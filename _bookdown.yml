@@ -1,0 +1,13 @@
+delete_merged_file: true
+
+rmd_files:
+  - index.Rmd
+  - 07-Data-Dictionary.Rmd
+  - 08-PCOR-Tmap.Rmd
+  - 06-geo-exposure.Rmd
+  - 01-ma_pm_patient.Rmd
+  - 02-census-income.Rmd
+  - 03-bivariate-choropleth_map.Rmd
+  - 04-bivariate_color.Rmd
+  - 05-bivariate_pm_patient.Rmd
+

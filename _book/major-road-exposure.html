@@ -1,0 +1,1217 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Major road exposure | 06-geo-exposure</title>
+  <meta name="description" content="<p>This is a example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  <meta name="generator" content="bookdown 0.34 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Major road exposure | 06-geo-exposure" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="<p>This is a example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Major road exposure | 06-geo-exposure" />
+  
+  <meta name="twitter:description" content="<p>This is a example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  
+
+<meta name="author" content="S.N." />
+
+
+<meta name="date" content="2023-07-14" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="pcor-t-map.html"/>
+<link rel="next" href="preparing-date.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Bookdown PCOR Tools</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><strong>Introduction</strong></a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#about"><i class="fa fa-check"></i>About</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#usage"><i class="fa fa-check"></i>Usage</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="data-dictionary.html"><a href="data-dictionary.html"><i class="fa fa-check"></i><strong>Data Dictionary</strong></a>
+<ul>
+<li class="chapter" data-level="" data-path="data-dictionary.html"><a href="data-dictionary.html#geoexposures"><i class="fa fa-check"></i>GeoExposures</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="pcor-t-map.html"><a href="pcor-t-map.html"><i class="fa fa-check"></i><strong>PCOR T-map</strong></a>
+<ul>
+<li class="chapter" data-level="" data-path="pcor-t-map.html"><a href="pcor-t-map.html#pm-2.5-tmap"><i class="fa fa-check"></i>PM 2.5 Tmap</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="major-road-exposure.html"><a href="major-road-exposure.html"><i class="fa fa-check"></i><strong>Major road exposure</strong></a>
+<ul>
+<li class="chapter" data-level="" data-path="major-road-exposure.html"><a href="major-road-exposure.html#major-road-proximity-metrics"><i class="fa fa-check"></i>Major road proximity metrics</a></li>
+<li class="chapter" data-level="" data-path="major-road-exposure.html"><a href="major-road-exposure.html#aircraft-landing-facility-proximity-metrics"><i class="fa fa-check"></i>Aircraft landing facility proximity metrics</a>
+<ul>
+<li class="chapter" data-level="" data-path="major-road-exposure.html"><a href="major-road-exposure.html#instructions-aircraft-landing-facility-proximity-metrics"><i class="fa fa-check"></i>Instructions: Aircraft landing facility proximity metrics</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="major-road-exposure.html"><a href="major-road-exposure.html#air-pollution-exposure"><i class="fa fa-check"></i>Air pollution exposure</a>
+<ul>
+<li class="chapter" data-level="" data-path="major-road-exposure.html"><a href="major-road-exposure.html#instructions-air-pollution-exposure-metrics-from-caces-model"><i class="fa fa-check"></i>Instructions: Air pollution exposure metrics from CACES model</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="preparing-date.html"><a href="preparing-date.html"><i class="fa fa-check"></i><strong>Preparing Date</strong></a>
+<ul>
+<li class="chapter" data-level="" data-path="preparing-date.html"><a href="preparing-date.html#pm2.5-vs-patient"><i class="fa fa-check"></i>PM(2.5) vs Patient</a>
+<ul>
+<li class="chapter" data-level="" data-path="preparing-date.html"><a href="preparing-date.html#data-preparation"><i class="fa fa-check"></i>Data Preparation</a></li>
+<li class="chapter" data-level="0.0.1" data-path="preparing-date.html"><a href="preparing-date.html#new-session"><i class="fa fa-check"></i><b>0.0.1</b> Load libraries</a></li>
+<li class="chapter" data-level="0.0.2" data-path="preparing-date.html"><a href="preparing-date.html#create-a-geographical-map"><i class="fa fa-check"></i><b>0.0.2</b> Create a Geographical Map</a></li>
+<li class="chapter" data-level="0.0.3" data-path="preparing-date.html"><a href="preparing-date.html#plotting-the-data-points"><i class="fa fa-check"></i><b>0.0.3</b> Plotting the Data Points</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="census-analysis.html"><a href="census-analysis.html"><i class="fa fa-check"></i><strong>Census Analysis</strong></a>
+<ul>
+<li class="chapter" data-level="" data-path="census-analysis.html"><a href="census-analysis.html#census-income-vs-patient"><i class="fa fa-check"></i>Census Income vs Patient</a>
+<ul>
+<li class="chapter" data-level="0.0.4" data-path="census-analysis.html"><a href="census-analysis.html#data-preparation-1"><i class="fa fa-check"></i><b>0.0.4</b> Data Preparation</a></li>
+<li class="chapter" data-level="0.0.5" data-path="census-analysis.html"><a href="census-analysis.html#use-case"><i class="fa fa-check"></i><b>0.0.5</b> use case:</a></li>
+<li class="chapter" data-level="0.0.6" data-path="census-analysis.html"><a href="census-analysis.html#join-the-dataframes-by-the-census-track-id"><i class="fa fa-check"></i><b>0.0.6</b> Join the dataframes by the census track id</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="census-analysis.html"><a href="census-analysis.html#the-county-with-hightest-income-in-ma-by-sensus-data-2020"><i class="fa fa-check"></i>The county with hightest income in MA by sensus data 2020</a>
+<ul>
+<li class="chapter" data-level="0.0.7" data-path="census-analysis.html"><a href="census-analysis.html#install-packages-for-the-plot"><i class="fa fa-check"></i><b>0.0.7</b> install packages for the plot</a></li>
+<li class="chapter" data-level="0.0.8" data-path="census-analysis.html"><a href="census-analysis.html#draw-a-map-with-patients-and-income-in-color"><i class="fa fa-check"></i><b>0.0.8</b> Draw a map with patients and income in color</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="exposure-estimates.html"><a href="exposure-estimates.html"><i class="fa fa-check"></i><strong>Exposure Estimates</strong></a>
+<ul>
+<li class="chapter" data-level="" data-path="exposure-estimates.html"><a href="exposure-estimates.html#bivariate-choropleth-map"><i class="fa fa-check"></i>bivariate choropleth map</a>
+<ul>
+<li class="chapter" data-level="0.0.9" data-path="exposure-estimates.html"><a href="exposure-estimates.html#make-a-bivariate-choropleth-map-sample"><i class="fa fa-check"></i><b>0.0.9</b> Make a bivariate choropleth map (Sample)</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="analysis.html"><a href="analysis.html"><i class="fa fa-check"></i><strong>Analysis</strong></a>
+<ul>
+<li class="chapter" data-level="" data-path="analysis.html"><a href="analysis.html#bivariate-choropleth-color"><i class="fa fa-check"></i>Bivariate choropleth color</a>
+<ul>
+<li class="chapter" data-level="0.0.10" data-path="analysis.html"><a href="analysis.html#bivariate-color-classes"><i class="fa fa-check"></i><b>0.0.10</b> Bivariate color classes</a></li>
+<li class="chapter" data-level="0.0.11" data-path="analysis.html"><a href="analysis.html#draw-us-cancer-rate-male-vs-female"><i class="fa fa-check"></i><b>0.0.11</b> Draw US cancer rate male vs female</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="bivariate-maps.html"><a href="bivariate-maps.html"><i class="fa fa-check"></i><strong>Bivariate maps</strong></a>
+<ul>
+<li class="chapter" data-level="" data-path="bivariate-maps.html"><a href="bivariate-maps.html#pm-2.5-bivariate-map"><i class="fa fa-check"></i>PM 2.5 Bivariate map</a>
+<ul>
+<li class="chapter" data-level="0.0.12" data-path="bivariate-maps.html"><a href="bivariate-maps.html#set-up-bivariate-color-classes"><i class="fa fa-check"></i><b>0.0.12</b> Set up bivariate color classes</a></li>
+<li class="chapter" data-level="0.0.13" data-path="bivariate-maps.html"><a href="bivariate-maps.html#get-the-boundaries-for-us-ma-counties"><i class="fa fa-check"></i><b>0.0.13</b> Get the boundaries for US MA counties</a></li>
+<li class="chapter" data-level="0.0.14" data-path="bivariate-maps.html"><a href="bivariate-maps.html#join-census-with-massachusetts-map"><i class="fa fa-check"></i><b>0.0.14</b> Join Census with Massachusetts map</a></li>
+<li class="chapter" data-level="0.0.15" data-path="bivariate-maps.html"><a href="bivariate-maps.html#set-color-on-both-varaibles"><i class="fa fa-check"></i><b>0.0.15</b> Set color on both varaibles</a></li>
+<li class="chapter" data-level="0.0.16" data-path="bivariate-maps.html"><a href="bivariate-maps.html#draw-a-state-map-with-pm-patient"><i class="fa fa-check"></i><b>0.0.16</b> Draw a state map with pm-patient</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">06-geo-exposure</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="major-road-exposure" class="section level1 unnumbered hasAnchor">
+<h1><strong>Major road exposure</strong><a href="major-road-exposure.html#major-road-exposure" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="major-road-proximity-metrics" class="section level2 unnumbered hasAnchor">
+<h2>Major road proximity metrics<a href="major-road-exposure.html#major-road-proximity-metrics" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The following are step-by-step instructions to calculate proximity-based exposure metrics to major roadways in the United States (US) using US NASA (National Aeronautics and Space Administration) Socioeconomic Data and Applications Center (SEDAC) <a href="https://doi.org/10.7927/H4VD6WCT">Global Roads Open Access Data Set (Version 1)</a>.</p>
+<p><strong>NASA SEDAC roads data</strong><br />
+The NASA SEDAC global data includes the locations of major roads (i.e., lines indicating roadway center lines) for the US in 2005. Major roads are categorized based on social and economic importance as follows:</p>
+<table>
+<colgroup>
+<col width="33%" />
+<col width="66%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Major road classification</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Highways</td>
+<td>Limited access divided highways connecting major cities.</td>
+</tr>
+<tr class="even">
+<td>Primary roads</td>
+<td>Other primary major roads between and into major cities as well as primary arterial roads.</td>
+</tr>
+<tr class="odd">
+<td>Secondary roads</td>
+<td>Other secondary roads between and into cities as well as secondary arterial roads.</td>
+</tr>
+</tbody>
+</table>
+<p>Other types of roads, such as tertiary roads, local roads, trails, and private roads, are not included.</p>
+<p>The following figure illustrates the spatial coverage (all US states and territories) and spatial scale (lines) of the SEDAC roads data:</p>
+<center>
+<div class="figure">
+<img src="images/sedac_major_roads_map_2005.jpeg" alt="" />
+<p class="caption"><em>Illustration of NASA SEDAC major roads data <strong>(a)</strong> spatial coverage (United States, including Alaska, Hawaii, and US territories (not shown)) and <strong>(b)</strong> spatial scale (lines).</em></p>
+</div>
+</center>
+<p><strong>Exposure metrics</strong><br />
+This tool calculates proximity-based (i.e., distance-based) exposure metrics for a specified list of receptor point locations (e.g., geocoded home addresses) to major roads in year 2005. This tool can be used to calculate the following proximity-based metrics within the US:</p>
+<ul>
+<li>distance to nearest major road and classification of nearest major road</li>
+<li>length of road within a specified buffer distance of receptor</li>
+</ul>
+<p>These proximity-based metrics can be calculated for all available major road classifications (i.e., highways, primary roads, and secondary roads) or any subset of them. Output includes information about data missingness (e.g., whether a receptor location is near a US border) as well as an optional log file.</p>
+<p><strong>Recommended uses</strong><br />
+This tool is recommended for the following uses:</p>
+<ul>
+<li>applications for which a proximity-based metric is appropriate. <em>Note: This tool does <strong>not</strong> provide other relevant exposure information associated with roads, such as traffic, noise levels, or air pollution levels.</em><br />
+</li>
+<li>analyses focused on exposures related specifically to major roads. <em>Note: This tool does <strong>not</strong> include data for other road classifications, such as local street networks or trails.</em><br />
+</li>
+<li>applications for which most receptor point locations are <em>not</em> located in communities with sections of tunneled or elevated highways. <em>Note: This tool does <strong>not</strong> provide information about whether roads are at surface level (e.g., elevated, tunneled, etc.). Exposure implications of roadway proximity may differ depending on whether road is at surface level. Some urban highways have varying tunneled, surface-level, or elevated sections (e.g., tunneled sections of US Interstate 90 in Boston, Massachusetts, and in Seattle, Washington).</em><br />
+</li>
+<li>applications for which most receptor point locations are <em>not</em> located near to a US border with Mexico or Canada. <em>Note: Because this tool does not include roadway data for Mexico or Canada, the tool may <strong>under predict</strong> proximity to major roads for receptor point locations in the US near a border with Mexico or Canada with nearby major roads across the border. This tool provides optional output information indicating whether a receptor point is located within a specified distance of a border.</em></li>
+</ul>
+<p><strong>Outline of steps</strong></p>
+<p><a href="major-road-exposure.html#step-1.-install-r-and-required-packages">Step 1. Install R and required packages</a></p>
+<p><a href="major-road-exposure.html#step-2.-download-tool">Step 2. Download tool</a></p>
+<p><a href="major-road-exposure.html#step-3.-prepare-receptor-point-data">Step 3. Prepare receptor point data</a></p>
+<p><a href="major-road-exposure.html#step-4.-run-script-in-r">Step 4. Run script in R</a></p>
+<p><a href="major-road-exposure.html#step-5.-review-output">Step 5. Review output</a></p>
+<p> 
+ </p>
+<div id="step-1.-install-r-and-required-packages" class="section level4 hasAnchor" number="0.0.0.1">
+<h4><span class="header-section-number">0.0.0.1</span> Step 1. Install R and required packages<a href="major-road-exposure.html#step-1.-install-r-and-required-packages" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<hr />
+<p><a href="https://cran.r-project.org/">Install R</a>. Optionally, <a href="https://www.rstudio.com/products/rstudio/download/">install RStudio</a>.</p>
+<p>Then, install the following R packages: <code>logr</code>, <code>tidyverse</code>, <code>sf</code>.
+Follow <a href="https://cran.r-project.org/doc/manuals/r-release/R-admin.html#Installing-packages">R package installation instructions</a>, or run the following code in R:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="major-road-exposure.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="fu">c</span>(<span class="st">&quot;logr&quot;</span>, <span class="st">&quot;tidyverse&quot;</span>, <span class="st">&quot;sf&quot;</span>))</span></code></pre></div>
+<p> 
+ </p>
+</div>
+<div id="step-2.-download-tool" class="section level4 hasAnchor" number="0.0.0.2">
+<h4><span class="header-section-number">0.0.0.2</span> Step 2. Download tool<a href="major-road-exposure.html#step-2.-download-tool" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<hr />
+<p>Download and save the folder containing input data (<code>input_source_major_roads.rds</code> and <code>input_us_borders.rds</code>) and script (<code>script_major_road_proximity_for_points.R</code>). To directly run the example scripts provided with these instructions in <a href="major-road-exposure.html#step-4.-run-script-in-r">Step 4</a>, do not change the file names within the folder.<br />
+ <br />
+ </p>
+</div>
+<div id="step-3.-prepare-receptor-point-data" class="section level4 hasAnchor" number="0.0.0.3">
+<h4><span class="header-section-number">0.0.0.3</span> Step 3. Prepare receptor point data<a href="major-road-exposure.html#step-3.-prepare-receptor-point-data" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<hr />
+<p>Prepare a comma-separated values (CSV) file that contains a table of the receptor
+point locations (e.g., geocoded addresses, coordinates). Include each receptor as
+a separate row in the table, and include the following <strong>required</strong> columns:</p>
+<ul>
+<li><code>id</code>: a unique and anonymous identifying code for each receptor. This can be in character (string) or numeric (double) format<br />
+</li>
+<li><code>latitude</code>: the latitude of the receptor point location in decimal degrees
+format (range: -90 to 90)</li>
+<li><code>longitude</code>: the longitude of the receptor point location in decimal
+degrees format (range: -180 to 180)</li>
+</ul>
+<p>The following table provides an example of the receptor point data format:</p>
+<table>
+<thead>
+<tr class="header">
+<th>id</th>
+<th>latitude</th>
+<th>longitude</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1011A</td>
+<td>39.00205369</td>
+<td>-77.105578716</td>
+</tr>
+<tr class="even">
+<td>1012C</td>
+<td>35.88480215</td>
+<td>-78.877942573</td>
+</tr>
+<tr class="odd">
+<td>1013E</td>
+<td>39.43560788</td>
+<td>-77.434847823</td>
+</tr>
+</tbody>
+</table>
+<p>To directly run the example scripts provided with these instructions, save the receptor point data as <code>input_receptor.csv</code> in the folder.<br />
+ <br />
+ </p>
+</div>
+<div id="step-4.-run-script-in-r" class="section level4 hasAnchor" number="0.0.0.4">
+<h4><span class="header-section-number">0.0.0.4</span> Step 4. Run script in R<a href="major-road-exposure.html#step-4.-run-script-in-r" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<hr />
+<p>Run the script <code>script_major_road_proximity_for_points.R</code> to load the required functions in R. You can then use the function <code>get_major_road_proximity_for_points()</code> to calculate proximity-based exposure metrics for each receptor point location.
+ <br />
+ </p>
+<div id="description-of-function-get_major_road_proximity_for_points" class="section level5 hasAnchor" number="0.0.0.4.1">
+<h5><span class="header-section-number">0.0.0.4.1</span> Description of function <code>get_major_road_proximity_for_points()</code><a href="major-road-exposure.html#description-of-function-get_major_road_proximity_for_points" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>This function takes the receptor point data above and returns a data frame with the receptor identifying code linked to the selected major road facility proximity metrics for selected raod class(es) as well as information about data missingness. Optionally, the function also writes a log file in the current R working directory. The function has the following arguments:</p>
+<p><strong>Required arguments</strong></p>
+<ul>
+<li><code>receptor_filepath</code>: specifies the file path to a CSV file containing the receptor point locations (described in <a href="major-road-exposure.html#step-3.-prepare-receptor-point-data">Step 3</a>). <em>Note: The format for file paths in R can vary by operating system.</em><br />
+</li>
+<li><code>source_major_roads_filepath</code>: specifies the file path to a RDS file containing a simple features object with the line locations of NASA SEDAC major roads in the US. This is the file <code>input_source_major_roads.rds</code>.<br />
+</li>
+<li><code>us_borders_filepath</code>: specifies the file path to a RDS file containing a simple features object with the US borders with Mexico and Canada. This is the file <code>input_us_borders.rds</code>.</li>
+</ul>
+<p><strong>Optional arguments</strong></p>
+<ul>
+<li><code>buffer_distance_km</code>: a numeric argument that specifies the buffer distance (units: kilometers [km]) to use in calculation of buffer-based proximity metrics. Default is <code>1</code> km. Must be between 0.001 km and 1000 km. <em>Note: Larger buffer distance values may result in longer run-times for buffer-based proximity metrics.</em></li>
+<li><code>receptor_crs</code>: a coordinate reference system object (i.e., <a href="https://www.nceas.ucsb.edu/sites/default/files/2020-04/OverviewCoordinateReferenceSystems.pdf">class is <code>crs</code> object in R</a>) for the receptor point locations. Default is <code>"EPSG:4269"</code> (i.e., NAD83).<br />
+</li>
+<li><code>projection_crs</code>: a projected coordinate reference system object (i.e., <a href="https://www.nceas.ucsb.edu/sites/default/files/2020-04/OverviewCoordinateReferenceSystems.pdf">class is <code>crs</code> object in R</a>) for use in exposure assessment. Default is <code>"ESRI:102008"</code> (i.e., North America Albers Equal Area Conic projection).</li>
+<li><code>road_class_selection</code>: list that specifies the subset of major road types to include in the exposure assessment. Default is all types: <code>"highway", "primary road", "secondary road", "unspecified"</code>.<br />
+</li>
+<li><code>proximity_metrics</code>: list that specifies the subset of proximity-based exposure metrics to calculate. Default is all metrics: <code>"distance_to_nearest,  "length_in_buffer"</code>.
+<ul>
+<li><code>"distance_to_nearest"</code>: returns output with distance to nearest major road (units: km) and classification of nearest major road (e.g., highway) for each receptor<br />
+</li>
+<li><code>"length_in_buffer"</code>: returns output with the length (units: km) of all major roads of the selected class(es) within the specified buffer distance of receptor<br />
+</li>
+</ul></li>
+<li><code>check_near_us_border</code>: logical argument that specifies whether the function should identify receptor points that are within the buffer distance (i.e., specified by argument <code>buffer_distance_km</code>) of a US border with Canada or Mexico. <code>TRUE</code> returns a column with output (<code>within_border_buffer</code>) with a binary variable indicating receptor points within the buffer distance of a border. Default is <code>TRUE</code>. <em>Note: This tool includes only road data for US states and territories. Thus, this tool may under predict proximity to major roads for receptor locations near a US border with Canada or Mexico.</em><br />
+</li>
+<li><code>add_all_input_to_output</code>: logical argument that specifies whether the output of the function should include all columns included with the input receptor data frame or not. <code>TRUE</code> returns all columns (i.e., including latitude and longitude) with output. <code>FALSE</code> returns only the anonymous receptor identifying code, proximity-based metrics, and data missingness information with output. <code>FALSE</code> may be useful for meeting data de-identification requirements. Default is <code>TRUE</code>.<br />
+</li>
+<li><code>write_log_to_file</code>: logical argument that specifies whether a log should be written to file. <code>TRUE</code> will create a log file in the current working directory. Default is <code>TRUE</code>.<br />
+</li>
+<li><code>print_log_to_console</code>: logical argument that specifies whether a log should be printed to the console. <code>TRUE</code> will print a log to console. Default is <code>TRUE</code>.<br />
+ <br />
+ </li>
+</ul>
+</div>
+<div id="example-use" class="section level5 hasAnchor" number="0.0.0.4.2">
+<h5><span class="header-section-number">0.0.0.4.2</span> Example use<a href="major-road-exposure.html#example-use" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>Below are two example scripts for using the function above to produce a CSV file with the proximity-based exposure estimates for each receptor to highways (using default options for all other optional arguments). The first example uses only R but requires editing the file paths. The second example requires RStudio and the <code>here</code> package but does not require editing file paths.</p>
+<p><strong>Example 1: Base R</strong></p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="major-road-exposure.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load packages</span></span>
+<span id="cb3-2"><a href="major-road-exposure.html#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb3-3"><a href="major-road-exposure.html#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(logr)</span>
+<span id="cb3-4"><a href="major-road-exposure.html#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
+<span id="cb3-5"><a href="major-road-exposure.html#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="major-road-exposure.html#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Load functions</span></span>
+<span id="cb3-7"><a href="major-road-exposure.html#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&quot;/set/file/path/to/script_major_road_proximity_for_points.R&quot;</span>)</span>
+<span id="cb3-8"><a href="major-road-exposure.html#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="major-road-exposure.html#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Get proximity-based exposures</span></span>
+<span id="cb3-10"><a href="major-road-exposure.html#cb3-10" aria-hidden="true" tabindex="-1"></a>major_road_proximity_metrics <span class="ot">&lt;-</span> </span>
+<span id="cb3-11"><a href="major-road-exposure.html#cb3-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">get_major_road_proximity_for_points</span>(</span>
+<span id="cb3-12"><a href="major-road-exposure.html#cb3-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">receptor_filepath =</span> <span class="st">&quot;/set/file/path/to/input_receptor.csv&quot;</span>, </span>
+<span id="cb3-13"><a href="major-road-exposure.html#cb3-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">source_major_roads_filepath =</span></span>
+<span id="cb3-14"><a href="major-road-exposure.html#cb3-14" aria-hidden="true" tabindex="-1"></a>      <span class="st">&quot;/set/file/path/to/input_source_major_roads.rds&quot;</span>,</span>
+<span id="cb3-15"><a href="major-road-exposure.html#cb3-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">us_borders_filepath =</span></span>
+<span id="cb3-16"><a href="major-road-exposure.html#cb3-16" aria-hidden="true" tabindex="-1"></a>      <span class="st">&quot;/set/file/path/to/input_us_borders.rds&quot;</span>,</span>
+<span id="cb3-17"><a href="major-road-exposure.html#cb3-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">road_class_selection =</span> <span class="st">&quot;highway&quot;</span>)</span>
+<span id="cb3-18"><a href="major-road-exposure.html#cb3-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-19"><a href="major-road-exposure.html#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Write exposures to CSV</span></span>
+<span id="cb3-20"><a href="major-road-exposure.html#cb3-20" aria-hidden="true" tabindex="-1"></a>readr<span class="sc">::</span><span class="fu">write_csv</span>(major_road_proximity_metrics, </span>
+<span id="cb3-21"><a href="major-road-exposure.html#cb3-21" aria-hidden="true" tabindex="-1"></a>                 <span class="at">file =</span><span class="st">&quot;/set/file/path/to/output_major_road_proximity_metrics.csv&quot;</span>)</span></code></pre></div>
+<p><strong>Example 2: RStudio with <code>here</code> package</strong></p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="major-road-exposure.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Install here package (if needed)</span></span>
+<span id="cb4-2"><a href="major-road-exposure.html#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;here&quot;</span>)</span>
+<span id="cb4-3"><a href="major-road-exposure.html#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="major-road-exposure.html#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Load packages</span></span>
+<span id="cb4-5"><a href="major-road-exposure.html#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(here)</span>
+<span id="cb4-6"><a href="major-road-exposure.html#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb4-7"><a href="major-road-exposure.html#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(logr)</span>
+<span id="cb4-8"><a href="major-road-exposure.html#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
+<span id="cb4-9"><a href="major-road-exposure.html#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="major-road-exposure.html#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Set location</span></span>
+<span id="cb4-11"><a href="major-road-exposure.html#cb4-11" aria-hidden="true" tabindex="-1"></a>here<span class="sc">::</span><span class="fu">i_am</span>(<span class="st">&quot;script_major_road_proximity_for_points.R&quot;</span>)</span>
+<span id="cb4-12"><a href="major-road-exposure.html#cb4-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-13"><a href="major-road-exposure.html#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Load functions</span></span>
+<span id="cb4-14"><a href="major-road-exposure.html#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">&quot;script_major_road_proximity_for_points.R&quot;</span>))</span>
+<span id="cb4-15"><a href="major-road-exposure.html#cb4-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-16"><a href="major-road-exposure.html#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Get exposures</span></span>
+<span id="cb4-17"><a href="major-road-exposure.html#cb4-17" aria-hidden="true" tabindex="-1"></a>major_road_proximity_metrics <span class="ot">&lt;-</span> </span>
+<span id="cb4-18"><a href="major-road-exposure.html#cb4-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">get_major_road_proximity_for_points</span>(</span>
+<span id="cb4-19"><a href="major-road-exposure.html#cb4-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">receptor_filepath =</span> <span class="fu">here</span>(<span class="st">&quot;input_receptor.csv&quot;</span>), </span>
+<span id="cb4-20"><a href="major-road-exposure.html#cb4-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">source_major_roads_filepath =</span> <span class="fu">here</span>(<span class="st">&quot;input_source_major_roads.rds&quot;</span>),</span>
+<span id="cb4-21"><a href="major-road-exposure.html#cb4-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">us_borders_filepath =</span> <span class="fu">here</span>(<span class="st">&quot;input_us_borders.rds&quot;</span>),</span>
+<span id="cb4-22"><a href="major-road-exposure.html#cb4-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">road_class_selection =</span> <span class="st">&quot;highway&quot;</span>)</span>
+<span id="cb4-23"><a href="major-road-exposure.html#cb4-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-24"><a href="major-road-exposure.html#cb4-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Write exposures to CSV</span></span>
+<span id="cb4-25"><a href="major-road-exposure.html#cb4-25" aria-hidden="true" tabindex="-1"></a>readr<span class="sc">::</span><span class="fu">write_csv</span>(major_road_proximity_metrics, </span>
+<span id="cb4-26"><a href="major-road-exposure.html#cb4-26" aria-hidden="true" tabindex="-1"></a>                 <span class="at">file =</span> <span class="fu">here</span>(<span class="st">&quot;output_major_road_proximity_metrics.csv&quot;</span>))</span></code></pre></div>
+<p> <br />
+ </p>
+</div>
+</div>
+<div id="step-5.-review-output" class="section level4 hasAnchor" number="0.0.0.5">
+<h4><span class="header-section-number">0.0.0.5</span> Step 5. Review output<a href="major-road-exposure.html#step-5.-review-output" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<hr />
+<div id="log-file" class="section level5 hasAnchor" number="0.0.0.5.1">
+<h5><span class="header-section-number">0.0.0.5.1</span> Log file<a href="major-road-exposure.html#log-file" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>After running the example script above, with the log file option selected, the log
+file will be available in the folder <code>log</code> in the current R working directory.<br />
+ <br />
+ </p>
+</div>
+<div id="output-data" class="section level5 hasAnchor" number="0.0.0.5.2">
+<h5><span class="header-section-number">0.0.0.5.2</span> Output data<a href="major-road-exposure.html#output-data" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>After running the example script above, calculated proximity-based exposure metrics for receptor locations will be available in the file <code>output_major_road_proximity_metrics.csv</code> within the folder. This CSV file includes a row for each receptor with the following columns (as applicable):</p>
+<p><strong>Identifiers</strong></p>
+<ul>
+<li><code>id</code>: the unique and anonymous identifying code for each receptor</li>
+</ul>
+<p><strong>Calculated proximity-based exposure metrics</strong></p>
+<p><strong><em>Nearest distance metrics</em></strong></p>
+<ul>
+<li><code>major_road_nearest_distance_km</code>: distance (units: km) to the nearest major road<br />
+</li>
+<li><code>major_road_nearest_road_class</code>: the classification of the nearest major road segment.</li>
+</ul>
+<p><strong><em>Length in buffer metrics</em></strong></p>
+<ul>
+<li><code>major_road_length_in_buffer_km</code>: length (units: km) of all major roads of the specified class(es) within the specified buffer distance of receptor. <code>0</code> indicates that no major roads are within the specified buffer distance of the receptor.</li>
+</ul>
+<p><strong>Information on data missingness</strong></p>
+<ul>
+<li><code>within_border_buffer</code>: binary variable indicating whether receptor point is located within the buffer distance (i.e., specified by argument <code>buffer_distance_km</code>) of a US border with Canada or Mexico:
+<ul>
+<li><code>1</code> indicates that receptor point is located within the buffer distance of a US border with Canada or Mexico. This indicates that the proximity-based metrics calculated by this tool may represent under predictions of the true proximity-based metrics (i.e., the nearest major road may be located in Canada or Mexico, outside the coverage of the major road data included in this tool).<br />
+</li>
+<li><code>0</code> indicates that receptor point is <strong>not</strong> located within the buffer distance of a US border with Canada or Mexico.
+ <br />
+ </li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="step-6.-cite-data-and-tool" class="section level4 hasAnchor" number="0.0.0.6">
+<h4><span class="header-section-number">0.0.0.6</span> Step 6. Cite data and tool<a href="major-road-exposure.html#step-6.-cite-data-and-tool" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<hr />
+<p>Please cite the following in any publications based on this tool:</p>
+<p><strong>Major roads data:</strong></p>
+<p>Center for International Earth Science Information Network - CIESIN - Columbia University, and Information Technology Outreach Services - ITOS - University of Georgia. (2013). Global Roads Open Access Data Set, Version 1 (gROADSv1). Palisades, New York: NASA Socioeconomic Data and Applications Center (SEDAC). [Available: <a href="https://doi.org/10.7927/H4VD6WCT" class="uri">https://doi.org/10.7927/H4VD6WCT</a>.] Accessed October 24, 2022.</p>
+<p><strong>US borders:</strong></p>
+<p>Homeland Infrastructure Foundation-Level Data (HIFLD) Geoplatform. <em>Canada and US border geospatial data</em>. [Available: <a href="https://hifld-geoplatform.opendata.arcgis.com/datasets/geoplatform" class="uri">https://hifld-geoplatform.opendata.arcgis.com/datasets/geoplatform</a>::canada-and-us-border/about]. Accessed: June 23, 2022.</p>
+<p>Homeland Infrastructure Foundation-Level Data (HIFLD) Geoplatform. <em>Mexico and US border geospatial data</em>. [Available: <a href="https://hifld-geoplatform.opendata.arcgis.com/datasets/geoplatform" class="uri">https://hifld-geoplatform.opendata.arcgis.com/datasets/geoplatform</a>::mexico-and-us-border/about]. Accessed: June 23, 2022.</p>
+<p><strong>NIEHS geospatial toolbox:</strong></p>
+<p><em>Citation to be determined.</em><br />
+ <br />
+ </p>
+</div>
+</div>
+<div id="aircraft-landing-facility-proximity-metrics" class="section level2 unnumbered hasAnchor">
+<h2>Aircraft landing facility proximity metrics<a href="major-road-exposure.html#aircraft-landing-facility-proximity-metrics" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="instructions-aircraft-landing-facility-proximity-metrics" class="section level3 unnumbered hasAnchor">
+<h3>Instructions: Aircraft landing facility proximity metrics<a href="major-road-exposure.html#instructions-aircraft-landing-facility-proximity-metrics" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<hr />
+<p>The following are step-by-step instructions to calculate proximity-based exposure metrics to aircraft landing facilities in the United States (US) using <a href="https://adip.faa.gov/agis/public/#/airportSearch/advanced">Federal Aviation Administration (FAA) aircraft landing facility data</a>.</p>
+<p><strong>FAA aircraft landing facility data</strong><br />
+The FAA aircraft landing facility data includes a registry of point locations (i.e., coordinates) of arrival and departure of aircraft in the US. FAA provides the following categorization of aircraft landing facility types: airports, heliports, seaplane bases, gliderports, ultralights, and balloonports. FAA also provides the activation year for facilities starting in year 1981.</p>
+<p>The following figure illustrates the spatial coverage (all US states) and spatial scale (points) of the FAA aircraft landing facility data:</p>
+<center>
+<div class="figure">
+<img src="images/faa_aircraft_landing_facilities_map_2020.jpg" alt="" />
+<p class="caption"><em>Illustration of FAA aircraft facility data <strong>(a)</strong> spatial coverage (United States, including Alaska and Hawaii (not shown)) and <strong>(b)</strong> spatial scale (points).</em></p>
+</div>
+</center>
+<p><strong>Exposure metrics</strong><br />
+This tool calculates proximity-based (i.e., distance-based) exposure metrics for a specified list of receptor point locations (e.g., geocoded home addresses) to aircraft landing facilities in a specified year (during 1981-2020). This tool can be used to calculate the following proximity-based metrics within the US:</p>
+<ul>
+<li>distance to nearest aircraft landing facility and identity of nearest aircraft landing facility (i.e., identifying codes, facility type, and activation year)</li>
+<li>count of aircraft landing facilities within a specified buffer distance of receptor</li>
+<li>summary metrics of distances to all aircraft landing facilities within a specified buffer distance of receptor (i.e., mean distance, mean of logarithm distance, and 25<sup>th</sup>, 50<sup>th</sup>, and 75<sup>th</sup> percentile distances)</li>
+</ul>
+<p>Proximity metrics can be calculated for all FAA aircraft landing facility types (i.e., airports, heliports, seaplane bases, gliderports, ultralights, and balloonports) or any subset of them. Output includes information about data missingness (e.g., whether a receptor location is near a US border) as well as an optional log file.</p>
+<p><strong>Recommended uses</strong><br />
+This tool is recommended for the following uses:</p>
+<ul>
+<li>applications for which a proximity-based metric is appropriate. <em>Note: This tool does <strong>not</strong> provide other relevant exposure information associated with aircraft landing facilities, such as traffic (e.g., annual count of arrivals/departures), noise levels, or air pollution levels.</em><br />
+</li>
+<li>applications for which most receptor point locations are <em>not</em> located near to a US border with Mexico or Canada. <em>Note: Because this tool does not include aircraft landing facility data for Mexico or Canada, the tool may <strong>under predict</strong> proximity to aircraft landing facilities for receptor point locations in the US near a border with Mexico or Canada with nearby aircraft landing facilities across the border. This tool provides optional output information indicating whether a receptor point is located within a specified distance of a border.</em></li>
+</ul>
+<p><strong>Outline of steps</strong></p>
+<p><a href="major-road-exposure.html#step-1.-install-r-and-required-packages">Step 1. Install R and required packages</a></p>
+<p><a href="major-road-exposure.html#step-2.-download-tool">Step 2. Download tool</a></p>
+<p><a href="major-road-exposure.html#step-3.-prepare-receptor-point-data">Step 3. Prepare receptor point data</a></p>
+<p><a href="major-road-exposure.html#step-4.-run-script-in-r">Step 4. Run script in R</a></p>
+<p><a href="major-road-exposure.html#step-5.-review-output">Step 5. Review output</a></p>
+<p> 
+ </p>
+<div id="step-1.-install-r-and-required-packages-1" class="section level4 hasAnchor" number="0.0.0.7">
+<h4><span class="header-section-number">0.0.0.7</span> Step 1. Install R and required packages<a href="major-road-exposure.html#step-1.-install-r-and-required-packages-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<hr />
+<p><a href="https://cran.r-project.org/">Install R</a>. Optionally, <a href="https://www.rstudio.com/products/rstudio/download/">install RStudio</a>.</p>
+<p>Then, install the following R packages: <code>logr</code>, <code>tidyverse</code>, <code>sf</code>.
+Follow <a href="https://cran.r-project.org/doc/manuals/r-release/R-admin.html#Installing-packages">R package installation instructions</a>, or run the following code in R:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="major-road-exposure.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="fu">c</span>(<span class="st">&quot;logr&quot;</span>, <span class="st">&quot;tidyverse&quot;</span>, <span class="st">&quot;sf&quot;</span>))</span></code></pre></div>
+<p> 
+ </p>
+</div>
+<div id="step-2.-download-tool-1" class="section level4 hasAnchor" number="0.0.0.8">
+<h4><span class="header-section-number">0.0.0.8</span> Step 2. Download tool<a href="major-road-exposure.html#step-2.-download-tool-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<hr />
+<p>Download and save the folder containing input data (<code>input_source_aircraft_facilities.rds</code> and <code>input_us_borders.rds</code>) and script (<code>script_aircraft_facility_proximity_for_points.R</code>). To directly run the example scripts provided with these instructions in <a href="major-road-exposure.html#step-4.-run-script-in-r">Step 4</a>, do not change the file names within the folder.<br />
+ <br />
+ </p>
+</div>
+<div id="step-3.-prepare-receptor-point-data-1" class="section level4 hasAnchor" number="0.0.0.9">
+<h4><span class="header-section-number">0.0.0.9</span> Step 3. Prepare receptor point data<a href="major-road-exposure.html#step-3.-prepare-receptor-point-data-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<hr />
+<p>Prepare a comma-separated values (CSV) file that contains a table of the receptor
+point locations (e.g., geocoded addresses, coordinates). Include each receptor as
+a separate row in the table, and include the following <strong>required</strong> columns:</p>
+<ul>
+<li><code>id</code>: a unique and anonymous identifying code for each receptor. This can be in character (string) or numeric (double) format<br />
+</li>
+<li><code>latitude</code>: the latitude of the receptor point location in decimal degrees
+format (range: -90 to 90)</li>
+<li><code>longitude</code>: the longitude of the receptor point location in decimal
+degrees format (range: -180 to 180)</li>
+</ul>
+<p>The following table provides an example of the receptor point data format:</p>
+<table>
+<thead>
+<tr class="header">
+<th>id</th>
+<th>latitude</th>
+<th>longitude</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1011A</td>
+<td>39.00205369</td>
+<td>-77.105578716</td>
+</tr>
+<tr class="even">
+<td>1012C</td>
+<td>35.88480215</td>
+<td>-78.877942573</td>
+</tr>
+<tr class="odd">
+<td>1013E</td>
+<td>39.43560788</td>
+<td>-77.434847823</td>
+</tr>
+</tbody>
+</table>
+<p>To directly run the example scripts provided with these instructions, save the receptor point data as <code>input_receptor.csv</code> in the folder.<br />
+ <br />
+ </p>
+</div>
+<div id="step-4.-run-script-in-r-1" class="section level4 hasAnchor" number="0.0.0.10">
+<h4><span class="header-section-number">0.0.0.10</span> Step 4. Run script in R<a href="major-road-exposure.html#step-4.-run-script-in-r-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<hr />
+<p>Run the script <code>script_aircraft_facility_proximity_for_points.R</code> to load the required functions in R. You can then use the function <code>get_aircraft_facility_proximity_for_points()</code> to calculate proximity-based exposure metrics for each receptor point location.
+ <br />
+ </p>
+<div id="description-of-function-get_aircraft_facility_proximity_for_points" class="section level5 hasAnchor" number="0.0.0.10.1">
+<h5><span class="header-section-number">0.0.0.10.1</span> Description of function <code>get_aircraft_facility_proximity_for_points()</code><a href="major-road-exposure.html#description-of-function-get_aircraft_facility_proximity_for_points" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>This function takes the receptor point data above and returns a data frame with the receptor identifying code linked to the selected aircraft landing facility proximity metrics for selected aircraft landing facility types and year (during 1981 to 2020) as well as information about data missingness. Optionally, the function also writes a log file in the current R working directory. The function has the following arguments:</p>
+<p><strong>Required arguments</strong></p>
+<ul>
+<li><code>receptor_filepath</code>: specifies the file path to a CSV file containing the receptor point locations (described in <a href="major-road-exposure.html#step-3.-prepare-receptor-point-data">Step 3</a>). <em>Note: The format for file paths in R can vary by operating system.</em><br />
+</li>
+<li><code>source_aircraft_facilities_filepath</code>: specifies the file path to a RDS file containing a simple features object with the point locations of FAA aircraft landing facilities. This is the file <code>input_source_aircraft_facilities.rds</code>.<br />
+</li>
+<li><code>us_borders_filepath</code>: specifies the file path to a RDS file containing a simple features object with the US borders with Mexico and Canada. This is the file <code>input_us_borders.rds</code>.</li>
+<li><code>aircraft_year</code>: specifies a single year (in YYYY format; e.g., 2003) for proximity-based exposure assessment across all pollutants. Default is <code>NULL</code>. Year must be during 1981 to 2020. Aircraft landing facilities activated after <code>aircraft_year</code> will be excluded from calculation of the proximity metrics.</li>
+</ul>
+<p><strong>Optional arguments</strong></p>
+<ul>
+<li><code>buffer_distance_km</code>: a numeric argument that specifies the buffer distance (units: kilometers [km]) to use in calculation of buffer-based proximity metrics. Default is <code>10</code> km. Must be between 0.001 km and 1000 km. <em>Note: Larger buffer distance values may result in longer run-times for buffer-based proximity metrics.</em></li>
+<li><code>receptor_crs</code>: a coordinate reference system object (i.e., <a href="https://www.nceas.ucsb.edu/sites/default/files/2020-04/OverviewCoordinateReferenceSystems.pdf">class is <code>crs</code> object in R</a>) for the receptor point locations. Default is <code>"EPSG:4269"</code> (i.e., NAD83).</li>
+<li><code>projection_crs</code>: a projected coordinate reference system object (i.e., <a href="https://www.nceas.ucsb.edu/sites/default/files/2020-04/OverviewCoordinateReferenceSystems.pdf">class is <code>crs</code> object in R</a>) for use in exposure assessment. Default is <code>"ESRI:102008"</code> (i.e., North America Albers Equal Area Conic projection).</li>
+<li><code>aircraft_facility_type</code>: list that specifies the subset of FAA aircraft landing facility types to include in the exposure assessment. Default is all types: <code>"airport", "heliport", "seaplane base", "gliderport", "ultralight", "balloonport"</code>.<br />
+</li>
+<li><code>proximity_metrics</code>: list that specifies the subset of proximity-based exposure metrics to calculate. Default is all metrics: <code>"distance_to_nearest, "count_in_buffer", "distance_in_buffer"</code>.
+<ul>
+<li><code>"distance_to_nearest"</code>: returns output with distance to nearest aircraft landing facility (units: km) and identity of nearest aircraft landing facility (i.e., identifying codes, facility type, and activation year) for each receptor<br />
+</li>
+<li><code>"count_in_buffer"</code>: returns output with count of aircraft landing facilities within a specified buffer distance of each receptor<br />
+</li>
+<li><code>"distance_in_buffer"</code>: returns output with summary metrics of distances to all aircraft landing facilities within the specified buffer distance of receptor (i.e., mean distance, mean of logarithm distance, and 25<sup>th</sup>, 50<sup>th</sup>, and 75<sup>th</sup> percentile distances to all aircraft landing facilities for each receptor)</li>
+</ul></li>
+<li><code>check_near_us_border</code>: logical argument that specifies whether the function should identify receptor points that are within the buffer distance (i.e., specified by argument <code>buffer_distance_km</code>) of a US border with Canada or Mexico. <code>TRUE</code> returns a column with output (<code>within_border_buffer</code>) with a binary variable indicating receptor points within the buffer distance of a border. Default is <code>TRUE</code>. <em>Note: The aircraft landing facility data covers only facilities located within the US. Thus, this tool may under predict proximity to aircraft landing facilities for receptor locations near a US border with Canada or Mexico.</em><br />
+</li>
+<li><code>add_all_input_to_output</code>: logical argument that specifies whether the output of the function should include all columns included with the input receptor data frame or not. <code>TRUE</code> returns all columns (i.e., including latitude and longitude) with output. <code>FALSE</code> returns only the anonymous receptor identifying code, proximity-based metrics, and data missingness information with output. <code>FALSE</code> may be useful for meeting data de-identification requirements. Default is <code>TRUE</code>.<br />
+</li>
+<li><code>write_log_to_file</code>: logical argument that specifies whether a log should be written to file. <code>TRUE</code> will create a log file in the current working directory. Default is <code>TRUE</code>.<br />
+</li>
+<li><code>print_log_to_console</code>: logical argument that specifies whether a log should be printed to the console. <code>TRUE</code> will print a log to console. Default is <code>TRUE</code>.<br />
+ <br />
+ </li>
+</ul>
+</div>
+<div id="example-use-1" class="section level5 hasAnchor" number="0.0.0.10.2">
+<h5><span class="header-section-number">0.0.0.10.2</span> Example use<a href="major-road-exposure.html#example-use-1" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>Below are two example scripts for using the function above to produce a CSV file with the proximiity-based exposure estimates for each receptor to airports in year 2020 (using default options for all other optional arguments). The first example uses only R but requires editing the file paths. The second example requires RStudio and the <code>here</code> package but does not require editing file paths.</p>
+<p><strong>Example 1: Base R</strong></p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="major-road-exposure.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load packages</span></span>
+<span id="cb6-2"><a href="major-road-exposure.html#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb6-3"><a href="major-road-exposure.html#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(logr)</span>
+<span id="cb6-4"><a href="major-road-exposure.html#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
+<span id="cb6-5"><a href="major-road-exposure.html#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-6"><a href="major-road-exposure.html#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Load functions</span></span>
+<span id="cb6-7"><a href="major-road-exposure.html#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&quot;/set/file/path/to/script_aircraft_facility_proximity_for_points.R&quot;</span>)</span>
+<span id="cb6-8"><a href="major-road-exposure.html#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-9"><a href="major-road-exposure.html#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Get exposures</span></span>
+<span id="cb6-10"><a href="major-road-exposure.html#cb6-10" aria-hidden="true" tabindex="-1"></a>aircraft_proximity_metrics <span class="ot">&lt;-</span> </span>
+<span id="cb6-11"><a href="major-road-exposure.html#cb6-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">get_aircraft_facility_proximity_for_points</span>(</span>
+<span id="cb6-12"><a href="major-road-exposure.html#cb6-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">receptor_filepath =</span> <span class="st">&quot;/set/file/path/to/input_receptor.csv&quot;</span>, </span>
+<span id="cb6-13"><a href="major-road-exposure.html#cb6-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">source_aircraft_facilities_filepath =</span></span>
+<span id="cb6-14"><a href="major-road-exposure.html#cb6-14" aria-hidden="true" tabindex="-1"></a>      <span class="st">&quot;/set/file/path/to/input_source_aircraft_facilities.rds&quot;</span>,</span>
+<span id="cb6-15"><a href="major-road-exposure.html#cb6-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">us_borders_filepath =</span></span>
+<span id="cb6-16"><a href="major-road-exposure.html#cb6-16" aria-hidden="true" tabindex="-1"></a>      <span class="st">&quot;/set/file/path/to/input_us_borders.rds&quot;</span>,</span>
+<span id="cb6-17"><a href="major-road-exposure.html#cb6-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">aircraft_year =</span> <span class="dv">2020</span>,</span>
+<span id="cb6-18"><a href="major-road-exposure.html#cb6-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">aircraft_facility_type =</span> <span class="st">&quot;airport&quot;</span>)</span>
+<span id="cb6-19"><a href="major-road-exposure.html#cb6-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-20"><a href="major-road-exposure.html#cb6-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Write exposures to CSV</span></span>
+<span id="cb6-21"><a href="major-road-exposure.html#cb6-21" aria-hidden="true" tabindex="-1"></a>readr<span class="sc">::</span><span class="fu">write_csv</span>(aircraft_proximity_metrics, </span>
+<span id="cb6-22"><a href="major-road-exposure.html#cb6-22" aria-hidden="true" tabindex="-1"></a>                 <span class="at">file =</span><span class="st">&quot;/set/file/path/to/output_aircraft_proximity_metrics.csv&quot;</span>)</span></code></pre></div>
+<p><strong>Example 2: RStudio with <code>here</code> package</strong></p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="major-road-exposure.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Install here package (if needed)</span></span>
+<span id="cb7-2"><a href="major-road-exposure.html#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;here&quot;</span>)</span>
+<span id="cb7-3"><a href="major-road-exposure.html#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="major-road-exposure.html#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Load packages</span></span>
+<span id="cb7-5"><a href="major-road-exposure.html#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(here)</span>
+<span id="cb7-6"><a href="major-road-exposure.html#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb7-7"><a href="major-road-exposure.html#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(logr)</span>
+<span id="cb7-8"><a href="major-road-exposure.html#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
+<span id="cb7-9"><a href="major-road-exposure.html#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-10"><a href="major-road-exposure.html#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Set location</span></span>
+<span id="cb7-11"><a href="major-road-exposure.html#cb7-11" aria-hidden="true" tabindex="-1"></a>here<span class="sc">::</span><span class="fu">i_am</span>(<span class="st">&quot;script_aircraft_facility_proximity_for_points.R&quot;</span>)</span>
+<span id="cb7-12"><a href="major-road-exposure.html#cb7-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-13"><a href="major-road-exposure.html#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Load functions</span></span>
+<span id="cb7-14"><a href="major-road-exposure.html#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">&quot;script_aircraft_facility_proximity_for_points.R&quot;</span>))</span>
+<span id="cb7-15"><a href="major-road-exposure.html#cb7-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-16"><a href="major-road-exposure.html#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Get exposures</span></span>
+<span id="cb7-17"><a href="major-road-exposure.html#cb7-17" aria-hidden="true" tabindex="-1"></a>aircraft_proximity_metrics <span class="ot">&lt;-</span> </span>
+<span id="cb7-18"><a href="major-road-exposure.html#cb7-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">get_aircraft_facility_proximity_for_points</span>(</span>
+<span id="cb7-19"><a href="major-road-exposure.html#cb7-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">receptor_filepath =</span> <span class="fu">here</span>(<span class="st">&quot;input_receptor.csv&quot;</span>), </span>
+<span id="cb7-20"><a href="major-road-exposure.html#cb7-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">source_aircraft_facilities_filepath =</span> <span class="fu">here</span>(<span class="st">&quot;input_source_aircraft_facilities.rds&quot;</span>),</span>
+<span id="cb7-21"><a href="major-road-exposure.html#cb7-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">us_borders_filepath =</span> <span class="fu">here</span>(<span class="st">&quot;input_us_borders.rds&quot;</span>),</span>
+<span id="cb7-22"><a href="major-road-exposure.html#cb7-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">aircraft_year =</span> <span class="dv">2020</span>,</span>
+<span id="cb7-23"><a href="major-road-exposure.html#cb7-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">aircraft_facility_type =</span> <span class="st">&quot;airport&quot;</span>)</span>
+<span id="cb7-24"><a href="major-road-exposure.html#cb7-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-25"><a href="major-road-exposure.html#cb7-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Write exposures to CSV</span></span>
+<span id="cb7-26"><a href="major-road-exposure.html#cb7-26" aria-hidden="true" tabindex="-1"></a>readr<span class="sc">::</span><span class="fu">write_csv</span>(aircraft_proximity_metrics, </span>
+<span id="cb7-27"><a href="major-road-exposure.html#cb7-27" aria-hidden="true" tabindex="-1"></a>                 <span class="at">file =</span> <span class="fu">here</span>(<span class="st">&quot;output_aircraft_proximity_metrics.csv&quot;</span>))</span></code></pre></div>
+<p> <br />
+ </p>
+</div>
+</div>
+<div id="step-5.-review-output-1" class="section level4 hasAnchor" number="0.0.0.11">
+<h4><span class="header-section-number">0.0.0.11</span> Step 5. Review output<a href="major-road-exposure.html#step-5.-review-output-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<hr />
+<div id="log-file-1" class="section level5 hasAnchor" number="0.0.0.11.1">
+<h5><span class="header-section-number">0.0.0.11.1</span> Log file<a href="major-road-exposure.html#log-file-1" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>After running the example script above, with the log file option selected, the log
+file will be available in the folder <code>log</code> in the current R working directory.<br />
+ <br />
+ </p>
+</div>
+<div id="output-data-1" class="section level5 hasAnchor" number="0.0.0.11.2">
+<h5><span class="header-section-number">0.0.0.11.2</span> Output data<a href="major-road-exposure.html#output-data-1" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>After running the example script above, calculated proximity-based exposure metrics for receptor locations will be available in the file <code>output_aircraft_proximity_metrics.csv</code> within the folder. This CSV file includes a row for each receptor with the following columns (as applicable):</p>
+<p><strong>Identifiers</strong></p>
+<ul>
+<li><code>id</code>: the unique and anonymous identifying code for each receptor</li>
+</ul>
+<p><strong>Calculated proximity-based exposure metrics</strong></p>
+<p><strong><em>Nearest distance metrics</em></strong></p>
+<ul>
+<li><code>aircraft_nearest_distance_km</code>: distance (units: km) to the nearest aircraft landing facility<br />
+</li>
+<li><code>aircraft_nearest_id_site_num</code>: the unique identifying FAA site number for the nearest aircraft landing facility. Consists of a numeric code followed by a letter indicating the aircraft landing facility type. For example, the site number for the Los Angeles International Airport is <code>01818.*A</code>. The FAA site number can be used to link additional types of <a href="https://adip.faa.gov/agis/public/#/airportSearch/advanced">FAA data</a> (e.g., annual operations) for further analyses.<br />
+</li>
+<li><code>aircraft_nearest_id_loc</code>: the unique identifying location code for the nearest aircraft landing facility. Consists of a 3 or 4 character alphanumeric code. For example, the location code for the Los Angeles International Airport is <code>LAX</code>. The location code can be used to link additional types of <a href="https://adip.faa.gov/agis/public/#/airportSearch/advanced">FAA data</a> (e.g., annual operations) for further analyses.<br />
+</li>
+<li><code>aircraft_nearest_fac_type</code>: the type (i.e., airport, heliport, seaplane base, gliderport, ultralight, and balloonport) of the nearest aircraft landing facility</li>
+<li><code>aircraft_nearest_year_activation</code>: the year of activation of the nearest aircraft landing facility. Activation year is available for all facilities starting in 1981.</li>
+</ul>
+<p><strong><em>Count in buffer metrics</em></strong></p>
+<ul>
+<li><code>aircraft_count_in_buffer</code>: number of aircraft landing facilities within the specified buffer distance of each receptor</li>
+</ul>
+<p><strong><em>Distance in buffer metrics</em></strong></p>
+<ul>
+<li><code>aircraft_mean_distance_in_buffer</code>: mean of distances (units: km) to all aircraft landing facilities within the specified buffer distance of receptor. <code>NA</code> indicates that no landing facilities are within the specified buffer distance of the receptor. <em>Note: In cases with exactly one aircraft landing facility within the specified buffer distance, the value will be the distance to that aircraft landing facility.</em></li>
+<li><code>aircraft_log_mean_distance_in_buffer</code>: mean of logarithm of distances (units: km) to all aircraft landing facilities within the specified buffer distance of receptor. <code>NA</code> indicates that no landing facilities are within the specified buffer distance of the receptor. <em>Note: In cases with exactly one aircraft landing facility within the specified buffer distance, the value will be the logarithm of the distance to that aircraft landing facility.</em></li>
+<li><code>aircraft_p25_distance_in_buffer</code>: 25<sup>th</sup> percentile of distances (units: km) to all aircraft landing facilities within the specified buffer distance of receptor, for cases with at least 10 aircraft landing facilities within the buffer distance. <code>NA</code> indicates that less than 10 aircraft landing facilities are within the buffer distance.</li>
+<li><code>aircraft_p50_distance_in_buffer</code>: 50<sup>th</sup> percentile (i.e., median) of distances (units: km) to all aircraft landing facilities within the specified buffer distance of receptor, for cases with at least 10 aircraft landing facilities within the buffer distance. <code>NA</code> indicates that less than 10 aircraft landing facilities are within the buffer distance.</li>
+<li><code>aircraft_p75_distance_in_buffer</code>: 75<sup>th</sup> percentile of distances (units: km) to all aircraft landing facilities within the specified buffer distance of receptor, for cases with at least 10 aircraft landing facilities within the buffer distance. <code>NA</code> indicates that less than 10 aircraft landing facilities are within the buffer distance.</li>
+</ul>
+<p><strong>Information on data missingness</strong></p>
+<ul>
+<li><code>within_border_buffer</code>: binary variable indicating whether receptor point is located within the buffer distance (i.e., specified by argument <code>buffer_distance_km</code>) of a US border with Canada or Mexico:
+<ul>
+<li><code>1</code> indicates that receptor point is located within the buffer distance of a US border with Canada or Mexico. This indicates that the proximity-based metrics calculated by this tool may represent under predictions of the true proximity-based metrics (i.e., the nearest aircraft landing facility may be located in Canada or Mexico, outside the coverage of the US aircraft landing facility dataset).<br />
+</li>
+<li><code>0</code> indicates that receptor point is <strong>not</strong> located within the buffer distance of a US border with Canada or Mexico.
+ <br />
+ </li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="step-6.-cite-data-and-tool-1" class="section level4 hasAnchor" number="0.0.0.12">
+<h4><span class="header-section-number">0.0.0.12</span> Step 6. Cite data and tool<a href="major-road-exposure.html#step-6.-cite-data-and-tool-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<hr />
+<p>Please cite the following in any publications based on this tool:</p>
+<p><strong>Aircraft landing facility data:</strong></p>
+<p>US Federal Aviation Administration (FAA). <em>Airport Data and Information Portal (ADIP)</em>. [Available: <a href="https://adip.faa.gov/agis/public/#/airportSearch/advanced" class="uri">https://adip.faa.gov/agis/public/#/airportSearch/advanced</a>]. Accessed: April 24, 2022.</p>
+<p>Homeland Infrastructure Foundation-Level Data (HIFLD) Geoplatform. <em>Aircraft landing facilities geospatial data</em>. [Available: <a href="https://hifld-geoplatform.opendata.arcgis.com/datasets/geoplatform" class="uri">https://hifld-geoplatform.opendata.arcgis.com/datasets/geoplatform</a>::aircraft-landing-facilities/about]. Accessed: June 23, 2022.</p>
+<p><strong>US borders:</strong></p>
+<p>Homeland Infrastructure Foundation-Level Data (HIFLD) Geoplatform. <em>Canada and US border geospatial data</em>. [Available: <a href="https://hifld-geoplatform.opendata.arcgis.com/datasets/geoplatform" class="uri">https://hifld-geoplatform.opendata.arcgis.com/datasets/geoplatform</a>::canada-and-us-border/about]. Accessed: June 23, 2022.</p>
+<p>Homeland Infrastructure Foundation-Level Data (HIFLD) Geoplatform. <em>Mexico and US border geospatial data</em>. [Available: <a href="https://hifld-geoplatform.opendata.arcgis.com/datasets/geoplatform" class="uri">https://hifld-geoplatform.opendata.arcgis.com/datasets/geoplatform</a>::mexico-and-us-border/about]. Accessed: June 23, 2022.</p>
+<p><strong>NIEHS geospatial toolbox:</strong></p>
+<p><em>Citation to be determined.</em><br />
+ <br />
+ </p>
+</div>
+</div>
+</div>
+<div id="air-pollution-exposure" class="section level2 unnumbered hasAnchor">
+<h2>Air pollution exposure<a href="major-road-exposure.html#air-pollution-exposure" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="instructions-air-pollution-exposure-metrics-from-caces-model" class="section level3 unnumbered hasAnchor">
+<h3>Instructions: Air pollution exposure metrics from CACES model<a href="major-road-exposure.html#instructions-air-pollution-exposure-metrics-from-caces-model" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<hr />
+<p>The following are step-by-step instructions to calculate annual average air pollution exposure metrics using the <a href="https://www.caces.us/data">Center for Air, Climate, &amp; Energy Solutions (CACES) land use regression models (Version 1.0)</a>.</p>
+<p><strong>CACES air pollution models</strong><br />
+The CACES models are based on air pollution observations from United States (US) Environmental Protection Agency monitors and from satellites, as well as land cover and land use information (e.g., locations of roadways). CACES model predictions cover populated locations in the contiguous US (i.e., in the 48 contiguous states plus the District of Columbia) at the spatial resolution of US census tracts, for the following air pollutants and time-periods:</p>
+<table>
+<colgroup>
+<col width="32%" />
+<col width="15%" />
+<col width="33%" />
+<col width="17%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Air pollutant</th>
+<th>Units</th>
+<th>Exposure metric</th>
+<th>Available years</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>carbon monoxide (CO)</td>
+<td>ppm</td>
+<td>annual average concentration</td>
+<td>1990-2015</td>
+</tr>
+<tr class="even">
+<td>nitrogen dioxide (NO<sub>2</sub>)</td>
+<td>ppb</td>
+<td>annual average concentration</td>
+<td>1979-2015</td>
+</tr>
+<tr class="odd">
+<td>ozone (O<sub>3</sub>)</td>
+<td>ppb</td>
+<td>May through September average of daily moving 8-hour maximum average concentration</td>
+<td>1979-2015</td>
+</tr>
+<tr class="even">
+<td>particulate matter (PM<sub>2.5</sub>)</td>
+<td>µg m<sup>-3</sup></td>
+<td>annual average concentration</td>
+<td>1999-2015</td>
+</tr>
+<tr class="odd">
+<td>particulate matter (PM<sub>10</sub>)</td>
+<td>µg m<sup>-3</sup></td>
+<td>annual average concentration</td>
+<td>1988-2015</td>
+</tr>
+<tr class="even">
+<td>sulfur dioxide (SO<sub>2</sub>)</td>
+<td>ppb</td>
+<td>annual average concentration</td>
+<td>1979-2015</td>
+</tr>
+</tbody>
+</table>
+<p>The following figure illustrates the spatial coverage (contiguous US) and spatial resolution (census tracts) for a single pollutant and time-period (NO<sub>2</sub> in 2015):</p>
+<center>
+<div class="figure">
+<img src="images/caces_map_no2_2015.jpeg" alt="" />
+<p class="caption"><em>Illustration of CACES data <strong>(a)</strong> spatial coverage (contiguous United States) and <strong>(b)</strong> spatial scale (census tracts).</em></p>
+</div>
+</center>
+<p><strong>Exposure metrics</strong><br />
+This tool calculates long-term average air pollution exposure metrics for a specified list of receptor point locations (e.g., geocoded home addresses) during a specified time-period in years. This tool can be used to calculate average exposure metrics:</p>
+<ul>
+<li>for a single year or single range of years that is constant across all receptor locations (e.g., 2002, 2010 to 2015)</li>
+<li>for a single year or range of years that varies across receptor locations (e.g., year of birth, years of residence at geocoded home address)</li>
+</ul>
+<p>Exposure metrics can be calculated for all CACES pollutants or any subset of them. Output includes information about data missingness (e.g., whether a specified receptor point is
+located outside the coverage of the CACES data) as well as an optional log file.</p>
+<p><strong>Recommended uses</strong><br />
+This tool is recommended for the following uses:</p>
+<ul>
+<li>comparisons of exposures across larger geographic regions in the contiguous US (e.g., across a metropolitan area or state). <em>Note: This tool is based on census tract level air pollution model data and cannot be used to compare exposures for different locations within the same census tract.</em><br />
+</li>
+<li>comparisons of exposures incorporating multiple pollutants and/or years in
+a consistent manner<br />
+</li>
+<li>analyses focused on long-term average (e.g., annual average, multi-year average) exposures to air pollution</li>
+</ul>
+<p><strong>Outline of instructions</strong></p>
+<p><a href="major-road-exposure.html#step-1.-install-r-and-required-packages">Step 1. Install R and required packages</a></p>
+<p><a href="major-road-exposure.html#step-2.-download-tool">Step 2. Download tool</a></p>
+<p><a href="major-road-exposure.html#step-3.-prepare-receptor-point-data">Step 3. Prepare receptor point data</a></p>
+<p><a href="major-road-exposure.html#step-4.-run-script-in-r">Step 4. Run script in R</a></p>
+<p><a href="major-road-exposure.html#step-5.-review-output">Step 5. Review output</a></p>
+<p><a href="major-road-exposure.html#step-6.-cite-data-and-tool">Step 6. Cite data and tool</a></p>
+<p> 
+ </p>
+<div id="step-1.-install-r-and-required-packages-2" class="section level4 hasAnchor" number="0.0.0.13">
+<h4><span class="header-section-number">0.0.0.13</span> Step 1. Install R and required packages<a href="major-road-exposure.html#step-1.-install-r-and-required-packages-2" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<hr />
+<p><a href="https://cran.r-project.org/">Install R</a>. Optionally, <a href="https://www.rstudio.com/products/rstudio/download/">install RStudio</a>.</p>
+<p>Then, install the following R packages: <code>logr</code>, <code>tidyverse</code>, <code>sf</code>.
+Follow <a href="https://cran.r-project.org/doc/manuals/r-release/R-admin.html#Installing-packages">R package installation instructions</a>, or run the following code in R:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="major-road-exposure.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="fu">c</span>(<span class="st">&quot;logr&quot;</span>, <span class="st">&quot;tidyverse&quot;</span>, <span class="st">&quot;sf&quot;</span>))</span></code></pre></div>
+<p> 
+ </p>
+</div>
+<div id="step-2.-download-tool-2" class="section level4 hasAnchor" number="0.0.0.14">
+<h4><span class="header-section-number">0.0.0.14</span> Step 2. Download tool<a href="major-road-exposure.html#step-2.-download-tool-2" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<hr />
+<p>Download and save the folder containing input data (<code>input_source_caces.rds</code> and <code>input_census_tracts_2010.rds</code>) and script (<code>script_caces_exposures_for_points.R</code>). To directly run the example scripts provided with these instructions in <a href="major-road-exposure.html#step-4.-run-script-in-r">Step 4</a>, do not change the file names within the folder.<br />
+ <br />
+ </p>
+</div>
+<div id="step-3.-prepare-receptor-point-data-2" class="section level4 hasAnchor" number="0.0.0.15">
+<h4><span class="header-section-number">0.0.0.15</span> Step 3. Prepare receptor point data<a href="major-road-exposure.html#step-3.-prepare-receptor-point-data-2" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<hr />
+<p>Prepare a comma-separated values (CSV) file that contains a table of the receptor
+point locations (e.g., geocoded addresses, coordinates). Include each receptor as
+a separate row in the table, and include the following <strong>required</strong> columns:</p>
+<ul>
+<li><code>id</code>: a unique and anonymous identifying code for each receptor. This can be in character (string) or numeric (double) format. <code>id</code> must be unique across all rows in the receptor point location table. It is not possible to use the same <code>id</code> for different time-points or locations within the same receptor point location table.<br />
+</li>
+<li><code>latitude</code>: the latitude of the receptor point location in decimal degrees
+format (range: -90 to 90)</li>
+<li><code>longitude</code>: the longitude of the receptor point location in decimal
+degrees format (range: -180 to 180)</li>
+</ul>
+<p>To calculate exposure metrics for time-periods (year or range of years) that vary
+across the receptors (e.g., years of residence at geocoded addresses), include <strong>both</strong>
+of the following <strong>optional</strong> columns:</p>
+<ul>
+<li><code>time_start</code>: the first year of the time-period in “YYYY” format (e.g., <code>2002</code> for year 2002)<br />
+</li>
+<li><code>time_end</code>: the last year of the time-period in “YYYY” format (e.g., <code>2003</code> for year 2003)</li>
+</ul>
+<p><em>Note: To calculate exposure metrics for a single year that varies across the receptors, provide the same year for both <code>time_start</code> and <code>time_end</code> for each receptor. To calculate exposure metrics for a range of years that is constant across the receptors, provide the start year of the range as <code>time_start</code> for all receptors and the end year of the range as <code>time_end</code> for all receptors. To calculate exposure metrics for a single year that is constant across all receptors, specify year for exposure assessment using argument <code>caces_year</code>. If both <code>caces_year</code> and <code>time_start</code> and <code>time_end</code> are provided, the exposure assessment will be based on <code>caces_year</code> (ignoring <code>time_start</code> and <code>time_end</code>).</em></p>
+<p>The following table provides an example of the receptor point data format:</p>
+<table>
+<thead>
+<tr class="header">
+<th>id</th>
+<th>latitude</th>
+<th>longitude</th>
+<th>time_start</th>
+<th>time_end</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1011A</td>
+<td>39.00205369</td>
+<td>-77.105578716</td>
+<td>2002</td>
+<td>2011</td>
+</tr>
+<tr class="even">
+<td>1012C</td>
+<td>35.88480215</td>
+<td>-78.877942573</td>
+<td>2014</td>
+<td>2015</td>
+</tr>
+<tr class="odd">
+<td>1013E</td>
+<td>39.43560788</td>
+<td>-77.434847823</td>
+<td>1990</td>
+<td>1990</td>
+</tr>
+</tbody>
+</table>
+<p>To directly run the example scripts provided with these instructions, save the receptor point data as <code>input_receptor.csv</code> in the folder.<br />
+ <br />
+ </p>
+</div>
+<div id="step-4.-run-script-in-r-2" class="section level4 hasAnchor" number="0.0.0.16">
+<h4><span class="header-section-number">0.0.0.16</span> Step 4. Run script in R<a href="major-road-exposure.html#step-4.-run-script-in-r-2" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<hr />
+<p>Run the script <code>script_caces_exposures_for_points.R</code> to load the required functions
+in R. You can then use the function <code>get_caces_for_points()</code> to calculate
+the mean CACES model pollutant concentrations for the selected time period (in years)
+for each receptor point location.
+ <br />
+ </p>
+<div id="description-of-function-get_caces_for_points" class="section level5 hasAnchor" number="0.0.0.16.1">
+<h5><span class="header-section-number">0.0.0.16.1</span> Description of function <code>get_caces_for_points()</code><a href="major-road-exposure.html#description-of-function-get_caces_for_points" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>This function takes the receptor point data above and returns a data frame with the receptor id linked to the exposure estimates for selected pollutants and time periods as well as information about data missingness. Optionally, the function also writes a log file in the current R working directory. The function has the following arguments:</p>
+<p><strong>Required arguments</strong></p>
+<ul>
+<li><code>receptor_filepath</code>: specifies the file path to a CSV file containing the receptor point locations (described in <a href="major-road-exposure.html#step-3.-prepare-receptor-point-data">Step 3</a>). <em>Note: The format for file paths in R can vary by operating system.</em><br />
+</li>
+<li><code>source_caces_filepath</code>: specifies the file path to a RDS file containing a data frame with the CACES air pollution estimates by census tract. This is the file <code>input_source_caces.rds</code>.<br />
+</li>
+<li><code>source_census_tracts_2010_filepath</code>: specifies the file path to a RDS file containing the simple features with the 2010 census tracts for the US. This is the file <code>input_census_tracts_2010.rds</code>.</li>
+</ul>
+<p><strong>Optional arguments</strong></p>
+<ul>
+<li><code>receptor_crs</code>: a coordinate reference system object (i.e., <a href="https://www.nceas.ucsb.edu/sites/default/files/2020-04/OverviewCoordinateReferenceSystems.pdf">class is <code>crs</code> object in R</a>) for the receptor point locations. Default is “EPSG:4269” (i.e., NAD83).</li>
+<li><code>caces_pollutants</code>: list that specifies the subset of CACES pollutants to include. Default is all pollutants: <code>"co", "no2", "o3", "pm10", "pm25", "so2"</code>.<br />
+</li>
+<li><code>caces_year</code>: specifies a single year (in “YYYY” format; e.g., 2003) for exposure assessment across all pollutants and receptors. Default is <code>NULL</code>. <code>caces_year</code> is required to be specified if <code>time_start</code> and <code>time_end</code> are <strong>not</strong> provided with the receptor point data. If both <code>caces_year</code> and <code>time_start</code> and <code>time_end</code> are provided, exposure assessment will be based on the single year specified by <code>caces_year</code> (i.e., ignoring <code>time_start</code> and <code>time_end</code>). <code>caces_year</code> must be <code>NULL</code> if using <code>time_start</code> and <code>time_end</code> to specify year(s) that vary across receptor points for exposure assessment. <code>caces_year</code> must be during 1999-2015 to return exposure estimates for all six pollutants, or during 1979-2015 for O<sub>3</sub>, NO<sub>2</sub>, and SO<sub>2</sub>, 1988-2015 for PM<sub>10</sub>, 1990-2015 for CO, or 1999-2015 for PM<sub>2.5</sub>.<br />
+</li>
+<li><code>add_all_input_to_output</code>: logical argument that specifies whether the output should include <em>all columns</em> included with receptor point locations (described in <a href="major-road-exposure.html#step-3.-prepare-receptor-point-data">Step 3</a>). <code>TRUE</code> returns all columns (i.e., including any time information and census tract identifying code) with output. <code>FALSE</code> returns only the anonymous receptor identifying code, exposure estimates, and data missingness flags with output. <code>FALSE</code> may be useful for meeting data de-identification requirements. Default is <code>TRUE</code>.<br />
+</li>
+<li><code>write_log_to_file</code>: logical argument that specifies whether a log should be written to file. <code>TRUE</code> will create a log file in the current working directory. Default is <code>TRUE</code>.<br />
+</li>
+<li><code>print_log_to_console</code>: logical argument that specifies whether a log should be printed to the console. <code>TRUE</code> will print a log to console. Default is <code>TRUE</code>.<br />
+ <br />
+ </li>
+</ul>
+</div>
+<div id="example-use-2" class="section level5 hasAnchor" number="0.0.0.16.2">
+<h5><span class="header-section-number">0.0.0.16.2</span> Example use<a href="major-road-exposure.html#example-use-2" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>Below are two example scripts for using the function above to produce a CSV file with the CACES exposure estimates for each receptor point for ozone and nitrogen dioxide in year 2015 (using default options for all other optional arguments). The first example uses only R but requires editing the file paths. The second example requires RStudio and the <code>here</code> package but does not require editing file paths.</p>
+<p><strong>Example 1: Base R</strong></p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="major-road-exposure.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load packages</span></span>
+<span id="cb9-2"><a href="major-road-exposure.html#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb9-3"><a href="major-road-exposure.html#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(logr)</span>
+<span id="cb9-4"><a href="major-road-exposure.html#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
+<span id="cb9-5"><a href="major-road-exposure.html#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-6"><a href="major-road-exposure.html#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Load functions</span></span>
+<span id="cb9-7"><a href="major-road-exposure.html#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&quot;/set/file/path/to/script_caces_exposures_for_points.R&quot;</span>)</span>
+<span id="cb9-8"><a href="major-road-exposure.html#cb9-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-9"><a href="major-road-exposure.html#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Get exposures</span></span>
+<span id="cb9-10"><a href="major-road-exposure.html#cb9-10" aria-hidden="true" tabindex="-1"></a>caces_exposures <span class="ot">&lt;-</span> </span>
+<span id="cb9-11"><a href="major-road-exposure.html#cb9-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">get_caces_for_points</span>(</span>
+<span id="cb9-12"><a href="major-road-exposure.html#cb9-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">receptor_filepath =</span> <span class="st">&quot;/set/file/path/to/input_receptor.csv&quot;</span>, </span>
+<span id="cb9-13"><a href="major-road-exposure.html#cb9-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">source_caces_filepath =</span> <span class="st">&quot;/set/file/path/to/input_source_caces.rds&quot;</span>,</span>
+<span id="cb9-14"><a href="major-road-exposure.html#cb9-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">source_census_tracts_2010_filepath =</span></span>
+<span id="cb9-15"><a href="major-road-exposure.html#cb9-15" aria-hidden="true" tabindex="-1"></a>      <span class="st">&quot;/set/file/path/to/input_census_tracts_2010.rds&quot;</span>,</span>
+<span id="cb9-16"><a href="major-road-exposure.html#cb9-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">caces_year =</span> <span class="dv">2015</span>,</span>
+<span id="cb9-17"><a href="major-road-exposure.html#cb9-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">caces_pollutants =</span> <span class="fu">c</span>(<span class="st">&quot;o3&quot;</span>, <span class="st">&quot;no2&quot;</span>))</span>
+<span id="cb9-18"><a href="major-road-exposure.html#cb9-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-19"><a href="major-road-exposure.html#cb9-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Write exposures to CSV</span></span>
+<span id="cb9-20"><a href="major-road-exposure.html#cb9-20" aria-hidden="true" tabindex="-1"></a>readr<span class="sc">::</span><span class="fu">write_csv</span>(caces_exposures, </span>
+<span id="cb9-21"><a href="major-road-exposure.html#cb9-21" aria-hidden="true" tabindex="-1"></a>                 <span class="at">file =</span><span class="st">&quot;/set/file/path/to/output_caces_exposures.csv&quot;</span>)</span></code></pre></div>
+<p><strong>Example 2: RStudio with <code>here</code> package</strong></p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="major-road-exposure.html#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Install here package (if needed)</span></span>
+<span id="cb10-2"><a href="major-road-exposure.html#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;here&quot;</span>)</span>
+<span id="cb10-3"><a href="major-road-exposure.html#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="major-road-exposure.html#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Load packages</span></span>
+<span id="cb10-5"><a href="major-road-exposure.html#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(here)</span>
+<span id="cb10-6"><a href="major-road-exposure.html#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb10-7"><a href="major-road-exposure.html#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(logr)</span>
+<span id="cb10-8"><a href="major-road-exposure.html#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
+<span id="cb10-9"><a href="major-road-exposure.html#cb10-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-10"><a href="major-road-exposure.html#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Set location</span></span>
+<span id="cb10-11"><a href="major-road-exposure.html#cb10-11" aria-hidden="true" tabindex="-1"></a>here<span class="sc">::</span><span class="fu">i_am</span>(<span class="st">&quot;script_caces_exposures_for_points.R&quot;</span>)</span>
+<span id="cb10-12"><a href="major-road-exposure.html#cb10-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-13"><a href="major-road-exposure.html#cb10-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Load functions</span></span>
+<span id="cb10-14"><a href="major-road-exposure.html#cb10-14" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">&quot;script_caces_exposures_for_points.R&quot;</span>))</span>
+<span id="cb10-15"><a href="major-road-exposure.html#cb10-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-16"><a href="major-road-exposure.html#cb10-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Get exposures</span></span>
+<span id="cb10-17"><a href="major-road-exposure.html#cb10-17" aria-hidden="true" tabindex="-1"></a>caces_exposures <span class="ot">&lt;-</span> </span>
+<span id="cb10-18"><a href="major-road-exposure.html#cb10-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">get_caces_for_points</span>(<span class="at">receptor_filepath =</span> <span class="fu">here</span>(<span class="st">&quot;input_receptor.csv&quot;</span>), </span>
+<span id="cb10-19"><a href="major-road-exposure.html#cb10-19" aria-hidden="true" tabindex="-1"></a>                       <span class="at">source_caces_filepath =</span> <span class="fu">here</span>(<span class="st">&quot;input_source_caces.rds&quot;</span>),</span>
+<span id="cb10-20"><a href="major-road-exposure.html#cb10-20" aria-hidden="true" tabindex="-1"></a>                       <span class="at">source_census_tracts_2010_filepath =</span></span>
+<span id="cb10-21"><a href="major-road-exposure.html#cb10-21" aria-hidden="true" tabindex="-1"></a>                         <span class="fu">here</span>(<span class="st">&quot;input_census_tracts_2010.rds&quot;</span>),</span>
+<span id="cb10-22"><a href="major-road-exposure.html#cb10-22" aria-hidden="true" tabindex="-1"></a>                       <span class="at">caces_year =</span> <span class="dv">2015</span>,</span>
+<span id="cb10-23"><a href="major-road-exposure.html#cb10-23" aria-hidden="true" tabindex="-1"></a>                       <span class="at">caces_pollutants =</span> <span class="fu">c</span>(<span class="st">&quot;o3&quot;</span>, <span class="st">&quot;no2&quot;</span>))</span>
+<span id="cb10-24"><a href="major-road-exposure.html#cb10-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-25"><a href="major-road-exposure.html#cb10-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Write exposures to CSV</span></span>
+<span id="cb10-26"><a href="major-road-exposure.html#cb10-26" aria-hidden="true" tabindex="-1"></a>readr<span class="sc">::</span><span class="fu">write_csv</span>(caces_exposures, </span>
+<span id="cb10-27"><a href="major-road-exposure.html#cb10-27" aria-hidden="true" tabindex="-1"></a>                 <span class="at">file =</span> <span class="fu">here</span>(<span class="st">&quot;output_caces_exposures.csv&quot;</span>))</span></code></pre></div>
+<p> <br />
+ </p>
+</div>
+</div>
+<div id="step-5.-review-output-2" class="section level4 hasAnchor" number="0.0.0.17">
+<h4><span class="header-section-number">0.0.0.17</span> Step 5. Review output<a href="major-road-exposure.html#step-5.-review-output-2" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<hr />
+<div id="log-file-2" class="section level5 hasAnchor" number="0.0.0.17.1">
+<h5><span class="header-section-number">0.0.0.17.1</span> Log file<a href="major-road-exposure.html#log-file-2" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>After running the example script above, with the log file option selected, the log
+file will be available in the folder <code>log</code> in the current R working directory.<br />
+ <br />
+ </p>
+</div>
+<div id="output-data-2" class="section level5 hasAnchor" number="0.0.0.17.2">
+<h5><span class="header-section-number">0.0.0.17.2</span> Output data<a href="major-road-exposure.html#output-data-2" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>After running the example script above, calculated exposure metrics for receptor
+locations will be available in the file <code>output_caces_exposure.csv</code> within the
+folder. This CSV file includes a row for each receptor with the following columns (as applicable):</p>
+<p><strong>Identifiers</strong></p>
+<ul>
+<li><code>id</code>: the unique and anonymous identifying code for each receptor<br />
+</li>
+<li><code>fips_tr_10</code>: the identifying code (FIPS code) for the year 2010 census tract</li>
+</ul>
+<p><strong>Calculated exposure metrics</strong></p>
+<ul>
+<li><code>co</code>: mean CACES model predicted concentration of outdoor annual average carbon monoxide (CO) air pollution (units: parts per million [ppm]) for the census tract that contains the receptor point location during the specified year(s)<br />
+</li>
+<li><code>no2</code>: mean CACES model predicted concentration of outdoor annual average nitrogen dioxide (NO<sub>2</sub>) air pollution (units: parts per billion [ppb]) for the census tract that contains the receptor point location during the specified year(s)<br />
+</li>
+<li><code>o3</code>: mean CACES model predicted concentration of outdoor annual average ozone (O<sub>3</sub>) air pollution (units: parts per billion [ppb]) for the census tract that contains the receptor point location during the specified year(s)<br />
+</li>
+<li><code>pm25</code>: mean CACES model predicted concentration of outdoor annual average particulate matter (PM<sub>2.5</sub>) air pollution (units: micrograms per cubic meter [µg m<sup>-3</sup>]) for the census tract that contains the receptor point location during the specified year(s)<br />
+</li>
+<li><code>pm10</code>: mean CACES model predicted concentration of outdoor annual average particulate matter (PM<sub>10</sub>) air pollution (units: micrograms per cubic meter [µg m<sup>-3</sup>]) for the census tract that contains the receptor point location during the specified year(s)<br />
+</li>
+<li><code>so2</code>: mean CACES model predicted concentration of outdoor annual average sulfur dioxide (SO<sub>2</sub>) air pollution (units: parts per billion [ppb]) for the census tract that contains the receptor point location during the specified year(s)</li>
+</ul>
+<p><strong>Information on data missingness</strong></p>
+<ul>
+<li><code>caces_flag_01</code>: binary variable indicating whether the receptor point is located within a year 2010 US census tract:
+<ul>
+<li><code>1</code> indicates that receptor point is <strong>not</strong> located within a year 2010 US census tract. All exposure metrics for that receptor point will be reported as <code>NA</code>.</li>
+<li><code>0</code> indicates that receptor point is located within a year 2010 US census tract<br />
+</li>
+</ul></li>
+<li><code>caces_flag_02</code>: binary variable indicating whether receptor point is located within a year 2010 US census tract but outside the spatial coverage of the CACES air pollution model:
+<ul>
+<li><code>1</code> indicates receptor point is located within a year 2010 US census tract but outside the spatial coverage of the CACES air pollution model. Examples include tracts in Alaska, Hawaii, or US territories, and tracts with no population recorded in the 2010 Decennial Census. All exposure metrics for that receptor point will be reported as <code>NA</code>.<br />
+</li>
+<li><code>0</code> indicates that receptor point is located within a year 2010 census tract within coverage of the CACES air pollution model<br />
+</li>
+</ul></li>
+<li><code>caces_flag_03</code>: binary variable indicating whether the specified time period for that receptor point is <em>completely</em> outside the coverage of the CACES air pollution model:
+<ul>
+<li><code>1</code> indicates that the specified time (year(s)) for that receptor point is completely outside the temporal coverage of CACES air pollution model for one or more of the selected pollutants. Exposure metrics will be reported as <code>NA</code> for one or more of the selected pollutants.<br />
+</li>
+<li><code>0</code> indicates that the specified time (year(s)) for that receptor point is <strong>not</strong> completely outside the temporal coverage of CACES air pollution model for any of the selected pollutants<br />
+</li>
+</ul></li>
+<li><code>caces_flag_04</code>: binary variable indicating whether the specified time-period (year(s)) for that receptor point is <em>partly</em> outside the temporal coverage of CACES air pollution model for one or more of the selected pollutants.
+<ul>
+<li><code>1</code> indicates that the the specified time-period (year(s)) for that receptor point is <em>partly</em> outside the temporal coverage of CACES air pollution model for one or more of the selected pollutants. Exposure metrics will be calculated based on the years with available data for that specified time-period.<br />
+</li>
+<li><code>0</code> indicates that the specified time-period (year(s)) for that receptor point is completely within the temporal coverage of CACES air pollution model for all of the selected pollutants.<br />
+ <br />
+ </li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="step-6.-cite-data-and-tool-2" class="section level4 hasAnchor" number="0.0.0.18">
+<h4><span class="header-section-number">0.0.0.18</span> Step 6. Cite data and tool<a href="major-road-exposure.html#step-6.-cite-data-and-tool-2" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<hr />
+<p>Please cite the following in any publications based on this tool:</p>
+<p><strong>CACES empirical air pollution models (v1):</strong></p>
+<p>Kim S.-Y.; Bechle, M.; Hankey, S.; Sheppard, L.; Szpiro, A. A.; Marshall, J. D. 2020. “Concentrations of criteria pollutants in the contiguous U.S., 1979 – 2015: Role of prediction model parsimony in integrated empirical geographic regression.” <em>PLoS ONE</em> 15(2), e0228535. DOI: 10.1371/journal.pone.0228535</p>
+<p><strong>Census tract spatial boundaries:</strong></p>
+<p>Steven Manson, Jonathan Schroeder, David Van Riper, Tracy Kugler, and Steven Ruggles. IPUMS National Historical Geographic Information System: Version 16.0 [Census Tract Shapefiles, 2010]. Minneapolis, MN: IPUMS. 2021. <a href="http://doi.org/10.18128/D050.V16.0" class="uri">http://doi.org/10.18128/D050.V16.0</a></p>
+<p>Please see the following for additional requirements: <a href="https://www.nhgis.org/citation-and-use-nhgis-data" class="uri">https://www.nhgis.org/citation-and-use-nhgis-data</a></p>
+<p><strong>NIEHS geospatial toolbox:</strong></p>
+<p><em>Citation to be determined.</em>
+ <br />
+ </p>
+
+</div>
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="pcor-t-map.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="preparing-date.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/06-geo-exposure.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

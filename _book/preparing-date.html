@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Preparing Date | 06-geo-exposure</title>
+  <meta name="description" content="<p>This is a example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  <meta name="generator" content="bookdown 0.34 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Preparing Date | 06-geo-exposure" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="<p>This is a example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Preparing Date | 06-geo-exposure" />
+  
+  <meta name="twitter:description" content="<p>This is a example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  
+
+<meta name="author" content="S.N." />
+
+
+<meta name="date" content="2023-07-14" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="major-road-exposure.html"/>
+<link rel="next" href="census-analysis.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Bookdown PCOR Tools</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><strong>Introduction</strong></a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#about"><i class="fa fa-check"></i>About</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#usage"><i class="fa fa-check"></i>Usage</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="data-dictionary.html"><a href="data-dictionary.html"><i class="fa fa-check"></i><strong>Data Dictionary</strong></a>
+<ul>
+<li class="chapter" data-level="" data-path="data-dictionary.html"><a href="data-dictionary.html#geoexposures"><i class="fa fa-check"></i>GeoExposures</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="pcor-t-map.html"><a href="pcor-t-map.html"><i class="fa fa-check"></i><strong>PCOR T-map</strong></a>
+<ul>
+<li class="chapter" data-level="" data-path="pcor-t-map.html"><a href="pcor-t-map.html#pm-2.5-tmap"><i class="fa fa-check"></i>PM 2.5 Tmap</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="major-road-exposure.html"><a href="major-road-exposure.html"><i class="fa fa-check"></i><strong>Major road exposure</strong></a>
+<ul>
+<li class="chapter" data-level="" data-path="major-road-exposure.html"><a href="major-road-exposure.html#major-road-proximity-metrics"><i class="fa fa-check"></i>Major road proximity metrics</a></li>
+<li class="chapter" data-level="" data-path="major-road-exposure.html"><a href="major-road-exposure.html#aircraft-landing-facility-proximity-metrics"><i class="fa fa-check"></i>Aircraft landing facility proximity metrics</a>
+<ul>
+<li class="chapter" data-level="" data-path="major-road-exposure.html"><a href="major-road-exposure.html#instructions-aircraft-landing-facility-proximity-metrics"><i class="fa fa-check"></i>Instructions: Aircraft landing facility proximity metrics</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="major-road-exposure.html"><a href="major-road-exposure.html#air-pollution-exposure"><i class="fa fa-check"></i>Air pollution exposure</a>
+<ul>
+<li class="chapter" data-level="" data-path="major-road-exposure.html"><a href="major-road-exposure.html#instructions-air-pollution-exposure-metrics-from-caces-model"><i class="fa fa-check"></i>Instructions: Air pollution exposure metrics from CACES model</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="preparing-date.html"><a href="preparing-date.html"><i class="fa fa-check"></i><strong>Preparing Date</strong></a>
+<ul>
+<li class="chapter" data-level="" data-path="preparing-date.html"><a href="preparing-date.html#pm2.5-vs-patient"><i class="fa fa-check"></i>PM(2.5) vs Patient</a>
+<ul>
+<li class="chapter" data-level="" data-path="preparing-date.html"><a href="preparing-date.html#data-preparation"><i class="fa fa-check"></i>Data Preparation</a></li>
+<li class="chapter" data-level="0.0.1" data-path="preparing-date.html"><a href="preparing-date.html#new-session"><i class="fa fa-check"></i><b>0.0.1</b> Load libraries</a></li>
+<li class="chapter" data-level="0.0.2" data-path="preparing-date.html"><a href="preparing-date.html#create-a-geographical-map"><i class="fa fa-check"></i><b>0.0.2</b> Create a Geographical Map</a></li>
+<li class="chapter" data-level="0.0.3" data-path="preparing-date.html"><a href="preparing-date.html#plotting-the-data-points"><i class="fa fa-check"></i><b>0.0.3</b> Plotting the Data Points</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="census-analysis.html"><a href="census-analysis.html"><i class="fa fa-check"></i><strong>Census Analysis</strong></a>
+<ul>
+<li class="chapter" data-level="" data-path="census-analysis.html"><a href="census-analysis.html#census-income-vs-patient"><i class="fa fa-check"></i>Census Income vs Patient</a>
+<ul>
+<li class="chapter" data-level="0.0.4" data-path="census-analysis.html"><a href="census-analysis.html#data-preparation-1"><i class="fa fa-check"></i><b>0.0.4</b> Data Preparation</a></li>
+<li class="chapter" data-level="0.0.5" data-path="census-analysis.html"><a href="census-analysis.html#use-case"><i class="fa fa-check"></i><b>0.0.5</b> use case:</a></li>
+<li class="chapter" data-level="0.0.6" data-path="census-analysis.html"><a href="census-analysis.html#join-the-dataframes-by-the-census-track-id"><i class="fa fa-check"></i><b>0.0.6</b> Join the dataframes by the census track id</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="census-analysis.html"><a href="census-analysis.html#the-county-with-hightest-income-in-ma-by-sensus-data-2020"><i class="fa fa-check"></i>The county with hightest income in MA by sensus data 2020</a>
+<ul>
+<li class="chapter" data-level="0.0.7" data-path="census-analysis.html"><a href="census-analysis.html#install-packages-for-the-plot"><i class="fa fa-check"></i><b>0.0.7</b> install packages for the plot</a></li>
+<li class="chapter" data-level="0.0.8" data-path="census-analysis.html"><a href="census-analysis.html#draw-a-map-with-patients-and-income-in-color"><i class="fa fa-check"></i><b>0.0.8</b> Draw a map with patients and income in color</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="exposure-estimates.html"><a href="exposure-estimates.html"><i class="fa fa-check"></i><strong>Exposure Estimates</strong></a>
+<ul>
+<li class="chapter" data-level="" data-path="exposure-estimates.html"><a href="exposure-estimates.html#bivariate-choropleth-map"><i class="fa fa-check"></i>bivariate choropleth map</a>
+<ul>
+<li class="chapter" data-level="0.0.9" data-path="exposure-estimates.html"><a href="exposure-estimates.html#make-a-bivariate-choropleth-map-sample"><i class="fa fa-check"></i><b>0.0.9</b> Make a bivariate choropleth map (Sample)</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="analysis.html"><a href="analysis.html"><i class="fa fa-check"></i><strong>Analysis</strong></a>
+<ul>
+<li class="chapter" data-level="" data-path="analysis.html"><a href="analysis.html#bivariate-choropleth-color"><i class="fa fa-check"></i>Bivariate choropleth color</a>
+<ul>
+<li class="chapter" data-level="0.0.10" data-path="analysis.html"><a href="analysis.html#bivariate-color-classes"><i class="fa fa-check"></i><b>0.0.10</b> Bivariate color classes</a></li>
+<li class="chapter" data-level="0.0.11" data-path="analysis.html"><a href="analysis.html#draw-us-cancer-rate-male-vs-female"><i class="fa fa-check"></i><b>0.0.11</b> Draw US cancer rate male vs female</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="bivariate-maps.html"><a href="bivariate-maps.html"><i class="fa fa-check"></i><strong>Bivariate maps</strong></a>
+<ul>
+<li class="chapter" data-level="" data-path="bivariate-maps.html"><a href="bivariate-maps.html#pm-2.5-bivariate-map"><i class="fa fa-check"></i>PM 2.5 Bivariate map</a>
+<ul>
+<li class="chapter" data-level="0.0.12" data-path="bivariate-maps.html"><a href="bivariate-maps.html#set-up-bivariate-color-classes"><i class="fa fa-check"></i><b>0.0.12</b> Set up bivariate color classes</a></li>
+<li class="chapter" data-level="0.0.13" data-path="bivariate-maps.html"><a href="bivariate-maps.html#get-the-boundaries-for-us-ma-counties"><i class="fa fa-check"></i><b>0.0.13</b> Get the boundaries for US MA counties</a></li>
+<li class="chapter" data-level="0.0.14" data-path="bivariate-maps.html"><a href="bivariate-maps.html#join-census-with-massachusetts-map"><i class="fa fa-check"></i><b>0.0.14</b> Join Census with Massachusetts map</a></li>
+<li class="chapter" data-level="0.0.15" data-path="bivariate-maps.html"><a href="bivariate-maps.html#set-color-on-both-varaibles"><i class="fa fa-check"></i><b>0.0.15</b> Set color on both varaibles</a></li>
+<li class="chapter" data-level="0.0.16" data-path="bivariate-maps.html"><a href="bivariate-maps.html#draw-a-state-map-with-pm-patient"><i class="fa fa-check"></i><b>0.0.16</b> Draw a state map with pm-patient</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">06-geo-exposure</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="preparing-date" class="section level1 unnumbered hasAnchor">
+<h1><strong>Preparing Date</strong><a href="preparing-date.html#preparing-date" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="pm2.5-vs-patient" class="section level2 unnumbered hasAnchor">
+<h2>PM(2.5) vs Patient<a href="preparing-date.html#pm2.5-vs-patient" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="data-preparation" class="section level3 unnumbered hasAnchor">
+<h3>Data Preparation<a href="preparing-date.html#data-preparation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Data set is from Synthetic patient and population health data from the state of Massachusetts</p>
+<ol style="list-style-type: decimal">
+<li><p>Download complete patients FHIR file from <a href="https://synthea.mitre.org/downloads" class="uri">https://synthea.mitre.org/downloads</a> 22G zip tar</p></li>
+<li><p>Developed python <a href="https://github.com/NIEHS/pcor_climate_tools/blob/main/geospatial_analysis/data_wrangling/fhir_dataset.py" title="File github location">fhir_dataset.py</a> to pull the patients information : patientid, lat, lon, birthdate, gender , start_date_time, end_date_time, code, code_display, start_date, end_date Total patients: 1 million patients</p>
+<p>sample result: ran synthea_1m_fhir_3_0_May_24/output_12 code =183478001</p>
+<p>output file : patient_encounts_bycode_v2_12.csv</p></li>
+<li><p>QC dataset. for instance : start date &gt; end date ; misplace birth/death date to hospital stay date<br />
+</p></li>
+<li><p>Using the start/end date from patients file run DeGauss pm2.5 model <a href="https://degauss.org/pm/" class="uri">https://degauss.org/pm/</a></p>
+<p>input file for pm2.5 from step 2
+command line:docker run –rm -v $PWD:/tmp ghcr.io/degauss-org/pm:0.2.0 tmp/yourdatafile.csv</p></li>
+<li><p>The following columns been added for each row:</p>
+<p>pm_pred : predicted PM2.5 (micrograms per cubic meter)</p>
+<p>pm_se : standard error for predicted PM2.5</p>
+<p>Output file: patient_encounts_bycode_v2_12_pm_0.2.0.csv</p></li>
+</ol>
+<p>The output file will contain one row per day between start_date and end_date for everyone. Lat(latitude) and lon (longitude) location. This means that the output file will likely contain many more rows than the input file</p>
+<ol start="6" style="list-style-type: decimal">
+<li><p>Run deGUAUSS census block group : <a href="https://degauss.org/census_block_group/" class="uri">https://degauss.org/census_block_group/</a> Produced a file with additional columns:</p>
+<p>• census_block_group_id_2010: identifier for 2010 block group</p>
+<p>• census_tract_id_2010: identifier for 2010 tract</p>
+<p>Output file: patient_encounts_bycode_v2_12_pm_0.2.0_census_block_group_0.6.0_2010.csv
+rename to:ms_patient_pm_census_v2.csv</p></li>
+</ol>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="preparing-date.html#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
+<span id="cb11-2"><a href="preparing-date.html#cb11-2" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;./dataset/ms_patient_pm_census_v2.csv&quot;</span>,<span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="preparing-date.html#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(df)</span></code></pre></div>
+<pre><code>## [1] 2979   19</code></pre>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="preparing-date.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(df)</span></code></pre></div>
+<pre><code>##  [1] &quot;patientid&quot;                  &quot;lat&quot;                       
+##  [3] &quot;lon&quot;                        &quot;birthdate&quot;                 
+##  [5] &quot;gender&quot;                     &quot;start_date_time&quot;           
+##  [7] &quot;end_date_time&quot;              &quot;code&quot;                      
+##  [9] &quot;code_display&quot;               &quot;start_date&quot;                
+## [11] &quot;end_date&quot;                   &quot;date&quot;                      
+## [13] &quot;year&quot;                       &quot;h3&quot;                        
+## [15] &quot;h3_3&quot;                       &quot;pm_pred&quot;                   
+## [17] &quot;pm_se&quot;                      &quot;census_block_group_id_2010&quot;
+## [19] &quot;census_tract_id_2010&quot;</code></pre>
+<p>install packages</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="preparing-date.html#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">require</span>(<span class="st">&#39;shiny&#39;</span>) <span class="sc">||</span> <span class="sc">!</span><span class="fu">require</span>(<span class="st">&#39;tidycensus&#39;</span>)  <span class="sc">||</span> <span class="sc">!</span><span class="fu">require</span>(<span class="st">&#39;tidyverse&#39;</span>) <span class="sc">||</span> <span class="sc">!</span><span class="fu">require</span>(<span class="st">&#39;viridis&#39;</span>)) {</span>
+<span id="cb16-2"><a href="preparing-date.html#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="fu">c</span>(<span class="st">&quot;shiny&quot;</span>,<span class="st">&quot;tidycensus&quot;</span>,<span class="st">&quot;tidyverse&quot;</span>,<span class="st">&quot;viridis&quot;</span>))</span>
+<span id="cb16-3"><a href="preparing-date.html#cb16-3" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb16-4"><a href="preparing-date.html#cb16-4" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<pre><code>## Loading required package: shiny</code></pre>
+<pre><code>## Loading required package: tidycensus</code></pre>
+<pre><code>## Loading required package: tidyverse</code></pre>
+<pre><code>## ── Attaching core tidyverse packages ───────── tidyverse 2.0.0 ──
+## ✔ dplyr     1.1.2     ✔ purrr     1.0.1
+## ✔ forcats   1.0.0     ✔ stringr   1.5.0
+## ✔ ggplot2   3.4.2     ✔ tibble    3.2.1
+## ✔ lubridate 1.9.2     ✔ tidyr     1.3.0
+## ── Conflicts ─────────────────────────── tidyverse_conflicts() ──
+## ✖ dplyr::filter() masks stats::filter()
+## ✖ dplyr::lag()    masks stats::lag()
+## ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors
+## Loading required package: viridis
+## 
+## Loading required package: viridisLite</code></pre>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="preparing-date.html#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">require</span>(<span class="st">&#39;plotly&#39;</span>)){</span>
+<span id="cb21-2"><a href="preparing-date.html#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">&quot;plotly&quot;</span>, <span class="at">type =</span> <span class="st">&quot;source&quot;</span>)</span>
+<span id="cb21-3"><a href="preparing-date.html#cb21-3" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<pre><code>## Loading required package: plotly
+## 
+## Attaching package: &#39;plotly&#39;
+## 
+## The following object is masked from &#39;package:ggplot2&#39;:
+## 
+##     last_plot
+## 
+## The following object is masked from &#39;package:stats&#39;:
+## 
+##     filter
+## 
+## The following object is masked from &#39;package:graphics&#39;:
+## 
+##     layout</code></pre>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="preparing-date.html#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">require</span>(<span class="st">&#39;ggplot2&#39;</span>)) {</span>
+<span id="cb23-2"><a href="preparing-date.html#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">&#39;ggplot2&#39;</span>)</span>
+<span id="cb23-3"><a href="preparing-date.html#cb23-3" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb23-4"><a href="preparing-date.html#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">require</span>(<span class="st">&#39;maps&#39;</span>) <span class="sc">||</span> <span class="sc">!</span><span class="fu">require</span>(<span class="st">&#39;ggmap&#39;</span>)) {</span>
+<span id="cb23-5"><a href="preparing-date.html#cb23-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="fu">c</span>(<span class="st">&quot;maps&quot;</span>,<span class="st">&quot;ggmap&quot;</span>))</span>
+<span id="cb23-6"><a href="preparing-date.html#cb23-6" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<pre><code>## Loading required package: maps</code></pre>
+<pre><code>## 
+## Attaching package: &#39;maps&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:viridis&#39;:
+## 
+##     unemp</code></pre>
+<pre><code>## The following object is masked from &#39;package:purrr&#39;:
+## 
+##     map</code></pre>
+<pre><code>## Loading required package: ggmap</code></pre>
+<pre><code>## ℹ Google&#39;s Terms of Service: &lt;https://mapsplatform.google.com&gt;
+## ℹ Please cite ggmap if you use it! Use `citation(&quot;ggmap&quot;)` for details.
+## 
+## Attaching package: &#39;ggmap&#39;
+## 
+## 
+## The following object is masked from &#39;package:plotly&#39;:
+## 
+##     wind</code></pre>
+<p>Note that the echo = FALSE parameter was added to the code chunk to prevent printing of the R code that generated the plot.</p>
+</div>
+<div id="new-session" class="section level3 hasAnchor" number="0.0.1">
+<h3><span class="header-section-number">0.0.1</span> Load libraries<a href="preparing-date.html#new-session" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Data wrangling</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="preparing-date.html#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check for missing values</span></span>
+<span id="cb30-2"><a href="preparing-date.html#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">is.na</span>(df))</span></code></pre></div>
+<pre><code>## [1] 514</code></pre>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="preparing-date.html#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># If there are missing values, you can drop or fill them as per your requirement</span></span>
+<span id="cb32-2"><a href="preparing-date.html#cb32-2" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(df)  <span class="co"># Drop rows with missing values</span></span></code></pre></div>
+<p>Change column name for later map</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="preparing-date.html#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(df)[<span class="fu">which</span>(<span class="fu">names</span>(df) <span class="sc">==</span> <span class="st">&quot;lon&quot;</span>)] <span class="ot">&lt;-</span> <span class="st">&quot;longitude&quot;</span></span>
+<span id="cb33-2"><a href="preparing-date.html#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(df)[<span class="fu">which</span>(<span class="fu">names</span>(df) <span class="sc">==</span><span class="st">&quot;lat&quot;</span>)] <span class="ot">&lt;-</span> <span class="st">&quot;latitude&quot;</span></span>
+<span id="cb33-3"><a href="preparing-date.html#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(df)</span></code></pre></div>
+<pre><code>## [1] 2722   19</code></pre>
+<p>Filter the rows based on the date range Use the subset() function to filter the rows based on the date range:2010 -2017to match 5 year sensus data</p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="preparing-date.html#cb35-1" aria-hidden="true" tabindex="-1"></a>filtered_df <span class="ot">&lt;-</span> <span class="fu">subset</span>(df, date <span class="sc">&gt;=</span> <span class="fu">as.Date</span>(<span class="st">&quot;2012-01-01&quot;</span>) <span class="sc">&amp;</span> date <span class="sc">&lt;=</span> <span class="fu">as.Date</span>(<span class="st">&quot;2017-09-01&quot;</span>))</span>
+<span id="cb35-2"><a href="preparing-date.html#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(filtered_df)</span></code></pre></div>
+<pre><code>## [1] 2124   19</code></pre>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="preparing-date.html#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(filtered_df,<span class="st">&quot;./dataset/asthma_small.csv&quot;</span>)</span></code></pre></div>
+<p>Combine information for display in tooltip</p>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="preparing-date.html#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Combine the required information for hover tooltip into a new column</span></span>
+<span id="cb38-2"><a href="preparing-date.html#cb38-2" aria-hidden="true" tabindex="-1"></a>filtered_df<span class="sc">$</span>tooltip <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="st">&quot;PM2.5:&quot;</span>, filtered_df<span class="sc">$</span>pm_pred, <span class="st">&quot;&lt;br&gt;&quot;</span>,</span>
+<span id="cb38-3"><a href="preparing-date.html#cb38-3" aria-hidden="true" tabindex="-1"></a>                    <span class="st">&quot;Hospital Date:&quot;</span>, filtered_df<span class="sc">$</span>date, <span class="st">&quot;&lt;br&gt;&quot;</span>,</span>
+<span id="cb38-4"><a href="preparing-date.html#cb38-4" aria-hidden="true" tabindex="-1"></a>                    <span class="st">&quot;Patient Info:&quot;</span>, filtered_df<span class="sc">$</span>code_display, <span class="st">&quot;&lt;br&gt;&quot;</span>,</span>
+<span id="cb38-5"><a href="preparing-date.html#cb38-5" aria-hidden="true" tabindex="-1"></a>                    <span class="st">&quot;gender :&quot;</span>, filtered_df<span class="sc">$</span>gender)</span></code></pre></div>
+</div>
+<div id="create-a-geographical-map" class="section level3 hasAnchor" number="0.0.2">
+<h3><span class="header-section-number">0.0.2</span> Create a Geographical Map<a href="preparing-date.html#create-a-geographical-map" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Load the required libraries for plotting maps:</p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="preparing-date.html#cb39-1" aria-hidden="true" tabindex="-1"></a>  <span class="fu">library</span>(ggplot2)</span>
+<span id="cb39-2"><a href="preparing-date.html#cb39-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">library</span>(maps)</span>
+<span id="cb39-3"><a href="preparing-date.html#cb39-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">library</span>(ggmap)</span></code></pre></div>
+<p>Add map data to the base plot using the map_data() function:</p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="preparing-date.html#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Draw massachusetts map </span></span>
+<span id="cb40-2"><a href="preparing-date.html#cb40-2" aria-hidden="true" tabindex="-1"></a>ma_map <span class="ot">&lt;-</span> <span class="fu">map_data</span>(<span class="st">&quot;state&quot;</span>, <span class="at">region =</span> <span class="st">&quot;massachusetts&quot;</span>)</span>
+<span id="cb40-3"><a href="preparing-date.html#cb40-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-4"><a href="preparing-date.html#cb40-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a base plot for Massachusetts</span></span>
+<span id="cb40-5"><a href="preparing-date.html#cb40-5" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb40-6"><a href="preparing-date.html#cb40-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_polygon</span>(<span class="at">data =</span> ma_map, <span class="fu">aes</span>(<span class="at">x =</span> long, <span class="at">y =</span> lat, <span class="at">group =</span> group),</span>
+<span id="cb40-7"><a href="preparing-date.html#cb40-7" aria-hidden="true" tabindex="-1"></a>               <span class="at">fill =</span> <span class="st">&quot;lightgray&quot;</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>)</span></code></pre></div>
+</div>
+<div id="plotting-the-data-points" class="section level3 hasAnchor" number="0.0.3">
+<h3><span class="header-section-number">0.0.3</span> Plotting the Data Points<a href="preparing-date.html#plotting-the-data-points" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Plot the data points on the map using the geom_point() function. Specify the longitude and latitude coordinates, and optionally, the color or size of the data points based on the PM2.5 values:</p>
+<p>Add PM2.5 data points with hover information</p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="preparing-date.html#cb41-1" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> p <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="at">data =</span> filtered_df, <span class="fu">aes</span>(<span class="at">x =</span> longitude, <span class="at">y =</span> latitude, <span class="at">color =</span> pm_pred,</span>
+<span id="cb41-2"><a href="preparing-date.html#cb41-2" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">text =</span> tooltip), <span class="at">size =</span> <span class="dv">3</span>)</span></code></pre></div>
+<pre><code>## Warning in geom_point(data = filtered_df, aes(x = longitude, y =
+## latitude, : Ignoring unknown aesthetics: text</code></pre>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="preparing-date.html#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co">#you can run this block code on your local to have mouse hover text. for Now it cannot </span></span>
+<span id="cb43-2"><a href="preparing-date.html#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="co">#rander on R-studio connect</span></span>
+<span id="cb43-3"><a href="preparing-date.html#cb43-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Convert the plot to a plotly object</span></span>
+<span id="cb43-4"><a href="preparing-date.html#cb43-4" aria-hidden="true" tabindex="-1"></a><span class="co"># p &lt;- ggplotly(p) %&gt;%</span></span>
+<span id="cb43-5"><a href="preparing-date.html#cb43-5" aria-hidden="true" tabindex="-1"></a><span class="co">#  layout(hoverlabel = list(bgcolor = &quot;white&quot;),</span></span>
+<span id="cb43-6"><a href="preparing-date.html#cb43-6" aria-hidden="true" tabindex="-1"></a><span class="co">#         hovertemplate = paste(</span></span>
+<span id="cb43-7"><a href="preparing-date.html#cb43-7" aria-hidden="true" tabindex="-1"></a><span class="co">#           &quot;&lt;b&gt;%{text}&lt;/b&gt;&quot;</span></span>
+<span id="cb43-8"><a href="preparing-date.html#cb43-8" aria-hidden="true" tabindex="-1"></a><span class="co">#         )</span></span>
+<span id="cb43-9"><a href="preparing-date.html#cb43-9" aria-hidden="true" tabindex="-1"></a><span class="co">#  )</span></span></code></pre></div>
+<p>Draw the map</p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="preparing-date.html#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(p)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="major-road-exposure.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="census-analysis.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/01-ma_pm_patient.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

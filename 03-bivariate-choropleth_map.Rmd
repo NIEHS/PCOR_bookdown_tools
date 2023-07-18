@@ -1,0 +1,45 @@
+# **Exposure Estimates** {-} 
+
+## bivariate choropleth map {-}
+
+### Make a bivariate choropleth map (Sample)
+
+```{r}
+library("knitr")
+knitr::opts_chunk$set(fig.align="center", fig.width=6, fig.height=6)
+options(width=90)
+
+```
+
+Single-variate choropleth maps
+
+```{r}
+if(!require('latticeExtra')){
+  install.packages("latticeExtra", type = "source")
+}
+if(!require('pals')){
+  install.packages("pals", type = "source")
+}
+ 
+```
+
+```{r}
+
+require(latticeExtra) # USCancerRates, mapplot
+require(maps) # map
+require(classInt) # classIntervals, findCols
+require(grid) # viewport, pushViewport
+require(pals) # brewer.blues, stevens.pinkgreen
+
+#This block of code Can run at your locally PC/MAC but can not knit to server
+ # suppressWarnings(print(
+ #   mapplot(rownames(USCancerRates) ~ log(rate.male) + log(rate.female),
+ #           data = USCancerRates,
+ #           colramp = brewer.blues,
+ #           map = map("county", plot = FALSE, fill = TRUE,
+ #                     projection = "tetra"),
+ #           breaks=classIntervals(log(USCancerRates$rate.female), n=3, style='quantile')$brks,
+ #           scales = list(draw = FALSE))
+ # ))
+
+```

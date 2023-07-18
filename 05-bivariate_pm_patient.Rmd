@@ -1,0 +1,160 @@
+# **Bivariate maps** {-}
+
+## PM 2.5 Bivariate map{-}
+
+### Set up bivariate color classes
+
+Each variate is divided into thirds (based on percentiles) and a joint classification for all 9 combinations is defined.
+
+```{r}
+require(latticeExtra) # USCancerRates, mapplot
+require(maps) # map
+require(classInt) # classIntervals, findCols
+require(grid) # viewport, pushViewport
+require(pals) # brewer.blues, stevens.pinkgreen
+
+```
+
+
+From asthma_patients_pm_2\_census_block_group_0.6.0_2010.csv run python biv_cho_map.py call fcc api to get county FIPS and Name for each patient <https://geo.fcc.gov/api/census/#!/block/get_block_find> new data fileasthma_patients_pm_2\_census_block_group_0.6.0_2010.csv
+
+```{R}
+library(readr)
+df_county<-read.csv("./dataset/county.csv")
+head(df_county)
+
+df_census_block<-read.csv("./dataset/asthma_patients_pm_2_census_block_group_0.6.0_2010.csv")
+head(df_census_block)
+```
+
+### Get the boundaries for US MA counties
+
+```{R include=FALSE}
+library(sf)
+library(ggplot2)
+library(dplyr)
+library(viridis)
+library(tigris)
+
+us_counties <- counties(cb = TRUE, year = 2020, class = "sf")
+
+us_counties_MA <- us_counties %>% 
+  dplyr::filter(STATEFP == "25")  # FIPS code for MA is 25
+dim(us_counties_MA)
+
+```
+
+Aggregate the data by county, calculating the total number of patients and the mean pm2.5_pred:
+
+```{R}
+df_agg <- df_county %>%
+  group_by(county_code) %>%
+  reframe(patient_count = n(),
+            county_name,
+            pm2_mean = mean(pm_pred, na.rm = TRUE))
+
+```
+### Join Census with Massachusetts map 
+```{R}
+dim(df_agg)
+ma_counties_data <- us_counties_MA %>% left_join(df_agg, by = c('NAMELSAD'='county_name'))
+head(ma_counties_data)
+```
+
+```{R}
+ # ggplot() +
+ #   geom_sf(data = ma_counties_data,
+ #           aes(fill = patient_count),
+ #           color = NA) +
+ #   scale_fill_viridis() +
+ #   theme_void() +
+ #   theme(legend.position = "bottom") +
+ #   labs(fill = "Patient count")
+
+```
+### Set color on both varaibles 
+```{r}
+cols <- stevens.pinkgreen; nbins <- 3
+
+# categorize rates into 3 percentile bins
+brks_pm <- classIntervals(log(ma_counties_data$pm2_mean), n=nbins, style='quantile')
+
+```
+
+```{r}
+brks_patient <- classIntervals(log(ma_counties_data$patient_count), n=nbins, style='quantile')
+
+```
+
+```{r}
+class_pm <- findCols(brks_pm)
+print(class_pm)
+```
+
+```{R}
+class_patient <- findCols(brks_patient)
+# convert x,y classes into a joint class x+3(y-1)
+ma_counties_data$class2 <- class_pm + nbins*(class_patient-1)
+
+# scatterplot of two variates showing bins
+plot(log(pm2_mean) ~ log(patient_count), data=ma_counties_data,
+     col=cols()[ma_counties_data$class2], pch=19,
+     xlim=c(0, 6), ylim=c(0, 5))
+
+```
+
+### Draw a state map with pm-patient
+```{r}
+# Check for missing values
+#sum(is.na(ma_counties_data))
+
+# If there are missing values, you can drop or fill them as per your requirement
+#df <- na.omit(ma_counties_data)  # Drop rows with missing values
+
+```
+
+```{r}
+m4 <- mapplot(rownames(ma_counties_data) ~ class2, data = ma_counties_data,
+              colramp=cols, breaks=seq(from=0.5, by=1, length=nbins*nbins+1),
+              xlab="",
+              colorkey=FALSE,
+              map = map("state","massachusetts", plot = FALSE, fill = TRUE,
+                        projection = "tetra"),
+              scales = list(draw = FALSE))
+```
+```{r}
+#print(nbins)
+#matrix(1:(nbins*nbins), nrow=nbins)
+m4leg <- levelplot(matrix(1:(nbins*nbins), nrow=nbins), axes=FALSE, col.regions=cols(),
+                   xlab="patient", ylab="pm_2.5", cuts=8, colorkey=FALSE,
+                   scales=list(draw=0))
+
+vp <- viewport(x=.15, y=.25, width=.3, height=.3)
+pushViewport(vp)
+print(m4leg, newpage=FALSE)
+popViewport()
+
+```
+
+```{r}
+
+#suppressWarnings(print( m4 ))
+
+# table(apply(data_sample,1, paste,collapse=""))
+# 
+ m4leg <- levelplot(matrix(1:(nbins*nbins), nrow=nbins), axes=FALSE, col.regions=cols(),
+                    xlab="patient", ylab="pm_2.5", cuts=8, colorkey=FALSE,
+                    scales=list(draw=0))
+
+# add the color legend
+ m4leg <- levelplot(matrix(1:(nbins*nbins), nrow=nbins), axes=FALSE, col.regions=cols(),
+                    xlab="patient", ylab="pm_2.5", cuts=8, colorkey=FALSE,
+                    scales=list(draw=0))
+ vp <- viewport(x=.15, y=.25, width=.3, height=.3)
+ pushViewport(vp)
+ print(m4leg, newpage=FALSE)
+ popViewport()
+
+```
+
+
