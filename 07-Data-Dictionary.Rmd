@@ -6,11 +6,25 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # **Data Dictionary** {-}
 
-## GeoExposures {-}
+*[Page Note:  add links to catalog for sources, add links to tools for tools]*
 
-The following is a catalog for the exposure sources 
+## Geospatial-based Exposures {-}
 
-**Table**  
+The following table provides a list of geospatial-based exposure measures used in
+the NIEHS Personalized Environment and Genes Study, including their sources and links
+to tools to use to compute these measures.  
+
+The sources include:
+* TRI = EPA Toxic Release Inventory
+* ACAG = Atmospheric Composition Analysis Group
+* CACES = Center for Air, Climate, & Energy Solutions 
+* FAA = Federal Aviation Administration
+* NCDEQ = North Carolina Department of Environmental Quality
+* FCC = Federal Communications Commission
+* NRC = Nuclear Regulatory Commission
+* DOT = Department of Transportation
+* EJI = Environmental Justice Index
+* Merra2 = NASA Global Modeling and Assimilation Office
 
 |variable_name     |description      | variable_source  |  
 |-------|------------------------------|----------------|  
