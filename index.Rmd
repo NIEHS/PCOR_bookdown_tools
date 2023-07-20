@@ -1,43 +1,49 @@
---- 
-title: "A BookDown for the tools"
-author: "S.N."
-date: "`r Sys.Date()`"
+---
+title: "The CHORDS Toolkit for Health and Geospatial Exposures Research"
+author: Lara Clark, Sue Nolte
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib, packages.bib]
-# url: your book url like https://bookdown.org/yihui/bookdown
-# cover-image: path to the social sharing image like images/cover.jpg
-description: |
-  This is a example of using the bookdown package to write a book.
-  The HTML output format for this example is bookdown::gitbook,
-  set in the _output.yml file.
-link-citations: yes
-github-repo: rstudio/bookdown-demo
+biblio-style: apalike
+link-citations: yes    
+output: bookdown::html_document2
 ---
+ 
+*[Page Note:  add authors and affiliations.  Check about correct funding attributions]*
+
 # **Introduction** {-}
 
-## About {-}
+Research into the effects of the environment on human health at the level of  
+individuals and populations  entails 
+pulling together a combination of health data and data on environmental exposures. 
 
-A collection of my sample r markdown pages. 
-Data set is from Synthetic patient and population health data from the state of Massachusetts in FHIR format.
-PM 2.5 dataset is from deGAUSS https://degauss.org/
-Census data is from deGAUSS and tidycensus
+One approach to gathering exposure information is to compute estimated exposure levels based on the location 
+of individuals at different time points.  For instance, based on location and time one can 
+estimate the level of noise around a person, the level of pollutants present in the air, and the presence of
+parks and other green spaces.
 
-## Usage {-}
+Estimating these exposures can be challenging, especially if one is not familiar with the
+sources of data used to make these estimations or the analysis methods needed to compute the estimated
+exposures.  This can be especially challenging for time varying exposures, exposures that depend on
+complex models such as the composition and dispersion of chemicals in the air, and for researchers seeking to
+study exposure effects at the individual level.
 
-Each **bookdown** chapter is an .Rmd file, and each .Rmd file can contain one (and only one) chapter. 
-
-
-To build the book from the R console:
-
-```{r, eval=FALSE}
-bookdown::render_book()
-```
+This resource seeks to aid researcher in adopting geospatial-based exposures into their research
+by providing guides for tools to use and example software code to work off of.
 
 
-```{r include=FALSE}
-# automatically create a bib database for R packages
-knitr::write_bib(c(
-  .packages(), 'bookdown', 'knitr', 'rmarkdown'
-), 'packages.bib')
-```
+## Getting Started {-}
+
+This resource does assume a familiarity with the R programming language and the use of
+R for working with, visualizing, and analyzing scientific data.
+
+The TAME Toolkit (https://uncsrp.github.io/Data-Analysis-Training-Modules/) provides a good resource for gaining familiarity with R for use in
+environmental health research methods, in particular Chapter 1 on Introductory
+Data Science and Chapter 3.3 on Database Integration.  
+
+## Funding {-}
+
+This resource was supported by the National Institutes of Health (NIH) from the National Institute of Environmental Health Sciences, by the NIH Office of Data Science Strategy Data Scholar's Program, by the Patient Centered Outcomes Research Trust Fund and the Department of Health and Human Services (DHHS) Office of Assistant Secretary for Planning and Evaluation.
+
+
+
