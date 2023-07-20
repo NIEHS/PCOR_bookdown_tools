@@ -2,7 +2,7 @@
 #```{r setup, include=FALSE}
 #knitr::opts_chunk$set(echo = TRUE)
 #```
-
+ 
 # **Major road exposure** {-}
 
 ## Major road proximity metrics {-}
