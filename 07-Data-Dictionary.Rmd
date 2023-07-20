@@ -15,6 +15,7 @@ the NIEHS Personalized Environment and Genes Study, including their sources and 
 to tools to use to compute these measures.  
 
 The sources include:
+
 * TRI = EPA Toxic Release Inventory
 * ACAG = Atmospheric Composition Analysis Group
 * CACES = Center for Air, Climate, & Energy Solutions 
@@ -25,6 +26,7 @@ The sources include:
 * DOT = Department of Transportation
 * EJI = Environmental Justice Index
 * Merra2 = NASA Global Modeling and Assimilation Office
+
 
 |variable_name     |description      | variable_source  |  
 |-------|------------------------------|----------------|  
