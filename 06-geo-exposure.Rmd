@@ -1,13 +1,8 @@
----
-title: "06-geo-exposure"
-output: html_document
-date: "2023-07-14"
----
 
 #```{r setup, include=FALSE}
 #knitr::opts_chunk$set(echo = TRUE)
 #```
-
+ 
 # **Major road exposure** {-}
 
 ## Major road proximity metrics {-}
