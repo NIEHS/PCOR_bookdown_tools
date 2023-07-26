@@ -3,9 +3,9 @@
 #knitr::opts_chunk$set(echo = TRUE)
 #```
  
-# **Major road exposure** {-}
+# **Exposure Models** {-}
 
-## Major road proximity metrics {-}
+## Major road proximity metrics 
 
 The following are step-by-step instructions to calculate proximity-based exposure metrics to  major roadways in the United States (US) using US NASA (National Aeronautics and Space Administration) Socioeconomic Data and Applications Center (SEDAC) [Global Roads Open Access Data Set (Version 1)](https://doi.org/10.7927/H4VD6WCT). 
 
@@ -62,7 +62,7 @@ This tool is recommended for the following uses:
 &nbsp; 
 &nbsp; 
 
-#### Step 1. Install R and required packages
+### Step 1. Install R and required packages
 ***
 [Install R](https://cran.r-project.org/). Optionally, [install RStudio](https://www.rstudio.com/products/rstudio/download/).
 
@@ -74,13 +74,13 @@ install.packages(c("logr", "tidyverse", "sf"))
 &nbsp; 
 &nbsp;  
     
-#### Step 2. Download tool 
+### Step 2. Download tool 
 ***
 Download and save the folder containing input data (````input_source_major_roads.rds```` and ````input_us_borders.rds````) and script (````script_major_road_proximity_for_points.R````). To directly run the example scripts provided with these instructions in [Step 4](#step-4.-run-script-in-r), do not change the file names within the folder.   
 &nbsp;  
 &nbsp;  
 
-#### Step 3. Prepare receptor point data  
+### Step 3. Prepare receptor point data  
 ***  
 Prepare a comma-separated values (CSV) file that contains a table of the receptor 
 point locations (e.g., geocoded addresses, coordinates). Include each receptor as 
@@ -104,7 +104,7 @@ To directly run the example scripts provided with these instructions, save the r
 &nbsp;   
 &nbsp;  
 
-#### Step 4. Run script in R  
+### Step 4. Run script in R  
 ***
 Run the script ````script_major_road_proximity_for_points.R```` to load the required functions in R. You can then use the function ````get_major_road_proximity_for_points()```` to calculate proximity-based exposure metrics for each receptor point location. 
 &nbsp;   
@@ -136,7 +136,7 @@ This function takes the receptor point data above and returns a data frame with 
 &nbsp;   
 &nbsp; 
 
-##### Example use 
+#### Example use 
 
 Below are two example scripts for using the function above to produce a CSV file with the proximity-based exposure estimates for each receptor to highways (using default options for all other optional arguments). The first example uses only R but requires editing the file paths. The second example requires RStudio and the ````here```` package but does not require editing file paths.  
 
@@ -200,15 +200,15 @@ readr::write_csv(major_road_proximity_metrics,
 &nbsp;   
 &nbsp;  
 
-#### Step 5. Review output  
+### Step 5. Review output  
 ***
-##### Log file  
+#### Log file  
 After running the example script above, with the log file option selected, the log
 file will be available in the folder ````log```` in the current R working directory.  
 &nbsp;   
 &nbsp;  
 
-##### Output data  
+#### Output data  
 After running the example script above, calculated proximity-based exposure metrics for receptor locations will be available in the file ````output_major_road_proximity_metrics.csv```` within the folder. This CSV file includes a row for each receptor with the following columns (as applicable):  
 
 **Identifiers**  
@@ -235,7 +235,7 @@ After running the example script above, calculated proximity-based exposure metr
 &nbsp;  
 
 
-#### Step 6. Cite data and tool   
+### Step 6. Cite data and tool   
 ***
 Please cite the following in any publications based on this tool:  
 
@@ -255,7 +255,7 @@ Homeland Infrastructure Foundation-Level Data (HIFLD) Geoplatform. *Mexico and U
 &nbsp;   
 &nbsp; 
 
-## Aircraft landing facility proximity metrics {-}
+## Aircraft landing facility proximity metrics 
 
 ### Instructions: Aircraft landing facility proximity metrics {-} 
 ***
@@ -303,7 +303,7 @@ This tool is recommended for the following uses:
 &nbsp; 
 &nbsp; 
 
-#### Step 1. Install R and required packages
+### Step 1. Install R and required packages
 ***
 [Install R](https://cran.r-project.org/). Optionally, [install RStudio](https://www.rstudio.com/products/rstudio/download/).
 
@@ -315,13 +315,13 @@ install.packages(c("logr", "tidyverse", "sf"))
 &nbsp; 
 &nbsp;  
     
-#### Step 2. Download tool 
+### Step 2. Download tool 
 ***
 Download and save the folder containing input data (````input_source_aircraft_facilities.rds```` and ````input_us_borders.rds````) and script (````script_aircraft_facility_proximity_for_points.R````). To directly run the example scripts provided with these instructions in [Step 4](#step-4.-run-script-in-r), do not change the file names within the folder.   
 &nbsp;  
 &nbsp;  
 
-#### Step 3. Prepare receptor point data  
+### Step 3. Prepare receptor point data  
 ***  
 Prepare a comma-separated values (CSV) file that contains a table of the receptor 
 point locations (e.g., geocoded addresses, coordinates). Include each receptor as 
@@ -345,13 +345,13 @@ To directly run the example scripts provided with these instructions, save the r
 &nbsp;   
 &nbsp;  
 
-#### Step 4. Run script in R  
+### Step 4. Run script in R  
 ***
 Run the script ````script_aircraft_facility_proximity_for_points.R```` to load the required functions in R. You can then use the function ````get_aircraft_facility_proximity_for_points()```` to calculate proximity-based exposure metrics for each receptor point location. 
 &nbsp;   
 &nbsp; 
 
-##### Description of function ````get_aircraft_facility_proximity_for_points()````   
+#### Description of function ````get_aircraft_facility_proximity_for_points()````   
 
 This function takes the receptor point data above and returns a data frame with the receptor identifying code linked to the selected aircraft landing facility proximity metrics for selected aircraft landing facility types and year (during 1981 to 2020) as well as information about data missingness. Optionally, the function also writes a log file in the current R working directory. The function has the following arguments:
 
@@ -379,7 +379,7 @@ This function takes the receptor point data above and returns a data frame with 
 &nbsp;   
 &nbsp; 
 
-##### Example use 
+#### Example use 
 
 Below are two example scripts for using the function above to produce a CSV file with the proximiity-based exposure estimates for each receptor to airports in year 2020 (using default options for all other optional arguments). The first example uses only R but requires editing the file paths. The second example requires RStudio and the ````here```` package but does not require editing file paths.  
 
@@ -445,15 +445,15 @@ readr::write_csv(aircraft_proximity_metrics,
 &nbsp;   
 &nbsp;  
 
-#### Step 5. Review output  
+### Step 5. Review output  
 ***
-##### Log file  
+#### Log file  
 After running the example script above, with the log file option selected, the log
 file will be available in the folder ````log```` in the current R working directory.  
 &nbsp;   
 &nbsp;  
 
-##### Output data  
+#### Output data  
 After running the example script above, calculated proximity-based exposure metrics for receptor locations will be available in the file ````output_aircraft_proximity_metrics.csv```` within the folder. This CSV file includes a row for each receptor with the following columns (as applicable):  
 
 **Identifiers**  
@@ -491,7 +491,7 @@ After running the example script above, calculated proximity-based exposure metr
 &nbsp;  
 
 
-#### Step 6. Cite data and tool   
+### Step 6. Cite data and tool   
 ***
 Please cite the following in any publications based on this tool:  
 
@@ -515,7 +515,7 @@ Homeland Infrastructure Foundation-Level Data (HIFLD) Geoplatform. *Mexico and U
 &nbsp; 
 
 
-##  Air pollution exposure {-}
+##  Air pollution exposure 
 
 ### Instructions: Air pollution exposure metrics from CACES model {-}
 ***
@@ -575,7 +575,7 @@ a consistent manner
 &nbsp; 
 &nbsp; 
 
-#### Step 1. Install R and required packages
+### Step 1. Install R and required packages
 ***
 [Install R](https://cran.r-project.org/). Optionally, [install RStudio](https://www.rstudio.com/products/rstudio/download/).
 
@@ -587,13 +587,13 @@ install.packages(c("logr", "tidyverse", "sf"))
 &nbsp; 
 &nbsp;  
     
-#### Step 2. Download tool 
+### Step 2. Download tool 
 ***
 Download and save the folder containing input data (````input_source_caces.rds```` and ````input_census_tracts_2010.rds````) and script (````script_caces_exposures_for_points.R````). To directly run the example scripts provided with these instructions in [Step 4](#step-4.-run-script-in-r), do not change the file names within the folder.  
 &nbsp;  
 &nbsp;  
 
-#### Step 3. Prepare receptor point data  
+### Step 3. Prepare receptor point data  
 ***  
 Prepare a comma-separated values (CSV) file that contains a table of the receptor 
 point locations (e.g., geocoded addresses, coordinates). Include each receptor as 
@@ -627,7 +627,7 @@ To directly run the example scripts provided with these instructions, save the r
 &nbsp;   
 &nbsp;  
 
-#### Step 4. Run script in R  
+### Step 4. Run script in R  
 ***
 Run the script ````script_caces_exposures_for_points.R```` to load the required functions
 in R. You can then use the function ````get_caces_for_points()```` to calculate 
@@ -636,7 +636,7 @@ for each receptor point location.
 &nbsp;   
 &nbsp; 
 
-##### Description of function ````get_caces_for_points()````   
+#### Description of function ````get_caces_for_points()````   
 
 This function takes the receptor point data above and returns a data frame with the receptor id linked to the exposure estimates for selected pollutants and time periods as well as information about data missingness. Optionally, the function also writes a log file in the current R working directory. The function has the following arguments:
 
@@ -657,7 +657,7 @@ This function takes the receptor point data above and returns a data frame with 
 &nbsp;   
 &nbsp; 
 
-##### Example use 
+#### Example use 
 
 Below are two example scripts for using the function above to produce a CSV file with the CACES exposure estimates for each receptor point for ozone and nitrogen dioxide in year 2015 (using default options for all other optional arguments). The first example uses only R but requires editing the file paths. The second example requires RStudio and the ````here```` package but does not require editing file paths.  
 
@@ -722,15 +722,15 @@ readr::write_csv(caces_exposures,
 &nbsp;   
 &nbsp;  
 
-#### Step 5. Review output  
+### Step 5. Review output  
 ***
-##### Log file  
+#### Log file  
 After running the example script above, with the log file option selected, the log
 file will be available in the folder ````log```` in the current R working directory.  
 &nbsp;   
 &nbsp;  
 
-##### Output data  
+#### Output data  
 After running the example script above, calculated exposure metrics for receptor 
 locations will be available in the file ````output_caces_exposure.csv```` within the 
 folder. This CSV file includes a row for each receptor with the following columns (as applicable):  
@@ -766,7 +766,7 @@ folder. This CSV file includes a row for each receptor with the following column
 &nbsp;   
 &nbsp;  
 
-#### Step 6. Cite data and tool   
+### Step 6. Cite data and tool   
 ***
 Please cite the following in any publications based on this tool:
 
