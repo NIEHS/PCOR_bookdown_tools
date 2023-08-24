@@ -3,7 +3,8 @@
 .RData
 .Ruserdata
 <<<<<<< HEAD
-
+dataset/
+*.csv
 =======
 _book/
 _bookdown_files/
