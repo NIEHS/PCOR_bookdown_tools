@@ -1,0 +1,13 @@
+name: pcor_bookdown
+title: PCOR_bookdown
+username: noltesz
+account: noltesz
+server: sandbox-staging.ntp.niehs.nih.gov
+hostUrl: https://sandbox-staging.ntp.niehs.nih.gov/rsconnect/__api__
+appId: 280
+bundleId: 1367
+url: https://sandbox-staging.ntp.niehs.nih.gov:443/rsconnect/content/27fd8bbe-aef3-4593-9fd4-f18f6305f555/
+when: 1690400825.67326
+lastSyncTime: 1690400825.67327
+asMultiple: FALSE
+asStatic: FALSE
