@@ -1,0 +1,14 @@
+name: pcor_bookdown_tools_oct
+title: PCOR_bookdown_tools_oct
+username: noltesz
+account: noltesz
+server: sandbox-staging.ntp.niehs.nih.gov
+hostUrl: https://sandbox-staging.ntp.niehs.nih.gov/rsconnect/__api__
+appId: 305
+bundleId: 1425
+url: https://sandbox-staging.ntp.niehs.nih.gov:443/rsconnect/content/bf3df2d0-6b4a-418d-8412-bf8e7b6dcb34/
+when: 1696523688.27517
+lastSyncTime: 1696523688.27518
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: .gitignore.orig|01-ma_pm_patient.Rmd|02-census-income.Rmd|03-bivariate-choropleth_map.Rmd|04-bivariate_color.Rmd|05-bivariate_pm_patient.Rmd|06-geo-exposure-b.Rmd|06-geo-exposure-c.Rmd|06-geo-exposure.Rmd|07-Data-Dictionary.Rmd|08-PCOR-Tmap_c.Rmd|08-PCOR-Tmap_d.Rmd|08-PCOR-Tmap.Rmd|09-tutorial-link-point-to-census-geoid.html|09-tutorial-link-point-to-census-geoid.Rmd|index.Rmd|packages.bib|preamble.tex|README.md|style.css|tool_content|tutorial-link-point-to-census-geoid-20230922.html|_bookdown_files|dataset
