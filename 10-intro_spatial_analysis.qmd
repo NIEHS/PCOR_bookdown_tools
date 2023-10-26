@@ -28,7 +28,8 @@ library(sf)
 library(ggplot2)
 library(ggpubr)
 map <- st_read(
-  "/Volumes/SET/Projects/EnviroTools/input/states/cb_2018_us_state_500k.shp"
+  paste0("/Volumes/manwareme/home/PCOR_bookdown_tools/datasets/states/",
+         "cb_2018_us_state_500k.shp")
 )
 map <- subset(map, subset = !NAME %in% c(
   "Alaska",
@@ -163,7 +164,8 @@ download.file(
 ## NEED TO CHANGE eval=TRUE for rendering
 ################################################################################
 url_epa <- "https://aqs.epa.gov/aqsweb/airdata/daily_88101_2021.zip"
-destination_epa <- "/Volumes/SET/Projects/EnviroTools/input/epa/epa_data.zip"
+destination_epa <-
+  "/Volumes/manwareme/home/PCOR_bookdown_tools/datasets/epa/epa_data.zip"
 download.file(
   url_epa,
   destination_epa
@@ -185,7 +187,7 @@ unzip("/   YOUR FILE PATH   /epa_data.zip",
 
 ```{r, echo=FALSE}
 ################################################################################
-unzip("/Volumes/SET/Projects/EnviroTools/input/epa/epa_data.zip",
+unzip("/Volumes/manwareme/home/PCOR_bookdown_tools/datasets/epa/epa_data.zip",
   list = TRUE
 )
 ################################################################################
@@ -203,7 +205,7 @@ unzip("/   YOUR FILE PATH   /epa_data.zip")
 ################################################################################
 ## NEED TO CHANGE eval=TRUE for rendering
 ################################################################################
-unzip("/Volumes/SET/Projects/EnviroTools/input/epa/epa_data.zip",
+unzip("/Volumes/manwareme/home/PCOR_bookdown_tools/datasets/epa/epa_data.zip",
   exdir = "/Volumes/SET/Projects/EnviroTools/input/epa"
 )
 ################################################################################
@@ -221,7 +223,7 @@ list.files("/   YOUR FILE PATH   /")
 
 ```{r, echo=FALSE}
 ################################################################################
-list.files("/Volumes/SET/Projects/EnviroTools/input/epa")
+list.files("/Volumes/manwareme/home/PCOR_bookdown_tools/datasets/epa")
 ################################################################################
 ```
 
@@ -236,7 +238,8 @@ pm <- st_read("/   YOUR FILE PATH   /daily_88101_2021.csv")
 ```{r, echo=FALSE, warning=TRUE, cache=FALSE, results='hide'}
 ################################################################################
 pm <- st_read(
-  "/Volumes/SET/Projects/EnviroTools/input/epa/daily_88101_2021.csv"
+  paste0("/Volumes/manwareme/home/PCOR_bookdown_tools/datasets/epa/",
+         "daily_88101_2021.csv")
 )
 ################################################################################
 ```
@@ -600,7 +603,7 @@ url_noaa <- paste0(
   ".zip"
 )
 destination_noaa <- paste0(
-  "/Volumes/SET/Projects/EnviroTools/input/noaa/noaa_smoke",
+  "/Volumes/manwareme/home/PCOR_bookdown_tools/datasets/noaa/noaa_smoke",
   year,
   month,
   day,
@@ -627,7 +630,9 @@ unzip("/   YOUR FILE PATH   /noaa_smoke20230901.zip",
 
 ```{r, echo=FALSE}
 ################################################################################
-unzip("/Volumes/SET/Projects/EnviroTools/input/noaa/noaa_smoke20230901.zip",
+unzip(
+  paste0("/Volumes/manwareme/home/PCOR_bookdown_tools/datasets/noaa/",
+         "noaa_smoke20230901.zip"),
   list = TRUE
 )
 ################################################################################
@@ -645,7 +650,9 @@ unzip("/   YOUR FILE PATH   /noaa_smoke20230901.zip")
 ################################################################################
 ## NEED TO CHANGE eval=TRUE for rendering
 ################################################################################
-unzip("/Volumes/SET/Projects/EnviroTools/input/noaa/noaa_smoke20230901.zip",
+unzip(
+  paste0("/Volumes/manwareme/home/PCOR_bookdown_tools/datasets/noaa/",
+         "noaa_smoke20230901.zip"),
   exdir = "/Volumes/SET/Projects/EnviroTools/input/noaa"
 )
 ################################################################################
@@ -659,7 +666,7 @@ list.files("/   YOUR FILE PATH   /")
 
 ```{r, echo=FALSE}
 ################################################################################
-list.files("/Volumes/SET/Projects/EnviroTools/input/noaa")
+list.files("/Volumes/manwareme/home/PCOR_bookdown_tools/datasets/noaa")
 ################################################################################
 ```
 
@@ -688,7 +695,8 @@ smoke_sf <- st_read("/   YOUR FILE PATH   /hms_smoke20230901.shp")
 ```{r, echo=FALSE, warning=TRUE, cache=FALSE, results='hide'}
 ################################################################################
 smoke_sf <- st_read(
-  "/Volumes/SET/Projects/EnviroTools/input/noaa/hms_smoke20230901.shp"
+  paste0("/Volumes/manwareme/home/PCOR_bookdown_tools/datasets/noaa/",
+         "hms_smoke20230901.shp")
 )
 ################################################################################
 ```
@@ -849,7 +857,7 @@ download.file(
 url_states <-
   "https://www2.census.gov/geo/tiger/GENZ2018/shp/cb_2018_us_state_500k.zip"
 destination_states <-
-  "/Volumes/SET/Projects/EnviroTools/input/states/states.zip"
+  "/Volumes/manwareme/home/PCOR_bookdown_tools/datasets/states/states.zip"
 download.file(
   url_states,
   destination_states
@@ -867,7 +875,7 @@ unzip("/   YOUR FILE PATH   /states.zip",
 ################################################################################
 ## NEED TO CHANGE eval=TRUE for rendering
 ################################################################################
-unzip("/Volumes/SET/Projects/EnviroTools/input/states/states.zip",
+unzip("/Volumes/manwareme/home/PCOR_bookdown_tools/datasets/states/states.zip",
   list = TRUE
 )
 ################################################################################
@@ -881,8 +889,8 @@ unzip("/   YOUR FILE PATH   /states.zip")
 ################################################################################
 ## NEED TO CHANGE eval=TRUE for rendering
 ################################################################################
-unzip("/Volumes/SET/Projects/EnviroTools/input/states/states.zip",
-  exdir = "/Volumes/SET/Projects/EnviroTools/input/states"
+unzip("/Volumes/manwareme/home/PCOR_bookdown_tools/datasets/states/states.zip",
+  exdir = "/Volumes/manwareme/home/PCOR_bookdown_tools/datasets/states"
 )
 ################################################################################
 ```
@@ -893,7 +901,7 @@ list.files("/   YOUR FILE PATH   /")
 
 ```{r, echo=FALSE}
 ################################################################################
-list.files("/Volumes/SET/Projects/EnviroTools/input/states")
+list.files("/Volumes/manwareme/home/PCOR_bookdown_tools/datasets/states")
 ################################################################################
 ```
 
@@ -904,7 +912,8 @@ states <- st_read("/   YOUR FILE PATH   /cb_2018_us_state.shp")
 ```{r, include=FALSE}
 ################################################################################
 states_sf <- st_read(
-  "/Volumes/SET/Projects/EnviroTools/input/states/cb_2018_us_state_500k.shp"
+  paste0("/Volumes/manwareme/home/PCOR_bookdown_tools/datasets/states/",
+         "cb_2018_us_state_500k.shp")
 )
 ################################################################################
 ```
@@ -1051,10 +1060,12 @@ states_t <- vect("/   YOUR FILE PATH   /cb_2018_us_state_500k.shp")
 ```{r, echo=FALSE, warning=TRUE, cache=FALSE, results='hide'}
 ################################################################################
 smoke_t <- vect(
-  "/Volumes/SET/Projects/EnviroTools/input/noaa/hms_smoke20230901.shp"
+  paste0("/Volumes/manwareme/home/PCOR_bookdown_tools/datasets/noaa/",
+         "hms_smoke20230901.shp")
 )
 states_t <- vect(
-  "/Volumes/SET/Projects/EnviroTools/input/states/cb_2018_us_state_500k.shp"
+  paste0("/Volumes/manwareme/home/PCOR_bookdown_tools/datasets/states/",
+         "cb_2018_us_state_500k.shp")
 )
 ################################################################################
 ```
@@ -1375,7 +1386,7 @@ url_narr <- paste0(
   ".nc"
 )
 destination_narr <- paste0(
-  "/Volumes/SET/Projects/EnviroTools/input/narr/narr_air2m_",
+  "/Volumes/manwareme/home/PCOR_bookdown_tools/datasets/narr/narr_air2m_",
   year,
   ".nc"
 )
@@ -1394,7 +1405,7 @@ list.files("/   YOUR FILE PATH   /")
 
 ```{r, echo=FALSE}
 ################################################################################
-list.files("/Volumes/SET/Projects/EnviroTools/input/narr")
+list.files("/Volumes/manwareme/home/PCOR_bookdown_tools/datasets/narr")
 ################################################################################
 ```
 
@@ -1414,7 +1425,7 @@ narr <- rast(paste0(
 
 ```{r, echo=FALSE, warning=TRUE, cache=FALSE, results='hide'}
 narr <- rast(paste0(
-  "/Volumes/SET/Projects/EnviroTools/input/narr/narr_air2m_",
+  "/Volumes/manwareme/home/PCOR_bookdown_tools/datasets/narr/narr_air2m_",
   year,
   ".nc"
 ))
