@@ -1672,7 +1672,16 @@ narr <- rast(paste0(
 ))
 ```
 
-```{r, echo=  FALSE, warning = TRUE, cache = FALSE, results = 'hide'}
+```{r, echo = FALSE, eval = TRUE, results = FALSE}
+#### TEST CHUNK ####
+test_that("narr_ari2m_2021.nc file exists.", {
+  files <- list.files(paste0(wd, "narr"))
+  expect_in("narr_air2m_2021.nc", files)
+})
+####################
+```
+
+```{r, echo = FALSE, warning = TRUE, cache = FALSE, results = 'hide'}
 narr <- rast(paste0(
   wd,
   "narr/narr_air2m_",
@@ -1689,6 +1698,14 @@ A function does not need to be specified in order to inspect the contents of `Sp
 narr
 ```
 
+```{r, echo = FALSE, eval = TRUE, results = FALSE}
+#### TEST CHUNK ####
+test_that("narr is a SpatRaster.", {
+  expect_equal(class(narr)[1], "SpatRaster")
+})
+####################
+```
+
 Inspecting the structure of `narr` shows important information, including its class, dimensions, layers, and coordinate reference system.
 
 When working with raster data, the dimensions of the raster refer to the number of rows (`nrow`) and columns (`ncol`) of grid cells that make up the raster. Similarly, the number of layers in the raster object (`nlyr`) represents the number of observations of the data. These can also be inspected individually with `nrow`, `ncol`, and `nlyr`, respectively.
@@ -1697,6 +1714,16 @@ When working with raster data, the dimensions of the raster refer to the number 
 nrow(narr)
 ncol(narr)
 nlyr(narr)
+```
+
+```{r, echo = FALSE, eval = TRUE, results = FALSE}
+#### TEST CHUNK ####
+test_that("Dimensions of narr are correct.", {
+  expect_equal(nrow(narr), 277)
+  expect_equal(ncol(narr), 349)
+  expect_equal(nlyr(narr), 365)
+})
+####################
 ```
 
 ### 3.2 Rename
@@ -1755,6 +1782,14 @@ Ensure that both data sets have the same coordinate reference system.
 
 ```{r}
 crs(conus_t) == crs(narr)
+```
+
+```{r, echo = FALSE, eval = TRUE, results = FALSE}
+#### TEST CHUNK ####
+test_that("conus_t and narr have same CRS.", {
+  expect_equal(crs(conus_t), crs(narr))
+})
+####################
 ```
 
 ### 3.4 Plot
@@ -1885,6 +1920,14 @@ conus_t$MEAN <- zonal(narr_crop_c$mean,
   conus_t,
   fun = "mean"
 )
+```
+
+```{r, echo = FALSE, eval = TRUE, results = FALSE}
+#### TEST CHUNK ####
+test_that("Temperature statistic for each state (and DC).", {
+  expect_equal(length(conus_t$MEAN), 49)
+})
+####################
 ```
 
 Once calculated, state-specific mean annual temperatures can be plotted using only the `conus_t` SpatVector.
