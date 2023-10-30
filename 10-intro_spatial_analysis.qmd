@@ -23,7 +23,7 @@ This vignette will focus primarily on **spatial data**, but some aspects of temp
 
 Take the United States' coterminous geopolitical border as an example. The map clearly depicts the geographic locations of the United States' coterminous border, but does not specify when the measurements were taken or if they have changed over time. The map is therefore an example of spatial data.
 
-```{r, echo=FALSE, eval=TRUE, results=FALSE}
+```{r, echo = FALSE, eval = TRUE, results = FALSE}
 #### TEST CHUNK ####
 library(testthat)
 wd <- "/Volumes/manwareme/PCOR_bookdown_tools/dataset/"
@@ -31,9 +31,10 @@ test_that("State boundary shapefile exists.", {
   files <- list.files(paste0(wd, "states"))
   expect_in("cb_2018_us_state_500k.shp", files)
 })
+####################
 ```
 
-```{r, include = FALSE, eval=TRUE}
+```{r, include = FALSE, eval = TRUE}
 library(sf)
 library(ggplot2)
 library(ggpubr)
@@ -59,6 +60,7 @@ test_that("Example map includes only coterminous states (and DC).", {
     49
   )
 })
+####################
 ```
 
 ```{r, echo = FALSE, eval = TRUE}
@@ -123,7 +125,7 @@ Many different R packages can be used to create, import, analyze, and export spa
 Installing and importing new packages may required R to restart.
 :::
 
-```{r, warning=FALSE, message=FALSE, results=FALSE}
+```{r, warning = FALSE, message = FALSE, results = FALSE}
 vignette_packages <- c(
   "dplyr", "ggplot2", "ggpubr", "sf",
   "terra", "tidyterra", "utils"
@@ -147,10 +149,10 @@ library(utils)
 ```{r,  echo = FALSE, eval = TRUE, results = FALSE}
 #### TEST CHUNK ####
 test_that("Required packages are imported.", {
-  loaded_packages <- library()
-  loaded_packages <- loaded_packages$results[, 1]
+  loaded_packages <- (.packages())
   expect_in(vignette_packages, loaded_packages)
 })
+####################
 ```
 
 #### 0.5.1 `ggplot2` and `ggpubr`
@@ -177,7 +179,7 @@ Define a variable to store the website URL where the data exists, and a second v
 Multiple chunks of code in this vignette will contain `/   YOUR FILE PATH   /`. To run the code on your machine, substitute `/   YOUR FILE PATH   /` with the file path where you would like to store the vignette data (ie. `Users/example_name/Documents/vignette_data/"`).
 :::
 
-```{r, results=FALSE, warning=FALSE, message=FALSE, results='hide', eval=FALSE}
+```{r, results = FALSE, eval = FALSE}
 url_epa <- "https://aqs.epa.gov/aqsweb/airdata/daily_88101_2021.zip"
 
 destination_epa <- "/   YOUR FILE PATH   /epa_data.zip"
@@ -188,7 +190,7 @@ download.file(
 )
 ```
 
-```{r, include = FALSE, eval=FALSE}
+```{r, include = FALSE, eval = FALSE}
 # url_epa <- "https://aqs.epa.gov/aqsweb/airdata/daily_88101_2021.zip"
 # destination_epa <- paste0(wd, "epa/epa_data.zip")
 # download.file(
@@ -203,13 +205,13 @@ The file downloaded from the EPA website is a `.zip` file. Zip files need to be 
 Unzipping a `.zip` file will decompress the contents within. Spatial data sets can be very large (ie. \> 1GB ), so check the size of the data before unzipping on your machine.
 :::
 
-```{r, results=FALSE, warning=FALSE, message=FALSE, results='hide', eval=FALSE}
+```{r, results = FALSE, eval = FALSE}
 unzip("/   YOUR FILE PATH   /epa_data.zip",
   list = TRUE
 )
 ```
 
-```{r, echo=FALSE}
+```{r, echo = FALSE}
 unzip(paste0(wd, "epa/epa_data.zip"),
   list = TRUE
 )
@@ -219,11 +221,11 @@ The numeric value size of the file is listed under `Length`.
 
 After inspecting the file size, unzip `epa_data.zip`.
 
-```{r, warning=FALSE, message=FALSE, results=FALSE}
+```{r, warning = FALSE, results = FALSE}
 unzip("/   YOUR FILE PATH   /epa_data.zip")
 ```
 
-```{r, echo=FALSE, eval=FALSE}
+```{r, echo = FALSE, eval = FALSE}
 # unzip(paste0(wd, "epa/epa_data.zip"),
 #       exdir = paste0(wd, "epa"))
 ```
@@ -234,11 +236,11 @@ Inspecting the file with `utils::unzip(list = TRUE)` returned the size of the fi
 If `/   YOUR FILE PATH   /` is a directory with other contents (ie. `/Users/example_name/Desktop/`), other files names may be returned.
 :::
 
-```{r, warning=FALSE, message=FALSE, results=FALSE}
+```{r, warning = FALSE, eval = FALSE}
 list.files("/   YOUR FILE PATH   /")
 ```
 
-```{r, echo=FALSE}
+```{r, echo = FALSE}
 list.files(paste0(wd, "epa"))
 ```
 
@@ -246,12 +248,30 @@ list.files(paste0(wd, "epa"))
 
 Now that the contents of `epa_data.zip` have been saved on your machine and `daily_88101_2021.csv` has been identified as the data set of interest, import the data with `sf::st_read()`.
 
-```{r, eval=FALSE}
+```{r, eval = FALSE}
 pm <- st_read("/   YOUR FILE PATH   /daily_88101_2021.csv")
 ```
 
-```{r, echo=FALSE, warning=TRUE, cache=FALSE, results='hide'}
+```{r, echo = FALSE, eval = TRUE, results = FALSE}
+#### TEST CHUNK ####
+test_that("PM CSV exists.", {
+  files <- list.files(paste0(wd, "/epa"))
+  expect_in("daily_88101_2021.csv", files)
+})
+####################
+```
+
+```{r, echo = FALSE, warning = TRUE, cache = FALSE, results = 'hide'}
 pm <- st_read(paste0(wd, "epa/daily_88101_2021.csv"))
+```
+
+```{r, echo = FALSE, eval = TRUE, results = FALSE}
+#### TEST CHUNK ####
+test_that("Ensure all PM data has been imported.", {
+  expect_equal(nrow(pm), 590208)
+  expect_equal(ncol(pm), 29)
+})
+####################
 ```
 
 ::: callout-note
@@ -292,6 +312,15 @@ str(pm,
 )
 ```
 
+```{r, echo = FALSE, eval = TRUE, results = FALSE}
+#### TEST CHUNK ####
+test_that("Ensure all PM data has been subsetted.", {
+  expect_equal(nrow(pm), 590208)
+  expect_equal(ncol(pm), 8)
+})
+####################
+```
+
 ### 1.4 Reclassify
 
 When the `str()` function is run, `: chr` indicates that the variable is of class `character`. This can also be determined by the quotations around the first two data points of each variable (ie. `$ State.Code    : chr "01" "01" ...`).
@@ -303,6 +332,15 @@ The `as.` family of functions is useful for converting data to a different class
 ```{r}
 pm$Date.Local <- as.Date(pm$Date.Local)
 pm$Arithmetic.Mean <- as.numeric(pm$Arithmetic.Mean)
+```
+
+```{r, echo = FALSE, eval = TRUE, results = FALSE}
+#### TEST CHUNK ####
+test_that("PM variables of interest have been reclassed.", {
+  expect_equal(class(pm$Date.Local), "Date")
+  expect_equal(class(pm$Arithmetic.Mean), "numeric")
+})
+####################
 ```
 
 After running the `as.` functions, ensure that the variable has been converted to the desired class.
@@ -322,6 +360,15 @@ The `sf::st_as_sf()` function creates a `$geometry` field based on the coordinat
 pm_sf <- st_as_sf(pm,
   coords = c("Longitude", "Latitude")
 )
+```
+
+```{r, echo = FALSE, eval = TRUE, results = FALSE}
+#### TEST CHUNK ####
+test_that("PM data has been converted to sf.", {
+  expect_equal(class(pm_sf), c("sf", "data.frame"))
+  expect_equal(class(pm_sf$geometry), c("sfc_POINT", "sfc"))
+})
+####################
 ```
 
 After running the `sf::st_as_sf()` function, inspect the classes of `pm_sf` and `pm_sf$geometry` to see the changes.
@@ -348,6 +395,15 @@ st_crs(pm_sf) <- 4326
 st_crs(pm_sf)
 ```
 
+```{r, echo = FALSE, eval = TRUE, results = FALSE}
+#### TEST CHUMK ####
+test_that("pm_sf CRS is EPSG:4326.", {
+  pm_sf_crs <- paste0(st_crs(pm_sf)[1])
+  expect_equal(pm_sf_crs, "EPSG:4326")
+})
+####################
+```
+
 After assigning a coordinate reference system to the data, the data can be projected (transformed) to a different projected coordinate system with `sf::st_transform()`.
 
 The area of interest for these exploratory analyses is the the coterminous United States, so the Albers Equal Area projected coordinate system will be used (EPSG code: 5070).
@@ -357,6 +413,15 @@ pm_sf <- st_transform(
   pm_sf,
   5070
 )
+```
+
+```{r, echo = FALSE, eval = TRUE, results = FALSE}
+#### TEST CHUNK ####
+test_that("pm_sf has been transformed to EPSG:5070", {
+  pm_sf_transform <- paste0(st_crs(pm_sf)[1])
+  expect_equal(pm_sf_transform, "EPSG:5070")
+})
+####################
 ```
 
 ### 1.7 Plot
@@ -379,6 +444,15 @@ The plotted points show the distribution of monitoring locations throughout the 
 ```{r}
 summary(pm_sf$Arithmetic.Mean)
 sd(pm_sf$Arithmetic.Mean)
+```
+
+```{r, echo = FALSE, eval = TRUE, results = FALSE}
+#### TEST CHUNK ####
+test_that("pm_sf$Arithmetic.Mean standard devkiation", {
+  expect_equal(round(sd(pm_sf$Arithmetic.Mean), 5),
+               7.36688)
+})
+####################
 ```
 
 Histograms help visualize the distribution of the data. Create a histogram by adding `ggplot2::geom_histogram()` as an argument to the `ggplot2::ggplot()` function.
@@ -420,17 +494,35 @@ The number of unique monitor identification codes should be equal to the number 
 length(unique(pm_sf$Monitor.ID)) == length(unique(pm_sf$geometry))
 ```
 
+```{r, echo = FALSE, eval = TRUE, results = FALSE}
+#### TEST CHUNK ####
+test_that("Number of monitor IDs matches number of geometries", {
+  expect_equal(length(unique(pm_sf$Monitor.ID)),
+               length(unique(pm_sf$geometry)))
+})
+####################
+```
+
 Functions and syntax from the `dplyr` package will be used to calculate the mean PM~2.5~ concentration measured at each monitoring location.
 
 ::: callout-note
 Including `State.Name` in the `group_by()` arguement will retain the state name for each monitoring location.
 :::
 
-```{r, warning=FALSE, message=FALSE}
+```{r, warning = FALSE, message = FALSE}
 pm_mean <-
   pm_sf %>%
   group_by(Monitor.ID, State.Name) %>%
   summarise(Annual.Mean = mean(Arithmetic.Mean))
+```
+
+```{r, echo = FALSE, eval = TRUE, results = FALSE}
+#### TEST CHUNK ####
+test_that("Mean pm calculated for each unique geometry", {
+  expect_equal(nrow(pm_mean),
+               length(unique(pm_sf$geometry)))
+})
+####################
 ```
 
 Inspect the summary statistics of mean PM~2.5~ concentration measurements.
@@ -438,6 +530,15 @@ Inspect the summary statistics of mean PM~2.5~ concentration measurements.
 ```{r}
 summary(pm_mean$Annual.Mean)
 sd(pm_mean$Annual.Mean)
+```
+
+```{r, echo = FALSE, eval = TRUE, results = FALSE}
+#### TEST CHUNK ####
+test_that("pm_mean$Annual.Mean standard deviation", {
+  expect_equal(round(sd(pm_mean$Annual.Mean), 5),
+               2.38105)
+})
+####################
 ```
 
 Recreate the plot of air pollution monitoring locations, but color each point according to the annual mean concentration of PM~2.5~ at each location.
@@ -488,6 +589,14 @@ Create a subset of `pm_sf` according to the monitor identification codes in `min
 pm_min_max <- subset(pm_sf,
   subset = Monitor.ID == min_max_monitors_id
 )
+```
+
+```{r, echo = FALSE, eval = TRUE, results = FALSE}
+#### TEST CHUNK ####
+test_that("pm_min_max contains 6 monitor locations", {
+  expect_equal(length(unique(pm_min_max$Monitor.ID)), 6)
+})
+####################
 ```
 
 The `ggplot2::geom_line()` argument can be used to plot all measurements from each of the highest and lowest monitoring locations in a single plot.
