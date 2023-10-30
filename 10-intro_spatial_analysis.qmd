@@ -37,10 +37,12 @@ test_that("State boundary shapefile exists.", {
 ```{r, echo = FALSE, eval = TRUE, results = FALSE}
 #### TEST CHUNK ####
 test_that("State boundary shapefile supports exists.", {
-  supports <- c("cb_2018_us_state_500k.cpg", "cb_2018_us_state_500k.dbf",
-                "cb_2018_us_state_500k.prj", "cb_2018_us_state_500k.shx",
-                "cb_2018_us_state_500k.shp.ea.iso.xml",
-                "cb_2018_us_state_500k.shp.iso.xml")
+  supports <- c(
+    "cb_2018_us_state_500k.cpg", "cb_2018_us_state_500k.dbf",
+    "cb_2018_us_state_500k.prj", "cb_2018_us_state_500k.shx",
+    "cb_2018_us_state_500k.shp.ea.iso.xml",
+    "cb_2018_us_state_500k.shp.iso.xml"
+  )
   files <- list.files(paste0(wd, "states"))
   expect_in(supports, files)
 })
@@ -204,12 +206,12 @@ download.file(
 ```
 
 ```{r, include = FALSE, eval = FALSE}
-# url_epa <- "https://aqs.epa.gov/aqsweb/airdata/daily_88101_2021.zip"
-# destination_epa <- paste0(wd, "epa/epa_data.zip")
-# download.file(
-#   url_epa,
-#   destination_epa
-# )
+url_epa <- "https://aqs.epa.gov/aqsweb/airdata/daily_88101_2021.zip"
+destination_epa <- paste0(wd, "epa/epa_data.zip")
+download.file(
+  url_epa,
+  destination_epa
+)
 ```
 
 The file downloaded from the EPA website is a `.zip` file. Zip files need to be unzipped (decompressed) in order to access the data within. Unzip the EPA air pollution file with `utils::unzip()`.
@@ -238,9 +240,10 @@ After inspecting the file size, unzip `epa_data.zip`.
 unzip("/   YOUR FILE PATH   /epa_data.zip")
 ```
 
-```{r, echo = FALSE, eval = FALSE}
-# unzip(paste0(wd, "epa/epa_data.zip"),
-#       exdir = paste0(wd, "epa"))
+```{r, include = FALSE, eval = FALSE}
+unzip(paste0(wd, "epa/epa_data.zip"),
+  exdir = paste0(wd, "epa")
+)
 ```
 
 Inspecting the file with `utils::unzip(list = TRUE)` returned the size of the file, but also the name of the data file of interest (`daily_88101_2021.csv`). The desired data file can also be identified by using `list.files()`.
@@ -462,8 +465,10 @@ sd(pm_sf$Arithmetic.Mean)
 ```{r, echo = FALSE, eval = TRUE, results = FALSE}
 #### TEST CHUNK ####
 test_that("pm_sf$Arithmetic.Mean standard devkiation.", {
-  expect_equal(round(sd(pm_sf$Arithmetic.Mean), 5),
-               7.36688)
+  expect_equal(
+    round(sd(pm_sf$Arithmetic.Mean), 5),
+    7.36688
+  )
 })
 ####################
 ```
@@ -510,8 +515,10 @@ length(unique(pm_sf$Monitor.ID)) == length(unique(pm_sf$geometry))
 ```{r, echo = FALSE, eval = TRUE, results = FALSE}
 #### TEST CHUNK ####
 test_that("Number of monitor IDs matches number of geometries.", {
-  expect_equal(length(unique(pm_sf$Monitor.ID)),
-               length(unique(pm_sf$geometry)))
+  expect_equal(
+    length(unique(pm_sf$Monitor.ID)),
+    length(unique(pm_sf$geometry))
+  )
 })
 ####################
 ```
@@ -532,8 +539,10 @@ pm_mean <-
 ```{r, echo = FALSE, eval = TRUE, results = FALSE}
 #### TEST CHUNK ####
 test_that("Mean pm calculated for each unique geometry.", {
-  expect_equal(nrow(pm_mean),
-               length(unique(pm_sf$geometry)))
+  expect_equal(
+    nrow(pm_mean),
+    length(unique(pm_sf$geometry))
+  )
 })
 ####################
 ```
@@ -548,8 +557,10 @@ sd(pm_mean$Annual.Mean)
 ```{r, echo = FALSE, eval = TRUE, results = FALSE}
 #### TEST CHUNK ####
 test_that("pm_mean$Annual.Mean standard deviation.", {
-  expect_equal(round(sd(pm_mean$Annual.Mean), 5),
-               2.38105)
+  expect_equal(
+    round(sd(pm_mean$Annual.Mean), 5),
+    2.38105
+  )
 })
 ####################
 ```
@@ -719,30 +730,30 @@ download.file(
 ```
 
 ```{r, include = FALSE, eval = FALSE}
-# url_noaa <- paste0(
-#   "https://satepsanone.nesdis.noaa.gov/pub/FIRE/web/HMS/Smoke_Polygons",
-#   "/Shapefile/",
-#   year,
-#   "/",
-#   month,
-#   "/hms_smoke",
-#   year,
-#   month,
-#   day,
-#   ".zip"
-# )
-# destination_noaa <- paste0(
-#   wd,
-#   "noaa/noaa_smoke",
-#   year,
-#   month,
-#   day,
-#   ".zip"
-# )
-# download.file(
-#   url_noaa,
-#   destination_noaa
-# )
+url_noaa <- paste0(
+  "https://satepsanone.nesdis.noaa.gov/pub/FIRE/web/HMS/Smoke_Polygons",
+  "/Shapefile/",
+  year,
+  "/",
+  month,
+  "/hms_smoke",
+  year,
+  month,
+  day,
+  ".zip"
+)
+destination_noaa <- paste0(
+  wd,
+  "noaa/noaa_smoke",
+  year,
+  month,
+  day,
+  ".zip"
+)
+download.file(
+  url_noaa,
+  destination_noaa
+)
 ```
 
 The file downloaded from the NOAA website is a `.zip` file. Zip files need to be unzipped (decompressed) in order to access the data within. Unzip the NOAA wildfire smoke plume coverage file with `utils::unzip()`.
@@ -772,13 +783,14 @@ unzip("/   YOUR FILE PATH   /noaa_smoke20230901.zip")
 ```
 
 ```{r, include = FALSE, eval = FALSE}
-# unzip(paste0(wd, "noaa/noaa_smoke20230901.zip"),
-#       exdir = paste0(wd, "noaa")
+unzip(paste0(wd, "noaa/noaa_smoke20230901.zip"),
+  exdir = paste0(wd, "noaa")
+)
 ```
 
 Inspecting the file with `utils::unzip(list = TRUE)` returned the size of the file, but also the name of the data file of interest (`hms_smoke20230901.shp`). The desired data file can also be identified by using `list.files()`.
 
-```{r, eval = FALSE}
+```{r, include = FALSE, eval = FALSE}
 list.files("/   YOUR FILE PATH   /")
 ```
 
@@ -816,8 +828,10 @@ test_that("NOAA HMS smoke shapefile exists.", {
 ```{r, echo = FALSE, eval = TRUE, results = FALSE}
 #### TEST CHUNK ####
 test_that("NOAA HMS smoke shapefile supports exists.", {
-  supports <- c("hms_smoke20230901.dbf", "hms_smoke20230901.prj",
-                "hms_smoke20230901.shx")
+  supports <- c(
+    "hms_smoke20230901.dbf", "hms_smoke20230901.prj",
+    "hms_smoke20230901.shx"
+  )
   files <- list.files(paste0(wd, "noaa"))
   expect_in(supports, files)
 })
@@ -1037,13 +1051,13 @@ download.file(
 ```
 
 ```{r, include = FALSE, eval = FALSE}
-# url_states <-
-#   "https://www2.census.gov/geo/tiger/GENZ2018/shp/cb_2018_us_state_500k.zip"
-# destination_states <- paste0(wd, "states/states.zip")
-# download.file(
-#   url_states,
-#   destination_states
-# )
+url_states <-
+  "https://www2.census.gov/geo/tiger/GENZ2018/shp/cb_2018_us_state_500k.zip"
+destination_states <- paste0(wd, "states/states.zip")
+download.file(
+  url_states,
+  destination_states
+)
 ```
 
 ```{r, eval = FALSE}
@@ -1063,8 +1077,9 @@ unzip("/   YOUR FILE PATH   /states.zip")
 ```
 
 ```{r, include = FALSE, eval = FALSE}
-# unzip(paste0(wd, "states/states.zip"),
-#       exdir = paste0(wd, "states"))
+unzip(paste0(wd, "states/states.zip"),
+  exdir = paste0(wd, "states")
+)
 ```
 
 ```{r, eval = FALSE}
@@ -1091,10 +1106,12 @@ test_that("State boundary shapefile exists.", {
 ```{r, echo = FALSE, eval = TRUE, results = FALSE}
 #### TEST CHUNK ####
 test_that("State boundary shapefile supports exists.", {
-  supports <- c("cb_2018_us_state_500k.cpg", "cb_2018_us_state_500k.dbf",
-                "cb_2018_us_state_500k..prj", "cb_2018_us_state_500k.shx",
-                "cb_2018_us_state_500k.shp.ea.iso.xml",
-                "cb_2018_us_state_500k.shp.iso.xml")
+  supports <- c(
+    "cb_2018_us_state_500k.cpg", "cb_2018_us_state_500k.dbf",
+    "cb_2018_us_state_500k..prj", "cb_2018_us_state_500k.shx",
+    "cb_2018_us_state_500k.shp.ea.iso.xml",
+    "cb_2018_us_state_500k.shp.iso.xml"
+  )
   files <- list.files(paste0(wd, "states"))
   expect_in("cb_2018_us_state_500k.shp", files)
 })
@@ -1585,13 +1602,13 @@ The website URL where the NOAA NARR air temperautre data exists is year-specific
 
 Define year of interest.
 
-```{r, results=FALSE, warning=FALSE, message=FALSE, results='hide'}
+```{r}
 year <- "2021"
 ```
 
 The `utils::download.file()` function downloads the file according to the defined URL and destination file.
 
-```{r, results=FALSE, warning=FALSE, message=FALSE, results='hide', eval=FALSE}
+```{r, eval = FALSE}
 # specify the URL where data is stored based on year variable of interest
 url_narr <- paste0(
   "https://downloads.psl.noaa.gov//Datasets/NARR/Dailies/monolevel/air.2m.",
@@ -1613,31 +1630,31 @@ download.file(
 )
 ```
 
-```{r, include = FALSE, eval=FALSE}
-# url_narr <- paste0(
-#   "https://downloads.psl.noaa.gov//Datasets/NARR/Dailies/monolevel/air.2m.",
-#   year,
-#   ".nc"
-# )
-# destination_narr <- paste0(
-#   wd,
-#   "narr/narr_air2m_",
-#   year,
-#   ".nc"
-# )
-# download.file(
-#   url_narr,
-#   destination_narr
-# )
+```{r, include = FALSE, eval = FALSE}
+url_narr <- paste0(
+  "https://downloads.psl.noaa.gov//Datasets/NARR/Dailies/monolevel/air.2m.",
+  year,
+  ".nc"
+)
+destination_narr <- paste0(
+  wd,
+  "narr/narr_air2m_",
+  year,
+  ".nc"
+)
+download.file(
+  url_narr,
+  destination_narr
+)
 ```
 
 Identify the desired data file with `utils::list.files()`
 
-```{r, warning=FALSE, message=FALSE, results=FALSE}
+```{r, eval = FASLE}
 list.files("/   YOUR FILE PATH   /")
 ```
 
-```{r, echo=FALSE}
+```{r, echo = FALSE}
 list.files(paste0(wd, "narr"))
 ```
 
@@ -1647,7 +1664,7 @@ The file downloaded from the NOAA website is a `.nc` file. NetCDF files are comm
 
 Import both the air temperature data from your machine. The `terra::rast()` function is used to import raster data as a `SpatRaster` object. For detailed description of `SpatRaster` objects, see [Description of the methods in the terra pacakge](https://search.r-project.org/CRAN/refmans/terra/html/terra-package.html).
 
-```{r, eval=FALSE}
+```{r, eval = FALSE}
 narr <- rast(paste0(
   "/   YOUR FILE PATH   /narr_air2m_",
   year,
@@ -1655,7 +1672,7 @@ narr <- rast(paste0(
 ))
 ```
 
-```{r, echo=FALSE, warning=TRUE, cache=FALSE, results='hide'}
+```{r, echo=  FALSE, warning = TRUE, cache = FALSE, results = 'hide'}
 narr <- rast(paste0(
   wd,
   "narr/narr_air2m_",
