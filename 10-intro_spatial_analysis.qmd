@@ -34,6 +34,19 @@ test_that("State boundary shapefile exists.", {
 ####################
 ```
 
+```{r, echo = FALSE, eval = TRUE, results = FALSE}
+#### TEST CHUNK ####
+test_that("State boundary shapefile supports exists.", {
+  supports <- c("cb_2018_us_state_500k.cpg", "cb_2018_us_state_500k.dbf",
+                "cb_2018_us_state_500k.prj", "cb_2018_us_state_500k.shx",
+                "cb_2018_us_state_500k.shp.ea.iso.xml",
+                "cb_2018_us_state_500k.shp.iso.xml")
+  files <- list.files(paste0(wd, "states"))
+  expect_in(supports, files)
+})
+####################
+```
+
 ```{r, include = FALSE, eval = TRUE}
 library(sf)
 library(ggplot2)
@@ -417,7 +430,7 @@ pm_sf <- st_transform(
 
 ```{r, echo = FALSE, eval = TRUE, results = FALSE}
 #### TEST CHUNK ####
-test_that("pm_sf has been transformed to EPSG:5070", {
+test_that("pm_sf has been transformed to EPSG:5070.", {
   pm_sf_transform <- paste0(st_crs(pm_sf)[1])
   expect_equal(pm_sf_transform, "EPSG:5070")
 })
@@ -448,7 +461,7 @@ sd(pm_sf$Arithmetic.Mean)
 
 ```{r, echo = FALSE, eval = TRUE, results = FALSE}
 #### TEST CHUNK ####
-test_that("pm_sf$Arithmetic.Mean standard devkiation", {
+test_that("pm_sf$Arithmetic.Mean standard devkiation.", {
   expect_equal(round(sd(pm_sf$Arithmetic.Mean), 5),
                7.36688)
 })
@@ -496,7 +509,7 @@ length(unique(pm_sf$Monitor.ID)) == length(unique(pm_sf$geometry))
 
 ```{r, echo = FALSE, eval = TRUE, results = FALSE}
 #### TEST CHUNK ####
-test_that("Number of monitor IDs matches number of geometries", {
+test_that("Number of monitor IDs matches number of geometries.", {
   expect_equal(length(unique(pm_sf$Monitor.ID)),
                length(unique(pm_sf$geometry)))
 })
@@ -518,7 +531,7 @@ pm_mean <-
 
 ```{r, echo = FALSE, eval = TRUE, results = FALSE}
 #### TEST CHUNK ####
-test_that("Mean pm calculated for each unique geometry", {
+test_that("Mean pm calculated for each unique geometry.", {
   expect_equal(nrow(pm_mean),
                length(unique(pm_sf$geometry)))
 })
@@ -534,7 +547,7 @@ sd(pm_mean$Annual.Mean)
 
 ```{r, echo = FALSE, eval = TRUE, results = FALSE}
 #### TEST CHUNK ####
-test_that("pm_mean$Annual.Mean standard deviation", {
+test_that("pm_mean$Annual.Mean standard deviation.", {
   expect_equal(round(sd(pm_mean$Annual.Mean), 5),
                2.38105)
 })
@@ -593,7 +606,7 @@ pm_min_max <- subset(pm_sf,
 
 ```{r, echo = FALSE, eval = TRUE, results = FALSE}
 #### TEST CHUNK ####
-test_that("pm_min_max contains 6 monitor locations", {
+test_that("pm_min_max contains 6 monitor locations.", {
   expect_equal(length(unique(pm_min_max$Monitor.ID)), 6)
 })
 ####################
@@ -669,7 +682,7 @@ The website URL where the NOAA wildfire smoke plume data exists is date-specific
 
 Define the `day`, `month`, and `year` variables according to the date of interest.
 
-```{r, results=FALSE, warning=FALSE, message=FALSE, results='hide'}
+```{r}
 day <- "01"
 month <- "09"
 year <- "2023"
@@ -677,7 +690,7 @@ year <- "2023"
 
 The `utils::download.file()` function downloads the file according to the defined URL and destination file.
 
-```{r, results=FALSE, warning=FALSE, message=FALSE, results='hide', eval=FALSE}
+```{r, eval = FALSE}
 url_noaa <- paste0(
   "https://satepsanone.nesdis.noaa.gov/pub/FIRE/web/HMS/Smoke_Polygons",
   "/Shapefile/",
@@ -705,7 +718,7 @@ download.file(
 )
 ```
 
-```{r, include = FALSE, eval=FALSE}
+```{r, include = FALSE, eval = FALSE}
 # url_noaa <- paste0(
 #   "https://satepsanone.nesdis.noaa.gov/pub/FIRE/web/HMS/Smoke_Polygons",
 #   "/Shapefile/",
@@ -738,13 +751,13 @@ The file downloaded from the NOAA website is a `.zip` file. Zip files need to be
 Unzipping a `.zip` file will decompress the contents within. Spatial data sets can be very large (ie. \> 1GB), so check the size of the data before unzipping on your machine.
 :::
 
-```{r, warning=FALSE, message=FALSE, results=FALSE, eval=FALSE}
+```{r, eval = FALSE}
 unzip("/   YOUR FILE PATH   /noaa_smoke20230901.zip",
   list = TRUE
 )
 ```
 
-```{r, echo=FALSE}
+```{r, echo = FALSE}
 unzip(paste0(wd, "noaa/noaa_smoke20230901.zip"),
   list = TRUE
 )
@@ -754,22 +767,22 @@ The numeric value size of each file is listed under `Length`.
 
 After inspecting the file sizes, unzip `noaa_smoke20230901.zip`.
 
-```{r, warning=FALSE, message=FALSE, results=FALSE}
+```{r, eval = FALSE}
 unzip("/   YOUR FILE PATH   /noaa_smoke20230901.zip")
 ```
 
-```{r, include=FALSE, eval=FALSE}
+```{r, include = FALSE, eval = FALSE}
 # unzip(paste0(wd, "noaa/noaa_smoke20230901.zip"),
 #       exdir = paste0(wd, "noaa")
 ```
 
 Inspecting the file with `utils::unzip(list = TRUE)` returned the size of the file, but also the name of the data file of interest (`hms_smoke20230901.shp`). The desired data file can also be identified by using `list.files()`.
 
-```{r, warning=FALSE, message=FALSE, results=FALSE}
+```{r, eval = FALSE}
 list.files("/   YOUR FILE PATH   /")
 ```
 
-```{r, echo=FALSE}
+```{r, echo = FALSE}
 list.files(paste0(wd, "noaa"))
 ```
 
@@ -791,11 +804,31 @@ Now that the contents of `hms_smoke20230901.zip` have been saved on your machine
 Although the supporting files are required to import a shapefile, only the file ending in `.shp` needs to be imported
 :::
 
-```{r, eval=FALSE}
+```{r, echo = FALSE, eval = TRUE, results = FALSE}
+#### TEST CHUNK ####
+test_that("NOAA HMS smoke shapefile exists.", {
+  files <- list.files(paste0(wd, "noaa"))
+  expect_in("hms_smoke20230901.shp", files)
+})
+####################
+```
+
+```{r, echo = FALSE, eval = TRUE, results = FALSE}
+#### TEST CHUNK ####
+test_that("NOAA HMS smoke shapefile supports exists.", {
+  supports <- c("hms_smoke20230901.dbf", "hms_smoke20230901.prj",
+                "hms_smoke20230901.shx")
+  files <- list.files(paste0(wd, "noaa"))
+  expect_in(supports, files)
+})
+####################
+```
+
+```{r, eval = FALSE}
 smoke_sf <- st_read("/   YOUR FILE PATH   /hms_smoke20230901.shp")
 ```
 
-```{r, echo=FALSE, warning=TRUE, cache=FALSE, results='hide'}
+```{r, echo = FALSE, warning = TRUE, cache = FALSE, results = 'hide'}
 smoke_sf <- st_read(paste0(wd, "noaa/hms_smoke20230901.shp"))
 ```
 
@@ -813,6 +846,18 @@ str(smoke_sf,
 
 As mentioned previously, the `smoke_sf` data set was imported as a spatially-enabled object. This is reflected by the data set having classes of `sf` and `data.frame`.
 
+```{r}
+class(smoke_sf)
+```
+
+```{r, echo = FALSE, eval = TRUE, results = FALSE}
+#### TEST CHUNK ####
+test_that("smoke_sf is class sf.", {
+  expect_equal(class(smoke_sf), c("sf", "data.frame"))
+})
+####################
+```
+
 #### 2.1.3 Reclassify
 
 The parameters of interest in this data set are `$Density`, which categorizes each wildfire smoke plume as "Light", "Medium", or "Heavy", and `$geometry`, which identifies the boundary of each smoke plume polygon.
@@ -823,12 +868,29 @@ The class of `$Density`, however, is `character`.
 class(smoke_sf$Density)
 ```
 
+```{r, echo = FALSE, eval = TRUE, results = FALSE}
+#### TEST CHUNK ####
+test_that("smoke_sf$Density is class character.", {
+  expect_equal(class(smoke_sf$Density), "character")
+})
+####################
+```
+
 When performing analyses on parameters with discrete, labelled classes, it is advised to convert the parameter to class `factor`.
 
 ```{r}
 smoke_sf$Density <- factor(smoke_sf$Density,
   levels = c("Light", "Medium", "Heavy")
 )
+```
+
+```{r, echo = FALSE, eval = TRUE, results = FALSE}
+#### TEST CHUNK ####
+test_that("smoke_sf$Density has been converted to factor.", {
+  expect_equal(class(smoke_sf$Density), "factor")
+  expect_equal(length(levels(smoke_sf$Density)), 3)
+})
+####################
 ```
 
 Check the class of `$Density` again to ensure proper reclassification.
@@ -847,6 +909,15 @@ Check the coordinate reference system.
 st_crs(smoke_sf)
 ```
 
+```{r, echo = FALSE, eval = TRUE, results = FALSE}
+#### TEST CHUNK ####
+test_that("smoke_sf CRS is WGS 84.", {
+  smoke_sf_crs <- paste0(st_crs(smoke_sf)[1])
+  expect_equal(smoke_sf_crs, "WGS 84")
+})
+####################
+```
+
 `smoke_sf` already has a defined coordinate reference system, WGS 84. As with the air pollution data, `smoke_sf` can be projected (transformed) to a different projected reference system that adequately visually represents the study area of interest.
 
 Project the wildfire smoke data to the Albers Equal Area projected coordinate system (EPSG code: 5070).
@@ -856,6 +927,15 @@ smoke_sf <- st_transform(
   smoke_sf,
   5070
 )
+```
+
+```{r, echo = FALSE, eval = TRUE, results = FALSE}
+#### TEST CHUNK ####
+test_that("smoke_sf has been transformed to EPSG:5070.", {
+  smoke_sf_transform <- paste0(st_crs(smoke_sf)[1])
+  expect_equal(smoke_sf_transform, "EPSG:5070")
+})
+####################
 ```
 
 #### 2.1.5 Plot (single)
@@ -903,6 +983,14 @@ smoke_sf_density <-
   )
 ```
 
+```{r, echo = FALSE, eval = TRUE, results = FALSE}
+#### TEST CHUNK ####
+test_that("smoke_sf_density has 3 rows (one for each factor level).", {
+  expect_equal(nrow(smoke_sf_density), 3)
+})
+####################
+```
+
 Inspecting the structure of `smoke_sf_density` shows three multipolygons of class `sf` and a column with the date of observation.
 
 ```{r}
@@ -936,7 +1024,7 @@ Accessing, downloading, unzipping, and importing the United States state border 
 The steps for accessing, downloading, unzipping, and importing will not be explained in detail. Refer to sections 2.0 Access, download, and unzip, and 2.1.1 Import for detailed steps.
 :::
 
-```{r, eval=FALSE}
+```{r, eval = FALSE}
 url_states <-
   "https://www2.census.gov/geo/tiger/GENZ2018/shp/cb_2018_us_state_500k.zip"
 
@@ -948,7 +1036,7 @@ download.file(
 )
 ```
 
-```{r, include = FALSE, eval=FALSE}
+```{r, include = FALSE, eval = FALSE}
 # url_states <-
 #   "https://www2.census.gov/geo/tiger/GENZ2018/shp/cb_2018_us_state_500k.zip"
 # destination_states <- paste0(wd, "states/states.zip")
@@ -958,40 +1046,62 @@ download.file(
 # )
 ```
 
-```{r, eval=FALSE}
+```{r, eval = FALSE}
 unzip("/   YOUR FILE PATH   /states.zip",
   list = TRUE
 )
 ```
 
-```{r, echo=FALSE}
+```{r, echo = FALSE}
 unzip(paste0(wd, "states/states.zip"),
   list = TRUE
 )
 ```
 
-```{r, eval=FALSE}
+```{r, eval = FALSE}
 unzip("/   YOUR FILE PATH   /states.zip")
 ```
 
-```{r, include=FALSE, eval=FALSE}
+```{r, include = FALSE, eval = FALSE}
 # unzip(paste0(wd, "states/states.zip"),
 #       exdir = paste0(wd, "states"))
 ```
 
-```{r, eval=FALSE}
+```{r, eval = FALSE}
 list.files("/   YOUR FILE PATH   /")
 ```
 
-```{r, echo=FALSE}
+```{r, echo = FALSE}
 list.files(paste0(wd, "states"))
 ```
 
-```{r, eval=FALSE}
+```{r, eval = FALSE}
 states <- st_read("/   YOUR FILE PATH   /cb_2018_us_state.shp")
 ```
 
-```{r, include=FALSE}
+```{r, echo = FALSE, eval = TRUE, results = FALSE}
+#### TEST CHUNK ####
+test_that("State boundary shapefile exists.", {
+  files <- list.files(paste0(wd, "states"))
+  expect_in("cb_2018_us_state_500k.shp", files)
+})
+####################
+```
+
+```{r, echo = FALSE, eval = TRUE, results = FALSE}
+#### TEST CHUNK ####
+test_that("State boundary shapefile supports exists.", {
+  supports <- c("cb_2018_us_state_500k.cpg", "cb_2018_us_state_500k.dbf",
+                "cb_2018_us_state_500k..prj", "cb_2018_us_state_500k.shx",
+                "cb_2018_us_state_500k.shp.ea.iso.xml",
+                "cb_2018_us_state_500k.shp.iso.xml")
+  files <- list.files(paste0(wd, "states"))
+  expect_in("cb_2018_us_state_500k.shp", files)
+})
+####################
+```
+
+```{r, include = FALSE}
 states_sf <- st_read(paste0(wd, "states/cb_2018_us_state_500k.shp"))
 ```
 
@@ -1022,6 +1132,17 @@ conus_sf <- subset(
 )
 ```
 
+```{r, echo = FALSE, eval = TRUE, results = FALSE}
+#### TEST CHUNK ####
+test_that("Example map includes only coterminous states (and DC).", {
+  expect_equal(
+    length(conus_sf$NAME),
+    49
+  )
+})
+####################
+```
+
 Check the coordinate reference system.
 
 ```{r}
@@ -1041,6 +1162,15 @@ conus_sf <- st_transform(
 )
 ```
 
+```{r, echo = FALSE, eval = TRUE, results = FALSE}
+#### TEST CHUNK ####
+test_that("conus_sf transformed to EPSG:5070.", {
+  conus_sf_crs <- paste0(st_crs(conus_sf)[1])
+  expect_equal(conus_sf_crs, "NAD83")
+})
+####################
+```
+
 Plot CONUS boundaries.
 
 ```{r}
@@ -1056,8 +1186,16 @@ Now that both the wildfire smoke plume and CONUS polygons have been imported and
 
 Set matching coordinate reference systems.
 
-```{r, warning=FALSE}
-st_crs(smoke_sf_density) == st_crs(conus_sf)
+```{r, warning = FALSE}
+st_crs(smoke_sf_density) <- st_crs(conus_sf)
+```
+
+```{r, echo = FALSE, eval = TRUE, results = FALSE}
+#### TEST CHUNK ####
+test_that("conus_sf and smoke_sf_density have matching CRS.", {
+  expect_equal(st_crs(smoke_sf_density), st_crs(conus_sf))
+})
+####################
 ```
 
 Plot `smoke_sf_density` and `conus_sf` in a single plot with `ggplot2::ggplot()`.
@@ -1089,7 +1227,7 @@ ggplot() +
 
 This new plot better shows the distribution of wildfire smoke plumes over the coterminous United States, but contains a lot of data located outside of the study area. The `sf::st_crop()` function can be used to limit the wildfire smoke plume polygons to the bounding box surrounding the CONUS polygons.
 
-```{r, warning=FALSE}
+```{r, warning = FALSE}
 smoke_sf_crop <- st_crop(
   smoke_sf_density,
   conus_sf
@@ -1129,12 +1267,12 @@ Accessing, downloading, and unzipping of data is the same as for `sf` and will n
 
 Import both the wildfire smoke plume coverage data and the United States state border data from your machine. The `terra::vect()` function is used to import vector data (point, line, polygon) as a `SpatVector` object. For detailed description of `SpatVector` objects, see [Description of the methods in the terra pacakge](https://search.r-project.org/CRAN/refmans/terra/html/terra-package.html).
 
-```{r, eval=FALSE}
+```{r, eval = FALSE}
 smoke_t <- vect("/   YOUR FILE PATH   /hms_smoke20230901.shp")
 states_t <- vect("/   YOUR FILE PATH   /cb_2018_us_state_500k.shp")
 ```
 
-```{r, echo=FALSE, warning=TRUE, cache=FALSE, results='hide'}
+```{r, echo = FALSE, warning = TRUE, cache = FALSE, results = 'hide'}
 smoke_t <- vect(paste0(wd, "noaa/hms_smoke20230901.shp"))
 states_t <- vect(paste0(wd, "states/cb_2018_us_state_500k.shp"))
 ```
@@ -1150,10 +1288,18 @@ states_t
 
 #### 2.2.3 Reclassify
 
-The parameters of interest in this data set is `$Density`, which categorizes each wildfire smoke plume as "Light", "Medium", or "Heavy".
+The parameter of interest in this data set is `$Density`, which categorizes each wildfire smoke plume as "Light", "Medium", or "Heavy".
 
 ```{r}
 class(smoke_t$Density)
+```
+
+```{r, echo = FALSE, eval = TRUE, results = FALSE}
+#### TEST CHUNK ####
+test_that("smoke_t$Density is class character.", {
+  expect_equal(class(smoke_t$Density), "character")
+})
+####################
 ```
 
 As with the `sf` package, `$Density` needs to be converted to to a factor because it contains discrete, labelled classes.
@@ -1164,6 +1310,15 @@ smoke_t$Density <- factor(smoke_t$Density,
 )
 ```
 
+```{r, echo = FALSE, eval = TRUE, results = FALSE}
+#### TEST CHUNK ####
+test_that("smoke_t$Density properly factored.", {
+  expect_equal(class(smoke_t$Density), "factor")
+  expect_equal(levels(smoke_t$Density), c("Light", "Medium", "Heavy"))
+})
+####################
+```
+
 Additionally, the `states_t` data set can be subsetted to only the coterminous United States.
 
 ```{r}
@@ -1172,6 +1327,18 @@ conus_t <- subset(
   !states_t$NAME %in% remove
 )
 ```
+
+```{r, echo = FALSE, eval = TRUE, results = FALSE}
+#### TEST CHUNK ####
+test_that("Example map includes only coterminous states (and DC).", {
+  expect_equal(
+    length(conus_t$NAME),
+    49
+  )
+})
+####################
+```
+
 
 #### 2.2.4 Coordinate reference system and projection
 
