@@ -26,8 +26,9 @@ Take the United States' coterminous geopolitical border as an example. The map c
 ```{r, echo=FALSE, eval=TRUE, results=FALSE}
 #### TEST CHUNK ####
 library(testthat)
+wd <- "/Volumes/manwareme/PCOR_bookdown_tools/dataset/"
 test_that("State boundary shapefile exists.", {
-  files <- list.files("/Volumes/manwareme/PCOR_bookdown_tools/dataset/states/")
+  files <- list.files(paste0(wd, "states"))
   expect_in("cb_2018_us_state_500k.shp", files)
 })
 ```
@@ -36,7 +37,6 @@ test_that("State boundary shapefile exists.", {
 library(sf)
 library(ggplot2)
 library(ggpubr)
-wd <- "/Volumes/manwareme/PCOR_bookdown_tools/dataset/"
 map <- st_read(
   paste0(wd, "states/cb_2018_us_state_500k.shp")
 )
@@ -54,8 +54,10 @@ map <- subset(map, subset = !NAME %in% c(
 ```{r, echo = FALSE, eval = TRUE, results = FALSE}
 #### TEST CHUNK ####
 test_that("Example map includes only coterminous states (and DC).", {
-  expect_equal(length(map$NAME),
-               49)
+  expect_equal(
+    length(map$NAME),
+    49
+  )
 })
 ```
 
@@ -146,7 +148,7 @@ library(utils)
 #### TEST CHUNK ####
 test_that("Required packages are imported.", {
   loaded_packages <- library()
-  loaded_packages <- loaded_packages$results[,1]
+  loaded_packages <- loaded_packages$results[, 1]
   expect_in(vignette_packages, loaded_packages)
 })
 ```
@@ -209,7 +211,8 @@ unzip("/   YOUR FILE PATH   /epa_data.zip",
 
 ```{r, echo=FALSE}
 unzip(paste0(wd, "epa/epa_data.zip"),
-      list = TRUE)
+  list = TRUE
+)
 ```
 
 The numeric value size of the file is listed under `Length`.
@@ -634,7 +637,8 @@ unzip("/   YOUR FILE PATH   /noaa_smoke20230901.zip",
 
 ```{r, echo=FALSE}
 unzip(paste0(wd, "noaa/noaa_smoke20230901.zip"),
-      list = TRUE)
+  list = TRUE
+)
 ```
 
 The numeric value size of each file is listed under `Length`.
@@ -853,7 +857,8 @@ unzip("/   YOUR FILE PATH   /states.zip",
 
 ```{r, echo=FALSE}
 unzip(paste0(wd, "states/states.zip"),
-      list = TRUE)
+  list = TRUE
+)
 ```
 
 ```{r, eval=FALSE}
@@ -1204,8 +1209,9 @@ The output of `terra::relate()` is a matrix. The `data.frame(t())` wrappers arou
 conus_smoke <- data.frame(
   t(
     relate(smoke_density_t,
-           conus_t,
-           relation = "overlaps")
+      conus_t,
+      relation = "overlaps"
+    )
   )
 )
 ```
@@ -1374,10 +1380,12 @@ narr <- rast(paste0(
 ```
 
 ```{r, echo=FALSE, warning=TRUE, cache=FALSE, results='hide'}
-narr <- rast(paste0(wd,
-                    "narr/narr_air2m_",
-                    year,
-                    ".nc"))
+narr <- rast(paste0(
+  wd,
+  "narr/narr_air2m_",
+  year,
+  ".nc"
+))
 ```
 
 ### 3.2 Inspect structure
