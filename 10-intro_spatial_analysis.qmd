@@ -23,13 +23,22 @@ This vignette will focus primarily on **spatial data**, but some aspects of temp
 
 Take the United States' coterminous geopolitical border as an example. The map clearly depicts the geographic locations of the United States' coterminous border, but does not specify when the measurements were taken or if they have changed over time. The map is therefore an example of spatial data.
 
+```{r, echo=FALSE, eval=TRUE, results=FALSE}
+#### TEST CHUNK ####
+library(testthat)
+test_that("State boundary shapefile exists.", {
+  files <- list.files("/Volumes/manwareme/PCOR_bookdown_tools/dataset/states/")
+  expect_in("cb_2018_us_state_500k.shp", files)
+})
+```
+
 ```{r, include = FALSE, eval=TRUE}
 library(sf)
 library(ggplot2)
 library(ggpubr)
+wd <- "/Volumes/manwareme/PCOR_bookdown_tools/dataset/"
 map <- st_read(
-  paste0("/Volumes/manwareme/home/PCOR_bookdown_tools/datasets/states/",
-         "cb_2018_us_state_500k.shp")
+  paste0(wd, "states/cb_2018_us_state_500k.shp")
 )
 map <- subset(map, subset = !NAME %in% c(
   "Alaska",
@@ -41,6 +50,15 @@ map <- subset(map, subset = !NAME %in% c(
   "American Samoa"
 ))
 ```
+
+```{r, echo = FALSE, eval = TRUE, results = FALSE}
+#### TEST CHUNK ####
+test_that("Example map includes only coterminous states (and DC).", {
+  expect_equal(length(map$NAME),
+               49)
+})
+```
+
 ```{r, echo = FALSE, eval = TRUE}
 ggplot() +
   geom_sf(
@@ -124,6 +142,15 @@ library(tidyterra)
 library(utils)
 ```
 
+```{r,  echo = FALSE, eval = TRUE, results = FALSE}
+#### TEST CHUNK ####
+test_that("Required packages are imported.", {
+  loaded_packages <- library()
+  loaded_packages <- loaded_packages$results[,1]
+  expect_in(vignette_packages, loaded_packages)
+})
+```
+
 #### 0.5.1 `ggplot2` and `ggpubr`
 
 The `ggplot2` package will be used throughout the vignette for creating publication quality plots. The syntax and functionality of `ggplot2` can be difficult for new users, so please see [ggplot2: Elegant Graphics for Data Analysis (3e)](https://ggplot2-book.org/introduction) for more information.
@@ -160,17 +187,12 @@ download.file(
 ```
 
 ```{r, include = FALSE, eval=FALSE}
-################################################################################
-## NEED TO CHANGE eval=TRUE for rendering
-################################################################################
-url_epa <- "https://aqs.epa.gov/aqsweb/airdata/daily_88101_2021.zip"
-destination_epa <-
-  "/Volumes/manwareme/home/PCOR_bookdown_tools/datasets/epa/epa_data.zip"
-download.file(
-  url_epa,
-  destination_epa
-)
-################################################################################
+# url_epa <- "https://aqs.epa.gov/aqsweb/airdata/daily_88101_2021.zip"
+# destination_epa <- paste0(wd, "epa/epa_data.zip")
+# download.file(
+#   url_epa,
+#   destination_epa
+# )
 ```
 
 The file downloaded from the EPA website is a `.zip` file. Zip files need to be unzipped (decompressed) in order to access the data within. Unzip the EPA air pollution file with `utils::unzip()`.
@@ -186,11 +208,8 @@ unzip("/   YOUR FILE PATH   /epa_data.zip",
 ```
 
 ```{r, echo=FALSE}
-################################################################################
-unzip("/Volumes/manwareme/home/PCOR_bookdown_tools/datasets/epa/epa_data.zip",
-  list = TRUE
-)
-################################################################################
+unzip(paste0(wd, "epa/epa_data.zip"),
+      list = TRUE)
 ```
 
 The numeric value size of the file is listed under `Length`.
@@ -202,13 +221,8 @@ unzip("/   YOUR FILE PATH   /epa_data.zip")
 ```
 
 ```{r, echo=FALSE, eval=FALSE}
-################################################################################
-## NEED TO CHANGE eval=TRUE for rendering
-################################################################################
-unzip("/Volumes/manwareme/home/PCOR_bookdown_tools/datasets/epa/epa_data.zip",
-  exdir = "/Volumes/SET/Projects/EnviroTools/input/epa"
-)
-################################################################################
+# unzip(paste0(wd, "epa/epa_data.zip"),
+#       exdir = paste0(wd, "epa"))
 ```
 
 Inspecting the file with `utils::unzip(list = TRUE)` returned the size of the file, but also the name of the data file of interest (`daily_88101_2021.csv`). The desired data file can also be identified by using `list.files()`.
@@ -222,9 +236,7 @@ list.files("/   YOUR FILE PATH   /")
 ```
 
 ```{r, echo=FALSE}
-################################################################################
-list.files("/Volumes/manwareme/home/PCOR_bookdown_tools/datasets/epa")
-################################################################################
+list.files(paste0(wd, "epa"))
 ```
 
 ### 1.1 Import
@@ -236,12 +248,7 @@ pm <- st_read("/   YOUR FILE PATH   /daily_88101_2021.csv")
 ```
 
 ```{r, echo=FALSE, warning=TRUE, cache=FALSE, results='hide'}
-################################################################################
-pm <- st_read(
-  paste0("/Volumes/manwareme/home/PCOR_bookdown_tools/datasets/epa/",
-         "daily_88101_2021.csv")
-)
-################################################################################
+pm <- st_read(paste0(wd, "epa/daily_88101_2021.csv"))
 ```
 
 ::: callout-note
@@ -587,33 +594,30 @@ download.file(
 ```
 
 ```{r, include = FALSE, eval=FALSE}
-################################################################################
-## NEED TO CHANGE eval=TRUE for rendering
-################################################################################
-url_noaa <- paste0(
-  "https://satepsanone.nesdis.noaa.gov/pub/FIRE/web/HMS/Smoke_Polygons",
-  "/Shapefile/",
-  year,
-  "/",
-  month,
-  "/hms_smoke",
-  year,
-  month,
-  day,
-  ".zip"
-)
-destination_noaa <- paste0(
-  "/Volumes/manwareme/home/PCOR_bookdown_tools/datasets/noaa/noaa_smoke",
-  year,
-  month,
-  day,
-  ".zip"
-)
-download.file(
-  url_noaa,
-  destination_noaa
-)
-################################################################################
+# url_noaa <- paste0(
+#   "https://satepsanone.nesdis.noaa.gov/pub/FIRE/web/HMS/Smoke_Polygons",
+#   "/Shapefile/",
+#   year,
+#   "/",
+#   month,
+#   "/hms_smoke",
+#   year,
+#   month,
+#   day,
+#   ".zip"
+# )
+# destination_noaa <- paste0(
+#   wd,
+#   "noaa/noaa_smoke",
+#   year,
+#   month,
+#   day,
+#   ".zip"
+# )
+# download.file(
+#   url_noaa,
+#   destination_noaa
+# )
 ```
 
 The file downloaded from the NOAA website is a `.zip` file. Zip files need to be unzipped (decompressed) in order to access the data within. Unzip the NOAA wildfire smoke plume coverage file with `utils::unzip()`.
@@ -629,13 +633,8 @@ unzip("/   YOUR FILE PATH   /noaa_smoke20230901.zip",
 ```
 
 ```{r, echo=FALSE}
-################################################################################
-unzip(
-  paste0("/Volumes/manwareme/home/PCOR_bookdown_tools/datasets/noaa/",
-         "noaa_smoke20230901.zip"),
-  list = TRUE
-)
-################################################################################
+unzip(paste0(wd, "noaa/noaa_smoke20230901.zip"),
+      list = TRUE)
 ```
 
 The numeric value size of each file is listed under `Length`.
@@ -647,15 +646,8 @@ unzip("/   YOUR FILE PATH   /noaa_smoke20230901.zip")
 ```
 
 ```{r, include=FALSE, eval=FALSE}
-################################################################################
-## NEED TO CHANGE eval=TRUE for rendering
-################################################################################
-unzip(
-  paste0("/Volumes/manwareme/home/PCOR_bookdown_tools/datasets/noaa/",
-         "noaa_smoke20230901.zip"),
-  exdir = "/Volumes/SET/Projects/EnviroTools/input/noaa"
-)
-################################################################################
+# unzip(paste0(wd, "noaa/noaa_smoke20230901.zip"),
+#       exdir = paste0(wd, "noaa")
 ```
 
 Inspecting the file with `utils::unzip(list = TRUE)` returned the size of the file, but also the name of the data file of interest (`hms_smoke20230901.shp`). The desired data file can also be identified by using `list.files()`.
@@ -665,9 +657,7 @@ list.files("/   YOUR FILE PATH   /")
 ```
 
 ```{r, echo=FALSE}
-################################################################################
-list.files("/Volumes/manwareme/home/PCOR_bookdown_tools/datasets/noaa")
-################################################################################
+list.files(paste0(wd, "noaa"))
 ```
 
 Listing the contents of the unzipped file reveals four individual files. The data to be imported is stored in the `hms_smoke20230901.shp`, but the other files contain important reference information for the data.
@@ -693,12 +683,7 @@ smoke_sf <- st_read("/   YOUR FILE PATH   /hms_smoke20230901.shp")
 ```
 
 ```{r, echo=FALSE, warning=TRUE, cache=FALSE, results='hide'}
-################################################################################
-smoke_sf <- st_read(
-  paste0("/Volumes/manwareme/home/PCOR_bookdown_tools/datasets/noaa/",
-         "hms_smoke20230901.shp")
-)
-################################################################################
+smoke_sf <- st_read(paste0(wd, "noaa/hms_smoke20230901.shp"))
 ```
 
 Unlike the `daily_88101_2021.csv` data, importing the `hms_smoke20230901.shp` with `sf::st_read()` did not return a `Warning:` message. This is because the `.shp` file is already a spatially-enabled object, and does not need to be converted to one.
@@ -851,18 +836,13 @@ download.file(
 ```
 
 ```{r, include = FALSE, eval=FALSE}
-################################################################################
-## NEED TO CHANGE eval=TRUE for rendering
-################################################################################
-url_states <-
-  "https://www2.census.gov/geo/tiger/GENZ2018/shp/cb_2018_us_state_500k.zip"
-destination_states <-
-  "/Volumes/manwareme/home/PCOR_bookdown_tools/datasets/states/states.zip"
-download.file(
-  url_states,
-  destination_states
-)
-################################################################################
+# url_states <-
+#   "https://www2.census.gov/geo/tiger/GENZ2018/shp/cb_2018_us_state_500k.zip"
+# destination_states <- paste0(wd, "states/states.zip")
+# download.file(
+#   url_states,
+#   destination_states
+# )
 ```
 
 ```{r, eval=FALSE}
@@ -872,13 +852,8 @@ unzip("/   YOUR FILE PATH   /states.zip",
 ```
 
 ```{r, echo=FALSE}
-################################################################################
-## NEED TO CHANGE eval=TRUE for rendering
-################################################################################
-unzip("/Volumes/manwareme/home/PCOR_bookdown_tools/datasets/states/states.zip",
-  list = TRUE
-)
-################################################################################
+unzip(paste0(wd, "states/states.zip"),
+      list = TRUE)
 ```
 
 ```{r, eval=FALSE}
@@ -886,13 +861,8 @@ unzip("/   YOUR FILE PATH   /states.zip")
 ```
 
 ```{r, include=FALSE, eval=FALSE}
-################################################################################
-## NEED TO CHANGE eval=TRUE for rendering
-################################################################################
-unzip("/Volumes/manwareme/home/PCOR_bookdown_tools/datasets/states/states.zip",
-  exdir = "/Volumes/manwareme/home/PCOR_bookdown_tools/datasets/states"
-)
-################################################################################
+# unzip(paste0(wd, "states/states.zip"),
+#       exdir = paste0(wd, "states"))
 ```
 
 ```{r, eval=FALSE}
@@ -900,9 +870,7 @@ list.files("/   YOUR FILE PATH   /")
 ```
 
 ```{r, echo=FALSE}
-################################################################################
-list.files("/Volumes/manwareme/home/PCOR_bookdown_tools/datasets/states")
-################################################################################
+list.files(paste0(wd, "states"))
 ```
 
 ```{r, eval=FALSE}
@@ -910,12 +878,7 @@ states <- st_read("/   YOUR FILE PATH   /cb_2018_us_state.shp")
 ```
 
 ```{r, include=FALSE}
-################################################################################
-states_sf <- st_read(
-  paste0("/Volumes/manwareme/home/PCOR_bookdown_tools/datasets/states/",
-         "cb_2018_us_state_500k.shp")
-)
-################################################################################
+states_sf <- st_read(paste0(wd, "states/cb_2018_us_state_500k.shp"))
 ```
 
 With the state border data imported, inspect the structure of `states_sf`.
@@ -1058,16 +1021,8 @@ states_t <- vect("/   YOUR FILE PATH   /cb_2018_us_state_500k.shp")
 ```
 
 ```{r, echo=FALSE, warning=TRUE, cache=FALSE, results='hide'}
-################################################################################
-smoke_t <- vect(
-  paste0("/Volumes/manwareme/home/PCOR_bookdown_tools/datasets/noaa/",
-         "hms_smoke20230901.shp")
-)
-states_t <- vect(
-  paste0("/Volumes/manwareme/home/PCOR_bookdown_tools/datasets/states/",
-         "cb_2018_us_state_500k.shp")
-)
-################################################################################
+smoke_t <- vect(paste0(wd, "noaa/hms_smoke20230901.shp"))
+states_t <- vect(paste0(wd, "states/cb_2018_us_state_500k.shp"))
 ```
 
 #### 2.2.2 Inspect structure
@@ -1377,24 +1332,21 @@ download.file(
 ```
 
 ```{r, include = FALSE, eval=FALSE}
-################################################################################
-## NEED TO CHANGE eval=TRUE for rendering
-################################################################################
-url_narr <- paste0(
-  "https://downloads.psl.noaa.gov//Datasets/NARR/Dailies/monolevel/air.2m.",
-  year,
-  ".nc"
-)
-destination_narr <- paste0(
-  "/Volumes/manwareme/home/PCOR_bookdown_tools/datasets/narr/narr_air2m_",
-  year,
-  ".nc"
-)
-download.file(
-  url_narr,
-  destination_narr
-)
-################################################################################
+# url_narr <- paste0(
+#   "https://downloads.psl.noaa.gov//Datasets/NARR/Dailies/monolevel/air.2m.",
+#   year,
+#   ".nc"
+# )
+# destination_narr <- paste0(
+#   wd,
+#   "narr/narr_air2m_",
+#   year,
+#   ".nc"
+# )
+# download.file(
+#   url_narr,
+#   destination_narr
+# )
 ```
 
 Identify the desired data file with `utils::list.files()`
@@ -1404,9 +1356,7 @@ list.files("/   YOUR FILE PATH   /")
 ```
 
 ```{r, echo=FALSE}
-################################################################################
-list.files("/Volumes/manwareme/home/PCOR_bookdown_tools/datasets/narr")
-################################################################################
+list.files(paste0(wd, "narr"))
 ```
 
 The file downloaded from the NOAA website is a `.nc` file. NetCDF files are commonly used to store raster data as they can store repeated measurements of a single variable with a fixed spatial geometry `.nc` files do not need to be unzipped.
@@ -1424,11 +1374,10 @@ narr <- rast(paste0(
 ```
 
 ```{r, echo=FALSE, warning=TRUE, cache=FALSE, results='hide'}
-narr <- rast(paste0(
-  "/Volumes/manwareme/home/PCOR_bookdown_tools/datasets/narr/narr_air2m_",
-  year,
-  ".nc"
-))
+narr <- rast(paste0(wd,
+                    "narr/narr_air2m_",
+                    year,
+                    ".nc"))
 ```
 
 ### 3.2 Inspect structure
