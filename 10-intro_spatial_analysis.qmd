@@ -1183,7 +1183,7 @@ conus_sf <- st_transform(
 #### TEST CHUNK ####
 test_that("conus_sf transformed to EPSG:5070.", {
   conus_sf_crs <- paste0(st_crs(conus_sf)[1])
-  expect_equal(conus_sf_crs, "NAD83")
+  expect_equal(conus_sf_crs, "EPSG:5070")
 })
 ####################
 ```
@@ -1650,7 +1650,7 @@ download.file(
 
 Identify the desired data file with `utils::list.files()`
 
-```{r, eval = FASLE}
+```{r, eval = FALSE}
 list.files("/   YOUR FILE PATH   /")
 ```
 
