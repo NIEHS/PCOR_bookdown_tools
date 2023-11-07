@@ -15,9 +15,9 @@ editor: source
 
 ### 0.1 Motivation
 
-Environmental health research relies on various types of data to accurately measure, model, and predict exposures. Environmental data are often spatial (related to the surface of the Earth), temporal (related to specific time/period of time), or spatio-temporal (related to the surface of the Earth for a specific time/period of time). These data are at the core of environmental health research, but the steps between identifying a spatial data set or variable and using it to help answer a research question can be challenging.
+Environmental health research relies on various types of data to accurately measure, model, and predict exposures. Environmental data are often spatial (related to the surface of the Earth), narroral (related to specific time/period of time), or spatio-narroral (related to the surface of the Earth for a specific time/period of time). These data are at the core of environmental health research, but the steps between identifying a spatial data set or variable and using it to help answer a research question can be challenging.
 
-This vignette is designed to introduce the necessary steps for conducting analyses with spatial data in R. It will introduce R packages that are equipped to handle spatial data, and will demonstrate how to access, import, and analyze three different types of spatial data. The vignette will focus primarily on spatial data, but some aspects of temporal and spatio-temporal data will also be discussed.
+This vignette is designed to introduce the necessary steps for conducting analyses with spatial data in R. It will introduce R packages that are equipped to handle spatial data, and will demonstrate how to access, import, and analyze three different types of spatial data. The vignette will focus primarily on spatial data, but some aspects of narroral and spatio-narroral data will also be discussed.
 
 ### 0.2 Objectives
 
@@ -47,12 +47,12 @@ For detailed descriptions of each type of spatial data, please see [Simple Featu
 
 The exploratory analyses performed in this vignette utilize free and publicly available environmental data. The code chunks are designed to access each specific file used for the exploratory analyses, but a description of each data source and data set is available below.
 
-| Data                                | Data Type     | Producer                                               | Link                                                                                        |
-|-----------------|-------------------|-------------------|-------------------|
-| PM~2.5~ Daily Observations          | Point         | Environmental Protection Agency (EPA)                  | <https://aqs.epa.gov/aqsweb/airdata/download_files.html>                                    |
-| Wildfire Smoke Plumes               | Polygon       | National Oceanic and Atmospheric Administration (NOAA) | <https://www.ospo.noaa.gov/Products/land/hms.html>                                          |
-| United States Cartographic Boundary | Polygon       | United States Census Bureau                            | <https://www.census.gov/geographies/mapping-files/time-series/geo/carto-boundary-file.html> |
-| Land Surface Temperature            | Raster        | National Oceanic and Atmospheric Administration (NOAA) | <https://psl.noaa.gov/data/gridded/data.narr.html>                                          |
+| Data                                | Data Type | Producer                                               | Link                                                                                        |
+|------------------|------------------|------------------|------------------|
+| PM~2.5~ Daily Observations          | Point     | Environmental Protection Agency (EPA)                  | <https://aqs.epa.gov/aqsweb/airdata/download_files.html>                                    |
+| Wildfire Smoke Plumes               | Polygon   | National Oceanic and Atmospheric Administration (NOAA) | <https://www.ospo.noaa.gov/Products/land/hms.html>                                          |
+| United States Cartographic Boundary | Polygon   | United States Census Bureau                            | <https://www.census.gov/geographies/mapping-files/time-series/geo/carto-boundary-file.html> |
+| Land Surface Temperature            | Raster    | National Oceanic and Atmospheric Administration (NOAA) | <https://psl.noaa.gov/data/gridded/data.narr.html>                                          |
 
 : Exploratory analyses data sources
 
@@ -297,7 +297,7 @@ class(pm$Date.Local)
 
 With the variables of interest selected and reclassified, `pm` can be converted to spatially defined `sf` object. The `sf::st_as_sf()` function creates a `$geometry` field based on the latitude and longitude coordinates contained within `pm`. The `coords = c()` argument specifies the column names which contain the coordinate values.
 
-:::callout-note
+::: callout-note
 The columns containing coordinate values will not always be "Latitude" and "Longitude". Use `str()` to see column names and identify which contain the coordinate values.
 :::
 
@@ -315,7 +315,6 @@ test_that("PM data has been converted to sf.", {
 })
 ####################
 ```
-
 
 Inspect the classes of `pm_sf` and `pm_sf$geometry` to see their differences, and how each are different than `class(pm)`.
 
@@ -352,7 +351,7 @@ test_that("pm_sf CRS is EPSG:4326.", {
 
 An `sf` object with a coordinate reference system can be transformed (projected) into a different coordinate reference system with `sf::st_transform()`. The area of interest for these exploratory analyses is the coterminous United States, so the Albers Equal Area projected coordinate system will be used (EPSG code: 5070).
 
-:::callout-note
+::: callout-note
 An `sf` object without an assigned coordinate reference system cannot be transformed. `sf::st_crs()` must be used to assign a coordinate reference system to an `sf` object that does not have one.
 :::
 
@@ -379,13 +378,13 @@ Plotting spatial data is important for visualizing and analyzing patterns in the
 ```{r}
 ggplot() +
   geom_sf(data = pm_sf) +
-  ggtitle("EPA Air Pollution Monitoring Locations (2021)") +
+  ggtitle("Air Pollution Monitor Locations") +
   theme_pubr() +
   theme(plot.title = element_text(hjust = 0.5)) +
   grids()
 ```
 
-The plot shows the distribution of monitoring locations, and roughly depicts the border of the United States due to the large number of monitors. The plot does not, however, convey any information about the concentration of PM~2.5~ measured by each monitor. Inspect the summary statistics of the PM~2.5~ measurements before creating any plots to visualize the data.
+The plot shows the distribution of monitoring locations, and roughly depicts the outline of the United States due to the large number of monitors. The plot does not, however, convey any information about the concentration of PM~2.5~ measured by each monitor. Inspect the summary statistics of the PM~2.5~ measurements before creating any plots to visualize the data.
 
 ```{r}
 summary(pm_sf$Arithmetic.Mean)
@@ -394,7 +393,7 @@ sd(pm_sf$Arithmetic.Mean)
 
 ```{r, echo = FALSE, eval = TRUE, results = FALSE}
 #### TEST CHUNK ####
-test_that("pm_sf$Arithmetic.Mean standard devkiation.", {
+test_that("pm_sf$Arithmetic.Mean standard deviation.", {
   expect_equal(
     round(sd(pm_sf$Arithmetic.Mean), 5),
     7.36688
@@ -405,7 +404,7 @@ test_that("pm_sf$Arithmetic.Mean standard devkiation.", {
 
 After inspecting the summary statistics, create a histogram of the PM~2.5~ concentration measurements to visualize the distribution of the data.
 
-:::callout-note
+::: callout-note
 The histogram is not a spatially defined plot, so the data set to be plotted is identified within `ggplot()`.
 :::
 
@@ -419,7 +418,7 @@ ggplot(
     binwidth = 5
   ) +
   ggtitle(
-    expression("PM"[2.5] * " Measurements at EPA Monitoring Locations (2021)")
+    expression("PM"[2.5] * " Concentration Measurements")
   ) +
   xlab(expression("PM"[2.5] * " Concentration (µg/m"^3 * ")")) +
   ylab("Number of Measurements") +
@@ -511,8 +510,7 @@ ggplot() +
     expression("PM"[2.5] * " Concentration (µg/m"^3 * ")")
   ) +
   ggtitle(
-    expression("Annual Mean PM"[2.5] *
-                 " Concentration at EPA Monitoring Locations")
+    expression("Annual Mean PM"[2.5] * " Concentration")
   ) +
   theme_pubr(legend = "bottom") +
   theme(plot.title = element_text(hjust = 0.5)) +
@@ -523,7 +521,7 @@ Now the plot depicts both spatial and non-spatial data.
 
 ### 1.9 Compare highest annual means
 
-A close visual inspection of the previous plot shows a few monitoring locations in the southwestern region of the United States with very high (> 20 µm/m^3^) annual mean concentrations of PM~2.5~. To investigate the differences between the monitors with the highest and lowest annual mean concentrations, create a subset of `pm_sf` with only the three highest and lowest monitors.
+A close visual inspection of the previous plot shows a few monitoring locations in the southwestern region of the United States with very high (\> 20 µm/m^3^) annual mean concentrations of PM~2.5~. To investigate the differences between the monitors with the highest and lowest annual mean concentrations, create a subset of `pm_sf` with only the three highest and lowest monitors.
 
 To do this, first identify the monitors with the highest and lowest annual mean concentrations.
 
@@ -570,7 +568,7 @@ The resulting `pm_min_max` data set contains data for only six monitoring locati
 unique(pm_min_max$Monitor.ID)
 ```
 
-The temporal trend of PM~2.5~ concentrations measured at each of these locations in 2021 can be depicted with `ggplot::geom_line()`.
+The narroral trend of PM~2.5~ concentrations measured at each of these locations in 2021 can be depicted with `ggplot::geom_line()`.
 
 ```{r}
 ggplot(
@@ -583,7 +581,7 @@ ggplot(
   )
 ) +
   geom_line() +
-  ggtitle("Monitors with the Highest and Lowest Annual Mean Concentrations") +
+  ggtitle("Minimum and Maximum Monitors") +
   xlab("Date") +
   ylab(expression("PM"[2.5] * " Concentrations (µg/m"^3 * ")")) +
   theme_pubr(legend = "bottom") +
@@ -798,7 +796,7 @@ test_that("smoke_sf is class sf.", {
 
 #### 2.1.3 Reclassify
 
-The main parameter of interest in this data set is `$Density`, which discretely categorizes each wildfire smoke plume as "Light", "Medium", or "Heavy". Checking its class shows that `$Density` is class character. 
+The main parameter of interest in this data set is `$Density`, which discretely categorizes each wildfire smoke plume as "Light", "Medium", or "Heavy". Checking its class shows that `$Density` is class character.
 
 ```{r}
 class(smoke_sf$Density)
@@ -887,7 +885,7 @@ ggplot() +
   scale_fill_manual("Smoke Density",
     values = c("lightgreen", "lightgoldenrod", "tomato")
   ) +
-  ggtitle("Wildfire Smoke Plumes (September 1, 2023)") +
+  ggtitle("Wildfire Smoke Plumes") +
   theme_pubr(legend = "bottom") +
   theme(plot.title = element_text(hjust = 0.5)) +
   grids()
@@ -901,7 +899,7 @@ For the purposes of these exploratory analyses, the satellite travelling directi
 
 #### 2.1.6 Union
 
-Individual polygons can be union-ed (combined) into one multi-part polygon with `sf::st_union`. The `group_by(Density)` argument specifies that the polygons should be combined based on the value stored in `$Density`. Adding the `Date = paste0(...` argument within the `dplyr::summarise()` function creates a parameter to store the date based on the year, month, and day of the data (defined in 2.0 Access, download, and unzip).
+Individual polygons can be unioned (combined) into one multi-part polygon with `sf::st_union`. The `group_by(Density)` argument specifies that the polygons should be combined based on the value stored in `$Density`. Adding the `Date = paste0(...` argument within the `dplyr::summarise()` function creates a parameter to store the date based on the year, month, and day of the data (defined in 2.0 Access, download, and unzip).
 
 ```{r}
 smoke_sf_density <-
@@ -942,17 +940,17 @@ ggplot() +
   scale_fill_manual("Smoke Density",
     values = c("lightgreen", "lightgoldenrod", "tomato")
   ) +
-  ggtitle("Wildfire Smoke Plumes (September 1, 2023)") +
+  ggtitle("Wildfire Smoke Plumes (unioned)") +
   theme_pubr(legend = "bottom") +
   theme(plot.title = element_text(hjust = 0.5)) +
   grids()
 ```
 
-The plot is still difficult to interpre because it lacks geospatial context. The grid lines provide latitude and longitude references, but physical or geopolitical borders can help show where the wildfire smoke plumes are relative to the study area of interest. To provide geospatial context to the wildfire smoke plume polygons, we can the United States state border polygons to the plot
+The plot is still difficult to interpret because it lacks geospatial context. The grid lines provide latitude and longitude references, but physical or geopolitical boundaries can help show where the wildfire smoke plumes are relative to the study area of interest. To provide geospatial context to the wildfire smoke plume polygons, we can add the United States' state boundary polygons to the plot.
 
 #### 2.1.7 Plot (multiple)
 
-The steps taken to access, download, unzip, and import the United States state border data are the same as those taken for the wildfire smoke plume coverage data. Refer to sections 2.0 Access, download, and unzip, and 2.1.1 Import for detailed descriptions.
+The steps taken to access, download, unzip, and import the United States' state boundary data are the same as those taken for the wildfire smoke plume coverage data. Refer to sections 2.0 Access, download, and unzip, and 2.1.1 Import for detailed descriptions.
 
 ```{r, eval = FALSE}
 url_states <-
@@ -1104,12 +1102,12 @@ test_that("conus_sf transformed to EPSG:5070.", {
 ####################
 ```
 
-Plot the coterminous United States boundary.
+Plot the coterminous United States's state boundaries.
 
 ```{r}
 ggplot() +
   geom_sf(data = conus_sf) +
-  ggtitle("Coterminous United States Boundaries") +
+  ggtitle("Coterminous United States' State Boundaries") +
   theme_pubr() +
   theme(plot.title = element_text(hjust = 0.5)) +
   grids()
@@ -1129,7 +1127,7 @@ test_that("conus_sf and smoke_sf_density have matching CRS.", {
 ####################
 ```
 
-Create a plot which shows the distribution of wildfire smoke plumes over the coterminous United States boundaries.
+Create a plot which shows the distribution of wildfire smoke plumes over the coterminous United States' state boundaries.
 
 ```{r}
 ggplot() +
@@ -1144,7 +1142,7 @@ ggplot() +
     data = conus_sf,
     fill = "transparent"
   ) +
-  ggtitle("Wildfire Smoke Plumes (September 1, 2023)") +
+  ggtitle("Wildfire Smoke Plumes (with states)") +
   theme_pubr(legend = "bottom") +
   theme(plot.title = element_text(hjust = 0.5)) +
   grids()
@@ -1154,7 +1152,7 @@ This plot provides important geospatial context for understanding where the wild
 
 #### 2.1.8 Crop
 
-The `sf::st_crop()` function can be used to reduce the extent of a set of polygons to a specific rectangle, typically the bounding box of another spatial data set. In this example we can crop the `smoke_sf_density` polygons to the bounding box surrounding the coterminous United States. 
+The `sf::st_crop()` function can be used to reduce the extent of a set of polygons to a specific rectangle, typically the bounding box of another spatial data set. In this example we can crop the `smoke_sf_density` polygons to the bounding box surrounding the coterminous United States.
 
 ```{r, warning = FALSE}
 smoke_sf_crop <- st_crop(
@@ -1163,7 +1161,7 @@ smoke_sf_crop <- st_crop(
 )
 ```
 
-Plot the cropped wildfire smoke plume polygons and the coterminous United States boundaries.
+Plot the cropped wildfire smoke plume polygons and the coterminous United States' state boundaries.
 
 ```{r}
 ggplot() +
@@ -1178,7 +1176,7 @@ ggplot() +
     data = conus_sf,
     fill = "transparent"
   ) +
-  ggtitle("Wildfire Smoke Plumes (September 1, 2023)") +
+  ggtitle("Wildfire Smoke Plumes (cropped)") +
   theme_pubr(legend = "bottom") +
   theme(plot.title = element_text(hjust = 0.5)) +
   grids()
@@ -1190,10 +1188,10 @@ This section will focus on exploratory analyses with polygon data using the `ter
 
 #### 2.2.1 Import
 
-Now that the contents of the zip files have been saved on your machine and the data files of interest have been identified, import both the wildfire smoke plume coverage data and the United States state border data with `terra::vect()`.
+Now that the contents of the zip files have been saved on your machine and the data files of interest have been identified, import both the wildfire smoke plume coverage data and the United States' state boundary data with `terra::vect()`.
 
-:::callout-note
-See sections 2.0 Access, download, and unzip and 2.1.7 Plot (multiple) for obtaining the wildfire smoke plume coverage and United States state border data sets, respectively.
+::: callout-note
+See sections 2.0 Access, download, and unzip and 2.1.7 Plot (multiple) for obtaining the wildfire smoke plume coverage and United States' state boundary data sets, respectively.
 :::
 
 ```{r, eval = FALSE}
@@ -1258,7 +1256,7 @@ Check the class of `$Density` again to ensure proper reclassification.
 class(smoke_t$Density)
 ```
 
-For the purpose of these exploratory analyses, only the coterminous (CONUS) United States will be used. Subset `states_t` to remove Alaska, Hawaii, and the United States’ territories.
+For the purpose of these exploratory analyses, only the coterminous (CONUS) United States will be used. Subset `states_t` to remove Alaska, Hawaii, and the United States' territories.
 
 ```{r}
 remove <- c(
@@ -1339,7 +1337,7 @@ ggplot() +
     data = conus_t,
     fill = "transparent"
   ) +
-  ggtitle("Wildfire Smoke Plumes (September 1, 2023)") +
+  ggtitle("Wildfire Smoke Plumes (with states)") +
   theme_pubr(legend = "bottom") +
   theme(plot.title = element_text(hjust = 0.5)) +
   grids()
@@ -1347,7 +1345,7 @@ ggplot() +
 
 The wildfire smoke plume polygons are clearly visible and colored according to their individual smoke density classification. The plot, however, is difficult to interpret because there are multiple polygons for each smoke density classification. Multiple borders and overlapping polygons with the same smoke density type can be confusing. To make the polygons more clear, individual polygons for each smoke density classification can be combined.
 
-:::calloout-warning
+::: calloout-warning
 For the purposes of these exploratory analyses, the satellite travelling direction and time of collection will be ignored.
 :::
 
@@ -1365,8 +1363,10 @@ smoke_t_density <- terra::aggregate(smoke_t,
 Aggregating the polygons based on the values stored in the `$Density` column can result in the other columns containing `NA` values. To remove these columns, subset `smoke_t_density` to remove `$Satellite`, `$Start`, and `$End`.
 
 ```{r}
-smoke_t_density <- smoke_t_density[seq_len(nrow(smoke_t_density)),
-                                   c("Density", "agg_n")]
+smoke_t_density <- smoke_t_density[
+  seq_len(nrow(smoke_t_density)),
+  c("Density", "agg_n")
+]
 ```
 
 The resulting data set contains three multi-polygons, a column for the smoke plume classification, and a count of the number of individual polygons that were aggregated to create the multi-polygon. This last column, `$agg_n` is automatically calculated by the `terra::aggregate()` function.
@@ -1390,7 +1390,7 @@ ggplot() +
     data = conus_t,
     fill = "transparent"
   ) +
-  ggtitle("Wildfire Smoke Plumes (September 1, 2023)") +
+  ggtitle("Wildfire Smoke Plumes (aggregated)") +
   theme_pubr(legend = "bottom") +
   theme(plot.title = element_text(hjust = 0.5)) +
   grids()
@@ -1398,7 +1398,7 @@ ggplot() +
 
 #### 2.2.6 Crop
 
-The `terra::crop()` function can be used to reduce `SpatVector` to an area determined by another `SpatVector`. In this example, we can crop the `smoke_t_density` polygons to the coterminous United States boundaries.
+The `terra::crop()` function can be used to reduce `SpatVector` to an area determined by another `SpatVector`. In this example, we can crop the `smoke_t_density` polygons to the coterminous United States' state boundaries.
 
 ```{r}
 smoke_t_crop <- terra::crop(
@@ -1407,7 +1407,7 @@ smoke_t_crop <- terra::crop(
 )
 ```
 
-Plot the cropped wildfire smoke plume polygons and the coterminous United States boundaries.
+Plot the cropped wildfire smoke plume polygons and the coterminous United States' state boundaries.
 
 ```{r}
 ggplot() +
@@ -1422,7 +1422,7 @@ ggplot() +
     data = conus_t,
     fill = "transparent"
   ) +
-  ggtitle("Wildfire Smoke Plumes in the United States (September 1, 2023)") +
+  ggtitle("Wildfire Smoke Plumes (cropped)") +
   theme_pubr(legend = "bottom") +
   theme(
     plot.title = element_text(hjust = 0.5),
@@ -1453,7 +1453,7 @@ conus_smoke <- data.frame(
 
 Set the column names of `conus_smoke` to match the smoke density classifications.
 
-:::callout-note
+::: callout-note
 The order of the columns in `conus_smoke` are based on the ordered factor levels in `smoke_t_density$Density` (see 2.2.3 Reclassify).
 :::
 
@@ -1461,10 +1461,10 @@ The order of the columns in `conus_smoke` are based on the ordered factor levels
 colnames(conus_smoke) <- c("Light", "Medium", "Heavy")
 ```
 
-Combine the wildfire smoke plume indicator data frame with the the coterminous United States boundaries data.
+Combine the wildfire smoke plume indicator data frame with the the coterminous United States' state boundaries data.
 
 ```{r}
-conus_t1 <- cbind(
+conus_t <- cbind(
   conus_t,
   conus_smoke
 )
@@ -1473,7 +1473,7 @@ conus_t1 <- cbind(
 The `conus_t` data set now contains separate columns indicating the presence or absence of "Light", "Medium", and "Heavy" wildfire smoke plumes for each coterminous state.
 
 ```{r}
-names(conus_t1)
+names(conus_t)
 ```
 
 #### 2.2.8 Plot (`for` Loop)
@@ -1538,7 +1538,7 @@ Air temperature data from the United States National Oceanic and Atmospheric Adm
 
 ### 3.0 Access and download
 
-The website URL where the NOAA NARR exists is year-specific, meaning there is a unique URL for each annual data set. For the purpose of these exporatory analyses, air temperature dat from the year 2021 will be used
+The website URL where the NOAA NARR exists is year-specific, meaning there is a unique URL for each annual data set. For the purpose of these exploratory analyses, air temperature data from the year 2021 will be used
 
 Define the variable `year` according to the year of interest.
 
@@ -1558,7 +1558,7 @@ url_narr <- paste0(
 
 # specify where to save downloaded data
 destination_narr <- paste0(
-  "/   YOUR FILE PATH   /temp_air2m_",
+  "/   YOUR FILE PATH   /narr_air2m_",
   year,
   ".nc"
 )
@@ -1578,7 +1578,7 @@ url_narr <- paste0(
 )
 destination_narr <- paste0(
   wd,
-  "narr/temp_air2m_",
+  "narr/narr_air2m_",
   year,
   ".nc"
 )
@@ -1605,8 +1605,8 @@ The file downloaded from NOAA's NARR data set is an `.nc`, or netCDF, file. NetC
 Now that the data file of interest has been downloaded and identified, import the data with `terra::rast()`.
 
 ```{r, eval = FALSE}
-temp <- rast(paste0(
-  "/   YOUR FILE PATH   /temp_air2m_",
+narr <- rast(paste0(
+  "/   YOUR FILE PATH   /narr_air2m_",
   year,
   ".nc"
 ))
@@ -1614,17 +1614,17 @@ temp <- rast(paste0(
 
 ```{r, echo = FALSE, eval = TRUE, results = FALSE}
 #### TEST CHUNK ####
-test_that("temp_air2m_2021.nc file exists.", {
+test_that("narr_air2m_2021.nc file exists.", {
   files <- list.files(paste0(wd, "narr"))
-  expect_in("temp_air2m_2021.nc", files)
+  expect_in("narr_air2m_2021.nc", files)
 })
 ####################
 ```
 
 ```{r, echo = FALSE, warning = TRUE, cache = FALSE, results = 'hide'}
-temp <- rast(paste0(
+narr <- rast(paste0(
   wd,
-  "narr/temp_air2m_",
+  "narr/narr_air2m_",
   year,
   ".nc"
 ))
@@ -1632,56 +1632,55 @@ temp <- rast(paste0(
 
 ### 3.2 Inspect structure
 
-Inspect the structure of `temp` to see its class, dimensions, variables, and layer names.
+Inspect the structure of `narr` to see its class, dimensions, variables, and layer names.
 
 ```{r}
-temp
+narr
 ```
 
 ```{r, echo = FALSE, eval = TRUE, results = FALSE}
 #### TEST CHUNK ####
-test_that("temp is a SpatRaster.", {
-  expect_equal(class(temp)[1], "SpatRaster")
+test_that("narr is a SpatRaster.", {
+  expect_equal(class(narr)[1], "SpatRaster")
 })
 ####################
 ```
 
-
 When working with raster data, the dimensions of the raster refer to the number of rows (`nrow`) and columns (`ncol`) of grid cells that make up the raster. Similarly, the number of layers in the raster object (`nlyr`) represents the number of observations of the data. These can also be inspected individually with `nrow()`, `ncol()`, and `nlyr()`, respectively.
 
 ```{r}
-nrow(temp)
-ncol(temp)
-nlyr(temp)
+nrow(narr)
+ncol(narr)
+nlyr(narr)
 ```
 
 ```{r, echo = FALSE, eval = TRUE, results = FALSE}
 #### TEST CHUNK ####
-test_that("Dimensions of temp are correct.", {
-  expect_equal(nrow(temp), 277)
-  expect_equal(ncol(temp), 349)
-  expect_equal(nlyr(temp), 365)
+test_that("Dimensions of narr are correct.", {
+  expect_equal(nrow(narr), 277)
+  expect_equal(ncol(narr), 349)
+  expect_equal(nlyr(narr), 365)
 })
 ####################
 ```
 
 ### 3.2 Rename
 
-The `temp` data set contains 365 layers, one for each daily observation of air temperature in 2021. When working with raster data that contains multiple layers, it is important to know and recognize the naming structure of each layer. In this case, the layer names are `air_` followed by the day of the year (ie. January 1 = `air_1`).
+The `narr` data set contains 365 layers, one for each daily observation of air temperature in 2021. When working with raster data that contains multiple layers, it is important to know and recognize the naming structure of each layer. In this case, the layer names are `air_` followed by the day of the year (ie. January 1 = `air_1`).
 
 ```{r}
-names(temp)[1:5]
+names(narr)[1:5]
 ```
 
 Renaming raster layers can be useful for calculating summary statistics or when combining rasters with potentially identical layer names. Using the `time()` and `gsub()` functions, the layers can be renamed according to their date.
 
 ```{r}
-names(temp) <- paste0(
+names(narr) <- paste0(
   "air_",
   gsub(
     "-",
     "",
-    as.character(time(temp))
+    as.character(time(narr))
   )
 )
 ```
@@ -1689,7 +1688,7 @@ names(temp) <- paste0(
 Check the layer names again to ensure proper renaming.
 
 ```{r}
-names(temp)[1:5]
+names(narr)[1:5]
 ```
 
 ### 3.3 Coordinate reference system and projection
@@ -1697,23 +1696,23 @@ names(temp)[1:5]
 Check the coordinate reference system of a `SpatRaster` object with `terra::crs()`.
 
 ```{r}
-crs(temp,
+crs(narr,
   describe = TRUE
 )
 ```
 
-`temp` has a native coordinate reference system, but it is unnamed and was not identifiable by `terra::rast()`. The area of interest for these exploratory analyses is the coterminous United States, so we can project `temp` to the Albers Equal Area projected coordinate system (EPSG code: 5070).
+`narr` has a native coordinate reference system, but it is unnamed and was not identifiable by `terra::rast()`. The area of interest for these exploratory analyses is the coterminous United States, so we can project `narr` to the Albers Equal Area projected coordinate system (EPSG code: 5070).
 
 ```{r}
-temp <- project(
-  temp,
+narr <- project(
+  narr,
   "EPSG:5070"
 )
 ```
 
-We want to create plots with and analyze the air temperature data as it relates to the coterminous United States boundaries. Subset `states_t` to remove Alaska, Hawaii, and the United States' territories.
+We want to create plots with and analyze the air temperature data as it relates to the coterminous United States' state boundaries. Subset `states_t` to remove Alaska, Hawaii, and the United States' territories.
 
-:::callout-note
+::: callout-note
 See sections 2.0 Access, download, and unzip and 2.2.1 Import for obtaining the `states_t` data set.
 :::
 
@@ -1746,7 +1745,7 @@ conus_t <- project(
 Ensure that both data sets have the same coordinate reference system.
 
 ```{r}
-crs(conus_t) == crs(temp)
+crs(conus_t) == crs(narr)
 ```
 
 ```{r, echo = FALSE, eval = TRUE, results = FALSE}
@@ -1759,19 +1758,19 @@ test_that("conus_t and narr have same CRS.", {
 
 ### 3.4 Plot (multiple)
 
-Now that the data sets and coordinate reference systems have been prepared, initiate a plot with `ggplot2::gglot()`. Identifying the data sets to be plotted within the `geom_spatraster()` and `geom_spatvector()` argument informs the function that the `temp` and `conus_t` data sets are `SpatRaster` and `SpatVector` objects, respectively.
+Now that the data sets and coordinate reference systems have been prepared, initiate a plot with `ggplot2::gglot()`. Identifying the data sets to be plotted within the `geom_spatraster()` and `geom_spatvector()` argument informs the function that the `narr` and `conus_t` data sets are `SpatRaster` and `SpatVector` objects, respectively.
 
-Only the first layer of the `temp` data set will be plotted.
+Only the first layer of the `narr` data set will be plotted.
 
 ```{r}
 ggplot() +
-  geom_spatraster(data = temp$air_20210101) +
+  geom_spatraster(data = narr$air_20210101) +
   scale_fill_continuous(
     type = "viridis",
     na.value = NA,
     "Temperature (°K)"
   ) +
-  ggtitle("Air Temperature at 2m Height (January 1, 2021)") +
+  ggtitle("Air Temperature") +
   geom_spatvector(
     data = conus_t,
     fill = "transparent",
@@ -1784,28 +1783,28 @@ ggplot() +
 
 ### 3.5 Crop
 
-The `terra::crop()` function can be used to reduce a `SpatRaster` to an area determined by `SpatVector` polygons. The `mask = TRUE` argument crops to the border of the polygons, whereas `mask = FALSE` crops to the bounding box surrounding the polygons. In this example, crop the `temp` data to the coterminous United States boundaries.
+The `terra::crop()` function can be used to reduce a `SpatRaster` to an area determined by `SpatVector` polygons. The `mask = TRUE` argument crops to the border of the polygons, whereas `mask = FALSE` crops to the bounding box surrounding the polygons. In this example, crop the `narr` data to the coterminous United States' state boundaries.
 
 ```{r}
-temp_crop <- crop(temp,
+narr_crop <- crop(narr,
   conus_t,
   mask = TRUE
 )
 ```
 
-Plot the cropped temperature data and the coterminous United States boundaries.
+Plot the cropped temperature data and the coterminous United States' state boundaries.
 
-Only the first layer of the `temp` data set will be plotted.
+Only the first layer of the `narr` data set will be plotted.
 
 ```{r}
 ggplot() +
-  geom_spatraster(data = temp_crop$air_20210101) +
+  geom_spatraster(data = narr_crop$air_20210101) +
   scale_fill_continuous(
     type = "viridis",
     na.value = NA,
     "Temperature (°K)"
   ) +
-  ggtitle("Air Temperature at 2m Height (January 1, 2021)") +
+  ggtitle("Air Temperature (cropped)") +
   geom_spatvector(
     data = conus_t,
     fill = "transparent",
@@ -1822,40 +1821,40 @@ ggplot() +
 
 ### 3.7 Units
 
-The previous plot depicts the 2m air temperature data in Kelvin. To convert the units to degrees Celsius, simply subtract the values in `temp_crop` by 273.15. This subtraction will be applied to every grid cell within every layer of `temp_crop`.
+The previous plot depicts the 2m air temperature data in Kelvin. To convert the units to degrees Celsius, simply subtract the values in `narr_crop` by 273.15. This subtraction will be applied to every grid cell within every layer of `narr_crop`.
 
 ```{r}
-temp_crop_c <- temp_crop - 273.15
+narr_crop_c <- narr_crop - 273.15
 ```
 
 ### 3.8 Summary statistics
 
-Similar to mathematical operations, calculating summary statistics is very straight forward with raster data. For this example, calculate the annual mean 2m air temperature and range of 2m air temperatures at each grid cell, and save these as a new layer in `temp_crop_c`
+Similar to mathematical operations, calculating summary statistics is very straight forward with raster data. For this example, calculate the annual mean 2m air temperature and range of 2m air temperatures at each grid cell, and save these as a new layer in `narr_crop_c`
 
 ```{r}
-temp_crop_c$mean <- mean(temp_crop_c)
-temp_crop_c$range <- max(temp_crop_c) - min(temp_crop_c)
+narr_crop_c$mean <- mean(narr_crop_c)
+narr_crop_c$range <- max(narr_crop_c) - min(narr_crop_c)
 ```
 
 Inspect the results of the mean and range calculations.
 
 ```{r}
-summary(temp_crop_c$mean)
-summary(temp_crop_c$range)
+summary(narr_crop_c$mean)
+summary(narr_crop_c$range)
 ```
 
-With the summary statistic layers prepared, initiate a plot with `ggplot2::ggplot()`. Identifying the data sets to be plotted within the `geom_spatraster()` and `geom_spatvector()` argument informs the function that the `temp_crop_c` and `conus_t` data sets are `SpatRaster` and `SpatVector` objects, respectively. Additionally, the `facet_wrap(~lyr)` argument creates a plot for each layer specified in `geom_spatraster(data = temp_crop_c[[c("mean", "range")]])`.
+With the summary statistic layers prepared, initiate a plot with `ggplot2::ggplot()`. Identifying the data sets to be plotted within the `geom_spatraster()` and `geom_spatvector()` argument informs the function that the `narr_crop_c` and `conus_t` data sets are `SpatRaster` and `SpatVector` objects, respectively. Additionally, the `facet_wrap(~lyr)` argument creates a plot for each layer specified in `geom_spatraster(data = narr_crop_c[[c("mean", "range")]])`.
 
 ```{r, warning=FALSE}
 ggplot() +
-  geom_spatraster(data = temp_crop_c[[c("mean", "range")]]) +
+  geom_spatraster(data = narr_crop_c[[c("mean", "range")]]) +
   scale_fill_continuous(
     type = "viridis",
     na.value = NA,
     "Temperature (°C)"
   ) +
   facet_wrap(~lyr) +
-  ggtitle("Air Temperature in 2021") +
+  ggtitle("Air Temperature") +
   geom_spatvector(
     data = conus_t,
     fill = "transparent",
@@ -1874,10 +1873,10 @@ ggplot() +
 
 Looking closely at the previous plot, it is clear that the annual mean and range of temperatures differ between states. The `terra` package can be used to calculate zonal statistics of a `SpatRaster` object based on `SpatVector` polygons.
 
-The `terra::zonal()` function can be used to calculate the average annual temperature in each state based on the annual grid cell temperatures stored in `temp_crop_c$mean`.
+The `terra::zonal()` function can be used to calculate the average annual temperature in each state based on the annual grid cell temperatures stored in `narr_crop_c$mean`.
 
 ```{r, warning=FALSE}
-conus_t$MEAN <- zonal(temp_crop_c$mean,
+conus_t$MEAN <- zonal(narr_crop_c$mean,
   conus_t,
   fun = "mean"
 )
@@ -1904,7 +1903,7 @@ ggplot() +
     na.value = NA,
     "Temperature (°C)"
   ) +
-  ggtitle("Average Annual Temperature by State in 2021") +
+  ggtitle("Air Temperature (state mean)") +
   theme_pubr(legend = "bottom") +
   theme(
     plot.title = element_text(hjust = 0.5),
@@ -1947,15 +1946,15 @@ reclass <- matrix(
 Now that the reclassification matrix has been prepared, reclassify the annual mean temperatures. The `right = TRUE` argument indicates that intervals are open on the left and closed on the right (ie. (0,10\] becomes 1).
 
 ```{r}
-temp_reclass <- classify(temp_crop_c$mean,
+narr_reclass <- classify(narr_crop_c$mean,
   rcl = reclass,
   right = TRUE
 )
 ```
 
-Although `temp_reclass` contains the reclassified mean air temperature data, the data is still continuously numeric. The following chunk of code converts the `temp_reclass$mean` layer from numeric to character based on the defined levels.
+Although `narr_reclass` contains the reclassified mean air temperature data, the data is still continuously numeric. The following chunk of code converts the `narr_reclass$mean` layer from numeric to character based on the defined levels.
 
-`temp_reclass` contains the reclassified mean air temperature data, but the data is still numeric. The `terra::set.cats()` function assigns categories to numeric data based on values stored in a data frame.
+`narr_reclass` contains the reclassified mean air temperature data, but the data is still numeric. The `terra::set.cats()` function assigns categories to numeric data based on values stored in a data frame.
 
 ```{r}
 level_values <- data.frame(
@@ -1963,7 +1962,7 @@ level_values <- data.frame(
   c("1", "2", "3")
 )
 colnames(level_values) <- c("mean_continuous", "mean_discrete")
-set.cats(temp_reclass,
+set.cats(narr_reclass,
   layer = "mean",
   value = level_values
 )
@@ -1973,7 +1972,7 @@ Plot the discretely reclassified mean temperature data.
 
 ```{r}
 ggplot() +
-  geom_spatraster(data = temp_reclass$mean_discrete) +
+  geom_spatraster(data = narr_reclass$mean_discrete) +
   scale_fill_viridis_d("",
     labels = c(
       "≤10°",
@@ -1983,7 +1982,7 @@ ggplot() +
     ),
     na.value = NA
   ) +
-  ggtitle("Reclassified Air Temperature Means") +
+  ggtitle("Air Temperature (reclassified)") +
   geom_spatvector(
     data = conus_t,
     fill = "transparent",
@@ -1998,7 +1997,23 @@ ggplot() +
   )
 ```
 
-## 4. References
+## 4. Additional Resources
+
+For additional resources pertaining to the packages used in this vignette, please see the following:
+
+-   [Package 'sf'](https://cran.r-project.org/web/packages/sf/sf.pdf)
+
+-   [Package 'terra'](https://cran.r-project.org/web/packages/terra/terra.pdf)
+
+-   [Description of the methods in the terra package](https://search.r-project.org/CRAN/refmans/terra/html/terra-package.html)
+
+-   [Package 'dplyr'](https://cran.r-project.org/web/packages/dplyr/dplyr.pdf)
+
+-   [Package 'ggplot2'](https://cran.r-project.org/web/packages/ggplot2/ggplot2.pdf)
+
+-   [Package 'ggpubr'](https://cran.r-project.org/web/packages/ggpubr/ggpubr.pdf)
+
+## 5. References
 
 H. Wickham. ggplot2: Elegant Graphics for Data Analysis. Springer-Verlag New York, 2016.
 
