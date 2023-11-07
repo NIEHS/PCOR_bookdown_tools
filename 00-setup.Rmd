@@ -1,0 +1,21 @@
+Basic setup for your environment Run only once
+
+```{R setup}
+install.packages("styler")
+```
+
+### Rmarkdown
+
+```{R car}
+
+summary(cars)
+```
+
+## Myplot
+
+You can label code chunks with hyphens but we don't recommend using underscores or spaces. Think "kebabs, not snakes".
+
+```{R plot}
+
+
+```
