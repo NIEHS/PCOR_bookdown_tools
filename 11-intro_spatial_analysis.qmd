@@ -13,13 +13,23 @@ editor: source
 
 ## 0. Introduction
 
-### 0.1 Motivation
+### 0.1 User Profiles
 
-Environmental health research relies on various types of data to accurately measure, model, and predict exposures. Environmental data are often spatial (related to the surface of the Earth), narroral (related to specific time/period of time), or spatio-narroral (related to the surface of the Earth for a specific time/period of time). These data are at the core of environmental health research, but the steps between identifying a spatial data set or variable and using it to help answer a research question can be challenging.
+:::{layout-ncol=3}
+![Clinical Researcher](images/user_profiles/lab_coat_goggles.png){width="150"}
 
-This vignette is designed to introduce the necessary steps for conducting analyses with spatial data in R. It will introduce R packages that are equipped to handle spatial data, and will demonstrate how to access, import, and analyze three different types of spatial data. The vignette will focus primarily on spatial data, but some aspects of narroral and spatio-narroral data will also be discussed.
+![Epidemiology Researcher](images/user_profiles/doctor_glasses.png){width="150"}
 
-### 0.2 Objectives
+![Student](images/user_profiles/students.png){width="150"}
+:::
+
+### 0.2 Motivation
+
+Environmental health research relies on various types of data to accurately measure, model, and predict exposures. Environmental data are often spatial (related to the surface of the Earth), temporal (related to specific time/period of time), or spatio-temporal (related to the surface of the Earth for a specific time/period of time). These data are at the core of environmental health research, but the steps between identifying a spatial data set or variable and using it to help answer a research question can be challenging.
+
+This vignette is designed to introduce the necessary steps for conducting analyses with spatial data in R. It will introduce R packages that are equipped to handle spatial data, and will demonstrate how to access, import, and analyze three different types of spatial data. The vignette will focus primarily on spatial data, but some aspects of temporal and spatio-temporal data will also be discussed.
+
+### 0.3 Objectives
 
 Users will learn about the following topics related to spatial data in R:
 
@@ -37,13 +47,13 @@ Users will learn about the following topics related to spatial data in R:
 
 -   Plotting individual and multiple data sets
 
-### 0.3 Data Types
+### 0.4 Data Types
 
 This vignette will cover how to access, import, and analyze point, polygon, and raster spatial data types. The details of what constitutes each unique spatial data type, however, will not be covered.
 
 For detailed descriptions of each type of spatial data, please see [Simple Features for R](https://r-spatial.github.io/sf/articles/sf1.html) for point and polygon data types, and [Introduction to Raster Data](https://datacarpentry.org/organization-geospatial/01-intro-raster-data) for raster data.
 
-### 0.4 Data Sources
+### 0.5 Data Sources
 
 The exploratory analyses performed in this vignette utilize free and publicly available environmental data. The code chunks are designed to access each specific file used for the exploratory analyses, but a description of each data source and data set is available below.
 
@@ -56,7 +66,7 @@ The exploratory analyses performed in this vignette utilize free and publicly av
 
 : Exploratory analyses data sources
 
-### 0.5 Packages
+### 0.6 Packages
 
 Various R packages can be used to create, import, analyze, and export spatial data. If you have not used these packages previously, they may not be installed on your machine. The following chunk of code installs and imports the packages required to conduct the exploratory analyses in this vignette.
 
@@ -96,7 +106,7 @@ test_that("Required packages are imported.", {
 ####################
 ```
 
-#### 0.5.1 `ggplot2` and `ggpubr`
+#### 0.6.1 `ggplot2` and `ggpubr`
 
 The `ggplot2` and `ggpubr` packages will be used throughout the vignette for creating publication quality plots. Please see [ggplot2: Elegant Graphics for Data Analysis (3e)](https://ggplot2-book.org/introduction) and [ggpubr: 'ggplot2' Based Publication Ready Plots](https://rpkgs.datanovia.com/ggpubr/) for in depth descriptions of the syntax and functionality utilized by these packages.
 
@@ -568,7 +578,7 @@ The resulting `pm_min_max` data set contains data for only six monitoring locati
 unique(pm_min_max$Monitor.ID)
 ```
 
-The narroral trend of PM~2.5~ concentrations measured at each of these locations in 2021 can be depicted with `ggplot::geom_line()`.
+The temporal trend of PM~2.5~ concentrations measured at each of these locations in 2021 can be depicted with `ggplot::geom_line()`.
 
 ```{r}
 ggplot(
