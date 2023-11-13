@@ -2,12 +2,7 @@
 title: Spatial Analysis with Environmental Data in R
 subtitle: Access, Import, and Primary Analyses
 authors: Mitchell Manware, Kyle P Messier
-format:
-  html:
-    toc: true
-    toc-title: Table of Contents
-    toc-depth: 4
-    toc-expand: TRUE
+format: pdf
 editor: source
 ---
 
@@ -15,7 +10,7 @@ editor: source
 
 ### 0.1 User Profiles
 
-:::{layout-ncol=3}
+::: {layout-ncol="3"}
 ![Clinical Researcher](images/user_profiles/lab_coat_goggles.png){width="150"}
 
 ![Epidemiology Researcher](images/user_profiles/doctor_glasses.png){width="150"}
