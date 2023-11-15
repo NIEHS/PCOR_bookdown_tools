@@ -1,5 +1,7 @@
 ## NPL script 2.0
 
+R code git URL: <https://github.com/NIEHS/PCOR_npl_proximity_for_points/>
+
 script_npl_proximity_for_points_V2.R
 
 ### Load Libraries
@@ -47,7 +49,7 @@ script_npl_proximity_for_points_V2.R
 
 ### Invok r script (sample)
 
-```{R} 
+```{R}
 
 # npl_proximity_metrics_v2 <- 
 #   get_npl_facility_proximity_for_points_V2(
