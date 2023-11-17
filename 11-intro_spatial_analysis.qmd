@@ -2,7 +2,12 @@
 title: Spatial Analysis with Environmental Data in R
 subtitle: Access, Import, and Primary Analyses
 authors: Mitchell Manware, Kyle P Messier
-format: pdf
+format:
+  html:
+    toc: true
+    toc-title: Table of Contents
+    toc-depth: 4
+    toc-expand: TRUE
 editor: source
 ---
 
@@ -11,11 +16,11 @@ editor: source
 ### 0.1 User Profiles
 
 ::: {layout-ncol="3"}
-![Clinical Researcher](images/user_profiles/lab_coat_goggles.png){width="150"}
+![Clinical Researcher](/Volumes/pcor_climate/Bookdown_tool/images/user_profiles/lab_coat_goggles.png){width="150"}
 
-![Epidemiology Researcher](images/user_profiles/doctor_glasses.png){width="150"}
+![Epidemiology Researcher](/Volumes/pcor_climate/Bookdown_tool/images/user_profiles/doctor_glasses.png){width="150"}
 
-![Student](images/user_profiles/students.png){width="150"}
+![Student](/Volumes/pcor_climate/Bookdown_tool/images/user_profiles/students.png){width="150"}
 :::
 
 ### 0.2 Motivation
@@ -93,7 +98,8 @@ library(utils)
 ```{r,  echo = FALSE, eval = TRUE, results = FALSE, warning = FALSE, message = FALSE}
 #### TEST CHUNK ####
 library(testthat)
-wd <- "/Volumes/manwareme/PCOR_bookdown_tools/dataset/"
+#wd <- "/Volumes/manwareme/PCOR_bookdown_tools/dataset/"
+wd <- "/Volumes/pcor_climate/Bookdown_tool/dataset/"
 test_that("Required packages are imported.", {
   loaded_packages <- (.packages())
   expect_in(vignette_packages, loaded_packages)
