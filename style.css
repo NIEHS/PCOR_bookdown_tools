@@ -12,3 +12,9 @@ pre {
 pre code {
   white-space: inherit;
 }
+
+.notebox {
+  padding: 1em;
+  background: skyblue;
+  color: white
+}
