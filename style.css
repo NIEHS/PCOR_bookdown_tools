@@ -13,8 +13,14 @@ pre code {
   white-space: inherit;
 }
 
+.center {
+  text-align: center;
+}
+
 .notebox {
   padding: 1em;
   background: skyblue;
-  color: white
+  color: white;
+  border: 2px solid black;
+  border-radius: 5px
 }

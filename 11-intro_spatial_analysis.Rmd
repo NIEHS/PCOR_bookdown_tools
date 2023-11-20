@@ -1,7 +1,6 @@
-# **Spatial Analysis with Environmental Data in R** {1}
+# **Spatial Analysis with Environmental Data in R**
 
-Spatial Analysis with Environmental Data in R
-Access, Import, and Primary Analyses
+<font size ="1"> Access, Import, and Primary Analyses </font>
 
 **Date:** November 20, 2023
 
