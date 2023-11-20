@@ -1,8 +1,4 @@
----
-output:
-  html_document:
-    css: style_css
----
+# **Spatial Analysis with Environmental Data in R** {.unnumbered}
 
 # Spatial Analysis with Environmental Data in R
 
@@ -10,7 +6,7 @@ output:
 
 **Date:** November 20, 2023
 
-**Author(s):** Mitchell Manware, Kyle P Messier*
+**Author(s):** Mitchell Manware, Kyle P Messier\*
 
 **Key Terms:** spatial analysis; geospatial analysis
 
@@ -20,13 +16,7 @@ output:
 
 ### User Profiles
 
-::: {layout-ncol="3"}
-![Clinical Researcher](/Volumes/pcor_climate/Bookdown_tool/images/user_profiles/lab_coat_goggles.png){width="150"}
-
-![Epidemiology Researcher](/Volumes/pcor_climate/Bookdown_tool/images/user_profiles/doctor_glasses.png){width="150"}
-
-![Student](/Volumes/pcor_climate/Bookdown_tool/images/user_profiles/students.png){width="150"}
-:::
+![Clinical Researcher](/Volumes/pcor_climate/Bookdown_tool/images/user_profiles/lab_coat_goggles.png){width="150"} ![Epidemiology Researcher](/Volumes/pcor_climate/Bookdown_tool/images/user_profiles/doctor_glasses.png){width="150"} ![Student](/Volumes/pcor_climate/Bookdown_tool/images/user_profiles/students.png){width="150"}
 
 ### Motivation
 
@@ -1959,7 +1949,7 @@ reclass <- matrix(
 )
 ```
 
-Now that the reclassification matrix has been prepared, reclassify the annual mean temperatures. The `right = TRUE` argument indicates that intervals are open on the left and closed on the right (ie. (0,10\] becomes 1).
+Now that the reclassification matrix has been prepared, reclassify the annual mean temperatures. The `right = TRUE` argument indicates that intervals are open on the left and closed on the right (ie. (0,10] becomes 1).
 
 ```{r}
 narr_reclass <- classify(narr_crop_c$mean,
@@ -2039,9 +2029,9 @@ Hijmans R (2023). *terra: Spatial Data Analysis*. R package version 1.7-39, <htt
 
 Kassambara A (2023). *ggpubr: 'ggplot2' Based Publication Ready Plots*. R package version 0.6.0, <https://CRAN.R-project.org/package=ggpubr>.
 
-Pebesma, E., & Bivand, R. (2023). Spatial Data Science: With Applications in R. Chapman and Hall/CRC. https://doi.org/10.1201/9780429459016
+Pebesma, E., & Bivand, R. (2023). Spatial Data Science: With Applications in R. Chapman and Hall/CRC. <https://doi.org/10.1201/9780429459016>
 
-Pebesma, E., 2018. Simple Features for R: Standardized Support for Spatial Vector Data. The R Journal 10 (1), 439-446, https://doi.org/10.32614/RJ-2018-009
+Pebesma, E., 2018. Simple Features for R: Standardized Support for Spatial Vector Data. The R Journal 10 (1), 439-446, <https://doi.org/10.32614/RJ-2018-009>
 
 R Core Team (2023). *R: A Language and Environment for Statistical Computing*. R Foundation for Statistical Computing, Vienna, Austria. <https://www.R-project.org/>.
 
