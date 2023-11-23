@@ -1,0 +1,15 @@
+name: 11-intro_spatial_analysis
+title: 11-intro_spatial_analysis
+username: noltesz
+account: noltesz
+server: sandbox-staging.ntp.niehs.nih.gov
+hostUrl: https://sandbox-staging.ntp.niehs.nih.gov/rsconnect/__api__
+appId: 319
+bundleId: 1445
+url: https://sandbox-staging.ntp.niehs.nih.gov:443/rsconnect/content/3bd72add-3395-4922-9ec8-06560c6d4f93/
+when: 1700165212.94388
+lastSyncTime: 1700165212.94389
+quarto_version: 1.3.326
+quarto_engines: knitr
+asMultiple: FALSE
+asStatic: FALSE
