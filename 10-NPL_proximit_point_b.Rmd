@@ -63,4 +63,3 @@
     *`Function: summary_of_point_sources_in_buffer_of_point_receptor`*
 
     `calculates the distances between the ith receptor and the sources within its buffer. Calculate Summary Metrics: The mean distance and the log-transformed mean distance (base 10) are  computed for the sources within the buffer of the ith receptor. These values are then stored in the appropriate columns of the summary_distances matrix. Calculate Percentiles: If there are 10 or more sources within the buffer of the ith receptor(nrow(sources_in_receptor_buffer_ls_i) >= 10), it calculates the 25th,50th (median), and 75th percentiles of the distances. These values are then stored in the last three columns of the summary_distances matrix.`
-    

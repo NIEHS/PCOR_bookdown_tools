@@ -1,26 +1,26 @@
-# **NPL proximit for point** {.unnumbered}
+# **NPL Proximit for Point** {.unnumbered}
 
 |                                    |
 |------------------------------------|
 | title: "10-NPL_proximit_for_point" |
 | subtitle: "Tutorial"               |
 | date: "October 05, 2023"           |
-| author: "Sue Nolte , Lara Clark"                |
+| author: "Sue Nolte , Lara Clark"   |
 | format: html                       |
 
 ------------------------------------------------------------------------
 
-# NPL proximity metrics
+# NPL Proximity Metrics
 
-A tool for calculate proximity-based exposure metrics for NPL (National Priorities List)
+A tool for calculating proximity-based exposure metrics for NPL (National Priorities List)
 
-This tool is based on Lara Clark's work "exposure metrics for aircraft facilities"
+This tool is based on Lara Clark's work, "Exposure Metrics for Aircraft Facilities"
 
 ## Superfund: National Priorities List
 
 ## Purpose:
 
-The script calculates proximity-based (i.e., distance-based) exposure metrics for a specified list of receptor point locations (e.g., geocoded home addresses) to US NPL. This tool can be used to calculate the following proximity-based metrics within the US:
+The tool's primary function is to calculate proximity-based metrics for receptor point locations in relation to the NPL sites.
 
 -   distance to nearest NPL facilities location from receptor
 
@@ -34,19 +34,19 @@ The script calculates proximity-based (i.e., distance-based) exposure metrics fo
 
 ![](images/npl_data3.jpg)
 
-![The data distribution](images/npl_data.jpg){width="353"}
+![The data distribution](images/npl_data.jpg){width="353" high="400"}
 
 ### Download
 
 The NPL data set can be download at [here](https://sedac.ciesin.columbia.edu/data/set/superfund-epa-national-priorities-list-ciesin-mod-v2).
 
-### NPL Data format 
+### NPL Data format
 
 | Data                   | Image                           | Map                             | Web              |
 |------------------|------------------|------------------|------------------|
 | Microsoft Excel (.xls) | Portable Network Graphics (PNG) | Maps in Portable Document (PDF) | Web map services |
 
-### Data sample 
+### Data sample
 
 Data set including Unique ID Name of site Street Address City Name County Name State Name Postal Code EPA Region Status on NPL Date of Status Geographic Latitude Geographic Longitude Additional Info URL to Site Profile Federal Ownership Status Date Data Last Updated
 
@@ -102,19 +102,29 @@ A simple feature collection with 6 features and 1 field
 
 ### required
 
-receptor_filepath : path to the receptor file source_npl_facilities_filepath : path to npl file us_borders_filepath: path to us border file start_year : format YYYY ex:1985 start_year \< end_year end_year : format YYYY ex: 2020 start_year \< end_year npl_year: must be %Y-%m-%d format ex:'2017-10-01' start_year \< npl_year \< end_year
+receptor_filepath : path to the receptor file.
+
+source_npl_facilities_filepath : path to npl file.
+
+us_borders_filepath: path to us border file.
+
+start_year : format YYYY ex:1985 start_year \< end_year.
+
+end_year : format YYYY ex: 2020 start_year \< end_year.
+
+npl_year: must be %Y-%m-%d format ex:'2017-10-01' , start_year \< npl_year \< end_year
 
 ### Optional:
 
-NPL_Status : The npl site status used as a filter. Values : ["Proposed for NPL" "Currently on the Final NPL" "Deleted from the Final NPL"]
+NPL_Status : Indicates the status of NPL sites. Possible values include : ["Proposed for NPL", "Currently on the Final NPL", "Deleted from the Final NPL"]
 
-time_option : ["single_year_only"; "variable_year_only"; "either_single_or_variable_year"]
+time_option : ["single_year_only", "variable_year_only", "either_single_or_variable_year"]
 
 > ***NOTE:*** Currently only "single_year_only" been implemented.
 
 ### Output
 
-The output is the result of the multiple steps' calculation.
+The output consists of calculated metrics based on the specified parameters.
 
 | Column Name                     | Note                                                                            |
 |---------------------------------|---------------------------------------|
@@ -140,6 +150,6 @@ The output is the result of the multiple steps' calculation.
 | NPL_p50_distance_in_buffer      | The 50% of the distance in the buffer                                           |
 | NPL_p75_distance_in_buffer      | The 75% of the distance in the buffer                                           |
 
-```{r, child=c("10-NPL_proximit_point_b.Rmd", "10-NPL_proximit_point_c.Rmd"), echo=TRUE}
+```{r, child=c("10-NPL_proximit_point_b.Rmd", "10-NPL_proximit_point_c.Rmd", "12-tool_for_all_proximity-based_calculation.Rmd"), echo=TRUE}
  
 ```
