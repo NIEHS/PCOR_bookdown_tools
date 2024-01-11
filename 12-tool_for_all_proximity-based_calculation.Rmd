@@ -1,0 +1,136 @@
+## Using Airport facility proximity metrics tool apply to all interested facilities {.unnumbered}
+
+Airport Facility Proximity Metrics Tool is designed to compute distance-based exposure metrics for designated receptor locations (such as geocoded residential addresses) in relation to aircraft landing facilities for a specific year between 1981 and 2020. This tool is also capable of determining various other distance-related metrics within the United States. As an illustration, it can be adeptly applied to analyze the National Priorities List (NPL), commonly known as Superfund sites.
+
+The ensuing instructions outline the process for employing this tool to calculate your desired proximity-based metrics.
+
+This version maintains the original meaning but enhances clarity and readability. If there are more specific details you'd like to include or adjust, please contact us at: Schmitt, Charles <charles.schmitt@nih.gov>
+
+The following guide provides step-by-step instructions on how to use this tool for computing proximity-based metrics. Start by downloading the script from the NIEHS GitHub repository [NIEHS github](https://github.com/NIEHS/PCOR_npl_proximity_for_points/ "PCOR NPL R script"){.uri}.
+
+Launch the project in your local R-Studio environment.
+
+Within the input folder, you will find three files:
+
+#### 1. input_receptor.csv: {.unnumbered}
+
+
+Replace this file with your own receptor data. It should contain a table of receptor point locations (for example, geocoded addresses or coordinates). Each receptor should be listed in a separate row with the following mandatory columns:
+
+-   id: A unique, anonymous identifier for each receptor, which can be either a string or a numeric value.
+
+-   latitude: The latitude of the receptor point location in decimal degrees format (range: -90 to 90)
+
+-   longitude: the longitude of the receptor point location in decimal degrees format (range: -180 to 180)
+
+The sample file includes additional columns like number, street, unit, city, district, region, and postcode, as shown in these examples:
+
+\| id \| number \| street \| unit \| city \| district \| region \| postcode \| longitude \| latitude \| time_start \| time_end \| \| 11356887 \| 5402 \| 66TH ST \|. \| LUBBOCK \|. \| TX \| 79424 \| -101.9312009 \| 33.5346308 \| 2009 \| 2015 \|
+
+\| 12585516 \| 5649 \| FAIRFAX DR \|. \| FRISCO \|. \| TX \| 75034 \| -96.837184 \| 33.1004522 \| 1970 \| 1975 \|
+
+time_start and time_end are used for compare if the receptors and facilities are both exist when we run the exposure assessment. This two parameters are optional.
+
+#### 2.input_us_borders.rds: {.unnumbered}
+
+US_borders Data set
+
+A simple feature collection with 6 features and 1 field
+
+#### Required columns : {.unnumbered}
+
+| border                    | geometry       |
+|---------------------------|----------------|
+| us-canada MULTILINESTRING | ((2131787 8... |
+
+Resources
+
+------------------------------------------------------------------------
+
+Originator: United States Environmental Protection Agency - US EPA, National Institute for Environmental Health Sciences Columbia University Superfund Research Program - NIEHS CU SRP, and Center for International Earth Science Information Network - CIESIN - Columbia University
+
+#### 3. epa-national-priorities-list-ciesin-mod-v2-2014.xls {.unnumbered}
+
+Columns:\| EPA_SITEID \| SITE_NAME \| ADDRESS \| CITY \| COUNTY \| STATE \| ZIP_CODE \| REGION \| NPL_STATUS \| NPL_STATUS_DATE \| LATITUDE \| LONGITUDE \| NOTES \| SITE_PROFILE_URL \| FEDERAL_STATUS \| LAST_UPDATED \|
+
+Replace this file with your interest point data set. The two columns : "LONGITUDE","LATITUDE" are must have with your interest point data set; You may have as many as columns you want depended on if you want to filter the data set or compare the results etc.
+
+Place those three files under your project/input directory then make a function call:
+
+```{R}
+# Download national priorities list data for new tool (EPA Superfund sites in 2014 via CIESIN (URL):
+
+# <https://sedac.ciesin.columbia.edu/data/set/superfund-epa-national-priorities-list-ciesin-mod-v2>
+
+# Load packages
+
+# library(tidyverse) library(logr) library(sf)
+
+# Load functions
+
+# source("./script_npl_proximity_for_points_V2.R") 
+# source("./functions/npl_proximity_points_logging.R") 
+# source("./functions/npl_proximity_points_input_validation.R") 
+# source("./functions/check_point_receptor_format.R") 
+# source("./functions/npl_proximity_points_transform_calculate.R") 
+# source("./functions/npl_check_point_receptor_format.R") 
+# source("./functions/check_point_receptor_near_border.R") 
+# source("./functions/nearest_distance_to_point_source_for_point_receptor.R") 
+# source("./functions/npl_proximity_points_summary_metrics.R") 
+# source("./functions/summary_of_point_sources_in_buffer_of_point_receptor.R") 
+
+#Parameters: 
+# receptor_filepath: Your receptor dataset
+# source_npl_facilities_filepath : Your facility dataset
+# us_borders_filepath: US borders geo data.download URL ???
+# p_NPL_STATUS: an optional parameter, for filter the input data if NULL then no data filter  
+# p_NPL_STATUS has three status 
+# ["Proposed for NPL" "Currently on the Final NPL" "Deleted from the Final NPL"]
+# assessment_year : The year assessment
+# time_option: only the single year will be calculated the other options are under development
+# npl_proximity_metrics_v2 <- get_npl_facility_proximity_for_points_V2 ( 
+#  receptor_filepath = "./input/input_receptor.csv", 
+# source_npl_facilities_filepath ="./input/epa-national-priorities-list-ciesin-mod-v2-2014.xls",   us_borders_filepath ="./input/input_us_borders.rds", 
+#  p_NPL_Status = 'Deleted from the Final NPL', 
+#  assessment_year = '2017-10-01', 
+  time_option = 'single_year_only' #'either_single_or_variable_year','variable_year_only' 
+# )
+
+# Write exposures to CSV readr::write_csv(npl_proximity_metrics_v2, file ="./output/output_npl_proximity_metrics_V2.csv")
+
+```
+
+Remove the below text
+
+```{R}
+
+#npl_proximity_metrics_v2 <- get_npl_facility_proximity_for_points_V2(
+#  receptor_filepath = "./input/input_receptor.csv", #(replace with your dataset)
+#  source_npl_facilities_filepath="./input/epa-national-priorities-list-ciesin-mod-v2-2014.xls", #(replace with your dataset)
+#  us_borders_filepath ="./input/input_us_borders.rds", #(keep)
+#  # The parameters below are optional
+#  p_NPL_Status = 'Deleted from the Final NPL', 
+#  npl_year = '2017-10-01', 
+#  start_year = 1985, 
+#  end_year = 2020,
+#  time_option = 'single_year_only' #(Keep for now * other calculate function is under development)
+#)
+
+# Write the exposure results to a CSV file
+# readr::write_csv(npl_proximity_metrics_v2, file ="./output/output_npl_proximity_metrics_V2.csv") 
+```
+
+```{=html}
+<!-- Notes:
+receptor_filepath = "./input/input_receptor.csv", /<b/>Keep as is/<//b/>
+source_npl_facilities_filepath="./input/epa-national-priorities-list-ciesin-mod-v2-2014.xls", 
+us_borders_filepath ="./input/input_us_borders.rds",
+The parameters below are optional 
+p_NPL_Status = 'Deleted from the Final NPL', 
+npl_year = '2017-10-01', 
+start_year = 1985, 
+end_year = 2020, 
+time_option = 'single_year_only'
+ -->
+```
+<!-- HTML comments -->

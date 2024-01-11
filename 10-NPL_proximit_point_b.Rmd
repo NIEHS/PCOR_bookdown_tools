@@ -1,0 +1,65 @@
+## Run the NPL R scripts
+
+### NPL R scripts
+
+-   npl_proximity_points_logging.R :
+
+    `Logging all script information into a file under ../log directory`
+
+-   npl_proximity_points_input_validation.R
+
+    `Check if receptor file exist # Check us_borders_sf is 30 rows and 2 columns # Check if point receptors are within buffer of border # Invoke check_point_receptor_near_border function form check_point_receptor_near_border.R  #  time_option = "single_year_only"`
+
+-   check_point_receptor_format.R
+
+    `Contains function to check format of point receptor data frame for compatibility with other NIEHS geospatial toolbox functions.  Required function argument is a data frame containing point receptors.  Function prints an error message if format errors are found`
+
+-   npl_proximity_points_transform_calculate.R
+
+    `Include 4 functions:`
+
+    ***`function : trainsform_receptor_sf`***
+
+    `Useing sf package st_crs to retrieves the CRS of the receptor cvs file A CRS defines how the two-dimensional (or potentially three-dimensional) data of the spatial object relates to real places on the Earth return a receptor sf object`
+
+    *`function : check_us_border`*
+
+    `Check if point receptors are within buffer of border \# Validate US borders' file and data frame us_borders_sf \# Log the information`
+
+    *`function : trainform_filter_source_points`*
+
+    `Load dataset from excel file filter the data as needed and convert to sf object with POINT geometry and return source_npl_sf`
+
+    *`function : calculate_distance_npl_receptor`*
+
+    `Calculate distance to nearest npl facility from point receptor \# Using functions from the dplyr package and storing the result in output_receptor_nearest_distance_df and return to the caller`
+
+-   npl_check_point_receptor_format.R
+
+    `Contains function to check format of point receptor data   frame for compatibility with other NIEHS geospatial toolbox functions.     Required function argument is a data frame containing point receptors. Function prints an error message if format errors are found.  Currently script supports time_option = "single_year_only"`
+
+-   check_point_receptor_near_border.R
+
+    `Contains function to check whether point receptors are within a set buffer distance of a border. Required function arguments are  simple features object of borders, simple features object of receptor points, and  buffer distance. Function returns a data frame of receptor points with added column 'within_border_buffer' identifying receptor points within buffer distance of border (1 = within buffer; 0 = not within buffer).`
+
+-   nearest_distance_to_point_source_for_point_receptor.R
+
+    `Contains function to calculate distance to nearest point  source from point receptors. Required function arguments are simple features  objects of point sources and point receptors and a projected coordinate reference system for use in distance calculations. Function  returns a data frame of receptor points with added column 'nearest_distance' and, optionally, added columns corresponding to columns from the nearest  point source in the point source simple features object (for use identifying the nearest point source).`
+
+-   npl_proximity_points_summary_metrics.R
+
+    `The script invocats summary_of_point_sources_in_buffer_of_point_receptor`
+
+    `calculates the distances between the ith receptor and the sources within its buffer.`
+
+    `Calculate Summary Metrics: The mean distance and the log-transformed mean distance (base 10) are computed for the sources within the buffer of the ith receptor. These values are then stored in the appropriate columns of the summary_distances matrix.`
+
+    `Calculate Percentiles: If there are 10 or more sources within the buffer of the ith receptor(nrow(sources_in_receptor_buffer_ls_i) >= 10), it calculates the 25th, 50th (median), and 75th percentiles of the distances. These values are then stored in the last three columns of the summary_distances matrix.`
+
+-   summary_of_point_sources_in_buffer_of_point_receptor.R
+
+    `Contains function to summarize point sources located within specified buffer distance of point receptor. Required function arguments are simple features objects of point sources and point receptors and buffer distance.  Function returns a data frame of receptor points with added columns containing:  count of point sources within buffer distance, summary metrics of distances  to all point sources within buffer distance of point receptor (mean distance,  mean of log distance, and 25th, 50th and 75th percentile distances).`
+
+    *`Function: summary_of_point_sources_in_buffer_of_point_receptor`*
+
+    `calculates the distances between the ith receptor and the sources within its buffer. Calculate Summary Metrics: The mean distance and the log-transformed mean distance (base 10) are  computed for the sources within the buffer of the ith receptor. These values are then stored in the appropriate columns of the summary_distances matrix. Calculate Percentiles: If there are 10 or more sources within the buffer of the ith receptor(nrow(sources_in_receptor_buffer_ls_i) >= 10), it calculates the 25th,50th (median), and 75th percentiles of the distances. These values are then stored in the last three columns of the summary_distances matrix.`
