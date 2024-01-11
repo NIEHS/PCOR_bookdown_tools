@@ -2,7 +2,7 @@
 
 <font size ="5"> **Access, Import, and Primary Analyses** </font>
 
-**Date:** November 20, 2023
+**Date Modified:** January 11, 2024
 
 **Author(s):** Mitchell Manware, Kyle P Messier
 
@@ -14,7 +14,9 @@
 
 ### User Profiles
 
-![Clinical Researcher](/Volumes/pcor_climate/Bookdown_tool/images/user_profiles/lab_coat_goggles.png){width="150"} ![Epidemiology Researcher](/Volumes/pcor_climate/Bookdown_tool/images/user_profiles/doctor_glasses.png){width="150"} ![Student](/Volumes/pcor_climate/Bookdown_tool/images/user_profiles/students.png){width="150"}
+-   Clinical/Medical Professional
+-   Social & Behavioral Scientist
+-   Student
 
 ### Motivation
 
