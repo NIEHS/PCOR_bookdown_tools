@@ -13,24 +13,24 @@ pre code {
   white-space: inherit;
 }
 
-.center {
-  text-align: center;
-}
-
 .notebox {
-  padding: 1em;
-  background: lightsteelblue;
+  padding: 0.5em;
+  background: #dbe4f0;
   color: black;
+  border-radius: 15px;
 }
 
 .warningbox {
-  padding: 1em;
-  background: palegoldenrod;
+  padding: 0.5em;
+  background: #f6f4d5;
   color: black;
+  border-radius: 15px;
 }
 
 .importantbox {
-  padding: 1em;
-  background: lightcoral;
-  color: black
+  padding: 0.5em;
+  background: #ffccd1;
+  color: black;
+  border-radius: 15px;
 }
+
