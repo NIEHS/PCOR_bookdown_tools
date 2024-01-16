@@ -4,6 +4,7 @@ rmd_files:
   - index.Rmd
   - 07-Data-Dictionary.Rmd
   - 11-intro_spatial_analysis.Rmd
+  - 13-download_functions_NASA_account.Rmd
   - 08-PCOR-Tmap.Rmd
   - 06-geo-exposure.Rmd
   - 10-NPL_proximit_point.Rmd
