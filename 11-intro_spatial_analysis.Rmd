@@ -91,17 +91,6 @@ library(tidyterra)
 library(utils)
 ```
 
-```{r,  echo = FALSE, eval = TRUE, results = FALSE, warning = FALSE, message = FALSE}
-#### TEST CHUNK ####
-library(testthat)
-wd <- "/Volumes/pcor_climate/Bookdown_tool/dataset/"
-test_that("Required packages are imported.", {
-  loaded_packages <- (.packages())
-  expect_in(vignette_packages, loaded_packages)
-})
-####################
-```
-
 #### `ggplot2` and `ggpubr`
 
 The `ggplot2` and `ggpubr` packages will be used throughout the vignette for creating publication quality plots. Please see [ggplot2: Elegant Graphics for Data Analysis (3e)](https://ggplot2-book.org/introduction) and [ggpubr: 'ggplot2' Based Publication Ready Plots](https://rpkgs.datanovia.com/ggpubr/) for in depth descriptions of the syntax and functionality utilized by these packages.
@@ -200,26 +189,8 @@ Now that the contents of the zip file have been saved on your machine and the da
 pm <- st_read("/   YOUR FILE PATH   /daily_88101_2021.csv")
 ```
 
-```{r, echo = FALSE, eval = TRUE, results = FALSE}
-#### TEST CHUNK ####
-test_that("PM CSV exists.", {
-  files <- list.files(paste0(wd, "/epa"))
-  expect_in("daily_88101_2021.csv", files)
-})
-####################
-```
-
 ```{r, echo = FALSE, warning = TRUE, cache = FALSE, results = 'hide'}
 pm <- st_read(paste0(wd, "epa/daily_88101_2021.csv"))
-```
-
-```{r, echo = FALSE, eval = TRUE, results = FALSE}
-#### TEST CHUNK ####
-test_that("Ensure all PM data has been imported.", {
-  expect_equal(nrow(pm), 590208)
-  expect_equal(ncol(pm), 29)
-})
-####################
 ```
 
 The previous chunk of code returned a `Warning:` message. This warning informs the user that the imported data does not have native spatial features, so the data was imported as a `data.frame`.
@@ -263,15 +234,6 @@ str(pm,
 )
 ```
 
-```{r, echo = FALSE, eval = TRUE, results = FALSE}
-#### TEST CHUNK ####
-test_that("Ensure all PM data has been subsetted.", {
-  expect_equal(nrow(pm), 590208)
-  expect_equal(ncol(pm), 8)
-})
-####################
-```
-
 ### Reclassify
 
 The `str()` function showed the class of each variable within the data set. All of the retained variables are of class character, indicated by `: chr` and the quotations around each observation (`"01" "01" ...`).
@@ -283,15 +245,6 @@ The `as.` functions can be used for reclassifying data. Reclassify `pm$Arithmeti
 ```{r}
 pm$Arithmetic.Mean <- as.numeric(pm$Arithmetic.Mean)
 pm$Date.Local <- as.Date(pm$Date.Local)
-```
-
-```{r, echo = FALSE, eval = TRUE, results = FALSE}
-#### TEST CHUNK ####
-test_that("PM variables of interest have been reclassed.", {
-  expect_equal(class(pm$Arithmetic.Mean), "numeric")
-  expect_equal(class(pm$Date.Local), "Date")
-})
-####################
 ```
 
 After running the `as.` functions, ensure that the two variables have been reclassified to the desired classes.
@@ -314,15 +267,6 @@ The columns containing coordinate values will not always be "Latitude" and "Long
 pm_sf <- st_as_sf(pm,
   coords = c("Longitude", "Latitude")
 )
-```
-
-```{r, echo = FALSE, eval = TRUE, results = FALSE}
-#### TEST CHUNK ####
-test_that("PM data has been converted to sf.", {
-  expect_equal(class(pm_sf), c("sf", "data.frame"))
-  expect_equal(class(pm_sf$geometry), c("sfc_POINT", "sfc"))
-})
-####################
 ```
 
 Inspect the classes of `pm_sf` and `pm_sf$geometry` to see their differences, and how each are different than `class(pm)`.
@@ -349,15 +293,6 @@ st_crs(pm_sf) <- 4326
 st_crs(pm_sf)
 ```
 
-```{r, echo = FALSE, eval = TRUE, results = FALSE}
-#### TEST CHUMK ####
-test_that("pm_sf CRS is EPSG:4326.", {
-  pm_sf_crs <- paste0(st_crs(pm_sf)[1])
-  expect_equal(pm_sf_crs, "EPSG:4326")
-})
-####################
-```
-
 An `sf` object with a coordinate reference system can be transformed (projected) into a different coordinate reference system with `sf::st_transform()`. The area of interest for these exploratory analyses is the coterminous United States, so the Albers Equal Area projected coordinate system will be used (EPSG code: 5070).
 
 ::: {.notebox}
@@ -372,20 +307,11 @@ pm_sf <- st_transform(
 )
 ```
 
-```{r, echo = FALSE, eval = TRUE, results = FALSE}
-#### TEST CHUNK ####
-test_that("pm_sf has been transformed to EPSG:5070.", {
-  pm_sf_transform <- paste0(st_crs(pm_sf)[1])
-  expect_equal(pm_sf_transform, "EPSG:5070")
-})
-####################
-```
-
 ### Plot
 
 Plotting spatial data is important for visualizing and analyzing patterns in the data. Initialize a plot for the locations of each air pollution monitoring station with `ggplot2::ggplot()`. Identifying the data set to be plotted within the `geom_sf()` argument informs the function that the data is an `sf` object.
 
-```{r}
+```{r, eval = FALSE}
 ggplot() +
   geom_sf(data = pm_sf) +
   ggtitle("Air Pollution Monitor Locations") +
@@ -394,22 +320,13 @@ ggplot() +
   grids()
 ```
 
+![](../images/11-intro-spatial/unnamed-chunk-30-1.pdf)
+
 The plot shows the distribution of monitoring locations, and roughly depicts the outline of the United States due to the large number of monitors. The plot does not, however, convey any information about the concentration of PM~2.5~ measured by each monitor. Inspect the summary statistics of the PM~2.5~ measurements before creating any plots to visualize the data.
 
 ```{r}
 summary(pm_sf$Arithmetic.Mean)
 sd(pm_sf$Arithmetic.Mean)
-```
-
-```{r, echo = FALSE, eval = TRUE, results = FALSE}
-#### TEST CHUNK ####
-test_that("pm_sf$Arithmetic.Mean standard deviation.", {
-  expect_equal(
-    round(sd(pm_sf$Arithmetic.Mean), 5),
-    7.36688
-  )
-})
-####################
 ```
 
 After inspecting the summary statistics, create a histogram of the PM~2.5~ concentration measurements to visualize the distribution of the data.
@@ -458,17 +375,6 @@ Each unique monitor identification code should be matched with a unique monitor 
 length(unique(pm_sf$Monitor.ID)) == length(unique(pm_sf$geometry))
 ```
 
-```{r, echo = FALSE, eval = TRUE, results = FALSE}
-#### TEST CHUNK ####
-test_that("Number of monitor IDs matches number of geometries.", {
-  expect_equal(
-    length(unique(pm_sf$Monitor.ID)),
-    length(unique(pm_sf$geometry))
-  )
-})
-####################
-```
-
 Now that each monitor location as a unique identification code, we can calculate the mean PM~2.5~ concentration measured at each monitoring location. Functions and syntax from the `dplyr` package will be used to do this. For more on the `dplyr` package, please see [Introduction to dplyr](https://dplyr.tidyverse.org/articles/dplyr.html).
 
 The `group_by(Monitor.ID, )` argument specifies that an annual mean should be calculated for each unique `Monitor.ID`. Including `State.Name` in this argument retains the column in the new `pm_mean` data set, but does not influence the calculation of the annual mean.
@@ -480,33 +386,11 @@ pm_mean <-
   summarise(Annual.Mean = mean(Arithmetic.Mean))
 ```
 
-```{r, echo = FALSE, eval = TRUE, results = FALSE}
-#### TEST CHUNK ####
-test_that("Mean pm calculated for each unique geometry.", {
-  expect_equal(
-    nrow(pm_mean),
-    length(unique(pm_sf$geometry))
-  )
-})
-####################
-```
-
 Inspect the summary statistics of `pm_mean`.
 
 ```{r}
 summary(pm_mean$Annual.Mean)
 sd(pm_mean$Annual.Mean)
-```
-
-```{r, echo = FALSE, eval = TRUE, results = FALSE}
-#### TEST CHUNK ####
-test_that("pm_mean$Annual.Mean standard deviation.", {
-  expect_equal(
-    round(sd(pm_mean$Annual.Mean), 5),
-    2.38105
-  )
-})
-####################
 ```
 
 Create a plot which shows the distribution of monitoring locations, and color each point according to the monitor's annual mean concentration of PM~2.5~.
@@ -563,14 +447,6 @@ Finally, subset the `pm_sf` data set according to the monitor identification cod
 pm_min_max <- subset(pm_sf,
   subset = Monitor.ID == min_max_monitors_id
 )
-```
-
-```{r, echo = FALSE, eval = TRUE, results = FALSE}
-#### TEST CHUNK ####
-test_that("pm_min_max contains 6 monitor locations.", {
-  expect_equal(length(unique(pm_min_max$Monitor.ID)), 6)
-})
-####################
 ```
 
 The resulting `pm_min_max` data set contains data for only six monitoring locations. Check the unique monitor identification codes that constitute the new data set.
@@ -752,28 +628,6 @@ Now that the contents of the zip file have been saved on your machine and the da
 Although the supporting files are required to import a shapefile, only the file ending in `.shp` needs to be imported
 :::
 
-```{r, echo = FALSE, eval = TRUE, results = FALSE}
-#### TEST CHUNK ####
-test_that("NOAA HMS smoke shapefile exists.", {
-  files <- list.files(paste0(wd, "noaa"))
-  expect_in("hms_smoke20230901.shp", files)
-})
-####################
-```
-
-```{r, echo = FALSE, eval = TRUE, results = FALSE}
-#### TEST CHUNK ####
-test_that("NOAA HMS smoke shapefile supports exists.", {
-  supports <- c(
-    "hms_smoke20230901.dbf", "hms_smoke20230901.prj",
-    "hms_smoke20230901.shx"
-  )
-  files <- list.files(paste0(wd, "noaa"))
-  expect_in(supports, files)
-})
-####################
-```
-
 ```{r, eval = FALSE}
 smoke_sf <- st_read("/   YOUR FILE PATH   /hms_smoke20230901.shp")
 ```
@@ -800,28 +654,12 @@ As mentioned previously, the `smoke_sf` data set has native spatial features. Th
 class(smoke_sf)
 ```
 
-```{r, echo = FALSE, eval = TRUE, results = FALSE}
-##### TEST CHUNK ####
-test_that("smoke_sf is class sf.", {
-  expect_equal(class(smoke_sf), c("sf", "data.frame"))
-})
-####################
-```
-
 #### Reclassify
 
 The main parameter of interest in this data set is `$Density`, which discretely categorizes each wildfire smoke plume as "Light", "Medium", or "Heavy". Checking its class shows that `$Density` is class character.
 
 ```{r}
 class(smoke_sf$Density)
-```
-
-```{r, echo = FALSE, eval = TRUE, results = FALSE}
-##### TEST CHUNK ####
-test_that("smoke_sf$Density is class character.", {
-  expect_equal(class(smoke_sf$Density), "character")
-})
-####################
 ```
 
 Nominal data, data without fixed order or rank system, can be stored as class character (ie. State names). However, it is best to store ordinal data as class factor for conducting analyses in R.
@@ -832,15 +670,6 @@ Converting data from class character to class factor can be done with `factor()`
 smoke_sf$Density <- factor(smoke_sf$Density,
   levels = c("Light", "Medium", "Heavy")
 )
-```
-
-```{r, echo = FALSE, eval = TRUE, results = FALSE}
-##### TEST CHUNK ####
-test_that("smoke_sf$Density has been converted to factor.", {
-  expect_equal(class(smoke_sf$Density), "factor")
-  expect_equal(length(levels(smoke_sf$Density)), 3)
-})
-####################
 ```
 
 Check the class of `$Density` again to ensure proper reclassification.
@@ -857,15 +686,6 @@ Check the coordinate reference system of an `sf` object with `sf::st_crs()`.
 st_crs(smoke_sf)
 ```
 
-```{r, echo = FALSE, eval = TRUE, results = FALSE}
-##### TEST CHUNK ####
-test_that("smoke_sf CRS is WGS 84.", {
-  smoke_sf_crs <- paste0(st_crs(smoke_sf)[1])
-  expect_equal(smoke_sf_crs, "WGS 84")
-})
-####################
-```
-
 `smoke_sf` has a native coordinate reference system which was imported during the `sf::st_read()` step. The area of interest for these exploratory analyses is the coterminous United States, so we can transform `smoke_sf` to the Albers Equal Area projected coordinate system (EPSG code: 5070).
 
 ```{r}
@@ -873,15 +693,6 @@ smoke_sf <- st_transform(
   smoke_sf,
   5070
 )
-```
-
-```{r, echo = FALSE, eval = TRUE, results = FALSE}
-##### TEST CHUNK ####
-test_that("smoke_sf has been transformed to EPSG:5070.", {
-  smoke_sf_transform <- paste0(st_crs(smoke_sf)[1])
-  expect_equal(smoke_sf_transform, "EPSG:5070")
-})
-####################
 ```
 
 #### Plot (single)
@@ -928,14 +739,6 @@ smoke_sf_density <-
       day
     )
   )
-```
-
-```{r, echo = FALSE, eval = TRUE, results = FALSE}
-##### TEST CHUNK ####
-test_that("smoke_sf_density has 3 rows (one for each factor level).", {
-  expect_equal(nrow(smoke_sf_density), 3)
-})
-####################
 ```
 
 The resulting data set contains three multi-polygons, a column for the smoke plume classification, and a column for the date.
@@ -1023,30 +826,6 @@ list.files(paste0(wd, "states"))
 states <- st_read("/   YOUR FILE PATH   /cb_2018_us_state.shp")
 ```
 
-```{r, echo = FALSE, eval = TRUE, results = FALSE}
-##### TEST CHUNK ####
-test_that("State boundary shapefile exists.", {
-  files <- list.files(paste0(wd, "states"))
-  expect_in("cb_2018_us_state_500k.shp", files)
-})
-####################
-```
-
-```{r, echo = FALSE, eval = TRUE, results = FALSE}
-##### TEST CHUNK ####
-test_that("State boundary shapefile supports exists.", {
-  supports <- c(
-    "cb_2018_us_state_500k.cpg", "cb_2018_us_state_500k.dbf",
-    "cb_2018_us_state_500k..prj", "cb_2018_us_state_500k.shx",
-    "cb_2018_us_state_500k.shp.ea.iso.xml",
-    "cb_2018_us_state_500k.shp.iso.xml"
-  )
-  files <- list.files(paste0(wd, "states"))
-  expect_in("cb_2018_us_state_500k.shp", files)
-})
-####################
-```
-
 ```{r, include = FALSE}
 states_sf <- st_read(paste0(wd, "states/cb_2018_us_state_500k.shp"))
 ```
@@ -1078,17 +857,6 @@ conus_sf <- subset(
 )
 ```
 
-```{r, echo = FALSE, eval = TRUE, results = FALSE}
-##### TEST CHUNK ####
-test_that("Example map includes only coterminous states (and DC).", {
-  expect_equal(
-    length(conus_sf$NAME),
-    49
-  )
-})
-####################
-```
-
 Check the coordinate reference system.
 
 ```{r}
@@ -1109,15 +877,6 @@ conus_sf <- st_transform(
 )
 ```
 
-```{r, echo = FALSE, eval = TRUE, results = FALSE}
-##### TEST CHUNK ####
-test_that("conus_sf transformed to EPSG:5070.", {
-  conus_sf_crs <- paste0(st_crs(conus_sf)[1])
-  expect_equal(conus_sf_crs, "EPSG:5070")
-})
-####################
-```
-
 Plot the coterminous United States's state boundaries.
 
 ```{r}
@@ -1133,14 +892,6 @@ With the wildfire smoke plume and coterminous United States polygons imported an
 
 ```{r, warning = FALSE}
 st_crs(smoke_sf_density) == st_crs(conus_sf)
-```
-
-```{r, echo = FALSE, eval = TRUE, results = FALSE}
-##### TEST CHUNK ####
-test_that("conus_sf and smoke_sf_density have matching CRS.", {
-  expect_equal(st_crs(smoke_sf_density), st_crs(conus_sf))
-})
-####################
 ```
 
 Create a plot which shows the distribution of wildfire smoke plumes over the coterminous United States' state boundaries.
@@ -1240,14 +991,6 @@ The main parameter of interest in this data set is `$Density`, which discretely 
 class(smoke_t$Density)
 ```
 
-```{r, echo = FALSE, eval = TRUE, results = FALSE}
-##### TEST CHUNK ####
-test_that("smoke_t$Density is class character.", {
-  expect_equal(class(smoke_t$Density), "character")
-})
-####################
-```
-
 Nominal data, data without fixed order or rank system, can be stored as class character (ie. State names). However, it is best to store ordinal data as class factor for conducting analyses in R.
 
 Converting data from class character to class factor can be done with `factor()`. The `levels = c()` argument in the function specifies both the level names and the ranked order of the levels.
@@ -1256,15 +999,6 @@ Converting data from class character to class factor can be done with `factor()`
 smoke_t$Density <- factor(smoke_t$Density,
   levels = c("Light", "Medium", "Heavy")
 )
-```
-
-```{r, echo = FALSE, eval = TRUE, results = FALSE}
-##### TEST CHUNK ####
-test_that("smoke_t$Density properly factored.", {
-  expect_equal(class(smoke_t$Density), "factor")
-  expect_equal(levels(smoke_t$Density), c("Light", "Medium", "Heavy"))
-})
-####################
 ```
 
 Check the class of `$Density` again to ensure proper reclassification.
@@ -1290,17 +1024,6 @@ conus_t <- subset(
   states_t,
   !states_t$NAME %in% remove
 )
-```
-
-```{r, echo = FALSE, eval = TRUE, results = FALSE}
-##### TEST CHUNK ####
-test_that("Example map includes only coterminous states (and DC).", {
-  expect_equal(
-    length(conus_t$NAME),
-    49
-  )
-})
-####################
 ```
 
 #### Coordinate reference system and projection
@@ -1630,15 +1353,6 @@ narr <- rast(paste0(
 ))
 ```
 
-```{r, echo = FALSE, eval = TRUE, results = FALSE}
-##### TEST CHUNK ####
-test_that("narr_air2m_2021.nc file exists.", {
-  files <- list.files(paste0(wd, "narr"))
-  expect_in("narr_air2m_2021.nc", files)
-})
-####################
-```
-
 ```{r, echo = FALSE, warning = TRUE, cache = FALSE, results = 'hide'}
 narr <- rast(paste0(
   wd,
@@ -1656,30 +1370,12 @@ Inspect the structure of `narr` to see its class, dimensions, variables, and lay
 narr
 ```
 
-```{r, echo = FALSE, eval = TRUE, results = FALSE}
-##### TEST CHUNK ####
-test_that("narr is a SpatRaster.", {
-  expect_equal(class(narr)[1], "SpatRaster")
-})
-####################
-```
-
 When working with raster data, the dimensions of the raster refer to the number of rows (`nrow`) and columns (`ncol`) of grid cells that make up the raster. Similarly, the number of layers in the raster object (`nlyr`) represents the number of observations of the data. These can also be inspected individually with `nrow()`, `ncol()`, and `nlyr()`, respectively.
 
 ```{r}
 nrow(narr)
 ncol(narr)
 nlyr(narr)
-```
-
-```{r, echo = FALSE, eval = TRUE, results = FALSE}
-##### TEST CHUNK ####
-test_that("Dimensions of narr are correct.", {
-  expect_equal(nrow(narr), 277)
-  expect_equal(ncol(narr), 349)
-  expect_equal(nlyr(narr), 365)
-})
-####################
 ```
 
 ### Rename
@@ -1765,14 +1461,6 @@ Ensure that both data sets have the same coordinate reference system.
 
 ```{r}
 crs(conus_t) == crs(narr)
-```
-
-```{r, echo = FALSE, eval = TRUE, results = FALSE}
-##### TEST CHUNK ####
-test_that("conus_t and narr have same CRS.", {
-  expect_equal(crs(conus_t), crs(narr))
-})
-####################
 ```
 
 ### Plot (multiple)
@@ -1899,14 +1587,6 @@ conus_t$MEAN <- zonal(narr_crop_c$mean,
   conus_t,
   fun = "mean"
 )
-```
-
-```{r, echo = FALSE, eval = TRUE, results = FALSE}
-##### TEST CHUNK ####
-test_that("Temperature statistic for each state (and DC).", {
-  expect_equal(length(conus_t$MEAN), 49)
-})
-####################
 ```
 
 Plot the state-specific annual mean temperatures with `ggplot2::ggplot()`. Identifying the data set to be plotted within `geom_spatvector()` argument informs the function that the data is a `SpatVector` object.
