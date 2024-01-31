@@ -1,4 +1,4 @@
-# **Spatial Analysis with Environmental Data in R**
+# **Spatial Analysis with Environmental Data in R** {-}
 
 <font size ="5"> **Access, Import, and Primary Analyses** </font>
 
@@ -70,7 +70,7 @@ Various R packages can be used to create, import, analyze, and export spatial da
 Installing and importing new packages may required R to restart.
 :::
   
-```{r, warning = FALSE, message = FALSE, results = FALSE}
+```{r, eval = TRUE}
 vignette_packages <- c(
   "dplyr", "ggplot2", "ggpubr", "sf",
   "terra", "tidyterra", "utils"
@@ -124,6 +124,13 @@ download.file(
 )
 ```
 
+```{r, eval = FALSE}
+## trying URL 'https://aqs.epa.gov/aqsweb/airdata/daily_88101_2021.zip'
+## Content type 'application/zip' length 6683419 bytes (6.4 MB)
+## ==================================================
+## downloaded 6.4 MB
+```
+
 ```{r, include = FALSE, eval = FALSE}
 url_epa <- "https://aqs.epa.gov/aqsweb/airdata/daily_88101_2021.zip"
 destination_epa <- paste0(wd, "epa/epa_data.zip")
@@ -149,6 +156,7 @@ unzip("/   YOUR FILE PATH   /epa_data.zip",
 ```
 
 ```{r, echo = FALSE}
+wd <- "/Volumes/pcor_climate/Bookdown_tool/dataset/"
 unzip(paste0(wd, "epa/epa_data.zip"),
   list = TRUE
 )
@@ -320,7 +328,7 @@ ggplot() +
   grids()
 ```
 
-![](../images/11-intro-spatial/unnamed-chunk-30-1.pdf)
+![](images/11-intro-spatial/unnamed-chunk-30-1.pdf)
 
 The plot shows the distribution of monitoring locations, and roughly depicts the outline of the United States due to the large number of monitors. The plot does not, however, convey any information about the concentration of PM~2.5~ measured by each monitor. Inspect the summary statistics of the PM~2.5~ measurements before creating any plots to visualize the data.
 
