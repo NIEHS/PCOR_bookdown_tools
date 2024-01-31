@@ -1,8 +1,26 @@
 # **Test** {.unnumbered}
 
-
 ## Test css {.unnumbered}
 
-###This is a test page 
+###This is a test page
 
-add
+> **Note:** This is how you write a note.
+>
+> It can have multiple lines.
+
+
+> **Warning:** This is how you write a warning.
+>
+> It can have multiple paragraphs.
+
+> **Callout:** **This is how you write a callout.**
+>
+> It can have multiple paragraphs.
+
+
+<div class="note">
+Typing `search()` gives the list of attached packages. By using `fortunes::fortune()` we avoid adding the fortunes package to that list.
+</div>
+
+
+
