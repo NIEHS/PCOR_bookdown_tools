@@ -1,4 +1,5 @@
-![lint](https://github.com/NIEHS/PCOR_bookdown_tools/actions/workflows/lintr.yml/badge.svg?branch=manware_1025)
+[![lintr](https://github.com/NIEHS/PCOR_bookdown_tools/actions/workflows/lintr.yml/badge.svg?branch=manware_1025)](https://github.com/NIEHS/PCOR_bookdown_tools/actions/workflows/lintr.yml/badge.svg?branch=manware_1025)
+[![superlintr](https://github.com/NIEHS/PCOR_bookdown_tools/actions/workflows/superlintr.yml/badge.svg?branch=manware_1025)](https://github.com/NIEHS/PCOR_bookdown_tools/actions/workflows/superlintr.yml/badge.svg?branch=manware_1025)
 
 Welcome!
 
