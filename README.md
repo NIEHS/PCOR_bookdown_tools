@@ -1,4 +1,4 @@
-[![lint](https://github.com/NIEHS/PCOR_bookdown_tools/actions/workflows/lint.yml/badge.svg?branch=manware_1025)](https://github.com/NIEHS/PCOR_bookdown_tools/actions/workflows/lint.yml)
+![lint](https://github.com/NIEHS/PCOR_bookdown_tools/actions/workflows/lintr.yml/badge.svg?branch=manware_1025)
 
 Welcome!
 
