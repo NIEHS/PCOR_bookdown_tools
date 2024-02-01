@@ -2,7 +2,7 @@
 
 <font size ="5"> **Access, Import, and Primary Analyses** </font>
 
-**Date Modified:** January 11, 2024
+**Date Modified:** February 1, 2024
 
 **Author(s):** Mitchell Manware, Kyle P Messier
 
@@ -291,7 +291,7 @@ ggplot() +
   grids()
 ```
 
-![](images/11-intro-spatial/unnamed-chunk-30-1.pdf)
+<img src="images/intro_to_spatial/epa_monitors.png" width = "75%" height = "auto" class = "centerimage">
 
 The plot shows the distribution of monitoring locations, and roughly depicts the outline of the United States due to the large number of monitors. The plot does not, however, convey any information about the concentration of PM~2.5~ measured by each monitor. Inspect the summary statistics of the PM~2.5~ measurements before creating any plots to visualize the data.
 
@@ -325,6 +325,8 @@ ggplot(
   theme(plot.title = element_text(hjust = 0.5)) +
   grids()
 ```
+
+<img src="images/intro_to_spatial/pm_concentrations_histogram.png" width = "75%" height = "auto" class = "centerimage">
 
 ### Calculate annual mean
 
@@ -382,6 +384,8 @@ ggplot() +
   theme(plot.title = element_text(hjust = 0.5)) +
   grids()
 ```
+
+<img src="images/intro_to_spatial/epa_monitors_concentrations.png" width = "75%" height = "auto" class = "centerimage">
 
 Now the plot depicts both spatial and non-spatial data.
 
@@ -446,6 +450,8 @@ ggplot(
   theme(plot.title = element_text(hjust = 0.5))
 ```
 
+<img src="images/intro_to_spatial/min_max_monitors.png" width = "75%" height = "auto" class = "centerimage">
+
 Alternatively, the `ggplot2::geom_boxplot()` function compares the median, interquartile range, and outliers of the monitors' measurements.
 
 ```{r, eval = FALSE}
@@ -462,6 +468,8 @@ ggplot(
   ylab(expression("PM"[2.5] * " Concentrations (µg/m"^3 * ")")) +
   theme_pubr(legend = "none")
 ```
+
+<img src="images/intro_to_spatial/monitors_boxplot.png" width = "75%" height = "auto" class = "centerimage">
 
 ## Polygon Data
 
@@ -640,6 +648,8 @@ ggplot() +
   grids()
 ```
 
+<img src="images/intro_to_spatial/smoke_polygons_sf_original.png" width = "75%" height = "auto" class = "centerimage">
+
 The wildfire smoke plume polygons are clearly visible and colored according to their individual smoke density classification. This plot, however, is difficult to interpret for two reasons. First, there are multiple polygons for each smoke density classification. Multiple borders and overlapping polygons with the same smoke density type can be confusing. To make the polygons more clear, individual polygons for each smoke density classification can be combined.
 
 ::: {.warning}
@@ -687,6 +697,8 @@ ggplot() +
   theme(plot.title = element_text(hjust = 0.5)) +
   grids()
 ```
+
+<img src="images/intro_to_spatial/smoke_polygons_sf_unioned.png" width = "75%" height = "auto" class = "centerimage">
 
 The plot is still difficult to interpret because it lacks geospatial context. The grid lines provide latitude and longitude references, but physical or geopolitical boundaries can help show where the wildfire smoke plumes are relative to the study area of interest. To provide geospatial context to the wildfire smoke plume polygons, we can add the United States' state boundary polygons to the plot.
 
@@ -782,6 +794,8 @@ ggplot() +
   grids()
 ```
 
+<img src="images/intro_to_spatial/conus_sf_original.png" width = "75%" height = "auto" class = "centerimage">
+
 With the wildfire smoke plume and coterminous United States polygons imported and prepared, ensure that they have the same coordinate reference system.
 
 ```{r, eval = FALSE}
@@ -808,6 +822,8 @@ ggplot() +
   theme(plot.title = element_text(hjust = 0.5)) +
   grids()
 ```
+
+<img src="images/intro_to_spatial/smoke_polygons_sf_states.png" width = "75%" height = "auto" class = "centerimage">
 
 This plot provides important geospatial context for understanding where the wildfire smoke plumes are in relation to the study area of interest.
 
@@ -842,6 +858,8 @@ ggplot() +
   theme(plot.title = element_text(hjust = 0.5)) +
   grids()
 ```
+
+<img src="images/intro_to_spatial/smoke_polygons_sf_cropped.png" width = "75%" height = "auto" class = "centerimage">
 
 ### Polygon Data with `terra`
 
@@ -972,6 +990,8 @@ ggplot() +
   grids()
 ```
 
+<img src="images/intro_to_spatial/smoke_polygons_terra_original.png" width = "75%" height = "auto" class = "centerimage">
+
 The wildfire smoke plume polygons are clearly visible and colored according to their individual smoke density classification. The plot, however, is difficult to interpret because there are multiple polygons for each smoke density classification. Multiple borders and overlapping polygons with the same smoke density type can be confusing. To make the polygons more clear, individual polygons for each smoke density classification can be combined.
 
 ::: calloout-warning
@@ -1025,6 +1045,8 @@ ggplot() +
   grids()
 ```
 
+<img src="images/intro_to_spatial/smoke_polygons_terra_aggregated.png" width = "75%" height = "auto" class = "centerimage">
+
 #### Crop
 
 The `terra::crop()` function can be used to reduce `SpatVector` to an area determined by another `SpatVector`. In this example, we can crop the `smoke_t_density` polygons to the coterminous United States' state boundaries.
@@ -1060,6 +1082,8 @@ ggplot() +
     axis.text = element_blank()
   )
 ```
+
+<img src="images/intro_to_spatial/smoke_polygons_terra_cropped.png" width = "75%" height = "auto" class = "centerimage">
 
 #### Zonal statistics
 
@@ -1161,6 +1185,12 @@ for (d in seq_along(dens_c)) {
   )
 }
 ```
+
+<img src="images/intro_to_spatial/smoke_zonal_light.png" width = "50%" height = "auto" class = "centerimage">
+
+<img src="images/intro_to_spatial/smoke_zonal_medium.png" width = "50%" height = "auto" class = "centerimage">
+
+<img src="images/intro_to_spatial/smoke_zonal_heavy.png" width = "50%" height = "auto" class = "centerimage">
 
 ## Raster Data with `terra`
 
@@ -1346,6 +1376,8 @@ ggplot() +
   grids()
 ```
 
+<img src="images/intro_to_spatial/temp_raster_original.png" width = "75%" height = "auto" class = "centerimage">
+
 ### Crop
 
 The `terra::crop()` function can be used to reduce a `SpatRaster` to an area determined by `SpatVector` polygons. The `mask = TRUE` argument crops to the border of the polygons, whereas `mask = FALSE` crops to the bounding box surrounding the polygons. In this example, crop the `narr` data to the coterminous United States' state boundaries.
@@ -1383,6 +1415,8 @@ ggplot() +
     axis.text = element_blank()
   )
 ```
+
+<img src="images/intro_to_spatial/temp_raster_crop.png" width = "75%" height = "auto" class = "centerimage">
 
 ### Units
 
@@ -1434,6 +1468,8 @@ ggplot() +
   )
 ```
 
+<img src="images/intro_to_spatial/temp_raster_mean_range.png" width = "75%" height = "auto" class = "centerimage">
+
 ### Zonal statistics
 
 Looking closely at the previous plot, it is clear that the annual mean and range of temperatures differ between states. The `terra` package can be used to calculate zonal statistics of a `SpatRaster` object based on `SpatVector` polygons.
@@ -1469,6 +1505,8 @@ ggplot() +
     axis.text = element_blank()
   )
 ```
+
+<img src="images/intro_to_spatial/temp_raster_state_mean.png" width = "75%" height = "auto" class = "centerimage">
 
 ### Reclassify
 
@@ -1553,6 +1591,8 @@ ggplot() +
     axis.text = element_blank()
   )
 ```
+
+<img src="images/intro_to_spatial/temp_raster_reclass.png" width = "75%" height = "auto" class = "centerimage">
 
 ## Additional Resources
 

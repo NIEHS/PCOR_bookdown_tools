@@ -35,7 +35,7 @@ pre code {
 
 .warning {
   background-color: #f6f4d5; /* Light yellow background */
-  border-left: 5px solid #c4b72b; /* Dark blue border on the left */
+  border-left: 5px solid #c4b72b; /* Dark yellow border on the left */
   padding: 10px 10px 10px 40px; /* Padding inside the box */
   margin: 10px 0; /* Margin around the box */
   font-family: 'Arial', sans-serif; /* Font family */
@@ -54,8 +54,8 @@ pre code {
 }
 
 .important {
-  background-color: #fbd8db; /* Light yellow background */
-  border-left: 5px solid #c42b2b; /* Dark blue border on the left */
+  background-color: #ffe8e9; /* Light red background */
+  border-left: 5px solid #c42b2b; /* Dark red border on the left */
   padding: 10px 10px 10px 40px; /* Padding inside the box */
   margin: 10px 0; /* Margin around the box */
   font-family: 'Arial', sans-serif; /* Font family */
@@ -65,7 +65,7 @@ pre code {
 }
 
 .important::before {
-  content: '🚨'; /* Warning icon */
+  content: '🚨'; /* Siren icon */
   position: absolute; /* Absolute position relative to the note */
   left: 10px; /* Position from the left */
   top: 50%; /* Center vertically */
@@ -73,3 +73,8 @@ pre code {
   font-size: 20px; /* Size of the icon */
 }
 
+.centerimage {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
