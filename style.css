@@ -28,7 +28,7 @@ pre code {
 }
 
 .note::before {
-  content: 'ℹ️'; /* Information icon */
+  content: "ℹ️"; /* Information icon */
   position: absolute; /* Absolute position relative to the note */
   left: 10px; /* Position from the left */
   top: 50%; /* Center vertically */
@@ -48,7 +48,7 @@ pre code {
 }
 
 .warning::before {
-  content: '⚠️'; /* Warning icon */
+  content: "⚠️"; /* Warning icon */
   position: absolute; /* Absolute position relative to the note */
   left: 10px; /* Position from the left */
   top: 50%; /* Center vertically */
@@ -68,7 +68,7 @@ pre code {
 }
 
 .important::before {
-  content: '🚨'; /* Siren icon */
+  content: "🚨"; /* Siren icon */
   position: absolute; /* Absolute position relative to the note */
   left: 10px; /* Position from the left */
   top: 50%; /* Center vertically */
