@@ -43,27 +43,25 @@ The output file will contain one row per day between start_date and end_date for
 install packages
 
 ```{r}
-if(!require('shiny') || !require('tidycensus')  || !require('tidyverse') || !require('viridis')) {
-  install.packages(c("shiny","tidycensus","tidyverse","viridis"))
- 
+if (!require("shiny") ||
+      !require("tidycensus") ||
+      !require("tidyverse") ||
+      !require("viridis")) {
+  install.packages(c("shiny", "tidycensus", "tidyverse", "viridis"))
 }
-if(!require('plotly')){
+if (!require("plotly")) {
   install.packages("plotly", type = "source")
 }
-
 ```
 
 ```{r }
-if(!require('ggplot2')) {
-  install.packages('ggplot2')
-  install.packages(c("maps","ggmap"))
-  
+if (!require("ggplot2")) {
+  install.packages("ggplot2")
+  install.packages(c("maps", "ggmap"))
 }
-if(!require('maps') || !require('ggmap')) {
-  install.packages(c("maps","ggmap"))
-  
+if (!require("maps") || !require("ggmap")) {
+  install.packages(c("maps", "ggmap"))
 }
-
 ```
 
 Note that the echo = FALSE parameter was added to the code chunk to prevent printing of the R code that generated the plot. 
@@ -75,22 +73,22 @@ library(tidyverse)
 library(viridis)
 library(shiny)
 library(plotly)
-#Only load the census key at the first time. then we set install=true 
-#census_api_key( install=TRUE)
+# Only load the census key at the first time. then we set install=true
+first <- FALSE
+if (first == TRUE) {
+  census_api_key(install = TRUE)
+}
 options(tigris_use_cache = TRUE)
-
 ```
 
 ```{R}
 library(readr)
-df <- read_csv("./dataset/ms_patient_pm_census_v2.csv",show_col_types = FALSE)
-
+df <- read_csv("./dataset/ms_patient_pm_census_v2.csv", show_col_types = FALSE)
 ```
 
 ```{r}
 dim(df)
 colnames(df)
-
 ```
 
 ### use case:
@@ -108,23 +106,25 @@ colnames(df)
 Create a character vector named income_code containing eight elements. Each element represents a variable code related to income.
 
 ```{R}
-income_code <- c("C17002_001","C17002_002","C17002_003","C17002_004","C17002_005","C17002_006",
-                 "C17002_007", "C17002_008")
-   #Assign the result of the get_acs function to the variable tarr. The function retrieves 
-#American Community Survey (ACS) data for the     specified geography (tract), variables 
-#(the income_code vector), state (Massachusetts with state code 25), geometry (TRUE to 
-#include spatial information), survey ("acs5"), and year (2012).
+income_code <- c(
+  "C17002_001", "C17002_002", "C17002_003", "C17002_004", "C17002_005", "C17002_006",
+  "C17002_007", "C17002_008"
+)
+# Assign the result of the get_acs function to the variable tarr. The function retrieves
+# American Community Survey (ACS) data for the     specified geography (tract), variables
+# (the income_code vector), state (Massachusetts with state code 25), geometry (TRUE to
+# include spatial information), survey ("acs5"), and year (2012).
 
-tarr <- get_acs(geography = "tract", variables = income_code,
-                state = 25,  geometry = FALSE,survey = "acs5", year = 2012) 
-                
-#Write the census income data into csv file 
-#modify if (FALSE) to if (TRUE) if you run the first time
+tarr <- get_acs(
+  geography = "tract", variables = income_code,
+  state = 25, geometry = FALSE, survey = "acs5", year = 2012
+)
+
+# Write the census income data into csv file
+# modify if (FALSE) to if (TRUE) if you run the first time
 if (FALSE) {
-write.csv(tarr,"./dataset/income_MA_mult_incomes.csv")
+  write.csv(tarr, "./dataset/income_MA_mult_incomes.csv")
 }
-
-
 ```
 
 9.  tarr column name : • Id -- census track id • geoid, • name, • variable, • estimate, • moe
@@ -136,7 +136,6 @@ write.csv(tarr,"./dataset/income_MA_mult_incomes.csv")
 ```{r}
 dim(tarr)
 colnames(tarr)
-
 ```
 
 ### Join the dataframes by the census track id
@@ -147,79 +146,94 @@ Join these two data frames
 
 ```{r}
 library(dplyr)
-
-#merged_frame <- df %>%
-#  mutate(census_tract_id_2010 = as.character(census_tract_id_2010)) %>%
-#  inner_join(tarr, by = c("GEOID" = "census_tract_id_2010"))
-#left join produce the same result as inner_join
-left_merged_frame <- df %>%
-  mutate(census_tract_id_2010 = as.character(census_tract_id_2010)) %>%
-  left_join(tarr, by = c("census_tract_id_2010" = "GEOID" ))
-
-#Write the merged frame data into csv file 
-#modify if (FALSE) to if (TRUE) if you run the first time
-if (FALSE) {
-write.csv(left_merged_frame,"./dataset/merged_income_MA_mult_incomes.csv")
+merge <- FALSE
+if (merge == TRUE) {
+  merged_frame <- df %>%
+    mutate(census_tract_id_2010 = as.character(census_tract_id_2010)) %>%
+    inner_join(tarr, by = c("GEOID" = "census_tract_id_2010"))
 }
 
+# left join produce the same result as inner_join
+left_merged_frame <- df %>%
+  mutate(census_tract_id_2010 = as.character(census_tract_id_2010)) %>%
+  left_join(tarr, by = c("census_tract_id_2010" = "GEOID"))
+
+# Write the merged frame data into csv file
+# modify if (FALSE) to if (TRUE) if you run the first time
+if (FALSE) {
+  write.csv(left_merged_frame, "./dataset/merged_income_MA_mult_incomes.csv")
+}
 ```
 
 ```{r}
 library(dplyr)
-
-
 ```
 
 ## The county with hightest income in MA by sensus data 2020 {-}
 
 ```{r}
 # Fetch ACS data for Massachusetts counties
-ma_counties <- get_acs(geography = "county", variables = "B19013_001", state = "MA", year = 2020)
+ma_counties <- get_acs(
+  geography = "county",
+  variables = "B19013_001",
+  state = "MA",
+  year = 2020
+)
 
 # Sort the data by median household income in descending order
-ma_counties_sorted <- ma_counties %>% 
+ma_counties_sorted <- ma_counties %>%
   arrange(desc(estimate))
 
 # Extract the county with the highest income
 highest_income_county <- ma_counties_sorted$NAME[1]
 
 # Print the county with the highest income
-cat("The county with the highest income in Massachusetts is:", highest_income_county)
+cat("The county with the highest income in Massachusetts is:",
+    highest_income_county)
 ```
 ### install packages for the plot
 
 ```{r}
-if(!require('maps') || !require('ggmap')) {
-  install.packages(c("maps","ggmap"))
+if (!require("maps") || !require("ggmap")) {
+  install.packages(c("maps", "ggmap"))
   library(maps)
   library(ggmap)
 }
 library(ggplot2)
-
 ```
 ```{r}
 colnames(left_merged_frame)
-
 ```
 ### Draw a map with patients and income in color
 ```{r}
-# Draw Massachusetts map 
+# Draw Massachusetts map
 ma_map <- map_data("state", region = "massachusetts")
-#modify column's name
-colnames(left_merged_frame)[which(names(left_merged_frame) == "lon")] <- "longitude"
-colnames(left_merged_frame)[which(names(left_merged_frame) =="lat")] <- "latitude"
+# modify column's name
+colnames(left_merged_frame)[which(names(left_merged_frame) == "lon")] <-
+  "longitude"
+colnames(left_merged_frame)[which(names(left_merged_frame) == "lat")] <-
+  "latitude"
 
-#Optional Filter the rows based on the date range Use the subset() function to
-#filter the rows based on the date range:2012 -2017to match 5 year sensus data
+# Optional Filter the rows based on the date range Use the subset() function to
+# filter the rows based on the date range:2012 -2017to match 5 year sensus data
 
-filtered_df <- subset(left_merged_frame, date >= as.Date("2012-09-01") & date <= as.Date("2017-09-01"))
+filtered_df <- subset(
+  left_merged_frame,
+  date >= as.Date("2012-09-01") & date <= as.Date("2017-09-01")
+)
 
 # Create a base plot for Massachusetts
 p <- ggplot() +
-  geom_polygon(data = ma_map, aes(x = long, y = lat, group = group),
-               fill = "lightgray", color = "black") +
+  geom_polygon(
+    data = ma_map, aes(x = long, y = lat, group = group),
+    fill = "lightgray", color = "black"
+  ) +
   # Plot the data points
-  geom_point(data = filtered_df, aes(x = longitude, y = latitude, color = estimate), size = 3) +
+  geom_point(
+    data = filtered_df,
+    aes(x = longitude, y = latitude, color = estimate),
+    size = 3
+  ) +
   labs(title = "Income vs patient Map", x = "Longitude", y = "Latitude") +
   scale_color_gradient(low = "blue", high = "red", name = "estimate") +
   theme_minimal() +
@@ -228,7 +242,6 @@ p <- ggplot() +
 
 # Print the map
 print(p)
-
 ```
 
 

@@ -7,17 +7,16 @@ script_npl_proximity_for_points_V2.R
 ### Load Libraries
 
 ```{R Libraries,eval=FALSE}
-#load libraries
+# load libraries
 library(tidyverse)
 library(logr)
 library(sf)
-
 ```
 
 ### Load Scripts
 
 ```{R scripts, eval=FALSE}
-#load scripts
+# load scripts
 source("./script_npl_proximity_for_points_V2.R")
 source("./functions/npl_proximity_points_logging.R")
 source("./functions/npl_proximity_points_input_validation.R")
@@ -28,7 +27,6 @@ source("./functions/check_point_receptor_near_border.R")
 source("./functions/nearest_distance_to_point_source_for_point_receptor.R")
 source("./functions/npl_proximity_points_summary_metrics.R")
 source("./functions/summary_of_point_sources_in_buffer_of_point_receptor.R")
-
 ```
 
 ### Setting Parameters:
@@ -50,27 +48,24 @@ source("./functions/summary_of_point_sources_in_buffer_of_point_receptor.R")
 ### Invok r script (sample)
 
 ```{R, eval=FALSE}
-
- npl_proximity_metrics_v2 <- 
-   get_npl_facility_proximity_for_points_V2(
-     receptor_filepath = "./input/input_receptor.csv", 
-     source_npl_facilities_filepath ="./input/epa-national-priorities-list-ciesin-mod-v2-2014.xls",
-     us_borders_filepath ="./input/input_us_borders.rds",
-     p_NPL_Status = 'Deleted from the Final NPL',
-     npl_year = '2017-10-01',
-     start_year = 1985,
-     end_year = 2020,
-     time_option = 'single_year_only'  
-     )
-
+npl_proximity_metrics_v2 <-
+  get_npl_facility_proximity_for_points_V2(
+    receptor_filepath = "./input/input_receptor.csv",
+    source_npl_facilities_filepath = "./input/epa-national-priorities-list-ciesin-mod-v2-2014.xls",
+    us_borders_filepath = "./input/input_us_borders.rds",
+    p_NPL_Status = "Deleted from the Final NPL",
+    npl_year = "2017-10-01",
+    start_year = 1985,
+    end_year = 2020,
+    time_option = "single_year_only"
+  )
 ```
 
 ### Results Output
 
 ```{R output,eval=FALSE}
 # Write exposures to CSV
-readr::write_csv(npl_proximity_metrics_v2, 
-                 file ="./output/output_npl_proximity_metrics_V2.csv")
-
-
+readr::write_csv(npl_proximity_metrics_v2,
+  file = "./output/output_npl_proximity_metrics_V2.csv"
+)
 ```

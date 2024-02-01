@@ -114,7 +114,7 @@ The following code installs and loads the packages used in this tutorial:
 install.packages(c("sf", "tidyverse", "tigris", "tmap"))
 
 # load required packages
-library(sf) 
+library(sf)
 library(tidyverse)
 library(tigris)
 library(tmap)
@@ -128,9 +128,29 @@ For this tutorial, we will use sample public data to represent geocoded addresse
 
 ```{r eval = FALSE}
 # create a table of sample public geocoded addresses
-geo_addresses_tbl <- tibble( id = c("01-charlotte", "02-raleigh","03-greensboro", "04-durham", "05-winston-salem"),
-                             latitude = c(35.21599030178876, 35.78019493350421, 36.07391214865624, 35.99607916214782, 36.09512361249636),
-                             longitude = c(-80.80170873958926, -78.64278743612566, -79.7883534467845, -78.89907326845271, -80.24283630316438))
+geo_addresses_tbl <- tibble(
+  id = c(
+    "01-charlotte",
+    "02-raleigh",
+    "03-greensboro",
+    "04-durham",
+    "05-winston-salem"
+  ),
+  latitude = c(
+    35.21599030178876,
+    35.78019493350421,
+    36.07391214865624,
+    35.99607916214782,
+    36.09512361249636
+  ),
+  longitude = c(
+    -80.80170873958926,
+    -78.64278743612566,
+    -79.7883534467845,
+    -78.89907326845271,
+    -80.24283630316438
+  )
+)
 
 # view the table
 print(geo_addresses_tbl)
@@ -140,13 +160,13 @@ Here is the table produced by the code above:
 
 ```{r eval = FALSE}
 # A tibble: 5 × 3
-  id               latitude longitude
-  <chr>               <dbl>     <dbl>
-1 01-charlotte         35.2     -80.8
-2 02-raleigh           35.8     -78.6
-3 03-greensboro        36.1     -79.8
-4 04-durham            36.0     -78.9
-5 05-winston-salem     36.1     -80.2
+#   id               latitude longitude
+#   <chr>               <dbl>     <dbl>
+# 1 01-charlotte         35.2     -80.8
+# 2 02-raleigh           35.8     -78.6
+# 3 03-greensboro        36.1     -79.8
+# 4 04-durham            36.0     -78.9
+# 5 05-winston-salem     36.1     -80.2
 ```
 
 Next, we'll transform this table to an explicitly spatial data type: [simple features (sf)](https://r-spatial.github.io/sf/articles/sf1.html). This will allow us to use the point locations for spatial analysis using the `sf` package in `R`.
@@ -169,9 +189,10 @@ The following code transforms the table of city hall locations to a simple featu
 
 ```{r eval = FALSE}
 # transform table to simple features
-geo_addresses_sf <- sf::st_as_sf(geo_addresses_tbl, 
-                                 coords = c('longitude','latitude'), 
-                                 crs = "EPSG:4326")
+geo_addresses_sf <- sf::st_as_sf(geo_addresses_tbl,
+  coords = c("longitude", "latitude"),
+  crs = "EPSG:4326"
+)
 
 # view simple features
 print(geo_addresses_sf)
@@ -180,19 +201,19 @@ print(geo_addresses_sf)
 Here is the description of the simple features object produced by the code above:
 
 ```{r eval = FALSE}
-Simple feature collection with 5 features and 1 field
-Geometry type: POINT
-Dimension:     XY
-Bounding box:  xmin: -80.80171 ymin: 35.21599 xmax: -78.64279 ymax: 36.09512
-Geodetic CRS:  WGS 84
-# A tibble: 5 × 2
-  id                           geometry
-* <chr>                     <POINT [°]>
-1 01-charlotte     (-80.80171 35.21599)
-2 02-raleigh       (-78.64279 35.78019)
-3 03-greensboro    (-79.78835 36.07391)
-4 04-durham        (-78.89907 35.99608)
-5 05-winston-salem (-80.24284 36.09512)
+# Simple feature collection with 5 features and 1 field
+# Geometry type: POINT
+# Dimension:     XY
+# Bounding box:  xmin: -80.80171 ymin: 35.21599 xmax: -78.64279 ymax: 36.09512
+# Geodetic CRS:  WGS 84
+# # A tibble: 5 × 2
+#   id                           geometry
+# * <chr>                     <POINT [°]>
+# 1 01-charlotte     (-80.80171 35.21599)
+# 2 02-raleigh       (-78.64279 35.78019)
+# 3 03-greensboro    (-79.78835 36.07391)
+# 4 04-durham        (-78.89907 35.99608)
+# 5 05-winston-salem (-80.24284 36.09512)
 ```
 
 Now, we can see that each city hall has associated `geometry` in point format. We can also confirm that the correct CRS (`WGS84`) is now associated with the city hall locations.
@@ -212,25 +233,26 @@ head(nc_tracts_2010_sf)
 Here is the description of the simple features object produced by the code above:
 
 ```{r eval = FALSE}
-Simple feature collection with 6 features and 14 fields
-Geometry type: MULTIPOLYGON
-Dimension:     XY
-Bounding box:  xmin: -80.07571 ymin: 34.80499 xmax: -79.45918 ymax: 35.18342
-Geodetic CRS:  NAD83
-  STATEFP10 COUNTYFP10 TRACTCE10     GEOID10 NAME10        NAMELSAD10 MTFCC10 FUNCSTAT10   ALAND10 AWATER10  INTPTLAT10   INTPTLON10
-1        37        153    970100 37153970100   9701 Census Tract 9701   G5020          S 246281647  2106825 +35.0503203 -079.6180454
-2        37        153    970200 37153970200   9702 Census Tract 9702   G5020          S 457736198  7835811 +35.0967892 -079.8225512
-3        37        153    970800 37153970800   9708 Census Tract 9708   G5020          S 139358521  2752112 +34.8508484 -079.8201950
-4        37        153    970900 37153970900   9709 Census Tract 9709   G5020          S  23311020    78240 +34.8785679 -079.7346295
-5        37        153    971000 37153971000   9710 Census Tract 9710   G5020          S  49233222   188190 +34.9395795 -079.6628977
-6        37        153    971100 37153971100   9711 Census Tract 9711   G5020          S 161136716   948938 +34.8751742 -079.6567146
-                        geometry COUNTYFP STATEFP
-1 MULTIPOLYGON (((-79.56729 3...      153      37
-2 MULTIPOLYGON (((-79.71753 3...      153      37
-3 MULTIPOLYGON (((-79.76773 3...      153      37
-4 MULTIPOLYGON (((-79.76773 3...      153      37
-5 MULTIPOLYGON (((-79.69038 3...      153      37
-6 MULTIPOLYGON (((-79.5684 34...      153      37
+# nolint start
+# Simple feature collection with 6 features and 14 fields
+# Geometry type: MULTIPOLYGON
+# Dimension:     XY
+# Bounding box:  xmin: -80.07571 ymin: 34.80499 xmax: -79.45918 ymax: 35.18342
+# Geodetic CRS:  NAD83
+#   STATEFP10 COUNTYFP10 TRACTCE10     GEOID10 NAME10        NAMELSAD10 MTFCC10 FUNCSTAT10   ALAND10 AWATER10  INTPTLAT10   INTPTLON10
+# 1        37        153    970100 37153970100   9701 Census Tract 9701   G5020          S 246281647  2106825 +35.0503203 -079.6180454
+# 2        37        153    970200 37153970200   9702 Census Tract 9702   G5020          S 457736198  7835811 +35.0967892 -079.8225512
+# 3        37        153    970800 37153970800   9708 Census Tract 9708   G5020          S 139358521  2752112 +34.8508484 -079.8201950
+# 4        37        153    970900 37153970900   9709 Census Tract 9709   G5020          S  23311020    78240 +34.8785679 -079.7346295
+# 5        37        153    971000 37153971000   9710 Census Tract 9710   G5020          S  49233222   188190 +34.9395795 -079.6628977
+# 6        37        153    971100 37153971100   9711 Census Tract 9711   G5020          S 161136716   948938 +34.8751742 -079.6567146
+#                         geometry COUNTYFP STATEFP
+# 1 MULTIPOLYGON (((-79.56729 3...      153      37
+# 2 MULTIPOLYGON (((-79.71753 3...      153      37
+# 3 MULTIPOLYGON (((-79.76773 3...      153      37
+# 4 MULTIPOLYGON (((-79.76773 3...      153      37
+# 5 MULTIPOLYGON (((-79.69038 3...      153      37
+# 6 MULTIPOLYGON (((-79.5684 34...      153      37
 ```
 
 Each tract has associated `geometry` in polygon format plus 14 additional attributes (i.e., variables, columns). Importantly, the Census tract geoid (i.e., [11-digit identifying code](#intro-census-geoids)) for year-2010 is stored in the column `GEOID10`.
@@ -241,8 +263,8 @@ Next, we can view the geometry of the tracts by creating a map:
 
 ```{r eval = FALSE}
 # create a map of the Census tracts
-nc_tracts_2010_map <- tmap::tm_shape(nc_tracts_2010_sf) + 
-                      tmap::tm_polygons(lwd = 0.5)
+nc_tracts_2010_map <- tmap::tm_shape(nc_tracts_2010_sf) +
+  tmap::tm_polygons(lwd = 0.5)
 
 # view the map
 print(nc_tracts_2010_map)
@@ -264,15 +286,18 @@ The third step is to link each geocoded addresses to the geoid of the Census geo
 
 ```{r eval = FALSE}
 # transform city hall locations to match CRS of Census tracts
-geo_addresses_crs_sf <- sf::st_transform(geo_addresses_sf, 
-                                         crs = sf::st_crs(nc_tracts_2010_sf))
+geo_addresses_crs_sf <- sf::st_transform(geo_addresses_sf,
+  crs = sf::st_crs(nc_tracts_2010_sf)
+)
 
 # create a map of the Census tracts with the city hall locations
-linkage_map <- tmap::tm_shape(nc_tracts_2010_sf) + 
-               tmap::tm_polygons(lwd = 0.5) +
-               tmap::tm_shape(geo_addresses_crs_sf) +
-               tmap::tm_dots(col = "red",
-                             size = 0.25)
+linkage_map <- tmap::tm_shape(nc_tracts_2010_sf) +
+  tmap::tm_polygons(lwd = 0.5) +
+  tmap::tm_shape(geo_addresses_crs_sf) +
+  tmap::tm_dots(
+    col = "red",
+    size = 0.25
+  )
 
 # view the map
 print(linkage_map)
@@ -304,13 +329,13 @@ print(geo_addresses_linkage_tbl)
 
 ```{r eval = FALSE}
 # A tibble: 5 × 2
-  id               geoid_tract_2010
-  <chr>            <chr>           
-1 01-charlotte     37119001100     
-2 02-raleigh       37183050100     
-3 03-greensboro    37081010800     
-4 04-durham        37063002200     
-5 05-winston-salem 37067000100     
+#   id               geoid_tract_2010
+#   <chr>            <chr>
+# 1 01-charlotte     37119001100
+# 2 02-raleigh       37183050100
+# 3 03-greensboro    37081010800
+# 4 04-durham        37063002200
+# 5 05-winston-salem 37067000100
 ```
 
 ### Step 4. Link AHRQ SDOH data to geocoded addresses {#step-4}
@@ -355,19 +380,19 @@ download.file(sdoh_tracts_2010_url, destfile = "sdoh_2010_tract_1_0.xlsx")
 sdoh_tracts_2010_tbl <- readxl::read_xlsx("sdoh_2010_tract_1_0.xlsx", sheet = "Data")
 
 # view the table
-head(sdoh_tracts_2010)  
+head(sdoh_tracts_2010)
 ```
 
 ```{r eval = FALSE}
 # A tibble: 6 × 355
-   YEAR TRACTFIPS   COUNTYFIPS STATEFIPS STATE   COUNTY         REGION TERRITORY ACS_TOT_POP_WT ACS_TOT_POP_US_ABOVE1 ACS_TOT_POP_ABOVE5 ACS_TOT_POP_ABOVE15
-  <dbl> <chr>       <chr>      <chr>     <chr>   <chr>          <chr>      <dbl>          <dbl>                 <dbl>              <dbl>               <dbl>
-1  2010 01001020100 01001      01        Alabama Autauga County South          0           1809                  1800               1705                1439
-2  2010 01001020200 01001      01        Alabama Autauga County South          0           2020                  1978               1890                1575
-3  2010 01001020300 01001      01        Alabama Autauga County South          0           3543                  3505               3365                2710
-4  2010 01001020400 01001      01        Alabama Autauga County South          0           4840                  4783               4537                3883
-5  2010 01001020500 01001      01        Alabama Autauga County South          0           9938                  9876               9297                7589
-6  2010 01001020600 01001      01        Alabama Autauga County South          0           3402                  3368               3254                2724
+#    YEAR TRACTFIPS   COUNTYFIPS STATEFIPS STATE   COUNTY         REGION TERRITORY ACS_TOT_POP_WT ACS_TOT_POP_US_ABOVE1 ACS_TOT_POP_ABOVE5 ACS_TOT_POP_ABOVE15
+#   <dbl> <chr>       <chr>      <chr>     <chr>   <chr>          <chr>      <dbl>          <dbl>                 <dbl>              <dbl>               <dbl>
+# 1  2010 01001020100 01001      01        Alabama Autauga County South          0           1809                  1800               1705                1439
+# 2  2010 01001020200 01001      01        Alabama Autauga County South          0           2020                  1978               1890                1575
+# 3  2010 01001020300 01001      01        Alabama Autauga County South          0           3543                  3505               3365                2710
+# 4  2010 01001020400 01001      01        Alabama Autauga County South          0           4840                  4783               4537                3883
+# 5  2010 01001020500 01001      01        Alabama Autauga County South          0           9938                  9876               9297                7589
+# 6  2010 01001020600 01001      01        Alabama Autauga County South          0           3402                  3368               3254                2724
 # ℹ 343 more variables: ACS_TOT_POP_ABOVE16 <dbl>, ACS_TOT_POP_16_19 <dbl>, ACS_TOT_POP_ABOVE25 <dbl>, ACS_TOT_CIVIL_POP_ABOVE18 <dbl>,
 #   ACS_TOT_CIVIL_VET_POP_ABOVE25 <dbl>, ACS_TOT_OWN_CHILD_BELOW17 <dbl>, ACS_TOT_CIVILIAN_LABOR <dbl>, ACS_TOT_CIVIL_EMPLOY_POP <dbl>,
 #   ACS_TOT_WORKER_HH <dbl>, ACS_TOT_WORKER_NWFH <dbl>, ACS_TOT_POP_POV <dbl>, ACS_TOT_GRANDCHILDREN_GP <dbl>, ACS_TOT_HU <dbl>, ACS_TOT_HH <dbl>,
@@ -397,9 +422,9 @@ The following code joins those SDOH data variables to the geocoded addresses bas
 ```{r eval = FALSE}
 # rename geoid in SDOH table to match the geoid in the geocoded addresses table
 # select the SDOH variables of interest
-sdoh_tracts_2010_tbl <- sdoh_tracts_2010_tbl %>% 
-                        dplyr::rename(geoid_tract_2010 = TRACTFIPS) %>%
-                        dplyr::select(geoid_tract_2010, ACS_PCT_INC50, POS_DIST_ED_TRACT, ACS_PCT_HU_NO_VEH)
+sdoh_tracts_2010_tbl <- sdoh_tracts_2010_tbl %>%
+  dplyr::rename(geoid_tract_2010 = TRACTFIPS) %>%
+  dplyr::select(geoid_tract_2010, ACS_PCT_INC50, POS_DIST_ED_TRACT, ACS_PCT_HU_NO_VEH)
 
 # join the SDOH table to the geocoded addresses based on geoid
 geo_addresses_sdoh_tbl <- dplyr::left_join(geo_addresses_linkage_tbl, sdoh_tracts_2010_tbl, by = "geoid_tract_2010")
@@ -410,13 +435,14 @@ print(geo_addresses_sdoh_tbl)
 
 ```{r eval = FALSE}
 # A tibble: 5 × 5
-  id               geoid_tract_2010 ACS_PCT_INC50 POS_DIST_ED_TRACT ACS_PCT_HU_NO_VEH
-  <chr>            <chr>                    <dbl>             <dbl>             <dbl>
-1 01-charlotte     37119001100               3.68              0.85              7.24
-2 02-raleigh       37183050100               6.77              2.8              25.5 
-3 03-greensboro    37081010800               6.16              0.99             16.4 
-4 04-durham        37063002200              25.9               2.62              7.63
-5 05-winston-salem 37067000100               9.01              3.35             16.5 
+#   id               geoid_tract_2010 ACS_PCT_INC50 POS_DIST_ED_TRACT ACS_PCT_HU_NO_VEH
+#   <chr>            <chr>                    <dbl>             <dbl>             <dbl>
+# 1 01-charlotte     37119001100               3.68              0.85              7.24
+# 2 02-raleigh       37183050100               6.77              2.8              25.5
+# 3 03-greensboro    37081010800               6.16              0.99             16.4
+# 4 04-durham        37063002200              25.9               2.62              7.63
+# 5 05-winston-salem 37067000100               9.01              3.35             16.5
+# nolint end
 ```
 
 Now, we have a linked table of geocoded addresses (by individual id) linked to the SDOH data.

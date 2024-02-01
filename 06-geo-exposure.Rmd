@@ -152,18 +152,20 @@ library(sf)
 source("/set/file/path/to/script_major_road_proximity_for_points.R")
 
 # Get proximity-based exposures
-major_road_proximity_metrics <- 
+major_road_proximity_metrics <-
   get_major_road_proximity_for_points(
-    receptor_filepath = "/set/file/path/to/input_receptor.csv", 
+    receptor_filepath = "/set/file/path/to/input_receptor.csv",
     source_major_roads_filepath =
-      "/set/file/path/to/input_source_major_roads.rds",
+    "/set/file/path/to/input_source_major_roads.rds",
     us_borders_filepath =
-      "/set/file/path/to/input_us_borders.rds",
-    road_class_selection = "highway")
+    "/set/file/path/to/input_us_borders.rds",
+    road_class_selection = "highway"
+  )
 
 # Write exposures to CSV
-readr::write_csv(major_road_proximity_metrics, 
-                 file ="/set/file/path/to/output_major_road_proximity_metrics.csv")
+readr::write_csv(major_road_proximity_metrics,
+  file = "/set/file/path/to/output_major_road_proximity_metrics.csv"
+)
 ```
 
 **Example 2: RStudio with ````here```` package**  
@@ -185,16 +187,18 @@ here::i_am("script_major_road_proximity_for_points.R")
 source(here::here("script_major_road_proximity_for_points.R"))
 
 # Get exposures
-major_road_proximity_metrics <- 
+major_road_proximity_metrics <-
   get_major_road_proximity_for_points(
-    receptor_filepath = here("input_receptor.csv"), 
+    receptor_filepath = here("input_receptor.csv"),
     source_major_roads_filepath = here("input_source_major_roads.rds"),
     us_borders_filepath = here("input_us_borders.rds"),
-    road_class_selection = "highway")
+    road_class_selection = "highway"
+  )
 
 # Write exposures to CSV
-readr::write_csv(major_road_proximity_metrics, 
-                 file = here("output_major_road_proximity_metrics.csv"))
+readr::write_csv(major_road_proximity_metrics,
+  file = here("output_major_road_proximity_metrics.csv")
+)
 ```
 
 &nbsp;   
@@ -257,9 +261,7 @@ Homeland Infrastructure Foundation-Level Data (HIFLD) Geoplatform. *Mexico and U
 
 
 ```{r child="06-geo-exposure-b.Rmd", echo=FALSE}
- 
 ```
 ```{r child="06-geo-exposure-c.Rmd", echo=FALSE}
- 
 ```
  
