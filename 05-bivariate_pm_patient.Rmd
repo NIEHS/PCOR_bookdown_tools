@@ -1,6 +1,6 @@
-# **Bivariate maps** {-}
+# **Bivariate maps** {.unnumbered}
 
-## PM 2.5 Bivariate map{-}
+## PM 2.5 Bivariate map {.unnumbered}
 
 ### Set up bivariate color classes
 
@@ -15,8 +15,7 @@ require(pals) # brewer.blues, stevens.pinkgreen
 
 ```
 
-
-From asthma_patients_pm_2\_census_block_group_0.6.0_2010.csv run python biv_cho_map.py call fcc api to get county FIPS and Name for each patient <https://geo.fcc.gov/api/census/#!/block/get_block_find> new data fileasthma_patients_pm_2\_census_block_group_0.6.0_2010.csv
+From asthma_patients_pm_2_census_block_group_0.6.0_2010.csv run python biv_cho_map.py call fcc api to get county FIPS and Name for each patient <https://geo.fcc.gov/api/census/#!/block/get_block_find> new data fileasthma_patients_pm_2_census_block_group_0.6.0_2010.csv
 
 ```{R}
 library(readr)
@@ -54,7 +53,9 @@ df_agg <- df_county %>%
             pm2_mean = mean(pm_pred, na.rm = TRUE))
 
 ```
-### Join Census with Massachusetts map 
+
+### Join Census with Massachusetts map
+
 ```{R}
 dim(df_agg)
 ma_counties_data <- us_counties_MA %>% left_join(df_agg, by = c('NAMELSAD'='county_name'))
@@ -72,7 +73,9 @@ head(ma_counties_data)
  #   labs(fill = "Patient count")
 
 ```
-### Set color on both varaibles 
+
+### Set color on both varaibles
+
 ```{r}
 cols <- stevens.pinkgreen; nbins <- 3
 
@@ -104,6 +107,7 @@ plot(log(pm2_mean) ~ log(patient_count), data=ma_counties_data,
 ```
 
 ### Draw a state map with pm-patient
+
 ```{r}
 # Check for missing values
 #sum(is.na(ma_counties_data))
@@ -122,6 +126,7 @@ m4 <- mapplot(rownames(ma_counties_data) ~ class2, data = ma_counties_data,
                         projection = "tetra"),
               scales = list(draw = FALSE))
 ```
+
 ```{r}
 #print(nbins)
 #matrix(1:(nbins*nbins), nrow=nbins)
@@ -156,5 +161,3 @@ popViewport()
  popViewport()
 
 ```
-
-
