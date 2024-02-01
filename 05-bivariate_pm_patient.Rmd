@@ -61,15 +61,15 @@ ma_counties_data <- us_counties_MA %>% left_join(df_agg, by = c("NAMELSAD" = "co
 head(ma_counties_data)
 ```
 
-```{r}
-# ggplot() +
-#   geom_sf(data = ma_counties_data,
-#           aes(fill = patient_count),
-#           color = NA) +
-#   scale_fill_viridis() +
-#   theme_void() +
-#   theme(legend.position = "bottom") +
-#   labs(fill = "Patient count")
+```{r, eval = FALSE}
+ggplot() +
+  geom_sf(data = ma_counties_data,
+          aes(fill = patient_count),
+          color = NA) +
+  scale_fill_viridis() +
+  theme_void() +
+  theme(legend.position = "bottom") +
+  labs(fill = "Patient count")
 ```
 
 ### Set color on both varaibles
@@ -136,9 +136,12 @@ m4 <- mapplot(rownames(ma_counties_data) ~ class2,
 )
 ```
 
+```{r, eval = FALSE}
+print(nbins)
+matrix(1:(nbins * nbins), nrow = nbins)
+```
+
 ```{r}
-# print(nbins)
-# matrix(1:(nbins*nbins), nrow=nbins)
 m4leg <- levelplot(matrix(1:(nbins * nbins), nrow = nbins),
   axes = FALSE, col.regions = cols(),
   xlab = "patient", ylab = "pm_2.5", cuts = 8, colorkey = FALSE,
@@ -151,11 +154,13 @@ print(m4leg, newpage = FALSE)
 popViewport()
 ```
 
+```{r, eval = FALSE}
+suppressWarnings(print(m4))
+
+table(apply(data_sample, 1, paste, collapse = ""))
+```
+
 ```{r}
-# suppressWarnings(print( m4 ))
-
-# table(apply(data_sample, 1, paste, collapse = ""))
-
 m4leg <- levelplot(matrix(1:(nbins * nbins), nrow = nbins),
   axes = FALSE, col.regions = cols(),
   xlab = "patient", ylab = "pm_2.5", cuts = 8, colorkey = FALSE,
