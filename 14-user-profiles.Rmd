@@ -1,0 +1,24 @@
+# **User Profiles (PLACEHOLDER)** {-}
+
+The educational materials and tutorials in this book have been designed to for various types of users.
+
+## Clinical/Medical Professional {#profilecmp}
+![](https://img.shields.io/badge/User%20Profile-Clinical/Medical%20Professional-E7C0CF.svg)
+
+Description
+
+Chapters...
+
+## Social & Behavioral Scientist {#profilesbs}
+![](https://img.shields.io/badge/User%20Profile-Social%20&%20Behavioral%20Scientist-9EE398.svg)
+
+Description
+
+Chapters...
+
+## Student {#profilestu}
+![](https://img.shields.io/badge/User%20Profile-Student-98C9E3.svg)
+
+Description
+
+Chapters...

@@ -55,15 +55,16 @@ colnames(us_epa_daily_2022)
 ```
 
 ### Filter by state name or ID California
-```{R}
-us_epa_daily_2022_CA <- us_epa_daily_2022[us_epa_daily_2022$State.Name == "California", ]
-dim(us_epa_daily_2022_CA)
+```{r}
+us_epa_daily_2022_ca <-
+  us_epa_daily_2022[us_epa_daily_2022$State.Name == "California", ]
+dim(us_epa_daily_2022_ca)
 
 # Check for missing values
-sum(is.na(us_epa_daily_2022_CA))
+sum(is.na(us_epa_daily_2022_ca))
 # If there are missing values, you can drop or fill them as per your requirement
-CA_null <- na.omit(us_epa_daily_2022_CA) # Drop rows with missing values
-CA_pm <- us_epa_daily_2022_CA
+ca_null <- na.omit(us_epa_daily_2022_ca) # Drop rows with missing values
+ca_pm <- us_epa_daily_2022_ca
 ```
 ### calculate the mean value for the year
 ```{r}
@@ -75,7 +76,7 @@ colnames(us_epa_daily_2022_ca)
 
 ```{R}
 # Sum the months for counties with the same Arithmetic.Mean
-summed_data <- CA_pm %>%
+summed_data <- ca_pm %>%
   group_by(Arithmetic.Mean) %>%
   summarise(Total_Months = n())
 colnames(summed_data)

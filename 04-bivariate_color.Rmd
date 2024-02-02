@@ -26,7 +26,7 @@ if (!require("pals")) {
 ```
 
 ```{r}
-require(latticeExtra) # USCancerRates, mapplot
+require(latticeExtra) # uscancerrates, mapplot
 require(maps) # map
 require(classInt) # classIntervals, findCols
 require(grid) # viewport, pushViewport
@@ -39,7 +39,7 @@ nbins <- 3
 
 # categorize rates into 3 percentile bins
 brksm <- classIntervals(
-  log(USCancerRates$rate.male),
+  log(uscancerrates$rate.male),
   n = nbins,
   style = "quantile"
 )
@@ -47,7 +47,7 @@ brksm <- classIntervals(
 
 ```{r}
 brksf <- classIntervals(
-  log(USCancerRates$rate.female),
+  log(uscancerrates$rate.female),
   n = nbins,
   style = "quantile"
 )

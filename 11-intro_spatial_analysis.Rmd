@@ -1,5 +1,9 @@
 # **Spatial Analysis with Environmental Data in R** {-}
 
+[![Profile-CMP](https://img.shields.io/badge/User%20Profile-Clinical/Medical%20Professional-E7C0CF.svg)](#profilecmp)
+[![Profile-SBS](https://img.shields.io/badge/User%20Profile-Social%20&%20Behavioral%20Scientist-9EE398.svg)](#profilesbs)
+[![Profile-STU](https://img.shields.io/badge/User%20Profile-Student-98C9E3.svg)](#profilestu)
+
 <font size ="5"> **Access, Import, and Primary Analyses** </font>
 
 **Date Modified:** February 1, 2024
@@ -11,12 +15,6 @@
 **Programming Language(s):** R
 
 ## Introduction
-
-### User Profiles
-
--   Clinical/Medical Professional
--   Social & Behavioral Scientist
--   Student
 
 ### Motivation
 

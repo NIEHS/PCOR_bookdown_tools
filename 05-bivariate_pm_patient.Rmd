@@ -7,7 +7,7 @@
 Each variate is divided into thirds (based on percentiles) and a joint classification for all 9 combinations is defined.
 
 ```{r}
-require(latticeExtra) # USCancerRates, mapplot
+require(latticeExtra) # uscancerrates, mapplot
 require(maps) # map
 require(classInt) # classIntervals, findCols
 require(grid) # viewport, pushViewport

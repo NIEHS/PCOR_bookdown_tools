@@ -21,21 +21,26 @@ if (!require("pals")) {
 }
 ```
 
-```{r, eval = FALSE}
-require(latticeExtra) # USCancerRates, mapplot
+```{r}
+require(latticeExtra) # uscancerrates, mapplot
 require(maps) # map
 require(classInt) # classIntervals, findCols
 require(grid) # viewport, pushViewport
 require(pals) # brewer.blues, stevens.pinkgreen
 
+uscancerrates <- latticeExtra::USCancerRates
+
+```
+
+```{r, eval = FALSE}
 # This block of code Can run at your locally PC/MAC but can not knit to server
 suppressWarnings(print(
-  mapplot(rownames(USCancerRates) ~ log(rate.male) + log(rate.female),
-          data = USCancerRates,
+  mapplot(rownames(uscancerrates) ~ log(rate.male) + log(rate.female),
+          data = uscancerrates,
           colramp = brewer.blues,
           map = map("county", plot = FALSE, fill = TRUE,
                     projection = "tetra"),
-          breaks = classIntervals(log(USCancerRates$rate.female),
+          breaks = classIntervals(log(uscancerrates$rate.female),
                                   n = 3,
                                   style = "quantile")$brks,
           scales = list(draw = FALSE))

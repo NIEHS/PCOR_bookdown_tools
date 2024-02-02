@@ -3,6 +3,7 @@ delete_merged_file: true
 rmd_files:
   - index.Rmd
   - 07-Data-Dictionary.Rmd
+  - 14-user-profiles.Rmd
   - 11-intro_spatial_analysis.Rmd
   - 08-PCOR-Tmap.Rmd
   - 06-geo-exposure.Rmd
