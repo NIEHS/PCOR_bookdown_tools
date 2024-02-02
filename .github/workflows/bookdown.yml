@@ -9,6 +9,7 @@ on:
 
 jobs:
   bookdown:
+    name: Render book
     runs-on: ubuntu-latest
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
