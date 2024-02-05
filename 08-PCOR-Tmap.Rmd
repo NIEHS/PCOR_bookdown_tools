@@ -6,9 +6,9 @@
 
 ## PM 2.5 Tmap{-}
 ```{r}
-if (!require("tmap")) {
-  install.packages("tmap")
-}
+# if (!require("tmap")) {
+#   install.packages("tmap")
+# }
 library(tmap)
 help <- FALSE
 if (help == TRUE) {

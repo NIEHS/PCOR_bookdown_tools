@@ -11,9 +11,9 @@ if (!require("ggplot2")) {
   install.packages(c("maps", "ggmap"))
 }
 
-if (!require("tmap")) {
-  install.packages("tmap")
-}
+# if (!require("tmap")) {
+#   install.packages("tmap")
+# }
 if (!require("sf")) {
   install.packages("sf")
 }
