@@ -4,7 +4,7 @@ on:
   push:
   pull_request:
 
-name: test-bookdown
+name: Render-Bookdown
 
 jobs:
   test-coverage:
@@ -19,10 +19,6 @@ jobs:
         with:
           use-public-rspm: true
 
-      - uses: r-lib/actions/setup-r-dependencies@v2
-        with:
-          extra-packages: any::testthat
-
       - name: Test render bookdown
         run: |
           testthat::test_dir(
@@ -31,17 +27,3 @@ jobs:
             clean = FALSE
           )
         shell: Rscript {0}
-
-      # - name: Show testthat output
-      #   if: always()
-      #   run: |
-      #     ## --------------------------------------------------------------------
-      #     find ${{ runner.temp }}/package -name 'testthat.Rout*' -exec cat '{}' \; || true
-      #   shell: bash
-
-      # - name: Upload test results
-      #   if: failure()
-      #   uses: actions/upload-artifact@v3
-      #   with:
-      #     name: coverage-test-failures
-      #     path: ${{ runner.temp }}/package
