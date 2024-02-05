@@ -27,7 +27,7 @@ jobs:
       - name: Test render bookdown
         run: |
           testthat::test_dir(
-            "tests/testthat/",
+            "tests/",
             quiet = FALSE,
             clean = FALSE
           )
