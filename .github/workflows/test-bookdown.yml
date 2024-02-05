@@ -4,7 +4,7 @@ on:
   push:
   pull_request:
 
-name: Render-Bookdown
+name: Render Bookdown
 
 jobs:
   test-coverage:
