@@ -5,13 +5,12 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ### Check and install the libraries
 ```{r}
-if (!"cowplot" %in% install.packages()) {
-  install.packages("cowplot")
-}
-
-if (!"ggplot2" %in% install.packages()) {
-  install.packages("ggplot2")
-}
+# if (!"cowplot" %in% install.packages()) {
+#   install.packages("cowplot")
+# }
+# if (!"ggplot2" %in% install.packages()) {
+#   install.packages("ggplot2")
+# }
 
 if (!require("ggplot2")) {
   install.packages("ggplot2")

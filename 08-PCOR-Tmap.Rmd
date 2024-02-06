@@ -15,23 +15,12 @@ help <- FALSE
 if (help == TRUE) {
   help(tmap_animation)
 }
-
 if (!require("gifski")) {
   install.packages("gifski")
 }
-
-if (!require("ffmpeg")) {
-  install.packages("ffmpeg")
-}
-```
-
-```{r}
-library(dplyr)
-library(sf)
-library(raster)
-library(tmap)
-library(ggplot2)
-library(cowplot)
+# if (!require("ffmpeg")) {
+#   install.packages("ffmpeg")
+# }
 ```
 
 ### Samples:
