@@ -7,15 +7,6 @@
 ## PM 2.5 Tmap{-}
 
 ```{r}
-library(dplyr)
-library(sf)
-library(raster)
-library(tmap)
-library(ggplot2)
-library(cowplot)
-```
-
-```{r, eval = FALSE}
 if (!require("tmap")) {
   install.packages("tmap")
 }
@@ -32,6 +23,15 @@ if (!require("gifski")) {
 if (!require("ffmpeg")) {
   install.packages("ffmpeg")
 }
+```
+
+```{r}
+library(dplyr)
+library(sf)
+library(raster)
+library(tmap)
+library(ggplot2)
+library(cowplot)
 ```
 
 ### Samples:

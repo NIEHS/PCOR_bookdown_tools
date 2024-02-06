@@ -28,17 +28,7 @@ jobs:
 
       - name: Test render bookdown
         run: |
-          testthat::test_that(
-            "Bookdown renders without error.",
-            {
-              withr::local_package("sf")
-              withr::local_package("terra")
-              withr::local_package("dplyr")
-              withr::local_package("tmap")
-              withr::local_package("ggplot2")
-              expect_no_error(
-                bookdown_render("../../")
-              )
-            }
+          testthat::test_file(
+            path = "tests/test-bookdown_render.R"
           )
         shell: Rscript {0}
