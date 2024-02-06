@@ -7,7 +7,7 @@
 ## PM 2.5 Tmap{-}
 ```{r}
 if (!require("tmap")) {
-  install.packages('raster', repos='https://rspatial.r-universe.dev')
+  # install.packages("raster", repos = "https://rspatial.r-universe.dev")
   install.packages("tmap")
 }
 library(tmap)

@@ -25,6 +25,7 @@ jobs:
           packages: |
             any::testthat
             any::bookdown
+            any::raster
 
       - name: Test render bookdown
         run: |
