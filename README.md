@@ -1,4 +1,4 @@
-# Welcome
+# The CHORDS Toolkit for Health and Geospatial Exposures Research
 
 [![Super-Lint](https://github.com/NIEHS/PCOR_bookdown_tools/actions/workflows/superlint.yml/badge.svg?branch=mm_workflows)](https://github.com/NIEHS/PCOR_bookdown_tools/actions/workflows/superlint.yml/badge.svg?branch=mm_workflows)
 [![Bookdown-Render](https://github.com/NIEHS/PCOR_bookdown_tools/actions/workflows/test-bookdown.yml/badge.svg?branch=mm_workflows)](https://github.com/NIEHS/PCOR_bookdown_tools/actions/workflows/test-bookdown.yml/badge.svg?branch=mm_workflows)
@@ -9,5 +9,4 @@ Install packages
 
 ```{r}
 install.packages("styler")
-
 ```
