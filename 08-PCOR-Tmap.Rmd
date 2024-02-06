@@ -5,7 +5,18 @@
 # **PCOR T-map** {-}
 
 ## PM 2.5 Tmap{-}
+
 ```{r}
+library(dplyr)
+library(sf)
+library(raster)
+library(tmap)
+library(ggplot2)
+library(cowplot)
+library(magick)
+```
+
+```{r, eval = FALSE}
 if (!require("tmap")) {
   install.packages("tmap")
 }
