@@ -13,7 +13,6 @@ library(raster)
 library(tmap)
 library(ggplot2)
 library(cowplot)
-library(magick)
 ```
 
 ```{r, eval = FALSE}
