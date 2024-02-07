@@ -4,14 +4,16 @@ knitr::opts_chunk$set(echo = TRUE)
 ### PM 2.5 TM_map:
 
 ### Check and install the libraries
-```{r}
-# if (!"cowplot" %in% install.packages()) {
-#   install.packages("cowplot")
-# }
-# if (!"ggplot2" %in% install.packages()) {
-#   install.packages("ggplot2")
-# }
+```{r, eval = FALSE}
+if (!"cowplot" %in% install.packages()) {
+  install.packages("cowplot")
+}
+if (!"ggplot2" %in% install.packages()) {
+  install.packages("ggplot2")
+}
+```
 
+```{r}
 if (!require("ggplot2")) {
   install.packages("ggplot2")
   install.packages(c("maps", "ggmap"))

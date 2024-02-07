@@ -1,3 +1,4 @@
+---
 delete_merged_file: true
 
 rmd_files:
@@ -16,7 +17,3 @@ rmd_files:
   - 05-bivariate_pm_patient.Rmd
   - 13-NASA_EarthData_account.Rmd
   - 20-test.Rmd
-
-  
-  
-

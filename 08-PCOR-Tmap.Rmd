@@ -18,9 +18,12 @@ if (help == TRUE) {
 if (!require("gifski")) {
   install.packages("gifski")
 }
-# if (!require("ffmpeg")) {
-#   install.packages("ffmpeg")
-# }
+ffmpeg <- FALSE
+if (ffmpeg == TRUE) {
+  if (!require("ffmpeg")) {
+    install.packages("ffmpeg")
+  }
+}
 ```
 
 ### Samples:
