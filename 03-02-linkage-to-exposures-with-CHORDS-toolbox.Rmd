@@ -1,0 +1,10 @@
+# Linkage to exposures with CHORDS toolbox
+
+This chapter provides an example application of the CHORDS exposure toolbox to...
+
+## Introduction 
+
+## Steps
+
+## References
+
