@@ -2,4 +2,4 @@
 
 # **Spatial Data Foundations** {-}
 
-This unit provides example code for working with different types of spatial data common in environmental health research.
+This unit provides guidance and example code for working with different types of spatial data common in environmental health research. 
