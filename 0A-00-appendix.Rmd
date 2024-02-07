@@ -1,0 +1,10 @@
+# (PART\*) Appendix {-}
+
+# Data Science Glossary 
+
+This glossary defines key data science terms related to climate change and health research that are used in the CHORDS toolkit.
+
+
+
+
+
