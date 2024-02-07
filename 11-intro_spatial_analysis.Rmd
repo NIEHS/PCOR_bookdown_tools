@@ -27,17 +27,11 @@ This vignette is designed to introduce the necessary steps for conducting analys
 Users will learn about the following topics related to spatial data in R:
 
 -   Point, polygon, and raster data types
-
 -   Downloading data from a URL
-
 -   Importing data
-
 -   Checking data type, structure, and class
-
 -   Reclassifying data
-
 -   Computing summary and zonal statistics
-
 -   Plotting individual and multiple data sets
 
 ### Data Types
@@ -64,7 +58,6 @@ The exploratory analyses performed in this vignette utilize free and publicly av
 Various R packages can be used to create, import, analyze, and export spatial data. If you have not used these packages previously, they may not be installed on your machine. The following chunk of code installs and imports the packages required to conduct the exploratory analyses in this vignette.
 
 ::: {.note}
-**Note**  
 Installing and importing new packages may required R to restart.
 :::
   
@@ -94,7 +87,6 @@ library(utils)
 The `ggplot2` and `ggpubr` packages will be used throughout the vignette for creating publication quality plots. Please see [ggplot2: Elegant Graphics for Data Analysis (3e)](https://ggplot2-book.org/introduction) and [ggpubr: 'ggplot2' Based Publication Ready Plots](https://rpkgs.datanovia.com/ggpubr/) for in depth descriptions of the syntax and functionality utilized by these packages.
 
 ::: {.important}
-**Important**  
 The exploratory analyses performed in this vignette are designed for educational purposes only. The results of the following analyses are not peer-reviewed findings, nor are they based on any hypotheses.
 :::
 
@@ -107,7 +99,6 @@ Air pollution monitoring data from the United States Environmental Protection Ag
 To download data with the `utils::download.file()` function, define two variables. One variable to store the website URL where the data exists and a second to store the file path for where the file should be saved.
 
 ::: {.note}
-**Note**  
 Multiple chunks of code in this vignette will contain `/   YOUR FILE PATH   /`. To run the code on your machine, substitute `/   YOUR FILE PATH   /` with the file path where you would like to store the vignette data.
 :::
 
@@ -125,7 +116,6 @@ download.file(
 The file downloaded from the EPA website is a zip file. Zip files need to be unzipped (decompressed) in order to access the data within. Unzip the EPA air pollution file with `utils::unzip()`.
 
 ::: {.warning}
-**Warning**  
 Unzipping a `.zip` file will decompress the contents within. Spatial data sets can be very large (ie. \> 1GB ), so check the size of the data before unzipping on your machine.
 :::
 
@@ -146,7 +136,6 @@ unzip("/   YOUR FILE PATH   /epa_data.zip")
 Inspecting the file with `utils::unzip(list = TRUE)` returned the size of the file, but also the name of the data file of interest. The desired data file can also be identified with `list.files()`.
 
 ::: {.note}
-**Note**  
 Other file names may be returned if `/   YOUR FILE PATH   /` is a directory with other contents (ie. Desktop or Documents).
 :::
 
@@ -228,7 +217,6 @@ class(pm$Date.Local)
 With the variables of interest selected and reclassified, `pm` can be converted to spatially defined `sf` object. The `sf::st_as_sf()` function creates a `$geometry` field based on the latitude and longitude coordinates contained within `pm`. The `coords = c()` argument specifies the column names which contain the coordinate values.
 
 ::: {.note}
-**Note**  
 The columns containing coordinate values will not always be "Latitude" and "Longitude". Use `str()` to see column names and identify which contain the coordinate values.
 :::
 
@@ -265,7 +253,6 @@ st_crs(pm_sf)
 An `sf` object with a coordinate reference system can be transformed (projected) into a different coordinate reference system with `sf::st_transform()`. The area of interest for these exploratory analyses is the coterminous United States, so the Albers Equal Area projected coordinate system will be used (EPSG code: 5070).
 
 ::: {.note}
-**Note**  
 An `sf` object without an assigned coordinate reference system cannot be transformed. `sf::st_crs()` must be used to assign a coordinate reference system to an `sf` object that does not have one.
 :::
 
@@ -301,7 +288,6 @@ sd(pm_sf$Arithmetic.Mean)
 After inspecting the summary statistics, create a histogram of the PM~2.5~ concentration measurements to visualize the distribution of the data.
 
 ::: {.note}
-**Note**  
 The histogram is not a spatially defined plot, so the data set to be plotted is identified within `ggplot()`.
 :::
 
@@ -518,7 +504,6 @@ download.file(
 The file downloaded from the NOAA website is a `.zip` file. Zip files need to be unzipped (decompressed) in order to access the data within. Unzip the NOAA wildfire smoke plume coverage file with `utils::unzip()`.
 
 ::: {.warning}
-**Warning**  
 Unzipping a `.zip` file will decompress the contents within. Spatial data sets can be very large (ie. \> 1GB), so check the size of the data before unzipping on your machine.
 :::
 
@@ -545,7 +530,6 @@ list.files("/   YOUR FILE PATH   /")
 Listing the contents of the unzipped file reveals four individual files. The data to be imported is stored in the `hms_smoke20230901.shp`, but the other files contain important information for the `.shp` file.
 
 ::: {.warning}
-**Warning**  
 Deleting any of the supporting files (ie. `*.dbf`, `*.prj`, or `*.shx`) will disrupt the data import.
 :::
 
@@ -558,7 +542,6 @@ This section will focus on exploratory analyses with polygon data using the `sf`
 Now that the contents of the zip file have been saved on your machine and the data file of interest has been identified, import the data with `sf::st_read()`.
 
 ::: {.note}
-**Note**  
 Although the supporting files are required to import a shapefile, only the file ending in `.shp` needs to be imported
 :::
 
@@ -651,7 +634,6 @@ ggplot() +
 The wildfire smoke plume polygons are clearly visible and colored according to their individual smoke density classification. This plot, however, is difficult to interpret for two reasons. First, there are multiple polygons for each smoke density classification. Multiple borders and overlapping polygons with the same smoke density type can be confusing. To make the polygons more clear, individual polygons for each smoke density classification can be combined.
 
 ::: {.warning}
-**Warning**  
 For the purposes of these exploratory analyses, the satellite travelling direction and time of collection will be ignored.
 :::
 
@@ -768,7 +750,6 @@ st_crs(conus_sf)
 ```
 
 ::: {.important}
-**Important**  
 When analyzing multiple spatial data sets together, all data sets must have the same coordinate reference system or projected coordinate system.
 :::
 
@@ -868,7 +849,6 @@ This section will focus on exploratory analyses with polygon data using the `ter
 Now that the contents of the zip files have been saved on your machine and the data files of interest have been identified, import both the wildfire smoke plume coverage data and the United States' state boundary data with `terra::vect()`.
 
 ::: {.note}
-**Note**  
 See sections 2.0 Access, download, and unzip and 2.1.7 Plot (multiple) for obtaining the wildfire smoke plume coverage and United States' state boundary data sets, respectively.
 :::
 
@@ -992,7 +972,7 @@ ggplot() +
 
 The wildfire smoke plume polygons are clearly visible and colored according to their individual smoke density classification. The plot, however, is difficult to interpret because there are multiple polygons for each smoke density classification. Multiple borders and overlapping polygons with the same smoke density type can be confusing. To make the polygons more clear, individual polygons for each smoke density classification can be combined.
 
-::: calloout-warning
+::: {.warning}
 For the purposes of these exploratory analyses, the satellite travelling direction and time of collection will be ignored.
 :::
 
@@ -1105,7 +1085,6 @@ conus_smoke <- data.frame(
 Set the column names of `conus_smoke` to match the smoke density classifications.
 
 ::: {.note}
-**Note**  
 The order of the columns in `conus_smoke` are based on the ordered factor levels in `smoke_t_density$Density` (see 2.2.3 Reclassify).
 :::
 
@@ -1313,7 +1292,6 @@ narr <- project(
 We want to create plots with and analyze the air temperature data as it relates to the coterminous United States' state boundaries. Subset `states_t` to remove Alaska, Hawaii, and the United States' territories.
 
 ::: {.note}
-**Note**  
 See sections 2.0 Access, download, and unzip and 2.2.1 Import for obtaining the `states_t` data set.
 :::
 

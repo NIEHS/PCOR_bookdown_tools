@@ -14,6 +14,7 @@ rmd_files:
   - 03-bivariate-choropleth_map.Rmd
   - 04-bivariate_color.Rmd
   - 05-bivariate_pm_patient.Rmd
+  - 13-NASA_EarthData_account.Rmd
   - 20-test.Rmd
 
   

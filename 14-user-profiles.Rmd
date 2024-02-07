@@ -18,6 +18,10 @@ The educational materials and tutorials in this book have been designed to for v
 -   Readily computed sociodemographic metrics
 -   Exposure and sociodemographic measures that are directly comparable with related measures from other studies
 
+**Relevant Chapters**
+
+-   [NASA EarthData and Prerequisite Files](#nasa-earthdata-and-prerequisite-files)
+
 ## Clinical Researcher {#profilecre .unnumbered .unlisted}
 ![](https://img.shields.io/badge/User%20Profile-Clinical%20Researcher-e6194B.svg)
 
@@ -93,8 +97,11 @@ The educational materials and tutorials in this book have been designed to for v
 -   Readily computed sociodemographic metrics
 -   Exposure and sociodemographic measures that are directly comparable with related measures from other studies
 
-## Epidemiologist {#profileepi .unnumbered .unlisted}
+**Relevant Chapters**
 
+-   [NASA EarthData and Prerequisite Files](#nasa-earthdata-and-prerequisite-files)
+
+## Epidemiologist {#profileepi .unnumbered .unlisted}
 ![](https://img.shields.io/badge/User%20Profile-Epidemiologist-4363d8.svg)
 
 **What is my area of expertise?**
@@ -132,6 +139,10 @@ The educational materials and tutorials in this book have been designed to for v
 -   Exposure measures that are directly comparable with related measures from other studies 
 -   Methods to integrate measures across different spatial geographies
 -   Methods to calculate and predict exposures from multiple sources and time periods
+
+**Relevant Chapters**
+
+-   [NASA EarthData and Prerequisite Files](#nasa-earthdata-and-prerequisite-files)
 
 ## Public Health Official {#profilepho .unnumbered .unlisted}
 ![](https://img.shields.io/badge/User%20Profile-Public%20Health%20Official-fffac8.svg)
