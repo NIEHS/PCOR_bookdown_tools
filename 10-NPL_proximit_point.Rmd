@@ -151,5 +151,4 @@ The output consists of calculated metrics based on the specified parameters.
 | NPL_p75_distance_in_buffer      | The 75% of the distance in the buffer                                           |
 
 ```{r, child=c("10-NPL_proximit_point_b.Rmd", "10-NPL_proximit_point_c.Rmd", "12-tool_for_all_proximity-based_calculation.Rmd"), echo=TRUE}
- 
 ```

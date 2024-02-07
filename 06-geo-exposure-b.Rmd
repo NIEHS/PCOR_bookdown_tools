@@ -143,19 +143,21 @@ library(sf)
 source("/set/file/path/to/script_aircraft_facility_proximity_for_points.R")
 
 # Get exposures
-aircraft_proximity_metrics <- 
+aircraft_proximity_metrics <-
   get_aircraft_facility_proximity_for_points(
-    receptor_filepath = "/set/file/path/to/input_receptor.csv", 
+    receptor_filepath = "/set/file/path/to/input_receptor.csv",
     source_aircraft_facilities_filepath =
-      "/set/file/path/to/input_source_aircraft_facilities.rds",
+    "/set/file/path/to/input_source_aircraft_facilities.rds",
     us_borders_filepath =
-      "/set/file/path/to/input_us_borders.rds",
+    "/set/file/path/to/input_us_borders.rds",
     aircraft_year = 2020,
-    aircraft_facility_type = "airport")
+    aircraft_facility_type = "airport"
+  )
 
 # Write exposures to CSV
-readr::write_csv(aircraft_proximity_metrics, 
-                 file ="/set/file/path/to/output_aircraft_proximity_metrics.csv")
+readr::write_csv(aircraft_proximity_metrics,
+  file = "/set/file/path/to/output_aircraft_proximity_metrics.csv"
+)
 ```
 
 **Example 2: RStudio with ```here``` package**  
@@ -177,17 +179,20 @@ here::i_am("script_aircraft_facility_proximity_for_points.R")
 source(here::here("script_aircraft_facility_proximity_for_points.R"))
 
 # Get exposures
-aircraft_proximity_metrics <- 
+aircraft_proximity_metrics <-
   get_aircraft_facility_proximity_for_points(
-    receptor_filepath = here("input_receptor.csv"), 
-    source_aircraft_facilities_filepath = here("input_source_aircraft_facilities.rds"),
+    receptor_filepath = here("input_receptor.csv"),
+    source_aircraft_facilities_filepath =
+    here("input_source_aircraft_facilities.rds"),
     us_borders_filepath = here("input_us_borders.rds"),
     aircraft_year = 2020,
-    aircraft_facility_type = "airport")
+    aircraft_facility_type = "airport"
+  )
 
 # Write exposures to CSV
-readr::write_csv(aircraft_proximity_metrics, 
-                 file = here("output_aircraft_proximity_metrics.csv"))
+readr::write_csv(aircraft_proximity_metrics,
+  file = here("output_aircraft_proximity_metrics.csv")
+)
 ```
 
 &nbsp;   

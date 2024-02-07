@@ -161,18 +161,20 @@ library(sf)
 source("/set/file/path/to/script_caces_exposures_for_points.R")
 
 # Get exposures
-caces_exposures <- 
+caces_exposures <-
   get_caces_for_points(
-    receptor_filepath = "/set/file/path/to/input_receptor.csv", 
+    receptor_filepath = "/set/file/path/to/input_receptor.csv",
     source_caces_filepath = "/set/file/path/to/input_source_caces.rds",
     source_census_tracts_2010_filepath =
-      "/set/file/path/to/input_census_tracts_2010.rds",
+    "/set/file/path/to/input_census_tracts_2010.rds",
     caces_year = 2015,
-    caces_pollutants = c("o3", "no2"))
+    caces_pollutants = c("o3", "no2")
+  )
 
 # Write exposures to CSV
-readr::write_csv(caces_exposures, 
-                 file ="/set/file/path/to/output_caces_exposures.csv")
+readr::write_csv(caces_exposures,
+  file = "/set/file/path/to/output_caces_exposures.csv"
+)
 ```
 
 **Example 2: RStudio with ```here``` package**  
@@ -194,17 +196,20 @@ here::i_am("script_caces_exposures_for_points.R")
 source(here::here("script_caces_exposures_for_points.R"))
 
 # Get exposures
-caces_exposures <- 
-  get_caces_for_points(receptor_filepath = here("input_receptor.csv"), 
-                       source_caces_filepath = here("input_source_caces.rds"),
-                       source_census_tracts_2010_filepath =
-                         here("input_census_tracts_2010.rds"),
-                       caces_year = 2015,
-                       caces_pollutants = c("o3", "no2"))
+caces_exposures <-
+  get_caces_for_points(
+    receptor_filepath = here("input_receptor.csv"),
+    source_caces_filepath = here("input_source_caces.rds"),
+    source_census_tracts_2010_filepath =
+    here("input_census_tracts_2010.rds"),
+    caces_year = 2015,
+    caces_pollutants = c("o3", "no2")
+  )
 
 # Write exposures to CSV
-readr::write_csv(caces_exposures, 
-                 file = here("output_caces_exposures.csv"))
+readr::write_csv(caces_exposures,
+  file = here("output_caces_exposures.csv")
+)
 ```
 
 &nbsp;   
