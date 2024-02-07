@@ -1,0 +1,26 @@
+Title: The CHORDS Toolkit for Health and Geospatial Exposures Research
+Description: R dependancies of "The CHORDS Toolkit for Health and Geospatial Exposures Research".
+Imports:
+    testthat,
+    rsconnect,
+    bookdown,
+    rmarkdown,
+    plotly,
+    shiny,
+    tidycensus,
+    tidyverse,
+    viridis,
+    ggmap,
+    ggplot2,
+    maps,
+    dplyr,
+    knitr,
+    latticeExtra,
+    pals,
+    classInt,
+    grid,
+    sf,
+    tmap,
+    lubridate,
+    ffmpeg,
+    gifski
