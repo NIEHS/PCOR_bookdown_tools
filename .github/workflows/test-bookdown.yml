@@ -7,10 +7,10 @@ on:
 name: Render Bookdown
 
 jobs:
-  test-coverage:
+  test-render-bookdown:
     runs-on: ubuntu-latest
     env:
-      GITHUB_PAT:
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
 
     steps:
       - uses: actions/checkout@v4
@@ -32,3 +32,10 @@ jobs:
             path = "tests/test-bookdown_render.R"
           )
         shell: Rscript {0}
+
+      - name: Show testthat output
+        if: always()
+        run: |
+          ## --------------------------------------------------------------------
+          find ${{ runner.temp }}/package -name 'testthat.Rout*' -exec cat '{}' \; || true
+        shell: bash 
