@@ -51,7 +51,6 @@ jobs:
             "latticeExtra",
             "pals",
             "classInt",
-            "grid",
             "sf",
             "udunits2",
             "tmap",
