@@ -20,12 +20,10 @@ testthat::test_that("Bookdown renders without error.", {
   withr::local_package("latticeExtra")
   withr::local_package("pals")
   withr::local_package("classInt")
-  withr::local_package("grid")
   withr::local_package("sf")
   withr::local_package("udunits2")
   withr::local_package("tmap")
   withr::local_package("lubridate")
-  withr::local_package("ffmpeg")
   withr::local_package("gifski")
   withr::local_package("magick")
   expect_no_error(
