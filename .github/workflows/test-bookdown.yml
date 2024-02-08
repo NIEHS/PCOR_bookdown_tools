@@ -28,14 +28,6 @@ jobs:
       - name: Test render bookdown
         run: |
           testthat::test_file(
-            path = "tests/test-bookdown_render.R",
-            install_path = file.path(Sys.getenv("RUNNER_TEMP"), "bookdown")
+            path = "tests/test-bookdown_render.R"
           )
         shell: Rscript {0}
-
-      - name: Show testthat output
-        if: always()
-        run: |
-          ## --------------------------------------------------------------------
-          find ${{ runner.temp }}/bookdown -name 'testthat.Rout*' -exec cat '{}' \; || true
-        shell: bash 
