@@ -23,4 +23,6 @@ Imports:
     tmap,
     lubridate,
     ffmpeg,
-    gifski
+    gifski,
+    magick
+Config/testthat/edition: 3
