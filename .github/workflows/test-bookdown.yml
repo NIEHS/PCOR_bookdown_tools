@@ -21,6 +21,10 @@ jobs:
         with:
           use-public-rspm: true
 
+      - name: Install libudunits2
+        run: |
+          sudo apt-get install -y libudunits2-dev libgdal-dev
+
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
           packages: |
@@ -67,5 +71,5 @@ jobs:
         if: always()
         run: |
           ## --------------------------------------------------------------------
-          find ${{ runner.temp }}/PCOR_bookdown_tools/PCOR_bookdown_tools -name 'testthat.Rout*' -exec cat '{}' \; || true
+          find home/runner/work/PCOR_bookdown_tools/PCOR_bookdown_tools -name 'testthat.Rout*' -exec cat '{}' \; || true
         shell: bash
