@@ -1,14 +1,7 @@
 
-
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
-
-# **Data Dictionary** {-}
+# Data Dictionary for NIEHS PEGS
 
 *[Page Note:  add links to catalog for sources, add links to tools for tools]*
-
-## Geospatial-based Exposures {-}
 
 The following table provides a list of geospatial-based exposure measures used in
 the NIEHS Personalized Environment and Genes Study, including their sources and links

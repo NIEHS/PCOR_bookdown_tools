@@ -1,0 +1,65 @@
+# Spatial Analysis with Environmental Data 
+
+This is a test file for headings structure in TOC.
+
+
+## Introduction 
+
+
+### Motivation {-}
+
+Motivation text....
+
+### Objectives {-}
+
+Objectives text...
+
+## Data Types 
+
+This vignette will cover how to access, import, and analyze point, polygon, and raster spatial data types. 
+The details of what constitutes each unique spatial data type, however, will not be covered....
+
+
+## Data Sources 
+
+The exploratory analyses performed in this vignette utilize free and publicly available environmental data. 
+The code chunks are designed to access each specific file used for the exploratory analyses, but a description of each data source and data set is available below....
+
+| Data                                | Data Type | Producer                                               | Link                                                                                        |
+|------------------|------------------|------------------|------------------|
+| PM~2.5~ Daily Observations          | Point     | Environmental Protection Agency (EPA)                  | <https://aqs.epa.gov/aqsweb/airdata/download_files.html>                                    |
+| Wildfire Smoke Plumes               | Polygon   | National Oceanic and Atmospheric Administration (NOAA) | <https://www.ospo.noaa.gov/Products/land/hms.html>                                          |
+| United States Cartographic Boundary | Polygon   | United States Census Bureau                            | <https://www.census.gov/geographies/mapping-files/time-series/geo/carto-boundary-file.html> |
+| Land Surface Temperature            | Raster    | National Oceanic and Atmospheric Administration (NOAA) | <https://psl.noaa.gov/data/gridded/data.narr.html>                                          |
+
+: Exploratory analyses data sources
+
+## Packages 
+
+Various R packages can be used to create, import, analyze, and export spatial data. If you have not used these packages previously, they may not be installed on your machine. The following chunk of code installs and imports the packages required to conduct the exploratory analyses in this vignette.
+
+::: {.note}
+**Note**  
+Installing and importing new packages may required R to restart.
+:::
+  
+```{r, eval = FALSE}
+vignette_packages <- c(
+  "dplyr", "ggplot2", "ggpubr", "sf",
+  "terra", "tidyterra", "utils"
+)
+
+for (v in seq_along(vignette_packages)) {
+  if (vignette_packages[v] %in% installed.packages() == FALSE) {
+    install.packages(vignette_packages[v])
+  }
+}
+
+library(dplyr)
+library(ggplot2)
+library(ggpubr)
+library(sf)
+library(terra)
+library(tidyterra)
+library(utils)
+```

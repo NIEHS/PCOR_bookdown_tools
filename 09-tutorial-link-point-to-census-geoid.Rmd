@@ -1,18 +1,13 @@
-# **A Census tutorial** {.unnumbered}
+# (PART) Integrating environmental and health data {-}
 
-|                                                                   |
-|-------------------------------------------------------------------|
-| title: "Linking geocoded addresses to US Census geographic units" |
-| subtitle: "Tutorial"                                              |
-| date: "September 22, 2023"                                        |
-| author: "Lara Clark"                                              |
-| format: html                                                      |
+This section covers...
+
+
+# Linking geocoded addresses to US Census geographic units: A tutorial 
 
 *Date*: September 13, 2023
 
 *Author(s)*: Lara Clark
-
-# Linking geocoded addresses to US Census geographic units: A tutorial
 
 **Key Terms**: Data Integration, Social Determinants of Health
 

@@ -3,17 +3,29 @@ delete_merged_file: true
 
 rmd_files:
   - index.Rmd
-  - 07-Data-Dictionary.Rmd
-  - 14-user-profiles.Rmd
-  - 11-intro_spatial_analysis.Rmd
-  - 08-PCOR-Tmap.Rmd
-  - 06-geo-exposure.Rmd
-  - 10-NPL_proximit_point.Rmd
-  - 01-ma_pm_patient.Rmd
-  - 02-census-income.Rmd
-  - 09-tutorial-link-point-to-census-geoid.Rmd
-  - 03-bivariate-choropleth_map.Rmd
-  - 04-bivariate_color.Rmd
-  - 05-bivariate_pm_patient.Rmd
-  - 13-NASA_EarthData_account.Rmd
-  - 20-test.Rmd
+  - 01-00-spatial-data-foundations.Rmd
+  - 01-01-spatial-data-analysis.Rmd
+  - 01-02-data-download.Rmd
+  - 02-00-wildfire-data.Rmd
+  - 02-01-wildfire-chapter-01.Rmd
+  - 03-00-health-data-integration.Rmd
+  - 03-01-link-points-to-census.Rmd
+  - 03-02-linkage-to-exposures-with-CHORDS-toolbox.Rmd
+  - 04-00-analysis-case-studies.Rmd
+  - 04-01-case-study-01.Rmd
+  - 0A-00-appendix.Rmd
+  - 0A-01-data-dictionary-pegs.Rmd
+#  - 08-PCOR-Tmap.Rmd
+#  - 06-geo-exposure.Rmd
+#  - 10-NPL_proximit_point.Rmd
+#  - 01-ma_pm_patient.Rmd
+#  - 02-census-income.Rmd
+#  - 09-tutorial-link-point-to-census-geoid.Rmd
+#  - 03-bivariate-choropleth_map.Rmd
+#  - 04-bivariate_color.Rmd
+#  - 05-bivariate_pm_patient.Rmd
+#  - 20-test.Rmd
+#  - 07-Data-Dictionary.Rmd
+#  - 13-NASA_EarthData_account.Rmd
+#  - 20-test.Rmd
+#  - 14-user-profiles.Rmd
