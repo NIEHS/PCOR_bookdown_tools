@@ -26,7 +26,6 @@ jobs:
           extra-packages: |
             any::testthat
             any::bookdown
-          needs: coverage
 
       - name: Render Bookdown
         run: |
@@ -62,6 +61,7 @@ jobs:
           testthat::test_file(
             "tests/test-render_bookdown.R"
           )
+        shell: Rscript {0}  
 
       - name: Show testthat output
         if: always()
