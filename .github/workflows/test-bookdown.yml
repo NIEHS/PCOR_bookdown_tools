@@ -56,7 +56,6 @@ jobs:
             "udunits2",
             "tmap",
             "lubridate",
-            "ffmpeg",
             "gifski",
             "magick"
             ),
