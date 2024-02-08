@@ -1,0 +1,291 @@
+# **NASA EarthData and Prerequisite Files** {.unnumbered}
+
+[![Profile-CDM](https://img.shields.io/badge/User%20Profile-Clinical%20Data%20Manager-469990.svg)](#profilecdm) [![Profile-EDU](https://img.shields.io/badge/User%20Profile-Educator-bfef45.svg)](#profileedu) [![Profile-GEO](https://img.shields.io/badge/User%20Profile-Geospatial%20Analyst-fabed4.svg)](#profilegeo)
+
+**Date Modified:** February 7, 2024
+
+**Author(s):** Mitchell Manware
+
+**Key Terms:** NASA EarthData; geospatial data
+
+**Programming Language(s):** R, Bash
+
+## Introduction
+
+### Motivation
+
+NASA's Earth Observing System Data and Information System (EOSDIS) and its twelve Distributed Active Archive Centers (DAAC) are home to a wide range of open access Earth science data.
+
+-   Alaska Satellite Facility (ASF) DAAC
+-   Atmospheric Science Data Center (ASDC)
+-   Crustal Dynamics Data Information System (CDDIS)
+-   Global Hydrometeorology Resource Center (GHRC)
+-   Goddard Earth Sciences Data and Information Services Center (GES DISC)
+-   Land Processes DAAC (LP DAAC)
+-   Level 1 and Atmosphere Archive and Distribution System (LAADS) DAAC
+-   National Snow and Ice Data Center (NSIDC) DAAC
+-   Oak Ridge National Laboratory (ORNL) DAAC
+-   Ocean Biology DAAC (OB.DAAC)
+-   Physical Oceanography DAAC (PO.DAAC)
+-   Socioeconomic Data and Applications Center (SEDAC)
+
+See <https://www.earthdata.nasa.gov/eosdis/daacs> for more information.
+
+Many of the NASA EOSDIS data sets are relevant to environmental health research, and accessing the data from within R is important for reproducability and repeatable analyses. Although the data is openly accessible, users are required to register for an EarthData account and/or be logged in if you have an account.
+
+### Objectives
+
+Users will:
+
+-   Register for or log into a NASA EarthData Account
+-   Generate NASA EarthData Account prerequisite files
+-   Practice downloading data from a URL
+
+## NASA EarthData Account
+
+### Register or log in
+
+Visit [https://urs.earthdata.nasa.gov/](http://urs.earthdata.nasa.gov) to register for or log into a NASA EarthData account.
+
+![NASA EarthData Account Landing Page](./images/NASA_EarthData_login.png)
+
+### Approved applications
+
+After creating an account, navigate to "My Profile"(<https://urs.earthdata.nasa.gov/profile>), and then to "Applications \> Authorized Apps". This "Authorized Apps" page specifies which NASA EarthData applications can use your login credentials. Authorize the applications from which you will be downloading data.
+
+![NASA EarthData Approved Applications](./images/NASA_EarthData_applications.png)
+
+### Prerequisite files
+
+Downloading password-protected data from a URL requires user credentials. Without prerequisite files containing user credentials, the data will not be downloaded correctly.
+
+::: note
+Without the prerequisite files the download step run without error, but trying to open the zip file will return an error.
+:::
+
+To demonstrate, try to download population density data from NASA's Socioeconomic Data and Applications Center (SEDAC) archive center.
+
+|                |                                                                              |
+|-----------------|-----------------------------------------------------------|
+| **Metric**     | Population Density                                                           |
+| **Year**       | 2020                                                                         |
+| **Resolution** | \~5km                                                                        |
+| **Format**     | GeoTiff                                                                      |
+| **URL**        | <https://sedac.ciesin.columbia.edu/data/set/gpw-v4-population-density-rev11> |
+
+Define the data URL and destination file.
+
+```{r, eval = FALSE}
+url <- paste0(
+  "https://sedac.ciesin.columbia.edu/downloads/data/gpw-v4/gpw-v4-population-",
+  "density-rev11/gpw-v4-population-density-rev11_2020_2pt5_min_tif.zip"
+)
+destfile <- paste0(
+  "/   YOUR FILE PATH   /sedac_population_2020_5km.zip"
+)
+```
+
+Run the download command using `system()` and unzip the file with `unzip()`.
+
+```{r, eval = FALSE}
+system(
+  command = paste0(
+    "curl -n -c -b -LJ -o ",
+    destfile,
+    " --url ",
+    url
+  )
+)
+unzip(destfile)
+```
+
+As expected, the data was not downloaded.
+
+To download the password protected data with command line commands, we must generate the `.netrc`, `.urs_cookies`, and `.dodsrc` prerequisite files.
+
+::: warning
+The following steps return errors for Windows system users. File generation on Windows is currently in development.
+:::
+
+#### `.netrc`
+
+The following commands create the `.netrc` file, which contains your NASA EarthData Account credentials.
+
+First, set your working directory to the home directory. Setting a working directory differs between Mac/Linux and Windows machines.
+
+```{r, eval = FALSE}
+if (.Platform$OS.type == "unix") {
+  setwd("~/")
+} else if (.Platform$OS.type == "windows") {
+  setwd("C:/")
+}
+```
+
+Create a file named `.netrc` with `file.create()`.
+
+```{r, eval = FALSE}
+file.create(".netrc")
+```
+
+Open a connection to `.netrc` with `sink()`. Write the line `machine urs...` replacing `YOUR_USERNAME` and `YOUR_PASSWORD` with your NASA EarthData username and password, respectively. After writing the line, close the connection with `sink()` again.
+
+```{r, eval = FALSE}
+sink(".netrc")
+writeLines(
+  "machine urs.earthdata.nasa.gov login YOUR_USERNAME password YOUR_PASSWORD"
+)
+sink()
+```
+
+Edit the settings so only you, the owner of the file, can read and write `.netrc`.
+
+```{r, eval = FALSE}
+system("chmod 0600 .netrc")
+```
+
+After, check to ensure the file was created properly.
+
+```{r, eval = FALSE}
+file.exists(".netrc")
+```
+
+```{r, eval = FALSE}
+TRUE
+```
+
+```{r, eval = FALSE}
+readLines(".netrc")
+```
+
+```{r, eval = FALSE}
+paste0(
+  "machine urs.earthdata.nasa.gov login YOUR_USERNAME password YOUR_PASSWORD"
+)
+```
+
+#### `.urs_cookies`
+
+The following commands create the `.urs_cookies` file.
+
+First, set your working directory to the home directory.
+
+```{r, eval = FALSE}
+if (.Platform$OS.type == "unix") {
+  setwd("~/")
+} else if (.Platform$OS.type == "windows") {
+  setwd("C:/")
+}
+```
+
+Create a file named `.netrc` with `file.create()`.
+
+```{r, eval = FALSE}
+file.create(".urs_cookies")
+```
+
+After, check to ensure the file was created properly.
+
+```{r, eval = FALSE}
+file.exists(".urs_cookies")
+```
+
+```{r, eval = FALSE}
+TRUE
+```
+
+#### `.dodsrc`
+
+The following commands create the `.urs_cookies` file.
+
+First, set your working directory to the home directory.
+
+```{r, eval = FALSE}
+if (.Platform$OS.type == "unix") {
+  setwd("~/")
+} else if (.Platform$OS.type == "windows") {
+  setwd("C:/")
+}
+```
+
+Create a file named ".dodsrc" with `file.create()`
+
+```{r, eval = FALSE}
+file.create(".dodsrc")
+```
+
+Open a connection to `.dodsrc` with `sink()`. Write the lines beginning with `HTTP.`, replacing `YOUR_USERNAME` and `YOUR_PASSWORD` with your NASA EarthData username and password, respectively. After writing the line, close the connection with `sink()` again.
+
+```{r, eval = FALSE}
+sink(".dodsrc")
+writeLines(
+  paste0(
+    "HTTP.NETRC=YOUR_HOME_DIRECTORY/.netrc\n",
+    "HTTP.COOKIE.JAR=YOUR_HOME_DIRECTORY/.urs_cookies"
+  )
+)
+sink()
+```
+
+After, check to ensure the file was created properly.
+
+```{r, eval = FALSE}
+file.exists(".dodsrc")
+```
+
+```{r, eval = FALSE}
+TRUE
+```
+
+```{r, eval = FALSE}
+readLines(".dodsrc")
+```
+
+```{r, eval = FALSE}
+paste0(
+  c(
+    "HTTP.NETRC=YOUR_HOME_DIRECTORY/.netrc",
+    "HTTP.COOKIE.JAR=YOUR_HOME_DIRECTORY/.urs_cookies"
+  )
+)
+```
+
+If working on a **Windows** machine, copy the `.dodsrc` file to the project working directory. Replace `YOUR_WORKING_DIRECTORY` with the absolute path to the project working directory.
+
+```{r, eval = FALSE}
+if (.Platform$OS.type == "windows") {
+  file.copy(
+    "C:/.dodsrc",
+    "YOUR_WORKING_DIRECTORY/.dodsrc"
+  )
+}
+```
+
+::: important
+Enter these commands, as well as your username, password, and home directory, without error. Even a single misplaced character can disrupt the verification of your EarthData credentials.
+:::
+
+With the prerequisite files generated, try to download the SEDAC population data again.
+
+::: note
+Be sure to authorize the "SEDAC" applications at "My Profile"(<https://urs.earthdata.nasa.gov/profile>) under "Applications \> Authorized Apps" before running the following command.
+:::
+
+```{r, eval = FALSE}
+system(
+  command = paste0(
+    "curl -n -c ~/.urs_cookies -b .urs_cookies -LJ -o ",
+    destfile,
+    " --url ",
+    url
+  )
+)
+unzip(destfile)
+```
+
+The data is downloaded successfully after the prerequisite files have been generated and the "SEDAC" applications have been authorized.
+
+## References
+
+-   Center for International Earth Science Information Network - CIESIN - Columbia University. 2018. *Gridded Population of the World, Version 4 (GPWv4): Population Density, Revision 11*. Palisades, New York: NASA Socioeconomic Data and Applications Center (SEDAC). [https://doi.org/10.7927/H49C6VHW](). Accessed 7 February 2024.
+-   National Aeronautics and Space Administration (NASA). *EOSDIS Distributed Active Archive Centers (DAAC)*. Accessed 3 January 2024. [https://www.earthdata.nasa.gov/eosdis/daacs]().
+-   National Aeronautics and Space Administration (NASA). *How to Generate Earthdata Prerequisite Files*. Accessed 3 January 2024. [https://disc.gsfc.nasa.gov/information/howto?title=How%20to%20Generate%20Earthdata%20Prerequisite%20Files]().

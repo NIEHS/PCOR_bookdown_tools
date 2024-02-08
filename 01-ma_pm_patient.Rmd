@@ -43,38 +43,36 @@ The output file will contain one row per day between start_date and end_date for
 
 ```{R}
 library(readr)
-df <- read_csv("./dataset/ms_patient_pm_census_v2.csv",show_col_types = FALSE)
-
+df <- read_csv("./dataset/ms_patient_pm_census_v2.csv", show_col_types = FALSE)
 ```
 
 ```{r}
 dim(df)
 colnames(df)
-
 ```
 
 
 install packages
 
 ```{r}
-if(!require('shiny') || !require('tidycensus')  || !require('tidyverse') || !require('viridis')) {
-  install.packages(c("shiny","tidycensus","tidyverse","viridis"))
- 
+if (!require("shiny") ||
+      !require("tidycensus") ||
+      !require("tidyverse") ||
+      !require("viridis")) {
+  install.packages(c("shiny", "tidycensus", "tidyverse", "viridis"))
 }
-if(!require('plotly')){
+if (!require("plotly")) {
   install.packages("plotly", type = "source")
 }
-
 ```
 
 ```{r }
-if(!require('ggplot2')) {
-  install.packages('ggplot2')
+if (!require("ggplot2")) {
+  install.packages("ggplot2")
 }
-if(!require('maps') || !require('ggmap')) {
-  install.packages(c("maps","ggmap"))
+if (!require("maps") || !require("ggmap")) {
+  install.packages(c("maps", "ggmap"))
 }
-
 ```
 Note that the echo = FALSE parameter was added to the code chunk to prevent printing of the R code that generated the plot. 
 
@@ -86,10 +84,12 @@ library(tidyverse)
 library(viridis)
 library(shiny)
 library(plotly)
-#Only load the census key at the first time. then we set install=true 
-#census_api_key( install=TRUE)
+# Only load the census key at the first time. then we set install=true
+first <- FALSE
+if (first == TRUE) {
+  census_api_key(install = TRUE)
+}
 options(tigris_use_cache = TRUE)
-
 ```
 
 Data wrangling
@@ -99,37 +99,37 @@ Data wrangling
 sum(is.na(df))
 
 # If there are missing values, you can drop or fill them as per your requirement
-df <- na.omit(df)  # Drop rows with missing values
-
+df <- na.omit(df) # Drop rows with missing values
 ```
 
 Change column name for later map
 
 ```{r}
 colnames(df)[which(names(df) == "lon")] <- "longitude"
-colnames(df)[which(names(df) =="lat")] <- "latitude"
+colnames(df)[which(names(df) == "lat")] <- "latitude"
 dim(df)
 ```
 
 Filter the rows based on the date range Use the subset() function to filter the rows based on the date range:2010 -2017to match 5 year sensus data
 
 ```{r}
-filtered_df <- subset(df, date >= as.Date("2012-01-01") & date <= as.Date("2017-09-01"))
+filtered_df <-
+  subset(df, date >= as.Date("2012-01-01") & date <= as.Date("2017-09-01"))
 dim(filtered_df)
 
-write.csv(filtered_df,"./dataset/asthma_small.csv")
-
+write.csv(filtered_df, "./dataset/asthma_small.csv")
 ```
 
 Combine information for display in tooltip
 
 ```{r}
 # Combine the required information for hover tooltip into a new column
-filtered_df$tooltip <- paste("PM2.5:", filtered_df$pm_pred, "<br>",
-                    "Hospital Date:", filtered_df$date, "<br>",
-                    "Patient Info:", filtered_df$code_display, "<br>",
-                    "gender :", filtered_df$gender)
-
+filtered_df$tooltip <- paste(
+  "PM2.5:", filtered_df$pm_pred, "<br>",
+  "Hospital Date:", filtered_df$date, "<br>",
+  "Patient Info:", filtered_df$code_display, "<br>",
+  "gender :", filtered_df$gender
+)
 ```
 
 ### Create a Geographical Map
@@ -137,27 +137,27 @@ filtered_df$tooltip <- paste("PM2.5:", filtered_df$pm_pred, "<br>",
 Load the required libraries for plotting maps:
 
 ```{r }
-  library(ggplot2)
-  library(maps)
-  library(ggmap)
+library(ggplot2)
+library(maps)
+library(ggmap)
 ```
 
 Add map data to the base plot using the map_data() function:
 
 ```{R}
-# Draw massachusetts map 
+# Draw massachusetts map
 ma_map <- map_data("state", region = "massachusetts")
 
 # Create a base plot for Massachusetts
 p <- ggplot() +
-  geom_polygon(data = ma_map, aes(x = long, y = lat, group = group),
-               fill = "lightgray", color = "black")
-
+  geom_polygon(
+    data = ma_map, aes(x = long, y = lat, group = group),
+    fill = "lightgray", color = "black"
+  )
 ```
 
 ```{R include=FALSE}
-#print(p)
-
+# print(p)
 ```
 
 ### Plotting the Data Points
@@ -167,25 +167,30 @@ Plot the data points on the map using the geom_point() function. Specify the lon
 Add PM2.5 data points with hover information
 
 ```{r}
-p <- p + geom_point(data = filtered_df, aes(x = longitude, y = latitude, color = pm_pred,
-                                   text = tooltip), size = 3)
-#you can run this block code on your local to have mouse hover text. for Now it cannot 
-#rander on R-studio connect
-#Convert the plot to a plotly object
-# p <- ggplotly(p) %>%
-#  layout(hoverlabel = list(bgcolor = "white"),
-#         hovertemplate = paste(
-#           "<b>%{text}</b>"
-#         )
-#  )
-
+p <- p + geom_point(data = filtered_df, aes(
+  x = longitude, y = latitude, color = pm_pred,
+  text = tooltip
+), size = 3)
+# you can run this block code on your local to have mouse hover text.
+# for Now it cannot
+# rander on R-studio connect
+# Convert the plot to a plotly object
+run <- FALSE
+if (run == TRUE) {
+  p <- ggplotly(p) %>%
+    layout(
+      hoverlabel = list(bgcolor = "white"),
+      hovertemplate = paste(
+        "<b>%{text}</b>"
+      )
+    )
+}
 ```
 
 Draw the map
 
 ```{r}
 print(p)
-
 ```
 
 

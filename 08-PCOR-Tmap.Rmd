@@ -5,16 +5,25 @@
 # **PCOR T-map** {-}
 
 ## PM 2.5 Tmap{-}
+
 ```{r}
-if(!require('tmap')){
-  install.packages('tmap')
+if (!require("tmap")) {
+  install.packages("tmap")
 }
 library(tmap)
-#help(tmap_animation)
-if (!require('gifski'))
-  install.packages('gifski')
-#if(!require('ffmpeg'))
- # install.packages('ffmpeg')
+help <- FALSE
+if (help == TRUE) {
+  help(tmap_animation)
+}
+if (!require("gifski")) {
+  install.packages("gifski")
+}
+ffmpeg <- FALSE
+if (ffmpeg == TRUE) {
+  if (!require("ffmpeg")) {
+    install.packages("ffmpeg")
+  }
+}
 ```
 
 ### Samples:
@@ -22,7 +31,7 @@ if (!require('gifski'))
 ```{r}
 data("World")
 tm_shape(World) +
-    tm_polygons("HPI")
+  tm_polygons("HPI")
 ```
 
 ### Dianamic T-map
@@ -31,37 +40,35 @@ tm_shape(World) +
 tmap_mode("view")
 
 tm_shape(World) +
-    tm_polygons("HPI")
-
-
+  tm_polygons("HPI")
 ```
 
 ### Sample tmap_animation:
 ```{R}
-#library(ffmpeg)
-#This version cannot install ffmpeg
+# library(ffmpeg)
+# This version cannot install ffmpeg
 # data(NLD_prov)
-# 
-# m1 <- tm_shape(NLD_prov) + 
+#
+# m1 <- tm_shape(NLD_prov) +
 # 	      tm_polygons("yellow") +
 # 	  tm_facets(along = "name")
-# 
+#
 # tmap_animation(m1, delay=40)
-# 
+#
 # data(World, metro)
-# 
+#
 # m2 <- tm_shape(World, projection = "+proj=eck4", simplify = 0.5) +
 #           tm_fill() +
-#       tm_shape(metro) + 
+#       tm_shape(metro) +
 #           tm_bubbles(size = paste0("pop", seq(1970, 2030, by=10)),
 #           		   col = "purple",
 #           		   border.col = "black", border.alpha = .5,
 #           		   scale = 2) +
-#       tm_facets(free.scales.symbol.size = FALSE, nrow=1,ncol=1) + 
+#       tm_facets(free.scales.symbol.size = FALSE, nrow=1,ncol=1) +
 #       tm_format("World")
-# 
+#
 # tmap_animation(m2, delay=100, outer.margins = 0)
-# 
+#
 # m3 <- lapply(seq(50, 85, by = 5), function(age) {
 # 	World$at_most <- World$life_exp <= age
 # 	World_sel <- World[which((World$life_exp <= age) & (World$life_exp > (age - 5))), ]
@@ -71,9 +78,9 @@ tm_shape(World) +
 # 		tm_text("name", size = "AREA", root = 5, remove.overlap = TRUE) +
 # 		tm_layout(main.title = paste0("Life expectency at most ", age), frame = FALSE)
 # })
-# 
+#
 # tmap_animation(m3, width = 1200, height = 600, delay = 100)
-# 
+#
 # m4 <- tm_shape(World) +
 # 	tm_polygons() +
 # tm_shape(metro) +
@@ -81,29 +88,25 @@ tm_shape(World) +
 # 	tm_text("name", ymod = -1) +
 # tm_facets(by = "name", free.coords = F, nrow = 1, ncol = 1) +
 # 	tm_layout(panel.show = FALSE, frame = FALSE)
-# 
-# tmap_animation(m4, filename = "World_cities.mp4", 
+#
+# tmap_animation(m4, filename = "World_cities.mp4",
 #     width=1200, height = 600, fps = 2, outer.margins = 0)
-# 
-
+#
 ```
 ```{R}
 data(World, metro, rivers, land)
 
 tmap_mode("plot")
 tm_shape(land) +
-    tm_raster("elevation", palette = terrain.colors(10)) +
-tm_shape(World) +
-    tm_borders("white", lwd = .5) +
-    tm_text("iso_a3", size = "AREA") +
-tm_shape(metro) +
-    tm_symbols(col = "red", size = "pop2020", scale = .5) +
-tm_legend(show = FALSE)
-
+  tm_raster("elevation", palette = terrain.colors(10)) +
+  tm_shape(World) +
+  tm_borders("white", lwd = .5) +
+  tm_text("iso_a3", size = "AREA") +
+  tm_shape(metro) +
+  tm_symbols(col = "red", size = "pop2020", scale = .5) +
+  tm_legend(show = FALSE)
 ```
 ```{r child="08-PCOR-Tmap_c.Rmd", echo=TRUE}
- 
 ```
 ```{r child="08-PCOR-Tmap_d.Rmd", echo=TRUE}
- 
 ```

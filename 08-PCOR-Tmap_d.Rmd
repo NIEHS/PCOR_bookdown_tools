@@ -1,29 +1,31 @@
 ### 12 month t-map
 ### Check and install the libraries
 ```{r}
-#if(!"cowplot" %in% install.packages()){
- # install.packages('cowplot')}
-#if(!"ggplot2" %in% install.packages()){
-  #install.packages("ggplot2")}
+# if(!"cowplot" %in% install.packages()){
+# install.packages('cowplot')}
+# if(!"ggplot2" %in% install.packages()){
+# install.packages("ggplot2")}
 
-if(!require('ggplot2')) {
-  install.packages('ggplot2')
-  install.packages(c("maps","ggmap"))
+if (!require("ggplot2")) {
+  install.packages("ggplot2")
+  install.packages(c("maps", "ggmap"))
 }
 
-if(!require('tmap')){
-  install.packages('tmap')
+if (!require("tmap")) {
+  install.packages("tmap")
 }
-if (!require('sf')){
-  install.packages('sf')
+if (!require("sf")) {
+  install.packages("sf")
 }
-if (!"magick" %in% installed.packages())
-  install.packages('magick')
+if (!"magick" %in% installed.packages()) {
+  install.packages("magick")
+}
 
-if(!"dplyr" %in% installed.packages())
+if (!"dplyr" %in% installed.packages()) {
   install.packages("dplyr")
-if (!require('lubridate')){
-  install.packages('lubridate')
+}
+if (!require("lubridate")) {
+  install.packages("lubridate")
 }
 ```
 
@@ -55,69 +57,67 @@ colnames(us_epa_daily_2020)
 ```{r}
 unique(us_epa_daily_2020$State.Name)
 ### Filter by state name or ID California
-CA_pm_2020 <- us_epa_daily_2022[us_epa_daily_2020$State.Name=='California',]
-dim(CA_pm_2020)
+ca_pm_2020 <- us_epa_daily_2022[us_epa_daily_2020$State.Name == "California", ]
+dim(ca_pm_2020)
 # Check for missing values
-sum(is.na(CA_pm_2020))
+sum(is.na(ca_pm_2020))
 # If there are missing values, you can drop or fill them as per your requirement
-CA_null <- na.omit(CA_pm_2020)  # Drop rows with missing values
-
+ca_null <- na.omit(ca_pm_2020) # Drop rows with missing values
 ```
 
 ```{R}
-print(CA_pm_2020)
-print (CA_null)
-dim(CA_null)
-
+print(ca_pm_2020)
+print(ca_null)
+dim(ca_null)
 ```
 ### calculate the mean value for the each month
 ```{r}
-CA_pm_2020_Month<- CA_pm_2020 %>%
+ca_pm_2020_month <- ca_pm_2020 %>%
   mutate(Month = month(ymd(Date.Local))) %>%
-  group_by(`County.Code`,Month) %>%
+  group_by(`County.Code`, Month) %>%
   summarise(Mean_of_Arithmetic_Mean = mean(`Arithmetic.Mean`, na.rm = TRUE))
-colnames(CA_pm_2020_Month)
-dim(CA_pm_2020_Month)
+colnames(ca_pm_2020_month)
+dim(ca_pm_2020_month)
 ```
 
 ### Download U.S. counties map files
 ```{r}
 # Go to the TIGER/Line Shapefiles page on the Census Bureau's website:
-# https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html
+# https://www.census.gov/geographies/mapping-files/time-series/geo/
+# tiger-line-file.html
 # make sure there is no null in the dataset
-# Read in the shapefile (replace 'counties' with the path to your actual shapefile)
-counties <- st_read('dataset/tl_2022_us_county.shp')
+# Read in the shapefile (replace 'counties' with the path to your actual
+# shapefile)
+counties <- st_read("dataset/tl_2022_us_county.shp")
 ```
 
 ### Join the dataset with U.S. country code
 ```{R}
-#library(dplyr)
-#library(lubridate)
-#library(tidyr)
-#Convert integer to character
-CA_pm_2020_Month$County.Code <- as.character(CA_pm_2020_Month$County.Code)
-#format conuty.code to 3chartes
-CA_pm_2020_Month$County.Code <- sprintf("%03s", CA_pm_2020_Month$County.Code)
-head(CA_pm_2020_Month)
-#check data
-subset_data <- CA_pm_2020_Month %>%
-  filter(County.Code == '003')
+# library(dplyr)
+# library(lubridate)
+# library(tidyr)
+# Convert integer to character
+ca_pm_2020_month$County.Code <- as.character(ca_pm_2020_month$County.Code)
+# format conuty.code to 3chartes
+ca_pm_2020_month$County.Code <- sprintf("%03s", ca_pm_2020_month$County.Code)
+head(ca_pm_2020_month)
+# check data
+subset_data <- ca_pm_2020_month %>%
+  filter(County.Code == "003")
 
 print(subset_data)
 
 # Ensure each county has all 12 months
-#all_combinations <- expand(CA_pm_2020_Month, County.Code, Month = 1:12)
-#print(all_combinations)
+# all_combinations <- expand(CA_pm_2020_Month, County.Code, Month = 1:12)
+# print(all_combinations)
 ```
 ```{r}
 # Merge the data and the shapefile
-merged <- CA_pm_2020_Month %>%
- left_join(  counties, by = c("County.Code" = "COUNTYFP" ))
+merged <- ca_pm_2020_month %>%
+  left_join(counties, by = c("County.Code" = "COUNTYFP"))
 ```
 ```{R}
-
-dim(CA_pm_2020_Month)
-
+dim(ca_pm_2020_month)
 ```
 
 ### Define AQI breaks and colors
@@ -132,11 +132,11 @@ aqi_colors <- c("green", "yellow", "orange", "red", "purple", "maroon")
 tmap_options(check.and.fix = TRUE)
 # Convert the data to spatial data frame
 merged_data_sf <- st_as_sf(merged)
-# Set geographical limits for North Carolina 
-#bb_nc <- st_bbox(c(xmin = -84.5, ymin = 33.8, xmax = -75.4, ymax = 36.6), crs = st_crs(merged_data_sf))
+# Set geographical limits for North Carolina
+# bb_nc <- st_bbox(c(xmin = -84.5, ymin = 33.8, xmax = -75.4, ymax = 36.6), crs = st_crs(merged_data_sf))
 
 # Set geographical limits for California
-bb <- st_bbox(c(xmin = -124.482003, ymin = 32.528832, xmax = -114.131211, ymax = 42.009518),  crs = st_crs(merged_data_sf))
+bb <- st_bbox(c(xmin = -124.482003, ymin = 32.528832, xmax = -114.131211, ymax = 42.009518), crs = st_crs(merged_data_sf))
 
 # Subset the data for California
 merged_data_sf_ca <- st_crop(merged_data_sf, bb)
@@ -147,31 +147,34 @@ tmap_mode("plot")
 ### Draw 12 month 2020 California PM 2.5 T-Map
 ```{R}
 tm_shape(merged_data_sf_ca, projection = 5070) +
-    tm_borders(col = "black", alpha = 0.4) +
-    tm_fill(col = "Mean_of_Arithmetic_Mean", 
-             breaks = aqi_breaks,
-             palette = aqi_colors,
-             alpha = 0.6) +
-     tm_facets(by = "Month", free.coords = FALSE) +
-    tm_legend(bg.color="white", bg.alpha=0.6)+
-    tm_layout(title = "",
-              attr.color = "navy",
-              title.position = c("center", "top"),
-              title.bg.color = "lightblue")
-
+  tm_borders(col = "black", alpha = 0.4) +
+  tm_fill(
+    col = "Mean_of_Arithmetic_Mean",
+    breaks = aqi_breaks,
+    palette = aqi_colors,
+    alpha = 0.6
+  ) +
+  tm_facets(by = "Month", free.coords = FALSE) +
+  tm_legend(bg.color = "white", bg.alpha = 0.6) +
+  tm_layout(
+    title = "",
+    attr.color = "navy",
+    title.position = c("center", "top"),
+    title.bg.color = "lightblue"
+  )
 ```
 
 ### Check if there are data in month 11
-```{r}
-#https://www.fire.ca.gov/incidents/2020
-#colnames(merged_data_sf_ca)
-#print(merged_data_sf_ca)
+```{r, eval = FALSE}
+# https://www.fire.ca.gov/incidents/2020
+colnames(merged_data_sf_ca)
+print(merged_data_sf_ca)
 dim(merged_data_sf_ca)
-subset_data <- CA_pm_2020_Month %>%
+subset_data <- ca_pm_2020_month %>%
   filter(Month == 10)
 print(subset_data)
 #
-sub_seto<-CA_pm_2020_Month[CA_pm_2020_Month$Month==11,]
+sub_seto <- ca_pm_2020_month[ca_pm_2020_month$Month == 11, ]
 print(sub_seto)
 # 0
 ```
