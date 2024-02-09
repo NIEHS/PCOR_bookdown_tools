@@ -5,7 +5,8 @@ testthat::test_that("Bookdown renders without error.", {
   )
   withr::local_package("testthat")
   withr::local_package("bookdown")
+  setwd("../")
   testthat::expect_no_error(
-    bookdown::render_book("../")
+    bookdown::render_book()
   )
 })
