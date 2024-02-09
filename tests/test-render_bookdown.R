@@ -1,5 +1,8 @@
 
 testthat::test_that("Bookdown renders without error.", {
+r <- getOption("repos")
+r["CRAN"] <- "http://cran.us.r-project.org"
+options(repos = r)
   withr::local_options(
     rlang_interactive = FALSE
   )
