@@ -20,9 +20,10 @@ jobs:
         with:
           use-public-rspm: true
 
-      - name: Install libudunits2
+      - name: Install libudunits2 and libmagick
         run: |
           sudo apt-get install -y libudunits2-dev libgdal-dev
+          sudo apt-get install libmagick++-dev
 
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
