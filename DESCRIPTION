@@ -25,5 +25,6 @@ Imports:
     lubridate,
     ffmpeg,
     gifski,
-    magick (== 2.7.5)
+    magick (== 2.7.5),
+    cowplot
 Config/testthat/edition: 3
