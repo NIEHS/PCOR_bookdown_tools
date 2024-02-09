@@ -11,9 +11,7 @@ on:
 jobs:
   test-render-bookdown:
     runs-on: ubuntu-latest
-    env:
-      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
-    
+    continue-on-error: false
     steps:
       - uses: actions/checkout@v4
 
@@ -34,7 +32,6 @@ jobs:
       - name: Render Bookdown
         env:
           GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
-        continue-on-error: false
         run: |
           install.packages(c(
             "testthat",
@@ -68,3 +65,7 @@ jobs:
           )
         shell: Rscript {0}  
 
+      - name: Upload test results
+        if: failure()
+        uses: actions/upload-artifact@v3
+        
