@@ -11,7 +11,8 @@ on:
 jobs:
   test-render-bookdown:
     runs-on: ubuntu-latest
-    continue-on-error: false
+    env:
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - uses: actions/checkout@v4
 
@@ -31,8 +32,6 @@ jobs:
             any::covr
 
       - name: Render Bookdown
-        env:
-          GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
         run: |
           install.packages(c(
             "testthat",
