@@ -28,6 +28,7 @@ jobs:
           packages: |
             any::testthat
             any::bookdown
+            any::covr
 
       - name: Render Bookdown
         env:
@@ -60,12 +61,7 @@ jobs:
             ),
             dependencies = TRUE
           )
-          testthat::test_file(
-            "tests/test-render_bookdown.R"
+          covr::environment_coverage(
+            test_files = "tests/test-render_bookdown.R"
           )
-        shell: Rscript {0}  
-
-      - name: Upload test results
-        if: failure()
-        uses: actions/upload-artifact@v3
-        
+        shell: Rscript {0} 
