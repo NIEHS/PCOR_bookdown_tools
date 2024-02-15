@@ -260,8 +260,8 @@ Homeland Infrastructure Foundation-Level Data (HIFLD) Geoplatform. *Mexico and U
 &nbsp; 
 
 
-```{r child="06-geo-exposure-b.Rmd", echo=FALSE}
+```{r child="BB-geo-exposure-b.Rmd", echo=FALSE}
 ```
-```{r child="06-geo-exposure-c.Rmd", echo=FALSE}
+```{r child="BB-geo-exposure-c.Rmd", echo=FALSE}
 ```
  

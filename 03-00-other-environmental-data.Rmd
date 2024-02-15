@@ -1,0 +1,8 @@
+# (PART\*) Other Environmental Data {-}
+
+# **Other Environmental Data** {-}
+
+This unit provides guidance and code for working with various sources of environmental data common in environmental health research.
+
+
+

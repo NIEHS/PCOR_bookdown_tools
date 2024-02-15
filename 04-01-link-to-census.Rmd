@@ -1,9 +1,4 @@
-# (PART) Integrating environmental and health data {-}
-
-This section covers...
-
-
-# Linking geocoded addresses to US Census geographic units: A tutorial 
+# Linkage to Census geographies
 
 *Date*: September 13, 2023
 

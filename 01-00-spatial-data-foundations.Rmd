@@ -1,5 +1,5 @@
-# (PART\*) Spatial Data Foundations {-}
+# (PART\*) Geospatial Data Foundations {-}
 
-# **Spatial Data Foundations** {-}
+# **Geospatial Data Foundations** {-}
 
-This unit provides guidance and example code for working with different types of spatial data common in environmental health research. 
+This unit provides guidance and example code for working with different types of geospatial data common in environmental health research. 

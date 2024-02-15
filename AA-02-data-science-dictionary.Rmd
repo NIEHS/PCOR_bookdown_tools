@@ -1,0 +1,8 @@
+# Environmental Data Science Glossary
+
+The following defines key terms used in the CHORDS Toolkit.
+
+
+
+
+
