@@ -1,16 +1,16 @@
-# Spatial Analysis with Environmental Data
+# Spatial Analysis
 
 [![Profile-CMP](https://img.shields.io/badge/User%20Profile-Clinician/Medical%20Professional-f58231.svg)](#profilecmp)
 [![Profile-SBS](https://img.shields.io/badge/User%20Profile-Social%20&%20Behavioral%20Scientist-808000.svg)](#profilesbs)
 [![Profile-STU](https://img.shields.io/badge/User%20Profile-Student-dcbeff.svg)](#profilestu)
 
-<font size ="5"> **Access, Import, and Primary Analyses in R** </font>
+<font size ="5"> **Access, Import, and Primary Analyses with Environmental Data in R** </font>
 
 **Date Modified:** February 1, 2024
 
 **Authors:** Mitchell Manware, Kyle P Messier
 
-**Key Terms:** Geospatial Analysis, Geospatial Data
+**Key Terms:** [Geospatial Analysis](#def-geospatial-analysis), [Geospatial Data](#def-geospatial-data)
 
 **Programming Language:** R
 
@@ -82,7 +82,7 @@ library(tidyterra)
 library(utils)
 ```
 
-#### `ggplot2` and `ggpubr`
+#### `ggplot2` and `ggpubr` {-}
 
 The `ggplot2` and `ggpubr` packages will be used throughout the vignette for creating publication quality plots. Please see [ggplot2: Elegant Graphics for Data Analysis (3e)](https://ggplot2-book.org/introduction) and [ggpubr: 'ggplot2' Based Publication Ready Plots](https://rpkgs.datanovia.com/ggpubr/) for in depth descriptions of the syntax and functionality utilized by these packages.
 
@@ -551,7 +551,7 @@ smoke_sf <- st_read("/   YOUR FILE PATH   /hms_smoke20230901.shp")
 
 Importing `hms_smoke20230901.shp` does not return a `Warning:` message because the data set has native spatial features, and is therefore imported as an `sf` object.
 
-#### Inspect structure
+#### Inspect structure {-}
 
 Inspect the structure of `smoke_sf` to see its class, column names, column classes, and the first two (specified by `vec.len = 2`) data points.
 
@@ -567,7 +567,7 @@ As mentioned previously, the `smoke_sf` data set has native spatial features. Th
 class(smoke_sf)
 ```
 
-#### Reclassify
+#### Reclassify {-}
 
 The main parameter of interest in this data set is `$Density`, which discretely categorizes each wildfire smoke plume as "Light", "Medium", or "Heavy". Checking its class shows that `$Density` is class character.
 
@@ -591,7 +591,7 @@ Check the class of `$Density` again to ensure proper reclassification.
 class(smoke_sf$Density)
 ```
 
-#### Coordinate reference system and projection
+#### Coordinate reference system and projection {-}
 
 Check the coordinate reference system of an `sf` object with `sf::st_crs()`.
 
@@ -608,7 +608,7 @@ smoke_sf <- st_transform(
 )
 ```
 
-#### Plot (single)
+#### Plot (single) {-}
 
 With the data prepared, plot the wildfire smoke plume polygons with `ggplot2::ggplot()`.
 
@@ -637,7 +637,7 @@ The wildfire smoke plume polygons are clearly visible and colored according to t
 For the purposes of these exploratory analyses, the satellite travelling direction and time of collection will be ignored.
 :::
 
-#### Union
+#### Union {-}
 
 Individual polygons can be unioned (combined) into one multi-part polygon with `sf::st_union`. The `group_by(Density)` argument specifies that the polygons should be combined based on the value stored in `$Density`. Adding the `Date = paste0(...` argument within the `dplyr::summarise()` function creates a parameter to store the date based on the year, month, and day of the data (defined in 2.0 Access, download, and unzip).
 
@@ -682,7 +682,7 @@ ggplot() +
 
 The plot is still difficult to interpret because it lacks geospatial context. The grid lines provide latitude and longitude references, but physical or geopolitical boundaries can help show where the wildfire smoke plumes are relative to the study area of interest. To provide geospatial context to the wildfire smoke plume polygons, we can add the United States' state boundary polygons to the plot.
 
-#### Plot (multiple)
+#### Plot (multiple) {-}
 
 The steps taken to access, download, unzip, and import the United States' state boundary data are the same as those taken for the wildfire smoke plume coverage data. Refer to sections 2.0 Access, download, and unzip, and 2.1.1 Import for detailed descriptions.
 
@@ -806,7 +806,7 @@ ggplot() +
 
 This plot provides important geospatial context for understanding where the wildfire smoke plumes are in relation to the study area of interest.
 
-#### Crop
+#### Crop {-}
 
 The `sf::st_crop()` function can be used to reduce the extent of a set of polygons to a specific rectangle, typically the bounding box of another spatial data set. In this example we can crop the `smoke_sf_density` polygons to the bounding box surrounding the coterminous United States.
 
@@ -844,7 +844,7 @@ ggplot() +
 
 This section will focus on exploratory analyses with polygon data using the `terra` package.
 
-#### Import
+#### Import {-}
 
 Now that the contents of the zip files have been saved on your machine and the data files of interest have been identified, import both the wildfire smoke plume coverage data and the United States' state boundary data with `terra::vect()`.
 
@@ -857,7 +857,7 @@ smoke_t <- vect("/   YOUR FILE PATH   /hms_smoke20230901.shp")
 states_t <- vect("/   YOUR FILE PATH   /cb_2018_us_state_500k.shp")
 ```
 
-#### Inspect structure
+#### Inspect structure {-}
 
 Inspect the structures of `smoke_t` and `states_t` to see their classes, column names, column classes.
 
@@ -868,7 +868,7 @@ states_t
 
 Both `smoke_t` and `states_t` have native spatial features. These are reflected by the type of spatial data in `geometry:`, and the spatial attributes `extent:` and `coord. ref.:`
 
-#### Reclassify
+#### Reclassify {-}
 
 The main parameter of interest in this data set is `$Density`, which discretely categorizes each wildfire smoke plume as "Light", "Medium", or "Heavy". Checking its class shows that `$Density` is class character.
 
@@ -911,7 +911,7 @@ conus_t <- subset(
 )
 ```
 
-#### Coordinate reference system and projection
+#### Coordinate reference system and projection {-}
 
 Check the coordinate reference systems of `SpatVector` objects with `terra::crs()`.
 
@@ -943,7 +943,7 @@ Although both data sets were transformed to the same projected coordinate system
 crs(smoke_t) == crs(conus_t)
 ```
 
-#### Plot (multiple)
+#### Plot (multiple) {-}
 
 Plot both data sets together in one plot with `ggplot2::ggplot()`.
 
@@ -976,7 +976,7 @@ The wildfire smoke plume polygons are clearly visible and colored according to t
 For the purposes of these exploratory analyses, the satellite travelling direction and time of collection will be ignored.
 :::
 
-#### Aggregate
+#### Aggregate {-}
 
 Individual polygons an be aggregated (combined) into one multi-part polygon with `terra::aggregate()`. The `by = "Density"` argument specifies that the polygons should be combined based on the value stored in `$Density`.
 
@@ -1025,7 +1025,7 @@ ggplot() +
 
 <img src="images/intro_to_spatial/smoke_polygons_terra_aggregated.png" width = "75%" height = "auto" class = "centerimage">
 
-#### Crop
+#### Crop {-}
 
 The `terra::crop()` function can be used to reduce `SpatVector` to an area determined by another `SpatVector`. In this example, we can crop the `smoke_t_density` polygons to the coterminous United States' state boundaries.
 
@@ -1063,7 +1063,7 @@ ggplot() +
 
 <img src="images/intro_to_spatial/smoke_polygons_terra_cropped.png" width = "75%" height = "auto" class = "centerimage">
 
-#### Zonal statistics
+#### Zonal statistics {-}
 
 Looking closely at the previous plot, it is clear that wildfire smoke plumes cover each state differently. The `terra` package can be used to identify which states are covered by each classification of wildfire smoke plumes.
 
@@ -1107,7 +1107,7 @@ The `conus_t` data set now contains separate columns indicating the presence or 
 names(conus_t)
 ```
 
-#### Plot (`for` Loop)
+#### Plot (`for` Loop) {-}
 
 A `for` loop can be used to create indicator plots for each wildfire smoke plume classification. The layout of a `for` loop can look complicated, but it simply applies the same set of functions to a given list of inputs.
 
