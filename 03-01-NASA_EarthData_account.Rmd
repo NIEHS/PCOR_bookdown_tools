@@ -1,14 +1,14 @@
-# **NASA EarthData and Prerequisite Files** {.unnumbered}
+# NASA EarthData Download
 
 [![Profile-CDM](https://img.shields.io/badge/User%20Profile-Clinical%20Data%20Manager-469990.svg)](#profilecdm) [![Profile-EDU](https://img.shields.io/badge/User%20Profile-Educator-bfef45.svg)](#profileedu) [![Profile-GEO](https://img.shields.io/badge/User%20Profile-Geospatial%20Analyst-fabed4.svg)](#profilegeo)
 
 **Date Modified:** February 7, 2024
 
-**Author(s):** Mitchell Manware
+**Author:** Mitchell Manware
 
-**Key Terms:** NASA EarthData; geospatial data
+**Key Terms:** [Geospatial Data](#def-geospatial-data), [Remote Sensing](https://tools.niehs.nih.gov/cchhglossary/)
 
-**Programming Language(s):** R, Bash
+**Programming Languages:** R, Bash
 
 ## Introduction
 
@@ -107,7 +107,7 @@ To download the password protected data with command line commands, we must gene
 The following steps return errors for Windows system users. File generation on Windows is currently in development.
 :::
 
-#### `.netrc`
+#### `.netrc` {-}
 
 The following commands create the `.netrc` file, which contains your NASA EarthData Account credentials.
 
@@ -163,7 +163,7 @@ paste0(
 )
 ```
 
-#### `.urs_cookies`
+#### `.urs_cookies` {-}
 
 The following commands create the `.urs_cookies` file.
 
@@ -193,7 +193,7 @@ file.exists(".urs_cookies")
 TRUE
 ```
 
-#### `.dodsrc`
+#### `.dodsrc` {-}
 
 The following commands create the `.urs_cookies` file.
 

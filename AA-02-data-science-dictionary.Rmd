@@ -1,8 +1,11 @@
-# Environmental Data Science Glossary
+# Environmental Data Science Glossary {.unnumbered}
 
 The following defines key terms used in the CHORDS Toolkit.
 
 
+#### Geospatial Data {#def-geospatial-data .unnumbered .unlisted}
+Data that includes information about specific times and places on the Earth.
+*Context:* Geospatial data can be used to assess individual and population level exposures to environmental and social determinants of health.
 
 
 

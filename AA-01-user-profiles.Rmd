@@ -1,4 +1,4 @@
-# **User Profiles** {.unnumbered}
+# User Profiles {.unnumbered}
 
 The educational materials and tutorials in this book have been designed to for various types of users.
 
