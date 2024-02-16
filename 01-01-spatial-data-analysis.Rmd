@@ -537,7 +537,7 @@ Deleting any of the supporting files (ie. `*.dbf`, `*.prj`, or `*.shx`) will dis
 
 This section will focus on exploratory analyses with polygon data using the `sf` package.
 
-#### Import
+#### Import {-}
 
 Now that the contents of the zip file have been saved on your machine and the data file of interest has been identified, import the data with `sf::st_read()`.
 

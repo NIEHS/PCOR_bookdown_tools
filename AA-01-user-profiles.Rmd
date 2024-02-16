@@ -1,6 +1,7 @@
 # User Profiles {.unnumbered}
 
-The educational materials and tutorials in this book have been designed to for various types of users.
+The CHORDS Toolkit chapters have been developed for various types of user profiles. 
+This appendix describes the user profiles and lists the most relevant chapters for each type.
 
 ## Clinical Data Manager  {#profilecdm .unnumbered .unlisted}
 ![](https://img.shields.io/badge/User%20Profile-Clinical%20Data%20Manager-469990.svg)
