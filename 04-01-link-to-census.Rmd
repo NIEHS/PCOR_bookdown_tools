@@ -2,11 +2,11 @@
 
 *Date*: September 13, 2023
 
-*Author(s)*: Lara Clark
+*Author*: Lara Clark
 
-**Key Terms**: Data Integration, Social Determinants of Health
+**Key Terms**: [Data Integration](https://tools.niehs.nih.gov/cchhglossary/?keyword=data+integration&termOnlySearch=true), [Social Determinants of Health](https://tools.niehs.nih.gov/cchhglossary/?keyword=social+determinants+of+health&termOnlySearch=true), [Geocoded Address](#def-geocoded-address), [Geographic Unit](#def-geographic-unit), [Geoid](#def-geoid)
 
-**Programming Language(s)**: R
+**Programming Language**: R
 
 ## Introduction
 

@@ -10,7 +10,7 @@
 
 **Authors:** Mitchell Manware, Kyle P Messier
 
-**Key Terms:** [Geospatial Analysis](#def-geospatial-analysis), [Geospatial Data](#def-geospatial-data)
+**Key Terms:** [Geospatial Data](#def-geospatial-data)
 
 **Programming Language:** R
 

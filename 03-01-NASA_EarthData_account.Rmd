@@ -6,7 +6,7 @@
 
 **Author:** Mitchell Manware
 
-**Key Terms:** [Geospatial Data](#def-geospatial-data), [Remote Sensing](https://tools.niehs.nih.gov/cchhglossary/)
+**Key Terms:** [Geospatial Data](#def-geospatial-data), [Remote Sensing](https://tools.niehs.nih.gov/cchhglossary/?keyword=remote+sensing)
 
 **Programming Languages:** R, Bash
 
