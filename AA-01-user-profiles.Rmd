@@ -207,6 +207,7 @@ The educational materials and tutorials in this book have been designed to for v
 **Relevant Chapters**
 
 -   [Spatial Analysis with Environmental Data in R](#spatial-analysis-with-environmental-data-in-r)
+-   [Linkage to Census Units](#link-to-census)
 
 ## Translational Researcher {#profiletlr .unnumbered .unlisted}
 ![](https://img.shields.io/badge/User%20Profile-Translational%20Researcher-aaffc3.svg)
