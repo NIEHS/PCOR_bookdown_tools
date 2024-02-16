@@ -38,7 +38,7 @@ The Census defines [geographic boundaries](https://www.census.gov/newsroom/blogs
 
 The Census defines the boundaries of tracts, block groups, and blocks to scale with local population: that is, in areas with higher population density (e.g., urban cores), these geographic units have finer spatial scale (i.e., smaller land area per unit) and in areas with lower population density (e.g., rural areas), the geographic units have coarser spatial scale (i.e., larger land area per unit). As a result, the spatial scale of geographic units varies substantially across the US. The shape of geographic units also varies substantially: the Census defines these boundaries to follow political boundaries (e.g., state boundaries) as well as physical features (e.g., roads, rivers), which often have irregular shapes.
 
-::: {.callout-note appearance="simple"}
+::: {.note}
 The variable shape and spatial scale of Census geographic units is in contrast with spatial grids-- in which each geographic unit (i.e., grid cell) has the same shape and spatial resolution. Such spatial grids are common for environment and climate data.
 :::
 
@@ -48,10 +48,10 @@ The following figure illustrates the variable spatial scale and shape of each ty
 
 <center>
 
-![Census geographic units in Durham County, North Carolina, in 2010](images/geography_durham_co.png)
-
+![**Census geographic units in Durham County, North Carolina, in 2010**](images/geography_durham_co.png)
 </center>
-
+  
+  
 The Census assigns a unique identifying code, or [geoid](https://www.census.gov/programs-surveys/geography/guidance/geo-identifiers.html), to each geographic unit. This Census geoid is also referred to as a FIPS (Federal Information Processing Series) code.
 
 The following table describes common types of Census geographic units and the structure of their geoids:
@@ -67,7 +67,7 @@ The following table describes common types of Census geographic units and the st
 
 [^09-tutorial-link-point-to-census-geoid-1]: Total number of geographic units in the US in 2020 (Source: [Census Bureau](https://www.census.gov/geographies/reference-files/time-series/geo/tallies.html))
 
-::: callout-note
+::: {.note}
 For states, counties, tracts, block groups, and blocks: the geoids for the finer spatial scale units are constructed from the geoids for the coarser spatial scale units in which they are located. This makes it possible to extract, for example, the tract geoid from the block geoid based on digit number.
 :::
 
@@ -85,15 +85,15 @@ The following are important considerations for linking geocoded addresses to Cen
 
 This tutorial includes the following steps:
 
--   [Install R packages](#step-0)
+1.   [Install R packages](#step-0)
 
--   [Prepare geocoded addresses](#step-1)
+2.   [Prepare geocoded addresses](#step-1)
 
--   [Access Census geographic boundaries](#step-2)
+3.   [Access Census geographic boundaries](#step-2)
 
--   [Link geocoded addresses to Census geographic boundaries](#step-3)
+4.   [Link geocoded addresses to Census geographic boundaries](#step-3)
 
--   [Link AHRQ SDOH data to geocoded addresses](#step-4)
+5.   [Link AHRQ SDOH data to geocoded addresses](#step-4)
 
 ## Tutorial
 
@@ -165,7 +165,7 @@ Next, we'll transform this table to an explicitly spatial data type: [simple fea
 
 To do this, we will need to specify the [coordinate reference system (CRS)](https://www.nceas.ucsb.edu/sites/default/files/2020-04/OverviewCoordinateReferenceSystems.pdf) used for the city hall coordinates. For this example, we retrieved the city hall coordinates from Google Maps, which uses the [World Geodetic System 1984](https://developers.google.com/maps/documentation/javascript/coordinates) (`WGS84`) CRS.
 
-::: callout-tip
+::: {.note}
 If you need to find the coordinate reference system information for your geolocation data, here are a few places to look:
 
 -   Metadata for geolocation data
@@ -225,19 +225,26 @@ head(nc_tracts_2010_sf)
 Here is the description of the simple features object produced by the code above:
 
 ```{r eval = FALSE}
-# nolint start
 # Simple feature collection with 6 features and 14 fields
 # Geometry type: MULTIPOLYGON
 # Dimension:     XY
 # Bounding box:  xmin: -80.07571 ymin: 34.80499 xmax: -79.45918 ymax: 35.18342
 # Geodetic CRS:  NAD83
-#   STATEFP10 COUNTYFP10 TRACTCE10     GEOID10 NAME10        NAMELSAD10 MTFCC10 FUNCSTAT10   ALAND10 AWATER10  INTPTLAT10   INTPTLON10
-# 1        37        153    970100 37153970100   9701 Census Tract 9701   G5020          S 246281647  2106825 +35.0503203 -079.6180454
-# 2        37        153    970200 37153970200   9702 Census Tract 9702   G5020          S 457736198  7835811 +35.0967892 -079.8225512
-# 3        37        153    970800 37153970800   9708 Census Tract 9708   G5020          S 139358521  2752112 +34.8508484 -079.8201950
-# 4        37        153    970900 37153970900   9709 Census Tract 9709   G5020          S  23311020    78240 +34.8785679 -079.7346295
-# 5        37        153    971000 37153971000   9710 Census Tract 9710   G5020          S  49233222   188190 +34.9395795 -079.6628977
-# 6        37        153    971100 37153971100   9711 Census Tract 9711   G5020          S 161136716   948938 +34.8751742 -079.6567146
+#   STATEFP10 COUNTYFP10 TRACTCE10     GEOID10 NAME10        NAMELSAD10 MTFCC10 
+# 1        37        153    970100 37153970100   9701 Census Tract 9701   G5020         
+# 2        37        153    970200 37153970200   9702 Census Tract 9702   G5020          
+# 3        37        153    970800 37153970800   9708 Census Tract 9708   G5020          
+# 4        37        153    970900 37153970900   9709 Census Tract 9709   G5020          
+# 5        37        153    971000 37153971000   9710 Census Tract 9710   G5020          
+# 6        37        153    971100 37153971100   9711 Census Tract 9711   G5020          
+#
+#   FUNCSTAT10   ALAND10 AWATER10  INTPTLAT10   INTPTLON10
+# 1          S 246281647  2106825 +35.0503203 -079.6180454
+# 2          S 457736198  7835811 +35.0967892 -079.8225512
+# 3          S 139358521  2752112 +34.8508484 -079.8201950
+# 4          S  23311020    78240 +34.8785679 -079.7346295
+# 5          S  49233222   188190 +34.9395795 -079.6628977
+# 6.         S 161136716   948938 +34.8751742 -079.6567146
 #                         geometry COUNTYFP STATEFP
 # 1 MULTIPOLYGON (((-79.56729 3...      153      37
 # 2 MULTIPOLYGON (((-79.71753 3...      153      37
@@ -264,8 +271,7 @@ print(nc_tracts_2010_map)
 
 <center>
 
-![Census tracts in North Carolina in 2010](images/nc_tracts_2010_map.png)
-
+![**Census tracts in North Carolina in 2010**](images/nc_tracts_2010_map.png)
 </center>
 
 Other [types and vintages of Census geographic boundaries](https://github.com/walkerke/tigris) are available through `tigris` and the related [`tidycensus`](https://walker-data.com/tidycensus/) package. In most cases, these boundaries are available for recent years (i.e., 1990 to present) and are accessed by state (i.e., users can download geographic boundaries for one state at a time, in separate files).
@@ -297,7 +303,7 @@ print(linkage_map)
 
 <center>
 
-![Census tracts in North Carolina in 2010 (grey) with sample geocoded addresses (red)](images/linkage_map.png)
+![**Census tracts in North Carolina in 2010 (grey) with sample geocoded addresses (red)**](images/linkage_map.png)
 
 </center>
 
@@ -338,7 +344,7 @@ To start, we'll need to prepare the AHRQ SDOH data for Census tracts. This data 
 
 <center>
 
-![Screenshot of AHRQ SDOH Website (September 13, 2023)](images/screenshot_sdoh_table.png)
+![**Screenshot of AHRQ SDOH Website (September 13, 2023)**](images/screenshot_sdoh_table.png)
 
 </center>
 
@@ -352,9 +358,9 @@ For this example, we will link the AHRQ SDOH data for Census tracts in 2010 to o
 
 <center>
 
-![Screenshot of first sheet in Excel file (September 14, 2023)](images/screenshot_sdoh_xls_1.png)
+![**Screenshot of first sheet in Excel file (September 14, 2023)**](images/screenshot_sdoh_xls_1.png)
 
-![Screenshot of second sheet in Excel file (September 14, 2023)](images/screenshot_sdoh_xls_2.png)
+![**Screenshot of second sheet in Excel file (September 14, 2023)**](images/screenshot_sdoh_xls_2.png)
 
 </center>
 
@@ -363,13 +369,15 @@ We find that the Excel file has two sheets: `Layout` and `Data`. The `Layout` sh
 The following code downloads the Excel file and reads its `Data` sheet into a table in `R`:
 
 ```{r eval = FALSE}
-# download Excel file using the URL provided in the table of links shown in the screenshot above
-sdoh_tracts_2010_url <- "https://www.ahrq.gov/downloads/sdoh/sdoh_2010_tract_1_0.xlsx"
+# download Excel file using the URL provided in the screenshot above
+sdoh_tracts_2010_url <- 
+  "https://www.ahrq.gov/downloads/sdoh/sdoh_2010_tract_1_0.xlsx"
 download.file(sdoh_tracts_2010_url, destfile = "sdoh_2010_tract_1_0.xlsx")
 
 # read the "Data" sheet of the Excel file into a table R
-# note that you may need to provide a complete filepath for the Excel file in the code below
-sdoh_tracts_2010_tbl <- readxl::read_xlsx("sdoh_2010_tract_1_0.xlsx", sheet = "Data")
+# note that you may need to provide a complete filepath for the Excel file 
+sdoh_tracts_2010_tbl <- readxl::read_xlsx("sdoh_2010_tract_1_0.xlsx", 
+                                          sheet = "Data")
 
 # view the table
 head(sdoh_tracts_2010)
@@ -377,27 +385,23 @@ head(sdoh_tracts_2010)
 
 ```{r eval = FALSE}
 # A tibble: 6 × 355
-#    YEAR TRACTFIPS   COUNTYFIPS STATEFIPS STATE   COUNTY         REGION TERRITORY ACS_TOT_POP_WT ACS_TOT_POP_US_ABOVE1 ACS_TOT_POP_ABOVE5 ACS_TOT_POP_ABOVE15
-#   <dbl> <chr>       <chr>      <chr>     <chr>   <chr>          <chr>      <dbl>          <dbl>                 <dbl>              <dbl>               <dbl>
-# 1  2010 01001020100 01001      01        Alabama Autauga County South          0           1809                  1800               1705                1439
-# 2  2010 01001020200 01001      01        Alabama Autauga County South          0           2020                  1978               1890                1575
-# 3  2010 01001020300 01001      01        Alabama Autauga County South          0           3543                  3505               3365                2710
-# 4  2010 01001020400 01001      01        Alabama Autauga County South          0           4840                  4783               4537                3883
-# 5  2010 01001020500 01001      01        Alabama Autauga County South          0           9938                  9876               9297                7589
-# 6  2010 01001020600 01001      01        Alabama Autauga County South          0           3402                  3368               3254                2724
-# ℹ 343 more variables: ACS_TOT_POP_ABOVE16 <dbl>, ACS_TOT_POP_16_19 <dbl>, ACS_TOT_POP_ABOVE25 <dbl>, ACS_TOT_CIVIL_POP_ABOVE18 <dbl>,
-#   ACS_TOT_CIVIL_VET_POP_ABOVE25 <dbl>, ACS_TOT_OWN_CHILD_BELOW17 <dbl>, ACS_TOT_CIVILIAN_LABOR <dbl>, ACS_TOT_CIVIL_EMPLOY_POP <dbl>,
-#   ACS_TOT_WORKER_HH <dbl>, ACS_TOT_WORKER_NWFH <dbl>, ACS_TOT_POP_POV <dbl>, ACS_TOT_GRANDCHILDREN_GP <dbl>, ACS_TOT_HU <dbl>, ACS_TOT_HH <dbl>,
-#   ACS_AVG_HH_SIZE <dbl>, ACS_TOT_CIVIL_VET_POP <dbl>, ACS_PCT_FEMALE <dbl>, ACS_PCT_MALE <dbl>, ACS_PCT_CTZ_NATURALIZED <dbl>,
-#   ACS_PCT_CTZ_NONUS_BORN <dbl>, ACS_PCT_CTZ_US_BORN <dbl>, ACS_PCT_FOREIGN_BORN <dbl>, ACS_PCT_NON_CITIZEN <dbl>, ACS_PCT_NONCTN_1990 <dbl>,
-#   ACS_PCT_NONCTN_1999 <dbl>, ACS_PCT_NONCTN_2000 <dbl>, ACS_PCT_API_LANG <dbl>, ACS_PCT_ENGL_NOT_ALL <dbl>, ACS_PCT_ENGL_NOT_WELL <dbl>,
-#   ACS_PCT_ENGL_VERY_WELL <dbl>, ACS_PCT_ENGL_WELL <dbl>, ACS_PCT_ENGLISH <dbl>, ACS_PCT_HH_LIMIT_ENGLISH <dbl>, ACS_PCT_OTH_EURP <dbl>, …
+#    YEAR TRACTFIPS   COUNTYFIPS STATEFIPS STATE   COUNTY         REGION    
+#   <dbl> <chr>       <chr>      <chr>     <chr>   <chr>          <chr>
+# 1  2010 01001020100 01001      01        Alabama Autauga County South
+# 2  2010 01001020200 01001      01        Alabama Autauga County South
+# 3  2010 01001020300 01001      01        Alabama Autauga County South
+# 4  2010 01001020400 01001      01        Alabama Autauga County South
+# 5  2010 01001020500 01001      01        Alabama Autauga County South          
+# 6  2010 01001020600 01001      01        Alabama Autauga County South
+# ℹ 348 more variables: TERRITORY <dbl>, ACS_TOT_POP_WT <dbl>, 
+#   ACS_TOT_POP_US_ABOVE1 <dbl>, ACS_TOT_POP_ABOVE5 <dbl> , 
+#   ACS_TOT_POP_ABOVE15 <dbl>, ACS_TOT_POP_ABOVE16 <dbl>, …
 # ℹ Use `colnames()` to see all variable names
 ```
 
 We can see that the variable `TRACTFIPS` contains the 11-digit geoid for Census tracts in character format, which matches the geoid format we prepared in the previous [step](#step-3) .
 
-::: callout-note
+::: {.note}
 For linkages based on geoid, it is important to check that the geoid is in the same format across data sources. We recommend using character format (rather than numeric format) for Census geoids. This will preserve padded zeroes in geoids (e.g., state geoid for Alabama is `01` rather than `1`) such that each type of geoid has the expected number of digits (e.g., 2-digits for state geoid).
 :::
 
@@ -416,10 +420,15 @@ The following code joins those SDOH data variables to the geocoded addresses bas
 # select the SDOH variables of interest
 sdoh_tracts_2010_tbl <- sdoh_tracts_2010_tbl %>%
   dplyr::rename(geoid_tract_2010 = TRACTFIPS) %>%
-  dplyr::select(geoid_tract_2010, ACS_PCT_INC50, POS_DIST_ED_TRACT, ACS_PCT_HU_NO_VEH)
+  dplyr::select(geoid_tract_2010, 
+                ACS_PCT_INC50, 
+                POS_DIST_ED_TRACT, 
+                ACS_PCT_HU_NO_VEH)
 
 # join the SDOH table to the geocoded addresses based on geoid
-geo_addresses_sdoh_tbl <- dplyr::left_join(geo_addresses_linkage_tbl, sdoh_tracts_2010_tbl, by = "geoid_tract_2010")
+geo_addresses_sdoh_tbl <- dplyr::left_join(geo_addresses_linkage_tbl, 
+                                           sdoh_tracts_2010_tbl, 
+                                           by = "geoid_tract_2010")
 
 # view the resulting linked table
 print(geo_addresses_sdoh_tbl)
@@ -427,14 +436,20 @@ print(geo_addresses_sdoh_tbl)
 
 ```{r eval = FALSE}
 # A tibble: 5 × 5
-#   id               geoid_tract_2010 ACS_PCT_INC50 POS_DIST_ED_TRACT ACS_PCT_HU_NO_VEH
-#   <chr>            <chr>                    <dbl>             <dbl>             <dbl>
-# 1 01-charlotte     37119001100               3.68              0.85              7.24
-# 2 02-raleigh       37183050100               6.77              2.8              25.5
-# 3 03-greensboro    37081010800               6.16              0.99             16.4
-# 4 04-durham        37063002200              25.9               2.62              7.63
-# 5 05-winston-salem 37067000100               9.01              3.35             16.5
-# nolint end
+#   id               geoid_tract_2010 ACS_PCT_INC50 POS_DIST_ED_TRACT 
+#   <chr>            <chr>                    <dbl>             <dbl>             
+# 1 01-charlotte     37119001100               3.68              0.85              
+# 2 02-raleigh       37183050100               6.77              2.8              
+# 3 03-greensboro    37081010800               6.16              0.99             
+# 4 04-durham        37063002200              25.9               2.62              
+# 5 05-winston-salem 37067000100               9.01              3.35             
+#   ACS_PCT_HU_NO_VEH
+#               <dbl>
+# 1             7.24
+# 2            25.5
+# 3            16.4
+# 4             7.63
+# 5            16.5
 ```
 
 Now, we have a linked table of geocoded addresses (by individual id) linked to the SDOH data.
