@@ -1,4 +1,4 @@
-# Spatial Data Analysis {#spatial-analysis-with-environmental-data-in-r}
+# Spatial Data Analysis {#chapter-intro-spatial-data-analysis}
 
 [![Profile-CMP](https://img.shields.io/badge/User%20Profile-Clinician/Medical%20Professional-f58231.svg)](#profilecmp)
 [![Profile-SBS](https://img.shields.io/badge/User%20Profile-Social%20&%20Behavioral%20Scientist-808000.svg)](#profilesbs)

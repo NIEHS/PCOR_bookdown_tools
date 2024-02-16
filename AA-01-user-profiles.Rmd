@@ -20,7 +20,7 @@ The educational materials and tutorials in this book have been designed to for v
 
 **Relevant Chapters**
 
--   [NASA EarthData and Prerequisite Files](#nasa-earthdata-and-prerequisite-files)
+-   [NASA EarthData Download](#chapter-nasa-earthdata)
 
 ## Clinical Researcher {#profilecre .unnumbered .unlisted}
 ![](https://img.shields.io/badge/User%20Profile-Clinical%20Researcher-e6194B.svg)
@@ -62,7 +62,7 @@ The educational materials and tutorials in this book have been designed to for v
 
 **Relevant Chapters**
 
--   [Spatial Analysis with Environmental Data in R](#spatial-analysis-with-environmental-data-in-r)
+-   [Spatial Data Analysis](#chapter-intro-spatial-data-analysis)
 
 ## Community Health Worker {#profilechw .unnumbered .unlisted}
 ![](https://img.shields.io/badge/User%20Profile-Community%20Health%20Worker-ffe119.svg)
@@ -99,7 +99,7 @@ The educational materials and tutorials in this book have been designed to for v
 
 **Relevant Chapters**
 
--   [NASA EarthData and Prerequisite Files](#nasa-earthdata-and-prerequisite-files)
+-   [NASA EarthData Download](#chapter-nasa-earthdata)
 
 ## Epidemiologist {#profileepi .unnumbered .unlisted}
 ![](https://img.shields.io/badge/User%20Profile-Epidemiologist-4363d8.svg)
@@ -142,7 +142,7 @@ The educational materials and tutorials in this book have been designed to for v
 
 **Relevant Chapters**
 
--   [NASA EarthData and Prerequisite Files](#nasa-earthdata-and-prerequisite-files)
+-   [NASA EarthData](#chapter-nasa-earthdata)
 
 ## Public Health Official {#profilepho .unnumbered .unlisted}
 ![](https://img.shields.io/badge/User%20Profile-Public%20Health%20Official-fffac8.svg)
@@ -183,7 +183,7 @@ The educational materials and tutorials in this book have been designed to for v
 
 **Relevant Chapters**
 
--   [Spatial Analysis with Environmental Data in R](#spatial-analysis-with-environmental-data-in-r)
+-   [Spatial Data Analysis](#chapter-intro-spatial-data-analysis)
 
 ## Student {#profilestu .unnumbered .unlisted}
 ![](https://img.shields.io/badge/User%20Profile-Student-dcbeff.svg)
@@ -206,8 +206,8 @@ The educational materials and tutorials in this book have been designed to for v
 
 **Relevant Chapters**
 
--   [Spatial Analysis with Environmental Data in R](#spatial-analysis-with-environmental-data-in-r)
--   [Linkage to Census Units](#link-to-census)
+-   [Spatial Data Analysis](#chapter-intro-spatial-data-analysis)
+-   [Linkage to Census Units](#chapter-link-to-census)
 
 ## Translational Researcher {#profiletlr .unnumbered .unlisted}
 ![](https://img.shields.io/badge/User%20Profile-Translational%20Researcher-aaffc3.svg)

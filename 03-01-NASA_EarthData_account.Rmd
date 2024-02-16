@@ -1,4 +1,4 @@
-# NASA EarthData Download
+# NASA EarthData Download {#chapter-nasa-earthdata}
 
 [![Profile-CDM](https://img.shields.io/badge/User%20Profile-Clinical%20Data%20Manager-469990.svg)](#profilecdm) [![Profile-EDU](https://img.shields.io/badge/User%20Profile-Educator-bfef45.svg)](#profileedu) [![Profile-GEO](https://img.shields.io/badge/User%20Profile-Geospatial%20Analyst-fabed4.svg)](#profilegeo)
 
