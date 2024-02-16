@@ -1,4 +1,4 @@
-# Linkage to exposures with CHORDS toolbox
+# Linkage to exposures with CHORDS toolbox {#chapter-chords-geo-exposures}
 
 This chapter provides an example application of the CHORDS exposure toolbox to...
 

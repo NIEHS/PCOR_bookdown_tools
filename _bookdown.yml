@@ -11,7 +11,10 @@ rmd_files:
   - 03-01-NASA_EarthData_account.Rmd
   - 04-00-health-data-integration.Rmd
   - 04-01-link-to-census.Rmd
-  - 04-02-linkage-to-exposures-with-CHORDS-toolbox.Rmd
+  - 04-02-geo-exposure-0.Rmd
+  - 04-02-geo-exposure-a.Rmd
+  - 04-02-geo-exposure-b.Rmd
+  - 04-02-geo-exposure-c.Rmd
   - 05-00-analysis-case-studies.Rmd
   - 05-01-case-study-01.Rmd
   - AA-00-appendix.Rmd
@@ -21,11 +24,8 @@ rmd_files:
 #  - BB-bivariate_color.Rmd
 #  - BB-bivariate-chloropleth_map.Rmd
   - BB-census-income.Rmd
-  - BB-geo-exposure.Rmd
-  - BB-geo-exposure-b.Rmd
-  - BB-geo-exposure-c.Rmd
   - BB-ma_pm_patient.Rmd
  # - BB-PCOR-Tmap.Rmd
- #  - BB-PCOR-Tmap_c.Rmd
+ # - BB-PCOR-Tmap_c.Rmd
  # - BB-PCOR-Tmap_d.Rmd
   - CC-test.Rmd
