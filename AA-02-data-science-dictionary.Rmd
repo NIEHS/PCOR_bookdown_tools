@@ -1,11 +1,69 @@
 # Environmental Data Science Glossary {.unnumbered}
 
-The following defines key terms used in the CHORDS Toolkit.
+Key terms used in the CHORDS Toolkit are defined below and in the [NIEHS Climate Change and Human Health Glossary](https://tools.niehs.nih.gov/cchhglossary/)
 
+
+---
+
+#### Geocoded Address {#def-geocoded-address .unnumbered .unlisted}
+
+The geographic coordinates (i.e., latitude and longitude) associated with a street address (e.g., home or work location).  
+                                                                               
+**Context:** Geocoded addresses are commonly used as a basis for geospatial exposure assessment for individuals.
+
+<font size ="2"> 
+Categories: [Research Methods](https://tools.niehs.nih.gov/cchhglossary/?category=RM)   
+Related Terms: [Geocoding](#def-geocoding) 
+</font>
+
+---
+
+#### Geocoding {#def-geocoding .unnumbered .unlisted}
+
+The process of converting place names or street addresses to geographic coordinates (i.e., latitude and longitude).
+                                                                               
+**Context:** Geocoding is a common data processing step in geospatial exposure assessment. 
+
+<font size ="2"> 
+Categories: [Research Methods](https://tools.niehs.nih.gov/cchhglossary/?category=RM)   
+Related Terms: [Geocoded Address](#def-geocoded-address) 
+</font>
+
+---
+
+#### Geographic Unit (Areal Unit) {#def-geographic-unit .unnumbered .unlisted}
+
+A specific place defined by administrative or political geographic boundaries (e.g., state, census tract, country, postal code), environmental boundaries (e.g., watershed) or a grid (e.g., grid cell in a 1 km grid).
+                                                                               
+**Context:** Data for social and environmental determinants of health are often provided for different types of geographic units (e.g., census tracts, grid cells).
+
+<font size ="2"> 
+Categories: [Research Methods](https://tools.niehs.nih.gov/cchhglossary/?category=RM)   
+</font>
+
+---
+
+#### Geoid {#def-geoid .unnumbered .unlisted}
+
+A unique identifying code for a place or geographic unit (e.g., census tract, city, postal code, land parcel, watershed).
+                                                                               
+**Context:** Geoid is commonly used as a basis for data integration for individual-level or population-level analyses
+
+<font size ="2"> 
+Categories: [Research Methods](https://tools.niehs.nih.gov/cchhglossary/?category=RM)   
+Related Terms: [Geocoding](#def-geocoding), [Data Integration](https://tools.niehs.nih.gov/cchhglossary/?keyword=data+integration)
+</font>
+
+---
 
 #### Geospatial Data {#def-geospatial-data .unnumbered .unlisted}
-Data that includes information about specific times and places on the Earth.
-*Context:* Geospatial data can be used to assess individual and population level exposures to environmental and social determinants of health.
 
+Data that includes information about specific times and places on the Earth.  
+                                                                               
+**Context:** Geospatial data can be used to assess individual and population level exposures to environmental and social determinants of health. 
 
+<font size ="2"> 
+Categories: [Research Methods](https://tools.niehs.nih.gov/cchhglossary/?category=RM)   
+</font>
 
+---
