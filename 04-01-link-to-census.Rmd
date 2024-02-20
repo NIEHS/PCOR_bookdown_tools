@@ -4,7 +4,7 @@
 
 **Date Modified**: September 13, 2023
 
-**Author**: Lara Clark
+**Author**: Lara P. Clark
 
 **Key Terms**: [Data Integration](https://tools.niehs.nih.gov/cchhglossary/?keyword=data+integration&termOnlySearch=true&exactSearch=true), [Social Determinants of Health](https://tools.niehs.nih.gov/cchhglossary/?keyword=social+determinants+of+health+(sdoh)&termOnlySearch=true&exactSearch=true), [Geocoded Address](#def-geocoded-address), [Geographic Unit](#def-geographic-unit), [Geoid](#def-geoid)
 
