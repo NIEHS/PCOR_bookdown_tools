@@ -6,7 +6,7 @@
 
 **Author**: Lara Clark
 
-**Key Terms**: [Data Integration](https://tools.niehs.nih.gov/cchhglossary/?keyword=data+integration&termOnlySearch=true), [Social Determinants of Health](https://tools.niehs.nih.gov/cchhglossary/?keyword=social+determinants+of+health&termOnlySearch=true), [Geocoded Address](#def-geocoded-address), [Geographic Unit](#def-geographic-unit), [Geoid](#def-geoid)
+**Key Terms**: [Data Integration](https://tools.niehs.nih.gov/cchhglossary/?keyword=data+integration&termOnlySearch=true&exactSearch=true), [Social Determinants of Health](https://tools.niehs.nih.gov/cchhglossary/?keyword=social+determinants+of+health+(sdoh)&termOnlySearch=true&exactSearch=true), [Geocoded Address](#def-geocoded-address), [Geographic Unit](#def-geographic-unit), [Geoid](#def-geoid)
 
 **Programming Language**: R
 

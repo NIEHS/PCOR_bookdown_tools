@@ -2,7 +2,6 @@
 
 Key terms used in the CHORDS Toolkit are defined below and in the [NIEHS Climate Change and Human Health Glossary](https://tools.niehs.nih.gov/cchhglossary/).
 
-
 ---
 
 #### Geocoded Address {#def-geocoded-address .unnumbered .unlisted}
@@ -51,7 +50,7 @@ A unique identifying code for a place or geographic unit (e.g., census tract, ci
 
 <font size ="2"> 
 Categories: [Research Methods](https://tools.niehs.nih.gov/cchhglossary/?category=RM)   
-Related Terms: [Geocoding](#def-geocoding), [Data Integration](https://tools.niehs.nih.gov/cchhglossary/?keyword=data+integration)
+Related Terms: [Geocoding](#def-geocoding), [Data Integration](https://tools.niehs.nih.gov/cchhglossary/?keyword=data+integration&termOnlySearch=true&exactSearch=true)
 </font>
 
 ---
