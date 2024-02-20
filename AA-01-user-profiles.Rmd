@@ -1,7 +1,7 @@
 # User Profiles {.unnumbered}
 
-The CHORDS Toolkit chapters have been developed for various types of user profiles. 
-This appendix describes the user profiles and lists the most relevant chapters for each type.
+The CHORDS Toolkit chapters have been developed for various user profiles. 
+This appendix describes the user profiles and suggests relevant chapters for each.
 
 ## Clinical Data Manager  {#profilecdm .unnumbered .unlisted}
 ![](https://img.shields.io/badge/User%20Profile-Clinical%20Data%20Manager-469990.svg)
@@ -22,6 +22,7 @@ This appendix describes the user profiles and lists the most relevant chapters f
 **Relevant Chapters**
 
 -   [NASA EarthData Download](#chapter-nasa-earthdata)
+-   [Linkage to Exposures](#chapter-chords-geo-exposures)
 
 ## Clinical Researcher {#profilecre .unnumbered .unlisted}
 ![](https://img.shields.io/badge/User%20Profile-Clinical%20Researcher-e6194B.svg)
@@ -64,6 +65,8 @@ This appendix describes the user profiles and lists the most relevant chapters f
 **Relevant Chapters**
 
 -   [Spatial Data Analysis](#chapter-intro-spatial-data-analysis)
+-   [Linkage to Census Units](#chapter-link-to-census)
+-   [Linkage to Exposures](#chapter-chords-geo-exposures)
 
 ## Community Health Worker {#profilechw .unnumbered .unlisted}
 ![](https://img.shields.io/badge/User%20Profile-Community%20Health%20Worker-ffe119.svg)
@@ -209,6 +212,7 @@ This appendix describes the user profiles and lists the most relevant chapters f
 
 -   [Spatial Data Analysis](#chapter-intro-spatial-data-analysis)
 -   [Linkage to Census Units](#chapter-link-to-census)
+-   [Linkage to Exposures](#chapter-chords-geo-exposures)
 
 ## Translational Researcher {#profiletlr .unnumbered .unlisted}
 ![](https://img.shields.io/badge/User%20Profile-Translational%20Researcher-aaffc3.svg)

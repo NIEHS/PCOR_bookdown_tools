@@ -1,4 +1,4 @@
-# Environmental Data Science Glossary {.unnumbered}
+# CHORDS Glossary {#chords-glossary .unnumbered}
 
 Key terms used in the CHORDS Toolkit are defined below and in the [NIEHS Climate Change and Human Health Glossary](https://tools.niehs.nih.gov/cchhglossary/).
 

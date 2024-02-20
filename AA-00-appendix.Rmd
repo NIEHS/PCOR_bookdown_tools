@@ -5,5 +5,5 @@
 The appendix includes the following:
 
 * User profile descriptions
-* Environmental data science glossary
+* CHORDS glossary
 * Data dictionary for NIEHS PEGS 
