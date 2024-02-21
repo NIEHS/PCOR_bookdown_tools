@@ -23,8 +23,3 @@ rmd_files:
   - AA-01-user-profiles.Rmd
   - AA-02-data-science-dictionary.Rmd
   - AA-03-pegs-data-dictionary.Rmd
- # - BB-bivariate_color.Rmd
- # - BB-bivariate-chloropleth_map.Rmd
- # - BB-PCOR-Tmap.Rmd
- # - BB-PCOR-Tmap_c.Rmd
- # - BB-PCOR-Tmap_d.Rmd
