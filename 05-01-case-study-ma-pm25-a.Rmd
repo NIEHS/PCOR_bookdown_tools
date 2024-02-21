@@ -4,7 +4,7 @@
 
 <font size ="5"> **Integrating and Analyzing Air Quality, Income and Asthma-Related Emergency Department Visits with Synthetic Patient Data in R** </font>
 
-**Date Modified**: ---
+**Date Modified**: February 21, 2024
 
 **Authors**: Sue Nolte, Lara P. Clark, Charles Schmitt
 
@@ -60,7 +60,7 @@ The output file will contain one row per day between start_date and end_date for
     Output file: patient_encounts_bycode_v2_12_pm_0.2.0_census_block_group_0.6.0_2010.csv
     rename to:ms_patient_pm_census_v2.csv
 
-## Data Exploration
+## Data Exploration and Vizualization
 
 ### Mapping Linked Air Pollution Data
 
@@ -99,7 +99,7 @@ if (!require("maps") || !require("ggmap")) {
 ```
 Note that the echo = FALSE parameter was added to the code chunk to prevent printing of the R code that generated the plot. 
 
-#### Load libraries {#new-session .unlisted .unnumbered}
+#### Load Libraries {#new-session .unlisted .unnumbered}
 
 ```{r include=FALSE}
 library(tidycensus)
@@ -115,7 +115,7 @@ if (first == TRUE) {
 options(tigris_use_cache = TRUE)
 ```
 
-Data wrangling
+Data wrangling:
 
 ```{r}
 # Check for missing values
@@ -125,7 +125,7 @@ sum(is.na(df))
 df <- na.omit(df) # Drop rows with missing values
 ```
 
-Change column name for later map
+Change column name for later map:
 
 ```{r}
 colnames(df)[which(names(df) == "lon")] <- "longitude"
