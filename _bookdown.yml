@@ -16,16 +16,15 @@ rmd_files:
   - 04-02-geo-exposure-b.Rmd
   - 04-02-geo-exposure-c.Rmd
   - 05-00-analysis-case-studies.Rmd
-  - 05-01-case-study-01.Rmd
+  - 05-01-case-study-ma-pm25-a.Rmd
+  - 05-01-case-study-ma-pm25-b.Rmd
+  - 05-01-case-study-ma-pm25-c.Rmd
   - AA-00-appendix.Rmd
   - AA-01-user-profiles.Rmd
   - AA-02-data-science-dictionary.Rmd
   - AA-03-pegs-data-dictionary.Rmd
-#  - BB-bivariate_color.Rmd
-#  - BB-bivariate-chloropleth_map.Rmd
-  - BB-census-income.Rmd
-  - BB-ma_pm_patient.Rmd
+ # - BB-bivariate_color.Rmd
+ # - BB-bivariate-chloropleth_map.Rmd
  # - BB-PCOR-Tmap.Rmd
  # - BB-PCOR-Tmap_c.Rmd
  # - BB-PCOR-Tmap_d.Rmd
-  - CC-test.Rmd

@@ -1,5 +1,3 @@
-# **Census Analysis** {-} 
-
 ## Census Income vs Patient{-}
 
 ### Data Preparation 
@@ -138,7 +136,7 @@ dim(tarr)
 colnames(tarr)
 ```
 
-### Join the dataframes by the census track id
+### Join the dataframes by the census tract id
 
 df column "census_block_group_id_2010" and tarr column "GEOID" are the census track id.
 
@@ -169,7 +167,7 @@ if (FALSE) {
 library(dplyr)
 ```
 
-## The county with hightest income in MA by sensus data 2020 {-}
+## The county with hightest income in MA by Census data 2020 {-}
 
 ```{r}
 # Fetch ACS data for Massachusetts counties
