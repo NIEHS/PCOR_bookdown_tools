@@ -1,8 +1,6 @@
-# **Bivariate maps** {.unnumbered}
+### Visualize Air Pollution and Health Information Using Bivariate Maps {.unnumbered}
 
-## PM 2.5 Bivariate map {.unnumbered}
-
-### Set up bivariate color classes
+#### Set Up Bivariate Color Classes {-}
 
 Each variate is divided into thirds (based on percentiles) and a joint classification for all 9 combinations is defined.
 
@@ -25,7 +23,7 @@ df_census_block <- read.csv("./dataset/asthma_patients_pm_2_census_block_group_0
 head(df_census_block)
 ```
 
-### Get the boundaries for US MA counties
+#### Get MA County Boundaries {-}
 
 ```{R include=FALSE}
 library(sf)
@@ -53,7 +51,7 @@ df_agg <- df_county %>%
   )
 ```
 
-### Join Census with Massachusetts map
+### Join Census Data with County Boundaries
 
 ```{R}
 dim(df_agg)
@@ -72,7 +70,7 @@ ggplot() +
   labs(fill = "Patient count")
 ```
 
-### Set color on both varaibles
+#### Set Color on Both Varaibles {-}
 
 ```{r}
 cols <- stevens.pinkgreen
@@ -112,7 +110,7 @@ plot(log(pm2_mean) ~ log(patient_count),
 )
 ```
 
-### Draw a state map with pm-patient
+#### Map Air Pollution and Patient Counts {-}
 
 ```{r, eval = FALSE}
 # Check for missing values

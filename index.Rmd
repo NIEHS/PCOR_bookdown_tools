@@ -1,6 +1,6 @@
 ---
 title: "The CHORDS Toolkit for Health and Geospatial Exposures Research"
-author: Lara Clark, Sue Nolte
+author: CHORDS team
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib, packages.bib]
@@ -18,7 +18,7 @@ individuals and populations  entails
 pulling together a combination of health data and data on environmental exposures. 
 
 One approach to gathering exposure information is to compute estimated exposure levels based on the location 
-of individuals at different time points.  For instance, based on location and time one can 
+of individuals at different time points.  For instance, based on location and time one can  
 estimate the level of noise around a person, the level of pollutants present in the air, and the presence of
 parks and other green spaces.
 

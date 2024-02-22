@@ -1,11 +1,26 @@
-# **Preparing Date**  {-} 
+# Air Quality, Income, and Asthma {#chapter-case-ma-pm25}
 
-## PM(2.5) vs Patient {-}
+[![Profile-STU](https://img.shields.io/badge/User%20Profile-Student-dcbeff.svg)](#profilestu)
 
-### Data Preparation {-}
+<font size ="5"> **Integrating and Analyzing Air Quality, Income and Asthma-Related Emergency Department Visits with Synthetic Patient Data in R** </font>
 
-Data set is from Synthetic patient and population health data from the state of Massachusetts
+**Date Modified**: February 21, 2024
 
+**Authors**: Sue Nolte, Lara P. Clark, Charles Schmitt
+
+**Key Terms**: [Exposure](https://tools.niehs.nih.gov/cchhglossary/?keyword=exposure&termOnlySearch=true&exactSearch=true), [Data Integration](https://tools.niehs.nih.gov/cchhglossary/?keyword=data+integration&termOnlySearch=true&exactSearch=true), [Social Determinants of Health](https://tools.niehs.nih.gov/cchhglossary/?keyword=social+determinants+of+health+(sdoh)&termOnlySearch=true&exactSearch=true)
+
+**Programming Languages**: R, Python
+
+## Introduction
+
+This case uses synthetic patient data to demonstrate a data integration pipeline for a study of asthma-related emergency department visits, air pollution, and social determinants of health. This case links air pollution data to the synthetic patients' geocoded home addresses during shorter-term time periods (days) before asthma-related emergency department visits. 
+
+## Data Preparation and Integration
+
+### Synthetic Patient Data Preparation
+
+Data set is from Synthetic patient and population health data from the state of Massachusetts.
 
 1.  Download complete patients FHIR file from <https://synthea.mitre.org/downloads> 22G zip tar
 
@@ -16,6 +31,8 @@ Data set is from Synthetic patient and population health data from the state of 
     output file : patient_encounts_bycode_v2_12.csv
 
 3.  QC dataset. for instance : start date \> end date ; misplace birth/death date to hospital stay date\
+
+### Air Quality Data Linkage
 
 4.  Using the start/end date from patients file run DeGauss pm2.5 model <https://degauss.org/pm/>
 
@@ -32,6 +49,8 @@ Data set is from Synthetic patient and population health data from the state of 
 
 The output file will contain one row per day between start_date and end_date for everyone. Lat(latitude) and lon (longitude) location. This means that the output file will likely contain many more rows than the input file
 
+### Census Geoid Linkage
+
 6.  Run deGUAUSS census block group : <https://degauss.org/census_block_group/> Produced a file with additional columns:
 
     • census_block_group_id_2010: identifier for 2010 block group
@@ -40,6 +59,10 @@ The output file will contain one row per day between start_date and end_date for
 
     Output file: patient_encounts_bycode_v2_12_pm_0.2.0_census_block_group_0.6.0_2010.csv
     rename to:ms_patient_pm_census_v2.csv
+
+## Data Exploration and Vizualization
+
+### Mapping Linked Air Pollution Data
 
 ```{R}
 library(readr)
@@ -52,7 +75,7 @@ colnames(df)
 ```
 
 
-install packages
+Install packages:
 
 ```{r}
 if (!require("shiny") ||
@@ -76,7 +99,7 @@ if (!require("maps") || !require("ggmap")) {
 ```
 Note that the echo = FALSE parameter was added to the code chunk to prevent printing of the R code that generated the plot. 
 
-### Load libraries {#new-session}
+#### Load Libraries {#new-session .unlisted .unnumbered}
 
 ```{r include=FALSE}
 library(tidycensus)
@@ -92,7 +115,7 @@ if (first == TRUE) {
 options(tigris_use_cache = TRUE)
 ```
 
-Data wrangling
+Data wrangling:
 
 ```{r}
 # Check for missing values
@@ -102,7 +125,7 @@ sum(is.na(df))
 df <- na.omit(df) # Drop rows with missing values
 ```
 
-Change column name for later map
+Change column name for later map:
 
 ```{r}
 colnames(df)[which(names(df) == "lon")] <- "longitude"
@@ -132,7 +155,7 @@ filtered_df$tooltip <- paste(
 )
 ```
 
-### Create a Geographical Map
+#### Create Map {-}
 
 Load the required libraries for plotting maps:
 
@@ -160,7 +183,7 @@ p <- ggplot() +
 # print(p)
 ```
 
-### Plotting the Data Points
+#### Plotting the Data Points {-}
 
 Plot the data points on the map using the geom_point() function. Specify the longitude and latitude coordinates, and optionally, the color or size of the data points based on the PM2.5 values:
 

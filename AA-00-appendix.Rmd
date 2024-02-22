@@ -1,0 +1,9 @@
+# (PART\*) Appendix {-}
+
+# **Appendix** {-}
+
+The appendix includes the following:
+
+* User profile descriptions
+* CHORDS glossary
+* Data dictionary for NIEHS PEGS 

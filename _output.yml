@@ -1,15 +1,19 @@
 ---
 bookdown::gitbook:
+  toc_depth: 2
   css: style.css
   config:
     toc:
+      collapse: section
       before: |
-        <li><a href="./">Bookdown PCOR Tools</a></li>
+        <li><a href="./"><img src="images/CHORDS_icon_logo_nobackgorund.png" width="150"></a></li>
+        <li><a href="./">CHORDS Toolkit</a></li>
       after: >
         <li><a href="https://github.com/rstudio/bookdown" 
         target="blank">Published with bookdown</a></li>
     edit: https://github.com/USERNAME/REPO/edit/BRANCH/%s
     download: ["pdf", "epub"]
+    
 bookdown::pdf_book:
   includes:
     in_header: preamble.tex
