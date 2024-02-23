@@ -1,4 +1,4 @@
-# Short Title {#chapter-template} 
+# Short Title {#chapter-short-title} 
 
 [![Profile-STU](https://img.shields.io/badge/User%20Profile-Student-dcbeff.svg)](#profilestu)
 [![Profile-CMP](https://img.shields.io/badge/User%20Profile-Clinician/Medical%20Professional-f58231.svg)](#profilecmp)
@@ -56,9 +56,17 @@ Example environmental health data sources readily available by Census geoid from
 
 ### Adding Citations
 
-
 ## Concluding Remarks
 
 All chapters end with a section titled "Concluding Remarks". This can be short.
+
+## Additional Resources
+
+This is an optional section describing available resources for the chapter topics. This is not meant to replace the reference list (which will be added below).
+
+## References 
+
+Add code block here to populate the chapters references.
+
 
 
