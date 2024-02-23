@@ -1,6 +1,6 @@
 ---
 title: "The CHORDS Toolkit for Health and Geospatial Exposures Research"
-author: CHORDS team
+author: 
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib, packages.bib]
@@ -8,7 +8,7 @@ biblio-style: apalike
 link-citations: yes    
 output: bookdown::html_document2
 ---
- 
+
 # **Introduction** {-}
 
 Research into the effects of the environment on human health at the level of individuals and populations entails pulling together a combination of health data and data on environmental exposures. 
@@ -21,21 +21,27 @@ This resource seeks to aid researchers in adopting geospatial data-based exposur
 
 ## About CHORDS {-}
 
-## Getting Started {-}
+<center>
+
+![](images/chords-art-logo.png)
+
+</center>
+
+## About This Toolkit {-}
+
+### Getting Started {-}
 
 This resource does assume a familiarity with the `R` programming language and the use of `R` for working with, visualizing, and analyzing scientific data.
 
-The TAME Toolkit (https://uncsrp.github.io/Data-Analysis-Training-Modules/) provides a good resource for gaining familiarity with R for use in
-environmental health research methods, in particular Chapter 1 on Introductory
-Data Science and Chapter 3.3 on Database Integration.  
+The [TAME Toolkit](https://uncsrp.github.io/Data-Analysis-Training-Modules/) provides a good resource for gaining familiarity with `R` for use in environmental health research methods, in particular Chapter 1 on Introductory Data Science and Chapter 3.3 on Database Integration.  
 
-## Funding {-}
+### Funding {-}
 
 This resource was supported by the National Institutes of Health (NIH) from the National Institute of Environmental Health Sciences (NIEHS), by the NIH Office of Data Science Strategy (ODSS) Data Scholar Program, by the Patient Centered Outcomes Research Trust Fund (PCORTF) and the Department of Health and Human Services (DHHS) Office of Assistant Secretary for Planning and Evaluation.
 
-## Authors {-}
+### Authors {-}
 
-## Suggested Citation {-}
+### Suggested Citation {-}
 
 
 
