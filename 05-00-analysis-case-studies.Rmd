@@ -1,6 +1,6 @@
-# (PART\*) Analysis Case Studies {-}
+# (PART\*) Case Studies {.unnumbered .unlisted}
 
-# **Analysis Case Studies** {-}
+# **Case Studies** {-}
 
 This unit provides example case studies that analyze integrated wildfire-related data with health outcomes data.
 

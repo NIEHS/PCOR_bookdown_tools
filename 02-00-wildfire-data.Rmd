@@ -1,4 +1,4 @@
-# (PART\*) Wildfire Data {-}
+# (PART\*) Wildfire Data {.unnumbered .unlisted}
 
 # **Wildfire Data** {-}
 
