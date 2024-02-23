@@ -9,8 +9,6 @@ link-citations: yes
 output: bookdown::html_document2
 ---
  
-*[Page Note:  add authors and affiliations.  Check about correct funding attributions]*
-
 # **Introduction** {-}
 
 Research into the effects of the environment on human health at the level of individuals and populations entails pulling together a combination of health data and data on environmental exposures. 
