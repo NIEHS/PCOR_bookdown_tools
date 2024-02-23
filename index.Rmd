@@ -13,29 +13,18 @@ output: bookdown::html_document2
 
 # **Introduction** {-}
 
-Research into the effects of the environment on human health at the level of  
-individuals and populations  entails 
-pulling together a combination of health data and data on environmental exposures. 
+Research into the effects of the environment on human health at the level of individuals and populations entails pulling together a combination of health data and data on environmental exposures. 
 
-One approach to gathering exposure information is to compute estimated exposure levels based on the location 
-of individuals at different time points.  For instance, based on location and time one can  
-estimate the level of noise around a person, the level of pollutants present in the air, and the presence of
-parks and other green spaces.
+One approach to gathering exposure information is to compute estimated exposure levels based on the location of individuals at different time points. For instance, based on location and time one can estimate the level of noise around a person, the level of pollutants present in the air, and the presence of parks and other green spaces.
 
-Estimating these exposures can be challenging, especially if one is not familiar with the
-sources of data used to make these estimations or the analysis methods needed to compute the estimated
-exposures.  This can be especially challenging for time varying exposures, exposures that depend on
-complex models such as the composition and dispersion of chemicals in the air, and for researchers seeking to
-study exposure effects at the individual level.
+Estimating these exposures can be challenging, especially if one is not familiar with the sources of data used to make these estimations or the analysis methods needed to compute the estimated exposures. This can be especially challenging for time varying exposures, exposures that depend on complex models such as the composition and dispersion of chemicals in the air, and for researchers seeking to study exposure effects at the individual level.
 
-This resource seeks to aid researcher in adopting geospatial-based exposures into their research
-by providing guides for tools to use and example software code to work off of.
+This resource seeks to aid researchers in adopting geospatial data-based exposures into their research by providing guides, tools, and example code.
 
 
 ## Getting Started {-}
 
-This resource does assume a familiarity with the R programming language and the use of
-R for working with, visualizing, and analyzing scientific data.
+This resource does assume a familiarity with the `R` programming language and the use of `R` for working with, visualizing, and analyzing scientific data.
 
 The TAME Toolkit (https://uncsrp.github.io/Data-Analysis-Training-Modules/) provides a good resource for gaining familiarity with R for use in
 environmental health research methods, in particular Chapter 1 on Introductory
@@ -43,7 +32,7 @@ Data Science and Chapter 3.3 on Database Integration.
 
 ## Funding {-}
 
-This resource was supported by the National Institutes of Health (NIH) from the National Institute of Environmental Health Sciences, by the NIH Office of Data Science Strategy Data Scholar's Program, by the Patient Centered Outcomes Research Trust Fund and the Department of Health and Human Services (DHHS) Office of Assistant Secretary for Planning and Evaluation.
+This resource was supported by the National Institutes of Health (NIH) from the National Institute of Environmental Health Sciences (NIEHS), by the NIH Office of Data Science Strategy (ODSS) Data Scholar Program, by the Patient Centered Outcomes Research Trust Fund (PCORTF) and the Department of Health and Human Services (DHHS) Office of Assistant Secretary for Planning and Evaluation.
 
 
 
