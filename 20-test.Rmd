@@ -22,5 +22,9 @@
 Typing `search()` gives the list of attached packages. By using `fortunes::fortune()` we avoid adding the fortunes package to that list.
 </div>
 
-
+```{r}
+# lintr test for commented coee
+code <- 5 + 5
+# commented <- mean(code)
+```
 

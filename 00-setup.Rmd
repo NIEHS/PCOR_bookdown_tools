@@ -15,7 +15,4 @@ summary(cars)
 You can label code chunks with hyphens but we don't recommend using underscores or spaces. Think "kebabs, not snakes".
 
 ```{R plot}
-# lintr example for commented code
-x <- 4 + 5
-# y <- 5 + 5
 ```
