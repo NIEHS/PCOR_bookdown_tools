@@ -5,6 +5,3 @@
 ---
 
 This unit provides guidance and code for working with different types of wildfire-related data in climate change and health research.
-
-
-

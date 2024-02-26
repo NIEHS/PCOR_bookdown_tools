@@ -25,10 +25,3 @@ The sources include:
 |gis_latitude  |Latitude coordinate   |Geocoding of subject data   |  
 |hazards_pm25_ammonium_ugm3  |ACAG estimated PM2.5 conponent: ammonium ion concentration (micrograms per cubic meter)   |ACAG   |  
 |hazards_benzene_1km  |Estimated xylene mass in kg using an isotropic sum of exponentially decaying mass equation with an exponential decay range of 1km (see Eq 1).   |TRI   |  
-
-
-
-
-
-
-
