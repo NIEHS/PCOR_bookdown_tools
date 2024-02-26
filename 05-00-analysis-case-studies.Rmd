@@ -2,6 +2,8 @@
 
 # **Case Studies** {-}
 
+---
+
 This unit provides example case studies that analyze integrated wildfire-related data with health outcomes data.
 
 

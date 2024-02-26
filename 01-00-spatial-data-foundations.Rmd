@@ -2,4 +2,6 @@
 
 # **Foundations** {-}
 
+---
+
 This unit provides guidance and example code for working with different types of geospatial data common in environmental health research. 

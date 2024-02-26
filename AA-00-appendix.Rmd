@@ -2,7 +2,9 @@
 
 # **Appendix** {-}
 
-The appendix includes the following:
+---
+
+The following are included as appendices:
 
 * User profile descriptions
 * CHORDS glossary
