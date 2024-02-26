@@ -5,3 +5,12 @@
 ---
 
 This unit provides guidance and example code for working with different types of geospatial data common in environmental health research. 
+
+```{r, include = FALSE, echo = FALSE, eval = FALSE, warning = FALSE}
+install.packages("BiocManager", quiet = TRUE)
+library(BiocManager)
+BiocManager::install("Biobase", update = FALSE, ask = FALSE)
+library(Biobase)
+library(BiocVersion)
+```
+
