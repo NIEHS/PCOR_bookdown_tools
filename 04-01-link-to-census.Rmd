@@ -4,6 +4,9 @@
 [![Profile-CMP](https://img.shields.io/badge/User%20Profile-Clinician/Medical%20Professional-f58231.svg)](#profilecmp)
 [![Profile-CDM](https://img.shields.io/badge/User%20Profile-Clinical%20Data%20Manager-469990.svg)](#profilecdm)
 
+<font size ="5"> **Linking Geocoded Addresses to Census Units and Social Determinants of Health Data in R** </font>
+
+
 **Date Modified**: September 13, 2023
 
 **Author**: Lara P. Clark
@@ -232,13 +235,13 @@ Here is the description of the simple features object produced by the code above
 # Dimension:     XY
 # Bounding box:  xmin: -80.07571 ymin: 34.80499 xmax: -79.45918 ymax: 35.18342
 # Geodetic CRS:  NAD83
-#   STATEFP10 COUNTYFP10 TRACTCE10     GEOID10 NAME10        NAMELSAD10 MTFCC10 
-# 1        37        153    970100 37153970100   9701 Census Tract 9701   G5020         
-# 2        37        153    970200 37153970200   9702 Census Tract 9702   G5020          
-# 3        37        153    970800 37153970800   9708 Census Tract 9708   G5020          
-# 4        37        153    970900 37153970900   9709 Census Tract 9709   G5020          
-# 5        37        153    971000 37153971000   9710 Census Tract 9710   G5020          
-# 6        37        153    971100 37153971100   9711 Census Tract 9711   G5020          
+#   STATEFP10 COUNTYFP10 TRACTCE10     GEOID10 NAME10        NAMELSAD10 MTFCC10
+# 1        37        153    970100 37153970100   9701 Census Tract 9701   G5020
+# 2        37        153    970200 37153970200   9702 Census Tract 9702   G5020
+# 3        37        153    970800 37153970800   9708 Census Tract 9708   G5020
+# 4        37        153    970900 37153970900   9709 Census Tract 9709   G5020
+# 5        37        153    971000 37153971000   9710 Census Tract 9710   G5020
+# 6        37        153    971100 37153971100   9711 Census Tract 9711   G5020
 #
 #   FUNCSTAT10   ALAND10 AWATER10  INTPTLAT10   INTPTLON10
 # 1          S 246281647  2106825 +35.0503203 -079.6180454
@@ -313,7 +316,9 @@ Now that the geocoded addresses and Census tracts are in the same CRS, we can li
 
 ```{r eval = FALSE}
 # link geocoded addresses to the Census tracts that contain them
-geo_addresses_linkage_sf <- sf::st_join(geo_addresses_sf, nc_tracts_2010_sf, left = TRUE)
+geo_addresses_linkage_sf <- sf::st_join(geo_addresses_sf,
+                                        nc_tracts_2010_sf,
+                                        left = TRUE)
 
 # create linked table with geocoded addresses id paired with Census tract geoid
 geo_addresses_linkage_tbl <- sf::st_drop_geometry(geo_addresses_linkage_sf) %>%
@@ -321,7 +326,8 @@ geo_addresses_linkage_tbl <- sf::st_drop_geometry(geo_addresses_linkage_sf) %>%
   dplyr::select(id, geoid_tract_2010)
 
 # write linked table to CSV file
-readr::write_csv(geo_addresses_linkage_tbl, "city_hall_census_tract_2010_linkage.csv")
+readr::write_csv(geo_addresses_linkage_tbl,
+                 "city_hall_census_tract_2010_linkage.csv")
 
 # view the linked table
 print(geo_addresses_linkage_tbl)
@@ -372,13 +378,13 @@ The following code downloads the Excel file and reads its `Data` sheet into a ta
 
 ```{r eval = FALSE}
 # download Excel file using the URL provided in the screenshot above
-sdoh_tracts_2010_url <- 
+sdoh_tracts_2010_url <-
   "https://www.ahrq.gov/downloads/sdoh/sdoh_2010_tract_1_0.xlsx"
 download.file(sdoh_tracts_2010_url, destfile = "sdoh_2010_tract_1_0.xlsx")
 
 # read the "Data" sheet of the Excel file into a table R
-# note that you may need to provide a complete filepath for the Excel file 
-sdoh_tracts_2010_tbl <- readxl::read_xlsx("sdoh_2010_tract_1_0.xlsx", 
+# note that you may need to provide a complete filepath for the Excel file
+sdoh_tracts_2010_tbl <- readxl::read_xlsx("sdoh_2010_tract_1_0.xlsx",
                                           sheet = "Data")
 
 # view the table
@@ -387,16 +393,16 @@ head(sdoh_tracts_2010)
 
 ```{r eval = FALSE}
 # A tibble: 6 × 355
-#    YEAR TRACTFIPS   COUNTYFIPS STATEFIPS STATE   COUNTY         REGION    
+#    YEAR TRACTFIPS   COUNTYFIPS STATEFIPS STATE   COUNTY         REGION
 #   <dbl> <chr>       <chr>      <chr>     <chr>   <chr>          <chr>
 # 1  2010 01001020100 01001      01        Alabama Autauga County South
 # 2  2010 01001020200 01001      01        Alabama Autauga County South
 # 3  2010 01001020300 01001      01        Alabama Autauga County South
 # 4  2010 01001020400 01001      01        Alabama Autauga County South
-# 5  2010 01001020500 01001      01        Alabama Autauga County South          
+# 5  2010 01001020500 01001      01        Alabama Autauga County South
 # 6  2010 01001020600 01001      01        Alabama Autauga County South
-# ℹ 348 more variables: TERRITORY <dbl>, ACS_TOT_POP_WT <dbl>, 
-#   ACS_TOT_POP_US_ABOVE1 <dbl>, ACS_TOT_POP_ABOVE5 <dbl> , 
+# ℹ 348 more variables: TERRITORY <dbl>, ACS_TOT_POP_WT <dbl>,
+#   ACS_TOT_POP_US_ABOVE1 <dbl>, ACS_TOT_POP_ABOVE5 <dbl>,
 #   ACS_TOT_POP_ABOVE15 <dbl>, ACS_TOT_POP_ABOVE16 <dbl>, …
 # ℹ Use `colnames()` to see all variable names
 ```
@@ -422,14 +428,14 @@ The following code joins those SDOH data variables to the geocoded addresses bas
 # select the SDOH variables of interest
 sdoh_tracts_2010_tbl <- sdoh_tracts_2010_tbl %>%
   dplyr::rename(geoid_tract_2010 = TRACTFIPS) %>%
-  dplyr::select(geoid_tract_2010, 
-                ACS_PCT_INC50, 
-                POS_DIST_ED_TRACT, 
+  dplyr::select(geoid_tract_2010,
+                ACS_PCT_INC50,
+                POS_DIST_ED_TRACT,
                 ACS_PCT_HU_NO_VEH)
 
 # join the SDOH table to the geocoded addresses based on geoid
-geo_addresses_sdoh_tbl <- dplyr::left_join(geo_addresses_linkage_tbl, 
-                                           sdoh_tracts_2010_tbl, 
+geo_addresses_sdoh_tbl <- dplyr::left_join(geo_addresses_linkage_tbl,
+                                           sdoh_tracts_2010_tbl,
                                            by = "geoid_tract_2010")
 
 # view the resulting linked table
@@ -438,13 +444,13 @@ print(geo_addresses_sdoh_tbl)
 
 ```{r eval = FALSE}
 # A tibble: 5 × 5
-#   id               geoid_tract_2010 ACS_PCT_INC50 POS_DIST_ED_TRACT 
-#   <chr>            <chr>                    <dbl>             <dbl>             
-# 1 01-charlotte     37119001100               3.68              0.85              
-# 2 02-raleigh       37183050100               6.77              2.8              
-# 3 03-greensboro    37081010800               6.16              0.99             
-# 4 04-durham        37063002200              25.9               2.62              
-# 5 05-winston-salem 37067000100               9.01              3.35             
+#   id               geoid_tract_2010 ACS_PCT_INC50 POS_DIST_ED_TRACT
+#   <chr>            <chr>                    <dbl>             <dbl>
+# 1 01-charlotte     37119001100               3.68              0.85
+# 2 02-raleigh       37183050100               6.77              2.8
+# 3 03-greensboro    37081010800               6.16              0.99
+# 4 04-durham        37063002200              25.9               2.62
+# 5 05-winston-salem 37067000100               9.01              3.35
 #   ACS_PCT_HU_NO_VEH
 #               <dbl>
 # 1             7.24
