@@ -67,4 +67,4 @@ jobs:
           covr::environment_coverage(
             test_files = "tests/test-render_bookdown.R"
           )
-        shell: Rscript {0} 
+        shell: Rscript {0}
