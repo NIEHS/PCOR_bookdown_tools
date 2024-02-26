@@ -1,4 +1,4 @@
-# User Profiles {.unnumbered}
+# **A1** User Profiles {#chapter-user-profiles .unnumbered}
 
 The CHORDS Toolkit chapters have been developed for various user profiles. 
 This appendix describes the user profiles and suggests relevant chapters for each.

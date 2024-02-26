@@ -1,8 +1,7 @@
-# (PART\*) Wildfire Data {-}
+# (PART\*) Wildfire Data {.unnumbered .unlisted}
 
 # **Wildfire Data** {-}
 
+---
+
 This unit provides guidance and code for working with different types of wildfire-related data in climate change and health research.
-
-
-

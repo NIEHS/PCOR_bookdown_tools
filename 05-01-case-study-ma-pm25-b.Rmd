@@ -242,5 +242,3 @@ p <- ggplot() +
 # Print the map
 print(p)
 ```
-
-
