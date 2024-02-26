@@ -15,7 +15,7 @@ The NASA SEDAC global data includes the locations of major roads (i.e., lines in
   
 
 Other types of roads, such as tertiary roads, local roads, trails, and private roads, are not included.
-
+gi
 The following figure illustrates the spatial coverage (all US states and territories) and spatial scale (lines) of the SEDAC roads data:
 
 <center>
