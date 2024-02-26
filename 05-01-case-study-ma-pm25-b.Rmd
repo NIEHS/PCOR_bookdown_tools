@@ -1,8 +1,6 @@
-# **Census Analysis** {-} 
+### Mapping Linked Census Income Data 
 
-## Census Income vs Patient{-}
-
-### Data Preparation 
+#### Data Preparation {-}
 
 Data set is from Synthetic patient and population health data from the state of Massachusetts
 
@@ -91,7 +89,7 @@ dim(df)
 colnames(df)
 ```
 
-### use case:
+#### Get Census Income Data {-}
 
 7.  Apply census api key at <https://api.census.gov/data/key_signup.html> and then supply the key to the `census_api_key()` function to use it throughout your tidycensus session.
 
@@ -138,7 +136,7 @@ dim(tarr)
 colnames(tarr)
 ```
 
-### Join the dataframes by the census track id
+#### Link Census Income Data by Tract Geoid {-}
 
 df column "census_block_group_id_2010" and tarr column "GEOID" are the census track id.
 
@@ -169,7 +167,7 @@ if (FALSE) {
 library(dplyr)
 ```
 
-## The county with hightest income in MA by sensus data 2020 {-}
+#### Identify County with Hightest Income in 2020 {-}
 
 ```{r}
 # Fetch ACS data for Massachusetts counties
@@ -191,7 +189,8 @@ highest_income_county <- ma_counties_sorted$NAME[1]
 cat("The county with the highest income in Massachusetts is:",
     highest_income_county)
 ```
-### install packages for the plot
+
+#### Map Income and Patient Data {-}
 
 ```{r}
 if (!require("maps") || !require("ggmap")) {
@@ -204,7 +203,7 @@ library(ggplot2)
 ```{r}
 colnames(left_merged_frame)
 ```
-### Draw a map with patients and income in color
+
 ```{r}
 # Draw Massachusetts map
 ma_map <- map_data("state", region = "massachusetts")
