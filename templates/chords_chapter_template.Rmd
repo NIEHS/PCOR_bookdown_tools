@@ -44,15 +44,25 @@ Short headings and sub-headings (with less than approximately 45 characters) are
 
 ### Code Blocks
 
+Please use the main text to describe important analytical decisions. Please use comments within the code to explain specific steps. 
+
 ### Call-out Boxes
 
-This section shows examples for adding call-out boxes, tables, figures, and code blocks.
+You can use call-out boxes to highlight important notes, tips, and warnings separated from the main text.
 
-Example environmental health data sources readily available by Census geoid from US federal agencies include the following:
+::: {.note}
+This displays a note with a light blue background and information sign icon.
+:::
 
-### Tables
+::: {.warning}
+This displays a warning with a light yellow background and caution sign icon.
+:::
 
-### Figures
+::: {.important}
+This displays an important note with a light red background and siren icon.
+:::
+
+### Tables and Figures
 
 ### Adding Citations
 
@@ -67,6 +77,3 @@ This is an optional section describing available resources for the chapter topic
 ## References 
 
 Add code block here to populate the chapters references.
-
-
-
