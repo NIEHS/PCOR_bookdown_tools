@@ -28,7 +28,7 @@ jobs:
       - name: Install pandoc-citeproc
         run: |
           sudo apt-get update
-          sude apt-get install pandoc-citeproc
+          sudo apt-get install pandoc-citeproc
 
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
