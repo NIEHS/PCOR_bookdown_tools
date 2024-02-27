@@ -25,6 +25,11 @@ jobs:
           sudo apt-get install -y libudunits2-dev libgdal-dev
           sudo apt-get install libmagick++-dev
 
+      - name: Install pandoc-citeproc
+        run: |
+          sudo apt-get update
+          sude apt-get install pandoc-citeproc
+
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
           packages: |
