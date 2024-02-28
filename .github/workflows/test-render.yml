@@ -5,6 +5,8 @@
 name: Render Bookdown
 
 on:
+  push:
+    branches: [master, main]
   pull_request:
 
 jobs:
