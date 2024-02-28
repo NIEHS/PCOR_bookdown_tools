@@ -4,12 +4,14 @@ name: Super Linter
 on:
   push:
   pull_request:
-    branches: [main, master]
 
 jobs:
   super-lint:
     name: Lint all file types
     runs-on: ubuntu-latest
+    env:
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -21,5 +23,4 @@ jobs:
       - name: Run Super-Linter
         uses: github/super-linter@v4
         env:
-          DEFAULT_BRANCH: main
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          LINTR_ERROR_ON_LINT: true
