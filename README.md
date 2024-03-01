@@ -5,8 +5,38 @@
 
 This is a data analysis examples book based on R Markdown and bookdown (<https://github.com/rstudio/bookdown>). The dataset and large files are under ddn: <smb://wine/pcor_climate/Bookdown_tool/>
 
-Install packages
+The following packages are required to run all of the code within the bookdown.
 
 ```{r}
-install.packages("styler")
+install.packages(
+  c(
+    "testthat",
+    "rsconnect",
+    "bookdown",
+    "rmarkdown",
+    "plotly",
+    "shiny",
+    "tidycensus",
+    "tidyverse",
+    "viridis",
+    "ggmap",
+    "ggplot2",
+    "maps",
+    "dplyr",
+    "knitr",
+    "latticeExtra",
+    "pals",
+    "classInt",
+    "sf",
+    "udunits2",
+    "tmap",
+    "lubridate",
+    "gifski",
+    "magick",
+    "cowplot",
+    "BiocManager",
+    "styler"
+  ),
+  dependencies = TRUE
+)
 ```
