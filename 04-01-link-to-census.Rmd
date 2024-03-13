@@ -21,7 +21,7 @@ This tutorial provides example code in `R`:
 
 1.  To link geocoded addresses (i.e., geographic coordinates) to the specific US Census geographic units (e.g., tract) in which they are located.
 
-2.  To link data from the [Agency for Healthcare Research and Quality (AHRQ) Social Determinants of Health Database](https://www.ahrq.gov/sdoh/data-analytics/sdoh-data.html) to those geocoded addresses.
+2.  To link data from the Agency for Healthcare Research and Quality (AHRQ) Social Determinants of Health Database [@ahrq-sdoh-database] to those geocoded addresses.
 
 ### Motivation
 
@@ -104,7 +104,7 @@ This tutorial includes the following steps:
 
 ### Install R packages {#step-0}
 
-The following code installs and loads the packages used in this tutorial:
+This tutorial uses the `R` packages `sf` [@r-sf-1; @r-sf-2], `tidyverse` [@r-tidyverse], `tigris` [@r-tigris], and `tmap` [@r-tmap]. The following code installs and loads these packages:
 
 ```{r eval = FALSE}
 # install required packages
