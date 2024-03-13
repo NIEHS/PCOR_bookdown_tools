@@ -3,9 +3,3 @@
 # **Appendix** {-}
 
 ---
-
-The following are included as appendices:
-
-* User profile descriptions
-* CHORDS glossary
-* Data dictionary for NIEHS PEGS 
