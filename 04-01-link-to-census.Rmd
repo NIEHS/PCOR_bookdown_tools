@@ -468,20 +468,6 @@ This tutorial demonstrates how to link geocoded addresses for individuals to Cen
 
 ## Resources
 
-R Packages used in this tutorial:
-
--   `sf`: Pebesma, E. (2018). Simple Features for R: Standardized Support for Spatial Vector Data. *The R Journal*, 10:1, 439-446. <https://github.com/r-spatial/sf/>; Pebesma, E., & Bivand, R. (2023). *Spatial Data Science: With Applications in R*. Chapman and Hall/CRC. <https://doi.org/10.1201/9780429459016>
-
--   `tidyverse`: Wickham, H., Averick, M., Bryan, J., Chang, W., McGowan, LD., et al. (2019). Welcome to the tidyverse. *Journal of Open Source Software*, 4(43), 1686. <https://doi.org/10.21105/joss.01686>
-
--   `tigris`: Walker, K., Rudis, B. (2023). tigris: Load Census TIGER/Line Shapefiles. R Package, Version 2.0.4, <https://github.com/walkerke/tigris>
-
--   `tmap`: Tennekes, M. (2018). tmap: Thematic Maps in R. *Journal of Statistical Software*. 84:6, 1-39. <https://doi.org/10.18637/jss.v084.i06>
-
-Data sources used in this tutorial:
-
--   Agency for Healthcare Research and Quality (AHRQ). (2020). *Social Determinants of Health Database*. <https://www.ahrq.gov/sdoh/data-analytics/sdoh-data.html>
-
 Resources for accessing and linking Census geographic boundaries:
 
 -   Census Bureau. (2023). *Geography Boundaries by Year*. <https://www.census.gov/programs-surveys/acs/geography-acs/geography-boundaries-by-year.html>
