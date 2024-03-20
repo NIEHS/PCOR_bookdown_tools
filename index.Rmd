@@ -69,9 +69,6 @@ This resource was supported by the National Institutes of Health (NIH) from the 
 
 ### Suggested Citation {-}
 
-Test Citation [@Sue-Test]
-
-Test Citation [@Hernangomez]
 
 
 
