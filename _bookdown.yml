@@ -5,6 +5,7 @@ rmd_files:
   - index.Rmd
   - 01-00-spatial-data-foundations.Rmd
   - 01-01-spatial-data-analysis.Rmd
+  - 01-02-coordinate-reference-systems.Rmd
   - 02-00-wildfire-data.Rmd
   - 02-01-wildfire-chapter-01.Rmd
   - 03-00-other-environmental-data.Rmd

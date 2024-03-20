@@ -1,6 +1,6 @@
 # Air Quality, Income, and Asthma {#chapter-case-ma-pm25}
 
-[![Profile-STU](https://img.shields.io/badge/User%20Profile-Student-dcbeff.svg)](#profilestu)
+[![Profile-STU](images/user_profiles/profilestu.svg)](#profilestu)
 
 <font size ="5"> **Integrating and Analyzing Air Quality, Income and Asthma-Related Emergency Department Visits with Synthetic Patient Data in R** </font>
 

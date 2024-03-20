@@ -1,8 +1,8 @@
 # Linkage to Census Units {#chapter-link-to-census}
 
-[![Profile-STU](https://img.shields.io/badge/User%20Profile-Student-dcbeff.svg)](#profilestu)
-[![Profile-CMP](https://img.shields.io/badge/User%20Profile-Clinician/Medical%20Professional-f58231.svg)](#profilecmp)
-[![Profile-CDM](https://img.shields.io/badge/User%20Profile-Clinical%20Data%20Manager-469990.svg)](#profilecdm)
+[![Profile-STU](images/user_profiles/profilestu.svg)](#profilestu)
+[![Profile-CMP](images/user_profiles/profilecmp.svg)](#profilecmp)
+[![Profile-CDM](images/user_profiles/profilecdm.svg)](#profilecdm)
 
 <font size ="5"> **Linking Geocoded Addresses to Census Units and Social Determinants of Health Data in R** </font>
 

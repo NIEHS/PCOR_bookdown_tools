@@ -1,6 +1,6 @@
 # NASA EarthData Download {#chapter-nasa-earthdata}
 
-[![Profile-CDM](https://img.shields.io/badge/User%20Profile-Clinical%20Data%20Manager-469990.svg)](#profilecdm) [![Profile-EDU](https://img.shields.io/badge/User%20Profile-Educator-bfef45.svg)](#profileedu) [![Profile-GEO](https://img.shields.io/badge/User%20Profile-Geospatial%20Analyst-fabed4.svg)](#profilegeo)
+[![Profile-CDM](images/user_profiles/profilecdm.svg)](#profilecdm) [![Profile-EDU](images/user_profiles/profileedu.svg)](#profileedu) [![Profile-GEO](images/user_profiles/profilegeo.svg)](#profilegeo)
 
 **Date Modified:** February 7, 2024
 
