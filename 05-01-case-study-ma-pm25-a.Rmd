@@ -6,7 +6,7 @@
 
 **Date Modified**: February 21, 2024
 
-**Authors**: Sue Nolte, Lara P. Clark, Charles Schmitt
+**Authors**: Sue Nolte, Lara P. Clark [![author-lpc](images/orcid.png){width=10}](https://orcid.org/0000-0001-6940-5442), Charles Schmitt [![author-cps](images/orcid.png){width=10}](https://orcid.org/0000-0002-3148-2263)
 
 **Key Terms**: [Exposure](https://tools.niehs.nih.gov/cchhglossary/?keyword=exposure&termOnlySearch=true&exactSearch=true), [Data Integration](https://tools.niehs.nih.gov/cchhglossary/?keyword=data+integration&termOnlySearch=true&exactSearch=true), [Social Determinants of Health](https://tools.niehs.nih.gov/cchhglossary/?keyword=social+determinants+of+health+(sdoh)&termOnlySearch=true&exactSearch=true)
 

@@ -9,7 +9,7 @@
 
 **Date Modified**: September 13, 2023
 
-**Author**: Lara P. Clark
+**Author**: Lara P. Clark [![author-lpc](images/orcid.png){width=10}](https://orcid.org/0000-0001-6940-5442)
 
 **Key Terms**: [Data Integration](https://tools.niehs.nih.gov/cchhglossary/?keyword=data+integration&termOnlySearch=true&exactSearch=true), [Social Determinants of Health](https://tools.niehs.nih.gov/cchhglossary/?keyword=social+determinants+of+health+(sdoh)&termOnlySearch=true&exactSearch=true), [Geocoded Address](#def-geocoded-address), [Geographic Unit](#def-geographic-unit), [Geoid](#def-geoid)
 

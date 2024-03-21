@@ -4,7 +4,7 @@
 
 **Date Modified:** February 7, 2024
 
-**Author:** Mitchell Manware
+**Author:** Mitchell Manware [![author-mm](images/orcid.png){width=10}](https://orcid.org/0009-0003-6440-6106)
 
 **Key Terms:** [Geospatial Data](#def-geospatial-data), [Remote Sensing](https://tools.niehs.nih.gov/cchhglossary/?keyword=remote+sensing)
 
@@ -33,12 +33,16 @@ See <https://www.earthdata.nasa.gov/eosdis/daacs> for more information.
 
 Many of the NASA EOSDIS data sets are relevant to environmental health research, and accessing the data from within R is important for reproducability and repeatable analyses. Although the data is openly accessible, users are required to register for an EarthData account and/or be logged in if you have an account.
 
+::: note
+The NASA EarthData Account prerequisite files can be generated directly from the command line or using a text editor (notepad in Windows). See [How to Generate Earthdata Prerequisite Files](https://disc.gsfc.nasa.gov/information/howto?title=How%20to%20Generate%20Earthdata%20Prerequisite%20Files) for detailed instructions on creating prerequisite files with both the command line and Python.
+:::
+
 ### Objectives
 
 Users will:
 
 -   Register for or log into a NASA EarthData Account
--   Generate NASA EarthData Account prerequisite files
+-   Generate NASA EarthData Account prerequisite files using R
 -   Practice downloading data from a URL
 
 ## NASA EarthData Account
@@ -195,7 +199,7 @@ TRUE
 
 #### `.dodsrc` {-}
 
-The following commands create the `.urs_cookies` file.
+The following commands create the `.dodsrc` file.
 
 First, set your working directory to the home directory.
 
