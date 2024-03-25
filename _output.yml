@@ -29,12 +29,4 @@ bookdown::pdf_book:
   keep_tex: yes
 bookdown::epub_book: default
 
-author: "Type your name here"
-date: "`r Sys.Date()`"
-output: 
-  html_document:
-    theme: cerulean
-    toc: yes
-    toc_float:
-      collapsed: true
 ---
