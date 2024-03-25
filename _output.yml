@@ -11,9 +11,6 @@ bookdown::gitbook:
       after: >
         <li><a href="https://github.com/rstudio/bookdown" 
         target="blank">Published with bookdown</a></li>
-    edit: 
-      link: https://github.com/NIEHS/PCOR_bookdown_tools/edit/main/%s
-      text: "Suggest an edit"
     download: ["pdf", "epub"]
     sharing:
       github: yes
