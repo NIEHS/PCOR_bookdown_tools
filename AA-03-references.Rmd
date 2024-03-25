@@ -1,3 +1,4 @@
-# **A3** References {.unnumbered}
+# **C** References {#all-references-appendix .unnumbered}
 
-<div id="refs"></div>
+::: #refs
+:::
