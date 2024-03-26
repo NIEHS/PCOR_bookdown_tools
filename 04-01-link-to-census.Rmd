@@ -79,11 +79,11 @@ For states, counties, tracts, block groups, and blocks: the geoids for the finer
 
 The following are important considerations for linking geocoded addresses to Census geographic boundaries for environmental health applications.
 
-1.  **Temporal considerations**: The Census [periodically updates its geographic boundaries](https://www.census.gov/content/dam/Census/library/publications/2020/acs/acs_geography_handbook_2020_ch02.pdf), such as tracts, block groups, and blocks. For example, the Census may add, remove, or modify specific geographic units (and associated geoids) as the population changes over time. Thus, it is important to select the correct years (or, [vintages](https://www.census.gov/content/dam/Census/library/publications/2020/acs/acs_geography_handbook_2020_ch02.pdf)) of Census geographic boundaries needed for linking each data source of interest. For example, linking SDOH data provided for year-2010 vintage Census tract boundaries would require the year-2010 vintage of Census tract geoids for each geocoded address.
+1.  **Temporal Considerations**: The Census [periodically updates its geographic boundaries](https://www.census.gov/content/dam/Census/library/publications/2020/acs/acs_geography_handbook_2020_ch02.pdf), such as tracts, block groups, and blocks. For example, the Census may add, remove, or modify specific geographic units (and associated geoids) as the population changes over time. Thus, it is important to select the correct years (or, [vintages](https://www.census.gov/content/dam/Census/library/publications/2020/acs/acs_geography_handbook_2020_ch02.pdf)) of Census geographic boundaries needed for linking each data source of interest. For example, linking SDOH data provided for year-2010 vintage Census tract boundaries would require the year-2010 vintage of Census tract geoids for each geocoded address.
 
-2.  **Spatial scale considerations**: The spatial scale of tracts, block groups, and blocks varies substantially across the US, with finer spatial scale in urban areas and coarser scale in rural areas. Thus, it is important to select the Census geographic boundary with appropriate spatial resolution for the specific environmental health application.
+2.  **Spatial Scale Considerations**: The spatial scale of tracts, block groups, and blocks varies substantially across the US, with finer spatial scale in urban areas and coarser scale in rural areas. Thus, it is important to select the Census geographic boundary with appropriate spatial resolution for the specific environmental health application.
 
-3.  **Privacy considerations**: Various web-based geocoding tools support look-up of Census geoids by street addresses or geographic coordinates. However, such web-based tools require sending geolocation information over the internet, which can risk exposing private geolocation information. To meet data protection guidelines for environmental health applications, this tutorial instead uses a fully offline approach for handling geolocation information.
+3.  **Privacy Considerations**: Various web-based geocoding tools support look-up of Census geoids by street addresses or geographic coordinates. However, such web-based tools require sending geolocation information over the internet, which can risk exposing private geolocation information. To meet data protection guidelines for environmental health applications, this tutorial instead uses a fully offline approach for handling geolocation information.
 
 ### Outline
 
@@ -101,7 +101,7 @@ This tutorial includes the following steps:
 
 ## Tutorial
 
-### Install R packages {#link-to-census-step-0}
+### Install R Packages {#link-to-census-step-0}
 
 This tutorial uses the `R` packages `sf` [@r-sf-1; @r-sf-2], `tidyverse` [@r-tidyverse], `tigris` [@r-tigris], and `tmap` [@r-tmap]. The following code installs and loads these packages:
 
@@ -116,7 +116,7 @@ library(tigris)
 library(tmap)
 ```
 
-### Prepare geocoded addresses {#link-to-census-step-1}
+### Prepare Geocoded Addresses {#link-to-census-step-1}
 
 The first step is to prepare the geocoded addresses (i.e., geographic coordinates or latitude/longitude) for mapping in `R`.
 
@@ -214,7 +214,7 @@ Here is the description of the simple features object produced by the code above
 
 Now, we can see that each city hall has associated `geometry` in point format. We can also confirm that the correct CRS (`WGS84`) is now associated with the city hall locations.
 
-### Access Census geographic boundaries {#link-to-census-step-2}
+### Access Census Geographic Boundaries {#link-to-census-step-2}
 
 The second step is to prepare the Census geographic boundaries for mapping in `R`. For this tutorial, we'll use the `tigris` package to load the Census tract boundaries for North Carolina in year-2010 (i.e., year-2010 vintage). Using an `R` package like `tigris` to load the Census geographic boundaries will help keep the workflow reproducible by documenting all of the steps in `R`. The following code reads the North Carolina 2010 Census tract boundaries into `R` as simple features:
 
@@ -284,7 +284,7 @@ Census geographic boundaries are also available to download by state for years 2
 
 Historic Census geographic boundaries (i.e., 1910 to present) are available through [IPUMS NHGIS](https://www.nhgis.org) [@ipums-nhgis]. Additionally, IPUMS NHGIS provides many boundaries at the national scale (i.e., such that users can download geographic boundaries for the entire US in a single file). Here is an [example workflow](https://walker-data.com/census-r/other-census-and-government-data-resources.html#mapping-historical-geographies-of-new-york-city-with-nhgis) for accessing historic Census geographic boundaries via IPUMS NHGIS in `R` [@walker2023analyzing].
 
-### Link geocoded addresses to Census geographic boundaries {#link-to-census-step-3}
+### Link Geocoded Addresses to Census Geographic Boundaries {#link-to-census-step-3}
 
 The third step is to link each geocoded addresses to the geoid of the Census geographic unit that contains it. To do this, we'll first need to prepare the geocoded addresses and Census geographic boundaries in the same CRS. The following code transforms the CRS of the geocoded addresses to match the the CRS of the Census geographic boundaries (`NAD83`) and then maps them together:
 
@@ -345,7 +345,7 @@ print(geo_addresses_linkage_tbl)
 # 5 05-winston-salem 37067000100
 ```
 
-### Link AHRQ SDOH data to geocoded addresses {#link-to-census-step-4}
+### Link AHRQ SDOH Data to Geocoded Addresses {#link-to-census-step-4}
 
 The fourth step is to link the AHRQ SDOH data to each geocoded address based on the Census geoid.
 
