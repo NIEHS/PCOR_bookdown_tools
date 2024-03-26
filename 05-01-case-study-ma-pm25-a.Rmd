@@ -2,7 +2,7 @@
 
 [![Profile-STU](https://img.shields.io/badge/User%20Profile-Student-dcbeff.svg)](#profilestu)
 
-<font size ="5"> **Integrating and Analyzing Air Quality, Income and Asthma-Related Emergency Department Visits with Synthetic Patient Data in R** </font>
+### Integrating and Analyzing Air Quality, Income and Asthma-Related Emergency Department Visits with Synthetic Patient Data in R {-}
 
 **Date Modified**: February 21, 2024
 

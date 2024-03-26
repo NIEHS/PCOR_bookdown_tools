@@ -4,7 +4,7 @@
 [![Profile-CDM](https://img.shields.io/badge/User%20Profile-Clinical%20Data%20Manager-469990.svg)](#profilecdm)
 [![Profile-STU](https://img.shields.io/badge/User%20Profile-Student-dcbeff.svg)](#profilestu)
 
-<font size ="5"> **Linking Geocoded Addresses to Various Geospatial Exposure Types Using NIEHS Tools in R** </font>
+### Linking Geocoded Addresses to Various Geospatial Exposure Types Using NIEHS Tools in R {-}
 
 **Date Modified:** August 10, 2023
 
