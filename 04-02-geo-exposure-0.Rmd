@@ -24,7 +24,9 @@ Climate change and health research draws upon diverse types of open geospatial d
 
 This chapter describes NIEHS open source tools to link environmental exposures to individual health data based on geocoded addresses (i.e., geographic coordinates, latitude and longitude). These tools are intended to be accessible to researchers without training in geographic information science (GISc) or geographic information systems (GIS) software. These tools require basic or beginner level programming in `R`.
 
-The tools consist of code, standardized data, and documentation describing use for environmental health applications. Each tool calculates a selection of environmental exposure metrics based on a different source of open geospatial data with national (or approximately national) coverage for United States. Exposure metrics are calculated based on specified point locations (i.e., geocoded address or other geographic coordinates). For data sources that include temporal information, the exposure metrics are also calculated based on specified times. Output of the tool includes the calculated exposure metrics as well as information about data missingness and an optional log file. These tools are designed to be run completely offline as an approach to protect personal geolocation data.
+The tools consist of code, standardized data, and documentation describing use for environmental health applications. Each tool calculates a selection of environmental exposure metrics based on a different source of open geospatial data with national (or approximately national) coverage for United States. Exposure metrics are calculated based on specified point locations (i.e., geocoded address or other geographic coordinates). For data sources that include temporal information, the exposure metrics are also calculated based on specified times. Output of the tool includes the calculated exposure metrics as well as information about data missingness and an optional log file. These tools are designed to be run completely offline as an approach to protect personal geolocation data [@brokamp2018degauss].
+
+These tools depend on the following `R` packages: `sf` [@r-sf-1; @r-sf-2], `terra` [@r-terra], and `tidyverse` [@r-tidyverse].
 
 ### Tools
 
@@ -42,12 +44,5 @@ The following summarizes the available tools and planned tools:
 
 Other available tools to calculate environmental exposures for health applications:
 
--   [DeGAUSS geomarker software](https://degauss.org): Brokamp, C. (2018). DeGAUSS: Decentralized geomarker assessment for multi-site studies. *Journal of Open Source Software*, 3(30), 812.
+-   DeGAUSS geomarker software [@brokamp2018degauss] provides [containerized tools](https://degauss.org/available_images.html) to calculate various geospatial exposure metrics based on geocoded address and state and end date. These metrics include proximity to roadways, traffic, land cover, and vegetation indices.  
 
-`R` packages used to develop the tools:
-
--   `sf`: Pebesma, E. (2018). Simple Features for R: Standardized Support for Spatial Vector Data. *The R Journal*, 10:1, 439-446. <https://github.com/r-spatial/sf/>; Pebesma, E., & Bivand, R. (2023). *Spatial Data Science: With Applications in R*. Chapman and Hall/CRC. <https://doi.org/10.1201/9780429459016>
-
--   `terra`: Hijmans, R. J., Bivand, R., Pebesma, E., Sumner, M. D. (2024). Welcome to the tidyverse. *Journal of Open Source Software*, 4(43), 1686. <https://CRAN.R-project.org/package=terra>
-
--   `tidyverse`: Wickham, H., Averick, M., Bryan, J., Chang, W., McGowan, LD., et al. (2019). terra: Spatial Data Analysis. *R Package, Version 1.7-71*, <https://doi.org/10.21105/joss.01686>
