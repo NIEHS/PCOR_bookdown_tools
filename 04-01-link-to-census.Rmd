@@ -4,8 +4,7 @@
 [![Profile-CMP](https://img.shields.io/badge/User%20Profile-Clinician/Medical%20Professional-f58231.svg)](#profilecmp)
 [![Profile-CDM](https://img.shields.io/badge/User%20Profile-Clinical%20Data%20Manager-469990.svg)](#profilecdm)
 
-<font size ="5"> **Linking Geocoded Addresses to Census Units and Social Determinants of Health Data in R** </font>
-
+### Linking Geocoded Addresses to Census Units and Social Determinants of Health Data in R {-}
 
 **Date Modified**: September 13, 2023
 
@@ -217,7 +216,7 @@ Now, we can see that each city hall has associated `geometry` in point format. W
 
 ### Access Census geographic boundaries {#step-2}
 
-The second step is to prepare the Census geographic boundaries for mapping in `R`. For this tutorial, we'll use the `tigris` package to download the Census tract boundaries for North Carolina in year-2010 (i.e., year-2010 vintage). The following code reads the North Carolina 2010 Census tract boundaries into `R` as simple features:
+The second step is to prepare the Census geographic boundaries for mapping in `R`. For this tutorial, we'll use the `tigris` package to load the Census tract boundaries for North Carolina in year-2010 (i.e., year-2010 vintage). Using an `R` package like `tigris` to load the Census geographic boundaries will help keep the workflow reproducible by documenting all of the steps in `R`. The following code reads the North Carolina 2010 Census tract boundaries into `R` as simple features:
 
 ```{r eval = FALSE}
 # download Census tracts in North Carolina in 2010 as simple features
@@ -279,9 +278,11 @@ print(nc_tracts_2010_map)
 ![Census tracts in North Carolina in 2010](images/nc_tracts_2010_map.png)
 </center>
 
-Other [types and vintages of Census geographic boundaries](https://github.com/walkerke/tigris) are available through `tigris` and the related [`tidycensus`](https://walker-data.com/tidycensus/) package. In most cases, these boundaries are available for recent years (i.e., 1990 to present) and are accessed by state (i.e., users can download geographic boundaries for one state at a time, in separate files).
+Other [types and vintages of Census geographic boundaries](https://github.com/walkerke/tigris) are available through `tigris` and the related `tidycensus` package [@r-tidycensus]. In most cases, these boundaries are available for recent years (i.e., 1990 to present) and are accessed by state (i.e., users can download geographic boundaries for one state at a time, in separate files).
 
-Historic Census geographic boundaries (i.e., 1910 to present) are available through [IPUMS NHGIS](https://www.nhgis.org). Additionally, IPUMS NHGIS provides many boundaries at the national scale (i.e., such that users can download geographic boundaries for the entire US in a single file). Here is an [example workflow](https://walker-data.com/census-r/other-census-and-government-data-resources.html#mapping-historical-geographies-of-new-york-city-with-nhgis) for accessing historic Census geographic boundaries via IPUMS NHGIS in `R`.
+Census geographic boundaries are also available to download by state for years 2007 to present via the Census TIGER/Lines website [@census-tiger-line-shapefiles].
+
+Historic Census geographic boundaries (i.e., 1910 to present) are available through [IPUMS NHGIS](https://www.nhgis.org) [@ipums-nhgis]. Additionally, IPUMS NHGIS provides many boundaries at the national scale (i.e., such that users can download geographic boundaries for the entire US in a single file). Here is an [example workflow](https://walker-data.com/census-r/other-census-and-government-data-resources.html#mapping-historical-geographies-of-new-york-city-with-nhgis) for accessing historic Census geographic boundaries via IPUMS NHGIS in `R` [@walker2023analyzing].
 
 ### Link geocoded addresses to Census geographic boundaries {#step-3}
 
@@ -466,18 +467,3 @@ Now, we have a linked table of geocoded addresses (by individual id) linked to t
 
 This tutorial demonstrates how to link geocoded addresses for individuals to Census geographic boundaries and then to SDOH data available for those Census geographic boundaries. Additional tabular data available for Census geographic boundaries can then be readily linked to further develop an integrated dataset for individuals. Such integrated datasets can be used to investigate relationships between SDOH and health outcomes for individuals.
 
-## Resources
-
-Resources for accessing and linking Census geographic boundaries:
-
--   Census Bureau. (2023). *Geography Boundaries by Year*. <https://www.census.gov/programs-surveys/acs/geography-acs/geography-boundaries-by-year.html>
-
--   IPUMS NHGIS, University of Minnesota, <https://www.nhgis.org>
-
--   Walker, K., Herman, M. (2023). tidycensus: Load US Census Boundary and Attribute Data as 'tidyverse' and 'sf'-Ready Data Frames. R Package, Version 1.3.2, <https://walker-data.com/tidycensus/>
-
--   Walker, K. (2023). *Analyzing US Census Data: Methods, Maps and Models in R*. CRC Press. <https://walker-data.com/census-r/index.html>
-
-## References
-
-<div id="refs"></div>
