@@ -260,7 +260,7 @@ Here is the description of the simple features object produced by the code above
 
 Each tract has associated `geometry` in polygon format plus 14 additional attributes (i.e., variables, columns). Importantly, the Census tract geoid (i.e., [11-digit identifying code](#intro-census-geoids)) for year-2010 is stored in the column `GEOID10`.
 
-We can see that the CRS listed above for the Census tract boundaries (`NAD83`) is different from the CRS for the city hall locations (`WGS84`). This will be important for the [linkage step](#link-to-census-step_3).
+We can see that the CRS listed above for the Census tract boundaries (`NAD83`) is different from the CRS for the city hall locations (`WGS84`). This will be important for the [linkage step](#link-to-census-step-3).
 
 Next, we can view the geometry of the tracts by creating a map:
 
