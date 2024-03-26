@@ -56,6 +56,8 @@ Short headings and sub-headings (with less than approximately 45 characters) are
 
 Please use the main text to describe important analytical decisions. Please use comments within the code to explain specific steps. 
 
+Code blocks must have less than 80 characters per line. 
+
 ### Call-out Boxes
 
 You can use call-out boxes to highlight important notes, tips, and warnings separated from the main text.
