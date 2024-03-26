@@ -466,4 +466,3 @@ Now, we have a linked table of geocoded addresses (by individual id) linked to t
 ## Concluding Remarks
 
 This tutorial demonstrates how to link geocoded addresses for individuals to Census geographic boundaries and then to SDOH data available for those Census geographic boundaries. Additional tabular data available for Census geographic boundaries can then be readily linked to further develop an integrated dataset for individuals. Such integrated datasets can be used to investigate relationships between SDOH and health outcomes for individuals.
-
