@@ -17,17 +17,13 @@ output: bookdown::html_document2
 
 ---
 
-Research into the effects of the environment on human health at the level of individuals and populations entails pulling together a combination of health data and data on environmental exposures. 
+Researchers interested in studying the health impacts of climate change and related natural disasters need access to relevant, timely, and harmonized data on environmental exposures, social determinants of health variables, and health outcomes. However, such datasets are often developed for different purposes, reside in multiple locations, and require linkage.
 
-One approach to gathering exposure information is to compute estimated exposure levels based on the location of individuals at different time points. For instance, based on location and time one can estimate the level of noise around a person, the level of pollutants present in the air, and the presence of parks and other green spaces.
-
-Estimating these exposures can be challenging, especially if one is not familiar with the sources of data used to make these estimations or the analysis methods needed to compute the estimated exposures. This can be especially challenging for time varying exposures, exposures that depend on complex models such as the composition and dispersion of chemicals in the air, and for researchers seeking to study exposure effects at the individual level.
-
-This resource seeks to aid researchers in adopting geospatial data-based exposures into their research by providing guides, tools, and example code.
+The Climate and Health Outcomes Research Data Systems (CHORDS) Toolkit seeks to aid researchers in accessing, processing, and integrating geospatial data-based exposures into their health research by providing guides, tools, and example code. 
 
 ## About CHORDS {-}
 
-The [Climate and Health Outcomes Research Data Systems (CHORDS)](https://www.niehs.nih.gov/research/programs/chords) program provides resources aimed at making it easier for researchers to study the effects of external, place-based environmental exposures on health outcomes. The CHORDS resources include a [web-based data catalog](https://chords.niehs.nih.gov), standardized data sets, and this toolkit.
+The [Climate and Health Outcomes Research Data Systems (CHORDS)](https://www.niehs.nih.gov/research/programs/chords) program provides resources aimed at making it easier for researchers to study the effects of place-based environmental exposures on health outcomes. The CHORDS resources include a [web-based data catalog](https://chords.niehs.nih.gov), standardized data sets, and this toolkit.
 
 <center>
 
