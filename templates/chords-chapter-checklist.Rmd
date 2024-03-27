@@ -2,13 +2,23 @@
 
 ## Linting
 
-Some formatting aspects have been automated using linting. Please run the following code and resolve any identified linting issues:
+Some formatting checks have been automated using linting. Please run the following code and resolve any formatting issues identified:
 
 ```{r eval = FALSE}
 lintr:lint()
 ```
 
 ## Chapter Main Text Formatting 
+
+### Spelling, Grammar, Terms
+
+[ ] Spelling and grammar have been checked
+[ ] Consistent terminology with the NIEHS Climate Change and Human Health Glossary and CHORDS Glossary have been checked
+
+### References
+
+[ ] `R` packages used in the chapter have been cited in the text
+[ ] References have been added to the `book.bib` file in correct format
 
 ### Header Information
 
@@ -20,12 +30,12 @@ lintr:lint()
 
 Please check the following after rendering the chapter to HTML:
 
-[ ] Links to key terms in the header are working
+[ ] Links to key terms in the chapter header are working
 [ ] Links to citations are working
 [ ] Links to URLS are working
 [ ] Links to other sections of the CHORDS Toolkit are working
 
-### Figures and tables
+### Figures and Tables
 
 Please check the following after rendering the chapter to HTML:
 
