@@ -39,7 +39,7 @@ This toolkit provides guides, tools, and example code in `R`. The [CHORDS Toolki
 
 The CHORDS toolkit has been developed to support different types of users, such as students, clinicians, and data managers. Please see the [User Profile Appendix](#chapter-user-profiles) for descriptions and suggested relevant toolkit chapters for each user profile. 
 
-This toolkit does require familiarity with the `R` programming language and the use of `R` for working with, visualizing, and analyzing scientific data. The [TAME Toolkit Chapter 1](https://uncsrp.github.io/Data-Analysis-Training-Modules/) provides resources for getting started with `R` for environmental health research.
+This toolkit does require familiarity with the `R` programming language and the use of `R` for working with, visualizing, and analyzing scientific data. The [TAME Toolkit](https://uncsrp.github.io/Data-Analysis-Training-Modules/) provides resources for getting started with `R` for environmental health research. Additionally, the book [*Geocomputation with R*](https://r.geocompx.org/) provides resources for geospatial data analysis with `R`. 
 
 The toolkit consists of a series of chapters organized into the following units:
 
