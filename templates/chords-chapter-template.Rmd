@@ -101,22 +101,12 @@ You can add a list like this:
 
 These are the steps to cite a resource in the chapter: 
 
-1. Add the BibTex reference information for the resource to the file `book.bib`. For example, the BibTex reference information for the `R` package `terra` looks like this:
-
-```{r eval = FALSE}
- @Manual{r-terra,
-    title = {{terra}: Spatial Data Analysis},
-    author = {Robert J. Hijmans},
-    year = {2024},
-    note = {R package version 1.7-71},
-    url = {https://CRAN.R-project.org/package=terra},
-  }
-```
+1. Add the BibTex reference information for the resource to the file `book.bib`. 
 
 You can retrieve the BibTex reference information for an `R` package by running the following code in `R`:
 
 ```{r eval = FALSE}
-print(citation("terra"), bibtex=TRUE)
+print(citation("terra"), bibtex = TRUE)
 ```
 
 2. Cite the resource in the text, using the tag from the first line of the BibTex reference information. For example, this sentence will have a an in-line citation at the end to the `R` package `terra` [@r-terra].
