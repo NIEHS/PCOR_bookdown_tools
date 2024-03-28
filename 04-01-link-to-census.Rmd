@@ -1,14 +1,14 @@
 # Linkage to Census Units {#chapter-link-to-census}
 
-[![Profile-STU](https://img.shields.io/badge/User%20Profile-Student-dcbeff.svg)](#profilestu)
-[![Profile-CMP](https://img.shields.io/badge/User%20Profile-Clinician/Medical%20Professional-f58231.svg)](#profilecmp)
-[![Profile-CDM](https://img.shields.io/badge/User%20Profile-Clinical%20Data%20Manager-469990.svg)](#profilecdm)
+[![Profile-STU](images/user_profiles/profilestu.svg)](#profilestu)
+[![Profile-CMP](images/user_profiles/profilecmp.svg)](#profilecmp)
+[![Profile-CDM](images/user_profiles/profilecdm.svg)](#profilecdm)
 
 ### Linking Geocoded Addresses to Census Units and Social Determinants of Health Data in R {-}
 
 **Date Modified**: September 13, 2023
 
-**Author**: Lara P. Clark
+**Author**: Lara P. Clark [![author-lpc](images/orcid.png){width=10}](https://orcid.org/0000-0001-6940-5442)
 
 **Key Terms**: [Data Integration](https://tools.niehs.nih.gov/cchhglossary/?keyword=data+integration&termOnlySearch=true&exactSearch=true), [Social Determinants of Health](https://tools.niehs.nih.gov/cchhglossary/?keyword=social+determinants+of+health+(sdoh)&termOnlySearch=true&exactSearch=true), [Geocoded Address](#def-geocoded-address), [Geographic Unit](#def-geographic-unit), [Geoid](#def-geoid)
 

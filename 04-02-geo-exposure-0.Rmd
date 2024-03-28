@@ -1,14 +1,14 @@
 # Linkage to Exposures {#chapter-chords-geo-exposures}
 
-[![Profile-CMP](https://img.shields.io/badge/User%20Profile-Clinician/Medical%20Professional-f58231.svg)](#profilecmp)
-[![Profile-CDM](https://img.shields.io/badge/User%20Profile-Clinical%20Data%20Manager-469990.svg)](#profilecdm)
-[![Profile-STU](https://img.shields.io/badge/User%20Profile-Student-dcbeff.svg)](#profilestu)
+[![Profile-CMP](images/user_profiles/profilecmp.svg)](#profilecmp)
+[![Profile-CDM](images/user_profiles/profilecdm.svg)](#profilecdm)
+[![Profile-STU](images/user_profiles/profilestu.svg)](#profilestu)
 
 ### Linking Geocoded Addresses to Various Geospatial Exposure Types Using NIEHS Tools in R {-}
 
 **Date Modified:** August 10, 2023
 
-**Authors:** Lara P. Clark, Kyle P. Messier, Sue Nolte, Charles Schmitt *et al.*
+**Authors:** Lara P. Clark [![author-lpc](images/orcid.png){width=10}](https://orcid.org/0000-0001-6940-5442), Kyle P. Messier [![author-kpm](images/orcid.png){width=10}](https://orcid.org/0000-0001-9508-9623), Sue Nolte, Charles Schmitt [![author-cps](images/orcid.png){width=10}](https://orcid.org/0000-0002-3148-2263) *et al.*
 
 **Key Terms:** [Data Integration](https://tools.niehs.nih.gov/cchhglossary/?keyword=data+integration&termOnlySearch=true&exactSearch=true), [Exposure](https://tools.niehs.nih.gov/cchhglossary/?keyword=exposure&termOnlySearch=true&exactSearch=true), [Exposure Assessment](https://tools.niehs.nih.gov/cchhglossary/?keyword=exposure+assessment&termOnlySearch=true&exactSearch=true), [Geocoded Address](#def-geocoded-address), [Geospatial Data](#def-geospatial-data)
 
