@@ -8,26 +8,13 @@ bookdown::gitbook:
       before: |
         <li><a href="./"><img src="images/chords-icon-nobackground.png" width="200"></a></li>
         <li><a href="./">CHORDS Toolkit</a></li>
-      after: >
+      after: |
         <li><a href="https://github.com/rstudio/bookdown" 
         target="blank">Published with bookdown</a></li>
-    edit: https://github.com/USERNAME/REPO/edit/BRANCH/%s
-    download: ["pdf", "epub"]
-    
-bookdown::pdf_book:
-  includes:
-    in_header: preamble.tex
-  latex_engine: xelatex
-  citation_package: natbib
-  keep_tex: yes
-bookdown::epub_book: default
-
-author: "Type your name here"
-date: "`r Sys.Date()`"
-output: 
-  html_document:
-    theme: cerulean
-    toc: yes
-    toc_float:
-      collapsed: true
+    download: no
+    sharing:
+      github: yes
+      facebook: no
+      twitter: no
+      all: no
 ---
