@@ -1,25 +1,25 @@
----
+book_filename: "PCOR_bookdown_tools"
 delete_merged_file: true
-
+output_dir: "docs"
 rmd_files:
-  - index.Rmd
-  - 01-00-spatial-data-foundations.Rmd
-  - 01-01-spatial-data-analysis.Rmd
-  - 02-00-wildfire-data.Rmd
-  - 02-01-wildfire-chapter-01.Rmd
-  - 03-00-other-environmental-data.Rmd
-  - 03-01-NASA_EarthData_account.Rmd
-  - 04-00-health-data-integration.Rmd
-  - 04-01-link-to-census.Rmd
-  - 04-02-geo-exposure-0.Rmd
-  - 04-02-geo-exposure-a.Rmd
-  - 04-02-geo-exposure-b.Rmd
-  - 04-02-geo-exposure-c.Rmd
-  - 05-00-analysis-case-studies.Rmd
-  - 05-01-case-study-ma-pm25-a.Rmd
-  - 05-01-case-study-ma-pm25-b.Rmd
-  - 05-01-case-study-ma-pm25-c.Rmd
-  - AA-00-appendix.Rmd
-  - AA-01-user-profiles.Rmd
-  - AA-02-data-science-dictionary.Rmd
-  - AA-03-pegs-data-dictionary.Rmd
+  - "index.Rmd"
+  - "01-00-spatial-data-foundations.Rmd"
+  - "01-01-spatial-data-analysis.Rmd"
+  - "02-00-wildfire-data.Rmd"
+  - "02-01-wildfire-chapter-01.Rmd"
+  - "03-00-other-environmental-data.Rmd"
+  - "03-01-NASA_EarthData_account.Rmd"
+  - "04-00-health-data-integration.Rmd"
+  - "04-01-link-to-census.Rmd"
+  - "04-02-geo-exposure-0.Rmd"
+  - "04-02-geo-exposure-a.Rmd"
+  - "04-02-geo-exposure-b.Rmd"
+  - "04-02-geo-exposure-c.Rmd"
+  - "05-00-analysis-case-studies.Rmd"
+  - "05-01-case-study-ma-pm25-a.Rmd"
+  - "05-01-case-study-ma-pm25-b.Rmd"
+  - "05-01-case-study-ma-pm25-c.Rmd"
+  - "AA-00-appendix.Rmd"
+  - "AA-01-user-profiles.Rmd"
+  - "AA-02-data-science-dictionary.Rmd"
+  - "AA-03-pegs-data-dictionary.Rmd"
