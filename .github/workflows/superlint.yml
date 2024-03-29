@@ -3,7 +3,13 @@ name: Super Linter
 
 on:
   push:
+    paths-ignore:
+      - '**/*.html'
+      - '**/*.css'
   pull_request:
+    paths-ignore:
+      - '**/*.html'
+      - '**/*.css'
 
 jobs:
   super-lint:
