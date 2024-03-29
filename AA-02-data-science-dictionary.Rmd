@@ -1,4 +1,4 @@
-# **A2** CHORDS Glossary {#chords-glossary .unnumbered}
+# **B** CHORDS Glossary {#chords-glossary .unnumbered}
 
 Key terms used in the CHORDS Toolkit are defined below and in the [NIEHS Climate Change and Human Health Glossary](https://tools.niehs.nih.gov/cchhglossary/).
 
@@ -46,7 +46,7 @@ Categories: [Research Methods](https://tools.niehs.nih.gov/cchhglossary/?categor
 
 A unique identifying code for a place or geographic unit (e.g., census tract, city, postal code, land parcel, watershed).
                                                                                
-**Context:** Geoid is commonly used as a basis for data integration for individual-level or population-level analyses
+**Context:** Geoid is commonly used as a basis for data integration at the individual and population level.
 
 <font size ="2"> 
 Categories: [Research Methods](https://tools.niehs.nih.gov/cchhglossary/?category=RM)   

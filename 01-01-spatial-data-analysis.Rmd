@@ -1,14 +1,14 @@
 # Spatial Data Analysis {#chapter-intro-spatial-data-analysis}
 
-[![Profile-CMP](https://img.shields.io/badge/User%20Profile-Clinician/Medical%20Professional-f58231.svg)](#profilecmp)
-[![Profile-SBS](https://img.shields.io/badge/User%20Profile-Social%20&%20Behavioral%20Scientist-808000.svg)](#profilesbs)
-[![Profile-STU](https://img.shields.io/badge/User%20Profile-Student-dcbeff.svg)](#profilestu)
+[![Profile-CMP](images/user_profiles/profilecmp.svg)](#profilecmp)
+[![Profile-SBS](images/user_profiles/profilesbs.svg)](#profilesbs)
+[![Profile-STU](images/user_profiles/profilestu.svg)](#profilestu)
 
-<font size ="5"> **Access, Import, and Primary Analyses with Environmental Data in R** </font>
+### Access, Import, and Primary Analyses with Environmental Data in R {-}
 
 **Date Modified:** February 1, 2024
 
-**Authors:** Mitchell Manware, Kyle P Messier
+**Authors:** Mitchell Manware [![author-mm](images/orcid.png){width=10}](https://orcid.org/0009-0003-6440-6106), Kyle P Messier [![author-kpm](images/orcid.png){width=10}](https://orcid.org/0000-0001-9508-9623)
 
 **Key Terms:** [Geospatial Data](#def-geospatial-data)
 
@@ -169,8 +169,6 @@ Checking the data's structure shows that `pm` is a very large data set. Each of 
 
 The data set can be reduced to include only the variables of interest with the `subset()` function. The `select =` argument indicates which variables to be retained in the new data set.
 
-Re-running `str(pm)` after running the `subset` shows that all observations (n = 590208) of the desired variables (n = 8) have been retained.
-
 ```{r, eval = FALSE}
 pm <- subset(pm, select = c(
   State.Code,
@@ -250,7 +248,7 @@ st_crs(pm_sf) <- 4326
 st_crs(pm_sf)
 ```
 
-An `sf` object with a coordinate reference system can be transformed (projected) into a different coordinate reference system with `sf::st_transform()`. The area of interest for these exploratory analyses is the coterminous United States, so the Albers Equal Area projected coordinate system will be used (EPSG code: 5070).
+An `sf` object with a coordinate reference system can be transformed (projected) into a different coordinate reference system with `sf::st_transform()`. The area of interest for these exploratory analyses is the coterminous United States, so the Albers Equal Area projected coordinate system will be used (EPSG code: 5070). For a detailed description of coordinate reference systems, and how to select the best system for your analyses, see [Coordinate Reference Systems](#chapter-coordinate-reference-systems).
 
 ::: {.note}
 An `sf` object without an assigned coordinate reference system cannot be transformed. `sf::st_crs()` must be used to assign a coordinate reference system to an `sf` object that does not have one.

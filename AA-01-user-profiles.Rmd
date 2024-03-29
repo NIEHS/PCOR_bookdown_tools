@@ -1,10 +1,10 @@
-# **A1** User Profiles {#chapter-user-profiles .unnumbered}
+# **A** User Profiles {#chapter-user-profiles .unnumbered}
 
 The CHORDS Toolkit chapters have been developed for various user profiles. 
 This appendix describes the user profiles and suggests relevant chapters for each.
 
 ## Clinical Data Manager  {#profilecdm .unnumbered .unlisted}
-![](https://img.shields.io/badge/User%20Profile-Clinical%20Data%20Manager-469990.svg)
+![](images/user_profiles/profilecdm.svg)
 
 **What is my area of expertise?**
 
@@ -25,7 +25,7 @@ This appendix describes the user profiles and suggests relevant chapters for eac
 -   [Linkage to Exposures](#chapter-chords-geo-exposures)
 
 ## Clinical Researcher {#profilecre .unnumbered .unlisted}
-![](https://img.shields.io/badge/User%20Profile-Clinical%20Researcher-e6194B.svg)
+![](images/user_profiles/profilecre.svg)
 
 **What is my area of expertise?**
 
@@ -44,7 +44,7 @@ This appendix describes the user profiles and suggests relevant chapters for eac
 -   Methods to readily assess known and predicted impacts of exposures on human health
 
 ## Clinician/Medical Professional {#profilecmp .unnumbered .unlisted}
-![](https://img.shields.io/badge/User%20Profile-Clinician/Medical%20Professional-f58231.svg)
+![](images/user_profiles/profilecmp.svg)
 
 **What is my area of expertise?**
 
@@ -69,7 +69,7 @@ This appendix describes the user profiles and suggests relevant chapters for eac
 -   [Linkage to Exposures](#chapter-chords-geo-exposures)
 
 ## Community Health Worker {#profilechw .unnumbered .unlisted}
-![](https://img.shields.io/badge/User%20Profile-Community%20Health%20Worker-ffe119.svg)
+![](images/user_profiles/profilechw.svg)
 
 **What is my area of expertise?**
 
@@ -86,7 +86,7 @@ This appendix describes the user profiles and suggests relevant chapters for eac
 -   Data visualizations and other related tools
 
 ## Educator {#profileedu .unnumbered .unlisted}
-![](https://img.shields.io/badge/User%20Profile-Educator-bfef45.svg)
+![](images/user_profiles/profileedu.svg)
 
 **What is my area of expertise?**
 
@@ -106,7 +106,7 @@ This appendix describes the user profiles and suggests relevant chapters for eac
 -   [NASA EarthData Download](#chapter-nasa-earthdata)
 
 ## Epidemiologist {#profileepi .unnumbered .unlisted}
-![](https://img.shields.io/badge/User%20Profile-Epidemiologist-4363d8.svg)
+![](images/user_profiles/profileepi.svg)
 
 **What is my area of expertise?**
 
@@ -127,7 +127,7 @@ This appendix describes the user profiles and suggests relevant chapters for eac
 
 
 ## Geospatial Analyst {#profilegeo .unnumbered .unlisted}
-![](https://img.shields.io/badge/User%20Profile-Geospatial%20Analyst-fabed4.svg)
+![](images/user_profiles/profilegeo.svg)
 
 **What is my area of expertise?**
 
@@ -149,7 +149,7 @@ This appendix describes the user profiles and suggests relevant chapters for eac
 -   [NASA EarthData](#chapter-nasa-earthdata)
 
 ## Public Health Official {#profilepho .unnumbered .unlisted}
-![](https://img.shields.io/badge/User%20Profile-Public%20Health%20Official-fffac8.svg)
+![](images/user_profiles/profilepho.svg)
 
 **What is my area of expertise?**
 
@@ -166,7 +166,7 @@ This appendix describes the user profiles and suggests relevant chapters for eac
 -   Data visualizations and other related tools
 
 ## Social & Behavioral Scientist {#profilesbs .unnumbered .unlisted}
-![](https://img.shields.io/badge/User%20Profile-Social%20&%20Behavioral%20Scientist-808000.svg)
+![](images/user_profiles/profilesbs.svg)
 
 **What is my area of expertise?**
 
@@ -190,7 +190,7 @@ This appendix describes the user profiles and suggests relevant chapters for eac
 -   [Spatial Data Analysis](#chapter-intro-spatial-data-analysis)
 
 ## Student {#profilestu .unnumbered .unlisted}
-![](https://img.shields.io/badge/User%20Profile-Student-dcbeff.svg)
+![](images/user_profiles/profilestu.svg)
 
 **What is my area of expertise?**
 
@@ -215,7 +215,7 @@ This appendix describes the user profiles and suggests relevant chapters for eac
 -   [Linkage to Exposures](#chapter-chords-geo-exposures)
 
 ## Translational Researcher {#profiletlr .unnumbered .unlisted}
-![](https://img.shields.io/badge/User%20Profile-Translational%20Researcher-aaffc3.svg)
+![](images/user_profiles/profiletlr.svg)
 
 **What is my area of expertise?**
 

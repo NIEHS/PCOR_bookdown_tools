@@ -1,0 +1,122 @@
+# Short Title {#chapter-short-title} 
+
+[![Profile-STU](https://img.shields.io/badge/User%20Profile-Student-dcbeff.svg)](#profilestu)
+[![Profile-CMP](https://img.shields.io/badge/User%20Profile-Clinician/Medical%20Professional-f58231.svg)](#profilecmp)
+[![Profile-CDM](https://img.shields.io/badge/User%20Profile-Clinical%20Data%20Manager-469990.svg)](#profilecdm)
+[!Profile-CRE](https://img.shields.io/badge/User%20Profile-Clinical%20Researcher-e6194B.svg)](#profilecre)
+[!Profile-CHW](https://img.shields.io/badge/User%20Profile-Community%20Health%20Worker-ffe119.svg)(#profilechw)
+[!Profile-EDU](https://img.shields.io/badge/User%20Profile-Educator-bfef45.svg)(#profileedu)
+[!Profile-EPI](https://img.shields.io/badge/User%20Profile-Epidemiologist-4363d8.svg)(#profileepi)
+[!Profile-GEO](https://img.shields.io/badge/User%20Profile-Geospatial%20Analyst-fabed4.svg)(#profilegeo)
+[!Profile-PHO](https://img.shields.io/badge/User%20Profile-Public%20Health%20Official-fffac8.svg)(#profilepho)
+[!Profile-SBS](https://img.shields.io/badge/User%20Profile-Social%20&%20Behavioral%20Scientist-808000.svg)(#profilesbs)
+[!Profile-TLR](https://img.shields.io/badge/User%20Profile-Translational%20Researcher-aaffc3.svg)(#profiletlr)
+
+### Optional Long Title or Subtitle {-}
+
+**Date Modified**: March 26, 2024 (Template Version 1.0.0)
+
+**Author(s)**: Author Name List
+
+**Key Terms**: [Data Integration](https://tools.niehs.nih.gov/cchhglossary/?keyword=data+integration&termOnlySearch=true&exactSearch=true), [Geocoded Address](#def-geocoded-address)
+
+**Programming Language(s)**: R Markdown
+
+## Introduction
+
+This is a template file for new chapters in the CHORDS toolkit. You can directly edit this template to create your chapter. 
+
+This is an R Mardown file. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+All chapters begin with a section titled "Introduction". This can be short.
+
+The following chapter header elements appear above the "Introduction" section:
+
+- **Short Title**: This is a short title with less than approximately 45 characters. This is the title that will appear in the table of contents sidebar.
+
+- **User Profile Tags**: This is a selection of suggested relevant user profile icons. See the CHORDS Toolkit User Profile Appendix for descriptions of each user profile. The complete list of user profile tags is included in the header in this file. Please select the most relevant user profile tags to display (and delete all remaining profile tags from the header above).
+
+- **Long Title**: This is an optional longer title with no character length limitation.
+
+- **Date Modified**: This is the date this chapter was last modified.
+
+- **Author(s)**: This is the list of author names.
+
+- **Key Terms**: This is a list of key terms that are relevant to the chapter. Terms are linked to the definitions in the CHORDS Glossary Appendix or in the NIEHS Climage Change and Human Health Glossary, as illustrated in the examples in the header above. We welcome suggestions for new terms to add to the CHORDS Glossary. You can suggest new terms by opening an issue through the NIEHS PCOR_bookdown_tools GitHub repository.
+
+- **Programming Language(s)**: This is a list of programming languages used in the chapter (if applicable).
+
+## Main Sections
+
+Please use any headings and sub-headings for the main part of the chapter as needed. 
+
+Short headings and sub-headings (with less than approximately 45 characters) are preferred for readability in the table of contents sidebar. 
+
+### Code Blocks
+
+Please use the main text to describe important analytical decisions. Please use comments within the code to explain specific steps. 
+
+Code blocks must have less than 80 characters per line.
+
+### Call-out Boxes
+
+You can use call-out boxes to highlight important notes, tips, and warnings separated from the main text.
+
+::: {.note}
+This displays a note with a light blue background and information sign icon.
+:::
+
+::: {.warning}
+This displays a warning with a light yellow background and caution sign icon.
+:::
+
+::: {.important}
+This displays an important note with a light red background and siren icon.
+:::
+
+### Tables, Figures, and Lists
+
+You can add image files to the "images" folder and then add them to your chapter with a caption like this:
+
+<center>
+
+![This is a caption for the CHORDS logo.](images/chords-art-logo.png)
+
+</center>
+
+You can add a table like this:
+
+|A            |B             |C               |
+|-------------|--------------|----------------|  
+|1            |Test          |Example         | 
+|2            |Test          |Example         |
+
+You can add a list like this:
+
+-     Item A
+-     Item B
+-     Item C
+
+### Citations
+
+These are the steps to cite a resource in the chapter: 
+
+1. Add the BibTex reference information for the resource to the file `book.bib`. 
+
+You can retrieve the BibTex reference information for an `R` package by running the following code in `R`:
+
+```{r eval = FALSE}
+print(citation("terra"), bibtex = TRUE)
+```
+
+2. Cite the resource in the text, using the tag from the first line of the BibTex reference information. For example, this sentence will have a an in-line citation at the end to the `R` package `terra` [@r-terra].
+
+A reference list will automatically be added to the end of the chapter and the end of the book.
+
+## Concluding Remarks
+
+All chapters end with a section titled "Concluding Remarks". This can be short.
+
+## Additional Resources
+
+This is an optional section describing additional available resources for further learning related to the chapter topics. This is not meant to replace the reference list (which will be automatically added below).
