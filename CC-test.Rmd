@@ -8,7 +8,6 @@
 >
 > It can have multiple lines.
 
-
 > **Warning:** This is how you write a warning.
 >
 > It can have multiple paragraphs.
@@ -17,7 +16,8 @@
 >
 > It can have multiple paragraphs.
 
-
-<div class="note">
+::: note
 Typing `search()` gives the list of attached packages. By using `fortunes::fortune()` we avoid adding the fortunes package to that list.
-</div>
+:::
+
+>test pull before build book
