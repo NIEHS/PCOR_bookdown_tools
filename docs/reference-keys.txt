@@ -87,13 +87,3 @@ step-3-roads
 step-4-roads
 step-5-roads
 step-6-roads
-chapter-case-ma-pm25
-introduction-5
-data-preparation-and-integration
-synthetic-patient-data-preparation
-air-quality-data-linkage
-census-geoid-linkage
-data-exploration-and-vizualization
-mapping-linked-air-pollution-data
-mapping-linked-census-income-data
-join-census-data-with-county-boundaries
