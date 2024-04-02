@@ -1,0 +1,83 @@
+p.caption {
+  color: #ee3;
+  margin-top: 10px;
+}
+
+p code {
+  white-space: inherit;
+}
+
+pre {
+  word-break: normal;
+  word-wrap: normal;
+}
+
+pre code {
+  white-space: inherit;
+}
+
+.note {
+  background-color: #e8f4fd; /* Light blue background */
+  border-left: 5px solid #2b8cc4; /* Dark blue border on the left */
+  padding: 10px 10px 10px 40px; /* Padding inside the box */
+  margin: 10px 0; /* Margin around the box */
+  font-family: Arial, sans-serif; /* Font family */
+  color: #333; /* Text color */
+  position: relative; /* For positioning the icon */
+  margin-right: 20px;
+}
+
+.note::before {
+  content: "ℹ️"; /* Information icon */
+  position: absolute; /* Absolute position relative to the note */
+  left: 10px; /* Position from the left */
+  top: 50%; /* Center vertically */
+  transform: translateY(-50%); /* Align center with height of the box */
+  font-size: 20px; /* Size of the icon */
+}
+
+.warning {
+  background-color: #f6f4d5; /* Light yellow background */
+  border-left: 5px solid #c4b72b; /* Dark yellow border on the left */
+  padding: 10px 10px 10px 40px; /* Padding inside the box */
+  margin: 10px 0; /* Margin around the box */
+  font-family: Arial, sans-serif; /* Font family */
+  color: #333; /* Text color */
+  position: relative; /* For positioning the icon */
+  margin-right: 20px;
+}
+
+.warning::before {
+  content: "⚠️"; /* Warning icon */
+  position: absolute; /* Absolute position relative to the note */
+  left: 10px; /* Position from the left */
+  top: 50%; /* Center vertically */
+  transform: translateY(-50%); /* Align center with height of the box */
+  font-size: 20px; /* Size of the icon */
+}
+
+.important {
+  background-color: #ffe8e9; /* Light red background */
+  border-left: 5px solid #c42b2b; /* Dark red border on the left */
+  padding: 10px 10px 10px 40px; /* Padding inside the box */
+  margin: 10px 0; /* Margin around the box */
+  font-family: Arial, sans-serif; /* Font family */
+  color: #333; /* Text color */
+  position: relative; /* For positioning the icon */
+  margin-right: 20px;
+}
+
+.important::before {
+  content: "🚨"; /* Siren icon */
+  position: absolute; /* Absolute position relative to the note */
+  left: 10px; /* Position from the left */
+  top: 50%; /* Center vertically */
+  transform: translateY(-50%); /* Align center with height of the box */
+  font-size: 20px; /* Size of the icon */
+}
+
+.centerimage {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
