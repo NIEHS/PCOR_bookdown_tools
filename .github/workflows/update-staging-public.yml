@@ -7,7 +7,7 @@ on:
 
 jobs:
   update_branch:
-    name: Delete `staging-public` after pull request and create new from `main`
+    name: Update Branch `staging-public`
     runs-on: ubuntu-latest
     
     steps:
