@@ -5,7 +5,7 @@ on:
   pull_request:
 
 jobs:
-  protect_main:
+  protect_staging_public:
     name: Protect Branch `staging-public`
     runs-on: ubuntu-latest
 
