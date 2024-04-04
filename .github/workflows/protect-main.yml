@@ -6,8 +6,7 @@ on:
     branches:
       - master
       - main
-    types: [closed]
-    
+
 jobs:
   delete_staging_1_on_merge:
     if: github.event.pull_request.merged == true && github.event.pull_request.base.ref == 'main'
@@ -21,13 +20,3 @@ jobs:
             echo "Pull requests into 'main' must come from 'staging-1'."
             exit 1
           fi
-
-      - name: Delete old staging-1 branch
-        run: |
-          git push origin --delete staging-1 || true
-
-      - name: Recreate staging-1 branch
-        run: |
-          git checkout main
-          git checkout -b staging-1
-          git push origin staging-1
