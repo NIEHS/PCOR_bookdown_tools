@@ -1,0 +1,23 @@
+---
+name: Protect Branch `main`
+
+on:
+  pull_request:
+    branches:
+      - master
+      - main
+
+jobs:
+  protect_main:
+    runs-on: ubuntu-latest
+
+    if: github.event.pull_request.base.ref == 'main' || github.event.pull_request.base.ref == 'master'
+    
+    steps:
+      - name: Check Source Branch
+        run: |
+          source_branch=$(jq -r '.pull_request.head.ref' "$GITHUB_EVENT_PATH")
+          if [[ "$source_branch" != "staging-1" ]]; then
+            echo "Pull requests into 'main' must come from 'staging-1'."
+            exit 1
+          fi
