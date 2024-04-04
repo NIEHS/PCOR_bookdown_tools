@@ -14,10 +14,10 @@ jobs:
         id: check-base-branch
         run: |
           if [[ "${{ github.event.pull_request.base.ref }}" == "main" || "${{ github.event.pull_request.base.ref }}" == "master" ]]; then
-            echo "Protected branch 'main' detected in pull request."
+            echo "Protected branch \"main\" detected in pull request."
             echo "continue=true" >> $GITHUB_OUTPUT
            else
-            echo "Protected branch 'main' not detected in pull request."
+            echo "Protected branch \"main\" not detected in pull request."
             echo "continue=false" >> $GITHUB_OUTPUT
           fi
       
@@ -27,9 +27,9 @@ jobs:
           if [[ "$continue" == "true" ]]; then
             source_branch=$(jq -r '.pull_request.head.ref' "$GITHUB_EVENT_PATH")
             if [[ "$source_branch" != "staging-public" ]]; then
-              echo "Pull requests into 'main' must come from 'staging-public'."
+              echo "Pull requests into \"main\" must come from \"staging-public\"."
               exit 1
             fi
           else
-            echo "Protected branch 'main' not detected in pull request."
+            echo "Protected branch \"main\" not detected in pull request."
           fi
