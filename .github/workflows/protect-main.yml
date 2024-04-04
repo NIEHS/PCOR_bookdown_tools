@@ -9,6 +9,7 @@ on:
 
 jobs:
   protect_main:
+    name: Protect Branch `main`
     runs-on: ubuntu-latest
 
     if: github.event.pull_request.base.ref == 'main' || github.event.pull_request.base.ref == 'master'
