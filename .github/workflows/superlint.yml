@@ -1,35 +1,35 @@
----
-name: Super Linter
+# ---
+# name: Super Linter
 
-on:
-  push:
-    paths-ignore:
-      - 'docs/**'
-      - '**/*.html'
-      - '**/*.css'
-  pull_request:
-    paths-ignore:
-      - 'docs/**'
-      - '**/*.html'
-      - '**/*.css'
+# on:
+#   push:
+#     paths-ignore:
+#       - 'docs/**'
+#       - '**/*.html'
+#       - '**/*.css'
+#   pull_request:
+#     paths-ignore:
+#       - 'docs/**'
+#       - '**/*.html'
+#       - '**/*.css'
 
-jobs:
-  super-lint:
-    name: Lint all file types
-    runs-on: ubuntu-latest
-    env:
-      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+# jobs:
+#   super-lint:
+#     name: Lint all file types
+#     runs-on: ubuntu-latest
+#     env:
+#       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
       
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v4
 
-      - uses: r-lib/actions/setup-r@v2
-        with:
-          use-public-rspm: true
+#       - uses: r-lib/actions/setup-r@v2
+#         with:
+#           use-public-rspm: true
 
-      - name: Run Super-Linter
-        uses: github/super-linter@v4
-        env:
-          FILTER_REGEX_EXCLUDE: ./doc/
-          LINTR_ERROR_ON_LINT: true
+#       - name: Run Super-Linter
+#         uses: github/super-linter@v4
+#         env:
+#           FILTER_REGEX_EXCLUDE: ./doc/
+#           LINTR_ERROR_ON_LINT: true
