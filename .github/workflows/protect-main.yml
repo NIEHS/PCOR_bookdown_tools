@@ -3,8 +3,7 @@ name: Protect Branch `main`
 
 on:
   pull_request:
-    branches:
-      - main
+    branches: [master, main]
     types: [closed]
 
 jobs:
