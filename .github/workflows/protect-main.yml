@@ -13,6 +13,7 @@ jobs:
     
     steps:
       - name: Check Source Branch
+        if: github.event.pull_request.base.ref == 'main' || github.event.pull_request.base.ref == 'master'
         run: |
           source_branch=$(jq -r '.pull_request.head.ref' "$GITHUB_EVENT_PATH")
           if [[ "$source_branch" != "staging-1" ]]; then

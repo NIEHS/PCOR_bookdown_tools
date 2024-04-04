@@ -4,7 +4,8 @@ name: Protect Branch `staging-1`
 on:
   pull_request:
     branches:
-      - staging-1
+      - master
+      - main
 
 jobs:
   delete_staging_1_on_merge:
@@ -12,9 +13,10 @@ jobs:
     
     steps:
       - name: Check Source Branch
+        if: github.event.pull_request.base.ref == 'staging-1'
         run: |
           source_branch=$(jq -r '.pull_request.head.ref' "$GITHUB_EVENT_PATH")
-          if [[ "$source_branch" != "staging-2" ]]; then
-            echo "Pull requests into 'staging-1' must come from 'staging-2'."
+          if [[ "$source_branch" != "staging-1" ]]; then
+            echo "Pull requests into 'main' must come from 'staging-1'."
             exit 1
           fi
