@@ -1,0 +1,27 @@
+---
+name: Update Branch `staging-public`
+
+on:
+  pull_request:
+    types: [closed]
+
+jobs:
+  update_branch:
+    name: Delete `staging-public` after pull request and create new from `main`
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Delete old branch
+        if: github.event.pull_request.merged == true && github.event.pull_request.base.ref == 'main'
+    
+        run: |
+          git push origin --delete staging-public || true
+
+      - name: Create new branch
+        if: github.event.pull_request.merged == true
+        run: |
+          git checkout -b staging-public
+          git push origin staging-public
