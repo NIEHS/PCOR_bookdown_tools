@@ -3,6 +3,7 @@ name: Update Branch `staging-public`
 
 on:
   pull_request:
+    branches: [main, master]
     types: [closed]
 
 jobs:
