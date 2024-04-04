@@ -7,7 +7,7 @@ on:
       - staging-1
 
 jobs:
-  delete_staging_1_on_merge:
+  protect_staging_1:
     runs-on: ubuntu-latest
     
     if: github.event.pull_request.base.ref == 'staging-1'
