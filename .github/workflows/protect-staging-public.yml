@@ -16,7 +16,7 @@ jobs:
             echo "Protected branch 'staging-public' detected in pull request."
           else
             echo "Protected branch 'staging-public' not detected in pull request."
-            exit 0
+            return 0
           fi
       
       - name: Check source branch

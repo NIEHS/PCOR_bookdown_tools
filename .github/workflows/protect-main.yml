@@ -16,7 +16,7 @@ jobs:
             echo "Protected branch 'main' detected in pull request."
           else
             echo "Protected branch 'main' not detected in pull request."
-            exit 0
+            return 0
           fi
       
       - name: Check source branch
