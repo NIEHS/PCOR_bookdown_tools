@@ -5,14 +5,21 @@ on:
   pull_request:
 
 jobs:
-  protect_staging_1:
+  protect_main:
     name: Protect Branch `staging-public`
     runs-on: ubuntu-latest
-    
-    if: github.event.pull_request.base.ref == 'staging-public'
 
     steps:
-      - name: Check Source Branch
+      - name: Check base branch
+        run: |
+          if [[ "${{ github.event.pull_request.base.ref }}" == "staging-public" ]]; then
+            echo "Protected branch 'staging-public' detected in pull request."
+          else
+            echo "Protected branch 'staging-public' not detected in pull request."
+            exit 0
+          fi
+      
+      - name: Check source branch
         run: |
           source_branch=$(jq -r '.pull_request.head.ref' "$GITHUB_EVENT_PATH")
           if [[ "$source_branch" != "staging-internal" ]]; then

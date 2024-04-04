@@ -9,10 +9,17 @@ jobs:
     name: Protect Branch `main`
     runs-on: ubuntu-latest
 
-    if: github.event.pull_request.base.ref == 'main' || github.event.pull_request.base.ref == 'master'
-    
     steps:
-      - name: Check Source Branch
+      - name: Check base branch
+        run: |
+          if [[ "${{ github.event.pull_request.base.ref }}" == "main" || "${{ github.event.pull_request.base.ref }}" == "master" ]]; then
+            echo "Protected branch 'main' detected in pull request."
+          else
+            echo "Protected branch 'main' not detected in pull request."
+            exit 0
+          fi
+      
+      - name: Check source branch
         run: |
           source_branch=$(jq -r '.pull_request.head.ref' "$GITHUB_EVENT_PATH")
           if [[ "$source_branch" != "staging-public" ]]; then
