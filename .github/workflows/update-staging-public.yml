@@ -16,12 +16,7 @@ jobs:
 
       - name: Delete old branch
         if: github.event.pull_request.merged == true && github.event.pull_request.base.ref == 'main'
-    
         run: |
           git push origin --delete staging-public || true
-
-      - name: Create new branch
-        if: github.event.pull_request.merged == true
-        run: |
           git checkout -b staging-public
           git push origin staging-public
