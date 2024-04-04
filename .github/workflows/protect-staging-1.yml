@@ -3,7 +3,8 @@ name: Protect Branch `staging-1`
 
 on:
   pull_request:
-    branches: [staging-1]
+    branches:
+      - staging-1
 
 jobs:
   check_source_branch:
