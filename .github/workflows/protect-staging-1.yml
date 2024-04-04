@@ -4,16 +4,16 @@ name: Protect Branch `staging-1`
 on:
   pull_request:
     branches:
-      - master
-      - main
+      - staging-1
 
 jobs:
   delete_staging_1_on_merge:
     runs-on: ubuntu-latest
     
+    if: github.event.pull_request.base.ref == 'staging-1'
+
     steps:
       - name: Check Source Branch
-        if: github.event.pull_request.base.ref == 'staging-1'
         run: |
           source_branch=$(jq -r '.pull_request.head.ref' "$GITHUB_EVENT_PATH")
           if [[ "$source_branch" != "staging-1" ]]; then
