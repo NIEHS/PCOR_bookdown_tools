@@ -26,5 +26,5 @@ jobs:
       - name: Run Super-Linter
         uses: github/super-linter@v4
         env:
-          FILTER_REGEX_EXCLUDE: ./doc/
+          FILTER_REGEX_EXCLUDE: '^(?!.*\/?docs\/).*'
           LINTR_ERROR_ON_LINT: true
