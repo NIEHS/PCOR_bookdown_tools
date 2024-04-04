@@ -1,0 +1,33 @@
+name: Protect Branch `main`
+
+on:
+  pull_request:
+    branches:
+      - main
+    types: [closed]
+
+jobs:
+  delete_staging_1_on_merge:
+    if: >
+        github.event.pull_request.merged == true &&
+        github.event.pull_request.base.ref == 'main'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check Source Branch
+        run: |
+          source_branch=$(jq -r '.pull_request.head.ref' "$GITHUB_EVENT_PATH")
+          if [[ "$source_branch" != "staging-1" ]]; then
+            echo "Pull requests into 'main' must come from 'staging-1'."
+            exit 1
+          fi
+
+      - name: Delete old staging-1 branch
+        run: |
+          git push origin --delete staging-1 || true
+
+      - name: Recreate staging-1 branch
+        run: |
+          git checkout main
+          git checkout -b staging-1
+          git push origin staging-1
