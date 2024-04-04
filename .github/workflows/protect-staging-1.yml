@@ -8,6 +8,7 @@ on:
 
 jobs:
   protect_staging_1:
+    name: Protect Branch `staging-1`
     runs-on: ubuntu-latest
     
     if: github.event.pull_request.base.ref == 'staging-1'
@@ -20,4 +21,3 @@ jobs:
             echo "Pull requests into 'staging-1' must come from 'staging-2'."
             exit 1
           fi
-          
