@@ -7,14 +7,14 @@ on:
       - staging-1
 
 jobs:
-  check_source_branch:
+  delete_staging_1_on_merge:
     runs-on: ubuntu-latest
-
+    
     steps:
-      - name: Check Source Branch
-        run: |
-          source_branch=$(jq -r '.pull_request.head.ref' "$GITHUB_EVENT_PATH")
-          if [[ "$source_branch" != "staging-2" ]]; then
-            echo "Pull requests into branch 'staging-1' must come from 'staging-2'."
-            exit 1
-          fi
+        - name: Check Source Branch
+          run: |
+            source_branch=$(jq -r '.pull_request.head.ref' "$GITHUB_EVENT_PATH")
+            if [[ "$source_branch" != "staging-2" ]]; then
+              echo "Pull requests into 'staging-1' must come from 'staging-2'."
+              exit 1
+            fi
