@@ -15,7 +15,7 @@ jobs:
       - name: Check Source Branch
         run: |
           source_branch=$(jq -r '.pull_request.head.ref' "$GITHUB_EVENT_PATH")
-          if [[ "$source_branch" != "staging-1" ]]; then
-            echo "Pull requests into 'main' must come from 'staging-1'."
+          if [[ "$source_branch" != "staging-public" ]]; then
+            echo "Pull requests into 'main' must come from 'staging-public'."
             exit 1
           fi
