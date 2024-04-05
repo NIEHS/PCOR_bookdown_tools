@@ -5,7 +5,7 @@
 
 This repository hosts data analysis tools and examples from the CHORDS Toolkit for Health and Geospatial Exposures Research. The toolkit was created with [R Markdown](https://rmarkdown.rstudio.com/) and [`bookdown`](https://bookdown.org/).
 
-The full version of the toolkit is available at [https://niehs.github.io/PCOR_bookdown_tools/]. 
+The full version of the toolkit is available at https://niehs.github.io/PCOR_bookdown_tools/.
 
 ## Users
 
@@ -34,7 +34,7 @@ Authors create, edit, and revise new and existing chapters in development branch
 
 A pull request must be opened to merge a development branch into the `staging-internal` branch. For the merge to be approved, the pull request must pass all of the status checks, most importantly the "Render Bookdown" and the "Super Linter" checks. A pull request into the `staging-internal` branch must be approved by at least one other author.
 
-### "staging-internal"
+### `staging-internal`
 
 The first review branch is titled `staging-internal`. This branch is used for internal review of the new/edited chapters. Reviewers must clone/pull the branch and render the book locally to view (or it can be available on R Posit Connect server).
 
@@ -44,7 +44,7 @@ A pull request must be opened to merge the `staging-internal` branch into the `s
 
 After the `staging-internal` branch is merged with the `staging-public` branch, a new version of the `staging-internal` branch will automatically be created. This will ensure that the workflow contains consistent versioning.
 
-### "staging-public""
+### `staging-public`
 
 The second review branch is titled `staging-public`. This branch is also used for internal review, but it is a final review step after group feedback has been incorporated into the chapters. Reviewers must clone/pull the branch and render the book locally to view (or it can be available on R Posit Connect server).
 
@@ -54,13 +54,13 @@ A pull request must be opened to merge the `staging-public` branch into the `mai
 
 The `staging-public` branch is recreated automatically after it has been merged into the `main` branch. This will ensure that the workflow contains consistent versioning.
 
-### "main"
+### `main`
 
 The `main` branch hosts the code used to build the public facing version of the bookdown webpage. A new version of the webpage is deployed upon a push from `staging-public` to the `main` branch.
 
 Authors are not allowed to edit the `main` branch direclty. Edits to the `main` branch must pass the outlined workflow.
 
-## Status Checks
+### Status Checks
 
 Render Bookdown
 - Checks that new chapters, style files, and figures/data do not cause errors when deploying the new book.
