@@ -64,17 +64,13 @@ The `main` branch can not be edited directly. All file edits must follow the out
 
 ### Status Checks
 
-Render Bookdown
-    * Checks that new chapters, file edits, and images and data do not cause errors in rendering the book.
+**Render Bookdown** Checks that new chapters, file edits, and images and data do not cause errors in rendering the book.
 
-Super Linter
-    * Checks that `.Rmd` chapters and style files do not have broken code and that code conforms to style pattern.
+**Super Linter** Checks that `.Rmd` chapters and style files do not have broken code and that code conforms to style pattern.
 
-Protect Branch `staging-public`
-    * Checks that a pull request into the `staging-public` branch is from `staging-internal`
+**Protect Branch `staging-public`**  Checks that a pull request into the `staging-public` branch is from `staging-internal`
 
-Protect Branch `main`
-    * Checks that a pull request into the `main` branch is from `staging-public`
+**Protect Branch `main`** Checks that a pull request into the `main` branch is from `staging-public`
 
 ## Questions
 
