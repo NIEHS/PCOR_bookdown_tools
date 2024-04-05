@@ -1,8 +1,12 @@
-# The CHORDS Toolkit for Health and Geospatial Exposures Research <img align="right" width="150" src="images/chords-icon-web.jpg">
+# The CHORDS Toolkit for Health and Geospatial Exposures Research <img align="right" width="250" src="images/chords-icon-web.jpg">
 
-## Users
+[![Super-Lint](https://github.com/NIEHS/PCOR_bookdown_tools/actions/workflows/superlint.yml/badge.svg)](https://github.com/NIEHS/PCOR_bookdown_tools/actions/workflows/superlint.yml/badge.svg)
+
+[![Render-Bookdown](https://github.com/NIEHS/PCOR_bookdown_tools/actions/workflows/test-render.yml/badge.svg)](https://github.com/NIEHS/PCOR_bookdown_tools/actions/workflows/test-render.yml/badge.svg)
 
 This repository hosts data analysis tools and examples from the CHORDS Toolkit for Health and Geospatial Exposures Research. The toolkit was created with [R Markdown](https://rmarkdown.rstudio.com/) and [`bookdown`](https://bookdown.org/).
+
+## Users
 
 The following packages are required to run all of the code examples within the book.
 
