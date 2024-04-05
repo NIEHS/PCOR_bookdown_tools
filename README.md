@@ -42,7 +42,7 @@ The first review branch is named `staging-internal`. This branch is used for the
 
 Contributors can make significant edits directly to the `staging-internal` branch based on reviewer feedback.
 
-A pull request must be opened to merge the `staging-internal` branch into the `staging-public` branch. **Pull requests into the `staging-public` branch are only accepted from the `staging-internal` branch.** Pull requests attempting to merge development branches into `staging-public` will fail. This branch protection is enforced by the ["Protect Branch `staging public`"](https://github.com/mitchellmanware/PCOR_bookdown_tools/actions/workflows/protect-staging-public.yml) status check.
+A pull request must be opened to merge the `staging-internal` branch into the `staging-public` branch. **Pull requests into the `staging-public` branch are only accepted from the `staging-internal` branch.** Pull requests attempting to merge development branches into `staging-public` will fail. This branch protection is enforced by the [Protect Branch \`staging public\`](https://github.com/mitchellmanware/PCOR_bookdown_tools/actions/workflows/protect-staging-public.yml) status check.
 
 When a pull request passes all status checks, is reviewed, and is merged into the `staging-public` branch, a new version of `staging-internal` will automatically be created (see .github/workflows/update-staging-internal.yml). Do not manually create a new `staging-internal` branch.
 
@@ -52,7 +52,7 @@ The second review branch is named `staging-public`. This branch is also used for
 
 Contributors **should not** make significant edits directly to the `staging-public` branch. Minor revisions (ie. punctuation, word choice) are acceptable, but changes to code, images, datasets, or style files should be addressed in the `staging-internal` review process, or implemented on a new development branch.
 
-A pull request must be opened to merge the `staging-public` branch into the `main` branch. **Pull requests into the `main` branch are only accepted from the `staging-public` branch.** Pull requests attempting to merge development branches or the `staging-internal` branch into `main` will fail. This branch protection is enforced by the ["Protect Branch `main`"](https://github.com/mitchellmanware/PCOR_bookdown_tools/actions/workflows/protect-main.yml) status check.
+A pull request must be opened to merge the `staging-public` branch into the `main` branch. **Pull requests into the `main` branch are only accepted from the `staging-public` branch.** Pull requests attempting to merge development branches or the `staging-internal` branch into `main` will fail. This branch protection is enforced by the [Protect Branch \`main\`](https://github.com/mitchellmanware/PCOR_bookdown_tools/actions/workflows/protect-main.yml) status check.
 
 When a pull request passes all status checks, is reviewed, and is merged into the `main` branch, a new version of `staging-public` will automatically be created (see .github/workflows/update-staging-public.yml). Do not manually create a new `staging-public` branch.
 
