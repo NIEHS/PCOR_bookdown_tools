@@ -28,7 +28,7 @@ BiocManager::install("Biobase")
 
 For NIEHS and external contributors, the repository consists of several workflow rules and branch protections to ensure proper development, revision, review, and publication.
 
-<img align="center" src="images/workflow_arrows.png">
+<img align="center" src="images/workflow_push.png">
 
 ### Development Branches
 
