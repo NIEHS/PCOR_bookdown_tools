@@ -5,7 +5,7 @@
 
 This repository hosts data analysis tools and examples from the CHORDS Toolkit for Health and Geospatial Exposures Research. The toolkit was created with [R Markdown](https://rmarkdown.rstudio.com/) and [`bookdown`](https://bookdown.org/).
 
-The full version of the toolkit is available at https://niehs.github.io/PCOR_bookdown_tools/.
+The full version of the toolkit is available at <https://niehs.github.io/PCOR_bookdown_tools/>.
 
 ## Users
 
@@ -58,9 +58,9 @@ When a pull request passes all status checks, is reviewed, and is merged into th
 
 ### main
 
-A push (closed and merged pull request) to the `main` branch will automatically build and deploy the public facing version of the toolkit webpage.
+A push (closed and merged pull request) to the `main` branch will automatically build and deploy the public facing version of the toolkit web page.
 
-The `main` branch can not be edited directly. All file edits must follow the outlined workflow to ensure the quality and reliability of the final webpage.
+The `main` branch can not be edited directly. All file edits must follow the outlined workflow to ensure the quality and reliability of the final web page.
 
 ### Status Checks
 
