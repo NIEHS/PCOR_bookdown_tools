@@ -1,0 +1,23 @@
+# ---
+# name: Update Branch `staging-internal`
+
+# on:
+#   pull_request:
+#     branches: [staging-public]
+#     types: [closed]
+
+# jobs:
+#   update_branch:
+#     name: Update Branch `staging-internal`
+#     runs-on: ubuntu-latest
+    
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v2
+
+#       - name: Delete old branch
+#         if: github.event.pull_request.merged == true && github.event.pull_request.base.ref == 'staging-public'
+#         run: |
+#           git push origin --delete staging-internal || true
+#           git checkout -b staging-internal
+#           git push origin staging-internal

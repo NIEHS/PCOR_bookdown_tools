@@ -1,23 +1,23 @@
----
-name: Update Branch `staging-public`
+# ---
+# name: Update Branch `staging-public`
 
-on:
-  pull_request:
-    branches: [main, master]
-    types: [closed]
+# on:
+#   pull_request:
+#     branches: [main, master]
+#     types: [closed]
 
-jobs:
-  update_branch:
-    name: Update Branch `staging-public`
-    runs-on: ubuntu-latest
+# jobs:
+#   update_branch:
+#     name: Update Branch `staging-public`
+#     runs-on: ubuntu-latest
     
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v2
 
-      - name: Delete old branch
-        if: github.event.pull_request.merged == true && github.event.pull_request.base.ref == 'main'
-        run: |
-          git push origin --delete staging-public || true
-          git checkout -b staging-public
-          git push origin staging-public
+#       - name: Delete old branch
+#         if: github.event.pull_request.merged == true && github.event.pull_request.base.ref == 'main'
+#         run: |
+#           git push origin --delete staging-public || true
+#           git checkout -b staging-public
+#           git push origin staging-public
