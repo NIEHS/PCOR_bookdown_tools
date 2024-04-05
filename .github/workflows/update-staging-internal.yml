@@ -1,9 +1,9 @@
 ---
-name: Update Branch `staging-public`
+name: Update Branch `staging-internal`
 
 on:
   push:
-    branches: [main, master]
+    branches: [staging-public]
 
 jobs:
   update_branch:
@@ -11,13 +11,13 @@ jobs:
     runs-on: ubuntu-latest
     
     if: github.event_name == 'push' && contains(github.event.head_commit.message, 'Merge pull request')
-
+    
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
       - name: Delete old branch
         run: |
-          git push origin --delete staging-public || true
-          git checkout -b staging-public
-          git push origin staging-public
+          git push origin --delete staging-internal || true
+          git checkout -b staging-internal
+          git push origin staging-internal
