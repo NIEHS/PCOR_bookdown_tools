@@ -1,4 +1,4 @@
-# The CHORDS Toolkit for Health and Geospatial Exposures Research <img align="right" width="250" src="images/chords-icon-web.jpg">
+# The CHORDS Toolkit for Health and Geospatial Exposures Research <img align="right" width="150" src="images/chords-icon-web.jpg">
 
 ## Users
 
