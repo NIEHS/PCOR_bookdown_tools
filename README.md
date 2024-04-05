@@ -5,6 +5,8 @@
 
 This repository hosts data analysis tools and examples from the CHORDS Toolkit for Health and Geospatial Exposures Research. The toolkit was created with [R Markdown](https://rmarkdown.rstudio.com/) and [`bookdown`](https://bookdown.org/).
 
+The full version of the toolkit is available at [https://niehs.github.io/PCOR_bookdown_tools/]. 
+
 ## Users
 
 The following packages are required to run all of the code examples within the book.
@@ -22,7 +24,7 @@ install.packages(
 BiocManager::install("Biobase")
 ```
 
-## Contributors
+## Contributors Guide
 
 For NIEHS and external contributors, the repository consists of several workflow rules and branch protections to ensure proper development, revision, review, and publication.
 
