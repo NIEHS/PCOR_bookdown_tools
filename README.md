@@ -30,51 +30,51 @@ For NIEHS and external contributors, the repository consists of several workflow
 
 <img align="center" src="images/workflow_reviews.png">
 
-### Development
+### Development Branches
 
-Authors create, edit, and revise new and existing chapters in development branches. Development branches should be named based on author initials, a one/two word description, and four digit month/day date according to the date of branch creation. For example, a development branch created by "Mitchell Manware" on April 5, 2024 to develop a unit testing chapter would be named `mm-unittests-0405`.
+Contributors create, edit, and revise new and existing chapters in development branches. Development branches should be named according to contributor initials, a one to two word description, and four digit month/day code (MMDD) based on the date of branch creation. For example, a development branch created by Mitchell Manware on April 5, 2024 to develop a unit testing chapter would be named `mm-unittests-0405`.
 
-A pull request must be opened to merge a development branch into the `staging-internal` branch. For the merge to be approved, the pull request must pass all of the status checks, most importantly the "Render Bookdown" and the "Super Linter" checks. A pull request into the `staging-internal` branch must be approved by at least one other author.
+A pull request must be opened to merge a development branch into the `staging-internal` branch. The pull request must pass all status checks and be reviewed by at least one other contributor.
 
-### `staging-internal`
+### staging-internal
 
-The first review branch is titled `staging-internal`. This branch is used for internal review of the new/edited chapters. Reviewers must clone/pull the branch and render the book locally to view (or it can be available on R Posit Connect server).
+The first review branch is named `staging-internal`. This branch is used for the CHORDS team's internal review of the incoming additions and changes. The `staging-internal` branch must be rendered locally to review as it is not hosted on a URL.
 
-Authors can make edits directly to the `staging-internal` branch based on feedback, but the branch cannot be created manually.
+Contributors can make significant edits directly to the `staging-internal` branch based on reviewer feedback.
 
-A pull request must be opened to merge the `staging-internal` branch into the `staging-public` branch. Additionally, **the `staging-public` branch will only accept merges from the `staging-internal` branch**. Authors are not permitted to merge a development branch directly into the `staging-public` branch. This branch protection is enforced by the "Protect Branch `staging-public`" status check. This status check, along with the "Render Bookdown" and "Super Linter" checks, must pass for the pull request to be approved. A pull request into the `staging-public` branch must be approved by at least two other authors.
+A pull request must be opened to merge the `staging-internal` branch into the `staging-public` branch. **Pull requests into the `staging-public` branch are only accepted from the `staging-internal` branch.** Pull requests attempting to merge development branches into `staging-public` will fail. This branch protection is enforced by the ["Protect Branch `staging public`"](.github/workflows/protect-staging-public.yml) status check.
 
-After the `staging-internal` branch is merged with the `staging-public` branch, a new version of the `staging-internal` branch will automatically be created. This will ensure that the workflow contains consistent versioning.
+When a pull request passes all status checks, is reviewed, and is merged into the `staging-public` branch, a new version of `staging-internal` will automatically be created (see [update-staging-internal.yml](.github/workflow/update-staging-internal.yml)). Do not manually create a new `staging-internal` branch.
 
-### `staging-public`
+### staging-public
 
-The second review branch is titled `staging-public`. This branch is also used for internal review, but it is a final review step after group feedback has been incorporated into the chapters. Reviewers must clone/pull the branch and render the book locally to view (or it can be available on R Posit Connect server).
+The second review branch is named `staging-public`. This branch is also used for the CHORDS team's internal review of the incoming additions and changes. The `staging-public` branch will be available on the R Studio Connect Posit Server (link incoming) to facilitate web version review and feedback.
 
-Authors **should not** make substantial edits directly to the `staging-public` branch. Minor revisions are acceptable, but significant changes should be addressed in the `staging-internal` review process, or by creating a new development branch.
+Contributors **should not** make significant edits directly to the `staging-public` branch. Minor revisions (ie. punctuation, word choice) are acceptable, but changes to code, images, datasets, or style files should be addressed in the `staging-internal` review process, or implemented on a new development branch.
 
-A pull request must be opened to merge the `staging-public` branch into the `main` branch. Additionally, **the `main` branch will only accept merges from the `staging-internal` branch**. Authors are not permitted to merge a development branch or the `staging-internal` branch directly into the `main` branch. This branch protection is enforced by the "Protect Branch `main`" status check. This status check, along with the "Render Bookdown" and "Super Linter" checks, must pass for the pull request to be approved. A pull request into the `main` branch must be approved by at least two other authors and by Charles Schmitt.
+A pull request must be opened to merge the `staging-public` branch into the `main` branch. **Pull requests into the `main` branch are only accepted from the `staging-public` branch.** Pull requests attempting to merge development branches or the `staging-internal` branch into `main` will fail. This branch protection is enforced by the ["Protect Branch `main`"](.github/workflows/protect-main.yml) status check.
 
-The `staging-public` branch is recreated automatically after it has been merged into the `main` branch. This will ensure that the workflow contains consistent versioning.
+When a pull request passes all status checks, is reviewed, and is merged into the `main` branch, a new version of `staging-public` will automatically be created (see [update-staging-public.yml](.github/workflow/update-staging-public.yml)). Do not manually create a new `staging-public` branch.
 
-### `main`
+### main
 
-The `main` branch hosts the code used to build the public facing version of the bookdown webpage. A new version of the webpage is deployed upon a push from `staging-public` to the `main` branch.
+A push (closed and merged pull request) to the `main` branch will automatically build and deploy the public facing version of the toolkit webpage.
 
-Authors are not allowed to edit the `main` branch direclty. Edits to the `main` branch must pass the outlined workflow.
+The `main` branch can not be edited directly. All file edits must follow the outlined workflow to ensure the quality and reliability of the final webpage.
 
 ### Status Checks
 
 Render Bookdown
-- Checks that new chapters, style files, and figures/data do not cause errors when deploying the new book.
+    * Checks that new chapters, file edits, and images and data do not cause errors in rendering the book.
 
 Super Linter
-- Checks that `.Rmd` and style files conform to code style, and that there is no broken code
+    * Checks that `.Rmd` chapters and style files do not have broken code and that code conforms to style pattern.
 
 Protect Branch `staging-public`
-- Checks that a pull request into the `staging-public` branch is from `staging-internal`
+    * Checks that a pull request into the `staging-public` branch is from `staging-internal`
 
 Protect Branch `main`
-- Checks that a pull request into the `main` branch is from `staging-public`
+    * Checks that a pull request into the `main` branch is from `staging-public`
 
 ## Questions
 
