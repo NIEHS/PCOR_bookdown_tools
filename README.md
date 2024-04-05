@@ -28,6 +28,8 @@ BiocManager::install("Biobase")
 
 For NIEHS and external contributors, the repository consists of several workflow rules and branch protections to ensure proper development, revision, review, and publication.
 
+<img align="center" src="images/workflow.png">
+
 ### Development
 
 Authors create, edit, and revise new and existing chapters in development branches. Development branches should be named based on author initials, a one/two word description, and four digit month/day date according to the date of branch creation. For example, a development branch created by "Mitchell Manware" on April 5, 2024 to develop a unit testing chapter would be named `mm-unittests-0405`.
