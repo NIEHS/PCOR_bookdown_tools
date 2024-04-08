@@ -64,11 +64,11 @@ The `main` branch can not be edited directly. All file edits must follow the out
 
 ## Status Checks
 
-**Check Render Bookdown**<br>
-Checks that new chapters, file edits, and images and data do not cause errors in rendering the book (see .github/workflows/check-render.yml).
-
 **Check Super Linter**<br>
-Checks that `.Rmd` chapters and style files do not have broken code and that code conforms to style pattern (see .github/workflows/check-superlinter.yml).
+Checks that `.Rmd` chapters and style files have valid source code and adhere to consistent formatting (see .github/workflows/check-super-linter.yml). Utilizes [super-linter/super-linter](https://github.com/super-linter/super-linter).
+
+**Check Render Bookdown**<br>
+Checks that new chapters, file edits, and images and data do not cause errors in rendering the book (see .github/workflows/check-render-bookdown.yml).
 
 **Protect Branch \`staging-public\`**<br>
 Checks that a pull request into the `staging-public` branch is from `staging-internal` (see .github/workflows/protect-staging-public.yml).
