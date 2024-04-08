@@ -1,17 +1,13 @@
 ---
-name: Super Linter
+name: Check Super Linter
 
 on:
   pull_request:
-    paths-ignore:
-      - 'docs/**'
-      - '**/*.html'
-      - '**/*.css'
 
 jobs:
-  super-lint:
-    name: Lint all file types
+  check_superlinter:
     runs-on: ubuntu-latest
+
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
       

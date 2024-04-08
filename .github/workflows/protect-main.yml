@@ -6,7 +6,6 @@ on:
 
 jobs:
   protect_main:
-    name: Protect Branch `main`
     runs-on: ubuntu-latest
 
     steps:
