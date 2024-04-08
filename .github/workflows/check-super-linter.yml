@@ -1,17 +1,13 @@
 ---
-name: Super Linter
+name: Check Super Linter
 
 on:
   pull_request:
-    paths-ignore:
-      - 'docs/**'
-      - '**/*.html'
-      - '**/*.css'
 
 jobs:
-  super-lint:
-    name: Lint all file types
+  check_super_linter:
     runs-on: ubuntu-latest
+
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
       
@@ -26,5 +22,5 @@ jobs:
       - name: Run Super-Linter
         uses: github/super-linter@v4
         env:
-          FILTER_REGEX_EXCLUDE: '^(?!.*\/?docs\/).*'
+          FILTER_REGEX_EXCLUDE: .*/docs/*
           LINTR_ERROR_ON_LINT: true
