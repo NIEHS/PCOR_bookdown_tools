@@ -6,8 +6,7 @@ on:
     branches: [main, master]
 
 jobs:
-  update_branch:
-    name: Update Branch `staging-public`
+  update_staging_public:
     runs-on: ubuntu-latest
     
     if: github.event_name == 'push' && contains(github.event.head_commit.message, 'Merge pull request')
