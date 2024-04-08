@@ -3,15 +3,7 @@ name: Super Linter
 
 on:
   push:
-    paths-ignore:
-      - 'docs/**'
-      - '**/*.html'
-      - '**/*.css'
   pull_request:
-    paths-ignore:
-      - 'docs/**'
-      - '**/*.html'
-      - '**/*.css'
 
 jobs:
   super-lint:
@@ -31,5 +23,5 @@ jobs:
       - name: Run Super-Linter
         uses: github/super-linter@v4
         env:
-          FILTER_REGEX_EXCLUDE: ./doc/
+          FILTER_REGEX_EXCLUDE: .*/doc/*
           LINTR_ERROR_ON_LINT: true
