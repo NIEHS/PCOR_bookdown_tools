@@ -62,7 +62,7 @@ A push (closed and merged pull request) to the `main` branch will automatically 
 
 The `main` branch can not be edited directly. All file edits must follow the outlined workflow to ensure the quality and reliability of the final web page.
 
-## Status Checks
+## Status Checks {#status-checks}
 
 **Check Render Bookdown**<br>
 Checks that new chapters, file edits, and images and data do not cause errors in rendering the book (see .github/workflows/check-render.yml).
