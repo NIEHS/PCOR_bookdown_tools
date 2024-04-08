@@ -37,7 +37,7 @@ jobs:
 
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
-          extra-packages: any::bookdown, local::.
+          extra-packages: any::bookdown
           needs: website
 
       - name: Build site

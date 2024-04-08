@@ -36,7 +36,7 @@ Contributors create, edit, and revise new and existing chapters in development b
 
 A pull request must be opened to merge a development branch into the `staging-internal` branch. The pull request must pass all status checks and be reviewed by at least one other contributor.
 
-### staging-internal
+### Branch \`staging-internal\` (protected)
 
 The first review branch is named `staging-internal`. This branch is used for the CHORDS team's internal review of the incoming additions and changes. The `staging-internal` branch must be rendered locally to review as it is not hosted on a URL.
 
@@ -46,7 +46,7 @@ A pull request must be opened to merge the `staging-internal` branch into the `s
 
 When a pull request passes all status checks, is reviewed, and is merged into the `staging-public` branch, a new version of `staging-internal` will automatically be created (see .github/workflows/update-staging-internal.yml). Do not manually create a new `staging-internal` branch.
 
-### staging-public
+### Branch \`staging-public\` (protected)
 
 The second review branch is named `staging-public`. This branch is also used for the CHORDS team's internal review of the incoming additions and changes. The `staging-public` branch will be available on the R Studio Connect Posit Server (link incoming) to facilitate web version review and feedback.
 
@@ -56,7 +56,7 @@ A pull request must be opened to merge the `staging-public` branch into the `mai
 
 When a pull request passes all status checks, is reviewed, and is merged into the `main` branch, a new version of `staging-public` will automatically be created (see .github/workflows/update-staging-public.yml). Do not manually create a new `staging-public` branch.
 
-### main
+### Branch \`main\` (protected)
 
 A push (closed and merged pull request) to the `main` branch will automatically build and deploy the public facing version of the toolkit web page.
 
