@@ -3,9 +3,7 @@
 [![Super-Lint](https://github.com/NIEHS/PCOR_bookdown_tools/actions/workflows/superlint.yml/badge.svg)](https://github.com/NIEHS/PCOR_bookdown_tools/actions/workflows/superlint.yml/badge.svg)
 [![Render-Bookdown](https://github.com/NIEHS/PCOR_bookdown_tools/actions/workflows/test-render.yml/badge.svg)](https://github.com/NIEHS/PCOR_bookdown_tools/actions/workflows/test-render.yml/badge.svg)
 
-This repository hosts data analysis tools and examples from the CHORDS Toolkit for Health and Geospatial Exposures Research. Toolkit chapters are written using [R Markdown](https://rmarkdown.rstudio.com/) files and the book is created using the [`bookdown`](https://bookdown.org/) package for R.
-
-The web version of the toolkit is available at <https://niehs.github.io/PCOR_bookdown_tools/>.
+This repository hosts data analysis tools and examples from the CHORDS Toolkit for Health and Geospatial Exposures Research. Toolkit chapters are written using [R Markdown](https://rmarkdown.rstudio.com/) files and the book is created using the [`bookdown`](https://bookdown.org/) package for R. The web version of this toolkit is available at <https://niehs.github.io/PCOR_bookdown_tools/>.
 
 ## Users
 
