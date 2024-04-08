@@ -40,18 +40,37 @@ jobs:
           sudo apt-get install -y libudunits2-dev libgdal-dev
           sudo apt-get install libmagick++-dev
 
-      - name: Install pandoc-citeproc
-        run: |
-          sudo apt-get update
-          sudo apt-get install pandoc-citeproc
-
-      - uses: r-lib/actions/setup-r-dependencies@v2
-        with:
-          extra-packages: any::bookdown
-          needs: website
-
       - name: Build site
-        run: bookdown::render_book()
+        run: |
+          install.packages(c(
+            "bookdown",
+            "rmarkdown",
+            "plotly",
+            "shiny",
+            "tidycensus",
+            "tidyverse",
+            "viridis",
+            "ggmap",
+            "ggplot2",
+            "maps",
+            "dplyr",
+            "knitr",
+            "latticeExtra",
+            "pals",
+            "classInt",
+            "sf",
+            "udunits2",
+            "tmap",
+            "lubridate",
+            "gifski",
+            "magick",
+            "cowplot",
+            "BiocManager"
+            ),
+            dependencies = TRUE
+          )
+          BiocManager::install("Biobase")
+          bookdown::render_book()
         shell: Rscript {0}
 
       # - name: Deploy to GitHub pages 🚀
