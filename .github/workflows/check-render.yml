@@ -8,7 +8,7 @@ on:
   pull_request:
 
 jobs:
-  check_render:
+  check_render_bookdown:
     runs-on: ubuntu-latest
 
     env:

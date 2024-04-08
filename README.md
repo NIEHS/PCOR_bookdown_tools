@@ -5,7 +5,7 @@
 
 This repository hosts data analysis tools and examples from the CHORDS Toolkit for Health and Geospatial Exposures Research. Toolkit chapters are written using [R Markdown](https://rmarkdown.rstudio.com/) files and the book is created using the [`bookdown`](https://bookdown.org/) package for R.
 
-The webpage version of the toolkit is available at <https://niehs.github.io/PCOR_bookdown_tools/>.
+The web version of the toolkit is available at <https://niehs.github.io/PCOR_bookdown_tools/>.
 
 ## Users
 
@@ -34,7 +34,7 @@ The GitHub repository consists of several workflow rules and branch protections 
 
 Contributors create, edit, and revise new and existing chapters in development branches. Development branches should be named according to contributor initials, a one to two word description, and four digit month/day code (MMDD) based on the date of branch creation. For example, a development branch created by Mitchell Manware on April 5, 2024 to develop a unit testing chapter would be named `mm-unittests-0405`.
 
-A pull request must be opened to merge a development branch into the `staging-internal` branch. The pull request must pass all [status checks](#statuschecks) and be reviewed by at least one other contributor.
+A pull request must be opened to merge a development branch into the `staging-internal` branch. The pull request must pass all [status checks](#status-checks) and be reviewed by at least one other contributor.
 
 ### Branch \`staging-internal\` [protected]
 
@@ -44,7 +44,7 @@ Contributors can make significant edits directly to the `staging-internal` branc
 
 A pull request must be opened to merge the `staging-internal` branch into the `staging-public` branch. **Pull requests into the `staging-public` branch are only accepted from the `staging-internal` branch.** Pull requests attempting to merge development branches into `staging-public` will fail. This branch protection is enforced by the "Protect Branch \`staging public\`" status check.
 
-When a pull request passes all [status checks](#statuschecks), is reviewed, and is merged into the `staging-public` branch, a new version of `staging-internal` will automatically be created (see .github/workflows/update-staging-internal.yml). Do not manually create a new `staging-internal` branch.
+When a pull request passes all [status checks](#status-checks), is reviewed, and is merged into the `staging-public` branch, a new version of `staging-internal` will automatically be created (see .github/workflows/update-staging-internal.yml). Do not manually create a new `staging-internal` branch.
 
 ### Branch \`staging-public\` [protected]
 
@@ -54,7 +54,7 @@ Contributors **should not** make significant edits directly to the `staging-publ
 
 A pull request must be opened to merge the `staging-public` branch into the `main` branch. **Pull requests into the `main` branch are only accepted from the `staging-public` branch.** Pull requests attempting to merge development branches or the `staging-internal` branch into `main` will fail. This branch protection is enforced by the "Protect Branch \`main\`" status check.
 
-When a pull request passes all [status checks](#statuschecks), is reviewed, and is merged into the `main` branch, a new version of `staging-public` will automatically be created (see .github/workflows/update-staging-public.yml). Do not manually create a new `staging-public` branch.
+When a pull request passes all [status checks](#status-checks), is reviewed, and is merged into the `main` branch, a new version of `staging-public` will automatically be created (see .github/workflows/update-staging-public.yml). Do not manually create a new `staging-public` branch.
 
 ### Branch \`main\` [protected]
 
@@ -62,7 +62,7 @@ A push (closed and merged pull request) to the `main` branch will automatically 
 
 The `main` branch can not be edited directly. All file edits must follow the outlined workflow to ensure the quality and reliability of the final web page.
 
-## Status Checks {#statuschecks}
+## Status Checks
 
 **Check Render Bookdown**<br>
 Checks that new chapters, file edits, and images and data do not cause errors in rendering the book (see .github/workflows/check-render.yml).

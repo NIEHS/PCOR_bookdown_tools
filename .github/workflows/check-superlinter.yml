@@ -5,7 +5,7 @@ on:
   pull_request:
 
 jobs:
-  check_superlinter:
+  check_super_linter:
     runs-on: ubuntu-latest
 
     env:
