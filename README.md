@@ -76,4 +76,4 @@ Checks that a pull request into the `main` branch is from `staging-public` (see 
 
 ## Questions
 
-Utilize [Issues](https://github.com/NIEHS/PCOR_bookdown_tools/issues) to ask questions regarding workflow.
+Utilize the [Issues](https://github.com/NIEHS/PCOR_bookdown_tools/issues) page to ask questions regarding workflow.
