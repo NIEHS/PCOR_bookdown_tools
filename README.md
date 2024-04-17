@@ -20,8 +20,8 @@ The following code installs the `R` packages used in the example code:
 ```{r}
 install.packages(
   c(
-    "bookdown", "plotly", "shiny", "tidycensus", "tidyverse", "viridis", "ggmap",
-    "ggplot2", "maps", "dplyr", "knitr", "latticeExtra", "pals",
+    "bookdown", "plotly", "shiny", "tidycensus", "tidyverse", "viridis", 
+    "ggmap", "ggplot2", "maps", "dplyr", "knitr", "latticeExtra", "pals",
     "classInt", "sf", "udunits2", "tmap", "lubridate", "gifski",
     "magick", "cowplot", "BiocManager"
     ),
