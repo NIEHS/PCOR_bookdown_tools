@@ -24,9 +24,9 @@ install.packages(
     "ggmap", "ggplot2", "maps", "dplyr", "knitr", "latticeExtra", "pals",
     "classInt", "sf", "udunits2", "tmap", "lubridate", "gifski",
     "magick", "cowplot", "BiocManager"
-    ),
+  ),
   dependencies = TRUE
-  )
+)
 BiocManager::install("Biobase")
 ```
 
