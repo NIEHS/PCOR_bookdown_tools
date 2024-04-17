@@ -15,7 +15,7 @@ Please open an [issue](https://github.com/NIEHS/PCOR_bookdown_tools/issues) to s
 
 ## Use
 
-The following code installs the `R` packages required to run all of the code examples within the book:
+The following code installs the `R` packages used in the example code:
 
 ```{r}
 install.packages(
