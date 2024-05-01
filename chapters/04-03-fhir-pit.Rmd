@@ -1,0 +1,144 @@
+
+# **A FHIR PIT tutorial** {.unnumbered}                                                                                                                |
+*Date*: April 30, 2024
+
+*Author(s)*: Juan Garcia, Kara Fecho, Hong Yi
+
+# FHIR PIT: HL7 Fast Healthcare Interoperability Resources Patient data Integration Tool: a Tutorial
+
+**Key Terms**: data integration, environmental exposures, EHR data, FHIR files
+
+**Programming Language(s)**: R
+
+## Introduction
+
+This tutorial provides example code in `R`:
+
+1.  To setup FHIR PIT.
+
+2.  To analyze the results from the FHIR PIT output.
+
+### Disclaimer
+
+The patient dataset used in this tutorial is synthetic. When using actual patient or participant datasets containing Protected Health Information (PHI), one must run FHIR PIT within a secure enclave and abide by all federal and institutional regulations.
+
+Note that the FHIR PIT application may be memory-intensive, depending on the size of the input datasets. For example, this tutorial requires approximately 25Gb RAM to run successfully.
+
+### Motivation
+
+Environmental exposures are increasingly recognized as important to consider when conducting human subjects research. Unfortunately, associating environmental exposures data with subject-level data is challenging due to the complexity of the data and the varied spatiotemporal resolutions. FHIR PIT is an open-source tool to link electronic health record (EHR) data in FHIR format with environmental exposures data derived from public sources.
+
+### Background 
+
+FHIR PIT (HL7 Fast Healthcare Interoperability Resources Patient data Integration Tool) is an open-source data integration pipeline to support subject-level research on social and environmental determinants of health and disease [1].
+
+In essence, the pipeline is a sequence of transformations configured from a YAML file [2]. The transformation steps join FHIR patient records with environmental exposures estimates using patient geocodes (e.g., primary residence) and date(s) of healthcare visits as the spatiotemporal links. At the end of each linkage step, FHIR PIT saves the linked tables to an intermediate folder to support rapid re-execution, should any given step fail to complete (e.g., lack of disk space). To support multiple healthcare visits, FHIR PIT vectorizes the FHIR patient records by grouping FHIR domains (e.g., Condition, Laboratory, Medication, Procedure) and counting events within a domain on a per-day basis. The features associated with the patient are then grouped by user-defined study periods (e.g., year) and aggregated with user-defined statistics (e.g., counts, mean, median, first measurement, last measurement).
+
+FHIR PIT was developed to support ICEES (Integrated Clinical and Environmental Exposures Service) [3] [4]. However, the tool is not specific to ICEES, but rather can be used to integrate any source of patient FHIR files with any source of environmental exposures data. In this tutorial, we use synthetic FHIR files and randomly sampled environmental exposures data derived from several public sources: 
+
+* [US Environmental Protection Agency airborne pollutant exposures data](https://www.epa.gov/cmaq) - The US EPA maintains collections of model-derived estimates of airborne pollutant exposure data such as PM2.5 and ozone at varying spatial and temporal resolutions. FHIR PIT uses the data to calculate, for example, average daily PM2.5 exposure and maximum daily ozone exposure over a defined study period.
+* [US Department of Transportation (DOT), Federal Highway Administration (FHA), Highway Performance Monitoring System (HPMS) major roadway/highway exposures data](https://www.fhwa.dot.gov/policyinformation/hpms.cfm) - The US DOT maintains a variety of metrics on roadway data. FHIR PIT uses the data to calculate point estimates of primary residential distance from the nearest major roadway or highway.
+* [US Census Bureau TIGER/line roadway data](https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html) - The US Census Bureau also maintains metrics on roadway data. FHIR PIT uses the data to supplement the US DOT data. 
+* [US Census Bureau American Community Survey (ACS) socio-economic exposures data](https://www.census.gov/programs-surveys/acs/data.html) - The US Census Bureau's ACS is a 5-year survey sample from the decennial nationwide US census. FHIR PIT uses a subset of the available ACS survey estimates of socio-economic exposures, including survey estimates on residential density, household median income, and household access to health insurance.
+* [NC Department of Environmental Quality (DEQ) concentrated animal feeding operations (CAFO) exposures data](https://deq.nc.gov/cafo-map) - North Carolina's DEQ maintains data on the location of all registered CAFOs across the state. FHIR PIT uses the data to calculate point estimates of primary residential distance from the nearest CAFO. 
+* [NC Department of Environmental Quality (DEQ) landfill exposures data](https://www.nconemap.gov/datasets/ncdenr::active-permitted-landfills/about) - North Carolina's DEQ maintains data on the location of all registered active and inactive landfills across the state. FHIR PIT uses the data to calculates point estimates of primary residential distance from the nearest landfill. 
+
+### Outline
+
+This tutorial includes the following steps:
+
+-   [Step 0. Setup](#step-0)
+
+-   [Step 1. Run FHIR PIT](#step-1)
+
+-   [Step 2. Analyze results](#step-2)
+
+## Tutorial
+
+```{r}
+# Loading library
+library(ggplot2)
+```
+
+
+### Step 0. Setup {#step-0}
+
+Install Docker. Follow instructions in [Docker installation documentation](https://docs.docker.com/engine/install/) for your operating system.
+
+Assign WORK_DIR the directory you would like to save FHIR PIT and its outputs to.
+
+```{r}
+work_dir <- "/Users/jj/Desktop/FHIR-PIT"
+Sys.setenv(WORK_DIR = work_dir)
+```
+
+Clone FHIR PIT into the WORK_DIR directory.
+
+```{bash}
+mkdir -p $WORK_DIR
+git clone --recursive https://github.com/ExposuresProvider/FHIR-PIT.git $WORK_DIR
+```
+
+### Step 1. Execute FHIR-PIT {#step-1}
+
+```{bash}
+echo "$WORK_DIR/data/output"
+```
+
+Run FHIR PIT in a docker container with -v. This will allow the output data to persist and be easily accessible by users on the host.
+
+```{bash}
+docker run -m="25g" -v "$WORK_DIR/data/output":"$WORK_DIR/data/output" renci/fhir-pit:1.0 
+```
+
+### Step 2. Access and analyze results {#step-2}
+
+The main outputs to consider are in ICEES, ICEES2 and ICEES2_dei directories (named in reference to ICEES, but not specific to ICEES). Each directory contains one or more CSV files with information at different granularities. 
+
+```{r}
+year_ <- 2010
+basepath <- file.path(work_dir, "data", "output")
+icees2dei_patient_url <- file.path(basepath,"icees2_dei",  sprintf("%spatient_deidentified", year_))
+```
+
+The ICEES directory contains one CSV file per subject. Each CSV file consists of the subject’s visits, concatenated with the corresponding environmental exposure estimates for that day and that subject's location. If a subject has multiple visits per day, then the transformation "PreprocPerPatSeriesToVector" step aggregates multiple daily visits by counting how many times a drug or diagnosis occurred. The directory for each subject is indexed by the "patient_num" column. The ICEES2 directory contains a single CSV file with the aggregation of all subjects grouped by (subject, study period). Lastly, the ICEES2DEI directory contains the same aggregated CSV file, but the data have been stripped of all PHI per HIPAA Safe Harbor method [5]. The fully deidentified file then abides by all federal regulations surrounding privacy and security, although institutional regulations may remain. For exposition purposes, we focus on the deidentified ICEES2DEI CSV file and reorder its columns.
+
+```{r}
+icees2dei_colorder <- scan("icees2dei_patient_column_order.txt", what="", sep="\n")
+icees2dei <- read.csv(icees2dei_patient_url, header = TRUE)[, icees2dei_colorder]
+```
+
+```{r}
+icees2dei
+```
+
+The deidentified ICEES2DEI CSV file may be used for further analysis. For instance, below we plot `AvgDailyPM2.5Exposure` vs `MaxDailyOzoneExposure` to examine the relationship between maximum daily ozone exposure and average daily PM2.5 exposure, noting a strong correlation is not expected for this tutorial, as we randomly sampled the exposures data.
+
+```{r}
+ggplot(icees2dei,aes(y=AvgDailyPM2.5Exposure,x=MaxDailyOzoneExposure)) + geom_point(color='blue') +
+  geom_smooth(method = "lm", se = FALSE)
+```
+
+## Considerations
+
+FHIR PIT must be run within a secure enclave when working with real patient datasets, and all federal and insititutional regulations surrounding patient privacy and data security must be met.
+
+FHiR PIT performs linkages between patient datasets and environmental exposures datasets using geocodes (i.e., patient primary residence), study period, and healthcare visit dates. FHIR PIT currently assumes a patient or subject resides in a single geolocation across a defined study period. We plan to adapt FHIR PIT to address mobility by, for example, assessing school-aged children's home versus public school exposures.
+
+FHIR PIT can be memory-intensive when working with large input datasets. 
+
+## Concluding Remarks
+
+This tutorial demonstrates how to execute FHIR PIT and analyze its output. The patient dataset used in this tutorial is synthetic and intended for demonstration purposes only. The environmental datasets used in this tutorial are randomly sampled from much larger datasets derived from public sources. Users may substititute the synthetic patient dataset and sample exposures datasets with their own datasets. To add your own data, please update the 'data/input' directory. For assistance with FHIR PIT or access to our environmental exposure datasets, please contact fhir-pit@renci.org.
+
+## Resources
+
+[1] Garcia, J. J., Fecho, K., Yi, H., and Xu, H., “FHIR-PIT: FHIR Patient data Integration Tool.” [Online]. Available at: https://github.com/ExposuresProvider/FHIR-PIT.
+
+[2] Garcia, J. J., “FHIR-PIT: Transformations documentation” [Online]. Available at: https://github.com/ExposuresProvider/FHIR-PIT/blob/contained_demo/spark/FHIR-PIT-Transformations-Documentation.pdf.
+
+[3] Xu, H., et al., “FHIR PIT: an open software application for spatiotemporal integration of clinical data and environmental exposures data,” BMC Med Inform Decis Mak, vol. 20, no. 1, p. 53, 2020. doi: 10.1186/s12911-020-1056-9.
+
+[4] Fecho, K., et al., "A novel approach for exposing and sharing clinical data: the Translator Integrated Clinical and Environmental Exposures Service," J Am Med Inform Assoc., vol. 26, no. 10, pp. 1064-1073, 2019. doi:10.1093/jamia/ocz042.
+
+[5] US Department of Health and Human Service, Office for Civil Rights, "Guidance Regarding Methods for De-identification of Protected Health Information in Accordance with the Health Insurance Portability and Accountability Act (HIPAA) Privacy Rule," October 25, 2022. https://www.hhs.gov/hipaa/for-professionals/privacy/special-topics/de-identification/index.html
