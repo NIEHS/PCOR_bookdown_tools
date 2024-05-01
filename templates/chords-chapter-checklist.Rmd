@@ -5,7 +5,8 @@
 Some formatting checks have been automated using linting. Please run the following code and resolve any formatting issues identified:
 
 ```{r eval = FALSE}
-lintr:lint()
+# edit file path for your chapter
+lintr::lint("chapters/NEW-CHAPTER-NAME.Rmd")
 ```
 
 ## Chapter Main Text Formatting 
