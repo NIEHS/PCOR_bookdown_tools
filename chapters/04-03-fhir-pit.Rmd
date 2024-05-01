@@ -98,14 +98,17 @@ The main outputs to consider are in ICEES, ICEES2 and ICEES2_dei directories (na
 ```{r}
 year_ <- 2010
 basepath <- file.path(work_dir, "data", "output")
-icees2dei_patient_url <- file.path(basepath,"icees2_dei",  sprintf("%spatient_deidentified", year_))
+icees2dei_patient_url <- file.path(basepath, "icees2_dei",
+                                   sprintf("%spatient_deidentified", year_))
 ```
 
 The ICEES directory contains one CSV file per subject. Each CSV file consists of the subject’s visits, concatenated with the corresponding environmental exposure estimates for that day and that subject's location. If a subject has multiple visits per day, then the transformation "PreprocPerPatSeriesToVector" step aggregates multiple daily visits by counting how many times a drug or diagnosis occurred. The directory for each subject is indexed by the "patient_num" column. The ICEES2 directory contains a single CSV file with the aggregation of all subjects grouped by (subject, study period). Lastly, the ICEES2DEI directory contains the same aggregated CSV file, but the data have been stripped of all PHI per HIPAA Safe Harbor method [5]. The fully deidentified file then abides by all federal regulations surrounding privacy and security, although institutional regulations may remain. For exposition purposes, we focus on the deidentified ICEES2DEI CSV file and reorder its columns.
 
 ```{r}
-icees2dei_colorder <- scan("icees2dei_patient_column_order.txt", what="", sep="\n")
-icees2dei <- read.csv(icees2dei_patient_url, header = TRUE)[, icees2dei_colorder]
+icees2dei_colorder <- scan("icees2dei_patient_column_order.txt",
+                           what = "", sep = "\n")
+icees2dei <- read.csv(icees2dei_patient_url,
+                      header = TRUE)[, icees2dei_colorder]
 ```
 
 ```{r}
@@ -115,7 +118,8 @@ icees2dei
 The deidentified ICEES2DEI CSV file may be used for further analysis. For instance, below we plot `AvgDailyPM2.5Exposure` vs `MaxDailyOzoneExposure` to examine the relationship between maximum daily ozone exposure and average daily PM2.5 exposure, noting a strong correlation is not expected for this tutorial, as we randomly sampled the exposures data.
 
 ```{r}
-ggplot(icees2dei,aes(y=AvgDailyPM2.5Exposure,x=MaxDailyOzoneExposure)) + geom_point(color='blue') +
+ggplot(icees2dei, aes(y = AvgDailyPM2.5Exposure, x = MaxDailyOzoneExposure)) +
+  geom_point(color = "blue") +
   geom_smooth(method = "lm", se = FALSE)
 ```
 
