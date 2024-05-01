@@ -66,27 +66,27 @@ Install Docker. Follow instructions in [Docker installation documentation](https
 
 Assign WORK_DIR the directory you would like to save FHIR PIT and its outputs to.
 
-```{r}
+```{r, eval = FALSE}
 work_dir <- "/Users/jj/Desktop/FHIR-PIT"
 Sys.setenv(WORK_DIR = work_dir)
 ```
 
 Clone FHIR PIT into the WORK_DIR directory.
 
-```{bash}
+```{bash, eval = FALSE}
 mkdir -p $WORK_DIR
 git clone --recursive https://github.com/ExposuresProvider/FHIR-PIT.git $WORK_DIR
 ```
 
 ### Execute FHIR-PIT {#fhir-pit-step-1}
 
-```{bash}
+```{bash, eval = FALSE}
 echo "$WORK_DIR/data/output"
 ```
 
 Run FHIR PIT in a docker container with -v. This will allow the output data to persist and be easily accessible by users on the host.
 
-```{bash}
+```{bash, eval = FALSE}
 docker run -m="25g" -v "$WORK_DIR/data/output":"$WORK_DIR/data/output" renci/fhir-pit:1.0 
 ```
 
@@ -94,7 +94,7 @@ docker run -m="25g" -v "$WORK_DIR/data/output":"$WORK_DIR/data/output" renci/fhi
 
 The main outputs to consider are in ICEES, ICEES2 and ICEES2_dei directories (named in reference to ICEES, but not specific to ICEES). Each directory contains one or more CSV files with information at different granularities. 
 
-```{r}
+```{r, eval = FALSE}
 year_ <- 2010
 basepath <- file.path(work_dir, "data", "output")
 icees2dei_patient_url <- file.path(basepath, "icees2_dei",
@@ -103,20 +103,20 @@ icees2dei_patient_url <- file.path(basepath, "icees2_dei",
 
 The ICEES directory contains one CSV file per subject. Each CSV file consists of the subject’s visits, concatenated with the corresponding environmental exposure estimates for that day and that subject's location. If a subject has multiple visits per day, then the transformation "PreprocPerPatSeriesToVector" step aggregates multiple daily visits by counting how many times a drug or diagnosis occurred. The directory for each subject is indexed by the "patient_num" column. The ICEES2 directory contains a single CSV file with the aggregation of all subjects grouped by (subject, study period). Lastly, the ICEES2DEI directory contains the same aggregated CSV file, but the data have been stripped of all PHI per HIPAA Safe Harbor method [5]. The fully deidentified file then abides by all federal regulations surrounding privacy and security, although institutional regulations may remain. For exposition purposes, we focus on the deidentified ICEES2DEI CSV file and reorder its columns.
 
-```{r}
+```{r, eval = FALSE}
 icees2dei_colorder <- scan("icees2dei_patient_column_order.txt",
                            what = "", sep = "\n")
 icees2dei <- read.csv(icees2dei_patient_url,
                       header = TRUE)[, icees2dei_colorder]
 ```
 
-```{r}
+```{r, eval = FALSE}
 icees2dei
 ```
 
 The deidentified ICEES2DEI CSV file may be used for further analysis. For instance, below we plot `AvgDailyPM2.5Exposure` vs `MaxDailyOzoneExposure` to examine the relationship between maximum daily ozone exposure and average daily PM2.5 exposure, noting a strong correlation is not expected for this tutorial, as we randomly sampled the exposures data.
 
-```{r}
+```{r, eval = FALSE}
 ggplot(icees2dei, aes(y = AvgDailyPM2.5Exposure, x = MaxDailyOzoneExposure)) +
   geom_point(color = "blue") +
   geom_smooth(method = "lm", se = FALSE)
