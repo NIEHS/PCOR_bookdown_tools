@@ -15,6 +15,7 @@ rmd_files:
   - chapters/04-02-geo-exposure-a.Rmd
   - chapters/04-02-geo-exposure-b.Rmd
   - chapters/04-02-geo-exposure-c.Rmd
+  - chapters/04-03-fhir-pit.Rmd
   - chapters/05-00-analysis-case-studies.Rmd
   - chapters/AA-00-appendix.Rmd
   - chapters/AA-01-user-profiles.Rmd
