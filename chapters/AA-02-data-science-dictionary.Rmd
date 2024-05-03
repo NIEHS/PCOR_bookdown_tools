@@ -66,3 +66,28 @@ Categories: [Research Methods](https://tools.niehs.nih.gov/cchhglossary/?categor
 </font>
 
 ---
+
+
+#### Electronic Health Record (EHR) {#def-ehr .unnumbered .unlisted}
+
+[...]  
+                                                                               
+**Context:** [...] 
+
+<font size ="2"> 
+Categories:  
+</font>
+
+---
+
+#### FHIR {#def-fhir .unnumbered .unlisted}
+
+[...]  
+                                                                               
+**Context:** [...] 
+
+<font size ="2"> 
+Categories: 
+</font>
+
+---
