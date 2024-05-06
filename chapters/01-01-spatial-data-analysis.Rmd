@@ -38,7 +38,7 @@ Users will learn about the following topics related to spatial data in R:
 
 This vignette will cover how to access, import, and analyze point, polygon, and raster spatial data types. The details of what constitutes each unique spatial data type, however, will not be covered.
 
-For detailed descriptions of each type of spatial data, please see [Simple Features for R](https://r-spatial.github.io/sf/articles/sf1.html) for point and polygon data types, and [Introduction to Raster Data](https://datacarpentry.org/organization-geospatial/01-intro-raster-data) for raster data.
+For detailed descriptions of each type of spatial data, please see [Simple Features for R](https://r-spatial.github.io/sf/articles/sf1.html)\cite{r-sf-article1} for point and polygon data types, and [Introduction to Raster Data](https://datacarpentry.org/organization-geospatial/01-intro-raster-data)\cite{raster-data} for raster data.
 
 ### Data Sources
 
@@ -84,7 +84,7 @@ library(utils)
 
 #### `ggplot2` and `ggpubr` {-}
 
-The `ggplot2` and `ggpubr` packages will be used throughout the vignette for creating publication quality plots. Please see [ggplot2: Elegant Graphics for Data Analysis (3e)](https://ggplot2-book.org/introduction) and [ggpubr: 'ggplot2' Based Publication Ready Plots](https://rpkgs.datanovia.com/ggpubr/) for in depth descriptions of the syntax and functionality utilized by these packages.
+The `ggplot2` and `ggpubr` packages will be used throughout the vignette for creating publication quality plots. Please see [ggplot2: Elegant Graphics for Data Analysis (3e)](https://ggplot2-book.org/introduction) and [ggpubr: 'ggplot2' Based Publication Ready Plots](https://rpkgs.datanovia.com/ggpubr/) for in depth descriptions of the syntax and functionality utilized by these packages.\cite{r-ggplot2, r-ggpubr}
 
 ::: {.important}
 The exploratory analyses performed in this vignette are designed for educational purposes only. The results of the following analyses are not peer-reviewed findings, nor are they based on any hypotheses.
@@ -104,7 +104,7 @@ For more information on how to select a coordinate reference system for your des
 
 ## Point Data with `sf`
 
-Air pollution monitoring data from the United States Environmental Protection Agency (EPA) will be used to demonstrate using point data with the `sf` package.
+Air pollution monitoring data from the United States Environmental Protection Agency (EPA) will be used to demonstrate using point data with the `sf` package.\cite{r-sf-1}
 
 ### Access, download, and unzip
 
@@ -260,7 +260,7 @@ st_crs(pm_sf) <- 4326
 st_crs(pm_sf)
 ```
 
-An `sf` object with a coordinate reference system can be transformed (projected) into a different coordinate reference system with `sf::st_transform()`. The area of interest for these exploratory analyses is the coterminous United States, so the Albers Equal Area projected coordinate system will be used (EPSG code: 5070). For a detailed description of coordinate reference systems, and how to select the best system for your analyses, see [Coordinate Reference Systems](#chapter-coordinate-reference-systems).
+An `sf` object with a coordinate reference system can be transformed (projected) into a different coordinate reference system with `sf::st_transform()`. The area of interest for these exploratory analyses is the coterminous United States, so the Albers Equal Area projected coordinate system will be used (EPSG code: 5070).
 
 ::: {.note}
 An `sf` object without an assigned coordinate reference system cannot be transformed. `sf::st_crs()` must be used to assign a coordinate reference system to an `sf` object that does not have one.
@@ -342,7 +342,7 @@ Each unique monitor identification code should be matched with a unique monitor 
 length(unique(pm_sf$Monitor.ID)) == length(unique(pm_sf$geometry))
 ```
 
-Now that each monitor location as a unique identification code, we can calculate the mean PM~2.5~ concentration measured at each monitoring location. Functions and syntax from the `dplyr` package will be used to do this. For more on the `dplyr` package, please see [Introduction to dplyr](https://dplyr.tidyverse.org/articles/dplyr.html).
+Now that each monitor location as a unique identification code, we can calculate the mean PM~2.5~ concentration measured at each monitoring location. Functions and syntax from the `dplyr` package will be used to do this.\cite{r-dplyr} For more on the `dplyr` package, please see [Introduction to dplyr](https://dplyr.tidyverse.org/articles/dplyr.html).\cite{dplyr-introduction}
 
 The `group_by(Monitor.ID, )` argument specifies that an annual mean should be calculated for each unique `Monitor.ID`. Including `State.Name` in this argument retains the column in the new `pm_mean` data set, but does not influence the calculation of the annual mean.
 
@@ -467,7 +467,7 @@ ggplot(
 
 ## Polygon Data
 
-Wildfire smoke plume coverage data from the United States National Oceanic and Atmospheric Administration (NOAA) will be used to demonstrate using polygon data. This section will cover polygon data with both the `sf` and `terra` packages separately, but the steps for accessing, downloading, and unzipping the data is the same for both packages.
+Wildfire smoke plume coverage data from the United States National Oceanic and Atmospheric Administration (NOAA) will be used to demonstrate using polygon data. This section will cover polygon data with both the `sf` and `terra` packages separately, but the steps for accessing, downloading, and unzipping the data is the same for both packages.\cite{r-sf-1, r-terra}
 
 ### Access, download, and unzip
 
@@ -852,7 +852,7 @@ ggplot() +
 
 ### Polygon Data with `terra`
 
-This section will focus on exploratory analyses with polygon data using the `terra` package.
+This section will focus on exploratory analyses with polygon data using the `terra` package.\cite{r-terra}
 
 #### Import {-}
 
@@ -957,7 +957,7 @@ crs(smoke_t) == crs(conus_t)
 
 Plot both data sets together in one plot with `ggplot2::ggplot()`.
 
-Now that the parameters of interest and coordinate reference systems have been prepared, create a plot with `ggplot2::ggplot()`. Identifying the data sets to be plotted within the `geom_spatvector()` arguments informs the function that the data are `SpatVector` objects.
+Now that the parameters of interest and coordinate reference systems have been prepared, create a plot with `ggplot2::ggplot()`. Identifying the data sets to be plotted within the `tidyterra::geom_spatvector()` arguments informs the function that the data are `SpatVector` objects.\cite{r-tidyterra}
 
 ```{r, eval = FALSE}
 ggplot() +
@@ -1584,32 +1584,15 @@ ggplot() +
 
 For additional resources pertaining to the packages used in this vignette, please see the following:
 
--   [Package 'sf'](https://cran.r-project.org/web/packages/sf/sf.pdf)
+-   ['sf'](https://cran.r-project.org/web/packages/sf/sf.pdf)
 
--   [Package 'terra'](https://cran.r-project.org/web/packages/terra/terra.pdf)
+-   ['terra'](https://cran.r-project.org/web/packages/terra/terra.pdf)
 
--   [Description of the methods in the terra package](https://search.r-project.org/CRAN/refmans/terra/html/terra-package.html)
+-   ['dplyr'](https://cran.r-project.org/web/packages/dplyr/dplyr.pdf)
 
--   [Package 'dplyr'](https://cran.r-project.org/web/packages/dplyr/dplyr.pdf)
+-   ['ggplot2'](https://cran.r-project.org/web/packages/ggplot2/ggplot2.pdf)
 
--   [Package 'ggplot2'](https://cran.r-project.org/web/packages/ggplot2/ggplot2.pdf)
+-   ['ggpubr'](https://cran.r-project.org/web/packages/ggpubr/ggpubr.pdf)
 
--   [Package 'ggpubr'](https://cran.r-project.org/web/packages/ggpubr/ggpubr.pdf)
+-   [`tidyterra`](https://cran.r-project.org/web/packages/tidyterra/tidyterra.pdf)
 
-## References
-
-H. Wickham. ggplot2: Elegant Graphics for Data Analysis. Springer-Verlag New York, 2016.
-
-Hernangomez D (2023). tidyterra: tidyverse Methods and ggplot2 Helpers for terra Objects. <https://doi.org/10.5281/zenodo.6572471>, <https://dieghernan.github.io/tidyterra/>
-
-Hijmans R (2023). *terra: Spatial Data Analysis*. R package version 1.7-39, <https://CRAN.R-project.org/package=terra>.
-
-Kassambara A (2023). *ggpubr: 'ggplot2' Based Publication Ready Plots*. R package version 0.6.0, <https://CRAN.R-project.org/package=ggpubr>.
-
-Pebesma, E., & Bivand, R. (2023). Spatial Data Science: With Applications in R. Chapman and Hall/CRC. <https://doi.org/10.1201/9780429459016>
-
-Pebesma, E., 2018. Simple Features for R: Standardized Support for Spatial Vector Data. The R Journal 10 (1), 439-446, <https://doi.org/10.32614/RJ-2018-009>
-
-R Core Team (2023). *R: A Language and Environment for Statistical Computing*. R Foundation for Statistical Computing, Vienna, Austria. <https://www.R-project.org/>.
-
-Wickham H, François R, Henry L, Müller K, Vaughan D (2023). *dplyr: A Grammar of Data Manipulation*. R package version 1.1.2, <https://CRAN.R-project.org/package=dplyr>.
