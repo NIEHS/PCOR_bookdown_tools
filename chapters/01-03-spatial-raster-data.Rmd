@@ -14,7 +14,7 @@
 
 ## Data
 
-Air temperature data from the United States National Oceanic and Atmospheric Administration's (NOAA) North American Regional Reanalysis (NARR) data set will be used to demonstrate using raster data with the `terra` package.(@r-terra)
+Air temperature data from the United States National Oceanic and Atmospheric Administration's (NOAA) North American Regional Reanalysis (NARR) data set will be used to demonstrate using raster data with the `terra` package (@r-terra).
 
 ## Access and download
 
@@ -172,7 +172,7 @@ crs(conus_t) == crs(narr)
 
 ## Plot (multiple)
 
-Now that the data sets and coordinate reference systems have been prepared, create a plot with `ggplot2::gglot()`. Identifying the data sets to be plotted within the `tidyterra::geom_spatraster()` and `tidyterra::geom_spatvector()` argument informs the function that the `narr` and `conus_t` data sets are `SpatRaster` and `SpatVector` objects, respectively.(@r-tidyterra)
+Now that the data sets and coordinate reference systems have been prepared, create a plot with `ggplot2::gglot()`. Identifying the data sets to be plotted within the `tidyterra::geom_spatraster()` and `tidyterra::geom_spatvector()` argument informs the function that the `narr` and `conus_t` data sets are `SpatRaster` and `SpatVector` objects, respectively (@r-tidyterra).
 
 Only the first layer of the `narr` data set will be plotted.
 

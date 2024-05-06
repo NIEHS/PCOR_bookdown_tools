@@ -14,7 +14,7 @@
 
 ## Data
 
-Wildfire smoke plume coverage data from the United States National Oceanic and Atmospheric Administration (NOAA) will be used to demonstrate using polygon data. This section will cover polygon data with both the `sf` and `terra` packages separately, but the steps for accessing, downloading, and unzipping the data is the same for both packages.(@r-sf-1, @r-terra)
+Wildfire smoke plume coverage data from the United States National Oceanic and Atmospheric Administration (NOAA) will be used to demonstrate using polygon data. This section will cover polygon data with both the `sf` (@r-sf-1) and `terra` (@r-terra) packages separately, but the steps for accessing, downloading, and unzipping the data is the same for both packages.
 
 ## Access, download, and unzip
 
@@ -399,7 +399,7 @@ ggplot() +
 
 ## Polygon Data with `terra`
 
-This section will focus on exploratory analyses with polygon data using the `terra` package.(@r-terra)
+This section will focus on exploratory analyses with polygon data using the `terra` package (@r-terra).
 
 ### Import {-}
 
@@ -504,7 +504,7 @@ crs(smoke_t) == crs(conus_t)
 
 Plot both data sets together in one plot with `ggplot2::ggplot()`.
 
-Now that the parameters of interest and coordinate reference systems have been prepared, create a plot with `ggplot2::ggplot()`. Identifying the data sets to be plotted within the `tidyterra::geom_spatvector()` arguments informs the function that the data are `SpatVector` objects.(@r-tidyterra)
+Now that the parameters of interest and coordinate reference systems have been prepared, create a plot with `ggplot2::ggplot()`. Identifying the data sets to be plotted within the `tidyterra::geom_spatvector()` arguments informs the function that the data are `SpatVector` objects (@r-tidyterra).
 
 ```{r, eval = FALSE}
 ggplot() +
