@@ -92,15 +92,9 @@ The exploratory analyses performed in this vignette are designed for educational
 
 ## Coordinate reference systems and projections
 
-A coordinate reference system defines how spatial data are positioned relative to the surface of the Earth, a critical piece of conducting spatial analyses (cite geocomputation 2.4)
+Coordinate reference systems (CRS) are important for spatial analyses as they define how spatial data align with the Earth's surface.\cite{geocomputation-24} Transforming (projecting) the data to a different CRS may be necessary when combining multiple datasets or creating visuals for particular areas of interest. It is important to note that transforming spatial data can cause distortions in it's area, direction, distance, or shape.\cite{geocomputation-24} The direction and magnitude of these distortions vary depending on the chosen CRS, area of interest, and type of data.\cite{article_steinwand1995reprojection} For guidance on selected the right coordinate reference system based on the data, area of interest, and analysis goals, see [Choose the right projection](https://learn.arcgis.com/en/projects/choose-the-right-projection/).\cite{arcgis-crs}
 
-Projected coordinate systems utilize geographic CRS to depict the CRS on a flat surface (cite).
-
-When transforming (projecting) data to a projected CRS, the data will be distoried in area, direction, distance, or shape.
-
-As the following analyses utilize the United States for spatial context, US-centric coordinate reference system (EPSG Code: 5070) will be used.
-
-For more information on how to select a coordinate reference system for your desired outcome, see [Choose the right projection](https://learn.arcgis.com/en/projects/choose-the-right-projection/). 
+For the following analyses which focus on the coterminous United States, the Albers Equal Area projection (EPSG Code: 5070) will be utilized.
 
 ## Point Data with `sf`
 
