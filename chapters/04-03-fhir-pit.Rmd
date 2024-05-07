@@ -8,7 +8,7 @@
 
 **Key Terms**: [Data Integration](https://tools.niehs.nih.gov/cchhglossary/?keyword=data+integration&termOnlySearch=true&exactSearch=true), [Electronic Health Record (EHR)](#def-ehr), [Exposure](https://tools.niehs.nih.gov/cchhglossary/?keyword=exposure&termOnlySearch=true&exactSearch=true), [FHIR](#def-fhir), [Geocoded Address](#def-geocoded-address)
 
-**Programming Languages**: R
+**Programming Languages**: R, Bash
 
 ## Introduction
 
