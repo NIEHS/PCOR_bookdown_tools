@@ -14,7 +14,7 @@
 
 This tutorial provides example code in `R`:
 
-1.  To setup FHIR PIT.
+1.  To set up FHIR PIT.
 
 2.  To analyze the results from the FHIR PIT output.
 
@@ -22,7 +22,7 @@ This tutorial provides example code in `R`:
 
 The patient dataset used in this tutorial is synthetic. When using actual patient or participant datasets containing Protected Health Information (PHI), one must run FHIR PIT within a secure enclave and abide by all federal and institutional regulations.
 
-Note that the FHIR PIT application may be memory-intensive, depending on the size of the input datasets. For example, this tutorial requires approximately 25Gb RAM to run successfully.
+Note that the FHIR PIT application may be memory-intensive, depending on the size of the input datasets. For example, this tutorial requires approximately 25 GB RAM to run successfully.
 
 ### Motivation
 
@@ -36,12 +36,12 @@ In essence, the pipeline is a sequence of transformations configured from a YAML
 
 FHIR PIT was developed to support ICEES (Integrated Clinical and Environmental Exposures Service) [@xu2020fhir; @fecho2019novel]. However, the tool is not specific to ICEES, but rather can be used to integrate any source of patient FHIR files with any source of environmental exposures data. In this tutorial, we use synthetic FHIR files and randomly sampled environmental exposures data derived from several public sources: 
 
--   [US Environmental Protection Agency airborne pollutant exposures data](https://www.epa.gov/cmaq) - The US EPA maintains collections of model-derived estimates of airborne pollutant exposure data such as PM2.5 and ozone at varying spatial and temporal resolutions. FHIR PIT uses the data to calculate, for example, average daily PM2.5 exposure and maximum daily ozone exposure over a defined study period.
+-   [US Environmental Protection Agency (EPA) airborne pollutant exposures data](https://www.epa.gov/cmaq) - The US EPA maintains collections of model-derived estimates of airborne pollutant exposure data such as PM~2.5~ and ozone at varying spatial and temporal resolutions. FHIR PIT uses the data to calculate, for example, average daily PM~2.5~ exposure and maximum daily ozone exposure over a defined study period.
 -   [US Department of Transportation (DOT), Federal Highway Administration (FHA), Highway Performance Monitoring System (HPMS) major roadway/highway exposures data](https://www.fhwa.dot.gov/policyinformation/hpms.cfm) - The US DOT maintains a variety of metrics on roadway data. FHIR PIT uses the data to calculate point estimates of primary residential distance from the nearest major roadway or highway.
 -   [US Census Bureau TIGER/line roadway data](https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html) - The US Census Bureau also maintains metrics on roadway data. FHIR PIT uses the data to supplement the US DOT data. 
 -   [US Census Bureau American Community Survey (ACS) socio-economic exposures data](https://www.census.gov/programs-surveys/acs/data.html) - The US Census Bureau's ACS is a 5-year survey sample from the decennial nationwide US census. FHIR PIT uses a subset of the available ACS survey estimates of socio-economic exposures, including survey estimates on residential density, household median income, and household access to health insurance.
 -   [NC Department of Environmental Quality (DEQ) concentrated animal feeding operations (CAFO) exposures data](https://deq.nc.gov/cafo-map) - North Carolina's DEQ maintains data on the location of all registered CAFOs across the state. FHIR PIT uses the data to calculate point estimates of primary residential distance from the nearest CAFO. 
--   [NC Department of Environmental Quality (DEQ) landfill exposures data](https://www.nconemap.gov/datasets/ncdenr::active-permitted-landfills/about) - North Carolina's DEQ maintains data on the location of all registered active and inactive landfills across the state. FHIR PIT uses the data to calculates point estimates of primary residential distance from the nearest landfill. 
+-   [NC Department of Environmental Quality (DEQ) landfill exposures data](https://www.nconemap.gov/datasets/ncdenr::active-permitted-landfills/about) - North Carolina's DEQ maintains data on the location of all registered active and inactive landfills across the state. FHIR PIT uses the data to calculate point estimates of primary residential distance from the nearest landfill. 
 
 ### Outline
 
@@ -114,7 +114,7 @@ icees2dei <- read.csv(icees2dei_patient_url,
 icees2dei
 ```
 
-The deidentified ICEES2DEI CSV file may be used for further analysis. For instance, below we plot `AvgDailyPM2.5Exposure` vs `MaxDailyOzoneExposure` to examine the relationship between maximum daily ozone exposure and average daily PM2.5 exposure, noting a strong correlation is not expected for this tutorial, as we randomly sampled the exposures data.
+The deidentified ICEES2DEI CSV file may be used for further analysis. For instance, below we plot `AvgDailyPM2.5Exposure` vs `MaxDailyOzoneExposure` to examine the relationship between maximum daily ozone exposure and average daily PM~2.5~ exposure, noting a strong correlation is not expected for this tutorial, as we randomly sampled the exposures data.
 
 ```{r, eval = FALSE}
 ggplot(icees2dei, aes(y = AvgDailyPM2.5Exposure, x = MaxDailyOzoneExposure)) +
@@ -126,7 +126,7 @@ ggplot(icees2dei, aes(y = AvgDailyPM2.5Exposure, x = MaxDailyOzoneExposure)) +
 
 FHIR PIT must be run within a secure enclave when working with real patient datasets, and all federal and insititutional regulations surrounding patient privacy and data security must be met.
 
-FHiR PIT performs linkages between patient datasets and environmental exposures datasets using geocodes (i.e., patient primary residence), study period, and healthcare visit dates. FHIR PIT currently assumes a patient or subject resides in a single geolocation across a defined study period. We plan to adapt FHIR PIT to address mobility by, for example, assessing school-aged children's home versus public school exposures.
+FHIR PIT performs linkages between patient datasets and environmental exposures datasets using geocodes (i.e., patient primary residence), study period, and healthcare visit dates. FHIR PIT currently assumes a patient or subject resides in a single geolocation across a defined study period. We plan to adapt FHIR PIT to address mobility by, for example, assessing school-aged children's home versus public school exposures.
 
 FHIR PIT can be memory-intensive when working with large input datasets. 
 
