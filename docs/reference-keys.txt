@@ -87,3 +87,15 @@ step-3-roads
 step-4-roads
 step-5-roads
 step-6-roads
+chapter-fhir-pit
+introduction-5
+disclaimer
+motivation-4
+background
+outline-1
+tutorial-1
+fhir-pit-step-0
+fhir-pit-step-1
+fhir-pit-step-2
+considerations-1
+concluding-remarks-1

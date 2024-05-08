@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>6 A FHIR PIT Tutorial | The CHORDS Toolkit for Health and Geospatial Exposures Research</title>
+  <meta name="description" content="The CHORDS Toolkit provides guides, tools, and example code to support climate change and human health research." />
+  <meta name="generator" content="bookdown 0.39 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="6 A FHIR PIT Tutorial | The CHORDS Toolkit for Health and Geospatial Exposures Research" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="The CHORDS Toolkit provides guides, tools, and example code to support climate change and human health research." />
+  <meta name="github-repo" content="NIEHS/PCOR_bookdown_tools" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="6 A FHIR PIT Tutorial | The CHORDS Toolkit for Health and Geospatial Exposures Research" />
+  
+  <meta name="twitter:description" content="The CHORDS Toolkit provides guides, tools, and example code to support climate change and human health research." />
+  
+
+<meta name="author" content="" />
+
+
+<meta name="date" content="2024-05-08" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="chapter-chords-geo-exposures.html"/>
+<link rel="next" href="case-studies.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./"><img src="images/chords-icon-nobackground.png" width="200"></a></li>
+<li><a href="./">CHORDS Toolkit</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><strong>Introduction</strong></a>
+<ul>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html#about-chords"><i class="fa fa-check"></i>About CHORDS</a></li>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html#about-this-toolkit"><i class="fa fa-check"></i>About This Toolkit</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="foundations.html"><a href="foundations.html"><i class="fa fa-check"></i><strong>Foundations</strong></a></li>
+<li class="chapter" data-level="1" data-path="chapter-intro-spatial-data-analysis.html"><a href="chapter-intro-spatial-data-analysis.html"><i class="fa fa-check"></i><b>1</b> Spatial Data Analysis</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="chapter-intro-spatial-data-analysis.html"><a href="chapter-intro-spatial-data-analysis.html#introduction-1"><i class="fa fa-check"></i><b>1.1</b> Introduction</a></li>
+<li class="chapter" data-level="1.2" data-path="chapter-intro-spatial-data-analysis.html"><a href="chapter-intro-spatial-data-analysis.html#point-data-with-sf"><i class="fa fa-check"></i><b>1.2</b> Point Data with <code>sf</code></a></li>
+<li class="chapter" data-level="1.3" data-path="chapter-intro-spatial-data-analysis.html"><a href="chapter-intro-spatial-data-analysis.html#polygon-data"><i class="fa fa-check"></i><b>1.3</b> Polygon Data</a></li>
+<li class="chapter" data-level="1.4" data-path="chapter-intro-spatial-data-analysis.html"><a href="chapter-intro-spatial-data-analysis.html#raster-data-with-terra"><i class="fa fa-check"></i><b>1.4</b> Raster Data with <code>terra</code></a></li>
+<li class="chapter" data-level="1.5" data-path="chapter-intro-spatial-data-analysis.html"><a href="chapter-intro-spatial-data-analysis.html#additional-resources"><i class="fa fa-check"></i><b>1.5</b> Additional Resources</a></li>
+<li class="chapter" data-level="1.6" data-path="chapter-intro-spatial-data-analysis.html"><a href="chapter-intro-spatial-data-analysis.html#references"><i class="fa fa-check"></i><b>1.6</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="wildfire-data.html"><a href="wildfire-data.html"><i class="fa fa-check"></i><strong>Wildfire Data</strong></a></li>
+<li class="chapter" data-level="2" data-path="wildfire-chapter.html"><a href="wildfire-chapter.html"><i class="fa fa-check"></i><b>2</b> Wildfire Chapter</a></li>
+<li class="chapter" data-level="" data-path="other-environmental-data.html"><a href="other-environmental-data.html"><i class="fa fa-check"></i><strong>Other Environmental Data</strong></a></li>
+<li class="chapter" data-level="3" data-path="chapter-nasa-earthdata.html"><a href="chapter-nasa-earthdata.html"><i class="fa fa-check"></i><b>3</b> NASA EarthData Download</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="chapter-nasa-earthdata.html"><a href="chapter-nasa-earthdata.html#introduction-2"><i class="fa fa-check"></i><b>3.1</b> Introduction</a></li>
+<li class="chapter" data-level="3.2" data-path="chapter-nasa-earthdata.html"><a href="chapter-nasa-earthdata.html#nasa-earthdata-account"><i class="fa fa-check"></i><b>3.2</b> NASA EarthData Account</a></li>
+<li class="chapter" data-level="3.3" data-path="chapter-nasa-earthdata.html"><a href="chapter-nasa-earthdata.html#references-1"><i class="fa fa-check"></i><b>3.3</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="health-data-integration.html"><a href="health-data-integration.html"><i class="fa fa-check"></i><strong>Health Data Integration</strong></a></li>
+<li class="chapter" data-level="4" data-path="chapter-link-to-census.html"><a href="chapter-link-to-census.html"><i class="fa fa-check"></i><b>4</b> Linkage to Census Units</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="chapter-link-to-census.html"><a href="chapter-link-to-census.html#introduction-3"><i class="fa fa-check"></i><b>4.1</b> Introduction</a></li>
+<li class="chapter" data-level="4.2" data-path="chapter-link-to-census.html"><a href="chapter-link-to-census.html#tutorial"><i class="fa fa-check"></i><b>4.2</b> Tutorial</a></li>
+<li class="chapter" data-level="4.3" data-path="chapter-link-to-census.html"><a href="chapter-link-to-census.html#concluding-remarks"><i class="fa fa-check"></i><b>4.3</b> Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="chapter-chords-geo-exposures.html"><a href="chapter-chords-geo-exposures.html"><i class="fa fa-check"></i><b>5</b> Linkage to Exposures</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="chapter-chords-geo-exposures.html"><a href="chapter-chords-geo-exposures.html#introduction-4"><i class="fa fa-check"></i><b>5.1</b> Introduction</a></li>
+<li class="chapter" data-level="5.2" data-path="chapter-chords-geo-exposures.html"><a href="chapter-chords-geo-exposures.html#chapter-geo-exposure-caces"><i class="fa fa-check"></i><b>5.2</b> CACES Air Pollution</a></li>
+<li class="chapter" data-level="5.3" data-path="chapter-chords-geo-exposures.html"><a href="chapter-chords-geo-exposures.html#chapter-geo-exposure-faa"><i class="fa fa-check"></i><b>5.3</b> Airport Proximity</a></li>
+<li class="chapter" data-level="5.4" data-path="chapter-chords-geo-exposures.html"><a href="chapter-chords-geo-exposures.html#chapter-geo-exposure-roads"><i class="fa fa-check"></i><b>5.4</b> Major Road Proximity</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="chapter-fhir-pit.html"><a href="chapter-fhir-pit.html"><i class="fa fa-check"></i><b>6</b> A FHIR PIT Tutorial</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="chapter-fhir-pit.html"><a href="chapter-fhir-pit.html#introduction-5"><i class="fa fa-check"></i><b>6.1</b> Introduction</a></li>
+<li class="chapter" data-level="6.2" data-path="chapter-fhir-pit.html"><a href="chapter-fhir-pit.html#tutorial-1"><i class="fa fa-check"></i><b>6.2</b> Tutorial</a></li>
+<li class="chapter" data-level="6.3" data-path="chapter-fhir-pit.html"><a href="chapter-fhir-pit.html#considerations-1"><i class="fa fa-check"></i><b>6.3</b> Considerations</a></li>
+<li class="chapter" data-level="6.4" data-path="chapter-fhir-pit.html"><a href="chapter-fhir-pit.html#concluding-remarks-1"><i class="fa fa-check"></i><b>6.4</b> Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="case-studies.html"><a href="case-studies.html"><i class="fa fa-check"></i><strong>Case Studies</strong></a></li>
+<li class="chapter" data-level="" data-path="appendix.html"><a href="appendix.html"><i class="fa fa-check"></i><strong>Appendix</strong></a></li>
+<li class="chapter" data-level="" data-path="chapter-user-profiles.html"><a href="chapter-user-profiles.html"><i class="fa fa-check"></i><strong>A</strong> User Profiles</a></li>
+<li class="chapter" data-level="" data-path="chords-glossary.html"><a href="chords-glossary.html"><i class="fa fa-check"></i><strong>B</strong> CHORDS Glossary</a></li>
+<li class="chapter" data-level="" data-path="all-references-appendix.html"><a href="all-references-appendix.html"><i class="fa fa-check"></i><strong>C</strong> References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" 
+target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">The CHORDS Toolkit for Health and Geospatial Exposures Research</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="chapter-fhir-pit" class="section level1 hasAnchor" number="6">
+<h1><span class="header-section-number">6</span> A FHIR PIT Tutorial<a href="chapter-fhir-pit.html#chapter-fhir-pit" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p><a href="chapter-user-profiles.html#profilecmp"><img src="images/user_profiles/profilecmp.svg" alt="Profile-CMP" /></a>
+<a href="chapter-user-profiles.html#profilecdm"><img src="images/user_profiles/profilecdm.svg" alt="Profile-CDM" /></a>
+<a href="chapter-user-profiles.html#profilestu"><img src="images/user_profiles/profilestu.svg" alt="Profile-STU" /></a></p>
+<div id="fhir-pit-hl7-fast-healthcare-interoperability-resources-patient-data-integration-tool-a-tutorial" class="section level3 unnumbered hasAnchor">
+<h3>FHIR PIT: HL7 Fast Healthcare Interoperability Resources Patient data Integration Tool: A Tutorial<a href="chapter-fhir-pit.html#fhir-pit-hl7-fast-healthcare-interoperability-resources-patient-data-integration-tool-a-tutorial" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><strong>Date Modified</strong>: April 30, 2024</p>
+<p><strong>Authors</strong>: Juan Garcia <a href="https://orcid.org/"><img src="images/orcid.png" width="10" alt="author-jc" /></a>, Kara Fecho <a href="https://orcid.org/0000-0002-6704-9306"><img src="images/orcid.png" width="10" alt="author-kf" /></a>, Hong Yi <a href="https://orcid.org/0000-0002-5699-1259"><img src="images/orcid.png" width="10" alt="author-hy" /></a></p>
+<p><strong>Key Terms</strong>: <a href="https://tools.niehs.nih.gov/cchhglossary/?keyword=data+integration&amp;termOnlySearch=true&amp;exactSearch=true">Data Integration</a>, <a href="chords-glossary.html#def-ehr">Electronic Health Record (EHR)</a>, <a href="https://tools.niehs.nih.gov/cchhglossary/?keyword=exposure&amp;termOnlySearch=true&amp;exactSearch=true">Exposure</a>, <a href="chords-glossary.html#def-fhir">FHIR</a>, <a href="chords-glossary.html#def-geocoded-address">Geocoded Address</a></p>
+<p><strong>Programming Languages</strong>: R, Bash</p>
+</div>
+<div id="introduction-5" class="section level2 hasAnchor" number="6.1">
+<h2><span class="header-section-number">6.1</span> Introduction<a href="chapter-fhir-pit.html#introduction-5" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>This tutorial provides example code in <code>R</code>:</p>
+<ol style="list-style-type: decimal">
+<li><p>To set up FHIR PIT.</p></li>
+<li><p>To analyze the results from the FHIR PIT output.</p></li>
+</ol>
+<div id="disclaimer" class="section level3 hasAnchor" number="6.1.1">
+<h3><span class="header-section-number">6.1.1</span> Disclaimer<a href="chapter-fhir-pit.html#disclaimer" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The patient dataset used in this tutorial is synthetic. When using actual patient or participant datasets containing Protected Health Information (PHI), one must run FHIR PIT within a secure enclave and abide by all federal and institutional regulations.</p>
+<p>Note that the FHIR PIT application may be memory-intensive, depending on the size of the input datasets. For example, this tutorial requires approximately 25 GB RAM to run successfully.</p>
+</div>
+<div id="motivation-4" class="section level3 hasAnchor" number="6.1.2">
+<h3><span class="header-section-number">6.1.2</span> Motivation<a href="chapter-fhir-pit.html#motivation-4" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Environmental exposures are increasingly recognized as important to consider when conducting human subjects research. Unfortunately, associating environmental exposures data with subject-level data is challenging due to the complexity of the data and the varied spatiotemporal resolutions. FHIR PIT is an open-source tool to link electronic health record (EHR) data in FHIR format with environmental exposures data derived from public sources.</p>
+</div>
+<div id="background" class="section level3 hasAnchor" number="6.1.3">
+<h3><span class="header-section-number">6.1.3</span> Background<a href="chapter-fhir-pit.html#background" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>FHIR PIT (HL7 Fast Healthcare Interoperability Resources Patient data Integration Tool) is an open-source data integration pipeline to support subject-level research on social and environmental determinants of health and disease <span class="citation">(<a href="#ref-fhirpit-repo">Garcia et al. 2024</a>)</span>.</p>
+<p>In essence, the pipeline is a sequence of transformations configured from a YAML file <span class="citation">(<a href="#ref-fhirpit-docs">Garcia 2022</a>)</span>. The transformation steps join FHIR patient records with environmental exposures estimates using patient geocodes (e.g., primary residence) and date(s) of healthcare visits as the spatiotemporal links. At the end of each linkage step, FHIR PIT saves the linked tables to an intermediate folder to support rapid re-execution, should any given step fail to complete (e.g., lack of disk space). To support multiple healthcare visits, FHIR PIT vectorizes the FHIR patient records by grouping FHIR domains (e.g., Condition, Laboratory, Medication, Procedure) and counting events within a domain on a per-day basis. The features associated with the patient are then grouped by user-defined study periods (e.g., year) and aggregated with user-defined statistics (e.g., counts, mean, median, first measurement, last measurement).</p>
+<p>FHIR PIT was developed to support ICEES (Integrated Clinical and Environmental Exposures Service) <span class="citation">(<a href="#ref-xu2020fhir">Xu et al. 2020</a>; <a href="#ref-fecho2019novel">Fecho et al. 2019</a>)</span>. However, the tool is not specific to ICEES, but rather can be used to integrate any source of patient FHIR files with any source of environmental exposures data. In this tutorial, we use synthetic FHIR files and randomly sampled environmental exposures data derived from several public sources:</p>
+<ul>
+<li><a href="https://www.epa.gov/cmaq">US Environmental Protection Agency (EPA) airborne pollutant exposures data</a> - The US EPA maintains collections of model-derived estimates of airborne pollutant exposure data such as PM<sub>2.5</sub> and ozone at varying spatial and temporal resolutions. FHIR PIT uses the data to calculate, for example, average daily PM<sub>2.5</sub> exposure and maximum daily ozone exposure over a defined study period.</li>
+<li><a href="https://www.fhwa.dot.gov/policyinformation/hpms.cfm">US Department of Transportation (DOT), Federal Highway Administration (FHA), Highway Performance Monitoring System (HPMS) major roadway/highway exposures data</a> - The US DOT maintains a variety of metrics on roadway data. FHIR PIT uses the data to calculate point estimates of primary residential distance from the nearest major roadway or highway.</li>
+<li><a href="https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html">US Census Bureau TIGER/line roadway data</a> - The US Census Bureau also maintains metrics on roadway data. FHIR PIT uses the data to supplement the US DOT data.</li>
+<li><a href="https://www.census.gov/programs-surveys/acs/data.html">US Census Bureau American Community Survey (ACS) socio-economic exposures data</a> - The US Census Bureau’s ACS is a 5-year survey sample from the decennial nationwide US census. FHIR PIT uses a subset of the available ACS survey estimates of socio-economic exposures, including survey estimates on residential density, household median income, and household access to health insurance.</li>
+<li><a href="https://deq.nc.gov/cafo-map">NC Department of Environmental Quality (DEQ) concentrated animal feeding operations (CAFO) exposures data</a> - North Carolina’s DEQ maintains data on the location of all registered CAFOs across the state. FHIR PIT uses the data to calculate point estimates of primary residential distance from the nearest CAFO.</li>
+<li><a href="https://www.nconemap.gov/datasets/ncdenr::active-permitted-landfills/about">NC Department of Environmental Quality (DEQ) landfill exposures data</a> - North Carolina’s DEQ maintains data on the location of all registered active and inactive landfills across the state. FHIR PIT uses the data to calculate point estimates of primary residential distance from the nearest landfill.</li>
+</ul>
+</div>
+<div id="outline-1" class="section level3 hasAnchor" number="6.1.4">
+<h3><span class="header-section-number">6.1.4</span> Outline<a href="chapter-fhir-pit.html#outline-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>This tutorial includes the following steps:</p>
+<ol style="list-style-type: decimal">
+<li><p><a href="chapter-fhir-pit.html#fhir-pit-step-0">Setup</a></p></li>
+<li><p><a href="chapter-fhir-pit.html#fhir-pit-step-1">Run FHIR PIT</a></p></li>
+<li><p><a href="chapter-fhir-pit.html#fhir-pit-step-2">Analyze results</a></p></li>
+</ol>
+</div>
+</div>
+<div id="tutorial-1" class="section level2 hasAnchor" number="6.2">
+<h2><span class="header-section-number">6.2</span> Tutorial<a href="chapter-fhir-pit.html#tutorial-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb158-1"><a href="chapter-fhir-pit.html#cb158-1" tabindex="-1"></a><span class="co"># Loading library</span></span>
+<span id="cb158-2"><a href="chapter-fhir-pit.html#cb158-2" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span></code></pre></div>
+<div id="fhir-pit-step-0" class="section level3 hasAnchor" number="6.2.1">
+<h3><span class="header-section-number">6.2.1</span> Setup<a href="chapter-fhir-pit.html#fhir-pit-step-0" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Install Docker. Follow instructions in <a href="https://docs.docker.com/engine/install/">Docker installation documentation</a> for your operating system.</p>
+<p>Assign WORK_DIR the directory you would like to save FHIR PIT and its outputs to.</p>
+<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb159-1"><a href="chapter-fhir-pit.html#cb159-1" tabindex="-1"></a>work_dir <span class="ot">&lt;-</span> <span class="st">&quot;/Users/jj/Desktop/FHIR-PIT&quot;</span></span>
+<span id="cb159-2"><a href="chapter-fhir-pit.html#cb159-2" tabindex="-1"></a><span class="fu">Sys.setenv</span>(<span class="at">WORK_DIR =</span> work_dir)</span></code></pre></div>
+<p>Clone FHIR PIT into the WORK_DIR directory.</p>
+<div class="sourceCode" id="cb160"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb160-1"><a href="chapter-fhir-pit.html#cb160-1" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> <span class="va">$WORK_DIR</span></span>
+<span id="cb160-2"><a href="chapter-fhir-pit.html#cb160-2" tabindex="-1"></a><span class="fu">git</span> clone <span class="at">--recursive</span> https://github.com/ExposuresProvider/FHIR-PIT.git <span class="va">$WORK_DIR</span></span></code></pre></div>
+</div>
+<div id="fhir-pit-step-1" class="section level3 hasAnchor" number="6.2.2">
+<h3><span class="header-section-number">6.2.2</span> Execute FHIR-PIT<a href="chapter-fhir-pit.html#fhir-pit-step-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb161"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb161-1"><a href="chapter-fhir-pit.html#cb161-1" tabindex="-1"></a><span class="bu">echo</span> <span class="st">&quot;</span><span class="va">$WORK_DIR</span><span class="st">/data/output&quot;</span></span></code></pre></div>
+<p>Run FHIR PIT in a docker container with -v. This will allow the output data to persist and be easily accessible by users on the host.</p>
+<div class="sourceCode" id="cb162"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb162-1"><a href="chapter-fhir-pit.html#cb162-1" tabindex="-1"></a><span class="ex">docker</span> run <span class="at">-m</span><span class="op">=</span><span class="st">&quot;25g&quot;</span> <span class="at">-v</span> <span class="st">&quot;</span><span class="va">$WORK_DIR</span><span class="st">/data/output&quot;</span>:<span class="st">&quot;</span><span class="va">$WORK_DIR</span><span class="st">/data/output&quot;</span> renci/fhir-pit:1.0 </span></code></pre></div>
+</div>
+<div id="fhir-pit-step-2" class="section level3 hasAnchor" number="6.2.3">
+<h3><span class="header-section-number">6.2.3</span> Access and Analyze Results<a href="chapter-fhir-pit.html#fhir-pit-step-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The main outputs to consider are in ICEES, ICEES2 and ICEES2_dei directories (named in reference to ICEES, but not specific to ICEES). Each directory contains one or more CSV files with information at different granularities.</p>
+<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb163-1"><a href="chapter-fhir-pit.html#cb163-1" tabindex="-1"></a>year_ <span class="ot">&lt;-</span> <span class="dv">2010</span></span>
+<span id="cb163-2"><a href="chapter-fhir-pit.html#cb163-2" tabindex="-1"></a>basepath <span class="ot">&lt;-</span> <span class="fu">file.path</span>(work_dir, <span class="st">&quot;data&quot;</span>, <span class="st">&quot;output&quot;</span>)</span>
+<span id="cb163-3"><a href="chapter-fhir-pit.html#cb163-3" tabindex="-1"></a>icees2dei_patient_url <span class="ot">&lt;-</span> <span class="fu">file.path</span>(basepath, <span class="st">&quot;icees2_dei&quot;</span>,</span>
+<span id="cb163-4"><a href="chapter-fhir-pit.html#cb163-4" tabindex="-1"></a>                                   <span class="fu">sprintf</span>(<span class="st">&quot;%spatient_deidentified&quot;</span>, year_))</span></code></pre></div>
+<p>The ICEES directory contains one CSV file per subject. Each CSV file consists of the subject’s visits, concatenated with the corresponding environmental exposure estimates for that day and that subject’s location. If a subject has multiple visits per day, then the transformation “PreprocPerPatSeriesToVector” step aggregates multiple daily visits by counting how many times a drug or diagnosis occurred. The directory for each subject is indexed by the “patient_num” column. The ICEES2 directory contains a single CSV file with the aggregation of all subjects grouped by (subject, study period). Lastly, the ICEES2DEI directory contains the same aggregated CSV file, but the data have been stripped of all PHI per HIPAA Safe Harbor method <span class="citation">(<a href="#ref-hhs2023hipaa">US Department of Health and Human Services Office for Civil Rights 2024</a>)</span>. The fully deidentified file then abides by all federal regulations surrounding privacy and security, although institutional regulations may remain. For exposition purposes, we focus on the deidentified ICEES2DEI CSV file and reorder its columns.</p>
+<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb164-1"><a href="chapter-fhir-pit.html#cb164-1" tabindex="-1"></a>icees2dei_colorder <span class="ot">&lt;-</span> <span class="fu">scan</span>(<span class="st">&quot;icees2dei_patient_column_order.txt&quot;</span>,</span>
+<span id="cb164-2"><a href="chapter-fhir-pit.html#cb164-2" tabindex="-1"></a>                           <span class="at">what =</span> <span class="st">&quot;&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb164-3"><a href="chapter-fhir-pit.html#cb164-3" tabindex="-1"></a>icees2dei <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(icees2dei_patient_url,</span>
+<span id="cb164-4"><a href="chapter-fhir-pit.html#cb164-4" tabindex="-1"></a>                      <span class="at">header =</span> <span class="cn">TRUE</span>)[, icees2dei_colorder]</span></code></pre></div>
+<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb165-1"><a href="chapter-fhir-pit.html#cb165-1" tabindex="-1"></a>icees2dei</span></code></pre></div>
+<p>The deidentified ICEES2DEI CSV file may be used for further analysis. For instance, below we plot <code>AvgDailyPM2.5Exposure</code> vs <code>MaxDailyOzoneExposure</code> to examine the relationship between maximum daily ozone exposure and average daily PM<sub>2.5</sub> exposure, noting a strong correlation is not expected for this tutorial, as we randomly sampled the exposures data.</p>
+<div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb166-1"><a href="chapter-fhir-pit.html#cb166-1" tabindex="-1"></a><span class="fu">ggplot</span>(icees2dei, <span class="fu">aes</span>(<span class="at">y =</span> AvgDailyPM2<span class="fl">.5</span>Exposure, <span class="at">x =</span> MaxDailyOzoneExposure)) <span class="sc">+</span></span>
+<span id="cb166-2"><a href="chapter-fhir-pit.html#cb166-2" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">color =</span> <span class="st">&quot;blue&quot;</span>) <span class="sc">+</span></span>
+<span id="cb166-3"><a href="chapter-fhir-pit.html#cb166-3" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="at">se =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+</div>
+</div>
+<div id="considerations-1" class="section level2 hasAnchor" number="6.3">
+<h2><span class="header-section-number">6.3</span> Considerations<a href="chapter-fhir-pit.html#considerations-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>FHIR PIT must be run within a secure enclave when working with real patient datasets, and all federal and insititutional regulations surrounding patient privacy and data security must be met.</p>
+<p>FHIR PIT performs linkages between patient datasets and environmental exposures datasets using geocodes (i.e., patient primary residence), study period, and healthcare visit dates. FHIR PIT currently assumes a patient or subject resides in a single geolocation across a defined study period. We plan to adapt FHIR PIT to address mobility by, for example, assessing school-aged children’s home versus public school exposures.</p>
+<p>FHIR PIT can be memory-intensive when working with large input datasets.</p>
+</div>
+<div id="concluding-remarks-1" class="section level2 hasAnchor" number="6.4">
+<h2><span class="header-section-number">6.4</span> Concluding Remarks<a href="chapter-fhir-pit.html#concluding-remarks-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>This tutorial demonstrates how to execute FHIR PIT and analyze its output. The patient dataset used in this tutorial is synthetic and intended for demonstration purposes only. The environmental datasets used in this tutorial are randomly sampled from much larger datasets derived from public sources. Users may substititute the synthetic patient dataset and sample exposures datasets with their own datasets. To add your own data, please update the ‘data/input’ directory. For assistance with FHIR PIT or access to our environmental exposure datasets, please contact <a href="mailto:fhir-pit@renci.org" class="email">fhir-pit@renci.org</a>.</p>
+
+</div>
+</div>
+
+
+
+<h3>References</h3>
+<div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="0">
+<div id="ref-fecho2019novel" class="csl-entry">
+Fecho, Karamarie, Emily Pfaff, Hao Xu, James Champion, Steve Cox, Lisa Stillwell, David B Peden, et al. 2019. <span>“A Novel Approach for Exposing and Sharing Clinical Data: The Translator Integrated Clinical and Environmental Exposures Service.”</span> <em>Journal of the American Medical Informatics Association</em> 26 (10): 1064–73. <a href="https://doi.org/10.1093/jamia/ocz042">https://doi.org/10.1093/jamia/ocz042</a>.
+</div>
+<div id="ref-fhirpit-docs" class="csl-entry">
+Garcia, Juan Jose. 2022. <em><span>FHIR-PIT</span>: Transformations Documentation</em>. <a href="https://github.com/ExposuresProvider/FHIR-PIT/blob/contained_demo/spark/FHIR-PIT-Transformations-Documentation.pdf">https://github.com/ExposuresProvider/FHIR-PIT/blob/contained_demo/spark/FHIR-PIT-Transformations-Documentation.pdf</a>.
+</div>
+<div id="ref-fhirpit-repo" class="csl-entry">
+Garcia, Juan Jose, Karamarie Fecho, Hong Yi, and Hao Xu. 2024. <em><span>FHIR-PIT</span>: <span class="nocase">FHIR Patient data Integration Tool</span></em>. Software. <a href="https://github.com/ExposuresProvider/FHIR-PIT">https://github.com/ExposuresProvider/FHIR-PIT</a>.
+</div>
+<div id="ref-hhs2023hipaa" class="csl-entry">
+US Department of Health and Human Services Office for Civil Rights. 2024. <em>Guidance Regarding Methods for de-Identification of Protected Health Information in Accordance with the Health Insurance Portability and Accountability Act (<span>HIPAA</span>) Privacy Rule</em>. Website. <a href="https://www.hhs.gov/hipaa/for-professionals/privacy/special-topics/de-identification/index.html">https://www.hhs.gov/hipaa/for-professionals/privacy/special-topics/de-identification/index.html</a>.
+</div>
+<div id="ref-xu2020fhir" class="csl-entry">
+Xu, Hao, Steven Cox, Lisa Stillwell, Emily Pfaff, James Champion, Stanley C. Ahalt, and Karamarie Fecho. 2020. <span>“<span>FHIR PIT</span>: An Open Software Application for Spatiotemporal Integration of Clinical Data and Environmental Exposures Eata.”</span> <em>BMC Medical Informatics and Decision Making</em> 20: 1–8. <a href="https://doi.org/10.1186/s12911-020-1056-9">https://doi.org/10.1186/s12911-020-1056-9</a>.
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="chapter-chords-geo-exposures.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="case-studies.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": false,
+"twitter": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": false
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

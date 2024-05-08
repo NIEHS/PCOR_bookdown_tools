@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>5 Linkage to Exposures | The CHORDS Toolkit for Health and Geospatial Exposures Research</title>
   <meta name="description" content="The CHORDS Toolkit provides guides, tools, and example code to support climate change and human health research." />
-  <meta name="generator" content="bookdown 0.34 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.39 and GitBook 2.6.7" />
 
   <meta property="og:title" content="5 Linkage to Exposures | The CHORDS Toolkit for Health and Geospatial Exposures Research" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="" />
 
 
-<meta name="date" content="2024-04-01" />
+<meta name="date" content="2024-05-08" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="chapter-link-to-census.html"/>
-<link rel="next" href="case-studies.html"/>
+<link rel="next" href="chapter-fhir-pit.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -56,7 +56,7 @@
 
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -128,6 +128,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
+  margin-bottom: 0em;
 }
 .hanging div.csl-entry {
   margin-left:2em;
@@ -163,10 +164,10 @@ div.csl-indent {
 <li><a href="./">CHORDS Toolkit</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><strong>Introduction</strong></a>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><strong>Introduction</strong></a>
 <ul>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#about-chords"><i class="fa fa-check"></i>About CHORDS</a></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#about-this-toolkit"><i class="fa fa-check"></i>About This Toolkit</a></li>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html#about-chords"><i class="fa fa-check"></i>About CHORDS</a></li>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html#about-this-toolkit"><i class="fa fa-check"></i>About This Toolkit</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="foundations.html"><a href="foundations.html"><i class="fa fa-check"></i><strong>Foundations</strong></a></li>
 <li class="chapter" data-level="1" data-path="chapter-intro-spatial-data-analysis.html"><a href="chapter-intro-spatial-data-analysis.html"><i class="fa fa-check"></i><b>1</b> Spatial Data Analysis</a>
@@ -200,6 +201,13 @@ div.csl-indent {
 <li class="chapter" data-level="5.2" data-path="chapter-chords-geo-exposures.html"><a href="chapter-chords-geo-exposures.html#chapter-geo-exposure-caces"><i class="fa fa-check"></i><b>5.2</b> CACES Air Pollution</a></li>
 <li class="chapter" data-level="5.3" data-path="chapter-chords-geo-exposures.html"><a href="chapter-chords-geo-exposures.html#chapter-geo-exposure-faa"><i class="fa fa-check"></i><b>5.3</b> Airport Proximity</a></li>
 <li class="chapter" data-level="5.4" data-path="chapter-chords-geo-exposures.html"><a href="chapter-chords-geo-exposures.html#chapter-geo-exposure-roads"><i class="fa fa-check"></i><b>5.4</b> Major Road Proximity</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="chapter-fhir-pit.html"><a href="chapter-fhir-pit.html"><i class="fa fa-check"></i><b>6</b> A FHIR PIT Tutorial</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="chapter-fhir-pit.html"><a href="chapter-fhir-pit.html#introduction-5"><i class="fa fa-check"></i><b>6.1</b> Introduction</a></li>
+<li class="chapter" data-level="6.2" data-path="chapter-fhir-pit.html"><a href="chapter-fhir-pit.html#tutorial-1"><i class="fa fa-check"></i><b>6.2</b> Tutorial</a></li>
+<li class="chapter" data-level="6.3" data-path="chapter-fhir-pit.html"><a href="chapter-fhir-pit.html#considerations-1"><i class="fa fa-check"></i><b>6.3</b> Considerations</a></li>
+<li class="chapter" data-level="6.4" data-path="chapter-fhir-pit.html"><a href="chapter-fhir-pit.html#concluding-remarks-1"><i class="fa fa-check"></i><b>6.4</b> Concluding Remarks</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="case-studies.html"><a href="case-studies.html"><i class="fa fa-check"></i><strong>Case Studies</strong></a></li>
 <li class="chapter" data-level="" data-path="appendix.html"><a href="appendix.html"><i class="fa fa-check"></i><strong>Appendix</strong></a></li>
@@ -1201,16 +1209,13 @@ file will be available in the folder <code>log</code> in the current R working d
 </div>
 </div>
 </div>
-
-
-
 <h3>References</h3>
-<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="0">
 <div id="ref-brokamp2018degauss" class="csl-entry">
 Brokamp, Cole. 2018. <span>“<span>DeGAUSS</span>: Decentralized Geomarker Assessment for Multi-Site Studies.”</span> <em>Journal of Open Source Software</em> 3 (30): 812. <a href="https://doi.org/10.21105/joss.00812">https://doi.org/10.21105/joss.00812</a>.
 </div>
 <div id="ref-r-terra" class="csl-entry">
-Hijmans, Robert J. 2024. <em><span class="nocase">terra</span>: Spatial Data Analysis</em>. <a href="https://CRAN.R-project.org/package=terra">https://CRAN.R-project.org/package=terra</a>.
+Hijmans, Robert J. 2024. <em><span class="nocase">terra</span>: Spatial Data Analysis</em>. R Package Version 1.7-71. <a href="https://CRAN.R-project.org/package=terra">https://CRAN.R-project.org/package=terra</a>.
 </div>
 <div id="ref-r-sf-1" class="csl-entry">
 Pebesma, Edzer. 2018. <span>“<span class="nocase">Simple Features for <span>R</span>: Standardized Support for Spatial Vector Data</span>.”</span> <em><span>The R Journal</span></em> 10 (1): 439–46. <a href="https://doi.org/10.32614/RJ-2018-009">https://doi.org/10.32614/RJ-2018-009</a>.
@@ -1228,7 +1233,7 @@ Wickham, Hadley, Mara Averick, Jennifer Bryan, Winston Chang, Lucy D’Agostino 
         </div>
       </div>
 <a href="chapter-link-to-census.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="case-studies.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="chapter-fhir-pit.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
