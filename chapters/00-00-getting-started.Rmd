@@ -24,6 +24,8 @@ The following resoures cover related topics:
 
 ## Getting Started with R
 
+The [TAME Toolkit](https://uncsrp.github.io/Data-Analysis-Training-Modules/) provides resources for getting started with `R` for environmental health research. Additionally, the book [*Geocomputation with R*](https://r.geocompx.org/) provides resources for geospatial data analysis with `R`. 
+
 ### Key R Packages Used in This Toolkit
 
 ## Getting Started with Geospatial Data
