@@ -1,0 +1,26 @@
+---
+title: "Geospatial Index Variables"
+author: "Kyle P Messier"
+date: "2024-05-11"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+TODO, IDEA: Chapter on review and details of index variables.
+
+\subsection{Index}\label{subsec: Index}
+Index variables are deterministic quantities that summarize multiple complex variables of interest into a simple and interpretable metric. They are most often calculated over a representative geographic area such as a census tract or county. Variables of interest are used to calculate an overall index value. Typical index variable inputs are summations, averages, percentiles, ranks, and factorizations of observed and/or estimated variables within a given geographic area. Additionally, output from other geospatial models can be an index variable component. Next, a summarizing function is applied. This is usually a dimension-reduction method such as principal components analysis. An index is generally defined as:
+
+\begin{equation}\label{eq:Index}
+    Y(p) = f(X_i(p)), \hspace{6pt} i = 1, \ldots, k
+\end{equation}
+where  $Y(p)$ is the index for locations $p$, $f(\cdot)$ is a summarizing function such as a mean, percentile, or factorization (e.g., principal component), and $X_i(p)$ is a geographic covariate matrix. 
+
+The Centers for Disease Control (CDC) Environmental Justice Index (EJI) \citep{EJI2022} is a an example used in geospatial exposure assessment. The EJI is a ranked sum of three sub-indices representing exposures related to: (1) environmental burden, (2) social vulnerability, and (3) health vulnerability. Each sub-index is calculated using multiple representative geographic covariates for each areal unit (e.g., census tract) \citep{owusu2022developing}. For example, the proportion of each census tract within a one-mile buffer of Toxic Release Inventory (TRI) sites is calculated as a geographic covariate for the environmental burden sub-index. The various geographic covariates for the environmental burden sub-index are summed (equation \ref{eq:Index}) and then ranked by percentiles to produce a value ranging from 0 to 1. The total EJI is then the sum of the three sub-indices, rescaled to an overall percentile rank. 
+
+The best attribute of index variables for geospatial exposure science is their ability to summarize many different exposure covariates into one succinct quantity. Moreover, covariates can represent disparate processes that would be otherwise difficult to combine into a single exposure estimate. Covariates with varying measurement units, native spatial and temporal scales, and geometry can be combined into index variables. Additionally, scaling indices to a percentile rank across analysis unit areas allows for direct comparisons among areas such as census tracts. 
+
+However, index variables have a few limitations that are important to consider for interpretation and applicability. First, census surveys are temporally infrequent (e.g., decennial), and, thus much smaller population samples and statistical models are required for predictions between census years. Second, they are by definition summaries of areal units, thus their interpretations with respect to the exposure outcome includes the possibility of an ecological fallacy - that is attributing group or population-level relationships to individuals. Third, similar to proximity models, index variables are deterministic quantities so uncertainty quantification is difficult. Moreover, indices are inherently unobservable quantities, so direct validation is difficult. \citet{owusu2022developing} used the convergent validation approach, which compares the index against other indices or measures that are expected to capture similar processes. However, this is potentially self-referential and may result in reverse causation bias since there would be no index to validate the original index and the original index could theoretically be validated against the one in development. Nonetheless, index variables are an exploratory tool that can be used by agencies, institutions, individual researchers, and the public to explore how multiple exposures relate to community-level factors and health outcomes \citep{kind2018making,owusu2022developing}. 
