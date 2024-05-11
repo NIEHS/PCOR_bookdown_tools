@@ -1,0 +1,33 @@
+---
+title: "Spatial Regression Techniques"
+author: "Kyle P Messier"
+date: "2024-05-11"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+TODO, IDEA: Combine with the RMarkdown file used to generate the simulation. This is an advanced geospatial analytics topic for the CHORDS Bookdown site.
+
+\subsection{Comparison of the Regression-based Method Predictions}\label{subsec: comparison}
+
+In this section, we compare the three regression-based methods with the aid of a simulated toy example. Figure \ref{fig: Regression Comparison} shows the example simulation and comparisons of prediction mean, variance, and other model features. 
+
+%TC:ignore
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics[width=15cm]{plots/Regression-comparison-01.png}% This is a *.eps file
+\end{center}
+\caption{A simulated toy example comparing land use regression, geographically weighted regression, and Gaussian processes/kriging. (a) shows a random field, chosen to represent a geographic covariate. (b) The simulated exposure outcome (e.g. PM$_{2.5}$) based on 100 randomly sampled locations from an underlying simulated random field. (c - e) and (f - h) demonstrate the similarities and differences of the three methods' prediction means and variances, respectively. (i - k) highlight features of each approach. (i) shows the confidence interval vs. prediction interval for LUR. (j) shows the spatially varying coefficient for GWR, and (k) shows the relationship between prediction variance and mean distance from observations for Gaussian process.}
+\label{fig: Regression Comparison}
+\end{figure}
+%TC:endignore
+
+We simulated two correlated multivariate normal spatial random fields on a regular unit grid ([0-1]x[0-1]) of 2,500 locations using the Cholesky decomposition method \citep{davis1987production}. Figure \ref{fig: Regression Comparison}a shows the first simulated field representing the geographic covariate. Figure \ref{fig: Regression Comparison}b shows 100 random samples from the second field representing the outcome measure. The correlation matrix for the Cholesky decomposition was based on a Mat\'ern correlation model with smoothness of 2.5 and range of 0.5. We chose random fields with a moderate Pearson's correlation of 0.67 to ensure a significant impact of the geography in a simple univariable regression.
+
+Given the relative strength of the correlation between the covariate and the exposure outcome, we can see there were similar results in the prediction mean visualization. The GWR model makes adjustments based on the smoothly varying spatial coefficient. The Kriging mean trends toward the observations, which can be seen in the bottom right corner with low values that differ from the geographic covariate. The biggest visual difference between the methods is prediction variance. LUR prediction variance is constant across space and time, while GWR variance varies spatially based on the spatial coefficients. The Kriging variance increases as predictions move farther away from observations. Absolute differences in the mean and variance of the methods can be more stark than the example shown here. Smooth, noise-free simulations and one geographic covariate were chosen to keep the example simple. The R-Markdown file used to simulate the example and the components of Figure \ref{fig: Regression Comparison} is available as supplementary material.
+
+\FloatBarrier
+

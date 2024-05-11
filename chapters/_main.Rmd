@@ -1,0 +1,604 @@
+---
+title: "The CHORDS Toolkit for Health and Geospatial Exposures Research"
+author: 
+date: '`r Sys.Date()`'
+site: bookdown::bookdown_site
+documentclass: book
+bibliography: [book.bib, packages.bib]
+biblio-style: apalike
+link-citations: true
+link-bibliography: true
+description: The CHORDS Toolkit provides guides, tools, and example code to support climate change and human health research.
+github-repo: NIEHS/PCOR_bookdown_tools
+output: bookdown::html_document2
+---
+
+# **Introduction** {-}
+
+Placeholder
+
+
+## About CHORDS {-}
+## About This Toolkit {-}
+### Getting Started {-}
+### Funding {-}
+### Authors {-}
+### Suggested Citation {-}
+
+<!--chapter:end:index.Rmd-->
+
+Basic setup for your environment Run only once
+
+```{R setup}
+install.packages("styler")
+```
+
+### Rmarkdown
+
+```{R car}
+summary(cars)
+```
+
+## Myplot
+
+You can label code chunks with hyphens but we don't recommend using underscores or spaces. Think "kebabs, not snakes".
+
+```{R plot}
+```
+
+<!--chapter:end:00-setup.Rmd-->
+
+# (PART\*) Foundations {.unnumbered .unlisted}
+
+# **Foundations** {-}
+
+---
+
+This unit provides guidance and example code for working with different types of geospatial data common in environmental health research. 
+
+```{r, include = FALSE, echo = FALSE, eval = FALSE, warning = FALSE}
+install.packages("BiocManager", quiet = TRUE)
+library(BiocManager)
+BiocManager::install("Biobase", update = FALSE, ask = FALSE)
+library(Biobase)
+library(BiocVersion)
+```
+
+
+<!--chapter:end:01-00-spatial-data-foundations.Rmd-->
+
+
+# Spatial Data Analysis {#chapter-intro-spatial-data-analysis}
+
+Placeholder
+
+
+### Access, Import, and Primary Analyses with Environmental Data in R {-}
+## Introduction
+### Motivation
+### Objectives
+### Data Types
+### Data Sources
+### Packages
+#### `ggplot2` and `ggpubr` {-}
+## Point Data with `sf`
+### Access, download, and unzip
+### Import
+### Inspect structure
+### Subset
+### Reclassify
+### Convert to `sf` object
+### Coordinate reference system and projection
+### Plot
+### Calculate annual mean
+### Compare highest annual means
+## Polygon Data
+### Access, download, and unzip
+### Polygon Data with `sf`
+#### Import {-}
+#### Inspect structure {-}
+#### Reclassify {-}
+#### Coordinate reference system and projection {-}
+#### Plot (single) {-}
+#### Union {-}
+#### Plot (multiple) {-}
+#### Crop {-}
+### Polygon Data with `terra`
+#### Import {-}
+#### Inspect structure {-}
+#### Reclassify {-}
+#### Coordinate reference system and projection {-}
+#### Plot (multiple) {-}
+#### Aggregate {-}
+#### Crop {-}
+#### Zonal statistics {-}
+#### Plot (`for` Loop) {-}
+## Raster Data with `terra`
+### Access and download
+### Import
+### Inspect structure
+### Rename
+### Coordinate reference system and projection
+### Plot (multiple)
+### Crop
+### Units
+### Summary statistics
+### Zonal statistics
+### Reclassify
+## Additional Resources
+## References
+
+<!--chapter:end:01-01-spatial-data-analysis.Rmd-->
+
+# (PART\*) Wildfire Data {.unnumbered .unlisted}
+
+# **Wildfire Data** {-}
+
+---
+
+This unit provides guidance and code for working with different types of wildfire-related data in climate change and health research.
+
+<!--chapter:end:02-00-wildfire-data.Rmd-->
+
+# Wildfire Chapter 
+
+Note: This is a blank test file.
+
+<!--chapter:end:02-01-wildfire-chapter-01.Rmd-->
+
+# (PART\*) Other Environmental Data {.unnumbered .unlisted}
+
+# **Other Environmental Data** {-}
+
+---
+
+This unit provides guidance and code for working with various sources of environmental data common in environmental health research.
+
+<!--chapter:end:03-00-other-environmental-data.Rmd-->
+
+
+# NASA EarthData Download {#chapter-nasa-earthdata}
+
+Placeholder
+
+
+### Using NASA EarthData Account to Download Data in R {-}
+## Introduction
+### Motivation
+### Objectives
+## NASA EarthData Account
+### Register or log in
+### Approved applications
+### Prerequisite files
+#### `.netrc` {-}
+#### `.urs_cookies` {-}
+#### `.dodsrc` {-}
+## References
+
+<!--chapter:end:03-01-NASA_EarthData_account.Rmd-->
+
+# (PART\*) Health Data Integration {.unnumbered .unlisted}
+
+# **Health Data Integration** {-}
+
+---
+
+This unit provides guidance and code for integrating environmental and health data in climate change and health research, both at the individual level and at the population level.
+
+<!--chapter:end:04-00-health-data-integration.Rmd-->
+
+
+# Linkage to Census Units {#chapter-link-to-census}
+
+Placeholder
+
+
+### Linking Geocoded Addresses to Census Units and Social Determinants of Health Data in R {-}
+## Introduction
+### Motivation
+### Background {#intro-census-geoids}
+### Considerations
+### Outline
+## Tutorial
+### Install R Packages {#link-to-census-step-0}
+### Prepare Geocoded Addresses {#link-to-census-step-1}
+### Access Census Geographic Boundaries {#link-to-census-step-2}
+### Link Geocoded Addresses to Census Geographic Boundaries {#link-to-census-step-3}
+### Link AHRQ SDOH Data to Geocoded Addresses {#link-to-census-step-4}
+## Concluding Remarks
+
+<!--chapter:end:04-01-link-to-census.Rmd-->
+
+
+# Linkage to Exposures {#chapter-chords-geo-exposures}
+
+Placeholder
+
+
+### Linking Geocoded Addresses to Various Geospatial Exposure Types Using NIEHS Tools in R {-}
+## Introduction
+### Motivation
+### Approach
+### Tools
+### Additional Resources
+
+<!--chapter:end:04-02-geo-exposure-0.Rmd-->
+
+
+
+##  CACES Air Pollution {#chapter-geo-exposure-caces}
+### Description
+#### CACES Air Pollution Model Data {-}
+#### Exposure Metrics {-}
+#### Recommended Uses {-}
+#### Steps {-}
+### Install R and Required Packages {#step-1-caces}
+### Download Tool {#step-2-caces}
+### Prepare Receptor Point Data {#step-3-caces}
+### Run Script in R  {#step-4-caces}
+#### Description of Function ````get_caces_for_points()```` {-}
+#### Example Use {-}
+### Review Output {#step-5-caces} 
+#### Log File  {-}
+#### Output Data  {-}
+### Cite Data and Tool {#step-6-caces}
+
+<!--chapter:end:04-02-geo-exposure-a.Rmd-->
+
+
+
+## Airport Proximity {#chapter-geo-exposure-faa}
+### Description
+#### FAA Aircraft Landing Facility Data {-} 
+#### Exposure Metrics {-}
+#### Recommended Uses {-}
+#### Steps {-}
+### Install R and Required Packages {#step-1-faa}
+### Download Tool {#step-2-faa}
+### Prepare Receptor Point Data {#step-3-faa} 
+### Run Script in R  {#step-4-faa}
+#### Description of Function ````get_aircraft_facility_proximity_for_points()```` {-}
+#### Example Use {-}
+### Review Output  {#step-5-faa}
+#### Log File {-} 
+#### Output Data {-}
+### Cite Data and Tool {#step-6-faa}
+
+<!--chapter:end:04-02-geo-exposure-b.Rmd-->
+
+
+
+## Major Road Proximity {#chapter-geo-exposure-roads}
+### Description
+#### NASA SEDAC Roads Data {-} 
+#### Exposure Metrics {-} 
+#### Recommended Uses {-}
+#### Steps {-}  
+### Install R and required packages {#step-1-roads}
+### Download Tool {#step-2-roads}
+### Prepare Receptor Point Data {#step-3-roads}
+### Run script in R {#step-4-roads}
+#### Description of Function ````get_major_road_proximity_for_points()```` {-}
+#### Example Use {-}
+### Review Output {#step-5-roads}
+#### Log File {-}
+#### Output Data {-}
+### Cite Data and Tool {#step-6-roads} 
+
+<!--chapter:end:04-02-geo-exposure-c.Rmd-->
+
+---
+title: "Spatial Regression Techniques"
+author: "Kyle P Messier"
+date: "2024-05-11"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+\subsection{Comparison of the Regression-based Method Predictions}\label{subsec: comparison}
+
+In this section, we compare the three regression-based methods with the aid of a simulated toy example. Figure \ref{fig: Regression Comparison} shows the example simulation and comparisons of prediction mean, variance, and other model features. 
+
+%TC:ignore
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics[width=15cm]{plots/Regression-comparison-01.png}% This is a *.eps file
+\end{center}
+\caption{A simulated toy example comparing land use regression, geographically weighted regression, and Gaussian processes/kriging. (a) shows a random field, chosen to represent a geographic covariate. (b) The simulated exposure outcome (e.g. PM$_{2.5}$) based on 100 randomly sampled locations from an underlying simulated random field. (c - e) and (f - h) demonstrate the similarities and differences of the three methods' prediction means and variances, respectively. (i - k) highlight features of each approach. (i) shows the confidence interval vs. prediction interval for LUR. (j) shows the spatially varying coefficient for GWR, and (k) shows the relationship between prediction variance and mean distance from observations for Gaussian process.}
+\label{fig: Regression Comparison}
+\end{figure}
+%TC:endignore
+
+We simulated two correlated multivariate normal spatial random fields on a regular unit grid ([0-1]x[0-1]) of 2,500 locations using the Cholesky decomposition method \citep{davis1987production}. Figure \ref{fig: Regression Comparison}a shows the first simulated field representing the geographic covariate. Figure \ref{fig: Regression Comparison}b shows 100 random samples from the second field representing the outcome measure. The correlation matrix for the Cholesky decomposition was based on a Mat\'ern correlation model with smoothness of 2.5 and range of 0.5. We chose random fields with a moderate Pearson's correlation of 0.67 to ensure a significant impact of the geography in a simple univariable regression.
+
+Given the relative strength of the correlation between the covariate and the exposure outcome, we can see there were similar results in the prediction mean visualization. The GWR model makes adjustments based on the smoothly varying spatial coefficient. The Kriging mean trends toward the observations, which can be seen in the bottom right corner with low values that differ from the geographic covariate. The biggest visual difference between the methods is prediction variance. LUR prediction variance is constant across space and time, while GWR variance varies spatially based on the spatial coefficients. The Kriging variance increases as predictions move farther away from observations. Absolute differences in the mean and variance of the methods can be more stark than the example shown here. Smooth, noise-free simulations and one geographic covariate were chosen to keep the example simple. The R-Markdown file used to simulate the example and the components of Figure \ref{fig: Regression Comparison} is available as supplementary material.
+
+\FloatBarrier
+
+
+<!--chapter:end:04-03-geospatial-regression-comparisons.Rmd-->
+
+# (PART\*) Case Studies {.unnumbered .unlisted}
+
+# **Case Studies** {-}
+
+---
+
+This unit provides example case studies that analyze integrated wildfire-related data with health outcomes data.
+
+<!--chapter:end:05-00-analysis-case-studies.Rmd-->
+
+
+# Air Quality, Income, and Asthma {#chapter-case-ma-pm25}
+
+Placeholder
+
+
+### Integrating and Analyzing Air Quality, Income and Asthma-Related Emergency Department Visits with Synthetic Patient Data in R {-}
+## Introduction
+## Data Preparation and Integration
+### Synthetic Patient Data Preparation
+### Air Quality Data Linkage
+### Census Geoid Linkage
+## Data Exploration and Vizualization
+### Mapping Linked Air Pollution Data
+#### Load Libraries {#new-session .unlisted .unnumbered}
+#### Create Map {-}
+#### Plotting the Data Points {-}
+
+<!--chapter:end:05-01-case-study-ma-pm25-a.Rmd-->
+
+
+
+### Mapping Linked Census Income Data 
+#### Data Preparation {-}
+### Load libraries
+#### Get Census Income Data {-}
+#### Link Census Income Data by Tract Geoid {-}
+#### Identify County with Hightest Income in 2020 {-}
+#### Map Income and Patient Data {-}
+
+<!--chapter:end:05-01-case-study-ma-pm25-b.Rmd-->
+
+
+
+### Visualize Air Pollution and Health Information Using Bivariate Maps {.unnumbered}
+#### Set Up Bivariate Color Classes {-}
+#### Get MA County Boundaries {-}
+### Join Census Data with County Boundaries
+#### Set Color on Both Varaibles {-}
+#### Map Air Pollution and Patient Counts {-}
+
+<!--chapter:end:05-01-case-study-ma-pm25-c.Rmd-->
+
+# (PART\*) Appendix {.unnumbered .unlisted}
+
+# **Appendix** {-}
+
+---
+
+<!--chapter:end:AA-00-appendix.Rmd-->
+
+
+# **A** User Profiles {#chapter-user-profiles .unnumbered}
+
+Placeholder
+
+
+## Clinical Data Manager  {#profilecdm .unnumbered .unlisted}
+## Clinical Researcher {#profilecre .unnumbered .unlisted}
+## Clinician/Medical Professional {#profilecmp .unnumbered .unlisted}
+## Community Health Worker {#profilechw .unnumbered .unlisted}
+## Educator {#profileedu .unnumbered .unlisted}
+## Epidemiologist {#profileepi .unnumbered .unlisted}
+## Geospatial Analyst {#profilegeo .unnumbered .unlisted}
+## Public Health Official {#profilepho .unnumbered .unlisted}
+## Social & Behavioral Scientist {#profilesbs .unnumbered .unlisted}
+## Student {#profilestu .unnumbered .unlisted}
+## Translational Researcher {#profiletlr .unnumbered .unlisted}
+
+<!--chapter:end:AA-01-user-profiles.Rmd-->
+
+
+# **B** CHORDS Glossary {#chords-glossary .unnumbered}
+
+Placeholder
+
+
+#### Geocoded Address {#def-geocoded-address .unnumbered .unlisted}
+#### Geocoding {#def-geocoding .unnumbered .unlisted}
+#### Geographic Unit (Areal Unit) {#def-geographic-unit .unnumbered .unlisted}
+#### Geoid {#def-geoid .unnumbered .unlisted}
+#### Geospatial Data {#def-geospatial-data .unnumbered .unlisted}
+
+<!--chapter:end:AA-02-data-science-dictionary.Rmd-->
+
+# **C** References {#all-references-appendix .unnumbered}
+
+::: #refs
+:::
+
+<!--chapter:end:AA-03-references.Rmd-->
+
+
+# **Analysis** {-} 
+
+Placeholder
+
+
+## Bivariate choropleth color{-}
+### Bivariate color classes
+### Draw US cancer rate male vs female
+
+<!--chapter:end:BB-bivariate_color.Rmd-->
+
+
+# **Exposure Estimates** {-} 
+
+Placeholder
+
+
+## bivariate choropleth map {-}
+### Make a bivariate choropleth map (Sample)
+
+<!--chapter:end:BB-bivariate-chloropleth_map.Rmd-->
+
+
+
+## Run the NPL R scripts
+### NPL R scripts
+
+<!--chapter:end:BB-NPL_proximit_point_b.Rmd-->
+
+
+
+## NPL script 2.0
+### Load Libraries
+### Load Scripts
+### Setting Parameters:
+### Invok r script (sample)
+### Results Output
+
+<!--chapter:end:BB-NPL_proximit_point_c.Rmd-->
+
+
+# **NPL Proximit for Point** {.unnumbered}
+
+Placeholder
+
+
+## Superfund: National Priorities List
+## Purpose:
+## NPL Data set:
+### Download
+### NPL Data format
+### Data sample
+## Bound Spatial Domain:
+## Receptor Data set
+### Data format : CSV
+### Columns :
+## US_borders Data set
+### US_borders Data format : rds
+### Required columns :
+## Parameters
+### required
+### Optional:
+### Output
+
+<!--chapter:end:BB-NPL_proximit_point.Rmd-->
+
+
+
+### PM 2.5 TM_map:
+### Check and install the libraries
+### load library
+### Load data:
+### Filter by state name or ID California
+### calculate the mean value for the year
+### Download U.S. counties map files
+### Join the dataset with U.S. country code
+### Draw Histogram plot
+### Draw T-map 
+###  T-map Combined
+
+<!--chapter:end:BB-PCOR-Tmap_c.Rmd-->
+
+
+
+### 12 month t-map
+### Check and install the libraries
+### load library
+### Load data:
+### Select state dataset: 
+### calculate the mean value for the each month
+### Download U.S. counties map files
+### Join the dataset with U.S. country code
+### Define AQI breaks and colors
+### Setup T-map parameters
+### Draw 12 month 2020 California PM 2.5 T-Map
+### Check if there are data in month 11
+
+<!--chapter:end:BB-PCOR-Tmap_d.Rmd-->
+
+
+# **PCOR T-map** {-}
+
+Placeholder
+
+
+## PM 2.5 Tmap{-}
+### Samples:
+### Dianamic T-map
+### Sample tmap_animation:
+
+<!--chapter:end:BB-PCOR-Tmap.Rmd-->
+
+# **A3** PEGS Data Dictionary {.unnumbered}
+
+*[Page Note:  add links to catalog for sources, add links to tools for tools]*
+
+The following table provides a list of geospatial-based exposure measures used in
+the NIEHS Personalized Environment and Genes Study, including their sources and links
+to tools to use to compute these measures.  
+
+The sources include:
+
+* TRI = EPA Toxic Release Inventory
+* ACAG = Atmospheric Composition Analysis Group
+* CACES = Center for Air, Climate, & Energy Solutions 
+* FAA = Federal Aviation Administration
+* NCDEQ = North Carolina Department of Environmental Quality
+* FCC = Federal Communications Commission
+* NRC = Nuclear Regulatory Commission
+* DOT = Department of Transportation
+* EJI = Environmental Justice Index
+* Merra2 = NASA Global Modeling and Assimilation Office
+
+
+|variable_name     |description      | variable_source  |  
+|-------|------------------------------|----------------|  
+|gis_latitude  |Latitude coordinate   |Geocoding of subject data   |  
+|hazards_pm25_ammonium_ugm3  |ACAG estimated PM2.5 conponent: ammonium ion concentration (micrograms per cubic meter)   |ACAG   |  
+|hazards_benzene_1km  |Estimated xylene mass in kg using an isotropic sum of exponentially decaying mass equation with an exponential decay range of 1km (see Eq 1).   |TRI   |  
+
+<!--chapter:end:BB-pegs-data-dictionary.Rmd-->
+
+
+
+## Using Airport facility proximity metrics tool apply to all interested facilities {.unnumbered}
+#### 1. input_receptor.csv: {.unnumbered}
+#### 2.input_us_borders.rds: {.unnumbered}
+#### Required columns : {.unnumbered}
+#### 3. epa-national-priorities-list-ciesin-mod-v2-2014.xls {.unnumbered}
+
+<!--chapter:end:BB-tool_for_all_proximity-based_calculation.Rmd-->
+
+# **Test** {.unnumbered}
+
+## Test css {.unnumbered}
+
+###This is a test page
+
+> **Note:** This is how you write a note.
+>
+> It can have multiple lines.
+
+> **Warning:** This is how you write a warning.
+>
+> It can have multiple paragraphs.
+
+> **Callout:** **This is how you write a callout.**
+>
+> It can have multiple paragraphs.
+
+::: note
+Typing `search()` gives the list of attached packages. By using `fortunes::fortune()` we avoid adding the fortunes package to that list.
+:::
+
+>test pull before build book
+
+<!--chapter:end:CC-test.Rmd-->
+
