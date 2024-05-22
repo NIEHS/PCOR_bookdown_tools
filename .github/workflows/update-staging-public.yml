@@ -1,22 +1,22 @@
----
-name: Update Branch `staging-public`
+# ---
+# name: Update Branch `staging-public`
 
-on:
-  push:
-    branches: [main, master]
+# on:
+#   push:
+#     branches: [main, master]
 
-jobs:
-  update_staging_public:
-    runs-on: ubuntu-latest
+# jobs:
+#   update_staging_public:
+#     runs-on: ubuntu-latest
     
-    if: github.event_name == 'push' && contains(github.event.head_commit.message, 'Merge pull request')
+#     if: github.event_name == 'push' && contains(github.event.head_commit.message, 'Merge pull request')
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v2
 
-      - name: Delete old branch
-        run: |
-          git push origin --delete staging-public || true
-          git checkout -b staging-public
-          git push origin staging-public
+#       - name: Delete old branch
+#         run: |
+#           git push origin --delete staging-public || true
+#           git checkout -b staging-public
+#           git push origin staging-public

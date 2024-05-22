@@ -1,22 +1,22 @@
----
-name: Update Branch `staging-internal`
+# ---
+# name: Update Branch `staging-internal`
 
-on:
-  push:
-    branches: [staging-public]
+# on:
+#   push:
+#     branches: [staging-public]
 
-jobs:
-  update_staging_internal:
-    runs-on: ubuntu-latest
+# jobs:
+#   update_staging_internal:
+#     runs-on: ubuntu-latest
     
-    if: github.event_name == 'push' && contains(github.event.head_commit.message, 'Merge pull request')
+#     if: github.event_name == 'push' && contains(github.event.head_commit.message, 'Merge pull request')
     
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v2
 
-      - name: Delete old branch
-        run: |
-          git push origin --delete staging-internal || true
-          git checkout -b staging-internal
-          git push origin staging-internal
+#       - name: Delete old branch
+#         run: |
+#           git push origin --delete staging-internal || true
+#           git checkout -b staging-internal
+#           git push origin staging-internal
