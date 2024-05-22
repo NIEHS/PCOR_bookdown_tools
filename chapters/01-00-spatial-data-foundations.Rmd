@@ -1,10 +1,10 @@
-# (PART\*) Foundations {.unnumbered .unlisted}
+# (PART\*) Spatial Data Foundations {.unnumbered .unlisted}
 
-# **Foundations** {-}
+# **Spatial Data Foundations** {.unnumbered}
 
----
+[![Profile-CMP](images/user_profiles/profilecmp.svg)](#profilecmp) [![Profile-SBS](images/user_profiles/profilesbs.svg)](#profilesbs) [![Profile-STU](images/user_profiles/profilestu.svg)](#profilestu)
 
-This unit provides guidance and example code for working with different types of geospatial data common in environmental health research. 
+------------------------------------------------------------------------
 
 ```{r, include = FALSE, echo = FALSE, eval = FALSE, warning = FALSE}
 install.packages("BiocManager", quiet = TRUE)
@@ -14,3 +14,106 @@ library(Biobase)
 library(BiocVersion)
 ```
 
+**Date Modified:** May 6, 2024
+
+**Authors:** Mitchell Manware [![author-mm](images/orcid.png){width="10"}](https://orcid.org/0009-0003-6440-6106), Kyle P Messier [![author-kpm](images/orcid.png){width="10"}](https://orcid.org/0000-0001-9508-9623)
+
+**Key Terms:** [Geospatial Data](#def-geospatial-data)
+
+**Programming Language:** R
+
+## Motivation {.unnumbered .unlisted}
+
+Environmental health research relies on various types of data to accurately measure, model, and predict exposures. Environmental data are often spatial (related to the surface of the Earth), temporal (related to specific time/period of time), or spatio-temporal (related to the surface of the Earth for a specific time/period of time). These data are at the core of environmental health research, but the steps between identifying a spatial data set or variable and using it to help answer a research question can be challenging.
+
+The spatial data foundations vignettes are designed to introduce the necessary steps for conducting analyses with spatial data in R. They will introduce R packages that are equipped to handle spatial data, and will demonstrate how to access, import, and analyze three different types of spatial data. The vignettes will focus primarily on spatial data, but some aspects of temporal and spatio-temporal data will also be discussed.
+
+## Objectives {.unnumbered .unlisted}
+
+Users will learn about the following topics related to spatial data in R:
+
+-   Point, polygon, and raster data types
+-   Downloading data from a URL
+-   Importing data
+-   Checking data type, structure, and class
+-   Reclassifying data
+-   Computing summary and zonal statistics
+-   Plotting individual and multiple data sets
+
+## Data Types {.unnumbered .unlisted}
+
+These vignettes will cover how to access, import, and analyze point, polygon, and raster spatial data types. The details of what constitutes each unique spatial data type, however, will not be covered.
+
+For detailed descriptions of each type of spatial data, please see [Simple Features for R](https://r-spatial.github.io/sf/articles/sf1.html) (@r-sf-1) for point and polygon data types, and [Introduction to Raster Data](https://datacarpentry.org/organization-geospatial/01-intro-raster-data) (@raster-data) for raster data.
+
+## Data Sources {.unnumbered .unlisted}
+
+The exploratory analyses utilize free and publicly available environmental data. The code chunks are designed to access each specific file used for the exploratory analyses, but a description of each data source and data set is available below.
+
+| Producer | Data | Data Type |
+|-----------------|----------------|-------|
+| Environmental Protection Agency (EPA) | [PM~2.5~ Daily Observations](https://aqs.epa.gov/aqsweb/airdata/download_files.html) | Point |
+| National Oceanic and Atmospheric Administration (NOAA) | [Wildfire Smoke Plumes](https://www.ospo.noaa.gov/Products/land/hms.html) | Polygon |
+| United States Census Bureau | [United States Cartographic Boundary](https://www.census.gov/geographies/mapping-files/time-series/geo/carto-boundary-file.html) | Polygon |
+| National Oceanic and Atmospheric Administration (NOAA) | [Land Surface Temperature](https://psl.noaa.gov/data/gridded/data.narr.html) | Raster |
+
+: Exploratory analyses data sources
+
+## Packages {.unnumbered .unlisted}
+
+Various R packages can be used to create, import, analyze, and export spatial data. If you have not used these packages previously, they may not be installed on your machine. The following chunk of code installs and imports the packages required to conduct the exploratory analyses in this vignette.
+
+::: note
+Installing and importing new packages may required R to restart.
+:::
+
+```{r, eval = FALSE}
+vignette_packages <- c(
+  "dplyr", "ggplot2", "ggpubr", "sf",
+  "terra", "tidyterra", "utils"
+)
+
+for (v in seq_along(vignette_packages)) {
+  if (vignette_packages[v] %in% installed.packages() == FALSE) {
+    install.packages(vignette_packages[v])
+  }
+}
+
+library(dplyr)
+library(ggplot2)
+library(ggpubr)
+library(sf)
+library(terra)
+library(tidyterra)
+library(utils)
+```
+
+### `ggplot2` and `ggpubr` {.unnumbered .unlisted}
+
+The `ggplot2` and `ggpubr` packages will be used throughout the vignette for creating publication quality plots. Please see [ggplot2: Elegant Graphics for Data Analysis (3e)](https://ggplot2-book.org/introduction) (@r-ggplot2) and [ggpubr: 'ggplot2' Based Publication Ready Plots](https://rpkgs.datanovia.com/ggpubr/) (@r-ggpubr) for in depth descriptions of the syntax and functionality utilized by these packages.
+
+::: important
+The exploratory analyses performed in this vignette are designed for educational purposes only. The results of the following analyses are not peer-reviewed findings, nor are they based on any hypotheses.
+:::
+
+## Coordinate reference systems and projections {.unnumbered .unlisted}
+
+Coordinate reference systems (CRS) are important for spatial analyses as they define how spatial data align with the Earth's surface (@geocomputation-24). Transforming (projecting) the data to a different CRS may be necessary when combining multiple datasets or creating visuals for particular areas of interest. It is important to note that transforming spatial data can cause distortions in it's area, direction, distance, or shape (@geocomputation-24). The direction and magnitude of these distortions vary depending on the chosen CRS, area of interest, and type of data (@article_steinwand1995reprojection). For guidance on selected the right coordinate reference system based on the data, area of interest, and analysis goals, see [Choose the right projection](https://learn.arcgis.com/en/projects/choose-the-right-projection/) (@arcgis-crs).
+
+For the following analyses which focus on the coterminous United States, the Albers Equal Area projection (EPSG Code: 5070) will be utilized.
+
+## Additional Resources {.unnumbered .unlisted}
+
+For additional resources pertaining to the packages used in this vignette, please see the following:
+
+-   [`sf`](https://cran.r-project.org/web/packages/sf/sf.pdf)
+
+-   [`terra`](https://cran.r-project.org/web/packages/terra/terra.pdf)
+
+-   [`dplyr`](https://cran.r-project.org/web/packages/dplyr/dplyr.pdf)
+
+-   [`ggplot2`](https://cran.r-project.org/web/packages/ggplot2/ggplot2.pdf)
+
+-   [`ggpubr`](https://cran.r-project.org/web/packages/ggpubr/ggpubr.pdf)
+
+-   [`tidyterra`](https://cran.r-project.org/web/packages/tidyterra/tidyterra.pdf)

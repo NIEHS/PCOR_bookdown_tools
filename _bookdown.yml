@@ -4,7 +4,9 @@ output_dir: "docs"
 rmd_files:
   - chapters/index.Rmd
   - chapters/01-00-spatial-data-foundations.Rmd
-  - chapters/01-01-spatial-data-analysis.Rmd
+  - chapters/01-01-spatial-point-data.Rmd
+  - chapters/01-02-spatial-polygon-data.Rmd
+  - chapters/01-03-spatial-raster-data.Rmd
   - chapters/02-00-wildfire-data.Rmd
   - chapters/02-01-wildfire-chapter-01.Rmd
   - chapters/03-00-other-environmental-data.Rmd
