@@ -63,12 +63,3 @@ The following toolkit chapters are currently in development:
 ### Funding {-}
 
 This resource was supported by the National Institutes of Health (NIH) from the National Institute of Environmental Health Sciences (NIEHS) and NIH Office of Data Science Strategy (ODSS), and the Department of Health and Human Services (DHHS) Office of the Assistant Secretary for Planning and Evaluation (ASPE) Office of the Secretary’s Patient Centered Outcomes Research Trust Fund (OS-PCORTF).
-
-### Authors {-}
-
-### Suggested Citation {-}
-
-
-
-
-
