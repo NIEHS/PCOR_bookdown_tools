@@ -69,8 +69,7 @@ Install Docker. Follow instructions in [Docker installation documentation](https
 Assign WORK_DIR the directory you would like to save FHIR PIT and its outputs to.
 
 ```{r, eval = FALSE}
-work_dir <- "/Users/laraclark/Documents/r-projects/fhir"
-# work_dir <- "/Users/jj/Desktop/FHIR-PIT"
+work_dir <- "/ADD/YOUR/FILEPATH/HERE"
 Sys.setenv(WORK_DIR = work_dir)
 ```
 
