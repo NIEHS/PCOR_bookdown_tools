@@ -8,7 +8,12 @@ The CHORDS Toolkit seeks to aid researchers in accessing, processing, and integr
 
 The CHORDS Toolkit chapters are written using [R Markdown](https://rmarkdown.rstudio.com/) files and the book is created using the [`bookdown`](https://bookdown.org/) `R` package.
 
-Please note that the CHORDS Toolkit is currently in development.  
+Please note that the CHORDS Toolkit is a work in progress. The following chapters are in development:
+
+|Unit              |Chapter Topic                     |Status          |
+|------------------|----------------------------------|----------------|  
+|Foundations       |Mapping Geospatial Data           |Planned         | 
+|Foundations       |Calculating Geographic Covariates |In Development  |
 
 ## Contact Us
 
@@ -36,3 +41,4 @@ The following code creates a local HTML version of the book:
 ```{r}
 bookdown::render_book("chapters/index.Rmd", "bookdown::gitbook")
 ```
+
