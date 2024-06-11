@@ -52,7 +52,7 @@ The following figure illustrates the variable spatial scale and shape of each ty
 
 <center>
 
-![Census geographic units in Durham County, North Carolina, in 2010](images/geography_durham_co.png)
+![Census geographic units in Durham County, North Carolina, in 2010](images/link_to_census/geography_durham_co.png)
 </center>
   
   
@@ -275,7 +275,7 @@ print(nc_tracts_2010_map)
 
 <center>
 
-![Census tracts in North Carolina in 2010](images/nc_tracts_2010_map.png)
+![Census tracts in North Carolina in 2010](images/link_to_census/nc_tracts_2010_map.png)
 </center>
 
 Other [types and vintages of Census geographic boundaries](https://github.com/walkerke/tigris) are available through `tigris` and the related `tidycensus` package [@r-tidycensus]. In most cases, these boundaries are available for recent years (i.e., 1990 to present) and are accessed by state (i.e., users can download geographic boundaries for one state at a time, in separate files).
@@ -309,7 +309,7 @@ print(linkage_map)
 
 <center>
 
-![Census tracts in North Carolina in 2010 (grey) with sample geocoded addresses (red)](images/linkage_map.png)
+![Census tracts in North Carolina in 2010 (grey) with sample geocoded addresses (red)](images/link_to_census/linkage_map.png)
 
 </center>
 
@@ -353,7 +353,7 @@ To start, we'll need to prepare the AHRQ SDOH data for Census tracts. This data 
 
 <center>
 
-![Screenshot of AHRQ SDOH Website (September 13, 2023)](images/screenshot_sdoh_table.png)
+![Screenshot of AHRQ SDOH Website (September 13, 2023)](images/link_to_census/screenshot_sdoh_table.png)
 
 </center>
 
@@ -367,9 +367,9 @@ For this example, we will link the AHRQ SDOH data for Census tracts in 2010 to o
 
 <center>
 
-![Screenshot of first sheet in Excel file (September 14, 2023)](images/screenshot_sdoh_xls_1.png)
+![Screenshot of first sheet in Excel file (September 14, 2023)](images/link_to_census/screenshot_sdoh_xls_1.png)
 
-![Screenshot of second sheet in Excel file (September 14, 2023)](images/screenshot_sdoh_xls_2.png)
+![Screenshot of second sheet in Excel file (September 14, 2023)](images/link_to_census/screenshot_sdoh_xls_2.png)
 
 </center>
 

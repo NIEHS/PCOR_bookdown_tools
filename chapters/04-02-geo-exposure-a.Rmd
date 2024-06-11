@@ -20,7 +20,7 @@ The following figure illustrates the spatial coverage (contiguous US) and spatia
 
 <center>
 
-![_Illustration of CACES data **(a)** spatial coverage (contiguous United States) and **(b)** spatial scale (census tracts)._](images/caces_map_no2_2015.jpeg)
+![_Illustration of CACES data **(a)** spatial coverage (contiguous United States) and **(b)** spatial scale (census tracts)._](images/link_to_exposures/caces_map_no2_2015.jpeg)
 
 </center>  
 

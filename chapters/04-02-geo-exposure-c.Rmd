@@ -20,7 +20,7 @@ The following figure illustrates the spatial coverage (all US states and territo
 
 <center>
 
-![_Illustration of NASA SEDAC major roads data **(a)** spatial coverage (United States, including Alaska, Hawaii, and US territories (not shown)) and **(b)** spatial scale (lines)._](./images/sedac_major_roads_map_2005.jpeg)
+![_Illustration of NASA SEDAC major roads data **(a)** spatial coverage (United States, including Alaska, Hawaii, and US territories (not shown)) and **(b)** spatial scale (lines)._](./images/link_to_exposures/sedac_major_roads_map_2005.jpeg)
 
 </center>  
 

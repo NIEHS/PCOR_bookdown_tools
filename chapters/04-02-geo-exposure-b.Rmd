@@ -11,7 +11,7 @@ The following figure illustrates the spatial coverage (all US states) and spatia
 
 <center>
 
-![_Illustration of FAA aircraft facility data **(a)** spatial coverage (United States, including Alaska and Hawaii (not shown)) and **(b)** spatial scale (points)._](images/faa_aircraft_landing_facilities_map_2020.jpeg)
+![_Illustration of FAA aircraft facility data **(a)** spatial coverage (United States, including Alaska and Hawaii (not shown)) and **(b)** spatial scale (points)._](images/link_to_exposures/faa_aircraft_landing_facilities_map_2020.jpeg)
 
 </center>  
 

@@ -53,13 +53,13 @@ Users will:
 
 Visit [https://urs.earthdata.nasa.gov/](http://urs.earthdata.nasa.gov) to register for or log into a NASA EarthData account.
 
-![NASA EarthData Account Landing Page](./images/NASA_EarthData_login.png)
+![NASA EarthData Account Landing Page](./images/nasa_earthdata/NASA_EarthData_login.png)
 
 ### Approved applications
 
 After creating an account, navigate to "My Profile"(<https://urs.earthdata.nasa.gov/profile>), and then to "Applications \> Authorized Apps". This "Authorized Apps" page specifies which NASA EarthData applications can use your login credentials. Authorize the applications from which you will be downloading data.
 
-![NASA EarthData Approved Applications](./images/NASA_EarthData_applications.png)
+![NASA EarthData Approved Applications](./images/nasa_earthdata/NASA_EarthData_applications.png)
 
 ### Prerequisite files
 
