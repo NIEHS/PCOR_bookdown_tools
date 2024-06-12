@@ -11,23 +11,23 @@ The digital files describing a patient's medical history that are maintained by 
 **Context:** EHRs are common data sources in various environmental health applications.
 
 <font size ="2"> 
-Categories: [Health-Related, Health Outcomes](https://tools.niehs.nih.gov/cchhglossary/?category=HRHO)
+Categories: [Health-Related, Health Outcomes](https://tools.niehs.nih.gov/cchhglossary/?category=HRHO)   
+Related Terms: [FHIR](#def-fhir) 
 </font>
 
 ---
 
 #### FHIR {#def-fhir .unnumbered .unlisted}
 
-[...]  
+A technical standard for health care data exchange. Source: [HL7](http://hl7.org/fhir/). 
                                                                                
-**Context:** [...] 
+**Context:** FHIR-based tools can be used to process data from EHRs for use in environmental health applications.
 
 <font size ="2"> 
-Categories: [Health-Related, Health Outcomes](https://tools.niehs.nih.gov/cchhglossary/?category=HRHO)
+Categories: [Health-Related, Health Outcomes](https://tools.niehs.nih.gov/cchhglossary/?category=HRHO)    
 Related Terms: [Electronic Health Record](#def-ehr) 
 </font>
 
----
 ---
 
 #### Geocoded Address {#def-geocoded-address .unnumbered .unlisted}
@@ -37,7 +37,7 @@ The geographic coordinates (i.e., latitude and longitude) associated with a stre
 **Context:** Geocoded addresses are commonly used as a basis for geospatial exposure assessment for individuals.
 
 <font size ="2"> 
-Categories: [Health-Related, Health Outcomes](https://tools.niehs.nih.gov/cchhglossary/?category=HRHO)   
+Categories: [Research Methods](https://tools.niehs.nih.gov/cchhglossary/?category=RM)     
 Related Terms: [Geocoding](#def-geocoding) 
 </font>
 
