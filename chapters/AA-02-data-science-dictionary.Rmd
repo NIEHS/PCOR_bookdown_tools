@@ -6,12 +6,12 @@ Key terms used in the CHORDS Toolkit are defined below and in the [NIEHS Climate
 
 #### Electronic Health Record (EHR) {#def-ehr .unnumbered .unlisted}
 
-[...]  
+The digital files describing a patient's medical history that are maintained by a health provider. EHRs include information such as demographics, progress notes, diagnoses, medications, and test results.
                                                                                
-**Context:** [...] 
+**Context:** EHRs are common data sources in various environmental health applications.
 
 <font size ="2"> 
-Categories:  
+Categories: [Health-Related, Health Outcomes](https://tools.niehs.nih.gov/cchhglossary/?category=HRHO)
 </font>
 
 ---
@@ -23,7 +23,8 @@ Categories:
 **Context:** [...] 
 
 <font size ="2"> 
-Categories: 
+Categories: [Health-Related, Health Outcomes](https://tools.niehs.nih.gov/cchhglossary/?category=HRHO)
+Related Terms: [Electronic Health Record](#def-ehr) 
 </font>
 
 ---
@@ -36,7 +37,7 @@ The geographic coordinates (i.e., latitude and longitude) associated with a stre
 **Context:** Geocoded addresses are commonly used as a basis for geospatial exposure assessment for individuals.
 
 <font size ="2"> 
-Categories: [Research Methods](https://tools.niehs.nih.gov/cchhglossary/?category=RM)   
+Categories: [Health-Related, Health Outcomes](https://tools.niehs.nih.gov/cchhglossary/?category=HRHO)   
 Related Terms: [Geocoding](#def-geocoding) 
 </font>
 
