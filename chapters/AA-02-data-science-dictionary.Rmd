@@ -4,6 +4,31 @@ Key terms used in the CHORDS Toolkit are defined below and in the [NIEHS Climate
 
 ---
 
+#### Electronic Health Record (EHR) {#def-ehr .unnumbered .unlisted}
+
+[...]  
+                                                                               
+**Context:** [...] 
+
+<font size ="2"> 
+Categories:  
+</font>
+
+---
+
+#### FHIR {#def-fhir .unnumbered .unlisted}
+
+[...]  
+                                                                               
+**Context:** [...] 
+
+<font size ="2"> 
+Categories: 
+</font>
+
+---
+---
+
 #### Geocoded Address {#def-geocoded-address .unnumbered .unlisted}
 
 The geographic coordinates (i.e., latitude and longitude) associated with a street address (e.g., home or work location).  
@@ -63,31 +88,6 @@ Data that includes information about specific times and places on the Earth.
 
 <font size ="2"> 
 Categories: [Research Methods](https://tools.niehs.nih.gov/cchhglossary/?category=RM)   
-</font>
-
----
-
-
-#### Electronic Health Record (EHR) {#def-ehr .unnumbered .unlisted}
-
-[...]  
-                                                                               
-**Context:** [...] 
-
-<font size ="2"> 
-Categories:  
-</font>
-
----
-
-#### FHIR {#def-fhir .unnumbered .unlisted}
-
-[...]  
-                                                                               
-**Context:** [...] 
-
-<font size ="2"> 
-Categories: 
 </font>
 
 ---
