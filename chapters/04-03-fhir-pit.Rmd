@@ -110,10 +110,155 @@ icees2dei_colorder <- scan("icees2dei_patient_column_order.txt",
                            what = "", sep = "\n")
 icees2dei <- read.csv(icees2dei_patient_url,
                       header = TRUE)[, icees2dei_colorder]
+icees2dei
 ```
 
 ```{r, eval = FALSE}
-icees2dei
+  index year AvgDailyPM2.5Exposure AvgDailyPM2.5Exposure_StudyAvg
+1     0 2010              7.949999                       8.645932
+2     1 2010             10.520382                       8.645932
+3     2 2010             22.711028                      12.472791
+4     3 2010             22.134923                      10.000803
+  AvgDailyPM2.5Exposure_StudyMax MaxDailyPM2.5Exposure
+1                       38.89938              20.42399
+2                       38.89938              16.50489
+3                       49.20912              35.83996
+4                       50.76701              37.09866
+  MaxDailyPM2.5Exposure_StudyAvg MaxDailyPM2.5Exposure_StudyMax
+1                       14.07015                       54.65602
+2                       14.07015                       54.65602
+3                       20.50664                       71.36617
+4                       16.74545                       67.37352
+  AvgDailyOzoneExposure AvgDailyOzoneExposure_StudyAvg
+1              36.97466                       46.99595
+2              18.62635                       46.99595
+3              55.75696                       38.58856
+4              38.33320                       40.13805
+  AvgDailyOzoneExposure_StudyMax MaxDailyOzoneExposure
+1                      128.36066              42.67887
+2                      128.36066              28.94073
+3                       69.68106              94.79951
+4                       76.71777              67.85281
+  MaxDailyOzoneExposure_StudyAvg MaxDailyOzoneExposure_StudyMax
+1                       61.60031                       198.8417
+2                       61.60031                       198.8417
+3                       55.08151                       103.9576
+4                       55.48645                       115.6936
+  AvgDailyPM2.5Exposure_2 MaxDailyOzoneExposure_2 AvgDailyCOExposure_2
+1                9.274049                36.54099             213.2262
+2                9.498967                35.70597             358.0131
+3                8.238118                39.11024             212.4620
+4                8.300655                38.53758             193.7690
+  AvgDailyNOExposure_2 AvgDailyNO2Exposure_2 AvgDailyNOxExposure_2
+1             3.048349             11.539853              14.58820
+2            14.655994             22.662306              37.31830
+3             2.493993             10.630901              13.12489
+4             1.840359              8.475516              10.31587
+  AvgDailySO2Exposure_2 AvgDailyAcetaldehydeExposure_2
+1              1.956961                      0.6987113
+2              3.789237                      0.9583015
+3              1.613538                      0.8120486
+4              1.097606                      0.7321192
+  AvgDailyFormaldehydeExposure_2 AvgDailyBenzeneExposure_2 ObesityBMI
+1                      0.9163324                        NA          0
+2                      1.3879702                        NA          0
+3                      1.0863108                        NA          0
+4                      0.9295859                        NA          0
+  TotalEDVisits TotalInpatientVisits TotalEDInpatientVisits Sex2  Sex    Race
+1             0                    0                      0 Male Male Unknown
+2             0                    0                      0 Male Male Unknown
+3             0                    0                      0 Male Male Unknown
+4             0                    0                      0 Male Male Unknown
+  Ethnicity MajorRoadwayHighwayExposure RoadwayDistanceExposure RoadwayType
+1   Unknown                    227.9604                12.42057          NA
+2   Unknown                   2098.2448               301.82455          NA
+3   Unknown                    336.5802               252.79614          NA
+4   Unknown                    460.0862               462.22059          NA
+  RoadwayAADT RoadwaySpeedLimit RoadwayLanes CAFO_Exposure Landfill_Exposure
+1          NA                NA           NA      574089.1          819888.5
+2          NA                NA           NA      567777.9          813577.6
+3          NA                NA           NA      472817.7          732120.1
+4          NA                NA           NA      572968.6          826018.3
+  EstResidentialDensity EstProbabilityHighSchoolMaxEducation
+1                    NA                                   NA
+2                    NA                                   NA
+3                    NA                                   NA
+4                    NA                                   NA
+  EstProbabilityNoHealthIns EstProbabilityHouseholdNonHispWhite EstProbabilityESL
+1                        NA                                  NA                NA
+2                        NA                                  NA                NA
+3                        NA                                  NA                NA
+4                        NA                                  NA                NA
+  EstProbabilityNonHispWhite EstHouseholdIncome EstResidentialDensity25Plus
+1                         NA                 NA                          NA
+2                         NA                 NA                          NA
+3                         NA                 NA                          NA
+4                         NA                 NA                          NA
+  EstProbabilityNoAuto ur Estradiol TesticularDysfunctionDx ProstateCancerDx
+1                   NA NA         0                       0                0
+2                   NA NA         0                       0                0
+3                   NA NA         0                       0                0
+4                   NA NA         0                       0                0
+  AnxietyDx Formoterol FibromyalgiaDx Metaproterenol Indacaterol
+1         0          0              0              0           0
+2         0          0              0              0           0
+3         0          0              0              0           0
+4         0          0              0              0           0
+  OvarianDysfunctionDx Fluoxetine PneumoniaDx Triptorelin Omalizumab Mepolizumab
+1                    0          0           0           0          0           0
+2                    0          0           0           0          0           0
+3                    0          0           0           0          0           0
+4                    0          0           0           0          0           0
+  Fluticasone Sertraline Budesonide AlcoholDependenceDx Flunisolide Nandrolone
+1           0          0          0                   0           0          0
+2           0          0          0                   0           0          0
+3           0          0          0                   0           0          0
+4           0          0          0                   0           0          0
+  Venlafaxine Androstenedione Arformoterol MenopauseDx Diphenhydramine Paroxetine
+1           0               0            0           0               0          0
+2           0               0            0           0               0          0
+3           0               0            0           0               0          0
+4           0               0            0           0               0          0
+  DrugDependenceDx DepressionDx Mometasone AutismDx Progesterone Prednisone
+1                0            0          0        0            0          0
+2                0            0          0        0            0          0
+3                0            0          0        0            0          0
+4                0            0          0        0            0          0
+  Escitalopram CroupDx Goserelin Cetirizine Citalopram CoughDx EndometriosisDx
+1            0       0         0          0          0       0               0
+2            0       0         0          0          0       0               0
+3            0       0         0          0          0       0               0
+4            0       0         0          0          0       0               0
+  TesticularCancerDx UterineCancerDx Fexofenadine Salmeterol Prasterone
+1                  0               0            0          0          0
+2                  0               0            0          0          0
+3                  0               0            0          0          0
+4                  0               0            0          0          0
+  Duloxetine Estrogen PregnancyDx Ciclesonide ObesityDx Testosterone
+1          0        0           0           0         0            0
+2          0        0           0           0         0            0
+3          0        0           0           0         0            0
+4          0        0           0           0         0            0
+  Beclomethasone OvarianCancerDx ReactiveAirwayDx Medroxyprogresterone DiabetesDx
+1              0               0                0                    0          0
+2              0               0                0                    0          0
+3              0               0                0                    0          0
+4              0               0                0                    0          0
+  Hydroxyzine AlopeciaDx Propranolol Theophylline KidneyCancerDx AsthmaDx
+1           0          0           0            0              0        0
+2           0          0           0            0              0        0
+3           0          0           0            0              0        0
+4           0          0           0            0              0        0
+  Metformin Albuterol Tamoxifen Estropipate Leuprolide CervicalCancerDx Histrelin
+1         0         0         0           0          0                0         0
+2         0         0         0           0          0                0         0
+3         0         0         0           0          0                0         0
+4         0         0         0           0          0                0         0
+  Ipratropium Trazodone AgeStudyStart Active_In_Year
+1           0         0            14              1
+2           0         0            17              1
+3           0         0            20              1
+4           0         0            17              1
 ```
 
 The deidentified ICEES2DEI CSV file may be used for further analysis. For instance, below we plot `AvgDailyPM2.5Exposure` vs `MaxDailyOzoneExposure` to examine the relationship between maximum daily ozone exposure and average daily PM~2.5~ exposure, noting a strong correlation is not expected for this tutorial, as we randomly sampled the exposures data.
