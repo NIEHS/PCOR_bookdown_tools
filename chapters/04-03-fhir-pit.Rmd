@@ -8,7 +8,7 @@
 
 **Authors**: Juan Garcia [![author-jc](images/orcid.png){width="10"}](https://orcid.org/0009-0003-6503-2986), Kara Fecho [![author-kf](images/orcid.png){width="10"}](https://orcid.org/0000-0002-6704-9306), Hong Yi [![author-hy](images/orcid.png){width="10"}](https://orcid.org/0000-0002-5699-1259)
 
-**Key Terms**: [Data Integration](https://tools.niehs.nih.gov/cchhglossary/?keyword=data+integration&termOnlySearch=true&exactSearch=true), [Electronic Health Record (EHR)](#def-ehr), [Exposure](https://tools.niehs.nih.gov/cchhglossary/?keyword=exposure&termOnlySearch=true&exactSearch=true), [FHIR](#def-fhir), [Geocoded Address](#def-geocoded-address)
+**Key Terms**: [Data Integration](https://tools.niehs.nih.gov/cchhglossary/?keyword=data+integration&termOnlySearch=true&exactSearch=true), [Electronic Health Record](#def-ehr), [Exposure](https://tools.niehs.nih.gov/cchhglossary/?keyword=exposure&termOnlySearch=true&exactSearch=true), [FHIR](#def-fhir), [Geocoded Address](#def-geocoded-address)
 
 **Programming Languages**: R, Bash
 
