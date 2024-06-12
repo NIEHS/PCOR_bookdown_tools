@@ -24,7 +24,7 @@ This tutorial provides example code in `R`:
 
 The patient dataset used in this tutorial is synthetic. When using actual patient or participant datasets containing Protected Health Information (PHI), one must run FHIR PIT within a secure enclave and abide by all federal and institutional regulations.
 
-Note that the FHIR PIT application may be memory-intensive, depending on the size of the input datasets. For example, this tutorial requires approximately 25 GB RAM to run successfully.
+Note that the FHIR PIT application may be memory-intensive, depending on the size of the input datasets. For the sample input data, this tutorial requires approximately 4 GB RAM to run successfully.
 
 ### Motivation
 
@@ -89,7 +89,7 @@ echo "$WORK_DIR/data/output"
 Run FHIR PIT in a docker container with -v. This will allow the output data to persist and be easily accessible by users on the host.
 
 ```{bash, eval = FALSE}
-docker run -m="25g" -v "$WORK_DIR/data/output":"$WORK_DIR/data/output" renci/fhir-pit:1.0 
+docker run -m=4g -v "$WORK_DIR/data/output":"/FHIR-PIT/data/output" renci/fhir-pit:1.0
 ```
 
 ### Access and Analyze Results {#fhir-pit-step-2}
