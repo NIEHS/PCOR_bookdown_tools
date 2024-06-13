@@ -11,7 +11,7 @@ Key terms used in the CHORDS Toolkit are defined below and in the [NIEHS Climate
 ::: glossaryterm
 #### Electronic Health Record (EHR) {#def-ehr .unnumbered .unlisted}
 
-The digital files describing a patient's medical history that are maintained by a health provider. EHRs include information such as demographics, progress notes, diagnoses, medications, and test results.
+The digital files describing a patient's medical history that are maintained by a health provider. EHRs contain information such as demographics, progress notes, diagnoses, medications, and test results.
                                                                                
 **Context:** EHRs are common data sources in various environmental health applications.
 
