@@ -1,8 +1,9 @@
 # Linkage to Census Units {#chapter-link-to-census}
 
-[![Profile-STU](images/user_profiles/profilestu.svg)](#profilestu)
 [![Profile-CMP](images/user_profiles/profilecmp.svg)](#profilecmp)
 [![Profile-CDM](images/user_profiles/profilecdm.svg)](#profilecdm)
+[![Profile-CHW](images/user_profiles/profilechw.svg)](#profilechw)
+[![Profile-STU](images/user_profiles/profilestu.svg)](#profilestu)
 
 ### Linking Geocoded Addresses to Census Units and Social Determinants of Health Data in R {-}
 

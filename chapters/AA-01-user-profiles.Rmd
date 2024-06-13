@@ -165,7 +165,7 @@ The CHORDS Toolkit chapters have been developed for various user profiles. This 
 
 **Relevant Chapters**
 
--   [NASA EarthData](#chapter-nasa-earthdata)
+-   [NASA EarthData Download](#chapter-nasa-earthdata)
 :::
 
 ## Public Health Official ![](images/user_profiles/profilepho.svg) {#profilepho .unnumbered .unlisted}

@@ -1,6 +1,8 @@
 # A FHIR PIT Tutorial {#chapter-fhir-pit}
 
-[![Profile-CMP](images/user_profiles/profilecmp.svg)](#profilecmp) [![Profile-CDM](images/user_profiles/profilecdm.svg)](#profilecdm)
+[![Profile-CMP](images/user_profiles/profilecmp.svg)](#profilecmp)
+[![Profile-CRE](images/user_profiles/profilecre.svg)](#profilecre)
+[![Profile-CDM](images/user_profiles/profilecdm.svg)](#profilecdm)
 
 ### FHIR PIT: HL7 Fast Healthcare Interoperability Resources Patient data Integration Tool: A Tutorial {.unnumbered}
 
