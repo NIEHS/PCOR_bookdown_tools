@@ -2,9 +2,13 @@
 
 The CHORDS Toolkit chapters have been developed for various user profiles. This appendix describes the user profiles and suggests relevant chapters for each.
 
-## Clinical Data Manager  {#profilecdm .unnumbered .unlisted}
-![](images/user_profiles/profilecdm.svg)
+## Index {.unnumbered .unlisted}
 
+[Clinical Data Manager](#profilecdm) | [Clinical Researcher](#profilecre) | [Clinician/Medical Professional](#profilecmp) | [Community Health Worker](#profilechw) | [Educator](#profileedu) | [Epidemiologist](#profileepi) | [Geospatial Analyst](#profilegeo) | [Public Health Official](#profilepho) | [Social & Behavioral Scientist](#profilesbs) | [Student](#profilestu) | [Translational Researcher](#profiletlr)
+
+## Clinical Data Manager ![](images/user_profiles/profilecdm.svg) {#profilecdm .unnumbered .unlisted}
+
+::: glossaryterm
 **What is my area of expertise?**
 
 -   Advanced knowledge of health data systems
@@ -24,10 +28,11 @@ The CHORDS Toolkit chapters have been developed for various user profiles. This 
 -   [Linkage to Census Units](#chapter-link-to-census)
 -   [Linkage to Exposures](#chapter-chords-geo-exposures)
 -   [A FHIR PIT Tutorial](#chapter-fhir-pit)
+:::
 
-## Clinical Researcher {#profilecre .unnumbered .unlisted}
-![](images/user_profiles/profilecre.svg)
+## Clinical Researcher ![](images/user_profiles/profilecre.svg) {#profilecre .unnumbered .unlisted}
 
+::: glossaryterm
 **What is my area of expertise?**
 
 -   In-depth knowledge of health data systems
@@ -47,10 +52,11 @@ The CHORDS Toolkit chapters have been developed for various user profiles. This 
 **Relevant Chapters**
 
 -   [A FHIR PIT Tutorial](#chapter-fhir-pit)
+:::
 
-## Clinician/Medical Professional {#profilecmp .unnumbered .unlisted}
-![](images/user_profiles/profilecmp.svg)
+## Clinician/Medical Professional ![](images/user_profiles/profilecmp.svg) {#profilecmp .unnumbered .unlisted}
 
+::: glossaryterm
 **What is my area of expertise?**
 
 -   Advanced knowledge of health conditions and mechanisms of disease 
@@ -73,10 +79,11 @@ The CHORDS Toolkit chapters have been developed for various user profiles. This 
 -   [A FHIR PIT Tutorial](#chapter-fhir-pit)
 -   [Linkage to Census Units](#chapter-link-to-census)
 -   [Linkage to Exposures](#chapter-chords-geo-exposures)
+:::
 
-## Community Health Worker {#profilechw .unnumbered .unlisted}
-![](images/user_profiles/profilechw.svg)
+## Community Health Worker ![](images/user_profiles/profilechw.svg) {#profilechw .unnumbered .unlisted}
 
+::: glossaryterm
 **What is my area of expertise?**
 
 -   Familiarity with general exposures and related health outcomes of interest
@@ -94,10 +101,11 @@ The CHORDS Toolkit chapters have been developed for various user profiles. This 
 **Relevant Chapters**
 
 -   [Linkage to Census Units](#chapter-link-to-census)
+:::
 
-## Educator {#profileedu .unnumbered .unlisted}
-![](images/user_profiles/profileedu.svg)
+## Educator ![](images/user_profiles/profileedu.svg) {#profileedu .unnumbered .unlisted}
 
+::: glossaryterm
 **What is my area of expertise?**
 
 -   In-depth knowledge of health data systems
@@ -114,10 +122,11 @@ The CHORDS Toolkit chapters have been developed for various user profiles. This 
 **Relevant Chapters**
 
 -   [NASA EarthData Download](#chapter-nasa-earthdata)
+:::
 
-## Epidemiologist {#profileepi .unnumbered .unlisted}
-![](images/user_profiles/profileepi.svg)
+## Epidemiologist ![](images/user_profiles/profileepi.svg) {#profileepi .unnumbered .unlisted}
 
+::: glossaryterm
 **What is my area of expertise?**
 
 -   Background knowledge of the key risk factors that influence the mechanism of the health outcome
@@ -134,11 +143,11 @@ The CHORDS Toolkit chapters have been developed for various user profiles. This 
 -   Health data that capture information on the disease or condition of interest
 -   Methods to integrate measures across different spatial geographies
 -   Methods to readily identify known and predicted impacts of exposures on human health
+:::
 
+## Geospatial Analyst ![](images/user_profiles/profilegeo.svg) {#profilegeo .unnumbered .unlisted}
 
-## Geospatial Analyst {#profilegeo .unnumbered .unlisted}
-![](images/user_profiles/profilegeo.svg)
-
+::: glossaryterm
 **What is my area of expertise?**
 
 -   Background knowledge of the key sources and patterns of exposure of interest 
@@ -157,10 +166,11 @@ The CHORDS Toolkit chapters have been developed for various user profiles. This 
 **Relevant Chapters**
 
 -   [NASA EarthData](#chapter-nasa-earthdata)
+:::
 
-## Public Health Official {#profilepho .unnumbered .unlisted}
-![](images/user_profiles/profilepho.svg)
+## Public Health Official ![](images/user_profiles/profilepho.svg) {#profilepho .unnumbered .unlisted}
 
+::: glossaryterm
 **What is my area of expertise?**
 
 -   Familiarity with the exposures and typical health outcomes of interest
@@ -174,10 +184,11 @@ The CHORDS Toolkit chapters have been developed for various user profiles. This 
 -   Health data that capture information on the diseases or conditions of interest
 -   Key findings or strategies for interpreting analytical results
 -   Data visualizations and other related tools
+:::
 
-## Social & Behavioral Scientist {#profilesbs .unnumbered .unlisted}
-![](images/user_profiles/profilesbs.svg)
+## Social & Behavioral Scientist ![](images/user_profiles/profilesbs.svg) {#profilesbs .unnumbered .unlisted}
 
+::: glossaryterm
 **What is my area of expertise?**
 
 -   Background knowledge of the key exposures and risk factors that influence the mechanism of the health outcome
@@ -198,11 +209,11 @@ The CHORDS Toolkit chapters have been developed for various user profiles. This 
 **Relevant Chapters**
 
 -   [Spatial Data Analysis](#chapter-intro-spatial-data-analysis)
+:::
 
+## Student ![](images/user_profiles/profilestu.svg) {#profilestu .unnumbered .unlisted}
 
-## Student {#profilestu .unnumbered .unlisted}
-![](images/user_profiles/profilestu.svg)
-
+::: glossaryterm
 **What is my area of expertise?**
 
 -   Background knowledge of the typical health outcomes of interest and key exposures and risk factors influencing these health outcomes
@@ -224,10 +235,11 @@ The CHORDS Toolkit chapters have been developed for various user profiles. This 
 -   [Spatial Data Analysis](#chapter-intro-spatial-data-analysis)
 -   [Linkage to Census Units](#chapter-link-to-census)
 -   [Linkage to Exposures](#chapter-chords-geo-exposures)
+:::
 
-## Translational Researcher {#profiletlr .unnumbered .unlisted}
-![](images/user_profiles/profiletlr.svg)
+## Translational Researcher ![](images/user_profiles/profiletlr.svg) {#profiletlr .unnumbered .unlisted}
 
+::: glossaryterm
 **What is my area of expertise?**
 
 -   Background knowledge of the key exposures and risk factors that influence the mechanism of the health outcome
@@ -244,3 +256,4 @@ The CHORDS Toolkit chapters have been developed for various user profiles. This 
 -   Health data that capture information on the disease or condition of interest
 -   Methods to integrate measures across different spatial geographies
 -   Methods to readily assess known and predicted impacts of exposures on human health
+:::

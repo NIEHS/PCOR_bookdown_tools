@@ -77,8 +77,8 @@ pre code {
 }
 
 .glossaryterm {
-  background-color: #fafafa; /* Light grey background */
-  border-left: 5px solid #ebebeb; /* Darker grey border on the left */
+  background-color: #f8f8f8; /* Light grey background */
+  border-left: 5px solid #cccccc; /* Darker grey border on the left */
   padding: 5px 5px 5px 20px; /* Padding inside the box */
   margin: 10px 0; /* Margin around the box */
   font-family: Arial, sans-serif; /* Font family */
