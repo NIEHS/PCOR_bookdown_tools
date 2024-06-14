@@ -52,7 +52,7 @@ The toolkit consists of a series of chapters organized into the following units:
 
 - **Case Studies**: This unit provides example case studies that analyze integrated wildfire-related data with health outcomes data.
 
-The CHORDS Toolkit is a work in progress. Please see the [CHORDS Toolkit GitHub repository](https://github.com/NIEHS/PCOR_bookdown_tools) for a list of chapters currently in development. 
+The CHORDS Toolkit is a work in progress. Please see the [CHORDS Toolkit GitHub repository](https://github.com/NIEHS/PCOR_bookdown_tools) for a list of chapters currently in development.
 
 ### Funding {-}
 
