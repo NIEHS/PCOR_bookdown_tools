@@ -12,14 +12,14 @@ Please note that the CHORDS Toolkit is a work in progress. The following chapter
 
 |Unit              |Chapter Topic                     |Status          |
 |------------------|----------------------------------|----------------|  
-|Foundations       |Mapping Geospatial Data           |Planned         | 
+|Foundations       |Mapping Geospatial Data           |In Development  | 
 |Foundations       |Calculating Geographic Covariates |In Development  |
 
 ## Contact Us
 
 Please open an [issue](https://github.com/NIEHS/PCOR_bookdown_tools/issues) to suggest edits or to ask questions.
 
-## Use
+## Set Up
 
 The following code installs the `R` packages used in the example code:
 
@@ -42,3 +42,4 @@ The following code creates a local HTML version of the book:
 bookdown::render_book("chapters/index.Rmd", "bookdown::gitbook")
 ```
 
+### Contributing Guide
