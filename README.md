@@ -43,3 +43,7 @@ bookdown::render_book("chapters/index.Rmd", "bookdown::gitbook")
 ```
 
 ### Contributing Guide
+
+### Templates and File Organization
+
+Please use the chapter template file in the `templates` folder to create a new chapter `RMD` file in the `chapters`. You can then add any images, datasets, and bibliography entries in the `images`, `dataset`, and `bibliography` folders, respectively.
