@@ -42,8 +42,8 @@ The following code creates a local HTML version of the book:
 bookdown::render_book("chapters/index.Rmd", "bookdown::gitbook")
 ```
 
-### Contributing Guide
+## Contributing Guide
 
 ### Templates and File Organization
 
-Please use the chapter template file in the `templates` folder to create a new chapter `RMD` file in the `chapters`. You can then add any images, datasets, and bibliography entries in the `images`, `dataset`, and `bibliography` folders, respectively.
+Please use the chapter template file in the `templates` folder to create a new chapter `RMD` file in the `chapters` folder. You can then add any images, datasets, and bibliography entries in the `images`, `dataset`, and `bibliography` folders, respectively.
