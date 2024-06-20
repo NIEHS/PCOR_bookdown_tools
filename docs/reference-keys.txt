@@ -34,7 +34,6 @@ zonal-statistics-1
 reclassify-3
 additional-resources
 references
-wildfire-chapter
 chapter-nasa-earthdata
 introduction-2
 motivation-1
