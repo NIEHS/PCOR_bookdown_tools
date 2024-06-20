@@ -13,7 +13,7 @@ Please note that the CHORDS Toolkit is a work in progress. The following chapter
 |Unit              |Chapter Topic                     |Status          |
 |------------------|----------------------------------|----------------|  
 |Foundations       |Calculating Geographic Covariates |In Development  |
-|Foundations       |Comparison of Spatial Regression Methods | In Development  | 
+|Foundations       |Comparison of Spatial Regression Methods | In Development  |
 
 ## Contact Us
 
