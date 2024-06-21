@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>5 A FHIR PIT Tutorial | The CHORDS Toolkit for Health and Geospatial Exposures Research</title>
+  <title>7 A FHIR PIT Tutorial | The CHORDS Toolkit for Health and Geospatial Exposures Research</title>
   <meta name="description" content="The CHORDS Toolkit provides guides, tools, and example code to support climate change and human health research." />
   <meta name="generator" content="bookdown 0.39 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="5 A FHIR PIT Tutorial | The CHORDS Toolkit for Health and Geospatial Exposures Research" />
+  <meta property="og:title" content="7 A FHIR PIT Tutorial | The CHORDS Toolkit for Health and Geospatial Exposures Research" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="The CHORDS Toolkit provides guides, tools, and example code to support climate change and human health research." />
   <meta name="github-repo" content="NIEHS/PCOR_bookdown_tools" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="5 A FHIR PIT Tutorial | The CHORDS Toolkit for Health and Geospatial Exposures Research" />
+  <meta name="twitter:title" content="7 A FHIR PIT Tutorial | The CHORDS Toolkit for Health and Geospatial Exposures Research" />
   
   <meta name="twitter:description" content="The CHORDS Toolkit provides guides, tools, and example code to support climate change and human health research." />
   
@@ -23,7 +23,7 @@
 <meta name="author" content="" />
 
 
-<meta name="date" content="2024-06-20" />
+<meta name="date" content="2024-06-21" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -170,44 +170,71 @@ width="200"></a></li>
 <li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html#about-chords"><i class="fa fa-check"></i>About CHORDS</a></li>
 <li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html#about-this-toolkit"><i class="fa fa-check"></i>About This Toolkit</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="foundations.html"><a href="foundations.html"><i class="fa fa-check"></i><strong>Foundations</strong></a></li>
-<li class="chapter" data-level="1" data-path="chapter-intro-spatial-data-analysis.html"><a href="chapter-intro-spatial-data-analysis.html"><i class="fa fa-check"></i><b>1</b> Spatial Data Analysis</a>
+<li class="chapter" data-level="" data-path="spatial-data-foundations.html"><a href="spatial-data-foundations.html"><i class="fa fa-check"></i><strong>Spatial Data Foundations</strong></a></li>
+<li class="chapter" data-level="1" data-path="chapter-point-data.html"><a href="chapter-point-data.html"><i class="fa fa-check"></i><b>1</b> Point Data</a>
 <ul>
-<li class="chapter" data-level="1.1" data-path="chapter-intro-spatial-data-analysis.html"><a href="chapter-intro-spatial-data-analysis.html#introduction-1"><i class="fa fa-check"></i><b>1.1</b> Introduction</a></li>
-<li class="chapter" data-level="1.2" data-path="chapter-intro-spatial-data-analysis.html"><a href="chapter-intro-spatial-data-analysis.html#point-data-with-sf"><i class="fa fa-check"></i><b>1.2</b> Point Data with <code>sf</code></a></li>
-<li class="chapter" data-level="1.3" data-path="chapter-intro-spatial-data-analysis.html"><a href="chapter-intro-spatial-data-analysis.html#polygon-data"><i class="fa fa-check"></i><b>1.3</b> Polygon Data</a></li>
-<li class="chapter" data-level="1.4" data-path="chapter-intro-spatial-data-analysis.html"><a href="chapter-intro-spatial-data-analysis.html#raster-data-with-terra"><i class="fa fa-check"></i><b>1.4</b> Raster Data with <code>terra</code></a></li>
-<li class="chapter" data-level="1.5" data-path="chapter-intro-spatial-data-analysis.html"><a href="chapter-intro-spatial-data-analysis.html#additional-resources"><i class="fa fa-check"></i><b>1.5</b> Additional Resources</a></li>
-<li class="chapter" data-level="1.6" data-path="chapter-intro-spatial-data-analysis.html"><a href="chapter-intro-spatial-data-analysis.html#references"><i class="fa fa-check"></i><b>1.6</b> References</a></li>
+<li class="chapter" data-level="1.1" data-path="chapter-point-data.html"><a href="chapter-point-data.html#data"><i class="fa fa-check"></i><b>1.1</b> Data</a></li>
+<li class="chapter" data-level="1.2" data-path="chapter-point-data.html"><a href="chapter-point-data.html#access-download-and-unzip"><i class="fa fa-check"></i><b>1.2</b> Access, download, and unzip</a></li>
+<li class="chapter" data-level="1.3" data-path="chapter-point-data.html"><a href="chapter-point-data.html#import"><i class="fa fa-check"></i><b>1.3</b> Import</a></li>
+<li class="chapter" data-level="1.4" data-path="chapter-point-data.html"><a href="chapter-point-data.html#inspect-structure"><i class="fa fa-check"></i><b>1.4</b> Inspect structure</a></li>
+<li class="chapter" data-level="1.5" data-path="chapter-point-data.html"><a href="chapter-point-data.html#subset"><i class="fa fa-check"></i><b>1.5</b> Subset</a></li>
+<li class="chapter" data-level="1.6" data-path="chapter-point-data.html"><a href="chapter-point-data.html#reclassify"><i class="fa fa-check"></i><b>1.6</b> Reclassify</a></li>
+<li class="chapter" data-level="1.7" data-path="chapter-point-data.html"><a href="chapter-point-data.html#convert-to-sf-object"><i class="fa fa-check"></i><b>1.7</b> Convert to <code>sf</code> object</a></li>
+<li class="chapter" data-level="1.8" data-path="chapter-point-data.html"><a href="chapter-point-data.html#coordinate-reference-system-and-projection"><i class="fa fa-check"></i><b>1.8</b> Coordinate reference system and projection</a></li>
+<li class="chapter" data-level="1.9" data-path="chapter-point-data.html"><a href="chapter-point-data.html#plot"><i class="fa fa-check"></i><b>1.9</b> Plot</a></li>
+<li class="chapter" data-level="1.10" data-path="chapter-point-data.html"><a href="chapter-point-data.html#calculate-annual-mean"><i class="fa fa-check"></i><b>1.10</b> Calculate annual mean</a></li>
+<li class="chapter" data-level="1.11" data-path="chapter-point-data.html"><a href="chapter-point-data.html#compare-highest-annual-means"><i class="fa fa-check"></i><b>1.11</b> Compare highest annual means</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="chapter-polygon-data.html"><a href="chapter-polygon-data.html"><i class="fa fa-check"></i><b>2</b> Polygon Data</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="chapter-polygon-data.html"><a href="chapter-polygon-data.html#data-1"><i class="fa fa-check"></i><b>2.1</b> Data</a></li>
+<li class="chapter" data-level="2.2" data-path="chapter-polygon-data.html"><a href="chapter-polygon-data.html#access-download-and-unzip-1"><i class="fa fa-check"></i><b>2.2</b> Access, download, and unzip</a></li>
+<li class="chapter" data-level="2.3" data-path="chapter-polygon-data.html"><a href="chapter-polygon-data.html#polygon-data-with-sf"><i class="fa fa-check"></i><b>2.3</b> Polygon Data with <code>sf</code></a></li>
+<li class="chapter" data-level="2.4" data-path="chapter-polygon-data.html"><a href="chapter-polygon-data.html#polygon-data-with-terra"><i class="fa fa-check"></i><b>2.4</b> Polygon Data with <code>terra</code></a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="chapter-raster-data.html"><a href="chapter-raster-data.html"><i class="fa fa-check"></i><b>3</b> Raster Data</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="chapter-raster-data.html"><a href="chapter-raster-data.html#data-2"><i class="fa fa-check"></i><b>3.1</b> Data</a></li>
+<li class="chapter" data-level="3.2" data-path="chapter-raster-data.html"><a href="chapter-raster-data.html#access-and-download"><i class="fa fa-check"></i><b>3.2</b> Access and download</a></li>
+<li class="chapter" data-level="3.3" data-path="chapter-raster-data.html"><a href="chapter-raster-data.html#import-3"><i class="fa fa-check"></i><b>3.3</b> Import</a></li>
+<li class="chapter" data-level="3.4" data-path="chapter-raster-data.html"><a href="chapter-raster-data.html#inspect-structure-3"><i class="fa fa-check"></i><b>3.4</b> Inspect structure</a></li>
+<li class="chapter" data-level="3.5" data-path="chapter-raster-data.html"><a href="chapter-raster-data.html#rename"><i class="fa fa-check"></i><b>3.5</b> Rename</a></li>
+<li class="chapter" data-level="3.6" data-path="chapter-raster-data.html"><a href="chapter-raster-data.html#coordinate-reference-system-and-projection-3"><i class="fa fa-check"></i><b>3.6</b> Coordinate reference system and projection</a></li>
+<li class="chapter" data-level="3.7" data-path="chapter-raster-data.html"><a href="chapter-raster-data.html#plot-multiple-2"><i class="fa fa-check"></i><b>3.7</b> Plot (multiple)</a></li>
+<li class="chapter" data-level="3.8" data-path="chapter-raster-data.html"><a href="chapter-raster-data.html#crop-2"><i class="fa fa-check"></i><b>3.8</b> Crop</a></li>
+<li class="chapter" data-level="3.9" data-path="chapter-raster-data.html"><a href="chapter-raster-data.html#units"><i class="fa fa-check"></i><b>3.9</b> Units</a></li>
+<li class="chapter" data-level="3.10" data-path="chapter-raster-data.html"><a href="chapter-raster-data.html#summary-statistics"><i class="fa fa-check"></i><b>3.10</b> Summary statistics</a></li>
+<li class="chapter" data-level="3.11" data-path="chapter-raster-data.html"><a href="chapter-raster-data.html#zonal-statistics-1"><i class="fa fa-check"></i><b>3.11</b> Zonal statistics</a></li>
+<li class="chapter" data-level="3.12" data-path="chapter-raster-data.html"><a href="chapter-raster-data.html#reclassify-3"><i class="fa fa-check"></i><b>3.12</b> Reclassify</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="wildfire-data.html"><a href="wildfire-data.html"><i class="fa fa-check"></i><strong>Wildfire Data</strong></a></li>
 <li class="chapter" data-level="" data-path="other-environmental-data.html"><a href="other-environmental-data.html"><i class="fa fa-check"></i><strong>Other Environmental Data</strong></a></li>
-<li class="chapter" data-level="2" data-path="chapter-nasa-earthdata.html"><a href="chapter-nasa-earthdata.html"><i class="fa fa-check"></i><b>2</b> NASA EarthData Download</a>
+<li class="chapter" data-level="4" data-path="chapter-nasa-earthdata.html"><a href="chapter-nasa-earthdata.html"><i class="fa fa-check"></i><b>4</b> NASA EarthData Download</a>
 <ul>
-<li class="chapter" data-level="2.1" data-path="chapter-nasa-earthdata.html"><a href="chapter-nasa-earthdata.html#introduction-2"><i class="fa fa-check"></i><b>2.1</b> Introduction</a></li>
-<li class="chapter" data-level="2.2" data-path="chapter-nasa-earthdata.html"><a href="chapter-nasa-earthdata.html#nasa-earthdata-account"><i class="fa fa-check"></i><b>2.2</b> NASA EarthData Account</a></li>
-<li class="chapter" data-level="2.3" data-path="chapter-nasa-earthdata.html"><a href="chapter-nasa-earthdata.html#references-1"><i class="fa fa-check"></i><b>2.3</b> References</a></li>
+<li class="chapter" data-level="4.1" data-path="chapter-nasa-earthdata.html"><a href="chapter-nasa-earthdata.html#introduction-1"><i class="fa fa-check"></i><b>4.1</b> Introduction</a></li>
+<li class="chapter" data-level="4.2" data-path="chapter-nasa-earthdata.html"><a href="chapter-nasa-earthdata.html#nasa-earthdata-account"><i class="fa fa-check"></i><b>4.2</b> NASA EarthData Account</a></li>
+<li class="chapter" data-level="4.3" data-path="chapter-nasa-earthdata.html"><a href="chapter-nasa-earthdata.html#references"><i class="fa fa-check"></i><b>4.3</b> References</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="health-data-integration.html"><a href="health-data-integration.html"><i class="fa fa-check"></i><strong>Health Data Integration</strong></a></li>
-<li class="chapter" data-level="3" data-path="chapter-link-to-census.html"><a href="chapter-link-to-census.html"><i class="fa fa-check"></i><b>3</b> Linkage to Census Units</a>
+<li class="chapter" data-level="5" data-path="chapter-link-to-census.html"><a href="chapter-link-to-census.html"><i class="fa fa-check"></i><b>5</b> Linkage to Census Units</a>
 <ul>
-<li class="chapter" data-level="3.1" data-path="chapter-link-to-census.html"><a href="chapter-link-to-census.html#introduction-3"><i class="fa fa-check"></i><b>3.1</b> Introduction</a></li>
-<li class="chapter" data-level="3.2" data-path="chapter-link-to-census.html"><a href="chapter-link-to-census.html#tutorial"><i class="fa fa-check"></i><b>3.2</b> Tutorial</a></li>
-<li class="chapter" data-level="3.3" data-path="chapter-link-to-census.html"><a href="chapter-link-to-census.html#concluding-remarks"><i class="fa fa-check"></i><b>3.3</b> Concluding Remarks</a></li>
+<li class="chapter" data-level="5.1" data-path="chapter-link-to-census.html"><a href="chapter-link-to-census.html#introduction-2"><i class="fa fa-check"></i><b>5.1</b> Introduction</a></li>
+<li class="chapter" data-level="5.2" data-path="chapter-link-to-census.html"><a href="chapter-link-to-census.html#tutorial"><i class="fa fa-check"></i><b>5.2</b> Tutorial</a></li>
+<li class="chapter" data-level="5.3" data-path="chapter-link-to-census.html"><a href="chapter-link-to-census.html#concluding-remarks"><i class="fa fa-check"></i><b>5.3</b> Concluding Remarks</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="chapter-chords-geo-exposures.html"><a href="chapter-chords-geo-exposures.html"><i class="fa fa-check"></i><b>4</b> Linkage to Exposures</a>
+<li class="chapter" data-level="6" data-path="chapter-chords-geo-exposures.html"><a href="chapter-chords-geo-exposures.html"><i class="fa fa-check"></i><b>6</b> Linkage to Exposures</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="chapter-chords-geo-exposures.html"><a href="chapter-chords-geo-exposures.html#introduction-4"><i class="fa fa-check"></i><b>4.1</b> Introduction</a></li>
-<li class="chapter" data-level="4.2" data-path="chapter-chords-geo-exposures.html"><a href="chapter-chords-geo-exposures.html#chapter-geo-exposure-caces"><i class="fa fa-check"></i><b>4.2</b> CACES Air Pollution</a></li>
-<li class="chapter" data-level="4.3" data-path="chapter-chords-geo-exposures.html"><a href="chapter-chords-geo-exposures.html#chapter-geo-exposure-faa"><i class="fa fa-check"></i><b>4.3</b> Airport Proximity</a></li>
-<li class="chapter" data-level="4.4" data-path="chapter-chords-geo-exposures.html"><a href="chapter-chords-geo-exposures.html#chapter-geo-exposure-roads"><i class="fa fa-check"></i><b>4.4</b> Major Road Proximity</a></li>
+<li class="chapter" data-level="6.1" data-path="chapter-chords-geo-exposures.html"><a href="chapter-chords-geo-exposures.html#introduction-3"><i class="fa fa-check"></i><b>6.1</b> Introduction</a></li>
+<li class="chapter" data-level="6.2" data-path="chapter-chords-geo-exposures.html"><a href="chapter-chords-geo-exposures.html#chapter-geo-exposure-caces"><i class="fa fa-check"></i><b>6.2</b> CACES Air Pollution</a></li>
+<li class="chapter" data-level="6.3" data-path="chapter-chords-geo-exposures.html"><a href="chapter-chords-geo-exposures.html#chapter-geo-exposure-faa"><i class="fa fa-check"></i><b>6.3</b> Airport Proximity</a></li>
+<li class="chapter" data-level="6.4" data-path="chapter-chords-geo-exposures.html"><a href="chapter-chords-geo-exposures.html#chapter-geo-exposure-roads"><i class="fa fa-check"></i><b>6.4</b> Major Road Proximity</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="chapter-fhir-pit.html"><a href="chapter-fhir-pit.html"><i class="fa fa-check"></i><b>5</b> A FHIR PIT Tutorial</a>
+<li class="chapter" data-level="7" data-path="chapter-fhir-pit.html"><a href="chapter-fhir-pit.html"><i class="fa fa-check"></i><b>7</b> A FHIR PIT Tutorial</a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="chapter-fhir-pit.html"><a href="chapter-fhir-pit.html#introduction-5"><i class="fa fa-check"></i><b>5.1</b> Introduction</a></li>
-<li class="chapter" data-level="5.2" data-path="chapter-fhir-pit.html"><a href="chapter-fhir-pit.html#tutorial-1"><i class="fa fa-check"></i><b>5.2</b> Tutorial</a></li>
-<li class="chapter" data-level="5.3" data-path="chapter-fhir-pit.html"><a href="chapter-fhir-pit.html#considerations-1"><i class="fa fa-check"></i><b>5.3</b> Considerations</a></li>
-<li class="chapter" data-level="5.4" data-path="chapter-fhir-pit.html"><a href="chapter-fhir-pit.html#concluding-remarks-1"><i class="fa fa-check"></i><b>5.4</b> Concluding Remarks</a></li>
+<li class="chapter" data-level="7.1" data-path="chapter-fhir-pit.html"><a href="chapter-fhir-pit.html#introduction-4"><i class="fa fa-check"></i><b>7.1</b> Introduction</a></li>
+<li class="chapter" data-level="7.2" data-path="chapter-fhir-pit.html"><a href="chapter-fhir-pit.html#tutorial-1"><i class="fa fa-check"></i><b>7.2</b> Tutorial</a></li>
+<li class="chapter" data-level="7.3" data-path="chapter-fhir-pit.html"><a href="chapter-fhir-pit.html#considerations-1"><i class="fa fa-check"></i><b>7.3</b> Considerations</a></li>
+<li class="chapter" data-level="7.4" data-path="chapter-fhir-pit.html"><a href="chapter-fhir-pit.html#concluding-remarks-1"><i class="fa fa-check"></i><b>7.4</b> Concluding Remarks</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="case-studies.html"><a href="case-studies.html"><i class="fa fa-check"></i><strong>Case Studies</strong></a></li>
 <li class="chapter" data-level="" data-path="appendix.html"><a href="appendix.html"><i class="fa fa-check"></i><strong>Appendix</strong></a></li>
@@ -235,8 +262,8 @@ target="blank">Published with bookdown</a></li>
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="chapter-fhir-pit" class="section level1 hasAnchor" number="5">
-<h1><span class="header-section-number">5</span> A FHIR PIT Tutorial<a href="chapter-fhir-pit.html#chapter-fhir-pit" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="chapter-fhir-pit" class="section level1 hasAnchor" number="7">
+<h1><span class="header-section-number">7</span> A FHIR PIT Tutorial<a href="chapter-fhir-pit.html#chapter-fhir-pit" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p><a href="chapter-user-profiles.html#profilecmp"><img src="images/user_profiles/profilecmp.svg" alt="Profile-CMP" /></a>
 <a href="chapter-user-profiles.html#profilecre"><img src="images/user_profiles/profilecre.svg" alt="Profile-CRE" /></a>
 <a href="chapter-user-profiles.html#profilecdm"><img src="images/user_profiles/profilecdm.svg" alt="Profile-CDM" /></a></p>
@@ -247,24 +274,24 @@ target="blank">Published with bookdown</a></li>
 <p><strong>Key Terms</strong>: <a href="https://tools.niehs.nih.gov/cchhglossary/?keyword=data+integration&amp;termOnlySearch=true&amp;exactSearch=true">Data Integration</a>, <a href="chords-glossary.html#def-ehr">Electronic Health Record</a>, <a href="https://tools.niehs.nih.gov/cchhglossary/?keyword=exposure&amp;termOnlySearch=true&amp;exactSearch=true">Exposure</a>, <a href="chords-glossary.html#def-fhir">FHIR</a>, <a href="chords-glossary.html#def-geocoded-address">Geocoded Address</a></p>
 <p><strong>Programming Languages</strong>: R, Bash</p>
 </div>
-<div id="introduction-5" class="section level2 hasAnchor" number="5.1">
-<h2><span class="header-section-number">5.1</span> Introduction<a href="chapter-fhir-pit.html#introduction-5" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="introduction-4" class="section level2 hasAnchor" number="7.1">
+<h2><span class="header-section-number">7.1</span> Introduction<a href="chapter-fhir-pit.html#introduction-4" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>This tutorial provides example code in <code>R</code>:</p>
 <ol style="list-style-type: decimal">
 <li><p>To set up FHIR PIT.</p></li>
 <li><p>To analyze the results from the FHIR PIT output.</p></li>
 </ol>
-<div id="disclaimer" class="section level3 hasAnchor" number="5.1.1">
-<h3><span class="header-section-number">5.1.1</span> Disclaimer<a href="chapter-fhir-pit.html#disclaimer" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="disclaimer" class="section level3 hasAnchor" number="7.1.1">
+<h3><span class="header-section-number">7.1.1</span> Disclaimer<a href="chapter-fhir-pit.html#disclaimer" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The patient dataset used in this tutorial is synthetic. When using actual patient or participant datasets containing Protected Health Information (PHI), one must run FHIR PIT within a secure enclave and abide by all federal and institutional regulations.</p>
 <p>Note that the FHIR PIT application may be memory-intensive, depending on the size of the input datasets. For the sample input data, this tutorial requires approximately 4 GB RAM to run successfully.</p>
 </div>
-<div id="motivation-4" class="section level3 hasAnchor" number="5.1.2">
-<h3><span class="header-section-number">5.1.2</span> Motivation<a href="chapter-fhir-pit.html#motivation-4" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="motivation-4" class="section level3 hasAnchor" number="7.1.2">
+<h3><span class="header-section-number">7.1.2</span> Motivation<a href="chapter-fhir-pit.html#motivation-4" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Environmental exposures are increasingly recognized as important to consider when conducting human subjects research. Unfortunately, associating environmental exposures data with subject-level data is challenging due to the complexity of the data and the varied spatiotemporal resolutions. FHIR PIT is an open-source tool to link electronic health record (EHR) data in FHIR format with environmental exposures data derived from public sources.</p>
 </div>
-<div id="background" class="section level3 hasAnchor" number="5.1.3">
-<h3><span class="header-section-number">5.1.3</span> Background<a href="chapter-fhir-pit.html#background" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="background" class="section level3 hasAnchor" number="7.1.3">
+<h3><span class="header-section-number">7.1.3</span> Background<a href="chapter-fhir-pit.html#background" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>FHIR PIT (HL7 Fast Healthcare Interoperability Resources Patient data Integration Tool) is an open-source data integration pipeline to support subject-level research on social and environmental determinants of health and disease <span class="citation">(<a href="#ref-fhirpit-repo">Garcia et al. 2024</a>)</span>.</p>
 <p>In essence, the pipeline is a sequence of transformations configured from a YAML file <span class="citation">(<a href="#ref-fhirpit-docs">Garcia 2022</a>)</span>. The transformation steps join FHIR patient records with environmental exposures estimates using patient geocodes (e.g., primary residence) and date(s) of healthcare visits as the spatiotemporal links. At the end of each linkage step, FHIR PIT saves the linked tables to an intermediate folder to support rapid re-execution, should any given step fail to complete (e.g., lack of disk space). To support multiple healthcare visits, FHIR PIT vectorizes the FHIR patient records by grouping FHIR domains (e.g., Condition, Laboratory, Medication, Procedure) and counting events within a domain on a per-day basis. The features associated with the patient are then grouped by user-defined study periods (e.g., year) and aggregated with user-defined statistics (e.g., counts, mean, median, first measurement, last measurement).</p>
 <p>FHIR PIT was developed to support ICEES (Integrated Clinical and Environmental Exposures Service) <span class="citation">(<a href="#ref-xu2020fhir">Xu et al. 2020</a>; <a href="#ref-fecho2019novel">Fecho et al. 2019</a>)</span>. However, the tool is not specific to ICEES, but rather can be used to integrate any source of patient FHIR files with any source of environmental exposures data. In this tutorial, we use synthetic FHIR files and randomly sampled environmental exposures data derived from several public sources:</p>
@@ -277,8 +304,8 @@ target="blank">Published with bookdown</a></li>
 <li><a href="https://www.nconemap.gov/datasets/ncdenr::active-permitted-landfills/about">NC Department of Environmental Quality (DEQ) landfill exposures data</a> - North Carolina’s DEQ maintains data on the location of all registered active and inactive landfills across the state. FHIR PIT uses the data to calculate point estimates of primary residential distance from the nearest landfill.</li>
 </ul>
 </div>
-<div id="outline-1" class="section level3 hasAnchor" number="5.1.4">
-<h3><span class="header-section-number">5.1.4</span> Outline<a href="chapter-fhir-pit.html#outline-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="outline-1" class="section level3 hasAnchor" number="7.1.4">
+<h3><span class="header-section-number">7.1.4</span> Outline<a href="chapter-fhir-pit.html#outline-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>This tutorial includes the following steps:</p>
 <ol style="list-style-type: decimal">
 <li><p><a href="chapter-fhir-pit.html#fhir-pit-step-0">Setup</a></p></li>
@@ -287,12 +314,12 @@ target="blank">Published with bookdown</a></li>
 </ol>
 </div>
 </div>
-<div id="tutorial-1" class="section level2 hasAnchor" number="5.2">
-<h2><span class="header-section-number">5.2</span> Tutorial<a href="chapter-fhir-pit.html#tutorial-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="tutorial-1" class="section level2 hasAnchor" number="7.2">
+<h2><span class="header-section-number">7.2</span> Tutorial<a href="chapter-fhir-pit.html#tutorial-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb158-1"><a href="chapter-fhir-pit.html#cb158-1" tabindex="-1"></a><span class="co"># Loading library</span></span>
 <span id="cb158-2"><a href="chapter-fhir-pit.html#cb158-2" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span></code></pre></div>
-<div id="fhir-pit-step-0" class="section level3 hasAnchor" number="5.2.1">
-<h3><span class="header-section-number">5.2.1</span> Setup<a href="chapter-fhir-pit.html#fhir-pit-step-0" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="fhir-pit-step-0" class="section level3 hasAnchor" number="7.2.1">
+<h3><span class="header-section-number">7.2.1</span> Setup<a href="chapter-fhir-pit.html#fhir-pit-step-0" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Install Docker. Follow instructions in <a href="https://docs.docker.com/engine/install/">Docker installation documentation</a> for your operating system.</p>
 <p>Assign WORK_DIR the directory you would like to save FHIR PIT and its outputs to.</p>
 <div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb159-1"><a href="chapter-fhir-pit.html#cb159-1" tabindex="-1"></a>work_dir <span class="ot">&lt;-</span> <span class="st">&quot;/ADD/YOUR/FILEPATH/HERE&quot;</span></span>
@@ -301,14 +328,14 @@ target="blank">Published with bookdown</a></li>
 <div class="sourceCode" id="cb160"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb160-1"><a href="chapter-fhir-pit.html#cb160-1" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> <span class="va">$WORK_DIR</span></span>
 <span id="cb160-2"><a href="chapter-fhir-pit.html#cb160-2" tabindex="-1"></a><span class="fu">git</span> clone <span class="at">--recursive</span> https://github.com/ExposuresProvider/FHIR-PIT.git <span class="va">$WORK_DIR</span></span></code></pre></div>
 </div>
-<div id="fhir-pit-step-1" class="section level3 hasAnchor" number="5.2.2">
-<h3><span class="header-section-number">5.2.2</span> Execute FHIR-PIT<a href="chapter-fhir-pit.html#fhir-pit-step-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="fhir-pit-step-1" class="section level3 hasAnchor" number="7.2.2">
+<h3><span class="header-section-number">7.2.2</span> Execute FHIR-PIT<a href="chapter-fhir-pit.html#fhir-pit-step-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="sourceCode" id="cb161"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb161-1"><a href="chapter-fhir-pit.html#cb161-1" tabindex="-1"></a><span class="bu">echo</span> <span class="st">&quot;</span><span class="va">$WORK_DIR</span><span class="st">/data/output&quot;</span></span></code></pre></div>
 <p>Run FHIR PIT in a docker container with -v. This will allow the output data to persist and be easily accessible by users on the host.</p>
 <div class="sourceCode" id="cb162"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb162-1"><a href="chapter-fhir-pit.html#cb162-1" tabindex="-1"></a><span class="ex">docker</span> run <span class="at">-m</span><span class="op">=</span>4g <span class="at">-v</span> <span class="st">&quot;</span><span class="va">$WORK_DIR</span><span class="st">/data/output&quot;</span>:<span class="st">&quot;/FHIR-PIT/data/output&quot;</span> renci/fhir-pit:1.0</span></code></pre></div>
 </div>
-<div id="fhir-pit-step-2" class="section level3 hasAnchor" number="5.2.3">
-<h3><span class="header-section-number">5.2.3</span> Access and Analyze Results<a href="chapter-fhir-pit.html#fhir-pit-step-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="fhir-pit-step-2" class="section level3 hasAnchor" number="7.2.3">
+<h3><span class="header-section-number">7.2.3</span> Access and Analyze Results<a href="chapter-fhir-pit.html#fhir-pit-step-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The main outputs to consider are in ICEES, ICEES2 and ICEES2_dei directories (named in reference to ICEES, but not specific to ICEES). Each directory contains one or more CSV files with information at different granularities.</p>
 <div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb163-1"><a href="chapter-fhir-pit.html#cb163-1" tabindex="-1"></a>year_ <span class="ot">&lt;-</span> <span class="dv">2010</span></span>
 <span id="cb163-2"><a href="chapter-fhir-pit.html#cb163-2" tabindex="-1"></a>basepath <span class="ot">&lt;-</span> <span class="fu">file.path</span>(work_dir, <span class="st">&quot;data&quot;</span>, <span class="st">&quot;output&quot;</span>)</span>
@@ -482,14 +509,14 @@ target="blank">Published with bookdown</a></li>
 <p><img src="images/fhir_pit/plot_daily_pm_vs_o3.png" width = "75%" height = "auto" class = "centerimage"></p>
 </div>
 </div>
-<div id="considerations-1" class="section level2 hasAnchor" number="5.3">
-<h2><span class="header-section-number">5.3</span> Considerations<a href="chapter-fhir-pit.html#considerations-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="considerations-1" class="section level2 hasAnchor" number="7.3">
+<h2><span class="header-section-number">7.3</span> Considerations<a href="chapter-fhir-pit.html#considerations-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>FHIR PIT must be run within a secure enclave when working with real patient datasets, and all federal and insititutional regulations surrounding patient privacy and data security must be met.</p>
 <p>FHIR PIT performs linkages between patient datasets and environmental exposures datasets using geocodes (i.e., patient primary residence), study period, and healthcare visit dates. FHIR PIT currently assumes a patient or subject resides in a single geolocation across a defined study period. We plan to adapt FHIR PIT to address mobility by, for example, assessing school-aged children’s home versus public school exposures.</p>
 <p>FHIR PIT can be memory-intensive when working with large input datasets.</p>
 </div>
-<div id="concluding-remarks-1" class="section level2 hasAnchor" number="5.4">
-<h2><span class="header-section-number">5.4</span> Concluding Remarks<a href="chapter-fhir-pit.html#concluding-remarks-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="concluding-remarks-1" class="section level2 hasAnchor" number="7.4">
+<h2><span class="header-section-number">7.4</span> Concluding Remarks<a href="chapter-fhir-pit.html#concluding-remarks-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>This tutorial demonstrates how to execute FHIR PIT and analyze its output. The patient dataset used in this tutorial is synthetic and intended for demonstration purposes only. The environmental datasets used in this tutorial are randomly sampled from much larger datasets derived from public sources. Users may substititute the synthetic patient dataset and sample exposures datasets with their own datasets. To add your own data, please update the ‘data/input’ directory. For assistance with FHIR PIT or access to our environmental exposure datasets, please contact <a href="mailto:fhir-pit@renci.org" class="email">fhir-pit@renci.org</a>.</p>
 
 </div>
