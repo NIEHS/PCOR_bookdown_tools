@@ -26,7 +26,6 @@ The CHORDS Toolkit chapters have been developed for various user profiles. This 
 
 -   [NASA EarthData Download](#chapter-nasa-earthdata)
 -   [Linkage to Census Units](#chapter-link-to-census)
--   [Linkage to Exposures](#chapter-chords-geo-exposures)
 -   [A FHIR PIT Tutorial](#chapter-fhir-pit)
 :::
 
@@ -78,7 +77,6 @@ The CHORDS Toolkit chapters have been developed for various user profiles. This 
 -   [Spatial Data Analysis](#chapter-intro-spatial-data-analysis)
 -   [A FHIR PIT Tutorial](#chapter-fhir-pit)
 -   [Linkage to Census Units](#chapter-link-to-census)
--   [Linkage to Exposures](#chapter-chords-geo-exposures)
 :::
 
 ## Community Health Worker ![](images/user_profiles/profilechw.svg) {#profilechw .unnumbered .unlisted}
@@ -234,7 +232,6 @@ The CHORDS Toolkit chapters have been developed for various user profiles. This 
 
 -   [Spatial Data Analysis](#chapter-intro-spatial-data-analysis)
 -   [Linkage to Census Units](#chapter-link-to-census)
--   [Linkage to Exposures](#chapter-chords-geo-exposures)
 :::
 
 ## Translational Researcher ![](images/user_profiles/profiletlr.svg) {#profiletlr .unnumbered .unlisted}
