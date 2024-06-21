@@ -1,7 +1,6 @@
 ---
 title: "The CHORDS Toolkit for Health and Geospatial Exposures Research"
-author: 
-date: '`r Sys.Date()`'
+date: "Last Modified: `r format(Sys.time(), '%B %d, %Y')` (Version 1.0)"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: ["bibliography/book.bib", "bibliography/packages.bib"]
