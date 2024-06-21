@@ -121,7 +121,7 @@ library(tmap)
 
 The first step is to prepare the geocoded addresses (i.e., geographic coordinates or latitude/longitude) for mapping in `R`.
 
-For this tutorial, we will use sample public data to represent geocoded addresses of, for example, participants in a health cohort study. This sample public data will be the coordinates for the city halls of the five largest cities in North Carolina. The following code reads these coordinates into a table in `R` with columns for `id`, `latitude`, and `longitude`:
+For this tutorial, we will use sample public data to represent geocoded addresses of, for example, participants in a health cohort study. This sample public data will be the coordinates for the city halls of the five largest cities in North Carolina. These coordinates were identified by searching Google Maps. The following code reads these coordinates into a table in `R` with columns for `id`, `latitude`, and `longitude`:
 
 ```{r eval = FALSE}
 # create a table of sample public geocoded addresses
