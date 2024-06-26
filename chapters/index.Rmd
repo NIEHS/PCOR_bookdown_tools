@@ -41,7 +41,7 @@ This toolkit requires familiarity with the `R` programming language and the use 
 
 The toolkit consists of a series of chapters organized into the following units:
 
-- **Geospatial Data Foundations**: This unit provides background, guidance and example code for working with different types of geospatial data common in environmental health research. This unit is intended as a starting point for users with less familiarity with geospatial data and geospatial analysis methods in environmental health.
+- **Geospatial Data Foundations**: This unit provides background, guidance and example code for working with different types of geospatial data common in environmental health research. This unit is intended as a starting point for users with less familiarity with geospatial data and geospatial analysis methods in environmental health using `R`.
 
 - **Wildfire Data**: This unit provides guidance for working with different types of wildfire-related data in climate change and health research.
 
