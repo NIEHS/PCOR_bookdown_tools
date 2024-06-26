@@ -23,7 +23,7 @@ Air pollution monitoring data from the United States Environmental Protection Ag
 To download data with the `utils::download.file()` function, define two variables. One variable to store the website URL where the data exists and a second to store the file path for where the file should be saved.
 
 ::: {.note}
-Multiple chunks of code in this vignette will contain `/   YOUR FILE PATH   /`. To run the code on your machine, substitute `/   YOUR FILE PATH   /` with the file path where you would like to store the vignette data.
+Multiple chunks of code in this tutorial will contain `/   YOUR FILE PATH   /`. To run the code on your machine, substitute `/   YOUR FILE PATH   /` with the file path where you would like to store the tutorial data.
 :::
 
 ```{r, eval = FALSE}
