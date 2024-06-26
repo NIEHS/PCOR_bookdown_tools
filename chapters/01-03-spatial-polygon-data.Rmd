@@ -504,7 +504,7 @@ Although both data sets were transformed to the same projected coordinate system
 crs(smoke_t) == crs(conus_t)
 ```
 
-## Data Preparation with `terra`
+## Exploratory Analysis with `terra`
 
 ### Plot (Multiple) 
 
