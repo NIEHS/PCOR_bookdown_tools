@@ -1,0 +1,49 @@
+# workflow to update external repository hosting staging webpage
+---
+name: Update external repository `PCOR_bookdown_staging`
+
+on:
+  push:
+    branches: [staging-internal]
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout `PCOR_public` repository
+        uses: actions/checkout@v3
+        with:
+          ref: staging-internal
+
+      - name: Set up Git
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Clone the staging repository
+        run: |
+          cd ../
+          git clone https://${{ secrets.PCOR_bookdown_staging_actions_06262024 }}@github.com/NIEHS/PCOR_bookdown_staging.git
+          cd PCOR_staging
+          git checkout main
+          cd ../
+
+      - name: Check directory debug
+        run: |
+          cd ../
+          pwd
+          ls -l
+
+      - name: Sync files
+        run: |
+          cd ../
+          rsync -av --ignore-missing-args --exclude='.git' --exclude='.github' --exclude='.gitignore' --exclude'README.md' --delete ./PCOR_public/ ./PCOR_staging/ || true
+          cd PCOR_staging
+          git add .
+          git status
+          git commit -m "Sync PCOR_public staging-internal branch" || echo "No changes to commit"
+          git push https://${{ secrets.PCOR_bookdown_staging_actions_06262024 }}@github.com/NIEHS/PCOR_bookdown_staging.git main
+
+    env:
+      GITHUB_PAT: ${{ secrets.PCOR_bookdown_staging_actions_06262024 }}
