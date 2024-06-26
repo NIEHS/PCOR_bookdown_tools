@@ -8,12 +8,13 @@ The CHORDS Toolkit seeks to aid researchers in accessing, processing, and integr
 
 The CHORDS Toolkit chapters are written using [R Markdown](https://rmarkdown.rstudio.com/) files and the book is created using the [`bookdown`](https://bookdown.org/) `R` package.
 
-Please note that the CHORDS Toolkit is a work in progress. The following chapters are in development:
+Please note that the CHORDS Toolkit is a work in progress. The following chapters are currently in development:
 
-|Unit              |Chapter Topic                     |Status          |
-|------------------|----------------------------------|----------------|  
-|Foundations       |Calculating Geographic Covariates |In Development  |
-|Foundations       |Comparison of Spatial Regression Methods |In Development  |
+|Unit              |Title                             |Description            |
+|------------------|----------------------------------|-----------------------|
+|Geospatial Data Foundations |Calculating Geographic Covariates |A tutorial introducing concepts and methods used to calculate common geographic covariates with public environmental data in R.|
+|Advanced Methods |Comparison of Spatial Regression Methods |A comparison of spatial regression methods used to develop exposure models for geospatial exposure assessment. |
+|Health Data Integration |Linkage to Exposures |A tutorial with code in R for linking geocoded addresses to environmental exposure data. |
 
 _This is a BETA Release. Please let us know of any improvements we can make._
 
@@ -58,7 +59,7 @@ Contributors create, edit, and revise new and existing chapters in development b
 
 A pull request must be opened to merge a development branch into the `staging-internal` branch. The pull request must pass all [status checks](#status-checks) and be reviewed by at least one other contributor.
 
-#### Branch \`staging-internal\` [protected]
+#### Branch `staging-internal` [protected]
 
 The first review branch is named `staging-internal`. This branch is used for the CHORDS team's internal review of the incoming additions and changes. The `staging-internal` branch must be rendered locally to review as it is not hosted on a URL.
 
@@ -68,7 +69,7 @@ A pull request must be opened to merge the `staging-internal` branch into the `s
 
 When a pull request passes all [status checks](#status-checks), is reviewed, and is merged into the `staging-public` branch, a new version of `staging-internal` will automatically be created (see .github/workflows/update-staging-internal.yml). Do not manually create a new `staging-internal` branch.
 
-#### Branch \`staging-public\` [protected]
+#### Branch `staging-public` [protected]
 
 The second review branch is named `staging-public`. This branch is also used for the CHORDS team's internal review of the incoming additions and changes. The `staging-public` branch will be available on the R Studio Connect Posit Server (link incoming) to facilitate web version review and feedback.
 
@@ -78,7 +79,7 @@ A pull request must be opened to merge the `staging-public` branch into the `mai
 
 When a pull request passes all [status checks](#status-checks), is reviewed, and is merged into the `main` branch, a new version of `staging-public` will automatically be created (see .github/workflows/update-staging-public.yml). Do not manually create a new `staging-public` branch.
 
-#### Branch \`main\` [protected]
+#### Branch `main` [protected]
 
 A push (closed and merged pull request) to the `main` branch will automatically build and deploy the public facing version of the toolkit web page.
 
@@ -96,8 +97,8 @@ Checks that `.Rmd` chapters and style files have valid source code and adhere to
 **Check Render Bookdown**<br>
 Checks that new chapters, file edits, and images and data do not cause errors in rendering the book (see .github/workflows/check-render-bookdown.yml).
 
-**Protect Branch \`staging-public\`**<br>
+**Protect Branch `staging-public`**<br>
 Checks that a pull request into the `staging-public` branch is from `staging-internal` (see .github/workflows/protect-staging-public.yml).
 
-**Protect Branch \`main\`**<br>
+**Protect Branch `main`**<br>
 Checks that a pull request into the `main` branch is from `staging-public` (see .github/workflows/protect-main.yml).
