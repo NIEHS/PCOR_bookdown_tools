@@ -22,7 +22,7 @@ The CHORDS Toolkit chapters have been developed for various user profiles. This 
 -   Readily computed sociodemographic metrics
 -   Exposure and sociodemographic measures that are directly comparable with related measures from other studies
 
-**Relevant Chapters**
+**Relevant Chapters:**
 
 -   [NASA EarthData Download](#chapter-nasa-earthdata)
 -   [Linkage to Census Units](#chapter-link-to-census)
@@ -48,7 +48,7 @@ The CHORDS Toolkit chapters have been developed for various user profiles. This 
 -   Methods to integrate measures across different spatial geographies
 -   Methods to readily assess known and predicted impacts of exposures on human health
 
-**Relevant Chapters**
+**Relevant Chapters:**
 
 -   [A FHIR PIT Tutorial](#chapter-fhir-pit)
 :::
@@ -72,9 +72,9 @@ The CHORDS Toolkit chapters have been developed for various user profiles. This 
 -   Methods for collecting, managing, and analyzing data
 -   Strategies for interpreting analytical results
 
-**Relevant Chapters**
+**Relevant Chapters:**
 
--   [Spatial Data Analysis](#chapter-intro-spatial-data-analysis)
+-   [Geospatial Data Foundations Unit](#unit-geospatial-foundations)
 -   [A FHIR PIT Tutorial](#chapter-fhir-pit)
 -   [Linkage to Census Units](#chapter-link-to-census)
 :::
@@ -96,7 +96,7 @@ The CHORDS Toolkit chapters have been developed for various user profiles. This 
 -   Key findings or strategies for interpreting analytical results
 -   Data visualizations and other related tools
 
-**Relevant Chapters**
+**Relevant Chapters:**
 
 -   [Linkage to Census Units](#chapter-link-to-census)
 :::
@@ -117,7 +117,7 @@ The CHORDS Toolkit chapters have been developed for various user profiles. This 
 -   Readily computed sociodemographic metrics
 -   Exposure and sociodemographic measures that are directly comparable with related measures from other studies
 
-**Relevant Chapters**
+**Relevant Chapters:**
 
 -   [NASA EarthData Download](#chapter-nasa-earthdata)
 :::
@@ -161,7 +161,7 @@ The CHORDS Toolkit chapters have been developed for various user profiles. This 
 -   Methods to integrate measures across different spatial geographies
 -   Methods to calculate and predict exposures from multiple sources and time periods
 
-**Relevant Chapters**
+**Relevant Chapters:**
 
 -   [NASA EarthData Download](#chapter-nasa-earthdata)
 :::
@@ -204,9 +204,9 @@ The CHORDS Toolkit chapters have been developed for various user profiles. This 
 -   Methods to integrate measures across different spatial geographies
 -   Methods to readily identify known and predicted impacts of exposures on human health
 
-**Relevant Chapters**
+**Relevant Chapters:**
 
--   [Spatial Data Analysis](#chapter-intro-spatial-data-analysis)
+-   [Geospatial Data Foundations Unit](#unit-geospatial-foundations)
 :::
 
 ## Student ![](images/user_profiles/profilestu.svg) {#profilestu .unnumbered .unlisted}
@@ -228,9 +228,9 @@ The CHORDS Toolkit chapters have been developed for various user profiles. This 
 -   Methods to integrate measures across different spatial geographies
 -   Methods for collecting, managing, and analyzing data
 
-**Relevant Chapters**
+**Relevant Chapters:**
 
--   [Spatial Data Analysis](#chapter-intro-spatial-data-analysis)
+-   [Geospatial Data Foundations Unit](#unit-geospatial-foundations)
 -   [Linkage to Census Units](#chapter-link-to-census)
 :::
 

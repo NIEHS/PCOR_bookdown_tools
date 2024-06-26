@@ -1,6 +1,6 @@
 # (PART\*) Geospatial Data Foundations {.unnumbered .unlisted}
 
-# **Geospatial Data Foundations** {-}
+# **Geospatial Data Foundations** {#unit-geospatial-foundations .unnumbered}
 
 ---
 
