@@ -92,7 +92,7 @@ Listing the contents of the unzipped file reveals four individual files. The dat
 Deleting any of the supporting files (i.e., `*.dbf`, `*.prj`, or `*.shx`) will disrupt the data import.
 :::
 
-## Polygon Data with `sf`
+## Data Preparation with `sf`
 
 This section will focus on exploratory analyses with polygon data using the `sf` package.
 
@@ -166,6 +166,8 @@ smoke_sf <- st_transform(
   5070
 )
 ```
+
+## Exploratory Analysis with `sf`
 
 ### Plot (Single) 
 
@@ -399,7 +401,7 @@ ggplot() +
 
 <img src="images/intro_to_spatial/smoke_polygons_sf_cropped.png" width = "75%" height = "auto" class = "centerimage">
 
-## Polygon Data with `terra`
+## Data Preparation with `terra`
 
 This section will focus on exploratory analyses with polygon data using the `terra` package [@r-terra].
 
@@ -501,6 +503,8 @@ Although both data sets were transformed to the same projected coordinate system
 ```{r, eval = FALSE}
 crs(smoke_t) == crs(conus_t)
 ```
+
+## Data Preparation with `terra`
 
 ### Plot (Multiple) 
 

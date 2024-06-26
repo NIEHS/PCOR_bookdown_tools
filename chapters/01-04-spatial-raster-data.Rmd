@@ -60,7 +60,9 @@ list.files("/   YOUR FILE PATH   /")
 
 The file downloaded from NOAA's NARR data set is an `.nc`, or netCDF, file. NetCDF files are common for raster data, and do not need to be unzipped.
 
-## Import
+## Data Preparation
+
+### Import
 
 Now that the data file of interest has been downloaded and identified, import the data with `terra::rast()`.
 
@@ -72,7 +74,7 @@ narr <- rast(paste0(
 ))
 ```
 
-## Inspect Structure
+### Inspect Structure
 
 Inspect the structure of `narr` to see its class, dimensions, variables, and layer names.
 
@@ -88,7 +90,7 @@ ncol(narr)
 nlyr(narr)
 ```
 
-## Rename
+### Rename
 
 The `narr` data set contains 365 layers, one for each daily observation of air temperature in 2021. When working with raster data that contains multiple layers, it is important to know and recognize the naming structure of each layer. In this case, the layer names are `air_` followed by the day of the year (i.e., January 1 = `air_1`).
 
@@ -115,7 +117,7 @@ Check the layer names again to ensure proper renaming.
 names(narr)[1:5]
 ```
 
-## Coordinate Reference System and Projection
+### Coordinate Reference System and Projection
 
 Check the coordinate reference system of a `SpatRaster` object with `terra::crs()`.
 
@@ -172,7 +174,9 @@ Ensure that both data sets have the same coordinate reference system.
 crs(conus_t) == crs(narr)
 ```
 
-## Plot (Multiple)
+## Exploratory Analysis
+
+### Plot (Multiple)
 
 Now that the data sets and coordinate reference systems have been prepared, create a plot with `ggplot2::gglot()`. Identifying the data sets to be plotted within the `tidyterra::geom_spatraster()` and `tidyterra::geom_spatvector()` argument informs the function that the `narr` and `conus_t` data sets are `SpatRaster` and `SpatVector` objects, respectively [@r-tidyterra].
 
@@ -199,7 +203,7 @@ ggplot() +
 
 <img src="images/intro_to_spatial/temp_raster_original.png" width = "75%" height = "auto" class = "centerimage">
 
-## Crop
+### Crop
 
 The `terra::crop()` function can be used to reduce a `SpatRaster` to an area determined by `SpatVector` polygons. The `mask = TRUE` argument crops to the border of the polygons, whereas `mask = FALSE` crops to the bounding box surrounding the polygons. In this example, crop the `narr` data to the conterminous United States state boundaries.
 
@@ -239,7 +243,7 @@ ggplot() +
 
 <img src="images/intro_to_spatial/temp_raster_crop.png" width = "75%" height = "auto" class = "centerimage">
 
-## Units
+### Units
 
 The previous plot depicts the 2 m air temperature data in degrees Kelvin. To convert the units to degrees Celsius, simply subtract the values in `narr_crop` by 273.15. This subtraction will be applied to every grid cell within every layer of `narr_crop`.
 
@@ -247,7 +251,7 @@ The previous plot depicts the 2 m air temperature data in degrees Kelvin. To con
 narr_crop_c <- narr_crop - 273.15
 ```
 
-## Summary Statistics
+### Summary Statistics
 
 Similar to mathematical operations, calculating summary statistics is very straight forward with raster data. For this example, calculate the annual mean 2m air temperature and range of 2m air temperatures at each grid cell, and save these as a new layer in `narr_crop_c`
 
@@ -291,7 +295,7 @@ ggplot() +
 
 <img src="images/intro_to_spatial/temp_raster_mean_range.png" width = "75%" height = "auto" class = "centerimage">
 
-## Zonal Statistics
+### Zonal Statistics
 
 Looking closely at the previous plot, it is clear that the annual mean and range of temperatures differ between states. The `terra` package can be used to calculate zonal statistics of a `SpatRaster` object based on `SpatVector` polygons.
 
@@ -329,7 +333,7 @@ ggplot() +
 
 <img src="images/intro_to_spatial/temp_raster_state_mean.png" width = "75%" height = "auto" class = "centerimage">
 
-## Reclassify
+### Reclassify
 
 Raster data is most often continuous numeric data. Sometimes, however, it is important to classify the continuous numeric raster data into discrete classes. For this example, we will reclassify the annual mean temperature data into three discrete classes: \<10°C, 10°C - 20°C, \>20°C.
 

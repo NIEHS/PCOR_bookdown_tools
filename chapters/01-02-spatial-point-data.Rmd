@@ -67,7 +67,9 @@ Other file names may be returned if `/   YOUR FILE PATH   /` is a directory with
 list.files("/   YOUR FILE PATH   /")
 ```
 
-## Import
+## Data Preparation
+
+### Import
 
 Now that the contents of the zip file have been saved on your machine and the data file of interest has been identified, import the data with `sf::st_read()`.
 
@@ -77,7 +79,7 @@ pm <- st_read("/   YOUR FILE PATH   /daily_88101_2021.csv")
 
 The previous chunk of code returned a `Warning:` message. This warning informs the user that the imported data does not have native spatial features, so the data was imported as a `data.frame`.
 
-## Inspect Structure
+### Inspect Structure
 
 Inspect the structure of `pm` to see its class, column names, column classes, and the first two (specified by `vec.len = 2`) data points from each column.
 
@@ -87,7 +89,7 @@ str(pm,
 )
 ```
 
-## Subset
+### Subset
 
 Checking the data's structure shows that `pm` is a very large data set. Each of the variables convey important information related to air pollution monitoring, but not all will be utilized in these exploratory analyses.
 
@@ -114,7 +116,7 @@ str(pm,
 )
 ```
 
-## Reclassify
+### Reclassify
 
 The `str()` function showed the class of each variable within the data set. All of the retained variables are of class character, indicated by `: chr` and the quotations around each observation (`"01" "01" ...`).
 
@@ -134,7 +136,7 @@ class(pm$Arithmetic.Mean)
 class(pm$Date.Local)
 ```
 
-## Convert to `sf` Object
+### Convert to `sf` Object
 
 With the variables of interest selected and reclassified, `pm` can be converted to spatially defined `sf` object. The `sf::st_as_sf()` function creates a `$geometry` field based on the latitude and longitude coordinates contained within `pm`. The `coords = c()` argument specifies the column names which contain the coordinate values.
 
@@ -157,7 +159,7 @@ class(pm_sf$geometry)
 
 `class(pm_sf)` returned both `"sf"` and `"data.frame"`, indicating that it contains both spatial and non-spatial data.
 
-## Coordinate Reference System and Projection
+### Coordinate Reference System and Projection
 
 The coordinate reference system of an `sf` object can be checked with `sf::st_crs()`.
 
@@ -185,7 +187,9 @@ pm_sf <- st_transform(
 )
 ```
 
-## Plot
+## Exploratory Analysis
+
+### Plot
 
 Plotting spatial data is important for visualizing and analyzing patterns in the data. Initialize a plot for the locations of each air pollution monitoring station with `ggplot2::ggplot()`. Identifying the data set to be plotted within the `geom_sf()` argument informs the function that the data is an `sf` object.
 
@@ -234,7 +238,7 @@ ggplot(
 
 <img src="images/intro_to_spatial/pm_concentrations_histogram.png" width = "75%" height = "auto" class = "centerimage">
 
-## Calculate Annual Mean
+### Calculate Annual Mean
 
 A common summary statistic of interest to researchers is the mean over a certain period of time. For this example, we will calculate the mean PM~2.5~ concentration for each monitoring location for the year 2021. To do this, a unique identification code must be created for each monitoring location.
 
@@ -295,7 +299,7 @@ ggplot() +
 
 Now the plot depicts both spatial and non-spatial data.
 
-## Compare Highest Annual Means
+### Compare Highest Annual Means
 
 A close visual inspection of the previous plot shows a few monitoring locations in the southwestern region of the United States with very high (\> 20 µm/m^3^) annual mean concentrations of PM~2.5~. To investigate the differences between the monitors with the highest and lowest annual mean concentrations, create a subset of `pm_sf` with only the three highest and lowest monitors.
 
