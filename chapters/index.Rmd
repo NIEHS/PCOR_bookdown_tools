@@ -41,17 +41,19 @@ This toolkit requires familiarity with the `R` programming language and the use 
 
 The toolkit consists of a series of chapters organized into the following units:
 
-- **Foundations**: This unit provides background, guidance and example code for working with different types of geospatial data common in environmental health research. This unit is intended as a starting point for users with less familiarity with geospatial data analysis methods in environmental health.
+- **Geospatial Data Foundations**: This unit provides background, guidance and example code for working with different types of geospatial data common in environmental health research. This unit is intended as a starting point for users with less familiarity with geospatial data and geospatial analysis methods in environmental health.
 
 - **Wildfire Data**: This unit provides guidance for working with different types of wildfire-related data in climate change and health research.
 
 - **Other Environmental Data**: This unit provides guidance and code for working with specific sources of environmental data common in environmental health research for characterizing environmental exposures as well as social determinants of health.
 
-- **Health Data Integration**: This unit provides guidance and code for integrating environmental and health data in climate change and health research, both at the individual level and at the population level. 
+- **Health Data Integration**: This unit provides guidance and code for integrating environmental and health data in climate change and health research, both at the individual level and at the population level.
 
-- **Case Studies**: This unit provides example case studies that analyze integrated wildfire-related data with health outcomes data.
+- **Case Studies**: This unit provides example case studies that analyze integrated wildfire-related data and other environmental exposures data with health outcomes data.
 
 The CHORDS Toolkit is a work in progress. Please see the [CHORDS Toolkit GitHub repository](https://github.com/NIEHS/PCOR_bookdown_tools) for a list of chapters currently in development.
+
+_This is a BETA Release. Please let us know of any improvements we can make._
 
 ### Funding {-}
 
