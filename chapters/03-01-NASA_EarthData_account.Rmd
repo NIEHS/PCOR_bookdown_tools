@@ -31,12 +31,12 @@ NASA's Earth Observing System Data and Information System (EOSDIS) and its twelv
 -   Physical Oceanography DAAC (PO.DAAC)
 -   Socioeconomic Data and Applications Center (SEDAC)
 
-See <https://www.earthdata.nasa.gov/eosdis/daacs> for more information.
+See <https://www.earthdata.nasa.gov/eosdis/daacs> for more information [@nasa-eosdis-daac].
 
 Many of the NASA EOSDIS data sets are relevant to environmental health research, and accessing the data from within R is important for reproducability and repeatable analyses. Although the data is openly accessible, users are required to register for an EarthData account and/or be logged in if you have an account.
 
 ::: note
-The NASA EarthData Account prerequisite files can be generated directly from the command line or using a text editor (notepad in Windows). See [How to Generate Earthdata Prerequisite Files](https://disc.gsfc.nasa.gov/information/howto?title=How%20to%20Generate%20Earthdata%20Prerequisite%20Files) for detailed instructions on creating prerequisite files with both the command line and Python.
+The NASA EarthData Account prerequisite files can be generated directly from the command line or using a text editor (notepad in Windows). See [How to Generate Earthdata Prerequisite Files](https://disc.gsfc.nasa.gov/information/howto?title=How%20to%20Generate%20Earthdata%20Prerequisite%20Files) for detailed instructions on creating prerequisite files with both the command line and Python [@nasa-generate-prereq].
 :::
 
 ### Objectives
@@ -69,13 +69,13 @@ Downloading password-protected data from a URL requires user credentials. Withou
 Without the prerequisite files the download step run without error, but trying to open the zip file will return an error.
 :::
 
-To demonstrate, try to download population density data from NASA's Socioeconomic Data and Applications Center (SEDAC) archive center.
+To demonstrate, try to download population density data [@sedac-gpwv4] from NASA's Socioeconomic Data and Applications Center (SEDAC) archive center.
 
 |                |                                                                              |
 |-----------------|-----------------------------------------------------------|
 | **Metric**     | Population Density                                                           |
 | **Year**       | 2020                                                                         |
-| **Resolution** | \~5km                                                                        |
+| **Resolution** | \~5 km                                                                        |
 | **Format**     | GeoTiff                                                                      |
 | **URL**        | <https://sedac.ciesin.columbia.edu/data/set/gpw-v4-population-density-rev11> |
 
@@ -289,9 +289,3 @@ unzip(destfile)
 ```
 
 The data is downloaded successfully after the prerequisite files have been generated and the "SEDAC" applications have been authorized.
-
-## References
-
--   Center for International Earth Science Information Network - CIESIN - Columbia University. 2018. *Gridded Population of the World, Version 4 (GPWv4): Population Density, Revision 11*. Palisades, New York: NASA Socioeconomic Data and Applications Center (SEDAC). [https://doi.org/10.7927/H49C6VHW](). Accessed 7 February 2024.
--   National Aeronautics and Space Administration (NASA). *EOSDIS Distributed Active Archive Centers (DAAC)*. Accessed 3 January 2024. [https://www.earthdata.nasa.gov/eosdis/daacs]().
--   National Aeronautics and Space Administration (NASA). *How to Generate Earthdata Prerequisite Files*. Accessed 3 January 2024. [https://disc.gsfc.nasa.gov/information/howto?title=How%20to%20Generate%20Earthdata%20Prerequisite%20Files]().
