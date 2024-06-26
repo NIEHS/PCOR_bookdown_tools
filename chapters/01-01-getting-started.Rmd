@@ -37,9 +37,18 @@ In the following chapters in the [Geospatial Data Foundations Unit](#unit-geospa
 
 ## Concepts and Terminology
 
-### Spatial Data Types
+### Spatial Geometry
 
-These tutorials will cover how to access, import, and analyze different types of spatial data: point, polygon, and raster spatial data types. For detailed descriptions of each type, please see [Simple Features for R](https://r-spatial.github.io/sf/articles/sf1.html) [@r-sf-1] and [Introduction to Raster Data](https://datacarpentry.org/organization-geospatial/01-intro-raster-data) [@raster-data] for raster data.
+There are three spatial geometry types: point, line, and area (i.e., polygon or grid). Uniform geometry data (i.e., grid) is refered to as _raster_ data, and non-uniform geometry data (i.e., point, line, polygon) is refered to as _vector_ data. Please see [Simple Features for R](https://r-spatial.github.io/sf/articles/sf1.html) [@r-sf-1] and [Introduction to Raster Data](https://datacarpentry.org/organization-geospatial/01-intro-raster-data) [@raster-data] for detailed descriptions of the vector and raster data types, respectively. 
+
+The following table illustrates common examples of each spatial geometry type used in environmental health applications:
+
+|Type  |Illustration |Examples                                      |Chapters |
+|------|-------------|----------------------------------------------|---------|
+|Point (Vector) |![](images/intro_to_spatial/illustration-point.png){width=60%} |Air pollution monitor, Weather station, Patient geocoded address, Healthcare facility coordinates |[Point Data](#chapter-point-data) |
+|Line (Vector) |![](images/intro_to_spatial/illustration-line.png){width=60%} |Road network, Travel path | |
+|Polygon (Vector)|![](images/intro_to_spatial/illustration-polygon.png){width=60%} |Wildfire smoke plumes, Census boundaries |[Polygon Data](#chapter-polygon-data) |
+|Grid (Raster) |![](images/intro_to_spatial/illustration-grid.png){width=60%} |Land cover imagery, Meteorological model output, Gridded population counts |[Raster Data](#chapter-raster-data) |
 
 ### Coordinate Reference Systems and Projections {#getting-started-spatial-crs}
 
