@@ -1,10 +1,10 @@
-# (PART\*) Spatial Data Foundations {.unnumbered .unlisted}
+# (PART\*) Geospatial Data Foundations {.unnumbered .unlisted}
 
-# **Spatial Data Foundations** {-}
+# **Geospatial Data Foundations** {-}
 
 ---
 
-This unit provides background, guidance and example code for working with different types of geospatial data common in environmental health research. This unit is intended as a starting point for users with less familiarity with geospatial data analysis methods in environmental health.
+This unit provides background, guidance and example code for working with different types of geospatial data common in environmental health research. This unit is intended as a starting point for users with less familiarity with geospatial data and geospatial analysis methods in environmental health.
 
 ```{r, include = FALSE, echo = FALSE, eval = FALSE, warning = FALSE}
 install.packages("BiocManager", quiet = TRUE)

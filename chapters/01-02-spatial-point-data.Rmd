@@ -4,19 +4,21 @@
 [![Profile-SBS](images/user_profiles/profilesbs.svg)](#profilesbs)
 [![Profile-STU](images/user_profiles/profilestu.svg)](#profilestu)
 
+### Point Data Access, Preparation, and Exploratory Analysis in R {-}
+
 **Date Modified:** May 6, 2024
 
-**Authors:** Mitchell Manware [![author-mm](images/orcid.png){width=10}](https://orcid.org/0009-0003-6440-6106), Kyle P Messier [![author-kpm](images/orcid.png){width=10}](https://orcid.org/0000-0001-9508-9623)
+**Authors:** Mitchell Manware [![author-mm](images/orcid.png){width=10}](https://orcid.org/0009-0003-6440-6106), Kyle P. Messier [![author-kpm](images/orcid.png){width=10}](https://orcid.org/0000-0001-9508-9623)
 
 **Key Terms:** [Geospatial Data](#def-geospatial-data)
 
 **Programming Language:** R
 
-## Data
+## Introduction
 
-Air pollution monitoring data from the United States Environmental Protection Agency (EPA) will be used to demonstrate using point data with the `sf` package (@r-sf-1).
+Air pollution monitoring data from the United States Environmental Protection Agency (EPA) will be used to demonstrate using point data with the `sf` package [@r-sf-1].
 
-## Access, download, and unzip
+## Access, Download, and Unzip
 
 To download data with the `utils::download.file()` function, define two variables. One variable to store the website URL where the data exists and a second to store the file path for where the file should be saved.
 
@@ -38,7 +40,7 @@ download.file(
 The file downloaded from the EPA website is a zip file. Zip files need to be unzipped (decompressed) in order to access the data within. Unzip the EPA air pollution file with `utils::unzip()`.
 
 ::: {.warning}
-Unzipping a `.zip` file will decompress the contents within. Spatial data sets can be very large (ie. \> 1GB ), so check the size of the data before unzipping on your machine.
+Unzipping a `.zip` file will decompress the contents within. Spatial data sets can be very large (i.e., \> 1 GB ), so check the size of the data before unzipping on your machine.
 :::
 
 The numeric value size of the file is listed under `Length`.
@@ -58,7 +60,7 @@ unzip("/   YOUR FILE PATH   /epa_data.zip")
 Inspecting the file with `utils::unzip(list = TRUE)` returned the size of the file, but also the name of the data file of interest. The desired data file can also be identified with `list.files()`.
 
 ::: {.note}
-Other file names may be returned if `/   YOUR FILE PATH   /` is a directory with other contents (ie. Desktop or Documents).
+Other file names may be returned if `/   YOUR FILE PATH   /` is a directory with other contents (e.g., Desktop or Documents folder).
 :::
 
 ```{r, eval = FALSE}
@@ -75,7 +77,7 @@ pm <- st_read("/   YOUR FILE PATH   /daily_88101_2021.csv")
 
 The previous chunk of code returned a `Warning:` message. This warning informs the user that the imported data does not have native spatial features, so the data was imported as a `data.frame`.
 
-## Inspect structure
+## Inspect Structure
 
 Inspect the structure of `pm` to see its class, column names, column classes, and the first two (specified by `vec.len = 2`) data points from each column.
 
@@ -132,7 +134,7 @@ class(pm$Arithmetic.Mean)
 class(pm$Date.Local)
 ```
 
-## Convert to `sf` object
+## Convert to `sf` Object
 
 With the variables of interest selected and reclassified, `pm` can be converted to spatially defined `sf` object. The `sf::st_as_sf()` function creates a `$geometry` field based on the latitude and longitude coordinates contained within `pm`. The `coords = c()` argument specifies the column names which contain the coordinate values.
 
@@ -155,7 +157,7 @@ class(pm_sf$geometry)
 
 `class(pm_sf)` returned both `"sf"` and `"data.frame"`, indicating that it contains both spatial and non-spatial data.
 
-## Coordinate reference system and projection
+## Coordinate Reference System and Projection
 
 The coordinate reference system of an `sf` object can be checked with `sf::st_crs()`.
 
@@ -163,14 +165,14 @@ The coordinate reference system of an `sf` object can be checked with `sf::st_cr
 st_crs(pm_sf)
 ```
 
-The previous chunk of code shows that `pm_sf` does not have a native coordinate reference system. The same function, `sf::st_crs()`, can be used to assign a coordinate reference system to an `sf` object. For this example, the World Geodesic System 1984 (WGS 84) will be used (EPSG code: 4326).
+The previous chunk of code shows that `pm_sf` does not have a native coordinate reference system. The same function, `sf::st_crs()`, can be used to assign a coordinate reference system to an `sf` object. For this example, the World Geodetic System 1984 (WGS 84) will be used (EPSG code: 4326).
 
 ```{r, eval = FALSE}
 st_crs(pm_sf) <- 4326
 st_crs(pm_sf)
 ```
 
-An `sf` object with a coordinate reference system can be transformed (projected) into a different coordinate reference system with `sf::st_transform()`. The area of interest for these exploratory analyses is the coterminous United States, so the Albers Equal Area projected coordinate system will be used (EPSG code: 5070). For a detailed description of coordinate reference systems, and how to select the best system for your analyses, see [Coordinate Reference Systems](#chapter-coordinate-reference-systems).
+An `sf` object with a coordinate reference system can be transformed (projected) into a different coordinate reference system with `sf::st_transform()`. The area of interest for these exploratory analyses is the conterminous United States, so the Albers Equal Area projected coordinate system will be used (EPSG code: 5070). For a detailed description of coordinate reference systems, and how to select the best system for your analyses, see Section [Coordinate Reference Systems and Projections](#getting-started-spatial-crs) in the Chapter [Getting Started](#chapter-getting-started-spatial).
 
 ::: {.note}
 An `sf` object without an assigned coordinate reference system cannot be transformed. `sf::st_crs()` must be used to assign a coordinate reference system to an `sf` object that does not have one.
@@ -232,7 +234,7 @@ ggplot(
 
 <img src="images/intro_to_spatial/pm_concentrations_histogram.png" width = "75%" height = "auto" class = "centerimage">
 
-## Calculate annual mean
+## Calculate Annual Mean
 
 A common summary statistic of interest to researchers is the mean over a certain period of time. For this example, we will calculate the mean PM~2.5~ concentration for each monitoring location for the year 2021. To do this, a unique identification code must be created for each monitoring location.
 
@@ -293,7 +295,7 @@ ggplot() +
 
 Now the plot depicts both spatial and non-spatial data.
 
-## Compare highest annual means
+## Compare Highest Annual Means
 
 A close visual inspection of the previous plot shows a few monitoring locations in the southwestern region of the United States with very high (\> 20 µm/m^3^) annual mean concentrations of PM~2.5~. To investigate the differences between the monitors with the highest and lowest annual mean concentrations, create a subset of `pm_sf` with only the three highest and lowest monitors.
 

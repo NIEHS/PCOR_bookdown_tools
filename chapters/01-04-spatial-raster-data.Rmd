@@ -4,19 +4,21 @@
 [![Profile-SBS](images/user_profiles/profilesbs.svg)](#profilesbs)
 [![Profile-STU](images/user_profiles/profilestu.svg)](#profilestu)
 
+### Raster Data Access, Preparation, and Exploratory Analysis in R {-}
+
 **Date Modified:** May 6, 2024
 
-**Authors:** Mitchell Manware [![author-mm](images/orcid.png){width=10}](https://orcid.org/0009-0003-6440-6106), Kyle P Messier [![author-kpm](images/orcid.png){width=10}](https://orcid.org/0000-0001-9508-9623)
+**Authors:** Mitchell Manware [![author-mm](images/orcid.png){width=10}](https://orcid.org/0009-0003-6440-6106), Kyle P. Messier [![author-kpm](images/orcid.png){width=10}](https://orcid.org/0000-0001-9508-9623)
 
 **Key Terms:** [Geospatial Data](#def-geospatial-data)
 
 **Programming Language:** R
 
-## Data
+## Introduction
 
-Air temperature data from the United States National Oceanic and Atmospheric Administration's (NOAA) North American Regional Reanalysis (NARR) data set will be used to demonstrate using raster data with the `terra` package (@r-terra).
+Air temperature data from the United States National Oceanic and Atmospheric Administration's (NOAA) North American Regional Reanalysis (NARR) data set will be used to demonstrate using raster data with the `terra` package [@r-terra].
 
-## Access and download
+## Access and Download {#raster-access}
 
 The website URL where the NOAA NARR exists is year-specific, meaning there is a unique URL for each annual data set. For the purpose of these exploratory analyses, air temperature data from the year 2021 will be used
 
@@ -70,7 +72,7 @@ narr <- rast(paste0(
 ))
 ```
 
-## Inspect structure
+## Inspect Structure
 
 Inspect the structure of `narr` to see its class, dimensions, variables, and layer names.
 
@@ -88,7 +90,7 @@ nlyr(narr)
 
 ## Rename
 
-The `narr` data set contains 365 layers, one for each daily observation of air temperature in 2021. When working with raster data that contains multiple layers, it is important to know and recognize the naming structure of each layer. In this case, the layer names are `air_` followed by the day of the year (ie. January 1 = `air_1`).
+The `narr` data set contains 365 layers, one for each daily observation of air temperature in 2021. When working with raster data that contains multiple layers, it is important to know and recognize the naming structure of each layer. In this case, the layer names are `air_` followed by the day of the year (i.e., January 1 = `air_1`).
 
 ```{r, eval = FALSE}
 names(narr)[1:5]
@@ -113,7 +115,7 @@ Check the layer names again to ensure proper renaming.
 names(narr)[1:5]
 ```
 
-## Coordinate reference system and projection
+## Coordinate Reference System and Projection
 
 Check the coordinate reference system of a `SpatRaster` object with `terra::crs()`.
 
@@ -123,7 +125,7 @@ crs(narr,
 )
 ```
 
-`narr` has a native coordinate reference system, but it is unnamed and was not identifiable by `terra::rast()`. The area of interest for these exploratory analyses is the coterminous United States, so we can project `narr` to the Albers Equal Area projected coordinate system (EPSG code: 5070).
+`narr` has a native coordinate reference system, but it is unnamed and was not identifiable by `terra::rast()`. The area of interest for these exploratory analyses is the conterminous United States, so we can project `narr` to the Albers Equal Area projected coordinate system (EPSG code: 5070).
 
 ```{r, eval = FALSE}
 narr <- project(
@@ -132,10 +134,10 @@ narr <- project(
 )
 ```
 
-We want to create plots with and analyze the air temperature data as it relates to the coterminous United States' state boundaries. Subset `states_t` to remove Alaska, Hawaii, and the United States' territories.
+We want to create plots with and analyze the air temperature data as it relates to the conterminous United States state boundaries. Subset `states_t` to remove Alaska, Hawaii, and the United States territories.
 
 ::: {.note}
-See sections 2.0 Access, download, and unzip and 2.2.1 Import for obtaining the `states_t` data set.
+See the [Polygon Data](#chapter-polygon-data) Chapter Section [Plot (Multiple)](#chapter-polygon-plot-multiple-sf) for the steps for obtaining the `states_t` data set.
 :::
 
 ```{r, eval = FALSE}
@@ -170,9 +172,9 @@ Ensure that both data sets have the same coordinate reference system.
 crs(conus_t) == crs(narr)
 ```
 
-## Plot (multiple)
+## Plot (Multiple)
 
-Now that the data sets and coordinate reference systems have been prepared, create a plot with `ggplot2::gglot()`. Identifying the data sets to be plotted within the `tidyterra::geom_spatraster()` and `tidyterra::geom_spatvector()` argument informs the function that the `narr` and `conus_t` data sets are `SpatRaster` and `SpatVector` objects, respectively (@r-tidyterra).
+Now that the data sets and coordinate reference systems have been prepared, create a plot with `ggplot2::gglot()`. Identifying the data sets to be plotted within the `tidyterra::geom_spatraster()` and `tidyterra::geom_spatvector()` argument informs the function that the `narr` and `conus_t` data sets are `SpatRaster` and `SpatVector` objects, respectively [@r-tidyterra].
 
 Only the first layer of the `narr` data set will be plotted.
 
@@ -199,7 +201,7 @@ ggplot() +
 
 ## Crop
 
-The `terra::crop()` function can be used to reduce a `SpatRaster` to an area determined by `SpatVector` polygons. The `mask = TRUE` argument crops to the border of the polygons, whereas `mask = FALSE` crops to the bounding box surrounding the polygons. In this example, crop the `narr` data to the coterminous United States' state boundaries.
+The `terra::crop()` function can be used to reduce a `SpatRaster` to an area determined by `SpatVector` polygons. The `mask = TRUE` argument crops to the border of the polygons, whereas `mask = FALSE` crops to the bounding box surrounding the polygons. In this example, crop the `narr` data to the conterminous United States state boundaries.
 
 ```{r, eval = FALSE}
 narr_crop <- crop(narr,
@@ -208,7 +210,7 @@ narr_crop <- crop(narr,
 )
 ```
 
-Plot the cropped temperature data and the coterminous United States' state boundaries.
+Plot the cropped temperature data and the conterminous United States state boundaries.
 
 Only the first layer of the `narr` data set will be plotted.
 
@@ -239,13 +241,13 @@ ggplot() +
 
 ## Units
 
-The previous plot depicts the 2m air temperature data in Kelvin. To convert the units to degrees Celsius, simply subtract the values in `narr_crop` by 273.15. This subtraction will be applied to every grid cell within every layer of `narr_crop`.
+The previous plot depicts the 2 m air temperature data in degrees Kelvin. To convert the units to degrees Celsius, simply subtract the values in `narr_crop` by 273.15. This subtraction will be applied to every grid cell within every layer of `narr_crop`.
 
 ```{r, eval = FALSE}
 narr_crop_c <- narr_crop - 273.15
 ```
 
-## Summary statistics
+## Summary Statistics
 
 Similar to mathematical operations, calculating summary statistics is very straight forward with raster data. For this example, calculate the annual mean 2m air temperature and range of 2m air temperatures at each grid cell, and save these as a new layer in `narr_crop_c`
 
@@ -289,7 +291,7 @@ ggplot() +
 
 <img src="images/intro_to_spatial/temp_raster_mean_range.png" width = "75%" height = "auto" class = "centerimage">
 
-## Zonal statistics
+## Zonal Statistics
 
 Looking closely at the previous plot, it is clear that the annual mean and range of temperatures differ between states. The `terra` package can be used to calculate zonal statistics of a `SpatRaster` object based on `SpatVector` polygons.
 
@@ -331,7 +333,7 @@ ggplot() +
 
 Raster data is most often continuous numeric data. Sometimes, however, it is important to classify the continuous numeric raster data into discrete classes. For this example, we will reclassify the annual mean temperature data into three discrete classes: \<10°C, 10°C - 20°C, \>20°C.
 
-The first step in the reclassification process is to create a matrix storing the "from", "to", and "becomes" values. As the names imply, the "from" and "to" values identify the discrete ranges to be reclassified, and "becomes" is the new value that data within this range will take (ie. "from" 0 "to" 5 "becomes" 1 means that values ranging from 0 to 5 will be reclassified as 1).
+The first step in the reclassification process is to create a matrix storing the "from", "to", and "becomes" values. As the names imply, the "from" and "to" values identify the discrete ranges to be reclassified, and "becomes" is the new value that data within this range will take (i.e., "from" 0 "to" 5 "becomes" 1 means that values ranging from 0 to 5 will be reclassified as 1).
 
 Create the reclassification matrix.
 
@@ -357,7 +359,7 @@ reclass <- matrix(
 )
 ```
 
-Now that the reclassification matrix has been prepared, reclassify the annual mean temperatures. The `right = TRUE` argument indicates that intervals are open on the left and closed on the right (ie. (0,10] becomes 1).
+Now that the reclassification matrix has been prepared, reclassify the annual mean temperatures. The `right = TRUE` argument indicates that intervals are open on the left and closed on the right (i.e., (0,10] becomes 1).
 
 ```{r, eval = FALSE}
 narr_reclass <- classify(narr_crop_c$mean,
