@@ -77,11 +77,11 @@ Categories: [Research Methods](https://tools.niehs.nih.gov/cchhglossary/?categor
 :::
 
 ::: glossaryterm
-#### Geoid {#def-geoid .unnumbered .unlisted}
+#### GeoID {#def-geoid .unnumbered .unlisted}
 
 A unique identifying code for a place or geographic unit (e.g., census tract, city, postal code, land parcel, watershed).
                                                                                
-**Context:** Geoid is commonly used as a basis for data integration at the individual and population level.
+**Context:** GeoID is commonly used as a basis for data integration at the individual and population level.
 
 <font size ="2"> 
 Categories: [Research Methods](https://tools.niehs.nih.gov/cchhglossary/?category=RM)   
