@@ -10,11 +10,11 @@ The CHORDS Toolkit chapters are written using [R Markdown](https://rmarkdown.rst
 
 Please note that the CHORDS Toolkit is a work in progress. The following chapters are currently in development:
 
-|Unit              |Title                             |Description            |
-|------------------|----------------------------------|-----------------------|
-|Geospatial Data Foundations |Calculating Geographic Covariates |A tutorial introducing concepts and methods used to calculate common geographic covariates with public environmental data in R.|
-|Advanced Methods |Comparison of Spatial Regression Methods |A comparison of spatial regression methods used to develop exposure models for geospatial exposure assessment. |
-|Health Data Integration |Linkage to Exposures |A tutorial with code in R for linking geocoded addresses to environmental exposure data. |
+|Title             |Unit    |Description                                     |
+|------------------|--------|------------------------------------------------|
+|Calculating Geographic Covariates |Geospatial Data Foundations |A tutorial introducing concepts and methods used to calculate common geographic covariates with public environmental data in R. |
+|Comparison of Spatial Regression Methods |Advanced Methods |A comparison of spatial regression methods used to develop exposure models for geospatial exposure assessment. |
+|Linkage to Exposures |Health Data Integration |A tutorial with code in R for linking geocoded addresses to environmental exposure data. |
 
 _This is a BETA Release. Please let us know of any improvements we can make._
 
