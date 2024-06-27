@@ -16,7 +16,16 @@
 
 ## Introduction
 
-Air temperature data from the United States National Oceanic and Atmospheric Administration's (NOAA) North American Regional Reanalysis (NARR) data set will be used to demonstrate using raster data with the `terra` package [@r-terra].
+Air temperature data from the United States National Oceanic and Atmospheric Administration's (NOAA) North American Regional Reanalysis (NARR) data set will be used to demonstrate using raster (grid) data with the `terra` package [@r-terra].
+
+This tutorial will demonstrate the following steps with raster data in `R`:
+
+-   Downloading data from a URL
+-   Importing data
+-   Checking data type, structure, and class
+-   Reclassifying data
+-   Computing summary and zonal statistics
+-   Plotting individual and multiple data sets
 
 ## Access and Download {#raster-access}
 

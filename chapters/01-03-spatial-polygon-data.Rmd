@@ -16,7 +16,16 @@
 
 ## Introduction
 
-Wildfire smoke plume coverage data from the United States National Oceanic and Atmospheric Administration (NOAA) will be used to demonstrate using polygon data. This section will cover polygon data with both the `sf` [@r-sf-1] and `terra` [@r-terra] packages separately, but the steps for accessing, downloading, and unzipping the data is the same for both packages.
+Wildfire smoke plume coverage data from the United States National Oceanic and Atmospheric Administration (NOAA) will be used to demonstrate using polygon data. This tutorial will cover polygon data with both the `sf` [@r-sf-1] and `terra` [@r-terra] packages separately, but the steps for accessing, downloading, and unzipping the data is the same for both packages.
+
+This tutorial will demonstrate the following steps with polygon data in `R`:
+
+-   Downloading data from a URL
+-   Importing data
+-   Checking data type, structure, and class
+-   Reclassifying data
+-   Computing summary and zonal statistics
+-   Plotting individual and multiple data sets
 
 ## Access, Download, and Unzip {#chapter-polygon-access}
 

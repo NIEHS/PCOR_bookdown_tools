@@ -16,7 +16,17 @@
 
 ## Introduction
 
+
 Air pollution monitoring data from the United States Environmental Protection Agency (EPA) will be used to demonstrate using point data with the `sf` package [@r-sf-1].
+
+This tutorial will demonstrate the following steps with point data in `R`:
+
+-   Downloading data from a URL
+-   Importing data
+-   Checking data type, structure, and class
+-   Reclassifying data
+-   Computing summary and zonal statistics
+-   Plotting individual and multiple data sets
 
 ## Access, Download, and Unzip
 
