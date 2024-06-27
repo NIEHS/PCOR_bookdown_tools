@@ -17,23 +17,15 @@
 
 ### Motivation
 
-Environmental health research relies on various types of data to accurately measure, model, and predict exposures. Environmental data are often spatial (related to the surface of the Earth), temporal (related to a specific time/period of time), or spatio-temporal (related to the surface of the Earth for a specific time/period of time). These data are at the core of environmental health research, but the steps between identifying a geospatial data set or variable and using it to help answer a research question can be challenging.
-
-The chapters in the [Geospatial Data Foundations Unit](#unit-geospatial-foundations) are designed to introduce the necessary steps for conducting analyses with spatial data in R. They will introduce R packages that are equipped to handle spatial data, and will demonstrate how to access, import, and analyze three different types of spatial data. The tutorials will focus primarily on spatial data, but some aspects of temporal and spatio-temporal data will also be discussed.
+Environmental health research relies on various types of data to accurately measure, model, and predict exposures. Environmental data are often spatial (related to the surface of the Earth), temporal (related to a specific time or period of time), or spatio-temporal (related to the surface of the Earth for a specific time or period of time). Here, the term _geospatial_ will be used to refer to spatial and spatio-temporal data. These data are at the core of environmental health research, but the steps between identifying a geospatial data set or variable and using it to help answer a research question can be challenging.
 
 ### Objectives
 
-This chapter will introduce the key concepts and terminology used throughout the CHORDS Toolkit for geospatial data and geospatial analysis methods. Additionally, this chapter will introduce the public geospatial datasets and key `R` packages used in the tutorials in this unit. Please see the [Additional Resources](#chapter-getting-started-spatial-resources) Section for a list of other useful resources for getting started with geospatial data analysis in environmental health using `R`.
+The objectives of this chapter are to: 
+1. Introduce concepts and terminology used throughout the CHORDS Toolkit for geospatial data and geospatial analysis methods. 2. Describe the public geospatial datasets and `R` packages used in the following tutorials.
+3. Provide a list of other useful resources for getting started with geospatial data analysis in environmental health using `R`.
 
-In the following chapters in the [Geospatial Data Foundations Unit](#unit-geospatial-foundations), users will learn about the following topics related to spatial data in `R`:
-
--   Point, polygon, and raster data types
--   Downloading data from a URL
--   Importing data
--   Checking data type, structure, and class
--   Reclassifying data
--   Computing summary and zonal statistics
--   Plotting individual and multiple data sets
+The following chapters in this unit will demonstrate how to use `R` to access, prepare, and analyze different types of geospatial data that are commonly used in environmental health applications. The tutorials will focus primarily on spatial data, but some aspects of temporal and spatio-temporal data will also be discussed.
 
 ## Concepts and Terminology
 
@@ -56,7 +48,7 @@ Coordinate reference systems (CRS) are important for spatial analyses as they de
 
 For the following analyses which focus on the conterminous United States, the Albers Equal Area projection (EPSG Code: 5070) will be utilized.
 
-## Data Sources
+## Data Sets
 
 The exploratory analyses utilize free and publicly available environmental data. The code chunks are designed to access each specific file used for the exploratory analyses, but a description of each data source and data set is available below.
 
