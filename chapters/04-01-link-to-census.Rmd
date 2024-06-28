@@ -1,8 +1,9 @@
 # Linkage to Census Units {#chapter-link-to-census}
 
-[![Profile-STU](images/user_profiles/profilestu.svg)](#profilestu)
 [![Profile-CMP](images/user_profiles/profilecmp.svg)](#profilecmp)
 [![Profile-CDM](images/user_profiles/profilecdm.svg)](#profilecdm)
+[![Profile-CHW](images/user_profiles/profilechw.svg)](#profilechw)
+[![Profile-STU](images/user_profiles/profilestu.svg)](#profilestu)
 
 ### Linking Geocoded Addresses to Census Units and Social Determinants of Health Data in R {-}
 
@@ -10,7 +11,7 @@
 
 **Author**: Lara P. Clark [![author-lpc](images/orcid.png){width=10}](https://orcid.org/0000-0001-6940-5442)
 
-**Key Terms**: [Data Integration](https://tools.niehs.nih.gov/cchhglossary/?keyword=data+integration&termOnlySearch=true&exactSearch=true), [Social Determinants of Health](https://tools.niehs.nih.gov/cchhglossary/?keyword=social+determinants+of+health+(sdoh)&termOnlySearch=true&exactSearch=true), [Geocoded Address](#def-geocoded-address), [Geographic Unit](#def-geographic-unit), [Geoid](#def-geoid)
+**Key Terms**: [Data Integration](https://tools.niehs.nih.gov/cchhglossary/?keyword=data+integration&termOnlySearch=true&exactSearch=true), [Social Determinants of Health](https://tools.niehs.nih.gov/cchhglossary/?keyword=social+determinants+of+health+(sdoh)&termOnlySearch=true&exactSearch=true), [Geocoded Address](#def-geocoded-address), [GeoID](#def-geoid), [Geographic Unit](#def-geographic-unit)
 
 **Programming Language**: R
 
@@ -24,11 +25,11 @@ This tutorial provides example code in `R`:
 
 ### Motivation
 
-Linking geocoded addresses to US Census geographic units is a common step in environmental health data integration workflows. First, using geographic information systems (GIS) software, the geocoded addresses are mapped to the specific Census geographic units (e.g., Census tracts) in which they are located. Second, the Census geographic unit identifying code (or, [geoid](https://www.census.gov/programs-surveys/geography/guidance/geo-identifiers.html)) is matched to each geocoded address. The result is a table of geocoded addresses and their corresponding Census geoids.
+Linking geocoded addresses to US Census geographic units is a common step in environmental health data integration workflows. First, using geographic information systems (GIS) software, the geocoded addresses are mapped to the specific Census geographic units (e.g., Census tracts) in which they are located. Second, the Census geographic unit identifying code (or, [geoID](https://www.census.gov/programs-surveys/geography/guidance/geo-identifiers.html)) is matched to each geocoded address. The result is a table of geocoded addresses and their corresponding Census geoIDs.
 
-The Census geoids can then serve as the basis for linking additional data to each geocoded address. Many types of data with importance for environmental health applications are available by Census geoid. Specifically, the Census collects and provides data by Census geoid for various social determinants of health (SDOH). Such Census SDOH data describe poverty, race/ethnicity, language, housing, and other socioeconomic characteristics. Increasingly, other data providers (e.g., other government agencies, research institutions, community science groups) are making their data available by Census geoid to help facilitate linkages with SDOH data. Such data cover various environment, climate, health, and built environment characteristics.
+The Census geoIDs can then serve as the basis for linking additional data to each geocoded address. Many types of data with importance for environmental health applications are available by Census geoID. Specifically, the Census collects and provides data by Census geoID for various social determinants of health (SDOH). Such Census SDOH data describe poverty, race/ethnicity, language, housing, and other socioeconomic characteristics. Increasingly, other data providers (e.g., other government agencies, research institutions, community science groups) are making their data available by Census geoID to help facilitate linkages with SDOH data. Such data cover various environment, climate, health, and built environment characteristics.
 
-Example environmental health data sources readily available by Census geoid from US federal agencies include the following:
+Example environmental health data sources readily available by Census geoID from US federal agencies include the following:
 
 | Data source                                                                                           | Geographic units        | Example topics                                                                                                   |
 |-----------------------|-------------------------|------------------------|
@@ -40,7 +41,7 @@ Example environmental health data sources readily available by Census geoid from
 
 The Census defines [geographic boundaries](https://www.census.gov/newsroom/blogs/random-samplings/2014/07/understanding-geographic-relationships-counties-places-tracts-and-more.html) at various spatial scales. Common examples in environmental health workflows include (from coarsest to finest spatial scale): states, counties, tracts, block groups, and blocks. These boundaries are completely non-overlapping, such that block boundaries are nested within block groups, which are nested within tracts, which are nested within counties, which are nested within states.
 
-The Census defines the boundaries of tracts, block groups, and blocks to scale with local population: that is, in areas with higher population density (e.g., urban cores), these geographic units have finer spatial scale (i.e., smaller land area per unit) and in areas with lower population density (e.g., rural areas), the geographic units have coarser spatial scale (i.e., larger land area per unit). As a result, the spatial scale of geographic units varies substantially across the US. The shape of geographic units also varies substantially: the Census defines these boundaries to follow political boundaries (e.g., state boundaries) as well as physical features (e.g., roads, rivers), which often have irregular shapes.
+The Census defines the boundaries of tracts and block groups to scale with local population: that is, in areas with higher population density (e.g., urban cores), these geographic units have finer spatial scale (i.e., smaller land area per unit) and in areas with lower population density (e.g., rural areas), the geographic units have coarser spatial scale (i.e., larger land area per unit). As a result, the spatial scale of geographic units varies substantially across the US. The shape of geographic units also varies substantially: the Census defines these boundaries to follow political boundaries (e.g., state boundaries) as well as physical features (e.g., roads, rivers), which often have irregular shapes.
 
 ::: {.note}
 The variable shape and spatial scale of Census geographic units is in contrast with spatial grids-- in which each geographic unit (i.e., grid cell) has the same shape and spatial resolution. Such spatial grids are common for environment and climate data.
@@ -52,15 +53,15 @@ The following figure illustrates the variable spatial scale and shape of each ty
 
 <center>
 
-![Census geographic units in Durham County, North Carolina, in 2010](images/geography_durham_co.png)
+![Census geographic units in Durham County, North Carolina, in 2010](images/link_to_census/geography_durham_co.png)
 </center>
   
   
-The Census assigns a unique identifying code, or [geoid](https://www.census.gov/programs-surveys/geography/guidance/geo-identifiers.html), to each geographic unit. This Census geoid is also referred to as a FIPS (Federal Information Processing Series) code.
+The Census assigns a unique identifying code, or [geoID](https://www.census.gov/programs-surveys/geography/guidance/geo-identifiers.html), to each geographic unit. This Census geoID is also referred to as a FIPS (Federal Information Processing Series) code.
 
-The following table describes common types of Census geographic units and the structure of their geoids:
+The following table describes common types of Census geographic units and the structure of their geoIDs:
 
-| Geographic unit                 | Total units[^09-tutorial-link-point-to-census-geoid-1] | Geoid desciption and structure                                                                                                                                                                | Example unit geoid | Example unit name                                     |
+| Geographic Unit                 | Total Units[^09-tutorial-link-point-to-census-geoid-1] | GeoID Desciption and Structure                                                                                                                                                                | Example Unit GeoID | Example Unit Name                                     |
 |---------------|---------------|---------------|---------------|---------------|
 | State                           | 50                                                     | 2-digit state (S) code = SS                                                                                                                                                                   | 09                 | Connecticut (CT)                                      |
 | County                          | 3143                                                   | 5-digit code = 2-digit state (S) code + 3-digit county (C) code = SSCCC                                                                                                                       | 09007              | Middlesex County, CT                                  |
@@ -72,18 +73,18 @@ The following table describes common types of Census geographic units and the st
 [^09-tutorial-link-point-to-census-geoid-1]: Total number of geographic units in the US in 2020 (Source: [Census Bureau](https://www.census.gov/geographies/reference-files/time-series/geo/tallies.html))
 
 ::: {.note}
-For states, counties, tracts, block groups, and blocks: the geoids for the finer spatial scale units are constructed from the geoids for the coarser spatial scale units in which they are located. This makes it possible to extract, for example, the tract geoid from the block geoid based on digit number.
+For states, counties, tracts, block groups, and blocks: the geoIDs for the finer spatial scale units are constructed from the geoIDs for the coarser spatial scale units in which they are located. This makes it possible to extract, for example, the tract geoID from the block geoID based on digit number.
 :::
 
 ### Considerations
 
 The following are important considerations for linking geocoded addresses to Census geographic boundaries for environmental health applications.
 
-1.  **Temporal Considerations**: The Census [periodically updates its geographic boundaries](https://www.census.gov/content/dam/Census/library/publications/2020/acs/acs_geography_handbook_2020_ch02.pdf), such as tracts, block groups, and blocks. For example, the Census may add, remove, or modify specific geographic units (and associated geoids) as the population changes over time. Thus, it is important to select the correct years (or, [vintages](https://www.census.gov/content/dam/Census/library/publications/2020/acs/acs_geography_handbook_2020_ch02.pdf)) of Census geographic boundaries needed for linking each data source of interest. For example, linking SDOH data provided for year-2010 vintage Census tract boundaries would require the year-2010 vintage of Census tract geoids for each geocoded address.
+1.  **Temporal Considerations**: The Census [periodically updates its geographic boundaries](https://www.census.gov/content/dam/Census/library/publications/2020/acs/acs_geography_handbook_2020_ch02.pdf), such as tracts, block groups, and blocks. For example, the Census may add, remove, or modify specific geographic units (and associated geoIDs) as the population changes over time. Thus, it is important to select the correct years (or, [vintages](https://www.census.gov/content/dam/Census/library/publications/2020/acs/acs_geography_handbook_2020_ch02.pdf)) of Census geographic boundaries needed for linking each data source of interest. For example, linking SDOH data provided for year-2010 vintage Census tract boundaries would require the year-2010 vintage of Census tract geoIDs for each geocoded address.
 
 2.  **Spatial Scale Considerations**: The spatial scale of tracts, block groups, and blocks varies substantially across the US, with finer spatial scale in urban areas and coarser scale in rural areas. Thus, it is important to select the Census geographic boundary with appropriate spatial resolution for the specific environmental health application.
 
-3.  **Privacy Considerations**: Various web-based geocoding tools support look-up of Census geoids by street addresses or geographic coordinates. However, such web-based tools require sending geolocation information over the internet, which can risk exposing private geolocation information. To meet data protection guidelines for environmental health applications, this tutorial instead uses a fully offline approach for handling geolocation information.
+3.  **Privacy Considerations**: Various web-based geocoding tools support look-up of Census geoIDs by street addresses or geographic coordinates. However, such web-based tools require sending geolocation information over the internet, which can risk exposing private geolocation information. To meet data protection guidelines for environmental health applications, this tutorial instead uses a fully offline approach for handling geolocation information.
 
 ### Outline
 
@@ -120,7 +121,7 @@ library(tmap)
 
 The first step is to prepare the geocoded addresses (i.e., geographic coordinates or latitude/longitude) for mapping in `R`.
 
-For this tutorial, we will use sample public data to represent geocoded addresses of, for example, participants in a health cohort study. This sample public data will be the coordinates for the city halls of the five largest cities in North Carolina. The following code reads these coordinates into a table in `R` with columns for `id`, `latitude`, and `longitude`:
+For this tutorial, we will use sample public data to represent geocoded addresses of, for example, participants in a health cohort study. This sample public data will be the coordinates for the city halls of the five largest cities in North Carolina. These coordinates were identified by searching Google Maps. The following code reads these coordinates into a table in `R` with columns for `id`, `latitude`, and `longitude`:
 
 ```{r eval = FALSE}
 # create a table of sample public geocoded addresses
@@ -179,7 +180,7 @@ If you need to find the coordinate reference system information for your geoloca
 -   General documentation for data provider
 :::
 
-There are multiple formats available in `R` for [specifying the CRS](https://www.earthdatascience.org/courses/earth-analytics/spatial-data-r/understand-epsg-wkt-and-other-crs-definition-file-types/) : `proj4`, well known text (`wkt`), and European Petroleum Survey Group (`EPSG`) format. Here, we will specify the `WGS84` CRS using the `EPSG` format, which is a 4-digit numeric identifying code. We can look up the `EPSG` code for `WGS84` by searching a [spatial reference catalog](https://spatialreference.org/ref/epsg/). There, we find that the `EPSG` code is`4326`.
+There are multiple formats available in `R` for [specifying the CRS](https://www.earthdatascience.org/courses/earth-analytics/spatial-data-r/understand-epsg-wkt-and-other-crs-definition-file-types/): `proj4`, well known text (`wkt`), and European Petroleum Survey Group (`EPSG`) format [@wasser-lesson5]. Here, we will specify the `WGS84` CRS using the `EPSG` format, which is a 4-digit numeric identifying code. We can look up the `EPSG` code for `WGS84` by searching a [spatial reference catalog](https://spatialreference.org/ref/epsg/). There, we find that the `EPSG` code is`4326`.
 
 The following code transforms the table of city hall locations to a simple features object:
 
@@ -258,7 +259,7 @@ Here is the description of the simple features object produced by the code above
 # 6 MULTIPOLYGON (((-79.5684 34...      153      37
 ```
 
-Each tract has associated `geometry` in polygon format plus 14 additional attributes (i.e., variables, columns). Importantly, the Census tract geoid (i.e., [11-digit identifying code](#intro-census-geoids)) for year-2010 is stored in the column `GEOID10`.
+Each tract has associated `geometry` in polygon format plus 14 additional attributes (i.e., variables, columns). Importantly, the Census tract geoID (i.e., [11-digit identifying code](#intro-census-geoids)) for year-2010 is stored in the column `GEOID10`.
 
 We can see that the CRS listed above for the Census tract boundaries (`NAD83`) is different from the CRS for the city hall locations (`WGS84`). This will be important for the [linkage step](#link-to-census-step-3).
 
@@ -275,7 +276,7 @@ print(nc_tracts_2010_map)
 
 <center>
 
-![Census tracts in North Carolina in 2010](images/nc_tracts_2010_map.png)
+![Census tracts in North Carolina in 2010](images/link_to_census/nc_tracts_2010_map.png)
 </center>
 
 Other [types and vintages of Census geographic boundaries](https://github.com/walkerke/tigris) are available through `tigris` and the related `tidycensus` package [@r-tidycensus]. In most cases, these boundaries are available for recent years (i.e., 1990 to present) and are accessed by state (i.e., users can download geographic boundaries for one state at a time, in separate files).
@@ -286,7 +287,7 @@ Historic Census geographic boundaries (i.e., 1910 to present) are available thro
 
 ### Link Geocoded Addresses to Census Geographic Boundaries {#link-to-census-step-3}
 
-The third step is to link each geocoded addresses to the geoid of the Census geographic unit that contains it. To do this, we'll first need to prepare the geocoded addresses and Census geographic boundaries in the same CRS. The following code transforms the CRS of the geocoded addresses to match the the CRS of the Census geographic boundaries (`NAD83`) and then maps them together:
+The third step is to link each geocoded addresses to the geoID of the Census geographic unit that contains it. To do this, we'll first need to prepare the geocoded addresses and Census geographic boundaries in the same CRS. The following code transforms the CRS of the geocoded addresses to match the the CRS of the Census geographic boundaries (`NAD83`) and then maps them together:
 
 ```{r eval = FALSE}
 # transform city hall locations to match CRS of Census tracts
@@ -309,11 +310,11 @@ print(linkage_map)
 
 <center>
 
-![Census tracts in North Carolina in 2010 (grey) with sample geocoded addresses (red)](images/linkage_map.png)
+![Census tracts in North Carolina in 2010 (grey) with sample geocoded addresses (red)](images/link_to_census/linkage_map.png)
 
 </center>
 
-Now that the geocoded addresses and Census tracts are in the same CRS, we can link each geocoded address to the Census tract that contains it using a spatial join. The following code produces a table of geocoded addresses linked to Census tract geoids:
+Now that the geocoded addresses and Census tracts are in the same CRS, we can link each geocoded address to the Census tract that contains it using a spatial join. The following code produces a table of geocoded addresses linked to Census tract geoIDs:
 
 ```{r eval = FALSE}
 # link geocoded addresses to the Census tracts that contain them
@@ -321,7 +322,7 @@ geo_addresses_linkage_sf <- sf::st_join(geo_addresses_sf,
                                         nc_tracts_2010_sf,
                                         left = TRUE)
 
-# create linked table with geocoded addresses id paired with Census tract geoid
+# create linked table with geocoded addresses id paired with Census tract geoID
 geo_addresses_linkage_tbl <- sf::st_drop_geometry(geo_addresses_linkage_sf) %>%
   dplyr::rename(geoid_tract_2010 = GEOID10) %>%
   dplyr::select(id, geoid_tract_2010)
@@ -347,13 +348,13 @@ print(geo_addresses_linkage_tbl)
 
 ### Link AHRQ SDOH Data to Geocoded Addresses {#link-to-census-step-4}
 
-The fourth step is to link the AHRQ SDOH data to each geocoded address based on the Census geoid.
+The fourth step is to link the AHRQ SDOH data to each geocoded address based on the Census geoID.
 
 To start, we'll need to prepare the AHRQ SDOH data for Census tracts. This data is available to download as an Excel (XLSX) spreadsheet on the [AHRQ SDOH website](https://www.ahrq.gov/sdoh/data-analytics/sdoh-data.html) as shown in this screenshot:
 
 <center>
 
-![Screenshot of AHRQ SDOH Website (September 13, 2023)](images/screenshot_sdoh_table.png)
+![Screenshot of AHRQ SDOH Website (September 13, 2023)](images/link_to_census/screenshot_sdoh_table.png)
 
 </center>
 
@@ -361,19 +362,19 @@ Before linking, we'll need to check the vintage of Census tracts used in the AHR
 
 > The SDOH Database 2009 file has census tracts based on the 2000 census tract boundaries. The SDOH Database for 2010-2019 SDOH files uses 2010 census tract boundaries, and the 2020 file uses 2020 census tract boundaries.
 
-Based on this information, we can use the geoids for year-2010 vintage Census tracts we prepared for the geocoded addresses in the previous [step](#link-to-census-step-3) to link the AHRQ SDOH data for years 2010-2019. If we would instead prefer to link the AHRQ SDOH data for year 2009 or 2020, we would first need to repeat the previous [steps](#link-to-census-step-2) to link the geoids for year-2000 vintage or year-2020 vintage Census tracts, respectively, to the geocoded addresses.
+Based on this information, we can use the geoIDs for year-2010 vintage Census tracts we prepared for the geocoded addresses in the previous [step](#link-to-census-step-3) to link the AHRQ SDOH data for years 2010-2019. If we would instead prefer to link the AHRQ SDOH data for year 2009 or 2020, we would first need to repeat the previous [steps](#link-to-census-step-2) to link the geoIDs for year-2000 vintage or year-2020 vintage Census tracts, respectively, to the geocoded addresses.
 
-For this example, we will link the AHRQ SDOH data for Census tracts in 2010 to our sample geocoded addresses on the basis of the year-2010 Census tract geoid. The SDOH AHRQ data for Census tracts in 2010 is provided as an Excel file. Because Excel files can contain multiple sheets, we'll need to first download and open the Excel file to understand which sheet(s) to read into `R`:
+For this example, we will link the AHRQ SDOH data for Census tracts in 2010 to our sample geocoded addresses on the basis of the year-2010 Census tract geoID. The SDOH AHRQ data for Census tracts in 2010 is provided as an Excel file. Because Excel files can contain multiple sheets, we'll need to first download and open the Excel file to understand which sheet(s) to read into `R`:
 
 <center>
 
-![Screenshot of first sheet in Excel file (September 14, 2023)](images/screenshot_sdoh_xls_1.png)
+![Screenshot of first sheet in Excel file (September 14, 2023)](images/link_to_census/screenshot_sdoh_xls_1.png)
 
-![Screenshot of second sheet in Excel file (September 14, 2023)](images/screenshot_sdoh_xls_2.png)
+![Screenshot of second sheet in Excel file (September 14, 2023)](images/link_to_census/screenshot_sdoh_xls_2.png)
 
 </center>
 
-We find that the Excel file has two sheets: `Layout` and `Data`. The `Layout` sheet contains the data dictionary. The `Data` sheet contains \>300 columns of SDOH data by geoid for the \>70,000 Census tracts in the US in 2010.
+We find that the Excel file has two sheets: `Layout` and `Data`. The `Layout` sheet contains the data dictionary. The `Data` sheet contains \>300 columns of SDOH data by geoID for the \>70,000 Census tracts in the US in 2010.
 
 The following code downloads the Excel file and reads its `Data` sheet into a table in `R`:
 
@@ -408,10 +409,10 @@ head(sdoh_tracts_2010)
 # ℹ Use `colnames()` to see all variable names
 ```
 
-We can see that the variable `TRACTFIPS` contains the 11-digit geoid for Census tracts in character format, which matches the geoid format we prepared in the previous [step](#link-to-census-step-3) .
+We can see that the variable `TRACTFIPS` contains the 11-digit geoID for Census tracts in character format, which matches the geoID format we prepared in the previous [step](#link-to-census-step-3) .
 
 ::: {.note}
-For linkages based on geoid, it is important to check that the geoid is in the same format across data sources. We recommend using character format (rather than numeric format) for Census geoids. This will preserve padded zeroes in geoids (e.g., state geoid for Alabama is `01` rather than `1`) such that each type of geoid has the expected number of digits (e.g., 2-digits for state geoid).
+For linkages based on geoID, it is important to check that the geoID is in the same format across data sources. We recommend using character format (rather than numeric format) for Census geoIDs. This will preserve padded zeroes in geoIDs (e.g., state geoID for Alabama is `01` rather than `1`) such that each type of geoID has the expected number of digits (e.g., 2-digits for state geoID).
 :::
 
 For this example, we can choose to link the following sample of SDOH variables identified by exploring the `Layout` sheet:
@@ -422,10 +423,10 @@ For this example, we can choose to link the following sample of SDOH variables i
 
 -   `ACS_PCT_HU_NO_VEH`: Percentage of housing units with no vehicle available
 
-The following code joins those SDOH data variables to the geocoded addresses based on the Census tract geoid:
+The following code joins those SDOH data variables to the geocoded addresses based on the Census tract geoID:
 
 ```{r eval = FALSE}
-# rename geoid in SDOH table to match the geoid in the geocoded addresses table
+# rename geoID in SDOH table to match the geoID in the geocoded addresses table
 # select the SDOH variables of interest
 sdoh_tracts_2010_tbl <- sdoh_tracts_2010_tbl %>%
   dplyr::rename(geoid_tract_2010 = TRACTFIPS) %>%
@@ -434,7 +435,7 @@ sdoh_tracts_2010_tbl <- sdoh_tracts_2010_tbl %>%
                 POS_DIST_ED_TRACT,
                 ACS_PCT_HU_NO_VEH)
 
-# join the SDOH table to the geocoded addresses based on geoid
+# join the SDOH table to the geocoded addresses based on geoID
 geo_addresses_sdoh_tbl <- dplyr::left_join(geo_addresses_linkage_tbl,
                                            sdoh_tracts_2010_tbl,
                                            by = "geoid_tract_2010")

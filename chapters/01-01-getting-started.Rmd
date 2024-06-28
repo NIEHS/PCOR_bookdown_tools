@@ -1,0 +1,113 @@
+
+# Getting Started {#chapter-getting-started-spatial}
+
+[![Profile-CMP](images/user_profiles/profilecmp.svg)](#profilecmp) [![Profile-SBS](images/user_profiles/profilesbs.svg)](#profilesbs) [![Profile-STU](images/user_profiles/profilestu.svg)](#profilestu)
+
+### Getting Started with Geospatial Data Analysis in Environmental Health Using R {-}
+
+**Date Modified:** June 25, 2024
+
+**Authors:** Mitchell Manware [![author-mm](images/orcid.png){width="10"}](https://orcid.org/0009-0003-6440-6106),  Lara P. Clark [![author-lpc](images/orcid.png){width=10}](https://orcid.org/0000-0001-6940-5442), Kyle P. Messier [![author-kpm](images/orcid.png){width="10"}](https://orcid.org/0000-0001-9508-9623)
+
+**Key Terms:** [Environmental Health](https://tools.niehs.nih.gov/cchhglossary/?keyword=environmental+health&termOnlySearch=true&exactSearch=true), [Geospatial Data](#def-geospatial-data)
+
+**Programming Language:** R
+
+## Introduction
+
+### Motivation
+
+Environmental health research relies on various types of data to accurately measure, model, and predict exposures. Environmental data are often spatial (related to the surface of the Earth), temporal (related to a specific time or period of time), or spatio-temporal (related to the surface of the Earth for a specific time or period of time). Here, the term _geospatial_ will be used to refer to spatial and spatio-temporal data. These data are at the core of environmental health research, but the steps between identifying a geospatial data set or variable and using it to help answer a research question can be challenging.
+
+### Objectives
+
+The objectives of this chapter are to:
+
+1. Introduce concepts and terminology used throughout the CHORDS Toolkit for geospatial data and geospatial analysis methods.
+2. Describe the geospatial datasets and `R` packages used in the following tutorials.
+3. Provide a list of useful resources for getting started with `R` and for further exploration of geospatial data analysis methods in environmental health.
+
+The following chapters in this unit will demonstrate how to use `R` to access, prepare, and analyze different types of geospatial data that are commonly used in environmental health applications. The tutorials will focus primarily on spatial data, but some aspects of temporal and spatio-temporal data will also be discussed.
+
+## Concepts and Terminology
+
+### Spatial Geometry
+
+The _spatial geometry_ of a geospatial dataset is an important consideration in data analysis pipelines.
+
+There are three main spatial geometry types: point, line, and area (i.e., polygon or grid). _Points_ are represented by geographic coordinates (latitude and longitude pairs), _lines_ by a series of connected points, and _polygons_ by a series of connected points that completely enclose and define an area. In contrast to polygons, which can define irregular or non-uniform areas, _grids_ define regular and uniform areas (e.g., such that each gridcell has the same area). Point, line, and polygon data is referred to as _vector_ data, and grid data is referred to as _raster_ data. For detailed descriptions of vector data, raster data, and the differences between them, respectively, see @r-sf-1, @raster-data, and @geocomputation-2. 
+
+The following table illustrates common examples of each spatial geometry type used in environmental health applications:
+
+|Type  |Illustration |Examples                                      |Tutorials  |
+|------|-------------|----------------------------------------------|----------|
+|Point (Vector) |![](images/intro_to_spatial/illustration-point.png){width=60%} |Air pollution monitors, Weather stations, Patient geocoded addresses, Healthcare facility coordinates |[Point Data](#chapter-point-data) |
+|Line (Vector) |![](images/intro_to_spatial/illustration-line.png){width=60%} |Roads, Commute routes | |
+|Polygon (Vector)|![](images/intro_to_spatial/illustration-polygon.png){width=60%} |Wildfire smoke plumes, Census boundaries |[Polygon Data](#chapter-polygon-data) |
+|Grid (Raster) |![](images/intro_to_spatial/illustration-grid.png){width=60%} |Land cover imagery from satellites, Meteorological model output, Gridded population counts |[Raster Data](#chapter-raster-data) |
+
+The tutorials linked in the table above demonstrate exploratory analyses with each spatial geometry data type.
+
+### Coordinate Reference Systems and Projections {#getting-started-spatial-crs}
+
+Coordinate reference systems (CRS) are important for spatial analyses as they define how spatial data align with the Earth's surface [@geocomputation-24]. Transforming (projecting) the data to a different CRS may be necessary when combining multiple datasets or creating visuals for particular areas of interest. It is important to note that transforming spatial data can cause distortions in its area, direction, distance, or shape [@geocomputation-24]. The direction and magnitude of these distortions vary depending on the chosen CRS, area of interest, and type of data [@article_steinwand1995reprojection]. For guidance on selecting an appropriate CRS based on the data, area of interest, and analysis goals, see [_Choose the Right Projection_](https://learn.arcgis.com/en/projects/choose-the-right-projection/.) [@arcgis-crs] and [_Map Projections_](https://pubs.usgs.gov/gip/70047422/report.pdf) [@usgs-projections].
+
+## Datasets
+
+The tutorials in this unit demonstrate the use of geospatial data using the following publicly available datasets: 
+
+| Data Provider   | Dataset         | Type  |
+|-----------------|-----------------|-------|
+| Environmental Protection Agency (EPA) | [PM~2.5~ Daily Observations](https://aqs.epa.gov/aqsweb/airdata/download_files.html) | Point |
+| National Oceanic and Atmospheric Administration (NOAA) | [Wildfire Smoke Plumes](https://www.ospo.noaa.gov/Products/land/hms.html) | Polygon |
+| United States Census Bureau | [United States Cartographic Boundary](https://www.census.gov/geographies/mapping-files/time-series/geo/carto-boundary-file.html) | Polygon |
+| National Oceanic and Atmospheric Administration (NOAA) | [Land Surface Temperature](https://psl.noaa.gov/data/gridded/data.narr.html) | Raster |
+
+## `R` Packages
+
+The tutorials in this unit demonstrate the use of the following `R` packages:
+
+-   **Spatial Analysis:** [`sf`](https://cran.r-project.org/web/packages/sf/sf.pdf) [@r-sf-1; @r-sf-2], [`terra`](https://cran.r-project.org/web/packages/terra/terra.pdf) [@r-terra], [`tidyterra`]((https://cran.r-project.org/web/packages/tidyterra/tidyterra.pdf)) [@r-tidyterra]
+
+-   **Data Visualization:** [`ggplot2`](https://cran.r-project.org/web/packages/ggplot2/ggplot2.pdf), [@r-ggplot2], [`ggpubr`](https://cran.r-project.org/web/packages/ggpubr/ggpubr.pdf) [@r-ggpubr]
+
+-   **Data Processing:** [`dplyr`](https://cran.r-project.org/web/packages/dplyr/dplyr.pdf) [@r-dplyr]
+
+The following code installs and imports the packages used in this unit:
+
+::: note
+Installing and importing new packages may required `R` to restart.
+:::
+
+```{r, eval = FALSE}
+vignette_packages <- c(
+  "dplyr", "ggplot2", "ggpubr", "sf",
+  "terra", "tidyterra", "utils"
+)
+
+for (v in seq_along(vignette_packages)) {
+  if (vignette_packages[v] %in% installed.packages() == FALSE) {
+    install.packages(vignette_packages[v])
+  }
+}
+
+library(dplyr)
+library(ggplot2)
+library(ggpubr)
+library(sf)
+library(terra)
+library(tidyterra)
+library(utils)
+```
+
+## Resources {#chapter-getting-started-spatial-resources}
+
+This section highlights resources for getting started with `R`, geospatial data analysis, and/or climate change and human health related research methods.
+
+- The BUSPH-HSPH Climate Change and Health Research Coordinating Center ([CAFÉ](https://climatehealthcafe.org)) provides training and education materials for climate change and human health research in different formats for various types of users. The [Climate CAFÉ Tutorials and Code Walkthroughs](https://climate-cafe.github.io/cafe_github_org.html) demonstrate geospatial data management and analysis in climate change and human health research using `R`. CAFÉ also provides a series of [video tutorials](https://climatehealthcafe.org/training) demonstrating the use of geographic information systems (GIS) in environmental health and a list of [educational materials on climate and health](https://climatehealthcafe.org/training).
+
+- The [inTelligence And Machine lEarning (TAME) Toolkit](https://uncsrp.github.io/Data-Analysis-Training-Modules/) provides tutorials for data generation, management, and analysis in environmental health research using `R`. The TAME Toolkit [Chapter 1](https://uncsrp.github.io/Data-Analysis-Training-Modules/introduction-to-coding-in-r.html#introduction-to-coding-in-r) includes a guide for installing and getting started with `R` and an introduction to data science methods in `R`. The TAME Toolkit also includes tutorials with `R` code demonstrating geospatial data analysis methods in environmental health (e.g., [Chapter 3.3](https://uncsrp.github.io/Data-Analysis-Training-Modules/database-integration-air-quality-mortality-and-environmental-justice-data.html#database-integration-air-quality-mortality-and-environmental-justice-data)).
+
+- The [IPUMS DHS Climate Change and Health Research Hub](https://tech.popdata.org/dhs-research-hub/) provides tutorials with code in `R` demonstrating use of various climate and health datasets and analysis methods. IPUMS also provides a guide to [installing and setting up `R`](https://tech.popdata.org/dhs-research-hub/posts/2024-02-01-getting-started-with-r/) for use in climate change and health research.
+
+- The book [*Geocomputation with R*](https://r.geocompx.org/) provides resources for geospatial data analysis, visualization, and modeling with `R`. This book provides tutorials and examples from various disciplines that use geospatial data (e.g., transportation, ecology). This book covers introductory through advanced topics.

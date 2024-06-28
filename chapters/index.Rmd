@@ -1,11 +1,11 @@
 ---
 title: "The CHORDS Toolkit for Health and Geospatial Exposures Research"
-author: 
-date: '`r Sys.Date()`'
+date: "Last Modified: `r format(Sys.time(), '%B %d, %Y')` (Version 1.0)"
 site: bookdown::bookdown_site
 documentclass: book
-bibliography: [book.bib, packages.bib]
+bibliography: ["bibliography/book.bib", "bibliography/packages.bib"]
 biblio-style: apalike
+csl: "bibliography/chicago-author-date-with-note.csl"
 link-citations: true
 link-bibliography: true
 description: The CHORDS Toolkit provides guides, tools, and example code to support climate change and human health research.
@@ -33,43 +33,28 @@ The [Climate and Health Outcomes Research Data Systems (CHORDS)](https://www.nie
 
 ## About This Toolkit {-}
 
-### Getting Started {-}
-
 This toolkit provides guides, tools, and example code in `R`. The [CHORDS Toolkit GitHub repository](https://github.com/NIEHS/PCOR_bookdown_tools) provides the underlying code and data for this book. 
 
 The CHORDS toolkit has been developed to support different types of users, such as students, clinicians, and data managers. Please see the [User Profile Appendix](#chapter-user-profiles) for descriptions and suggested relevant toolkit chapters for each user profile. 
 
-This toolkit does require familiarity with the `R` programming language and the use of `R` for working with, visualizing, and analyzing scientific data. The [TAME Toolkit](https://uncsrp.github.io/Data-Analysis-Training-Modules/) provides resources for getting started with `R` for environmental health research. Additionally, the book [*Geocomputation with R*](https://r.geocompx.org/) provides resources for geospatial data analysis with `R`. 
+This toolkit requires familiarity with the `R` programming language and the use of `R` for working with, visualizing, and analyzing scientific data. Please see the [Getting Started](#chapter-getting-started-spatial-resources) chapter for a list of resources for getting started with `R` for geospatial data analysis in environmental health research.
 
 The toolkit consists of a series of chapters organized into the following units:
 
-- **Foundations**: This unit provides background, guidance and example code for working with different types of geospatial data common in environmental health research. This unit is intended as a starting point for users with less familiarity with geospatial data analysis methods in environmental health.
+- **Geospatial Data Foundations**: This unit provides background, guidance and example code for working with different types of geospatial data common in environmental health research. This unit is intended as a starting point for users with less familiarity with geospatial data and geospatial analysis methods in environmental health using `R`.
 
 - **Wildfire Data**: This unit provides guidance for working with different types of wildfire-related data in climate change and health research.
 
 - **Other Environmental Data**: This unit provides guidance and code for working with specific sources of environmental data common in environmental health research for characterizing environmental exposures as well as social determinants of health.
 
-- **Health Data Integration**: This unit provides guidance and code for integrating environmental and health data in climate change and health research, both at the individual level and at the population level. 
+- **Health Data Integration**: This unit provides guidance and code for integrating environmental and health data in climate change and health research, both at the individual level and at the population level.
 
-- **Case Studies**: This unit provides example case studies that analyze integrated wildfire-related data with health outcomes data.
+- **Case Studies**: This unit provides example case studies that analyze integrated wildfire-related data and other environmental exposures data with health outcomes data.
 
-The following toolkit chapters are currently in development:
+The CHORDS Toolkit is a work in progress. Please see the [CHORDS Toolkit GitHub repository](https://github.com/NIEHS/PCOR_bookdown_tools) for a list of chapters currently in development.
 
-|Unit              |Chapter Topic                     |Status          |
-|------------------|----------------------------------|----------------|  
-|Foundations       |Mapping Geospatial Data           |In Development  | 
-|Foundations       |Calculating Geospatial Covariates |In Development  |
-
+_This is a BETA Release. Please let us know of any improvements we can make._
 
 ### Funding {-}
 
 This resource was supported by the National Institutes of Health (NIH) from the National Institute of Environmental Health Sciences (NIEHS) and NIH Office of Data Science Strategy (ODSS), and the Department of Health and Human Services (DHHS) Office of the Assistant Secretary for Planning and Evaluation (ASPE) Office of the Secretary’s Patient Centered Outcomes Research Trust Fund (OS-PCORTF).
-
-### Authors {-}
-
-### Suggested Citation {-}
-
-
-
-
-

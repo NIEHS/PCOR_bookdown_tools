@@ -1,11 +1,14 @@
 # **A** User Profiles {#chapter-user-profiles .unnumbered}
 
-The CHORDS Toolkit chapters have been developed for various user profiles. 
-This appendix describes the user profiles and suggests relevant chapters for each.
+The CHORDS Toolkit chapters have been developed for various user profiles. This appendix describes the user profiles and suggests relevant chapters for each.
 
-## Clinical Data Manager  {#profilecdm .unnumbered .unlisted}
-![](images/user_profiles/profilecdm.svg)
+## Index {.unnumbered .unlisted}
 
+[Clinical Data Manager](#profilecdm) | [Clinical Researcher](#profilecre) | [Clinician/Medical Professional](#profilecmp) | [Community Health Worker](#profilechw) | [Educator](#profileedu) | [Epidemiologist](#profileepi) | [Geospatial Analyst](#profilegeo) | [Public Health Official](#profilepho) | [Social & Behavioral Scientist](#profilesbs) | [Student](#profilestu) | [Translational Researcher](#profiletlr)
+
+## Clinical Data Manager ![](images/user_profiles/profilecdm.svg) {#profilecdm .unnumbered .unlisted}
+
+::: glossaryterm
 **What is my area of expertise?**
 
 -   Advanced knowledge of health data systems
@@ -19,14 +22,16 @@ This appendix describes the user profiles and suggests relevant chapters for eac
 -   Readily computed sociodemographic metrics
 -   Exposure and sociodemographic measures that are directly comparable with related measures from other studies
 
-**Relevant Chapters**
+**Relevant Chapters:**
 
 -   [NASA EarthData Download](#chapter-nasa-earthdata)
--   [Linkage to Exposures](#chapter-chords-geo-exposures)
+-   [Linkage to Census Units](#chapter-link-to-census)
+-   [A FHIR PIT Tutorial](#chapter-fhir-pit)
+:::
 
-## Clinical Researcher {#profilecre .unnumbered .unlisted}
-![](images/user_profiles/profilecre.svg)
+## Clinical Researcher ![](images/user_profiles/profilecre.svg) {#profilecre .unnumbered .unlisted}
 
+::: glossaryterm
 **What is my area of expertise?**
 
 -   In-depth knowledge of health data systems
@@ -43,9 +48,14 @@ This appendix describes the user profiles and suggests relevant chapters for eac
 -   Methods to integrate measures across different spatial geographies
 -   Methods to readily assess known and predicted impacts of exposures on human health
 
-## Clinician/Medical Professional {#profilecmp .unnumbered .unlisted}
-![](images/user_profiles/profilecmp.svg)
+**Relevant Chapters:**
 
+-   [A FHIR PIT Tutorial](#chapter-fhir-pit)
+:::
+
+## Clinician/Medical Professional ![](images/user_profiles/profilecmp.svg) {#profilecmp .unnumbered .unlisted}
+
+::: glossaryterm
 **What is my area of expertise?**
 
 -   Advanced knowledge of health conditions and mechanisms of disease 
@@ -62,15 +72,16 @@ This appendix describes the user profiles and suggests relevant chapters for eac
 -   Methods for collecting, managing, and analyzing data
 -   Strategies for interpreting analytical results
 
-**Relevant Chapters**
+**Relevant Chapters:**
 
--   [Spatial Data Analysis](#chapter-intro-spatial-data-analysis)
+-   [Geospatial Data Foundations Unit](#unit-geospatial-foundations)
+-   [A FHIR PIT Tutorial](#chapter-fhir-pit)
 -   [Linkage to Census Units](#chapter-link-to-census)
--   [Linkage to Exposures](#chapter-chords-geo-exposures)
+:::
 
-## Community Health Worker {#profilechw .unnumbered .unlisted}
-![](images/user_profiles/profilechw.svg)
+## Community Health Worker ![](images/user_profiles/profilechw.svg) {#profilechw .unnumbered .unlisted}
 
+::: glossaryterm
 **What is my area of expertise?**
 
 -   Familiarity with general exposures and related health outcomes of interest
@@ -85,9 +96,14 @@ This appendix describes the user profiles and suggests relevant chapters for eac
 -   Key findings or strategies for interpreting analytical results
 -   Data visualizations and other related tools
 
-## Educator {#profileedu .unnumbered .unlisted}
-![](images/user_profiles/profileedu.svg)
+**Relevant Chapters:**
 
+-   [Linkage to Census Units](#chapter-link-to-census)
+:::
+
+## Educator ![](images/user_profiles/profileedu.svg) {#profileedu .unnumbered .unlisted}
+
+::: glossaryterm
 **What is my area of expertise?**
 
 -   In-depth knowledge of health data systems
@@ -101,13 +117,14 @@ This appendix describes the user profiles and suggests relevant chapters for eac
 -   Readily computed sociodemographic metrics
 -   Exposure and sociodemographic measures that are directly comparable with related measures from other studies
 
-**Relevant Chapters**
+**Relevant Chapters:**
 
 -   [NASA EarthData Download](#chapter-nasa-earthdata)
+:::
 
-## Epidemiologist {#profileepi .unnumbered .unlisted}
-![](images/user_profiles/profileepi.svg)
+## Epidemiologist ![](images/user_profiles/profileepi.svg) {#profileepi .unnumbered .unlisted}
 
+::: glossaryterm
 **What is my area of expertise?**
 
 -   Background knowledge of the key risk factors that influence the mechanism of the health outcome
@@ -124,11 +141,11 @@ This appendix describes the user profiles and suggests relevant chapters for eac
 -   Health data that capture information on the disease or condition of interest
 -   Methods to integrate measures across different spatial geographies
 -   Methods to readily identify known and predicted impacts of exposures on human health
+:::
 
+## Geospatial Analyst ![](images/user_profiles/profilegeo.svg) {#profilegeo .unnumbered .unlisted}
 
-## Geospatial Analyst {#profilegeo .unnumbered .unlisted}
-![](images/user_profiles/profilegeo.svg)
-
+::: glossaryterm
 **What is my area of expertise?**
 
 -   Background knowledge of the key sources and patterns of exposure of interest 
@@ -144,13 +161,14 @@ This appendix describes the user profiles and suggests relevant chapters for eac
 -   Methods to integrate measures across different spatial geographies
 -   Methods to calculate and predict exposures from multiple sources and time periods
 
-**Relevant Chapters**
+**Relevant Chapters:**
 
--   [NASA EarthData](#chapter-nasa-earthdata)
+-   [NASA EarthData Download](#chapter-nasa-earthdata)
+:::
 
-## Public Health Official {#profilepho .unnumbered .unlisted}
-![](images/user_profiles/profilepho.svg)
+## Public Health Official ![](images/user_profiles/profilepho.svg) {#profilepho .unnumbered .unlisted}
 
+::: glossaryterm
 **What is my area of expertise?**
 
 -   Familiarity with the exposures and typical health outcomes of interest
@@ -164,10 +182,11 @@ This appendix describes the user profiles and suggests relevant chapters for eac
 -   Health data that capture information on the diseases or conditions of interest
 -   Key findings or strategies for interpreting analytical results
 -   Data visualizations and other related tools
+:::
 
-## Social & Behavioral Scientist {#profilesbs .unnumbered .unlisted}
-![](images/user_profiles/profilesbs.svg)
+## Social & Behavioral Scientist ![](images/user_profiles/profilesbs.svg) {#profilesbs .unnumbered .unlisted}
 
+::: glossaryterm
 **What is my area of expertise?**
 
 -   Background knowledge of the key exposures and risk factors that influence the mechanism of the health outcome
@@ -185,13 +204,14 @@ This appendix describes the user profiles and suggests relevant chapters for eac
 -   Methods to integrate measures across different spatial geographies
 -   Methods to readily identify known and predicted impacts of exposures on human health
 
-**Relevant Chapters**
+**Relevant Chapters:**
 
--   [Spatial Data Analysis](#chapter-intro-spatial-data-analysis)
+-   [Geospatial Data Foundations Unit](#unit-geospatial-foundations)
+:::
 
-## Student {#profilestu .unnumbered .unlisted}
-![](images/user_profiles/profilestu.svg)
+## Student ![](images/user_profiles/profilestu.svg) {#profilestu .unnumbered .unlisted}
 
+::: glossaryterm
 **What is my area of expertise?**
 
 -   Background knowledge of the typical health outcomes of interest and key exposures and risk factors influencing these health outcomes
@@ -208,15 +228,15 @@ This appendix describes the user profiles and suggests relevant chapters for eac
 -   Methods to integrate measures across different spatial geographies
 -   Methods for collecting, managing, and analyzing data
 
-**Relevant Chapters**
+**Relevant Chapters:**
 
--   [Spatial Data Analysis](#chapter-intro-spatial-data-analysis)
+-   [Geospatial Data Foundations Unit](#unit-geospatial-foundations)
 -   [Linkage to Census Units](#chapter-link-to-census)
--   [Linkage to Exposures](#chapter-chords-geo-exposures)
+:::
 
-## Translational Researcher {#profiletlr .unnumbered .unlisted}
-![](images/user_profiles/profiletlr.svg)
+## Translational Researcher ![](images/user_profiles/profiletlr.svg) {#profiletlr .unnumbered .unlisted}
 
+::: glossaryterm
 **What is my area of expertise?**
 
 -   Background knowledge of the key exposures and risk factors that influence the mechanism of the health outcome
@@ -233,3 +253,4 @@ This appendix describes the user profiles and suggests relevant chapters for eac
 -   Health data that capture information on the disease or condition of interest
 -   Methods to integrate measures across different spatial geographies
 -   Methods to readily assess known and predicted impacts of exposures on human health
+:::

@@ -2,21 +2,56 @@
 
 Key terms used in the CHORDS Toolkit are defined below and in the [NIEHS Climate Change and Human Health Glossary](https://tools.niehs.nih.gov/cchhglossary/).
 
----
+## Index {.unnumbered .unlisted}
 
+**A** | **B** | **C** | **D** | [**E**](#def-e) | [**F**](#def-f) | [**G**](#def-g) | **H** | **I** | **J** | **K** | **L** | **M** | **N** | **O** | **P** | **Q** | **R** | **S** | **T** | **U** | **V** | **W** | **X** | **Y** | **Z**
+
+### E {#def-e .unnumbered .unlisted}
+
+::: glossaryterm
+#### Electronic Health Record (EHR) {#def-ehr .unnumbered .unlisted}
+
+The digital files describing a patient's medical history that are maintained by a health provider. EHRs contain information such as demographics, progress notes, diagnoses, medications, and test results.
+                                                                               
+**Context:** EHRs are common data sources in various environmental health applications.
+
+<font size ="2"> 
+Categories: [Health-Related, Health Outcomes](https://tools.niehs.nih.gov/cchhglossary/?category=HRHO)   
+Related Terms: [FHIR](#def-fhir) 
+</font>
+:::
+
+### F {#def-f .unnumbered .unlisted}
+
+::: glossaryterm
+#### FHIR {#def-fhir .unnumbered .unlisted}
+
+A technical standard for health care data exchange. Source: [HL7](http://hl7.org/fhir/). 
+                                                                               
+**Context:** FHIR-based tools can be used to process data from EHRs for use in environmental health applications.
+
+<font size ="2"> 
+Categories: [Health-Related, Health Outcomes](https://tools.niehs.nih.gov/cchhglossary/?category=HRHO)    
+Related Terms: [Electronic Health Record](#def-ehr) 
+</font>
+:::
+
+### G {#def-g .unnumbered .unlisted}
+
+::: glossaryterm
 #### Geocoded Address {#def-geocoded-address .unnumbered .unlisted}
 
 The geographic coordinates (i.e., latitude and longitude) associated with a street address (e.g., home or work location).  
-                                                                               
+                                                                              
 **Context:** Geocoded addresses are commonly used as a basis for geospatial exposure assessment for individuals.
 
 <font size ="2"> 
-Categories: [Research Methods](https://tools.niehs.nih.gov/cchhglossary/?category=RM)   
+Categories: [Research Methods](https://tools.niehs.nih.gov/cchhglossary/?category=RM)     
 Related Terms: [Geocoding](#def-geocoding) 
 </font>
+:::
 
----
-
+::: glossaryterm
 #### Geocoding {#def-geocoding .unnumbered .unlisted}
 
 The process of converting place names or street addresses to geographic coordinates (i.e., latitude and longitude).
@@ -27,9 +62,9 @@ The process of converting place names or street addresses to geographic coordina
 Categories: [Research Methods](https://tools.niehs.nih.gov/cchhglossary/?category=RM)   
 Related Terms: [Geocoded Address](#def-geocoded-address) 
 </font>
+:::
 
----
-
+::: glossaryterm
 #### Geographic Unit (Areal Unit) {#def-geographic-unit .unnumbered .unlisted}
 
 A specific place defined by administrative or political geographic boundaries (e.g., state, census tract, country, postal code), environmental boundaries (e.g., watershed) or a grid (e.g., grid cell in a 1 km grid).
@@ -39,22 +74,22 @@ A specific place defined by administrative or political geographic boundaries (e
 <font size ="2"> 
 Categories: [Research Methods](https://tools.niehs.nih.gov/cchhglossary/?category=RM)   
 </font>
+:::
 
----
-
-#### Geoid {#def-geoid .unnumbered .unlisted}
+::: glossaryterm
+#### GeoID {#def-geoid .unnumbered .unlisted}
 
 A unique identifying code for a place or geographic unit (e.g., census tract, city, postal code, land parcel, watershed).
                                                                                
-**Context:** Geoid is commonly used as a basis for data integration at the individual and population level.
+**Context:** GeoID is commonly used as a basis for data integration at the individual and population level.
 
 <font size ="2"> 
 Categories: [Research Methods](https://tools.niehs.nih.gov/cchhglossary/?category=RM)   
-Related Terms: [Geocoding](#def-geocoding), [Data Integration](https://tools.niehs.nih.gov/cchhglossary/?keyword=data+integration&termOnlySearch=true&exactSearch=true)
+Related Terms: [Geographic Unit](#def-geographic-unit), [Data Integration](https://tools.niehs.nih.gov/cchhglossary/?keyword=data+integration&termOnlySearch=true&exactSearch=true)
 </font>
+:::
 
----
-
+::: glossaryterm
 #### Geospatial Data {#def-geospatial-data .unnumbered .unlisted}
 
 Data that includes information about specific times and places on the Earth.  
@@ -64,5 +99,4 @@ Data that includes information about specific times and places on the Earth.
 <font size ="2"> 
 Categories: [Research Methods](https://tools.niehs.nih.gov/cchhglossary/?category=RM)   
 </font>
-
----
+:::
