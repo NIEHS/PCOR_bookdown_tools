@@ -66,7 +66,7 @@ The tutorials in this unit demonstrate the use of geospatial data using the foll
 The tutorials in this unit demonstrate the use of the following `R` packages:
 
 -   **Spatial Analysis**: `sf` [@r-sf-1; @r-sf-2], `terra` [@r-terra], `tidyterra` [@r-tidyterra]
--   **Data Vizualization**: `ggplot2` [@r-ggplot2], `ggpubr` [@ggpubr]
+-   **Data Vizualization**: `ggplot2` [@r-ggplot2], `ggpubr` [@r-ggpubr]
 -   **Data Processing**: `dplyr` [@r-dplyr]
 
 
@@ -97,10 +97,10 @@ library(tidyterra)
 library(utils)
 ```
 
-::: important
-The exploratory analyses in this unit are designed for educational purposes only. The results of the following analyses are not peer-reviewed findings, nor are they based on any hypotheses.
-:::
-
 ## Additional Resources {#chapter-getting-started-spatial-resources}
+
+This section lists useful resources for getting started with the `R` programming language, geospatial data analysis, and/or climate change and human health research methods.
+
+
 
 

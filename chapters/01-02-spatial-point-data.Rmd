@@ -16,7 +16,6 @@
 
 ## Introduction
 
-
 Air pollution monitoring data from the United States Environmental Protection Agency (EPA) will be used to demonstrate using point data with the `sf` package [@r-sf-1].
 
 This tutorial will demonstrate the following steps with point data in `R`:
@@ -27,6 +26,10 @@ This tutorial will demonstrate the following steps with point data in `R`:
 -   Reclassifying data
 -   Computing summary and zonal statistics
 -   Plotting individual and multiple data sets
+
+::: important
+The exploratory analyses in this unit are designed for educational purposes only. The results of the following analyses are not peer-reviewed findings, nor are they based on any hypotheses.
+:::
 
 ## Access, Download, and Unzip
 
