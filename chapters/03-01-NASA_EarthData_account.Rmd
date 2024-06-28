@@ -4,7 +4,7 @@
 
 ### Using NASA EarthData Account to Download Data in R {-}
 
-**Date Modified:** February 7, 2024
+**Date Modified:** June 28, 2024
 
 **Author:** Mitchell Manware [![author-mm](images/orcid.png){width=10}](https://orcid.org/0009-0003-6440-6106)
 
