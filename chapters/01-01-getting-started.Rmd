@@ -35,16 +35,18 @@ The following chapters in this unit will demonstrate how to use `R` to access, p
 
 The _spatial geometry_ of a geospatial dataset is an important consideration in data analysis pipelines.
 
-There are three main spatial geometry types: point, line, and area (i.e., polygon or grid). Uniform geometry data (i.e., grid) is referred to as _raster_ data, and non-uniform geometry data (i.e., point, line, polygon) is referred to as _vector_ data.  For detailed descriptions of vector data, raster data, and the differences between them, respectively, see @r-sf-1, @raster-data, and @geocomputation-2. 
+There are three main spatial geometry types: point, line, and area (i.e., polygon or grid). _Points_ are represented by geographic coordinates (latitude and longitude pairs), _lines_ by a series of connected points, and _polygons_ by a series of connected points that completely enclose and define an area. In contrast to polygons, which can define irregular or non-uniform areas, _grids_ define uniform areas (e.g., such that each gridcell has the same area). Point, line, and polygon data is referred to as _vector_ data, and grid data is referred to as _raster_ data. For detailed descriptions of the types of vector data, raster data, and the differences between them, respectively, see @r-sf-1, @raster-data, and @geocomputation-2. 
 
 The following table illustrates common examples of each spatial geometry type used in environmental health applications:
 
-|Type  |Illustration |Examples                                      |Chapters |
-|------|-------------|----------------------------------------------|---------|
+|Type  |Illustration |Examples                                      |Tutorials  |
+|------|-------------|----------------------------------------------|----------|
 |Point (Vector) |![](images/intro_to_spatial/illustration-point.png){width=60%} |Air pollution monitors, Weather stations, Patient geocoded addresses, Healthcare facility coordinates |[Point Data](#chapter-point-data) |
 |Line (Vector) |![](images/intro_to_spatial/illustration-line.png){width=60%} |Roads, Commute routes | |
 |Polygon (Vector)|![](images/intro_to_spatial/illustration-polygon.png){width=60%} |Wildfire smoke plumes, Census boundaries |[Polygon Data](#chapter-polygon-data) |
 |Grid (Raster) |![](images/intro_to_spatial/illustration-grid.png){width=60%} |Land cover imagery from satellites, Meteorological model output, Gridded population counts |[Raster Data](#chapter-raster-data) |
+
+See the tutorials linked in the table above for example exploratory analyses featuring each spatial geometry data type.
 
 ### Coordinate Reference Systems and Projections {#getting-started-spatial-crs}
 
@@ -65,10 +67,9 @@ The tutorials in this unit demonstrate the use of geospatial data using the foll
 
 The tutorials in this unit demonstrate the use of the following `R` packages:
 
--   **Spatial Analysis**: `sf` [@r-sf-1; @r-sf-2], `terra` [@r-terra], `tidyterra` [@r-tidyterra]
--   **Data Vizualization**: `ggplot2` [@r-ggplot2], `ggpubr` [@r-ggpubr]
--   **Data Processing**: `dplyr` [@r-dplyr]
-
+-   **Spatial Analysis:** `sf` [@r-sf-1; @r-sf-2], `terra` [@r-terra], `tidyterra` [@r-tidyterra]
+-   **Data Vizualization:** `ggplot2` [@r-ggplot2], `ggpubr` [@r-ggpubr]
+-   **Data Processing:** `dplyr` [@r-dplyr]
 
 The following code installs and imports the packages used in this unit:
 
