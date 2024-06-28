@@ -171,9 +171,9 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="1.1" data-path="chapter-getting-started-spatial.html"><a href="chapter-getting-started-spatial.html#introduction-1"><i class="fa fa-check"></i><b>1.1</b> Introduction</a></li>
 <li class="chapter" data-level="1.2" data-path="chapter-getting-started-spatial.html"><a href="chapter-getting-started-spatial.html#concepts-and-terminology"><i class="fa fa-check"></i><b>1.2</b> Concepts and Terminology</a></li>
-<li class="chapter" data-level="1.3" data-path="chapter-getting-started-spatial.html"><a href="chapter-getting-started-spatial.html#data-sources"><i class="fa fa-check"></i><b>1.3</b> Data Sources</a></li>
+<li class="chapter" data-level="1.3" data-path="chapter-getting-started-spatial.html"><a href="chapter-getting-started-spatial.html#datasets"><i class="fa fa-check"></i><b>1.3</b> Datasets</a></li>
 <li class="chapter" data-level="1.4" data-path="chapter-getting-started-spatial.html"><a href="chapter-getting-started-spatial.html#r-packages"><i class="fa fa-check"></i><b>1.4</b> <code>R</code> Packages</a></li>
-<li class="chapter" data-level="1.5" data-path="chapter-getting-started-spatial.html"><a href="chapter-getting-started-spatial.html#chapter-getting-started-spatial-resources"><i class="fa fa-check"></i><b>1.5</b> Additional Resources</a></li>
+<li class="chapter" data-level="1.5" data-path="chapter-getting-started-spatial.html"><a href="chapter-getting-started-spatial.html#chapter-getting-started-spatial-resources"><i class="fa fa-check"></i><b>1.5</b> Resources</a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="chapter-point-data.html"><a href="chapter-point-data.html"><i class="fa fa-check"></i><b>2</b> Point Data</a>
 <ul>
@@ -259,7 +259,19 @@ target="blank">Published with bookdown</a></li>
 </div>
 <div id="introduction-4" class="section level2 hasAnchor" number="4.1">
 <h2><span class="header-section-number">4.1</span> Introduction<a href="chapter-raster-data.html#introduction-4" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Air temperature data from the United States National Oceanic and Atmospheric Administration’s (NOAA) North American Regional Reanalysis (NARR) data set will be used to demonstrate using raster data with the <code>terra</code> package <span class="citation">(<a href="#ref-r-terra">Hijmans 2024</a>)</span>.</p>
+<p>Air temperature data from the United States National Oceanic and Atmospheric Administration’s (NOAA) North American Regional Reanalysis (NARR) data set will be used to demonstrate using raster (grid) data with the <code>terra</code> package <span class="citation">(<a href="#ref-r-terra">Hijmans 2024</a>)</span>.</p>
+<p>This tutorial will demonstrate the following steps with raster data in <code>R</code>:</p>
+<ul>
+<li>Downloading data from a URL</li>
+<li>Importing data</li>
+<li>Checking data type, structure, and class</li>
+<li>Reclassifying data</li>
+<li>Computing summary and zonal statistics</li>
+<li>Plotting individual and multiple data sets</li>
+</ul>
+<div class="important">
+<p>The exploratory analyses in this unit are designed for educational purposes only. The results of the following analyses are not peer-reviewed findings, nor are they based on any hypotheses.</p>
+</div>
 </div>
 <div id="raster-access" class="section level2 hasAnchor" number="4.2">
 <h2><span class="header-section-number">4.2</span> Access and Download<a href="chapter-raster-data.html#raster-access" class="anchor-section" aria-label="Anchor link to header"></a></h2>
