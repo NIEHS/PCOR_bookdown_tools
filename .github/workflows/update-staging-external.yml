@@ -38,7 +38,7 @@ jobs:
       - name: Sync files
         run: |
           cd ../
-          rsync -av --ignore-missing-args --exclude='.git' --exclude='.github' --exclude='.gitignore' --exclude='README.md' --delete ./PCOR_bookdown_staging/ ./PCOR_bookdown_tools/ || true
+          rsync -av --checksum --ignore-missing-args --exclude='.git' --exclude='.github' --exclude='.gitignore' --exclude='README.md' --delete ./PCOR_bookdown_staging/ ./PCOR_bookdown_tools/ || true
           cd PCOR_bookdown_staging
           git add .
           git status
