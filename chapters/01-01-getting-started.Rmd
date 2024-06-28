@@ -50,19 +50,16 @@ The following table illustrates common examples of each spatial geometry type us
 
 Coordinate reference systems (CRS) are important for spatial analyses as they define how spatial data align with the Earth's surface [@geocomputation-24]. Transforming (projecting) the data to a different CRS may be necessary when combining multiple datasets or creating visuals for particular areas of interest. It is important to note that transforming spatial data can cause distortions in its area, direction, distance, or shape [@geocomputation-24]. The direction and magnitude of these distortions vary depending on the chosen CRS, area of interest, and type of data [@article_steinwand1995reprojection]. For guidance on selecting an appropriate CRS based on the data, area of interest, and analysis goals, see @arcgis-crs and @usgs-projections.
 
-## Data Sets
+## Datasets
 
-The exploratory analyses utilize free and publicly available environmental data. The code chunks are designed to access each specific file used for the exploratory analyses, but a description of each data source and data set is available below.
+The tutorials in this unit demonstrate the use of geospatial data using the following publicly available datasets: 
 
-| Producer | Data | Data Type |
-|-----------------|----------------|-------|
+| Data Provider   | Dataset         | Type  |
+|-----------------|-----------------|-------|
 | Environmental Protection Agency (EPA) | [PM~2.5~ Daily Observations](https://aqs.epa.gov/aqsweb/airdata/download_files.html) | Point |
 | National Oceanic and Atmospheric Administration (NOAA) | [Wildfire Smoke Plumes](https://www.ospo.noaa.gov/Products/land/hms.html) | Polygon |
 | United States Census Bureau | [United States Cartographic Boundary](https://www.census.gov/geographies/mapping-files/time-series/geo/carto-boundary-file.html) | Polygon |
 | National Oceanic and Atmospheric Administration (NOAA) | [Land Surface Temperature](https://psl.noaa.gov/data/gridded/data.narr.html) | Raster |
-
-: Exploratory analyses data sources
-
 
 ## `R` Packages
 
