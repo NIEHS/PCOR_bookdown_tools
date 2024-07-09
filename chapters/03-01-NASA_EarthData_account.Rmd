@@ -77,6 +77,8 @@ Without the prerequisite files the download step run without error, but trying t
 
 To demonstrate, try to download population density data [@sedac-gpwv4] from NASA's Socioeconomic Data and Applications Center (SEDAC) archive center.
 
+<figcaption>NASA SEDAC Population Density Data Characteristics</figcaption>
+
 |                |                                                                              |
 |-----------------|-----------------------------------------------------------|
 | **Metric**     | Population Density                                                           |
@@ -276,9 +278,9 @@ if (.Platform$OS.type == "windows") {
 Enter these commands, as well as your username, password, and home directory, without error. Even a single misplaced character can disrupt the verification of your EarthData credentials.
 :::
 
-## Download Data 
+## Download Data
 
-With the prerequisite files generated, try to download the SEDAC population data again.
+With the prerequisite files generated, try to download the SEDAC population density data again.
 
 ::: note
 Be sure to authorize the "SEDAC" applications at "My Profile"(<https://urs.earthdata.nasa.gov/profile>) under "Applications \> Authorized Apps" before running the following command.

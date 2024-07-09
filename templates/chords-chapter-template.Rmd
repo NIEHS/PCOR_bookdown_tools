@@ -92,7 +92,9 @@ You can add image files to the "images" folder and then add them to your chapter
   <figcaption>This is a Caption for the CHORDS Logo</figcaption>
 :::
 
-You can add a table like this:
+You can add a table with a caption like this:
+
+<figcaption>This is a Caption for an Example Table</figcaption>
 
 |A            |B             |C               |
 |-------------|--------------|----------------|  

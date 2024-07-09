@@ -29,7 +29,9 @@ Linking geocoded addresses to US Census geographic units is a common step in env
 
 The Census geoIDs can then serve as the basis for linking additional data to each geocoded address. Many types of data with importance for environmental health applications are available by Census geoID. Specifically, the Census collects and provides data by Census geoID for various social determinants of health (SDOH). Such Census SDOH data describe poverty, race/ethnicity, language, housing, and other socioeconomic characteristics. Increasingly, other data providers (e.g., other government agencies, research institutions, community science groups) are making their data available by Census geoID to help facilitate linkages with SDOH data. Such data cover various environment, climate, health, and built environment characteristics.
 
-Example environmental health data sources readily available by Census geoID from US federal agencies include the following:
+The following table lists example environmental health data sources readily available by Census geoID from US federal agencies.
+
+<figcaption>Example Environmental Health Data Sources</figcaption>
 
 | Data source                                                                                           | Geographic units        | Example topics                                                                                                   |
 |-----------------------|-------------------------|------------------------|
@@ -58,7 +60,9 @@ The following figure illustrates the variable spatial scale and shape of each ty
   
 The Census assigns a unique identifying code, or [geoID](https://www.census.gov/programs-surveys/geography/guidance/geo-identifiers.html), to each geographic unit. This Census geoID is also referred to as a FIPS (Federal Information Processing Series) code.
 
-The following table describes common types of Census geographic units and the structure of their geoIDs:
+The following table describes common types of Census geographic units and the structure of their geoIDs.
+
+<figcaption>Common Census Geographic Units in the United States</figcaption>
 
 | Geographic Unit                 | Total Units[^09-tutorial-link-point-to-census-geoid-1] | GeoID Desciption and Structure                                                                                                                                                                | Example Unit GeoID | Example Unit Name                                     |
 |---------------|---------------|---------------|---------------|---------------|
