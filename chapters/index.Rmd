@@ -4,8 +4,7 @@ date: "Last Modified: `r format(Sys.time(), '%B %d, %Y')` (Version 1.0)"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: ["bibliography/book.bib", "bibliography/packages.bib"]
-biblio-style: apalike
-csl: "bibliography/chicago-author-date-with-note.csl"
+csl: "bibliography/chicago-numeric-with-note.csl"
 link-citations: true
 link-bibliography: true
 description: The CHORDS Toolkit provides guides, tools, and example code to support climate change and human health research.
