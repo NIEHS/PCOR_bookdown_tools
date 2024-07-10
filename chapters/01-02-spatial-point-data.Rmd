@@ -104,7 +104,7 @@ str(pm,
 
 ### Subset
 
-Checking the data's structure shows that `pm` is a very large data set. Each of the variables convey important information related to air pollution monitoring, but not all will be utilized in these exploratory analyses.
+Checking the data structure shows that `pm` is a very large data set. Each of the variables convey important information related to air pollution monitoring, but not all will be utilized in these exploratory analyses.
 
 The data set can be reduced to include only the variables of interest with the `subset()` function. The `select =` argument indicates which variables to be retained in the new data set.
 

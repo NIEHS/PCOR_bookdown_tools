@@ -64,7 +64,7 @@ The following table describes common types of Census geographic units and the st
 
 <figcaption>Common Census Geographic Units in the United States</figcaption>
 
-| Geographic Unit                 | Total Units[^09-tutorial-link-point-to-census-geoid-1] | GeoID Desciption and Structure                                                                                                                                                                | Example Unit GeoID | Example Unit Name                                     |
+| Geographic Unit                 | Total Units[^09-tutorial-link-point-to-census-geoid-1] | GeoID Description and Structure                                                                                                                                                                | Example Unit GeoID | Example Unit Name                                     |
 |---------------|---------------|---------------|---------------|---------------|
 | State                           | 50                                                     | 2-digit state (S) code = SS                                                                                                                                                                   | 09                 | Connecticut (CT)                                      |
 | County                          | 3143                                                   | 5-digit code = 2-digit state (S) code + 3-digit county (C) code = SSCCC                                                                                                                       | 09007              | Middlesex County, CT                                  |

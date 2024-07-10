@@ -186,7 +186,7 @@ smoke_sf <- st_transform(
 
 With the data prepared, plot the wildfire smoke plume polygons with `ggplot2::ggplot()`.
 
-Now that the parameters of interest and coordinate reference system have been prepared, create a plot with `ggplot2::ggplot()`. Identifying the data set to be plotted within the `geom_sf()` arguement informs the function that the data is an `sf` object.
+Now that the parameters of interest and coordinate reference system have been prepared, create a plot with `ggplot2::ggplot()`. Identifying the data set to be plotted within the `geom_sf()` argument informs the function that the data is an `sf` object.
 
 ```{r, eval = FALSE}
 ggplot() +

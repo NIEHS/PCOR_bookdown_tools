@@ -16,9 +16,9 @@ output: bookdown::html_document2
 
 ---
 
-Researchers interested in studying the health impacts of climate change and related natural disasters need access to relevant, timely, and harmonized data on environmental exposures, social determinants of health variables, and health outcomes. However, such datasets are often developed for different purposes, reside in multiple locations, and require linkage.
+Researchers interested in studying the health impacts of climate change and climate related disasters need access to relevant, timely, and harmonized data on environmental exposures, social determinants of health variables, and health outcomes. However, such datasets are often developed for different purposes, reside in multiple locations, and require linkage.
 
-The Climate and Health Outcomes Research Data Systems (CHORDS) Toolkit seeks to aid researchers in accessing, processing, and integrating geospatial data-based exposures into their health research by providing guides, tools, and example code. 
+The Climate and Health Outcomes Research Data Systems (CHORDS) Project seeks to connect researchers to environmental and health datasets with a toolkit that provides guides, tools, and example code to improve integration of geospatial data-based exposures and health data and records into their research. 
 
 ## About CHORDS {-}
 
@@ -54,4 +54,5 @@ _This is a BETA Release. Please let us know of any improvements we can make._
 
 ### Funding {-}
 
-This resource was supported by the National Institutes of Health (NIH) from the National Institute of Environmental Health Sciences (NIEHS) and NIH Office of Data Science Strategy (ODSS), and the Department of Health and Human Services (DHHS) Office of the Assistant Secretary for Planning and Evaluation (ASPE) Office of the Secretary’s Patient Centered Outcomes Research Trust Fund (OS-PCORTF).
+This resource was supported by the Department of Health and Human Services (DHHS) Office of the Assistant Secretary for Planning and Evaluation (ASPE) Office of the Secretary’s Patient Centered Outcomes Research Trust Fund (OS-PCORTF) and by the National Institutes of Health (NIH) from the National Institute of Environmental Health Sciences (NIEHS) and the NIH Office of Data Science Strategy (ODSS).
+
