@@ -1,14 +1,10 @@
 # A FHIR PIT Tutorial {#chapter-fhir-pit}
 
-[![Profile-CMP](images/user_profiles/profilecmp.svg)](#profilecmp)
-[![Profile-CRE](images/user_profiles/profilecre.svg)](#profilecre)
-[![Profile-CDM](images/user_profiles/profilecdm.svg)](#profilecdm)
-[![Profile-GEO](images/user_profiles/profilegeo.svg)](#profilegeo)
-[![Profile-SBS](images/user_profiles/profilesbs.svg)](#profilesbs)
+[![Profile-CMP](images/user_profiles/profilecmp.svg)](#profilecmp) [![Profile-CRE](images/user_profiles/profilecre.svg)](#profilecre) [![Profile-CDM](images/user_profiles/profilecdm.svg)](#profilecdm) [![Profile-GEO](images/user_profiles/profilegeo.svg)](#profilegeo) [![Profile-SBS](images/user_profiles/profilesbs.svg)](#profilesbs)
 
 ### FHIR PIT: HL7 Fast Healthcare Interoperability Resources Patient data Integration Tool: A Tutorial {.unnumbered}
 
-**Date Modified**: April 30, 2024
+**Date Modified**: July 8, 2024
 
 **Authors**: Juan Garcia [![author-jc](images/orcid.png){width="10"}](https://orcid.org/0009-0003-6503-2986), Kara Fecho [![author-kf](images/orcid.png){width="10"}](https://orcid.org/0000-0002-6704-9306), Hong Yi [![author-hy](images/orcid.png){width="10"}](https://orcid.org/0000-0002-5699-1259)
 
@@ -27,8 +23,6 @@ This tutorial provides example code in `R`:
 ### Disclaimer
 
 The patient dataset used in this tutorial is synthetic. When using actual patient or participant datasets containing Protected Health Information (PHI), one must run FHIR PIT within a secure enclave and abide by all federal and institutional regulations.
-
-Note that the FHIR PIT application may be memory-intensive, depending on the size of the input datasets. For the sample input data, this tutorial requires approximately 4 GB RAM to run successfully.
 
 ### Motivation
 
@@ -283,7 +277,7 @@ ggplot(icees2dei, aes(y = AvgDailyPM2.5Exposure, x = MaxDailyOzoneExposure)) +
   geom_smooth(method = "lm", se = FALSE)
 ```
 
-<img src="images/fhir_pit/plot_daily_pm_vs_o3.png" width = "75%" height = "auto" class = "centerimage">
+<img src="images/fhir_pit/plot_daily_pm_vs_o3.png" class="centerimage" width="75%" height="auto"/>
 
 ## Considerations
 
