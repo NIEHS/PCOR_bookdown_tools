@@ -164,6 +164,7 @@ The CHORDS Toolkit chapters have been developed for various user profiles. This 
 **Relevant Chapters:**
 
 -   [NASA EarthData Download](#chapter-nasa-earthdata)
+-   [A FHIR PIT Tutorial](#chapter-fhir-pit)
 :::
 
 ## Public Health Official ![](images/user_profiles/profilepho.svg) {#profilepho .unnumbered .unlisted}
@@ -207,6 +208,7 @@ The CHORDS Toolkit chapters have been developed for various user profiles. This 
 **Relevant Chapters:**
 
 -   [Geospatial Data Foundations Unit](#unit-geospatial-foundations)
+-   [A FHIR PIT Tutorial](#chapter-fhir-pit)
 :::
 
 ## Student ![](images/user_profiles/profilestu.svg) {#profilestu .unnumbered .unlisted}
