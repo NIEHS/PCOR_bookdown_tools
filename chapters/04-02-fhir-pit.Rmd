@@ -3,6 +3,8 @@
 [![Profile-CMP](images/user_profiles/profilecmp.svg)](#profilecmp)
 [![Profile-CRE](images/user_profiles/profilecre.svg)](#profilecre)
 [![Profile-CDM](images/user_profiles/profilecdm.svg)](#profilecdm)
+[![Profile-GEO](images/user_profiles/profilegeo.svg)](#profilegeo)
+[![Profile-SBS](images/user_profiles/profilesbs.svg)](#profilesbs)
 
 ### FHIR PIT: HL7 Fast Healthcare Interoperability Resources Patient data Integration Tool: A Tutorial {.unnumbered}
 
