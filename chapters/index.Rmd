@@ -16,9 +16,7 @@ output: bookdown::html_document2
 
 ---
 
-Researchers interested in studying the health impacts of climate change and climate related disasters need access to relevant, timely, and harmonized data on environmental exposures, social determinants of health variables, and health outcomes. However, such datasets are often developed for different purposes, reside in multiple locations, and require linkage.
-
-The Climate and Health Outcomes Research Data Systems (CHORDS) Project seeks to connect researchers to environmental and health datasets with a toolkit that provides guides, tools, and example code to improve integration of geospatial data-based exposures and health data and records into their research. 
+Researchers interested in studying the health impacts of climate change and climate related disasters need access to relevant, timely, and harmonized data on environmental exposures, social determinants of health variables, and health outcomes. However, such datasets are often developed for different purposes, reside in multiple locations, and require linkage. The Climate and Health Outcomes Research Data Systems (CHORDS) Project seeks to connect researchers to environmental and health datasets with a toolkit that provides guides, tutorials, and example code to improve integration of geospatial data-based exposures and health data and records into their research. 
 
 ## About CHORDS {-}
 
