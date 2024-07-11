@@ -1,12 +1,10 @@
 # A FHIR PIT Tutorial {#chapter-fhir-pit}
 
-[![Profile-CMP](images/user_profiles/profilecmp.svg)](#profilecmp)
-[![Profile-CRE](images/user_profiles/profilecre.svg)](#profilecre)
-[![Profile-CDM](images/user_profiles/profilecdm.svg)](#profilecdm)
+[![Profile-CMP](images/user_profiles/profilecmp.svg)](#profilecmp) [![Profile-CRE](images/user_profiles/profilecre.svg)](#profilecre) [![Profile-CDM](images/user_profiles/profilecdm.svg)](#profilecdm) [![Profile-GEO](images/user_profiles/profilegeo.svg)](#profilegeo) [![Profile-SBS](images/user_profiles/profilesbs.svg)](#profilesbs)
 
 ### FHIR PIT: HL7 Fast Healthcare Interoperability Resources Patient data Integration Tool: A Tutorial {.unnumbered}
 
-**Date Modified**: April 30, 2024
+**Date Modified**: July 8, 2024
 
 **Authors**: Juan Garcia [![author-jc](images/orcid.png){width="10"}](https://orcid.org/0009-0003-6503-2986), Kara Fecho [![author-kf](images/orcid.png){width="10"}](https://orcid.org/0000-0002-6704-9306), Hong Yi [![author-hy](images/orcid.png){width="10"}](https://orcid.org/0000-0002-5699-1259)
 
@@ -26,11 +24,9 @@ This tutorial provides example code in `R`:
 
 The patient dataset used in this tutorial is synthetic. When using actual patient or participant datasets containing Protected Health Information (PHI), one must run FHIR PIT within a secure enclave and abide by all federal and institutional regulations.
 
-Note that the FHIR PIT application may be memory-intensive, depending on the size of the input datasets. For the sample input data, this tutorial requires approximately 4 GB RAM to run successfully.
-
 ### Motivation
 
-Environmental exposures are increasingly recognized as important to consider when conducting human subjects research. Unfortunately, associating environmental exposures data with subject-level data is challenging due to the complexity of the data and the varied spatiotemporal resolutions. FHIR PIT is an open-source tool to link electronic health record (EHR) data in FHIR format with environmental exposures data derived from public sources.
+Environmental exposures are increasingly recognized as important to consider when conducting human subjects research. Unfortunately, associating environmental exposures data with subject-level data is challenging due to the complexity of the data and the varied spatiotemporal resolutions. FHIR PIT is an open-source tool to link electronic health record (EHR) data in FHIR format with environmental exposures data derived from public sources. See Section [Considerations](#fhir-pit-considerations) for tools to support other common data models (CDMs).
 
 ### Background
 
@@ -281,16 +277,18 @@ ggplot(icees2dei, aes(y = AvgDailyPM2.5Exposure, x = MaxDailyOzoneExposure)) +
   geom_smooth(method = "lm", se = FALSE)
 ```
 
-<img src="images/fhir_pit/plot_daily_pm_vs_o3.png" width = "75%" height = "auto" class = "centerimage">
+<img src="images/fhir_pit/plot_daily_pm_vs_o3.png" class="centerimage" width="75%" height="auto"/>
 
-## Considerations
+## Considerations {#fhir-pit-considerations}
 
-FHIR PIT must be run within a secure enclave when working with real patient datasets, and all federal and insititutional regulations surrounding patient privacy and data security must be met.
+FHIR PIT must be run within a secure enclave when working with real patient datasets, and all federal and institutional regulations surrounding patient privacy and data security must be met.
 
 FHIR PIT performs linkages between patient datasets and environmental exposures datasets using geocodes (i.e., patient primary residence), study period, and healthcare visit dates. FHIR PIT currently assumes a patient or subject resides in a single geolocation across a defined study period. We plan to adapt FHIR PIT to address mobility by, for example, assessing school-aged children's home versus public school exposures.
 
-FHIR PIT can be memory-intensive when working with large input datasets.
+Note that the FHIR PIT application may be memory-intensive, depending on the size of the input datasets. For the sample input data, this tutorial requires approximately 4 GB RAM to run successfully, but the memory requirements may be greater with large input datasets.
+
+Finally, FHIR PIT, by name and function, ingests FHIR files as the preferred CDM. For users who are working with the PCORnet CDM, we offer two tools to map PCORnet to FHIR: pcornet-to-fhir (https://github.com/RENCI/tx-pcornet-to-fhir) and CAMP FHIR (https://github.com/NCTraCSIDSci/camp-fhir). CAMP FHIR additionally maps i2b2 and OMOP to FHIR. Both tools are openly available.
 
 ## Concluding Remarks
 
-This tutorial demonstrates how to execute FHIR PIT and analyze its output. The patient dataset used in this tutorial is synthetic and intended for demonstration purposes only. The environmental datasets used in this tutorial are randomly sampled from much larger datasets derived from public sources. Users may substititute the synthetic patient dataset and sample exposures datasets with their own datasets. To add your own data, please update the 'data/input' directory. For assistance with FHIR PIT or access to our environmental exposure datasets, please contact [fhir-pit\@renci.org](mailto:fhir-pit@renci.org){.email}.
+This tutorial demonstrates how to execute FHIR PIT and analyze its output. The patient dataset used in this tutorial is synthetic and intended for demonstration purposes only. The environmental datasets used in this tutorial are randomly sampled from much larger datasets derived from public sources. Users may substitute the synthetic patient dataset and sample exposures datasets with their own datasets. To add your own data, please update the 'data/input' directory. For assistance with FHIR PIT or access to our environmental exposure datasets, please contact [fhir-pit\@renci.org](mailto:fhir-pit@renci.org){.email}.

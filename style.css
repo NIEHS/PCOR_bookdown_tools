@@ -12,6 +12,20 @@ pre {
   word-wrap: normal;
 }
 
+figure {
+  padding: 0;
+  margin: auto;
+}
+
+figcaption {
+  color: black;
+  font-style: italic;
+  font-weight: 500;
+  padding: 0 5px 20px;
+  margin: 0;
+  text-align: center;
+}
+
 pre code {
   white-space: inherit;
 }

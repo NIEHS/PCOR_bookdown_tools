@@ -33,11 +33,11 @@ The following chapters in this unit will demonstrate how to use `R` to access, p
 
 ### Spatial Geometry
 
-The _spatial geometry_ of a geospatial dataset is an important consideration in data analysis pipelines.
+The _spatial geometry_ of a geospatial dataset is an important consideration in data analysis pipelines. There are three main spatial geometry types: point, line, and area (i.e., polygon or grid). _Points_ are represented by geographic coordinates (latitude and longitude pairs), _lines_ by a series of connected points, and _polygons_ by a series of connected points that completely enclose and define an area. In contrast to polygons, which can define irregular or non-uniform areas, _grids_ define regular and uniform areas (e.g., such that each grid cell has the same area). Point, line, and polygon data is referred to as _vector_ data, and grid data is referred to as _raster_ data. For detailed descriptions of vector data, raster data, and the differences between them, respectively, see [@r-sf-1], [@raster-data] and [@geocomputation-2].
 
-There are three main spatial geometry types: point, line, and area (i.e., polygon or grid). _Points_ are represented by geographic coordinates (latitude and longitude pairs), _lines_ by a series of connected points, and _polygons_ by a series of connected points that completely enclose and define an area. In contrast to polygons, which can define irregular or non-uniform areas, _grids_ define regular and uniform areas (e.g., such that each gridcell has the same area). Point, line, and polygon data is referred to as _vector_ data, and grid data is referred to as _raster_ data. For detailed descriptions of vector data, raster data, and the differences between them, respectively, see @r-sf-1, @raster-data, and @geocomputation-2. 
+The following table illustrates common examples of each spatial geometry type used in environmental health applications.
 
-The following table illustrates common examples of each spatial geometry type used in environmental health applications:
+<figcaption>Spatial Geometry Types</figcaption>
 
 |Type  |Illustration |Examples                                      |Tutorials  |
 |------|-------------|----------------------------------------------|----------|
@@ -50,7 +50,7 @@ The tutorials linked in the table above demonstrate exploratory analyses with ea
 
 ### Coordinate Reference Systems and Projections {#getting-started-spatial-crs}
 
-Coordinate reference systems (CRS) are important for spatial analyses as they define how spatial data align with the Earth's surface [@geocomputation-24]. Transforming (projecting) the data to a different CRS may be necessary when combining multiple datasets or creating visuals for particular areas of interest. It is important to note that transforming spatial data can cause distortions in its area, direction, distance, or shape [@geocomputation-24]. The direction and magnitude of these distortions vary depending on the chosen CRS, area of interest, and type of data [@article_steinwand1995reprojection]. For guidance on selecting an appropriate CRS based on the data, area of interest, and analysis goals, see [_Choose the Right Projection_](https://learn.arcgis.com/en/projects/choose-the-right-projection/.) [@arcgis-crs] and [_Map Projections_](https://pubs.usgs.gov/gip/70047422/report.pdf) [@usgs-projections].
+Coordinate reference systems (CRS) are important for spatial analyses as they define how spatial data align with the Earth's surface [@geocomputation-24]. Transforming (projecting) the data to a different CRS may be necessary when combining multiple datasets or creating visuals for particular areas of interest. It is important to note that transforming spatial data can cause distortions in its area, direction, distance, or shape [@geocomputation-24]. The direction and magnitude of these distortions vary depending on the chosen CRS, area of interest, and type of data [@article_steinwand1995reprojection]. For guidance on selecting an appropriate CRS based on the data, area of interest, and analysis goals, see [@arcgis-crs; @usgs-projections].
 
 ## Datasets
 
@@ -69,7 +69,7 @@ The tutorials in this unit demonstrate the use of the following `R` packages:
 
 -   **Spatial Analysis:** [`sf`](https://cran.r-project.org/web/packages/sf/sf.pdf) [@r-sf-1; @r-sf-2], [`terra`](https://cran.r-project.org/web/packages/terra/terra.pdf) [@r-terra], [`tidyterra`]((https://cran.r-project.org/web/packages/tidyterra/tidyterra.pdf)) [@r-tidyterra]
 
--   **Data Visualization:** [`ggplot2`](https://cran.r-project.org/web/packages/ggplot2/ggplot2.pdf), [@r-ggplot2], [`ggpubr`](https://cran.r-project.org/web/packages/ggpubr/ggpubr.pdf) [@r-ggpubr]
+-   **Data Visualization:** [`ggplot2`](https://cran.r-project.org/web/packages/ggplot2/ggplot2.pdf) [@r-ggplot2], [`ggpubr`](https://cran.r-project.org/web/packages/ggpubr/ggpubr.pdf) [@r-ggpubr]
 
 -   **Data Processing:** [`dplyr`](https://cran.r-project.org/web/packages/dplyr/dplyr.pdf) [@r-dplyr]
 

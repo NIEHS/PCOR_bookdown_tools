@@ -4,8 +4,7 @@ date: "Last Modified: `r format(Sys.time(), '%B %d, %Y')` (Version 1.0)"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: ["bibliography/book.bib", "bibliography/packages.bib"]
-biblio-style: apalike
-csl: "bibliography/chicago-author-date-with-note.csl"
+csl: "bibliography/chicago-numeric-with-note.csl"
 link-citations: true
 link-bibliography: true
 description: The CHORDS Toolkit provides guides, tools, and example code to support climate change and human health research.
@@ -17,19 +16,15 @@ output: bookdown::html_document2
 
 ---
 
-Researchers interested in studying the health impacts of climate change and related natural disasters need access to relevant, timely, and harmonized data on environmental exposures, social determinants of health variables, and health outcomes. However, such datasets are often developed for different purposes, reside in multiple locations, and require linkage.
-
-The Climate and Health Outcomes Research Data Systems (CHORDS) Toolkit seeks to aid researchers in accessing, processing, and integrating geospatial data-based exposures into their health research by providing guides, tools, and example code. 
+Researchers interested in studying the health impacts of climate change and climate related disasters need access to relevant, timely, and harmonized data on environmental exposures, social determinants of health variables, and health outcomes. However, such datasets are often developed for different purposes, reside in multiple locations, and require linkage. The Climate and Health Outcomes Research Data Systems (CHORDS) Project seeks to connect researchers to environmental and health datasets with a toolkit that provides guides, tutorials, and example code to improve integration of geospatial data-based exposures and health data and records into their research. 
 
 ## About CHORDS {-}
 
 The [Climate and Health Outcomes Research Data Systems (CHORDS)](https://www.niehs.nih.gov/research/programs/chords) program provides resources aimed at making it easier for researchers to study the effects of place-based environmental exposures on health outcomes. The CHORDS resources include a [web-based data catalog](https://chords.niehs.nih.gov), standardized data sets, and this toolkit.
 
-<center>
-
-![](images/chords-art-logo.png)
-
-</center>
+::: {.figure}
+  <img src="images/chords-art-logo.png" style="width:100%">
+:::
 
 ## About This Toolkit {-}
 
@@ -57,4 +52,5 @@ _This is a BETA Release. Please let us know of any improvements we can make._
 
 ### Funding {-}
 
-This resource was supported by the National Institutes of Health (NIH) from the National Institute of Environmental Health Sciences (NIEHS) and NIH Office of Data Science Strategy (ODSS), and the Department of Health and Human Services (DHHS) Office of the Assistant Secretary for Planning and Evaluation (ASPE) Office of the Secretary’s Patient Centered Outcomes Research Trust Fund (OS-PCORTF).
+This resource was supported by the Department of Health and Human Services (DHHS) Office of the Assistant Secretary for Planning and Evaluation (ASPE) Office of the Secretary’s Patient Centered Outcomes Research Trust Fund (OS-PCORTF) and by the National Institutes of Health (NIH) from the National Institute of Environmental Health Sciences (NIEHS) and the NIH Office of Data Science Strategy (ODSS).
+

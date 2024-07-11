@@ -29,7 +29,9 @@ Linking geocoded addresses to US Census geographic units is a common step in env
 
 The Census geoIDs can then serve as the basis for linking additional data to each geocoded address. Many types of data with importance for environmental health applications are available by Census geoID. Specifically, the Census collects and provides data by Census geoID for various social determinants of health (SDOH). Such Census SDOH data describe poverty, race/ethnicity, language, housing, and other socioeconomic characteristics. Increasingly, other data providers (e.g., other government agencies, research institutions, community science groups) are making their data available by Census geoID to help facilitate linkages with SDOH data. Such data cover various environment, climate, health, and built environment characteristics.
 
-Example environmental health data sources readily available by Census geoID from US federal agencies include the following:
+The following table lists example environmental health data sources readily available by Census geoID from US federal agencies.
+
+<figcaption>Example Environmental Health Data Sources</figcaption>
 
 | Data source                                                                                           | Geographic units        | Example topics                                                                                                   |
 |-----------------------|-------------------------|------------------------|
@@ -50,25 +52,26 @@ The variable shape and spatial scale of Census geographic units is in contrast w
 [ZIP Code Tabulation Areas (ZCTAs)](https://www.census.gov/programs-surveys/geography/guidance/geo-areas/zctas.html), which represent the geographic areas used by the US Postal Service for ZIP codes, are another common boundary used in environmental health workflows. ZCTAs have no spatial relationship with block groups, tracts, counties, or states: that is, ZCTAs can cross or overlap those other geographic boundaries. Like other Census geographic boundaries, ZCTAs vary in spatial resolution and shape across the US. The spatial scale of ZCTAs is, on average, finer than counties but coarser than tracts.
 
 The following figure illustrates the variable spatial scale and shape of each type of geographic boundary:
-
-<center>
-
-![Census geographic units in Durham County, North Carolina, in 2010](images/link_to_census/geography_durham_co.png)
-</center>
   
+::: {.figure}
+  <img src="images/link_to_census/geography_durham_co.png" style="width:100%">
+  <figcaption>Census Geographic Units in Durham County, North Carolina, in 2010</figcaption>
+:::
   
 The Census assigns a unique identifying code, or [geoID](https://www.census.gov/programs-surveys/geography/guidance/geo-identifiers.html), to each geographic unit. This Census geoID is also referred to as a FIPS (Federal Information Processing Series) code.
 
-The following table describes common types of Census geographic units and the structure of their geoIDs:
+The following table describes common types of Census geographic units and the structure of their geoIDs.
 
-| Geographic Unit                 | Total Units[^09-tutorial-link-point-to-census-geoid-1] | GeoID Desciption and Structure                                                                                                                                                                | Example Unit GeoID | Example Unit Name                                     |
+<figcaption>Common Census Geographic Units in the United States</figcaption>
+
+| Geographic Unit                 | Total Units[^09-tutorial-link-point-to-census-geoid-1] | GeoID Description and Structure                                                                                                                                                                | Example Unit GeoID | Example Unit Name                                     |
 |---------------|---------------|---------------|---------------|---------------|
 | State                           | 50                                                     | 2-digit state (S) code = SS                                                                                                                                                                   | 09                 | Connecticut (CT)                                      |
 | County                          | 3143                                                   | 5-digit code = 2-digit state (S) code + 3-digit county (C) code = SSCCC                                                                                                                       | 09007              | Middlesex County, CT                                  |
 | Zip Code Tabulation Area (ZCTA) | 33,642                                                 | 5-digit ZCTA (Z) code = ZZZZZ                                                                                                                                                                 | 06480              | ZCTA for Portland, CT                                 |
 | Tract                           | 84,414                                                 | 11-digit code = 2-digit state (S) code + 3 digit county (C) code + 6-digit tract (T) code = SSCCCTTTTTT                                                                                       | 09007560100        | Tract 560100 in Middlesex County, CT                  |
 | Block group                     | 239,780                                                | 12-digit code = 2-digit state (S) code + 3 digit county (C) code + 6-digit tract (T) code + 1-digit block group (G) code = SSCCCTTTTTTG                                                       | 090075601001       | Block group 1 in Tract 560100 in Middlesex County, CT |
-| Block                           | 8,132,968                                              | 15-digit code = 2-digit state (S) code + 3 digit county (C) code + 6-digit tract (T) code + 4-digit block (B) code (which contains the block group code as its first digit) = SSCCCTTTTTTGBBB | 090075601001004    | Block 1004 in Tract 560100 in Middlesex County, CT    |
+| Block                           | 8,132,968                                              | 15-digit code = 2-digit state (S) code + 3 digit county (C) code + 6-digit tract (T) code + 4-digit block (B) code (which contains the block group code as its first digit) = SSCCCTTTTTTBBBB | 090075601001004    | Block 1004 in Tract 560100 in Middlesex County, CT    |
 
 [^09-tutorial-link-point-to-census-geoid-1]: Total number of geographic units in the US in 2020 (Source: [Census Bureau](https://www.census.gov/geographies/reference-files/time-series/geo/tallies.html))
 
@@ -274,10 +277,10 @@ nc_tracts_2010_map <- tmap::tm_shape(nc_tracts_2010_sf) +
 print(nc_tracts_2010_map)
 ```
 
-<center>
-
-![Census tracts in North Carolina in 2010](images/link_to_census/nc_tracts_2010_map.png)
-</center>
+::: {.figure}
+  <img src="images/link_to_census/nc_tracts_2010_map.png" style="width:100%">
+  <figcaption>Census Tracts in North Carolina in 2010</figcaption>
+:::
 
 Other [types and vintages of Census geographic boundaries](https://github.com/walkerke/tigris) are available through `tigris` and the related `tidycensus` package [@r-tidycensus]. In most cases, these boundaries are available for recent years (i.e., 1990 to present) and are accessed by state (i.e., users can download geographic boundaries for one state at a time, in separate files).
 
@@ -308,11 +311,10 @@ linkage_map <- tmap::tm_shape(nc_tracts_2010_sf) +
 print(linkage_map)
 ```
 
-<center>
-
-![Census tracts in North Carolina in 2010 (grey) with sample geocoded addresses (red)](images/link_to_census/linkage_map.png)
-
-</center>
+::: {.figure}
+  <img src="images/link_to_census/linkage_map.png" style="width:100%">
+  <figcaption>Census Tracts in North Carolina in 2010 (Grey) with Sample Geocoded Addresses (Red)</figcaption>
+:::
 
 Now that the geocoded addresses and Census tracts are in the same CRS, we can link each geocoded address to the Census tract that contains it using a spatial join. The following code produces a table of geocoded addresses linked to Census tract geoIDs:
 
@@ -352,11 +354,10 @@ The fourth step is to link the AHRQ SDOH data to each geocoded address based on 
 
 To start, we'll need to prepare the AHRQ SDOH data for Census tracts. This data is available to download as an Excel (XLSX) spreadsheet on the [AHRQ SDOH website](https://www.ahrq.gov/sdoh/data-analytics/sdoh-data.html) as shown in this screenshot:
 
-<center>
-
-![Screenshot of AHRQ SDOH Website (September 13, 2023)](images/link_to_census/screenshot_sdoh_table.png)
-
-</center>
+::: {.figure}
+  <img src="images/link_to_census/screenshot_sdoh_table.png" style="width:100%">
+  <figcaption>Screenshot of AHRQ SDOH Website (September 13, 2023)</figcaption>
+:::
 
 Before linking, we'll need to check the vintage of Census tracts used in the AHRQ SDOH data. To do this, we can review the AHRQ SDOH [Data Source Documentation](https://www.ahrq.gov/sites/default/files/wysiwyg/sdoh/SDOH-Data-Sources-Documentation-v1-Final.pdf) (accessed through the link shown in the website screenshot above). There we find the following information:
 
@@ -366,13 +367,15 @@ Based on this information, we can use the geoIDs for year-2010 vintage Census tr
 
 For this example, we will link the AHRQ SDOH data for Census tracts in 2010 to our sample geocoded addresses on the basis of the year-2010 Census tract geoID. The SDOH AHRQ data for Census tracts in 2010 is provided as an Excel file. Because Excel files can contain multiple sheets, we'll need to first download and open the Excel file to understand which sheet(s) to read into `R`:
 
-<center>
+::: {.figure}
+  <img src="images/link_to_census/screenshot_sdoh_xls_1.png" style="width:100%">
+  <figcaption>Screenshot of First Sheet in Excel File (September 14, 2023)</figcaption>
+:::
 
-![Screenshot of first sheet in Excel file (September 14, 2023)](images/link_to_census/screenshot_sdoh_xls_1.png)
-
-![Screenshot of second sheet in Excel file (September 14, 2023)](images/link_to_census/screenshot_sdoh_xls_2.png)
-
-</center>
+::: {.figure}
+  <img src="images/link_to_census/screenshot_sdoh_xls_2.png" style="width:100%">
+  <figcaption>Screenshot of Second Sheet in Excel File (September 14, 2023)</figcaption>
+:::
 
 We find that the Excel file has two sheets: `Layout` and `Data`. The `Layout` sheet contains the data dictionary. The `Data` sheet contains \>300 columns of SDOH data by geoID for the \>70,000 Census tracts in the US in 2010.
 

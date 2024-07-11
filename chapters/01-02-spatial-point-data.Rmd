@@ -104,7 +104,7 @@ str(pm,
 
 ### Subset
 
-Checking the data's structure shows that `pm` is a very large data set. Each of the variables convey important information related to air pollution monitoring, but not all will be utilized in these exploratory analyses.
+Checking the data structure shows that `pm` is a very large data set. Each of the variables convey important information related to air pollution monitoring, but not all will be utilized in these exploratory analyses.
 
 The data set can be reduced to include only the variables of interest with the `subset()` function. The `select =` argument indicates which variables to be retained in the new data set.
 
@@ -121,7 +121,7 @@ pm <- subset(pm, select = c(
 ))
 ```
 
-Re-running `str(pm)` after subsetting the data set shows that all all observations (n = 590208) of the variables of interest (n = 8) have been retained.
+Re-running `str(pm)` after subsetting the data set shows that all observations (n = 590,208) of the variables of interest (n = 8) have been retained.
 
 ```{r, eval = FALSE}
 str(pm,
@@ -271,7 +271,7 @@ Each unique monitor identification code should be matched with a unique monitor 
 length(unique(pm_sf$Monitor.ID)) == length(unique(pm_sf$geometry))
 ```
 
-Now that each monitor location as a unique identification code, we can calculate the mean PM~2.5~ concentration measured at each monitoring location. Functions and syntax from the `dplyr` package will be used to do this. For more on the `dplyr` package, please see [Introduction to dplyr](https://dplyr.tidyverse.org/articles/dplyr.html).
+Now that each monitor location has a unique identification code, we can calculate the mean PM~2.5~ concentration measured at each monitoring location. Functions and syntax from the `dplyr` package will be used to do this. For more on the `dplyr` package, please see [Introduction to dplyr](https://dplyr.tidyverse.org/articles/dplyr.html).
 
 The `group_by(Monitor.ID, )` argument specifies that an annual mean should be calculated for each unique `Monitor.ID`. Including `State.Name` in this argument retains the column in the new `pm_mean` data set, but does not influence the calculation of the annual mean.
 

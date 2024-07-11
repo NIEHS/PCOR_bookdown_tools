@@ -59,7 +59,7 @@ The following header items appear above the "Introduction" section:
 
 Please use any headings and sub-headings for the main part of the chapter as needed. 
 
-Short headings and sub-headings (with less than approximately 45 characters) are preferred for readability in the table of contents sidebar. 
+Short headings and first level sub-headings (with less than approximately 45 characters) are preferred for readability in the table of contents sidebar. 
 
 ### Code Blocks
 
@@ -87,24 +87,31 @@ This displays an important note with a light red background and siren icon.
 
 You can add image files to the "images" folder and then add them to your chapter with a caption like this:
 
-<center>
+::: {.figure}
+  <img src="images/chords-art-logo.png" style="width:100%">
+  <figcaption>This is a Caption for the CHORDS Logo</figcaption>
+:::
 
-![This is a caption for the CHORDS logo.](images/chords-art-logo.png)
+You can add a table with a caption like this:
 
-</center>
-
-You can add a table like this:
+<figcaption>This is a Caption for an Example Table</figcaption>
 
 |A            |B             |C               |
 |-------------|--------------|----------------|  
 |1            |Test          |Example         | 
 |2            |Test          |Example         |
 
-You can add a list like this:
+You can add an itemized list like this:
 
 - Item A
 - Item B
 - Item C
+
+You can add a numbered list like this:
+
+1. Item 1
+2. Item 2
+3. Item 3
 
 ### Citations
 
@@ -118,7 +125,7 @@ A reference list will automatically be added to the end of the chapter and the e
 
 ## Concluding Remarks
 
-Chapters end with a section titled "Concluding Remarks". This can be short.
+Chapters can end with a section titled "Concluding Remarks". This can be short.
 
 ## Additional Resources
 
