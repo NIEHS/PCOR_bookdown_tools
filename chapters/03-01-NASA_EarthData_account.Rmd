@@ -4,7 +4,7 @@
 
 ### Using NASA EarthData Account to Download Data in R {-}
 
-**Date Modified:** February 7, 2024
+**Date Modified:** June 28, 2024
 
 **Author:** Mitchell Manware [![author-mm](images/orcid.png){width=10}](https://orcid.org/0009-0003-6440-6106)
 
@@ -31,12 +31,12 @@ NASA's Earth Observing System Data and Information System (EOSDIS) and its twelv
 -   Physical Oceanography DAAC (PO.DAAC)
 -   Socioeconomic Data and Applications Center (SEDAC)
 
-See <https://www.earthdata.nasa.gov/eosdis/daacs> for more information.
+See <https://www.earthdata.nasa.gov/eosdis/daacs> for more information [@nasa-eosdis-daac].
 
 Many of the NASA EOSDIS data sets are relevant to environmental health research, and accessing the data from within R is important for reproducability and repeatable analyses. Although the data is openly accessible, users are required to register for an EarthData account and/or be logged in if you have an account.
 
 ::: note
-The NASA EarthData Account prerequisite files can be generated directly from the command line or using a text editor (notepad in Windows). See [How to Generate Earthdata Prerequisite Files](https://disc.gsfc.nasa.gov/information/howto?title=How%20to%20Generate%20Earthdata%20Prerequisite%20Files) for detailed instructions on creating prerequisite files with both the command line and Python.
+The NASA EarthData Account prerequisite files can be generated directly from the command line or using a text editor (notepad in Windows). See [How to Generate Earthdata Prerequisite Files](https://disc.gsfc.nasa.gov/information/howto?title=How%20to%20Generate%20Earthdata%20Prerequisite%20Files) for detailed instructions on creating prerequisite files with both the command line and Python [@nasa-generate-prereq].
 :::
 
 ### Objectives
@@ -49,19 +49,25 @@ Users will:
 
 ## NASA EarthData Account
 
-### Register or log in
+### Register or Log In
 
 Visit [https://urs.earthdata.nasa.gov/](http://urs.earthdata.nasa.gov) to register for or log into a NASA EarthData account.
 
-![NASA EarthData Account Landing Page](./images/NASA_EarthData_login.png)
+::: {.figure}
+  <img src="images/nasa_earthdata/NASA_EarthData_login.png" style="width:100%">
+  <figcaption>NASA EarthData Account Landing Page</figcaption>
+:::
 
-### Approved applications
+### Approved Applications
 
 After creating an account, navigate to "My Profile"(<https://urs.earthdata.nasa.gov/profile>), and then to "Applications \> Authorized Apps". This "Authorized Apps" page specifies which NASA EarthData applications can use your login credentials. Authorize the applications from which you will be downloading data.
 
-![NASA EarthData Approved Applications](./images/NASA_EarthData_applications.png)
+::: {.figure}
+  <img src="images/nasa_earthdata/NASA_EarthData_applications.png" style="width:100%">
+  <figcaption>NASA EarthData Approved Applications</figcaption>
+:::
 
-### Prerequisite files
+## Generate Prerequisite Files
 
 Downloading password-protected data from a URL requires user credentials. Without prerequisite files containing user credentials, the data will not be downloaded correctly.
 
@@ -69,13 +75,15 @@ Downloading password-protected data from a URL requires user credentials. Withou
 Without the prerequisite files the download step run without error, but trying to open the zip file will return an error.
 :::
 
-To demonstrate, try to download population density data from NASA's Socioeconomic Data and Applications Center (SEDAC) archive center.
+To demonstrate, try to download population density data [@sedac-gpwv4] from NASA's Socioeconomic Data and Applications Center (SEDAC) archive center.
+
+<figcaption>NASA SEDAC Population Density Data Characteristics</figcaption>
 
 |                |                                                                              |
 |-----------------|-----------------------------------------------------------|
 | **Metric**     | Population Density                                                           |
 | **Year**       | 2020                                                                         |
-| **Resolution** | \~5km                                                                        |
+| **Resolution** | \~5 km                                                                        |
 | **Format**     | GeoTiff                                                                      |
 | **URL**        | <https://sedac.ciesin.columbia.edu/data/set/gpw-v4-population-density-rev11> |
 
@@ -113,7 +121,7 @@ To download the password protected data with command line commands, we must gene
 The following steps return errors for Windows system users. File generation on Windows is currently in development.
 :::
 
-#### `.netrc` {-}
+### `.netrc`
 
 The following commands create the `.netrc` file, which contains your NASA EarthData Account credentials.
 
@@ -169,7 +177,7 @@ paste0(
 )
 ```
 
-#### `.urs_cookies` {-}
+### `.urs_cookies`
 
 The following commands create the `.urs_cookies` file.
 
@@ -199,7 +207,7 @@ file.exists(".urs_cookies")
 TRUE
 ```
 
-#### `.dodsrc` {-}
+### `.dodsrc`
 
 The following commands create the `.dodsrc` file.
 
@@ -270,7 +278,9 @@ if (.Platform$OS.type == "windows") {
 Enter these commands, as well as your username, password, and home directory, without error. Even a single misplaced character can disrupt the verification of your EarthData credentials.
 :::
 
-With the prerequisite files generated, try to download the SEDAC population data again.
+## Download Data
+
+With the prerequisite files generated, try to download the SEDAC population density data again.
 
 ::: note
 Be sure to authorize the "SEDAC" applications at "My Profile"(<https://urs.earthdata.nasa.gov/profile>) under "Applications \> Authorized Apps" before running the following command.
@@ -289,9 +299,3 @@ unzip(destfile)
 ```
 
 The data is downloaded successfully after the prerequisite files have been generated and the "SEDAC" applications have been authorized.
-
-## References
-
--   Center for International Earth Science Information Network - CIESIN - Columbia University. 2018. *Gridded Population of the World, Version 4 (GPWv4): Population Density, Revision 11*. Palisades, New York: NASA Socioeconomic Data and Applications Center (SEDAC). [https://doi.org/10.7927/H49C6VHW](). Accessed 7 February 2024.
--   National Aeronautics and Space Administration (NASA). *EOSDIS Distributed Active Archive Centers (DAAC)*. Accessed 3 January 2024. [https://www.earthdata.nasa.gov/eosdis/daacs]().
--   National Aeronautics and Space Administration (NASA). *How to Generate Earthdata Prerequisite Files*. Accessed 3 January 2024. [https://disc.gsfc.nasa.gov/information/howto?title=How%20to%20Generate%20Earthdata%20Prerequisite%20Files]().

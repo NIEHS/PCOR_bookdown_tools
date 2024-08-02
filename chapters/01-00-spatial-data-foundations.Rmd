@@ -1,10 +1,10 @@
-# (PART\*) Foundations {.unnumbered .unlisted}
+# (PART\*) Geospatial Data Foundations {.unnumbered .unlisted}
 
-# **Foundations** {-}
+# **Geospatial Data Foundations** {#unit-geospatial-foundations .unnumbered}
 
 ---
 
-This unit provides guidance and example code for working with different types of geospatial data common in environmental health research. 
+This unit provides background, guidance and example code for working with different types of geospatial data common in environmental health research. This unit is intended as a starting point for users with less familiarity with geospatial data and geospatial analysis methods in environmental health using `R`.
 
 ```{r, include = FALSE, echo = FALSE, eval = FALSE, warning = FALSE}
 install.packages("BiocManager", quiet = TRUE)
@@ -13,4 +13,3 @@ BiocManager::install("Biobase", update = FALSE, ask = FALSE)
 library(Biobase)
 library(BiocVersion)
 ```
-

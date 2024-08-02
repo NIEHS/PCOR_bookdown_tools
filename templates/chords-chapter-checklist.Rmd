@@ -5,7 +5,8 @@
 Some formatting checks have been automated using linting. Please run the following code and resolve any formatting issues identified:
 
 ```{r eval = FALSE}
-lintr:lint()
+# edit file path for your chapter
+lintr::lint("chapters/NEW-CHAPTER-NAME.Rmd")
 ```
 
 ## Chapter Main Text Formatting 
@@ -22,7 +23,7 @@ lintr:lint()
 
 ### Header Information
 
-[ ] Authors are listed with ORCID
+[ ] Authors are listed with ORCIDs
 [ ] At least one User Profile tag is listed
 [ ] Title, headings, and sub-headings are short enough for readability in Table of Contents sidebar (i.e., less than ~45 characters) and are in "title case" (i.e., most words are capitalized)
 
@@ -49,4 +50,4 @@ Please check the following after adding the chapter to the CHORDS Toolkit book:
 [ ] Chapter name is displayed correctly in Table of Contents
 [ ] New terms have been added to the CHORDS Glossary Appendix as needed
 [ ] Chapter is linked under the relevant user profiles in the User Profile Appendix
-[ ] Chapter is no longer listed as "in development" in the table in the Introduction Chapter
+[ ] Chapter is no longer listed as "in development" in the table in GitHub repository README file

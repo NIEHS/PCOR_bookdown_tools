@@ -4,17 +4,16 @@ output_dir: "docs"
 rmd_files:
   - chapters/index.Rmd
   - chapters/01-00-spatial-data-foundations.Rmd
-  - chapters/01-01-spatial-data-analysis.Rmd
+  - chapters/01-01-getting-started.Rmd
+  - chapters/01-02-spatial-point-data.Rmd
+  - chapters/01-03-spatial-polygon-data.Rmd
+  - chapters/01-04-spatial-raster-data.Rmd
   - chapters/02-00-wildfire-data.Rmd
-  - chapters/02-01-wildfire-chapter-01.Rmd
   - chapters/03-00-other-environmental-data.Rmd
   - chapters/03-01-NASA_EarthData_account.Rmd
   - chapters/04-00-health-data-integration.Rmd
   - chapters/04-01-link-to-census.Rmd
-  - chapters/04-02-geo-exposure-0.Rmd
-  - chapters/04-02-geo-exposure-a.Rmd
-  - chapters/04-02-geo-exposure-b.Rmd
-  - chapters/04-02-geo-exposure-c.Rmd
+  - chapters/04-02-fhir-pit.Rmd
   - chapters/05-00-analysis-case-studies.Rmd
   - chapters/AA-00-appendix.Rmd
   - chapters/AA-01-user-profiles.Rmd

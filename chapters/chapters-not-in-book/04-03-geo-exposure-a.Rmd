@@ -1,0 +1,254 @@
+##  CACES Air Pollution {#chapter-geo-exposure-caces}
+
+The following are step-by-step instructions to calculate annual average air pollution exposure metrics using the [Center for Air, Climate, & Energy Solutions (CACES) land use regression models (Version 1.0)](https://www.caces.us/data). 
+
+### Description
+
+#### CACES Air Pollution Model Data {-}
+The CACES models are based on air pollution observations from United States (US) Environmental Protection Agency monitors and from satellites, as well as land cover and land use information (e.g., locations of roadways). CACES model predictions cover populated locations in the contiguous US (i.e., in the 48 contiguous states plus the District of Columbia) at the spatial resolution of US census tracts, for the following air pollutants and time-periods:
+
+|Air pollutant                |Units         | Exposure metric              |Available years |  
+|-----------------------------|--------------|------------------------------|----------------|  
+|carbon monoxide (CO)         |ppm           |annual average concentration  |1990-2015       |
+|nitrogen dioxide (NO~2~)     |ppb           |annual average concentration  |1979-2015       |
+|ozone (O~3~)                 |ppb           |May through September average of daily moving 8-hour maximum average concentration  |1979-2015  | 
+|particulate matter (PM~2.5~) |&micro;g m^-3^|annual average concentration  |1999-2015 |  
+|particulate matter (PM~10~)  |&micro;g m^-3^|annual average concentration  |1988-2015 | 
+|sulfur dioxide (SO~2~)       |ppb           |annual average concentration  |1979-2015 | 
+
+The following figure illustrates the spatial coverage (contiguous US) and spatial resolution (census tracts) for a single pollutant and time-period (NO~2~ in 2015):  
+
+<center>
+
+![_Illustration of CACES data **(a)** spatial coverage (contiguous United States) and **(b)** spatial scale (census tracts)._](images/link_to_exposures/caces_map_no2_2015.jpeg)
+
+</center>  
+
+#### Exposure Metrics {-}
+This tool calculates long-term average air pollution exposure metrics for a specified list of receptor point locations (e.g., geocoded home addresses) during a specified time-period in years. This tool can be used to calculate average exposure metrics:  
+
+* for a single year or single range of years that is constant across all receptor locations (e.g., 2002, 2010 to 2015)
+* for a single year or range of years that varies across receptor locations (e.g., year of birth, years of residence at geocoded home address)  
+
+Exposure metrics can be calculated for all CACES pollutants or any subset of them. Output includes information about data missingness (e.g., whether a specified receptor point is 
+located outside the coverage of the CACES data) as well as an optional log file.  
+
+#### Recommended Uses {-}
+This tool is recommended for the following uses:  
+
+* Comparisons of exposures across larger geographic regions in the contiguous US (e.g., across a metropolitan area or state). *Note: This tool is based on census tract level air pollution model data and cannot be used to compare exposures for different locations within the same census tract.*  
+* Comparisons of exposures incorporating multiple pollutants and/or years in
+a consistent manner  
+* Analyses focused on long-term average (e.g., annual average, multi-year average) exposures to air pollution  
+
+#### Steps {-}
+
+1. [Install R and required packages](#step-1-caces)  
+
+2. [Download tool](#step-2-caces)  
+
+3. [Prepare receptor point data](#step-3-caces)  
+
+4. [Run script in R](#step-4-caces)  
+
+5. [Review output](#step-5-caces)  
+
+6. [Cite data and tool](#step-6-caces)
+
+### Install R and Required Packages {#step-1-caces}
+
+[Install R](https://cran.r-project.org/). Optionally, [install RStudio](https://www.rstudio.com/products/rstudio/download/).
+
+Then, install the following R packages: ````logr````, ````tidyverse````, ````sf````.
+Follow [R package installation instructions](https://cran.r-project.org/doc/manuals/r-release/R-admin.html#Installing-packages), or run the following code in R:
+```{r eval = FALSE}
+install.packages(c("logr", "tidyverse", "sf"))
+```
+    
+### Download Tool {#step-2-caces}
+
+Download and save the folder containing input data (````input_source_caces.rds```` and ````input_census_tracts_2010.rds````) and script (````script_caces_exposures_for_points.R````). To directly run the example scripts provided with these instructions in [Step 4](#step-4-caces), do not change the file names within the folder.  
+
+### Prepare Receptor Point Data {#step-3-caces}
+
+Prepare a comma-separated values (CSV) file that contains a table of the receptor 
+point locations (e.g., geocoded addresses, coordinates). Include each receptor as 
+a separate row in the table, and include the following **required** columns:  
+
+* ````id````: a unique and anonymous identifying code for each receptor. This can be in character (string) or numeric (double) format. ````id```` must be unique across all rows in the receptor point location table. It is not possible to use the same ````id```` for different time-points or locations within the same receptor point location table.  
+* ````latitude````: the latitude of the receptor point location in decimal degrees 
+format (range: -90 to 90) 
+* ````longitude````: the longitude of the receptor point location in decimal 
+degrees format (range: -180 to 180)    
+
+To calculate exposure metrics for time-periods (year or range of years) that vary 
+across the receptors (e.g., years of residence at geocoded addresses), include **both** 
+of the following **optional** columns:  
+
+* ````time_start````: the first year of the time-period in “YYYY” format (e.g., ````2002```` for year 2002)  
+* ````time_end````: the last year of the time-period in “YYYY” format (e.g., ````2003```` for year 2003)  
+
+::: {.note}
+To calculate exposure metrics for a single year that varies across the receptors, provide the same year for both ````time_start```` and ````time_end```` for each receptor. To calculate exposure metrics for a range of years that is constant across the receptors, provide the start year of the range as ````time_start```` for all receptors and the end year of the range as ````time_end```` for all receptors. To calculate exposure metrics for a single year that is constant across all receptors, specify year for exposure assessment using argument ````caces_year````. If both ````caces_year```` and ````time_start```` and ````time_end```` are provided, the exposure assessment will be based on ````caces_year```` (ignoring ````time_start```` and ````time_end````).   
+:::
+
+The following table provides an example of the receptor point data format:    
+
+|id     |latitude      | longitude      |time_start |  time_end  |  
+|-------|--------------|----------------|-----------|------------|  
+|1011A  |39.00205369   |-77.105578716   |2002       |2011        |  
+|1012C  |35.88480215   |-78.877942573   |2014       |2015        |  
+|1013E  |39.43560788   |-77.434847823   |1990       |1990        |  
+
+To directly run the example scripts provided with these instructions, save the receptor point data as ````input_receptor.csv```` in the folder.  
+
+### Run Script in R  {#step-4-caces}
+
+Run the script ````script_caces_exposures_for_points.R```` to load the required functions
+in R. You can then use the function ````get_caces_for_points()```` to calculate 
+the mean CACES model pollutant concentrations for the selected time period (in years) 
+for each receptor point location. 
+
+#### Description of Function ````get_caces_for_points()```` {-}
+
+This function takes the receptor point data above and returns a data frame with the receptor id linked to the exposure estimates for selected pollutants and time periods as well as information about data missingness. Optionally, the function also writes a log file in the current R working directory. The function has the following arguments:
+
+**Required Arguments**  
+
+* ````receptor_filepath````: specifies the file path to a CSV file containing the receptor point locations (described in [Step 3](#step-3-caces)). *Note: The format for file paths in R can vary by operating system.*  
+* ````source_caces_filepath````: specifies the file path to a RDS file containing a data frame with the CACES air pollution estimates by census tract. This is the file ````input_source_caces.rds````.  
+* ````source_census_tracts_2010_filepath````: specifies the file path to a RDS file containing the simple features with the 2010 census tracts for the US. This is the file ````input_census_tracts_2010.rds````.  
+
+**Optional Arguments**  
+
+* ````receptor_crs````: a coordinate reference system object (i.e., [class is ````crs```` object in R](https://www.nceas.ucsb.edu/sites/default/files/2020-04/OverviewCoordinateReferenceSystems.pdf)) for the receptor point locations. Default is “EPSG:4269” (i.e., NAD83). 
+* ````caces_pollutants````: list that specifies the subset of CACES pollutants to include. Default is all pollutants: ````"co", "no2", "o3", "pm10", "pm25", "so2"````.  
+* ````caces_year````: specifies a single year (in "YYYY" format; e.g., 2003) for exposure assessment across all pollutants and receptors. Default is ````NULL````. ````caces_year```` is required to be specified if ````time_start```` and ````time_end```` are **not** provided with the receptor point data. If both ````caces_year```` and ````time_start```` and ````time_end```` are provided, exposure assessment will be based on the single year specified by ````caces_year```` (i.e., ignoring ````time_start```` and ````time_end````). ````caces_year```` must be ````NULL```` if using ````time_start```` and ````time_end```` to specify year(s) that vary across receptor points for exposure assessment. ````caces_year```` must be during 1999-2015 to return exposure estimates for all six pollutants, or during 1979-2015 for O~3~, NO~2~, and SO~2~, 1988-2015 for PM~10~, 1990-2015 for CO, or 1999-2015 for PM~2.5~.   
+* ````add_all_input_to_output````: logical argument that specifies whether the output should include *all columns* included with receptor point locations (described in [Step 3](#step-3-caces)). ````TRUE```` returns all columns (i.e., including any time information and census tract identifying code) with output. ````FALSE```` returns only the anonymous receptor identifying code, exposure estimates, and data missingness flags with output. ````FALSE```` may be useful for meeting data de-identification requirements. Default is ````TRUE````.  
+* ````write_log_to_file````: logical argument that specifies whether a log should be written to file. ````TRUE```` will create a log file in the current working directory. Default is ````TRUE````.  
+* ````print_log_to_console````: logical argument that specifies whether a log should be printed to the console. ````TRUE```` will print a log to console. Default is ````TRUE````.  
+
+#### Example Use {-}
+
+Below are two example scripts for using the function above to produce a CSV file with the CACES exposure estimates for each receptor point for ozone and nitrogen dioxide in year 2015 (using default options for all other optional arguments). The first example uses only R but requires editing the file paths. The second example requires RStudio and the ````here```` package but does not require editing file paths.  
+
+**Example 1: Base R**  
+
+```{r eval = FALSE}
+# Load packages
+library(tidyverse)
+library(logr)
+library(sf)
+
+# Load functions
+source("/set/file/path/to/script_caces_exposures_for_points.R")
+
+# Get exposures
+caces_exposures <-
+  get_caces_for_points(
+    receptor_filepath = "/set/file/path/to/input_receptor.csv",
+    source_caces_filepath = "/set/file/path/to/input_source_caces.rds",
+    source_census_tracts_2010_filepath =
+    "/set/file/path/to/input_census_tracts_2010.rds",
+    caces_year = 2015,
+    caces_pollutants = c("o3", "no2")
+  )
+
+# Write exposures to CSV
+readr::write_csv(caces_exposures,
+  file = "/set/file/path/to/output_caces_exposures.csv"
+)
+```
+
+**Example 2: RStudio with ```here``` Package** 
+
+```{r eval = FALSE}
+# Install here package (if needed)
+install.packages("here")
+
+# Load packages
+library(here)
+library(tidyverse)
+library(logr)
+library(sf)
+
+# Set location
+here::i_am("script_caces_exposures_for_points.R")
+
+# Load functions
+source(here::here("script_caces_exposures_for_points.R"))
+
+# Get exposures
+caces_exposures <-
+  get_caces_for_points(
+    receptor_filepath = here("input_receptor.csv"),
+    source_caces_filepath = here("input_source_caces.rds"),
+    source_census_tracts_2010_filepath =
+    here("input_census_tracts_2010.rds"),
+    caces_year = 2015,
+    caces_pollutants = c("o3", "no2")
+  )
+
+# Write exposures to CSV
+readr::write_csv(caces_exposures,
+  file = here("output_caces_exposures.csv")
+)
+```
+
+### Review Output {#step-5-caces} 
+
+#### Log File  {-}
+After running the example script above, with the log file option selected, the log
+file will be available in the folder ````log```` in the current R working directory.  
+
+#### Output Data  {-}
+After running the example script above, calculated exposure metrics for receptor 
+locations will be available in the file ````output_caces_exposure.csv```` within the 
+folder. This CSV file includes a row for each receptor with the following columns (as applicable):  
+
+**Identifiers**  
+
+* ````id````: the unique and anonymous identifying code for each receptor  
+* ````fips_tr_10````: the identifying code (FIPS code) for the year 2010 census tract  
+
+**Calculated Exposure Metrics**  
+
+* ````co````: mean CACES model predicted concentration of outdoor annual average carbon monoxide (CO) air pollution (units: parts per million [ppm]) for the census tract that contains the receptor point location during the specified year(s)    
+* ````no2````: mean CACES model predicted concentration of outdoor annual average nitrogen dioxide (NO~2~) air pollution (units: parts per billion [ppb]) for the census tract that contains the receptor point location during the specified year(s)   
+* ````o3````: mean CACES model predicted concentration of outdoor annual average ozone (O~3~) air pollution (units: parts per billion [ppb]) for the census tract that contains the receptor point location during the specified year(s)  
+* ````pm25````: mean CACES model predicted concentration of outdoor annual average particulate matter (PM~2.5~) air pollution (units: micrograms per cubic meter [&micro;g m^-3^]) for the census tract that contains the receptor point location during the specified year(s)   
+* ````pm10````: mean CACES model predicted concentration of outdoor annual average particulate matter (PM~10~) air pollution (units: micrograms per cubic meter [&micro;g m^-3^]) for the census tract that contains the receptor point location during the specified year(s)   
+* ````so2````: mean CACES model predicted concentration of outdoor annual average sulfur dioxide (SO~2~) air pollution (units: parts per billion [ppb]) for the census tract that contains the receptor point location during the specified year(s)   
+
+**Information on Data Missingness**  
+
+* ````caces_flag_01````: binary variable indicating whether the receptor point is located within a year 2010 US census tract:  
+    + ````1```` indicates that receptor point is **not** located within a year 2010 US census tract. All exposure metrics for that receptor point will be reported as ````NA````. 
+    + ````0```` indicates that receptor point is located within a year 2010 US census tract  
+* ````caces_flag_02````: binary variable indicating whether receptor point is located within a year 2010 US census tract but outside the spatial coverage of the CACES air pollution model:  
+    + ````1```` indicates receptor point is located within a year 2010 US census tract but outside the spatial coverage of the CACES air pollution model. Examples include tracts in Alaska, Hawaii, or US territories, and tracts with no population recorded in the 2010 Decennial Census. All exposure metrics for that receptor point will be reported as ````NA````.  
+    + ````0```` indicates that receptor point is located within a year 2010 census tract within coverage of the CACES air pollution model  
+* ````caces_flag_03````: binary variable indicating whether the specified time period for that receptor point is *completely* outside the coverage of the CACES air pollution model:  
+    + ````1```` indicates that the specified time (year(s)) for that receptor point is completely outside the temporal coverage of CACES air pollution model for one or more of the selected pollutants. Exposure metrics will be reported as ````NA```` for one or more of the selected pollutants.  
+    + ````0```` indicates that the specified time (year(s)) for that receptor point is **not** completely outside the temporal coverage of CACES air pollution model for any of the selected pollutants  
+* ````caces_flag_04````: binary variable indicating whether the specified time-period (year(s)) for that receptor point is *partly* outside the temporal coverage of CACES air pollution model for one or more of the selected pollutants. 
+    + ````1```` indicates that the the specified time-period (year(s)) for that receptor point is *partly* outside the temporal coverage of CACES air pollution model for one or more of the selected pollutants. Exposure metrics will be calculated based on the years with available data for that specified time-period.  
+    + ````0```` indicates that the specified time-period (year(s)) for that receptor point is completely within the temporal coverage of CACES air pollution model for all of the selected pollutants.  
+
+### Cite Data and Tool {#step-6-caces}
+
+Please cite the following in any publications based on this tool:
+
+**CACES Empirical Air Pollution Models (v1):**  
+
+Kim S.-Y.; Bechle, M.; Hankey, S.; Sheppard, L.; Szpiro, A. A.; Marshall, J. D. 2020. “Concentrations of criteria pollutants in the contiguous U.S., 1979 – 2015: Role of prediction model parsimony in integrated empirical geographic regression.” *PLoS ONE* 15(2), e0228535. DOI: 10.1371/journal.pone.0228535  
+
+**Census Tract Spatial Boundaries:**  
+
+Steven Manson, Jonathan Schroeder, David Van Riper, Tracy Kugler, and Steven Ruggles. IPUMS National Historical Geographic Information System: Version 16.0 [Census Tract Shapefiles, 2010]. Minneapolis, MN: IPUMS. 2021. http://doi.org/10.18128/D050.V16.0  
+
+Please see the following for additional requirements:   https://www.nhgis.org/citation-and-use-nhgis-data  
+
+**NIEHS Geospatial Toolbox:** 
+
+*Citation to be determined.*
