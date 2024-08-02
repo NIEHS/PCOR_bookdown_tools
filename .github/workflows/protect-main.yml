@@ -1,0 +1,34 @@
+---
+name: Protect Branch `main`
+
+on:
+  pull_request:
+
+jobs:
+  protect_main:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check base branch
+        id: check-base-branch
+        run: |
+          if [[ "${{ github.event.pull_request.base.ref }}" == "main" || "${{ github.event.pull_request.base.ref }}" == "master" ]]; then
+            echo "Protected branch \"main\" detected in pull request."
+            echo "continue=true" >> "$GITHUB_OUTPUT"
+           else
+            echo "Protected branch \"main\" not detected in pull request."
+            echo "continue=false" >> "$GITHUB_OUTPUT"
+          fi
+      
+      - name: Check source branch
+        run: |
+          continue="${{ steps.check-base-branch.outputs.continue }}"
+          if [[ "$continue" == "true" ]]; then
+            source_branch=$(jq -r '.pull_request.head.ref' "$GITHUB_EVENT_PATH")
+            if [[ "$source_branch" != "staging-public" ]]; then
+              echo "Pull requests into \"main\" must come from \"staging-public\"."
+              exit 1
+            fi
+          else
+            echo "Protected branch \"main\" not detected in pull request."
+          fi
