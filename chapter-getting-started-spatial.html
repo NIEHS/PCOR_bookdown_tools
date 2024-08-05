@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>1 Getting Started | The CHORDS Toolkit for Health and Geospatial Exposures Research</title>
+  <meta name="description" content="The CHORDS Toolkit provides guides, tools, and example code to support climate change and human health research." />
+  <meta name="generator" content="bookdown 0.40 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="1 Getting Started | The CHORDS Toolkit for Health and Geospatial Exposures Research" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="The CHORDS Toolkit provides guides, tools, and example code to support climate change and human health research." />
+  <meta name="github-repo" content="NIEHS/PCOR_bookdown_tools" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="1 Getting Started | The CHORDS Toolkit for Health and Geospatial Exposures Research" />
+  
+  <meta name="twitter:description" content="The CHORDS Toolkit provides guides, tools, and example code to support climate change and human health research." />
+  
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="unit-geospatial-foundations.html"/>
+<link rel="next" href="chapter-point-data.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">CHORDS Toolkit</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><strong>Introduction</strong></a>
+<ul>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html#about-chords"><i class="fa fa-check"></i>About CHORDS</a></li>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html#about-this-toolkit"><i class="fa fa-check"></i>About This Toolkit</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="unit-geospatial-foundations.html"><a href="unit-geospatial-foundations.html"><i class="fa fa-check"></i><strong>Geospatial Data Foundations</strong></a></li>
+<li class="chapter" data-level="1" data-path="chapter-getting-started-spatial.html"><a href="chapter-getting-started-spatial.html"><i class="fa fa-check"></i><b>1</b> Getting Started</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="chapter-getting-started-spatial.html"><a href="chapter-getting-started-spatial.html#introduction-1"><i class="fa fa-check"></i><b>1.1</b> Introduction</a></li>
+<li class="chapter" data-level="1.2" data-path="chapter-getting-started-spatial.html"><a href="chapter-getting-started-spatial.html#concepts-and-terminology"><i class="fa fa-check"></i><b>1.2</b> Concepts and Terminology</a></li>
+<li class="chapter" data-level="1.3" data-path="chapter-getting-started-spatial.html"><a href="chapter-getting-started-spatial.html#datasets"><i class="fa fa-check"></i><b>1.3</b> Datasets</a></li>
+<li class="chapter" data-level="1.4" data-path="chapter-getting-started-spatial.html"><a href="chapter-getting-started-spatial.html#r-packages"><i class="fa fa-check"></i><b>1.4</b> <code>R</code> Packages</a></li>
+<li class="chapter" data-level="1.5" data-path="chapter-getting-started-spatial.html"><a href="chapter-getting-started-spatial.html#chapter-getting-started-spatial-resources"><i class="fa fa-check"></i><b>1.5</b> Resources</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="chapter-point-data.html"><a href="chapter-point-data.html"><i class="fa fa-check"></i><b>2</b> Point Data</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="chapter-point-data.html"><a href="chapter-point-data.html#introduction-2"><i class="fa fa-check"></i><b>2.1</b> Introduction</a></li>
+<li class="chapter" data-level="2.2" data-path="chapter-point-data.html"><a href="chapter-point-data.html#access-download-and-unzip"><i class="fa fa-check"></i><b>2.2</b> Access, Download, and Unzip</a></li>
+<li class="chapter" data-level="2.3" data-path="chapter-point-data.html"><a href="chapter-point-data.html#data-preparation"><i class="fa fa-check"></i><b>2.3</b> Data Preparation</a></li>
+<li class="chapter" data-level="2.4" data-path="chapter-point-data.html"><a href="chapter-point-data.html#exploratory-analysis"><i class="fa fa-check"></i><b>2.4</b> Exploratory Analysis</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="chapter-polygon-data.html"><a href="chapter-polygon-data.html"><i class="fa fa-check"></i><b>3</b> Polygon Data</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="chapter-polygon-data.html"><a href="chapter-polygon-data.html#introduction-3"><i class="fa fa-check"></i><b>3.1</b> Introduction</a></li>
+<li class="chapter" data-level="3.2" data-path="chapter-polygon-data.html"><a href="chapter-polygon-data.html#chapter-polygon-access"><i class="fa fa-check"></i><b>3.2</b> Access, Download, and Unzip</a></li>
+<li class="chapter" data-level="3.3" data-path="chapter-polygon-data.html"><a href="chapter-polygon-data.html#data-preparation-with-sf"><i class="fa fa-check"></i><b>3.3</b> Data Preparation with <code>sf</code></a></li>
+<li class="chapter" data-level="3.4" data-path="chapter-polygon-data.html"><a href="chapter-polygon-data.html#exploratory-analysis-with-sf"><i class="fa fa-check"></i><b>3.4</b> Exploratory Analysis with <code>sf</code></a></li>
+<li class="chapter" data-level="3.5" data-path="chapter-polygon-data.html"><a href="chapter-polygon-data.html#data-preparation-with-terra"><i class="fa fa-check"></i><b>3.5</b> Data Preparation with <code>terra</code></a></li>
+<li class="chapter" data-level="3.6" data-path="chapter-polygon-data.html"><a href="chapter-polygon-data.html#exploratory-analysis-with-terra"><i class="fa fa-check"></i><b>3.6</b> Exploratory Analysis with <code>terra</code></a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="chapter-raster-data.html"><a href="chapter-raster-data.html"><i class="fa fa-check"></i><b>4</b> Raster Data</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="chapter-raster-data.html"><a href="chapter-raster-data.html#introduction-4"><i class="fa fa-check"></i><b>4.1</b> Introduction</a></li>
+<li class="chapter" data-level="4.2" data-path="chapter-raster-data.html"><a href="chapter-raster-data.html#raster-access"><i class="fa fa-check"></i><b>4.2</b> Access and Download</a></li>
+<li class="chapter" data-level="4.3" data-path="chapter-raster-data.html"><a href="chapter-raster-data.html#data-preparation-1"><i class="fa fa-check"></i><b>4.3</b> Data Preparation</a></li>
+<li class="chapter" data-level="4.4" data-path="chapter-raster-data.html"><a href="chapter-raster-data.html#exploratory-analysis-1"><i class="fa fa-check"></i><b>4.4</b> Exploratory Analysis</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="wildfire-data.html"><a href="wildfire-data.html"><i class="fa fa-check"></i><strong>Wildfire Data</strong></a></li>
+<li class="chapter" data-level="" data-path="other-environmental-data.html"><a href="other-environmental-data.html"><i class="fa fa-check"></i><strong>Other Environmental Data</strong></a></li>
+<li class="chapter" data-level="5" data-path="chapter-nasa-earthdata.html"><a href="chapter-nasa-earthdata.html"><i class="fa fa-check"></i><b>5</b> NASA EarthData Download</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="chapter-nasa-earthdata.html"><a href="chapter-nasa-earthdata.html#introduction-5"><i class="fa fa-check"></i><b>5.1</b> Introduction</a></li>
+<li class="chapter" data-level="5.2" data-path="chapter-nasa-earthdata.html"><a href="chapter-nasa-earthdata.html#nasa-earthdata-account"><i class="fa fa-check"></i><b>5.2</b> NASA EarthData Account</a></li>
+<li class="chapter" data-level="5.3" data-path="chapter-nasa-earthdata.html"><a href="chapter-nasa-earthdata.html#generate-prerequisite-files"><i class="fa fa-check"></i><b>5.3</b> Generate Prerequisite Files</a></li>
+<li class="chapter" data-level="5.4" data-path="chapter-nasa-earthdata.html"><a href="chapter-nasa-earthdata.html#download-data"><i class="fa fa-check"></i><b>5.4</b> Download Data</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="health-data-integration.html"><a href="health-data-integration.html"><i class="fa fa-check"></i><strong>Health Data Integration</strong></a></li>
+<li class="chapter" data-level="6" data-path="chapter-link-to-census.html"><a href="chapter-link-to-census.html"><i class="fa fa-check"></i><b>6</b> Linkage to Census Units</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="chapter-link-to-census.html"><a href="chapter-link-to-census.html#introduction-6"><i class="fa fa-check"></i><b>6.1</b> Introduction</a></li>
+<li class="chapter" data-level="6.2" data-path="chapter-link-to-census.html"><a href="chapter-link-to-census.html#tutorial"><i class="fa fa-check"></i><b>6.2</b> Tutorial</a></li>
+<li class="chapter" data-level="6.3" data-path="chapter-link-to-census.html"><a href="chapter-link-to-census.html#concluding-remarks"><i class="fa fa-check"></i><b>6.3</b> Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="chapter-fhir-pit.html"><a href="chapter-fhir-pit.html"><i class="fa fa-check"></i><b>7</b> A FHIR PIT Tutorial</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="chapter-fhir-pit.html"><a href="chapter-fhir-pit.html#introduction-7"><i class="fa fa-check"></i><b>7.1</b> Introduction</a></li>
+<li class="chapter" data-level="7.2" data-path="chapter-fhir-pit.html"><a href="chapter-fhir-pit.html#tutorial-1"><i class="fa fa-check"></i><b>7.2</b> Tutorial</a></li>
+<li class="chapter" data-level="7.3" data-path="chapter-fhir-pit.html"><a href="chapter-fhir-pit.html#fhir-pit-considerations"><i class="fa fa-check"></i><b>7.3</b> Considerations</a></li>
+<li class="chapter" data-level="7.4" data-path="chapter-fhir-pit.html"><a href="chapter-fhir-pit.html#concluding-remarks-1"><i class="fa fa-check"></i><b>7.4</b> Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="case-studies.html"><a href="case-studies.html"><i class="fa fa-check"></i><strong>Case Studies</strong></a></li>
+<li class="chapter" data-level="" data-path="appendix.html"><a href="appendix.html"><i class="fa fa-check"></i><strong>Appendix</strong></a></li>
+<li class="chapter" data-level="" data-path="chapter-user-profiles.html"><a href="chapter-user-profiles.html"><i class="fa fa-check"></i><strong>A</strong> User Profiles</a></li>
+<li class="chapter" data-level="" data-path="chords-glossary.html"><a href="chords-glossary.html"><i class="fa fa-check"></i><strong>B</strong> CHORDS Glossary</a></li>
+<li class="chapter" data-level="" data-path="all-references-appendix.html"><a href="all-references-appendix.html"><i class="fa fa-check"></i><strong>C</strong> References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" 
+target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">The CHORDS Toolkit for Health and Geospatial Exposures Research</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="chapter-getting-started-spatial" class="section level1 hasAnchor" number="1">
+<h1><span class="header-section-number">1</span> Getting Started<a href="chapter-getting-started-spatial.html#chapter-getting-started-spatial" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p><a href="chapter-user-profiles.html#profilecmp"><img src="images/user_profiles/profilecmp.svg" alt="Profile-CMP" /></a> <a href="chapter-user-profiles.html#profilesbs"><img src="images/user_profiles/profilesbs.svg" alt="Profile-SBS" /></a> <a href="chapter-user-profiles.html#profilestu"><img src="images/user_profiles/profilestu.svg" alt="Profile-STU" /></a></p>
+<div id="getting-started-with-geospatial-data-analysis-in-environmental-health-using-r" class="section level3 unnumbered hasAnchor">
+<h3>Getting Started with Geospatial Data Analysis in Environmental Health Using R<a href="chapter-getting-started-spatial.html#getting-started-with-geospatial-data-analysis-in-environmental-health-using-r" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><strong>Date Modified:</strong> June 25, 2024</p>
+<p><strong>Authors:</strong> Mitchell Manware <a href="https://orcid.org/0009-0003-6440-6106"><img src="images/orcid.png" width="10" alt="author-mm" /></a>, Lara P. Clark <a href="https://orcid.org/0000-0001-6940-5442"><img src="images/orcid.png" width="10" alt="author-lpc" /></a>, Kyle P. Messier <a href="https://orcid.org/0000-0001-9508-9623"><img src="images/orcid.png" width="10" alt="author-kpm" /></a></p>
+<p><strong>Key Terms:</strong> <a href="https://tools.niehs.nih.gov/cchhglossary/?keyword=environmental+health&amp;termOnlySearch=true&amp;exactSearch=true">Environmental Health</a>, <a href="chords-glossary.html#def-geospatial-data">Geospatial Data</a></p>
+<p><strong>Programming Language:</strong> R</p>
+</div>
+<div id="introduction-1" class="section level2 hasAnchor" number="1.1">
+<h2><span class="header-section-number">1.1</span> Introduction<a href="chapter-getting-started-spatial.html#introduction-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="motivation" class="section level3 hasAnchor" number="1.1.1">
+<h3><span class="header-section-number">1.1.1</span> Motivation<a href="chapter-getting-started-spatial.html#motivation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Environmental health research relies on various types of data to accurately measure, model, and predict exposures. Environmental data are often spatial (related to the surface of the Earth), temporal (related to a specific time or period of time), or spatio-temporal (related to the surface of the Earth for a specific time or period of time). Here, the term <em>geospatial</em> will be used to refer to spatial and spatio-temporal data. These data are at the core of environmental health research, but the steps between identifying a geospatial data set or variable and using it to help answer a research question can be challenging.</p>
+</div>
+<div id="objectives" class="section level3 hasAnchor" number="1.1.2">
+<h3><span class="header-section-number">1.1.2</span> Objectives<a href="chapter-getting-started-spatial.html#objectives" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The objectives of this chapter are to:</p>
+<ol style="list-style-type: decimal">
+<li>Introduce concepts and terminology used throughout the CHORDS Toolkit for geospatial data and geospatial analysis methods.</li>
+<li>Describe the geospatial datasets and <code>R</code> packages used in the following tutorials.</li>
+<li>Provide a list of useful resources for getting started with <code>R</code> and for further exploration of geospatial data analysis methods in environmental health.</li>
+</ol>
+<p>The following chapters in this unit will demonstrate how to use <code>R</code> to access, prepare, and analyze different types of geospatial data that are commonly used in environmental health applications. The tutorials will focus primarily on spatial data, but some aspects of temporal and spatio-temporal data will also be discussed.</p>
+</div>
+</div>
+<div id="concepts-and-terminology" class="section level2 hasAnchor" number="1.2">
+<h2><span class="header-section-number">1.2</span> Concepts and Terminology<a href="chapter-getting-started-spatial.html#concepts-and-terminology" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="spatial-geometry" class="section level3 hasAnchor" number="1.2.1">
+<h3><span class="header-section-number">1.2.1</span> Spatial Geometry<a href="chapter-getting-started-spatial.html#spatial-geometry" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The <em>spatial geometry</em> of a geospatial dataset is an important consideration in data analysis pipelines. There are three main spatial geometry types: point, line, and area (i.e., polygon or grid). <em>Points</em> are represented by geographic coordinates (latitude and longitude pairs), <em>lines</em> by a series of connected points, and <em>polygons</em> by a series of connected points that completely enclose and define an area. In contrast to polygons, which can define irregular or non-uniform areas, <em>grids</em> define regular and uniform areas (e.g., such that each grid cell has the same area). Point, line, and polygon data is referred to as <em>vector</em> data, and grid data is referred to as <em>raster</em> data. For detailed descriptions of vector data, raster data, and the differences between them, respectively, see <span class="citation">(<a href="#ref-r-sf-1">1</a>)</span>, <span class="citation">(<a href="#ref-raster-data">2</a>)</span> and <span class="citation">(<a href="#ref-geocomputation-2">3</a>)</span>.</p>
+<p>The following table illustrates common examples of each spatial geometry type used in environmental health applications.</p>
+<figcaption>
+Spatial Geometry Types
+</figcaption>
+<table>
+<colgroup>
+<col width="8%" />
+<col width="17%" />
+<col width="61%" />
+<col width="13%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Type</th>
+<th>Illustration</th>
+<th>Examples</th>
+<th>Tutorials</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Point (Vector)</td>
+<td><img src="images/intro_to_spatial/illustration-point.png" style="width:60.0%" /></td>
+<td>Air pollution monitors, Weather stations, Patient geocoded addresses, Healthcare facility coordinates</td>
+<td><a href="chapter-point-data.html#chapter-point-data">Point Data</a></td>
+</tr>
+<tr class="even">
+<td>Line (Vector)</td>
+<td><img src="images/intro_to_spatial/illustration-line.png" style="width:60.0%" /></td>
+<td>Roads, Commute routes</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Polygon (Vector)</td>
+<td><img src="images/intro_to_spatial/illustration-polygon.png" style="width:60.0%" /></td>
+<td>Wildfire smoke plumes, Census boundaries</td>
+<td><a href="chapter-polygon-data.html#chapter-polygon-data">Polygon Data</a></td>
+</tr>
+<tr class="even">
+<td>Grid (Raster)</td>
+<td><img src="images/intro_to_spatial/illustration-grid.png" style="width:60.0%" /></td>
+<td>Land cover imagery from satellites, Meteorological model output, Gridded population counts</td>
+<td><a href="chapter-raster-data.html#chapter-raster-data">Raster Data</a></td>
+</tr>
+</tbody>
+</table>
+<p>The tutorials linked in the table above demonstrate exploratory analyses with each spatial geometry data type.</p>
+</div>
+<div id="getting-started-spatial-crs" class="section level3 hasAnchor" number="1.2.2">
+<h3><span class="header-section-number">1.2.2</span> Coordinate Reference Systems and Projections<a href="chapter-getting-started-spatial.html#getting-started-spatial-crs" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Coordinate reference systems (CRS) are important for spatial analyses as they define how spatial data align with the Earth’s surface <span class="citation">(<a href="#ref-geocomputation-24">4</a>)</span>. Transforming (projecting) the data to a different CRS may be necessary when combining multiple datasets or creating visuals for particular areas of interest. It is important to note that transforming spatial data can cause distortions in its area, direction, distance, or shape <span class="citation">(<a href="#ref-geocomputation-24">4</a>)</span>. The direction and magnitude of these distortions vary depending on the chosen CRS, area of interest, and type of data <span class="citation">(<a href="#ref-article_steinwand1995reprojection">5</a>)</span>. For guidance on selecting an appropriate CRS based on the data, area of interest, and analysis goals, see <span class="citation">(<a href="#ref-arcgis-crs">6</a>,<a href="#ref-usgs-projections">7</a>)</span>.</p>
+</div>
+</div>
+<div id="datasets" class="section level2 hasAnchor" number="1.3">
+<h2><span class="header-section-number">1.3</span> Datasets<a href="chapter-getting-started-spatial.html#datasets" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The tutorials in this unit demonstrate the use of geospatial data using the following publicly available datasets:</p>
+<table>
+<colgroup>
+<col width="41%" />
+<col width="41%" />
+<col width="17%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Data Provider</th>
+<th>Dataset</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Environmental Protection Agency (EPA)</td>
+<td><a href="https://aqs.epa.gov/aqsweb/airdata/download_files.html">PM<sub>2.5</sub> Daily Observations</a></td>
+<td>Point</td>
+</tr>
+<tr class="even">
+<td>National Oceanic and Atmospheric Administration (NOAA)</td>
+<td><a href="https://www.ospo.noaa.gov/Products/land/hms.html">Wildfire Smoke Plumes</a></td>
+<td>Polygon</td>
+</tr>
+<tr class="odd">
+<td>United States Census Bureau</td>
+<td><a href="https://www.census.gov/geographies/mapping-files/time-series/geo/carto-boundary-file.html">United States Cartographic Boundary</a></td>
+<td>Polygon</td>
+</tr>
+<tr class="even">
+<td>National Oceanic and Atmospheric Administration (NOAA)</td>
+<td><a href="https://psl.noaa.gov/data/gridded/data.narr.html">Land Surface Temperature</a></td>
+<td>Raster</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="r-packages" class="section level2 hasAnchor" number="1.4">
+<h2><span class="header-section-number">1.4</span> <code>R</code> Packages<a href="chapter-getting-started-spatial.html#r-packages" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The tutorials in this unit demonstrate the use of the following <code>R</code> packages:</p>
+<ul>
+<li><p><strong>Spatial Analysis:</strong> <a href="https://cran.r-project.org/web/packages/sf/sf.pdf"><code>sf</code></a> <span class="citation">(<a href="#ref-r-sf-1">1</a>,<a href="#ref-r-sf-2">8</a>)</span>, <a href="https://cran.r-project.org/web/packages/terra/terra.pdf"><code>terra</code></a> <span class="citation">(<a href="#ref-r-terra">9</a>)</span>, <a href="(https://cran.r-project.org/web/packages/tidyterra/tidyterra.pdf)"><code>tidyterra</code></a> <span class="citation">(<a href="#ref-r-tidyterra">10</a>)</span></p></li>
+<li><p><strong>Data Visualization:</strong> <a href="https://cran.r-project.org/web/packages/ggplot2/ggplot2.pdf"><code>ggplot2</code></a> <span class="citation">(<a href="#ref-r-ggplot2">11</a>)</span>, <a href="https://cran.r-project.org/web/packages/ggpubr/ggpubr.pdf"><code>ggpubr</code></a> <span class="citation">(<a href="#ref-r-ggpubr">12</a>)</span></p></li>
+<li><p><strong>Data Processing:</strong> <a href="https://cran.r-project.org/web/packages/dplyr/dplyr.pdf"><code>dplyr</code></a> <span class="citation">(<a href="#ref-r-dplyr">13</a>)</span></p></li>
+</ul>
+<p>The following code installs and imports the packages used in this unit:</p>
+<div class="note">
+<p>Installing and importing new packages may required <code>R</code> to restart.</p>
+</div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="chapter-getting-started-spatial.html#cb1-1" tabindex="-1"></a>vignette_packages <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb1-2"><a href="chapter-getting-started-spatial.html#cb1-2" tabindex="-1"></a>  <span class="st">&quot;dplyr&quot;</span>, <span class="st">&quot;ggplot2&quot;</span>, <span class="st">&quot;ggpubr&quot;</span>, <span class="st">&quot;sf&quot;</span>,</span>
+<span id="cb1-3"><a href="chapter-getting-started-spatial.html#cb1-3" tabindex="-1"></a>  <span class="st">&quot;terra&quot;</span>, <span class="st">&quot;tidyterra&quot;</span>, <span class="st">&quot;utils&quot;</span></span>
+<span id="cb1-4"><a href="chapter-getting-started-spatial.html#cb1-4" tabindex="-1"></a>)</span>
+<span id="cb1-5"><a href="chapter-getting-started-spatial.html#cb1-5" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="chapter-getting-started-spatial.html#cb1-6" tabindex="-1"></a><span class="cf">for</span> (v <span class="cf">in</span> <span class="fu">seq_along</span>(vignette_packages)) {</span>
+<span id="cb1-7"><a href="chapter-getting-started-spatial.html#cb1-7" tabindex="-1"></a>  <span class="cf">if</span> (vignette_packages[v] <span class="sc">%in%</span> <span class="fu">installed.packages</span>() <span class="sc">==</span> <span class="cn">FALSE</span>) {</span>
+<span id="cb1-8"><a href="chapter-getting-started-spatial.html#cb1-8" tabindex="-1"></a>    <span class="fu">install.packages</span>(vignette_packages[v])</span>
+<span id="cb1-9"><a href="chapter-getting-started-spatial.html#cb1-9" tabindex="-1"></a>  }</span>
+<span id="cb1-10"><a href="chapter-getting-started-spatial.html#cb1-10" tabindex="-1"></a>}</span>
+<span id="cb1-11"><a href="chapter-getting-started-spatial.html#cb1-11" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="chapter-getting-started-spatial.html#cb1-12" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-13"><a href="chapter-getting-started-spatial.html#cb1-13" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb1-14"><a href="chapter-getting-started-spatial.html#cb1-14" tabindex="-1"></a><span class="fu">library</span>(ggpubr)</span>
+<span id="cb1-15"><a href="chapter-getting-started-spatial.html#cb1-15" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
+<span id="cb1-16"><a href="chapter-getting-started-spatial.html#cb1-16" tabindex="-1"></a><span class="fu">library</span>(terra)</span>
+<span id="cb1-17"><a href="chapter-getting-started-spatial.html#cb1-17" tabindex="-1"></a><span class="fu">library</span>(tidyterra)</span>
+<span id="cb1-18"><a href="chapter-getting-started-spatial.html#cb1-18" tabindex="-1"></a><span class="fu">library</span>(utils)</span></code></pre></div>
+</div>
+<div id="chapter-getting-started-spatial-resources" class="section level2 hasAnchor" number="1.5">
+<h2><span class="header-section-number">1.5</span> Resources<a href="chapter-getting-started-spatial.html#chapter-getting-started-spatial-resources" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>This section highlights resources for getting started with <code>R</code>, geospatial data analysis, and/or climate change and human health related research methods.</p>
+<ul>
+<li><p>The BUSPH-HSPH Climate Change and Health Research Coordinating Center (<a href="https://climatehealthcafe.org">CAFÉ</a>) provides training and education materials for climate change and human health research in different formats for various types of users. The <a href="https://climate-cafe.github.io/cafe_github_org.html">Climate CAFÉ Tutorials and Code Walkthroughs</a> demonstrate geospatial data management and analysis in climate change and human health research using <code>R</code>. CAFÉ also provides a series of <a href="https://climatehealthcafe.org/training">video tutorials</a> demonstrating the use of geographic information systems (GIS) in environmental health and a list of <a href="https://climatehealthcafe.org/training">educational materials on climate and health</a>.</p></li>
+<li><p>The <a href="https://uncsrp.github.io/Data-Analysis-Training-Modules/">inTelligence And Machine lEarning (TAME) Toolkit</a> provides tutorials for data generation, management, and analysis in environmental health research using <code>R</code>. The TAME Toolkit <a href="https://uncsrp.github.io/Data-Analysis-Training-Modules/introduction-to-coding-in-r.html#introduction-to-coding-in-r">Chapter 1</a> includes a guide for installing and getting started with <code>R</code> and an introduction to data science methods in <code>R</code>. The TAME Toolkit also includes tutorials with <code>R</code> code demonstrating geospatial data analysis methods in environmental health (e.g., <a href="https://uncsrp.github.io/Data-Analysis-Training-Modules/database-integration-air-quality-mortality-and-environmental-justice-data.html#database-integration-air-quality-mortality-and-environmental-justice-data">Chapter 3.3</a>).</p></li>
+<li><p>The <a href="https://tech.popdata.org/dhs-research-hub/">IPUMS DHS Climate Change and Health Research Hub</a> provides tutorials with code in <code>R</code> demonstrating use of various climate and health datasets and analysis methods. IPUMS also provides a guide to <a href="https://tech.popdata.org/dhs-research-hub/posts/2024-02-01-getting-started-with-r/">installing and setting up <code>R</code></a> for use in climate change and health research.</p></li>
+<li><p>The book <a href="https://r.geocompx.org/"><em>Geocomputation with R</em></a> provides resources for geospatial data analysis, visualization, and modeling with <code>R</code>. This book provides tutorials and examples from various disciplines that use geospatial data (e.g., transportation, ecology). This book covers introductory through advanced topics.</p></li>
+</ul>
+
+</div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references csl-bib-body">
+<div id="ref-r-sf-1" class="csl-entry">
+<div class="csl-left-margin">1. </div><div class="csl-right-inline">Pebesma, Edzer. 2018. <span>“<span class="nocase">Simple Features for <span>R</span>: Standardized Support for Spatial Vector Data</span>.”</span> <em><span>The R Journal</span></em> 10 (1): 439–46. <a href="https://doi.org/10.32614/RJ-2018-009">https://doi.org/10.32614/RJ-2018-009</a></div>
+</div>
+<div id="ref-raster-data" class="csl-entry">
+<div class="csl-left-margin">2. </div><div class="csl-right-inline"><em>Introduction to Raster Data</em>. 2023. <a href="https://datacarpentry.org/organization-geospatial/01-intro-raster-data">https://datacarpentry.org/organization-geospatial/01-intro-raster-data</a></div>
+</div>
+<div id="ref-geocomputation-2" class="csl-entry">
+<div class="csl-left-margin">3. </div><div class="csl-right-inline">Lovelace, Robin, Jakub Nowosad, and Jannes Muenchow. 2019. <span>“Geographic Data in <span>R</span>.”</span> In <em>Geocomputation with <span>R</span></em>. Chapman; Hall/CRC. <a href="https://r.geocompx.org/spatial-class#spatial-class">https://r.geocompx.org/spatial-class#spatial-class</a></div>
+</div>
+<div id="ref-geocomputation-24" class="csl-entry">
+<div class="csl-left-margin">4. </div><div class="csl-right-inline">Lovelace, Robin, Jakub Nowosad, and Jannes Muenchow. 2019. <span>“Coordinate Reference Systems.”</span> In <em>Geocomputation with <span>R</span></em>. Chapman; Hall/CRC. <a href="https://r.geocompx.org/spatial-class#crs-intro">https://r.geocompx.org/spatial-class#crs-intro</a></div>
+</div>
+<div id="ref-article_steinwand1995reprojection" class="csl-entry">
+<div class="csl-left-margin">5. </div><div class="csl-right-inline">Steinwand, Daniel R, John A Hutchinson, and John P Snyder. 1995. <span>“Map Projections for Global and Gontinental Data Sets and an Analysis of Pixel Distortion Caused by Reproiection.”</span> <em>Photogrammetric Engineering &amp; Remote Sensing</em> 61 (12): 1487–97</div>
+</div>
+<div id="ref-arcgis-crs" class="csl-entry">
+<div class="csl-left-margin">6. </div><div class="csl-right-inline">Esri. 2023. <em>Choose the Right Projection</em>. Website. <a href="https://learn.arcgis.com/en/projects/choose-the-right-projection/">https://learn.arcgis.com/en/projects/choose-the-right-projection/</a></div>
+</div>
+<div id="ref-usgs-projections" class="csl-entry">
+<div class="csl-left-margin">7. </div><div class="csl-right-inline">United States Geological Survey (USGS). 2019. <em>Map Projections</em>. Website. <a href="https://pubs.usgs.gov/gip/70047422/report.pdf">https://pubs.usgs.gov/gip/70047422/report.pdf</a></div>
+</div>
+<div id="ref-r-sf-2" class="csl-entry">
+<div class="csl-left-margin">8. </div><div class="csl-right-inline">Pebesma, Edzer, and Roger Bivand. 2023. <em>Spatial Data Science: With Applications in <span>R</span></em>. <span>Chapman and Hall/CRC</span>. <a href="https://doi.org/10.1201/9780429459016">https://doi.org/10.1201/9780429459016</a></div>
+</div>
+<div id="ref-r-terra" class="csl-entry">
+<div class="csl-left-margin">9. </div><div class="csl-right-inline">Hijmans, Robert J. 2024. <em><span class="nocase">terra</span>: Spatial Data Analysis</em>. R Package Version 1.7-71. <a href="https://CRAN.R-project.org/package=terra">https://CRAN.R-project.org/package=terra</a></div>
+</div>
+<div id="ref-r-tidyterra" class="csl-entry">
+<div class="csl-left-margin">10. </div><div class="csl-right-inline">Hernangómez, Diego. 2023. <span>“Using the <span class="nocase">tidyverse</span> with <span class="nocase">terra</span> Objects: The <span class="nocase">tidyterra</span> Package.”</span> <em>Journal of Open Source Software</em> 8 (91): 5751. <a href="https://doi.org/10.21105/joss.05751">https://doi.org/10.21105/joss.05751</a></div>
+</div>
+<div id="ref-r-ggplot2" class="csl-entry">
+<div class="csl-left-margin">11. </div><div class="csl-right-inline">Wickham, Hadley. 2016. <em><span class="nocase">ggplot2</span>: Elegant Graphics for Data Analysis</em>. Springer-Verlag New York. <a href="https://ggplot2.tidyverse.org">https://ggplot2.tidyverse.org</a></div>
+</div>
+<div id="ref-r-ggpubr" class="csl-entry">
+<div class="csl-left-margin">12. </div><div class="csl-right-inline">Kassambara, Alboukadel. 2023. <em><span class="nocase">ggpubr</span>: <span class="nocase">’ggplot2’</span> Based Publication Ready Plots</em>. R Package Version 0.6.0. <a href="https://CRAN.R-project.org/package=ggpubr">https://CRAN.R-project.org/package=ggpubr</a></div>
+</div>
+<div id="ref-r-dplyr" class="csl-entry">
+<div class="csl-left-margin">13. </div><div class="csl-right-inline">Wickham, Hadley, Romain François, Lionel Henry, Kirill Müller, and Davis Vaughan. 2023. <em><span class="nocase">dplyr</span>: A Grammar of Data Manipulation</em>. R Package Version 1.1.4. <a href="https://CRAN.R-project.org/package=dplyr">https://CRAN.R-project.org/package=dplyr</a></div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="unit-geospatial-foundations.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="chapter-point-data.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": false,
+"twitter": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": false
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+</body>
+
+</html>
