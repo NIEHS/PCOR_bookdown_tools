@@ -64,7 +64,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -281,24 +281,24 @@ Example Environmental Health Data Sources
 <col width="33%" />
 </colgroup>
 <thead>
-<tr class="header">
+<tr>
 <th>Data source</th>
 <th>Geographic units</th>
 <th>Example topics</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td><a href="https://www.ahrq.gov/sdoh/data-analytics/sdoh-data.html">AHRQ Social Detrminants of Health Database</a></td>
 <td>County, ZIP code, tract</td>
 <td>Demographic characteristics, housing and transportation characteristics, food access, healthcare characteristics</td>
 </tr>
-<tr class="even">
+<tr>
 <td><a href="https://www.epa.gov/ejscreen">EPA Environmental Justice Screening and Mapping Tool</a></td>
 <td>Block group</td>
 <td>Air pollution, hazardous waste, flood risk, wildfire risk, environmental justice indices</td>
 </tr>
-<tr class="odd">
+<tr>
 <td><a href="https://ephtracking.cdc.gov">CDC National Environmental Public Health Tracking Network</a></td>
 <td>State, county</td>
 <td>Heat, sunlight and ultraviolet exposure, built environment characteristics, asthma, heat-related illnesses</td>
@@ -335,7 +335,7 @@ Common Census Geographic Units in the United States
 <col width="20%" />
 </colgroup>
 <thead>
-<tr class="header">
+<tr>
 <th>Geographic Unit</th>
 <th>Total Units<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></th>
 <th>GeoID Description and Structure</th>
@@ -344,42 +344,42 @@ Common Census Geographic Units in the United States
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td>State</td>
 <td>50</td>
 <td>2-digit state (S) code = SS</td>
 <td>09</td>
 <td>Connecticut (CT)</td>
 </tr>
-<tr class="even">
+<tr>
 <td>County</td>
 <td>3143</td>
 <td>5-digit code = 2-digit state (S) code + 3-digit county (C) code = SSCCC</td>
 <td>09007</td>
 <td>Middlesex County, CT</td>
 </tr>
-<tr class="odd">
+<tr>
 <td>Zip Code Tabulation Area (ZCTA)</td>
 <td>33,642</td>
 <td>5-digit ZCTA (Z) code = ZZZZZ</td>
 <td>06480</td>
 <td>ZCTA for Portland, CT</td>
 </tr>
-<tr class="even">
+<tr>
 <td>Tract</td>
 <td>84,414</td>
 <td>11-digit code = 2-digit state (S) code + 3 digit county (C) code + 6-digit tract (T) code = SSCCCTTTTTT</td>
 <td>09007560100</td>
 <td>Tract 560100 in Middlesex County, CT</td>
 </tr>
-<tr class="odd">
+<tr>
 <td>Block group</td>
 <td>239,780</td>
 <td>12-digit code = 2-digit state (S) code + 3 digit county (C) code + 6-digit tract (T) code + 1-digit block group (G) code = SSCCCTTTTTTG</td>
 <td>090075601001</td>
 <td>Block group 1 in Tract 560100 in Middlesex County, CT</td>
 </tr>
-<tr class="even">
+<tr>
 <td>Block</td>
 <td>8,132,968</td>
 <td>15-digit code = 2-digit state (S) code + 3 digit county (C) code + 6-digit tract (T) code + 4-digit block (B) code (which contains the block group code as its first digit) = SSCCCTTTTTTBBBB</td>
