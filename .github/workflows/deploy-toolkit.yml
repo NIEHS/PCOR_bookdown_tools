@@ -15,68 +15,51 @@ on:
 jobs:
   deploy_toolkit:
     runs-on: ubuntu-latest
-
     # Only restrict concurrency for non-PR jobs
     concurrency:
-      group: bookdown-${{ github.event_name != 'pull_request' || github.run_id }}
-
+      group: deploy-staging-${{ github.event_name != 'pull_request' || github.run_id }}
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
-
+    
     permissions:
       contents: write
-
+      pages: write
+    
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-      - uses: r-lib/actions/setup-pandoc@v2
+      - name: Set up R and Pandoc
+        uses: r-lib/actions/setup-pandoc@v2
+        with:
+          pandoc-version: 'latest'
 
-      - uses: r-lib/actions/setup-r@v2
+      - name: Set up R
+        uses: r-lib/actions/setup-r@v2
         with:
           use-public-rspm: true
 
-      - name: Install libudunits2 and libmagick
+      - name: Install system dependencies
         run: |
           sudo apt-get install -y libudunits2-dev libgdal-dev
           sudo apt-get install libmagick++-dev
 
-      - name: Build site
+      - name: Install R packages
         run: |
-          install.packages(c(
-            "bookdown",
-            "rmarkdown",
-            "plotly",
-            "shiny",
-            "tidycensus",
-            "tidyverse",
-            "viridis",
-            "ggmap",
-            "ggplot2",
-            "maps",
-            "dplyr",
-            "knitr",
-            "latticeExtra",
-            "pals",
-            "classInt",
-            "sf",
-            "udunits2",
-            "tmap",
-            "lubridate",
-            "gifski",
-            "magick",
-            "cowplot",
-            "BiocManager"
-            ),
-            dependencies = TRUE
-          )
-          BiocManager::install("Biobase")
-          bookdown::render_book()
-        shell: Rscript {0}
+          R -e 'install.packages(c("bookdown", "rmarkdown", "plotly", "shiny", "tidycensus", "tidyverse", "viridis", "ggmap", "ggplot2", "maps", "dplyr", "knitr", "latticeExtra", "pals", "classInt", "sf", "udunits2", "tmap", "lubridate", "gifski", "magick", "cowplot"))'
+          R -e 'if (!requireNamespace("BiocManager", quietly = TRUE)) install.packages("BiocManager"); BiocManager::install("Biobase")'
+  
+      - name: Build site for staging branch
+        run: R -e 'bookdown::render_book(".", "bookdown::gitbook")'
 
-      - name: Deploy to GitHub pages 🚀
+      - name: Debug Repository State
+        run: |
+          git status
+          ls -la
+
+      - name: Deploy to GitHub Pages
         if: github.event_name != 'pull_request'
-        uses: JamesIves/github-pages-deploy-action@v4.4.1
+        uses: peaceiris/actions-gh-pages@v4
         with:
-          clean: false
-          branch: gh-pages
-          folder: docs
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./docs  # Directory where bookdown outputs the HTML f
