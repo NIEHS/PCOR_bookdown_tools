@@ -2,7 +2,7 @@
 delete_merged_file: true
 output_dir: "docs"
 rmd_files:
-  - chapters/index.Rmd
+  - index.Rmd
   - chapters/01-00-spatial-data-foundations.Rmd
   - chapters/01-01-getting-started.Rmd
   - chapters/01-02-spatial-point-data.Rmd
