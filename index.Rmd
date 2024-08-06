@@ -20,7 +20,7 @@ Researchers interested in studying the health impacts of climate change and clim
 
 ## About CHORDS {-}
 
-The [Climate and Health Outcomes Research Data Systems (CHORDS)](https://www.niehs.nih.gov/research/programs/chords) program provides resources aimed at making it easier for researchers to study the effects of place-based environmental exposures on health outcomes. The CHORDS resources include a [web-based data catalog](https://chords.niehs.nih.gov), standardized data sets, and this toolkit.
+The [Climate and Health Outcomes Research Data Systems (CHORDS)](https://www.niehs.nih.gov/research/programs/chords) program provides resources aimed at making it easier for researchers to study the effects of place-based environmental exposures on health outcomes. The CHORDS resources include a web-based data catalog, standardized data sets, and this toolkit.
 
 ::: {.figure}
   <img src="images/chords-art-logo.png" style="width:100%">
