@@ -1,7 +1,7 @@
 # The CHORDS Toolkit for Health and Geospatial Exposures Research <img align="right" width="250" src="images/chords-icon-web.jpg">
 
-[![Super-Lint](https://github.com/NIEHS/PCOR_bookdown_tools/actions/workflows/superlint.yml/badge.svg)](https://github.com/NIEHS/PCOR_bookdown_tools/actions/workflows/superlint.yml/badge.svg)
-[![Render-Bookdown](https://github.com/NIEHS/PCOR_bookdown_tools/actions/workflows/test-render.yml/badge.svg)](https://github.com/NIEHS/PCOR_bookdown_tools/actions/workflows/test-render.yml/badge.svg)
+[![Super-Lint](https://github.com/NIEHS/PCOR_bookdown_tools/actions/workflows/check-super-linter.yml/badge.svg)](https://github.com/NIEHS/PCOR_bookdown_tools/actions/workflows/check-super-linter.yml)
+[![Render-Bookdown](https://github.com/NIEHS/PCOR_bookdown_tools/actions/workflows/check-render-bookdown.yml/badge.svg)](https://github.com/NIEHS/PCOR_bookdown_tools/actions/workflows/check-render-bookdown.yml)
 
 This repository provides the underlying code and data for the [Climate and Health Outcomes Research Data Systems (CHORDS)](https://www.niehs.nih.gov/research/programs/chords) Toolkit for Health and Geospatial Exposures Research.
 The CHORDS Toolkit seeks to aid researchers in accessing, processing, and integrating geospatial data-based exposures into their health research by providing guides, tools, and example code. The CHORDS Toolkit is available at <https://niehs.github.io/PCOR_bookdown_tools/>.
