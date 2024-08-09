@@ -25,8 +25,8 @@ jobs:
           continue="${{ steps.check-base-branch.outputs.continue }}"
           if [[ "$continue" == "true" ]]; then
             source_branch=$(jq -r '.pull_request.head.ref' "$GITHUB_EVENT_PATH")
-            if [[ "$source_branch" != "staging-public" ]]; then
-              echo "Pull requests into \"main\" must come from \"staging-public\"."
+            if [[ "$source_branch" != "staging" ]]; then
+              echo "Pull requests into \"main\" must come from \"staging\"."
               exit 1
             fi
           else

@@ -4,7 +4,7 @@ name: Update external repository `PCOR_bookdown_staging`
 
 on:
   push:
-    branches: [staging-internal]
+    branches: [staging]
 
 jobs:
   sync:
@@ -14,7 +14,7 @@ jobs:
       - name: Checkout `PCOR_public` repository
         uses: actions/checkout@v3
         with:
-          ref: staging-internal
+          ref: staging
 
       - name: Set up Git
         run: |
@@ -42,7 +42,7 @@ jobs:
           cd PCOR_bookdown_staging
           git add .
           git status
-          git commit -m "Sync PCOR_public staging-internal branch" || echo "No changes to commit"
+          git commit -m "Sync PCOR_public staging branch" || echo "No changes to commit"
           git push https://${{ secrets.PCOR_bookdown_staging_actions_06262024 }}@github.com/NIEHS/PCOR_bookdown_staging.git main
 
     env:
