@@ -51,7 +51,7 @@ bookdown::render_book("chapters/index.Rmd", "bookdown::gitbook")
 
 The following workflow rules and branch protections facilitate development, revision, review, and publication of the CHORDS Toolkit.
 
-<img align="center" src="images/workflow_push.png">
+<img align="center" src="images/workflow_staging.png">
 
 #### Development Branches
 
