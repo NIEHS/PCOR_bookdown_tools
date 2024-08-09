@@ -3,7 +3,7 @@ bookdown::gitbook:
   toc_depth: 2
   css: style.css
   includes:
-      after_body: "after_body.html"
+    after_body: "after_body.html"
   config:
     toc:
       collapse: section
