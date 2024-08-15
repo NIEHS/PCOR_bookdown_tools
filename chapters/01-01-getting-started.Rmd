@@ -79,7 +79,7 @@ The following code installs and imports the packages used in this unit:
 Installing and importing new packages may required `R` to restart.
 :::
 
-```{r, eval = FALSE}
+```{r, warning = FALSE}
 vignette_packages <- c(
   "dplyr", "ggplot2", "ggpubr", "sf",
   "terra", "tidyterra", "utils"
