@@ -115,7 +115,7 @@ The data set can be reduced to include only the variables of interest with the `
 
 ```{r}
 pm <- subset(
-  pm, 
+  pm,
   select = c(
     State.Code,
     County.Code,
