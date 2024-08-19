@@ -6,7 +6,7 @@
 
 ### Point Data Access, Preparation, and Exploratory Analysis in R {-}
 
-**Date Modified:** May 6, 2024
+**Date Modified:** August 16, 2024
 
 **Authors:** Mitchell Manware [![author-mm](images/orcid.png){width=10}](https://orcid.org/0009-0003-6440-6106), Kyle P. Messier [![author-kpm](images/orcid.png){width=10}](https://orcid.org/0000-0001-9508-9623)
 

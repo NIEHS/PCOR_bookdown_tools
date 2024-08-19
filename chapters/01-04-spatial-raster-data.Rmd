@@ -6,7 +6,7 @@
 
 ### Raster Data Access, Preparation, and Exploratory Analysis in R {-}
 
-**Date Modified:** May 6, 2024
+**Date Modified:** August 16, 2024
 
 **Authors:** Mitchell Manware [![author-mm](images/orcid.png){width=10}](https://orcid.org/0009-0003-6440-6106), Kyle P. Messier [![author-kpm](images/orcid.png){width=10}](https://orcid.org/0000-0001-9508-9623)
 
@@ -37,11 +37,15 @@ The website URL where the NOAA NARR exists is year-specific, meaning there is a 
 
 Define the variable `year` according to the year of interest.
 
-```{r, eval = FALSE}
+```{r}
 year <- "2021"
 ```
 
 The `utils::download.file()` function downloads the file according to the defined URL and destination file.
+
+::: {.note}
+Multiple chunks of code in this tutorial will contain `./dataset/`, a fixed directory path to run the tutorial code. To run the code on your machine, substitute `./dataset/` with the file path where you would like to store the tutorial data.
+:::
 
 ```{r, eval = FALSE}
 # specify the URL where data is stored based on year variable of interest
@@ -53,7 +57,7 @@ url_narr <- paste0(
 
 # specify where to save downloaded data
 destination_narr <- paste0(
-  "/   YOUR FILE PATH   /narr_air2m_",
+  "./data/narr/air.2m_",
   year,
   ".nc"
 )
@@ -67,8 +71,8 @@ download.file(
 
 Identify the desired data file with `utils::list.files()`
 
-```{r, eval = FALSE}
-list.files("/   YOUR FILE PATH   /")
+```{r}
+list.files("./dataset/narr/")
 ```
 
 The file downloaded from NOAA's NARR data set is an `.nc`, or netCDF, file. NetCDF files are common for raster data, and do not need to be unzipped.
@@ -79,54 +83,50 @@ The file downloaded from NOAA's NARR data set is an `.nc`, or netCDF, file. NetC
 
 Now that the data file of interest has been downloaded and identified, import the data with `terra::rast()`.
 
-```{r, eval = FALSE}
-narr <- rast(paste0(
-  "/   YOUR FILE PATH   /narr_air2m_",
-  year,
-  ".nc"
-))
+```{r}
+narr <- terra::rast("./dataset/narr/air.2m_2021.nc")
 ```
 
 ### Inspect Structure
 
 Inspect the structure of `narr` to see its class, dimensions, variables, and layer names.
 
-```{r, eval = FALSE}
+```{r}
 narr
 ```
 
 When working with raster data, the dimensions of the raster refer to the number of rows (`nrow`) and columns (`ncol`) of grid cells that make up the raster. Similarly, the number of layers in the raster object (`nlyr`) represents the number of observations of the data. These can also be inspected individually with `nrow()`, `ncol()`, and `nlyr()`, respectively.
 
-```{r, eval = FALSE}
+```{r}
 nrow(narr)
 ncol(narr)
-nlyr(narr)
+terra::nlyr(narr)
 ```
 
 ### Rename
 
 The `narr` data set contains 365 layers, one for each daily observation of air temperature in 2021. When working with raster data that contains multiple layers, it is important to know and recognize the naming structure of each layer. In this case, the layer names are `air_` followed by the day of the year (i.e., January 1 = `air_1`).
 
-```{r, eval = FALSE}
+```{r}
 names(narr)[1:5]
 ```
 
 Renaming raster layers can be useful for calculating summary statistics or when combining rasters with potentially identical layer names. Using the `time()` and `gsub()` functions, the layers can be renamed according to their date.
 
-```{r, eval = FALSE}
+```{r}
 names(narr) <- paste0(
   "air_",
   gsub(
     "-",
     "",
-    as.character(time(narr))
+    as.character(terra::time(narr))
   )
 )
 ```
 
 Check the layer names again to ensure proper renaming.
 
-```{r, eval = FALSE}
+```{r}
 names(narr)[1:5]
 ```
 
@@ -134,8 +134,9 @@ names(narr)[1:5]
 
 Check the coordinate reference system of a `SpatRaster` object with `terra::crs()`.
 
-```{r, eval = FALSE}
-crs(narr,
+```{r}
+terra::crs(
+  narr,
   describe = TRUE
 )
 ```
@@ -143,7 +144,7 @@ crs(narr,
 `narr` has a native coordinate reference system, but it is unnamed and was not identifiable by `terra::rast()`. The area of interest for these exploratory analyses is the conterminous United States, so we can project `narr` to the Albers Equal Area projected coordinate system (EPSG code: 5070).
 
 ```{r, eval = FALSE}
-narr <- project(
+narr <- terra::project(
   narr,
   "EPSG:5070"
 )
@@ -174,8 +175,8 @@ conus_t <- subset(
 
 Project `conus_t` to the Albers Equal Area projected coordinate system (EPSG code: 5070).
 
-```{r, eval = FALSE}
-conus_t <- project(
+```{r}
+conus_t <- terra::project(
   conus_t,
   "EPSG:5070"
 )
@@ -183,8 +184,8 @@ conus_t <- project(
 
 Ensure that both data sets have the same coordinate reference system.
 
-```{r, eval = FALSE}
-crs(conus_t) == crs(narr)
+```{r}
+terra::crs(conus_t) == terra::crs(narr)
 ```
 
 ## Exploratory Analysis
@@ -195,33 +196,32 @@ Now that the data sets and coordinate reference systems have been prepared, crea
 
 Only the first layer of the `narr` data set will be plotted.
 
-```{r, eval = FALSE}
-ggplot() +
-  geom_spatraster(data = narr$air_20210101) +
-  scale_fill_continuous(
+```{r}
+ggplot2::ggplot() +
+  tidyterra::geom_spatraster(data = narr$air_20210101) +
+  ggplot2::scale_fill_continuous(
     type = "viridis",
     na.value = NA,
     "Temperature (°K)"
   ) +
-  ggtitle("Air Temperature") +
-  geom_spatvector(
+  ggplot2::ggtitle("Air Temperature") +
+  tidyterra::geom_spatvector(
     data = conus_t,
     fill = "transparent",
     color = "black"
   ) +
-  theme_pubr(legend = "bottom") +
-  theme(plot.title = element_text(hjust = 0.5)) +
-  grids()
+  ggpubr::theme_pubr(legend = "bottom") +
+  ggplot2::theme(plot.title = element_text(hjust = 0.5)) +
+  ggpubr::grids()
 ```
-
-<img src="images/intro_to_spatial/temp_raster_original.png" width = "75%" height = "auto" class = "centerimage">
 
 ### Crop
 
 The `terra::crop()` function can be used to reduce a `SpatRaster` to an area determined by `SpatVector` polygons. The `mask = TRUE` argument crops to the border of the polygons, whereas `mask = FALSE` crops to the bounding box surrounding the polygons. In this example, crop the `narr` data to the conterminous United States state boundaries.
 
-```{r, eval = FALSE}
-narr_crop <- crop(narr,
+```{r}
+narr_crop <- terra::crop(
+  narr,
   conus_t,
   mask = TRUE
 )
@@ -231,22 +231,22 @@ Plot the cropped temperature data and the conterminous United States state bound
 
 Only the first layer of the `narr` data set will be plotted.
 
-```{r, eval = FALSE}
-ggplot() +
-  geom_spatraster(data = narr_crop$air_20210101) +
-  scale_fill_continuous(
+```{r}
+ggplot2::ggplot() +
+  tidyterra::geom_spatraster(data = narr_crop$air_20210101) +
+  ggplot2::scale_fill_continuous(
     type = "viridis",
     na.value = NA,
     "Temperature (°K)"
   ) +
-  ggtitle("Air Temperature (cropped)") +
-  geom_spatvector(
+  ggplot2::ggtitle("Air Temperature (cropped)") +
+  tidyterra::geom_spatvector(
     data = conus_t,
     fill = "transparent",
     color = "black"
   ) +
-  theme_pubr(legend = "bottom") +
-  theme(
+  ggpubr::theme_pubr(legend = "bottom") +
+  ggplot2::theme(
     plot.title = element_text(hjust = 0.5),
     axis.line = element_blank(),
     axis.ticks = element_blank(),
@@ -254,13 +254,11 @@ ggplot() +
   )
 ```
 
-<img src="images/intro_to_spatial/temp_raster_crop.png" width = "75%" height = "auto" class = "centerimage">
-
 ### Units
 
 The previous plot depicts the 2 m air temperature data in degrees Kelvin. To convert the units to degrees Celsius, simply subtract the values in `narr_crop` by 273.15. This subtraction will be applied to every grid cell within every layer of `narr_crop`.
 
-```{r, eval = FALSE}
+```{r}
 narr_crop_c <- narr_crop - 273.15
 ```
 
@@ -268,14 +266,14 @@ narr_crop_c <- narr_crop - 273.15
 
 Similar to mathematical operations, calculating summary statistics is very straight forward with raster data. For this example, calculate the annual mean 2m air temperature and range of 2m air temperatures at each grid cell, and save these as a new layer in `narr_crop_c`
 
-```{r, eval = FALSE}
+```{r}
 narr_crop_c$mean <- mean(narr_crop_c)
 narr_crop_c$range <- max(narr_crop_c) - min(narr_crop_c)
 ```
 
 Inspect the results of the mean and range calculations.
 
-```{r, eval = FALSE}
+```{r}
 summary(narr_crop_c$mean)
 summary(narr_crop_c$range)
 ```
@@ -283,30 +281,28 @@ summary(narr_crop_c$range)
 With the summary statistic layers prepared, create a plot with `ggplot2::ggplot()`. Identifying the data sets to be plotted within the `tidyterra::geom_spatraster()` and `tidyterra::geom_spatvector()` argument informs the function that the `narr_crop_c` and `conus_t` data sets are `SpatRaster` and `SpatVector` objects, respectively. Additionally, the `facet_wrap(~lyr)` argument creates a plot for each layer specified in `geom_spatraster(data = narr_crop_c[[c("mean", "range")]])`.
 
 ```{r, eval = FALSE}
-ggplot() +
-  geom_spatraster(data = narr_crop_c[[c("mean", "range")]]) +
-  scale_fill_continuous(
+ggplot2::ggplot() +
+  tidyterra::geom_spatraster(data = narr_crop_c[[c("mean", "range")]]) +
+  ggplot2::scale_fill_continuous(
     type = "viridis",
     na.value = NA,
     "Temperature (°C)"
   ) +
-  facet_wrap(~lyr) +
-  ggtitle("Air Temperature") +
-  geom_spatvector(
+  ggplot2::facet_wrap(~lyr) +
+  ggplot2::ggtitle("Air Temperature") +
+  tidyterra::geom_spatvector(
     data = conus_t,
     fill = "transparent",
     color = "black"
   ) +
-  theme_pubr(legend = "bottom") +
-  theme(
+  ggpubr::theme_pubr(legend = "bottom") +
+  ggplot2::theme(
     plot.title = element_text(hjust = 0.5),
     axis.line = element_blank(),
     axis.ticks = element_blank(),
     axis.text = element_blank()
   )
 ```
-
-<img src="images/intro_to_spatial/temp_raster_mean_range.png" width = "75%" height = "auto" class = "centerimage">
 
 ### Zonal Statistics
 
@@ -314,8 +310,9 @@ Looking closely at the previous plot, it is clear that the annual mean and range
 
 The `terra::zonal()` function can be used to calculate the average annual temperature in each state based on the annual grid cell temperatures stored in `narr_crop_c$mean`.
 
-```{r, eval = FALSE}
-conus_t$MEAN <- zonal(narr_crop_c$mean,
+```{r}
+conus_t$MEAN <- terra::zonal(
+  narr_crop_c$mean,
   conus_t,
   fun = "mean"
 )
@@ -323,28 +320,26 @@ conus_t$MEAN <- zonal(narr_crop_c$mean,
 
 Plot the state-specific annual mean temperatures with `ggplot2::ggplot()`. Identifying the data set to be plotted within `tidyterra::geom_spatvector()` argument informs the function that the data is a `SpatVector` object.
 
-```{r, eval = FALSE}
-ggplot() +
-  geom_spatvector(
+```{r}
+ggplot2::ggplot() +
+  tidyterra::geom_spatvector(
     data = conus_t,
     aes(fill = MEAN)
   ) +
-  scale_fill_continuous(
+  ggplot2::scale_fill_continuous(
     type = "viridis",
     na.value = NA,
     "Temperature (°C)"
   ) +
-  ggtitle("Air Temperature (state mean)") +
-  theme_pubr(legend = "bottom") +
-  theme(
+  ggplot2::ggtitle("Air Temperature (state mean)") +
+  ggpubr::theme_pubr(legend = "bottom") +
+  ggplot2::theme(
     plot.title = element_text(hjust = 0.5),
     axis.line = element_blank(),
     axis.ticks = element_blank(),
     axis.text = element_blank()
   )
 ```
-
-<img src="images/intro_to_spatial/temp_raster_state_mean.png" width = "75%" height = "auto" class = "centerimage">
 
 ### Reclassify
 
@@ -354,7 +349,7 @@ The first step in the reclassification process is to create a matrix storing the
 
 Create the reclassification matrix.
 
-```{r, eval = FALSE}
+```{r}
 from <- c(
   -Inf,
   10,
@@ -378,8 +373,9 @@ reclass <- matrix(
 
 Now that the reclassification matrix has been prepared, reclassify the annual mean temperatures. The `right = TRUE` argument indicates that intervals are open on the left and closed on the right (i.e., (0,10] becomes 1).
 
-```{r, eval = FALSE}
-narr_reclass <- classify(narr_crop_c$mean,
+```{r}
+narr_reclass <- terra::classify(
+  narr_crop_c$mean,
   rcl = reclass,
   right = TRUE
 )
@@ -389,13 +385,13 @@ Although `narr_reclass` contains the reclassified mean air temperature data, the
 
 `narr_reclass` contains the reclassified mean air temperature data, but the data is still numeric. The `terra::set.cats()` function assigns categories to numeric data based on values stored in a data frame.
 
-```{r, eval = FALSE}
+```{r}
 level_values <- data.frame(
   c(1:3),
   c("1", "2", "3")
 )
 colnames(level_values) <- c("mean_continuous", "mean_discrete")
-set.cats(narr_reclass,
+terra::set.cats(narr_reclass,
   layer = "mean",
   value = level_values
 )
@@ -403,10 +399,11 @@ set.cats(narr_reclass,
 
 Plot the discretely reclassified mean temperature data.
 
-```{r, eval = FALSE}
-ggplot() +
-  geom_spatraster(data = narr_reclass$mean_discrete) +
-  scale_fill_viridis_d("",
+```{r}
+ggplot2::ggplot() +
+  tidyterra::geom_spatraster(data = narr_reclass$mean_discrete) +
+  ggplot2::scale_fill_viridis_d(
+    "",
     labels = c(
       "≤10°",
       "10°< & ≤20°",
@@ -415,19 +412,17 @@ ggplot() +
     ),
     na.value = NA
   ) +
-  ggtitle("Air Temperature (reclassified)") +
-  geom_spatvector(
+  ggplot2::ggtitle("Air Temperature (reclassified)") +
+  tidyterra::geom_spatvector(
     data = conus_t,
     fill = "transparent",
     color = "black"
   ) +
-  theme_pubr(legend = "bottom") +
-  theme(
+  ggpubr::theme_pubr(legend = "bottom") +
+  ggplot2::theme(
     plot.title = element_text(hjust = 0.5),
     axis.line = element_blank(),
     axis.ticks = element_blank(),
     axis.text = element_blank()
   )
 ```
-
-<img src="images/intro_to_spatial/temp_raster_reclass.png" width = "75%" height = "auto" class = "centerimage">

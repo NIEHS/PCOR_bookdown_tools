@@ -6,7 +6,7 @@
 
 ### Polygon Data Access, Preparation, and Exploratory Analysis in R {-}
 
-**Date Modified:** May 6, 2024
+**Date Modified:** August 16, 2024
 
 **Authors:** Mitchell Manware [![author-mm](images/orcid.png){width=10}](https://orcid.org/0009-0003-6440-6106), Kyle P. Messier [![author-kpm](images/orcid.png){width=10}](https://orcid.org/0000-0001-9508-9623)
 
@@ -37,13 +37,17 @@ The website URL where the NOAA wildfire smoke plume data exists is date-specific
 
 Define three variables for `day`, `month`, and `year` according to the date of interest.
 
-```{r, eval = FALSE}
+```{r}
 day <- "01"
 month <- "09"
 year <- "2023"
 ```
 
 The `utils::download.file()` function downloads the file according to the defined URL and destination file.
+
+::: {.note}
+Multiple chunks of code in this tutorial will contain `./dataset/`, a fixed directory path to run the tutorial code. To run the code on your machine, substitute `./dataset/` with the file path where you would like to store the tutorial data.
+:::
 
 ```{r, eval = FALSE}
 url_noaa <- paste0(
@@ -60,7 +64,7 @@ url_noaa <- paste0(
 )
 
 destination_noaa <- paste0(
-  "/   YOUR FILE PATH   /noaa_smoke",
+  "./dataset/noaa/noaa_smoke",
   year,
   month,
   day,
@@ -81,8 +85,8 @@ Unzipping a `.zip` file will decompress the contents within. Spatial data sets c
 
 The numeric value size of each file is listed under `Length`.
 
-```{r, eval = FALSE}
-unzip("/   YOUR FILE PATH   /noaa_smoke20230901.zip",
+```{r}
+unzip("./dataset/noaa/noaa_smoke20230901.zip",
   list = TRUE
 )
 ```
@@ -90,13 +94,13 @@ unzip("/   YOUR FILE PATH   /noaa_smoke20230901.zip",
 After inspecting the file sizes, unzip `noaa_smoke20230901.zip`.
 
 ```{r, eval = FALSE}
-unzip("/   YOUR FILE PATH   /noaa_smoke20230901.zip")
+unzip("./dataset/noaa/noaa_smoke20230901.zip", exdir = "./dataset/noaa/")
 ```
 
 Inspecting the file with `utils::unzip(list = TRUE)` returned the size of the file, but also the name of the data file of interest. The desired data file can also be identified with `list.files()`.
 
-```{r, eval = FALSE}
-list.files("/   YOUR FILE PATH   /")
+```{r}
+list.files("./dataset/noaa/")
 ```
 
 Listing the contents of the unzipped file reveals four individual files. The data to be imported is stored in the `hms_smoke20230901.shp`, but the other files contain important information for the `.shp` file.
@@ -117,8 +121,8 @@ Now that the contents of the zip file have been saved on your machine and the da
 Although the supporting files are required to import a shapefile, only the file ending in `.shp` needs to be imported
 :::
 
-```{r, eval = FALSE}
-smoke_sf <- st_read("/   YOUR FILE PATH   /hms_smoke20230901.shp")
+```{r}
+smoke_sf <- sf::st_read("./dataset/noaa/hms_smoke20230901.shp")
 ```
 
 Importing `hms_smoke20230901.shp` does not return a `Warning:` message because the data set has native spatial features, and is therefore imported as an `sf` object.
@@ -127,15 +131,16 @@ Importing `hms_smoke20230901.shp` does not return a `Warning:` message because t
 
 Inspect the structure of `smoke_sf` to see its class, column names, column classes, and the first two (specified by `vec.len = 2`) data points.
 
-```{r, eval = FALSE}
-str(smoke_sf,
+```{r}
+str(
+  smoke_sf,
   vec.len = 2
 )
 ```
 
 As mentioned previously, the `smoke_sf` data set has native spatial features. These are reflected by the data set having classes of `sf` and `data.frame`, and the `$geometry` feature.
 
-```{r, eval = FALSE}
+```{r}
 class(smoke_sf)
 ```
 
@@ -143,7 +148,7 @@ class(smoke_sf)
 
 The main parameter of interest in this data set is `$Density`, which discretely categorizes each wildfire smoke plume as "Light", "Medium", or "Heavy". Checking its class shows that `$Density` is class character.
 
-```{r, eval = FALSE}
+```{r}
 class(smoke_sf$Density)
 ```
 
@@ -151,15 +156,16 @@ Nominal data, data without fixed order or rank system, can be stored as class ch
 
 Converting data from class character to class factor can be done with `factor()`. The `levels = c()` argument in the function specifies both the level names and the ranked order of the levels.
 
-```{r, eval = FALSE}
-smoke_sf$Density <- factor(smoke_sf$Density,
+```{r}
+smoke_sf$Density <- factor(
+  smoke_sf$Density,
   levels = c("Light", "Medium", "Heavy")
 )
 ```
 
 Check the class of `$Density` again to ensure proper reclassification.
 
-```{r, eval = FALSE}
+```{r}
 class(smoke_sf$Density)
 ```
 
@@ -167,14 +173,14 @@ class(smoke_sf$Density)
 
 Check the coordinate reference system of an `sf` object with `sf::st_crs()`.
 
-```{r, eval = FALSE}
-st_crs(smoke_sf)
+```{r}
+sf::st_crs(smoke_sf)
 ```
 
 `smoke_sf` has a native coordinate reference system which was imported during the `sf::st_read()` step. The area of interest for these exploratory analyses is the conterminous United States, so we can transform `smoke_sf` to the Albers Equal Area projected coordinate system (EPSG code: 5070).
 
-```{r, eval = FALSE}
-smoke_sf <- st_transform(
+```{r}
+smoke_sf <- sf::st_transform(
   smoke_sf,
   5070
 )
@@ -188,22 +194,20 @@ With the data prepared, plot the wildfire smoke plume polygons with `ggplot2::gg
 
 Now that the parameters of interest and coordinate reference system have been prepared, create a plot with `ggplot2::ggplot()`. Identifying the data set to be plotted within the `geom_sf()` argument informs the function that the data is an `sf` object.
 
-```{r, eval = FALSE}
-ggplot() +
-  geom_sf(
+```{r}
+ggplot2::ggplot() +
+  ggplot2::geom_sf(
     data = smoke_sf,
     aes(fill = Density)
   ) +
-  scale_fill_manual("Smoke Density",
+  ggplot2::scale_fill_manual("Smoke Density",
     values = c("lightgreen", "lightgoldenrod", "tomato")
   ) +
-  ggtitle("Wildfire Smoke Plumes") +
-  theme_pubr(legend = "bottom") +
-  theme(plot.title = element_text(hjust = 0.5)) +
-  grids()
+  ggplot2::ggtitle("Wildfire Smoke Plumes") +
+  ggpubr::theme_pubr(legend = "bottom") +
+  ggplot2::theme(plot.title = element_text(hjust = 0.5)) +
+  ggpubr::grids()
 ```
-
-<img src="images/intro_to_spatial/smoke_polygons_sf_original.png" width = "75%" height = "auto" class = "centerimage">
 
 The wildfire smoke plume polygons are clearly visible and colored according to their individual smoke density classification. This plot, however, is difficult to interpret for two reasons. First, there are multiple polygons for each smoke density classification. Multiple borders and overlapping polygons with the same smoke density type can be confusing. To make the polygons more clear, individual polygons for each smoke density classification can be combined.
 
@@ -215,12 +219,13 @@ For the purposes of these exploratory analyses, the satellite travelling directi
 
 Individual polygons can be unioned (combined) into one multi-part polygon with `sf::st_union`. The `group_by(Density)` argument specifies that the polygons should be combined based on the value stored in `$Density`. Adding the `Date = paste0(...` argument within the `dplyr::summarise()` function creates a parameter to store the date based on the year, month, and day of the data.
 
-```{r, eval = FALSE}
+```{r}
+library(dplyr)
 smoke_sf_density <-
   smoke_sf %>%
-  group_by(Density) %>%
-  summarise(
-    geometry = st_union(geometry),
+  dplyr::group_by(Density) %>%
+  dplyr::summarise(
+    geometry = sf::st_union(geometry),
     Date = paste0(
       year,
       month,
@@ -231,28 +236,26 @@ smoke_sf_density <-
 
 The resulting data set contains three multi-polygons, a column for the smoke plume classification, and a column for the date.
 
-```{r, eval = FALSE}
+```{r}
 smoke_sf_density
 ```
 
 Creating a new plot with `smoke_sf_density`.
 
-```{r, eval = FALSE}
-ggplot() +
-  geom_sf(
+```{r}
+ggplot2::ggplot() +
+  ggplot2::geom_sf(
     data = smoke_sf_density,
     aes(fill = Density)
   ) +
-  scale_fill_manual("Smoke Density",
+  ggplot2::scale_fill_manual("Smoke Density",
     values = c("lightgreen", "lightgoldenrod", "tomato")
   ) +
-  ggtitle("Wildfire Smoke Plumes (unioned)") +
-  theme_pubr(legend = "bottom") +
-  theme(plot.title = element_text(hjust = 0.5)) +
-  grids()
+  ggplot2::ggtitle("Wildfire Smoke Plumes (unioned)") +
+  ggpubr::theme_pubr(legend = "bottom") +
+  ggplot2::theme(plot.title = element_text(hjust = 0.5)) +
+  ggpubr::grids()
 ```
-
-<img src="images/intro_to_spatial/smoke_polygons_sf_unioned.png" width = "75%" height = "auto" class = "centerimage">
 
 The plot is still difficult to interpret because it lacks geospatial context. The grid lines provide latitude and longitude references, but physical or geopolitical boundaries can help show where the wildfire smoke plumes are relative to the study area of interest. To provide geospatial context to the wildfire smoke plume polygons, we can add the United States state boundary polygons to the plot.
 
@@ -264,7 +267,7 @@ The steps taken to access, download, unzip, and import the United States state b
 url_states <-
   "https://www2.census.gov/geo/tiger/GENZ2018/shp/cb_2018_us_state_500k.zip"
 
-destination_states <- "/   YOUR FILE PATH   /states.zip"
+destination_states <- "./dataset/states/states.zip"
 
 download.file(
   url_states,
@@ -272,35 +275,37 @@ download.file(
 )
 ```
 
-```{r, eval = FALSE}
-unzip("/   YOUR FILE PATH   /states.zip",
+```{r}
+unzip(
+  "./dataset/states/states.zip",
   list = TRUE
 )
 ```
 
 ```{r, eval = FALSE}
-unzip("/   YOUR FILE PATH   /states.zip")
+unzip("./dataset/states/states.zip", exdir = "./dataset/states/")
 ```
 
-```{r, eval = FALSE}
-list.files("/   YOUR FILE PATH   /")
+```{r}
+list.files("./dataset/states/")
 ```
 
-```{r, eval = FALSE}
-states <- st_read("/   YOUR FILE PATH   /cb_2018_us_state.shp")
+```{r}
+states_sf <- sf::st_read("./dataset/states/cb_2018_us_state_500k.shp")
 ```
 
 Inspect the structure of `states_sf`.
 
-```{r, eval = FALSE}
-str(states_sf,
+```{r}
+str(
+  states_sf,
   vec.len = 2
 )
 ```
 
 For the purpose of these exploratory analyses, only the conterminous United States (CONUS) will be used. Subset `states_sf` to remove Alaska, Hawaii, and United States territories.
 
-```{r, eval = FALSE}
+```{r}
 remove <- c(
   "Alaska",
   "Hawaii",
@@ -319,8 +324,8 @@ conus_sf <- subset(
 
 Check the coordinate reference system.
 
-```{r, eval = FALSE}
-st_crs(conus_sf)
+```{r}
+sf::st_crs(conus_sf)
 ```
 
 ::: {.important}
@@ -329,8 +334,8 @@ When analyzing multiple spatial data sets together, all data sets must have the 
 
 Transform `conus_sf` to match the projected coordinate system of the `smoke_sf_density` data set.
 
-```{r, eval = FALSE}
-conus_sf <- st_transform(
+```{r}
+conus_sf <- sf::st_transform(
   conus_sf,
   st_crs(smoke_sf_density)
 )
@@ -338,45 +343,41 @@ conus_sf <- st_transform(
 
 Plot the conterminous United States state boundaries.
 
-```{r, eval = FALSE}
-ggplot() +
-  geom_sf(data = conus_sf) +
-  ggtitle("Coterminous United States' State Boundaries") +
-  theme_pubr() +
-  theme(plot.title = element_text(hjust = 0.5)) +
-  grids()
+```{r}
+ggplot2::ggplot() +
+  ggplot2::geom_sf(data = conus_sf) +
+  ggplot2::ggtitle("Coterminous United States' State Boundaries") +
+  ggpubr::theme_pubr() +
+  ggplot2::theme(plot.title = element_text(hjust = 0.5)) +
+  ggpubr::grids()
 ```
-
-<img src="images/intro_to_spatial/conus_sf_original.png" width = "75%" height = "auto" class = "centerimage">
 
 With the wildfire smoke plume and conterminous United States polygons imported and prepared, ensure that they have the same coordinate reference system.
 
-```{r, eval = FALSE}
-st_crs(smoke_sf_density) == st_crs(conus_sf)
+```{r}
+sf::st_crs(smoke_sf_density) == sf::st_crs(conus_sf)
 ```
 
 Create a plot which shows the distribution of wildfire smoke plumes over the conterminous United States state boundaries.
 
-```{r, eval = FALSE}
-ggplot() +
-  geom_sf(
+```{r}
+ggplot2::ggplot() +
+  ggplot2::geom_sf(
     data = smoke_sf_density,
     aes(fill = Density)
   ) +
-  scale_fill_manual("Smoke Density",
+  ggplot2::scale_fill_manual("Smoke Density",
     values = c("lightgreen", "lightgoldenrod", "tomato")
   ) +
-  geom_sf(
+  ggplot2::geom_sf(
     data = conus_sf,
     fill = "transparent"
   ) +
-  ggtitle("Wildfire Smoke Plumes (with states)") +
-  theme_pubr(legend = "bottom") +
-  theme(plot.title = element_text(hjust = 0.5)) +
-  grids()
+  ggplot2::ggtitle("Wildfire Smoke Plumes (with states)") +
+  ggpubr::theme_pubr(legend = "bottom") +
+  ggplot2::theme(plot.title = element_text(hjust = 0.5)) +
+  ggpubr::grids()
 ```
-
-<img src="images/intro_to_spatial/smoke_polygons_sf_states.png" width = "75%" height = "auto" class = "centerimage">
 
 This plot provides important geospatial context for understanding where the wildfire smoke plumes are in relation to the study area of interest.
 
@@ -384,8 +385,8 @@ This plot provides important geospatial context for understanding where the wild
 
 The `sf::st_crop()` function can be used to reduce the extent of a set of polygons to a specific rectangle, typically the bounding box of another spatial data set. In this example we can crop the `smoke_sf_density` polygons to the bounding box surrounding the conterminous United States.
 
-```{r, eval = FALSE}
-smoke_sf_crop <- st_crop(
+```{r}
+smoke_sf_crop <- sf::st_crop(
   smoke_sf_density,
   conus_sf
 )
@@ -393,26 +394,24 @@ smoke_sf_crop <- st_crop(
 
 Plot the cropped wildfire smoke plume polygons and the conterminous United States state boundaries.
 
-```{r, eval = FALSE}
-ggplot() +
-  geom_sf(
+```{r}
+ggplot2::ggplot() +
+  ggplot2::geom_sf(
     data = smoke_sf_crop,
     aes(fill = Density)
   ) +
-  scale_fill_manual("Smoke Density",
+  ggplot2::scale_fill_manual("Smoke Density",
     values = c("lightgreen", "lightgoldenrod", "tomato")
   ) +
-  geom_sf(
+  ggplot2::geom_sf(
     data = conus_sf,
     fill = "transparent"
   ) +
-  ggtitle("Wildfire Smoke Plumes (cropped)") +
-  theme_pubr(legend = "bottom") +
-  theme(plot.title = element_text(hjust = 0.5)) +
-  grids()
+  ggplot2::ggtitle("Wildfire Smoke Plumes (cropped)") +
+  ggpubr::theme_pubr(legend = "bottom") +
+  ggplot2::theme(plot.title = element_text(hjust = 0.5)) +
+  ggpubr::grids()
 ```
-
-<img src="images/intro_to_spatial/smoke_polygons_sf_cropped.png" width = "75%" height = "auto" class = "centerimage">
 
 ## Data Preparation with `terra`
 
@@ -426,16 +425,16 @@ Now that the contents of the zip files have been saved on your machine and the d
 See Sections [Access, Download, and Unzip](#chapter-polygon-access) and [Plot (Multiple)](#chapter-polygon-plot-multiple-sf) for obtaining the wildfire smoke plume coverage and United States state boundary data sets, respectively.
 :::
 
-```{r, eval = FALSE}
-smoke_t <- vect("/   YOUR FILE PATH   /hms_smoke20230901.shp")
-states_t <- vect("/   YOUR FILE PATH   /cb_2018_us_state_500k.shp")
+```{r}
+smoke_t <- terra::vect("./dataset/noaa/hms_smoke20230901.shp")
+states_t <- terra::vect("./dataset/states/cb_2018_us_state_500k.shp")
 ```
 
 ### Inspect Structure
 
 Inspect the structures of `smoke_t` and `states_t` to see their classes, column names, and column classes.
 
-```{r, eval = FALSE}
+```{r}
 smoke_t
 states_t
 ```
@@ -446,7 +445,7 @@ Both `smoke_t` and `states_t` have native spatial features. These are reflected 
 
 The main parameter of interest in this data set is `$Density`, which discretely categorizes each wildfire smoke plume as "Light", "Medium", or "Heavy". Checking its class shows that `$Density` is class character.
 
-```{r, eval = FALSE}
+```{r}
 class(smoke_t$Density)
 ```
 
@@ -454,21 +453,22 @@ Nominal data, data without fixed order or rank system, can be stored as class ch
 
 Converting data from class character to class factor can be done with `factor()`. The `levels = c()` argument in the function specifies both the level names and the ranked order of the levels.
 
-```{r, eval = FALSE}
-smoke_t$Density <- factor(smoke_t$Density,
+```{r}
+smoke_t$Density <- factor(
+  smoke_t$Density,
   levels = c("Light", "Medium", "Heavy")
 )
 ```
 
 Check the class of `$Density` again to ensure proper reclassification.
 
-```{r, eval = FALSE}
+```{r}
 class(smoke_t$Density)
 ```
 
 For the purpose of these exploratory analyses, only the conterminous United States (CONUS) will be used. Subset `states_t` to remove Alaska, Hawaii, and the United States territories.
 
-```{r, eval = FALSE}
+```{r}
 remove <- c(
   "Alaska",
   "Hawaii",
@@ -489,23 +489,25 @@ conus_t <- subset(
 
 Check the coordinate reference systems of `SpatVector` objects with `terra::crs()`.
 
-```{r, eval = FALSE}
-crs(smoke_t,
+```{r}
+terra::crs(
+  smoke_t,
   describe = TRUE
 )
-crs(conus_t,
+terra::crs(
+  conus_t,
   describe = TRUE
 )
 ```
 
 Both data sets have native coordinate reference systems which were imported during the `terra::vect()` step. The two data sets, however, have different coordinate reference systems from each other. The area of interest for these exploratory analyses is the conterminous United States, so we can project `smoke_t` and `conus_t` to the Albers Equal Area projected coordinate system (EPSG code: 5070).
 
-```{r, eval = FALSE}
-smoke_t <- project(
+```{r}
+smoke_t_p <- terra::project(
   smoke_t,
   "EPSG:5070"
 )
-conus_t <- project(
+conus_t_p <- terra::project(
   conus_t,
   "EPSG:5070"
 )
@@ -513,8 +515,8 @@ conus_t <- project(
 
 Although both data sets were transformed to the same projected coordinate system, it is important to ensure that all data sets have the same coordinate reference system or projected coordinate system.
 
-```{r, eval = FALSE}
-crs(smoke_t) == crs(conus_t)
+```{r}
+terra::crs(smoke_t_p) == terra::crs(conus_t_p)
 ```
 
 ## Exploratory Analysis with `terra`
@@ -525,26 +527,25 @@ Plot both data sets together in one plot with `ggplot2::ggplot()`.
 
 Now that the parameters of interest and coordinate reference systems have been prepared, create a plot with `ggplot2::ggplot()`. Identifying the data sets to be plotted within the `tidyterra::geom_spatvector()` arguments informs the function that the data are `SpatVector` objects [@r-tidyterra].
 
-```{r, eval = FALSE}
-ggplot() +
-  geom_spatvector(
-    data = smoke_t,
+```{r}
+library(tidyterra)
+ggplot2::ggplot() +
+  tidyterra::geom_spatvector(
+    data = smoke_t_p,
     aes(fill = Density)
   ) +
-  scale_fill_manual("Smoke Density",
+  ggplot2::scale_fill_manual("Smoke Density",
     values = c("lightgreen", "lightgoldenrod", "tomato")
   ) +
-  geom_spatvector(
-    data = conus_t,
+  tidyterra::geom_spatvector(
+    data = conus_t_p,
     fill = "transparent"
   ) +
-  ggtitle("Wildfire Smoke Plumes (with states)") +
-  theme_pubr(legend = "bottom") +
-  theme(plot.title = element_text(hjust = 0.5)) +
-  grids()
+  ggplot2::ggtitle("Wildfire Smoke Plumes (with states)") +
+  ggpubr::theme_pubr(legend = "bottom") +
+  ggplot2::theme(plot.title = element_text(hjust = 0.5)) +
+  ggpubr::grids()
 ```
-
-<img src="images/intro_to_spatial/smoke_polygons_terra_original.png" width = "75%" height = "auto" class = "centerimage">
 
 The wildfire smoke plume polygons are clearly visible and colored according to their individual smoke density classification. The plot, however, is difficult to interpret because there are multiple polygons for each smoke density classification. Multiple borders and overlapping polygons with the same smoke density type can be confusing. To make the polygons more clear, individual polygons for each smoke density classification can be combined.
 
@@ -556,8 +557,9 @@ For the purposes of these exploratory analyses, the satellite travelling directi
 
 Individual polygons an be aggregated (combined) into one multi-part polygon with `terra::aggregate()`. The `by = "Density"` argument specifies that the polygons should be combined based on the value stored in `$Density`.
 
-```{r, eval = FALSE}
-smoke_t_density <- terra::aggregate(smoke_t,
+```{r}
+smoke_t_density <- terra::aggregate(
+  smoke_t_p,
   by = "Density",
   dissolve = TRUE
 )
@@ -565,7 +567,7 @@ smoke_t_density <- terra::aggregate(smoke_t,
 
 Aggregating the polygons based on the values stored in the `$Density` column can result in the other columns containing `NA` values. To remove these columns, subset `smoke_t_density` to remove `$Satellite`, `$Start`, and `$End`.
 
-```{r, eval = FALSE}
+```{r}
 smoke_t_density <- smoke_t_density[
   seq_len(nrow(smoke_t_density)),
   c("Density", "agg_n")
@@ -574,70 +576,70 @@ smoke_t_density <- smoke_t_density[
 
 The resulting data set contains three multi-polygons, a column for the smoke plume classification, and a count of the number of individual polygons that were aggregated to create the multi-polygon. This last column, `$agg_n` is automatically calculated by the `terra::aggregate()` function.
 
-```{r, eval = FALSE}
+```{r}
 smoke_t_density
 ```
 
 Create a new plot with `smoke_t_density`.
 
-```{r, eval = FALSE}
-ggplot() +
-  geom_spatvector(
+```{r}
+ggplot2::ggplot() +
+  tidyterra::geom_spatvector(
     data = smoke_t_density,
     aes(fill = Density)
   ) +
-  scale_fill_manual("Smoke Density",
+  ggplot2::scale_fill_manual("Smoke Density",
     values = c("lightgreen", "lightgoldenrod", "tomato")
   ) +
-  geom_spatvector(
-    data = conus_t,
+  tidyterra::geom_spatvector(
+    data = conus_t_p,
     fill = "transparent"
   ) +
-  ggtitle("Wildfire Smoke Plumes (aggregated)") +
-  theme_pubr(legend = "bottom") +
-  theme(plot.title = element_text(hjust = 0.5)) +
-  grids()
+  ggplot2::ggtitle("Wildfire Smoke Plumes (aggregated)") +
+  ggpubr::theme_pubr(legend = "bottom") +
+  ggplot2::theme(plot.title = element_text(hjust = 0.5)) +
+  ggpubr::grids()
 ```
-
-<img src="images/intro_to_spatial/smoke_polygons_terra_aggregated.png" width = "75%" height = "auto" class = "centerimage">
 
 ### Crop
 
 The `terra::crop()` function can be used to reduce `SpatVector` to an area determined by another `SpatVector`. In this example, we can crop the `smoke_t_density` polygons to the conterminous United States state boundaries.
 
-```{r, eval = FALSE}
+::: {.note}
+Overlapping or self-intersecting polygons can occur with complex geometries or during data processing and transformation. Applying a negative buffer can help resolve these issues by slightly reducing the size of the polygons, thus eliminating problematic overlaps and intersections. This buffering adjustedment may affect statistical analyses, and therefore should be performed with caution.
+:::
+
+```{r}
 smoke_t_crop <- terra::crop(
   smoke_t_density,
-  conus_t
+  terra::buffer(conus_t_p, -0.0001)
 )
 ```
 
 Plot the cropped wildfire smoke plume polygons and the conterminous United States state boundaries.
 
-```{r, eval = FALSE}
-ggplot() +
-  geom_spatvector(
+```{r}
+ggplot2::ggplot() +
+  tidyterra::geom_spatvector(
     data = smoke_t_crop,
     aes(fill = Density)
   ) +
-  scale_fill_manual("Smoke Density",
+  ggplot2::scale_fill_manual("Smoke Density",
     values = c("lightgreen", "lightgoldenrod", "tomato")
   ) +
-  geom_spatvector(
-    data = conus_t,
+  tidyterra::geom_spatvector(
+    data = conus_t_p,
     fill = "transparent"
   ) +
-  ggtitle("Wildfire Smoke Plumes (cropped)") +
-  theme_pubr(legend = "bottom") +
-  theme(
+  ggplot2::ggtitle("Wildfire Smoke Plumes (cropped)") +
+  ggpubr::theme_pubr(legend = "bottom") +
+  ggplot2::theme(
     plot.title = element_text(hjust = 0.5),
     axis.line = element_blank(),
     axis.ticks = element_blank(),
     axis.text = element_blank()
   )
 ```
-
-<img src="images/intro_to_spatial/smoke_polygons_terra_cropped.png" width = "75%" height = "auto" class = "centerimage">
 
 ### Zonal Statistics
 
@@ -647,11 +649,12 @@ The `terra::relate()` function can be used to identify spatial relationships bet
 
 The output of `terra::relate()` is a wide matrix. The nested `data.frame()` and `t()` wrappers convert the output from a wide matrix to a long data frame, which is required to combine the results with the `conus_t` data set.
 
-```{r, eval = FALSE}
+```{r}
 conus_smoke <- data.frame(
   t(
-    relate(smoke_t_density,
-      conus_t,
+    terra::relate(
+      smoke_t_density,
+      conus_t_p,
       relation = "intersects"
     )
   )
@@ -664,23 +667,23 @@ Set the column names of `conus_smoke` to match the smoke density classifications
 The order of the columns in `conus_smoke` are based on the ordered factor levels in `smoke_t_density$Density` (see Section [Reclassify](#chapter-polygon-terra-reclassify)).
 :::
 
-```{r, eval = FALSE}
+```{r}
 colnames(conus_smoke) <- c("Light", "Medium", "Heavy")
 ```
 
 Combine the wildfire smoke plume indicator data frame with the the conterminous United States state boundaries data.
 
-```{r, eval = FALSE}
-conus_t <- cbind(
-  conus_t,
+```{r}
+conus_t_p <- cbind(
+  conus_t_p,
   conus_smoke
 )
 ```
 
-The `conus_t` data set now contains separate columns indicating the presence or absence of "Light", "Medium", and "Heavy" wildfire smoke plumes for each conterminous state.
+The `conus_t_p` data set now contains separate columns indicating the presence or absence of "Light", "Medium", and "Heavy" wildfire smoke plumes for each conterminous state.
 
-```{r, eval = FALSE}
-names(conus_t)
+```{r}
+names(conus_t_p)
 ```
 
 ### Plot (`for` Loop)
@@ -691,7 +694,7 @@ The list of inputs must first be created. As the goal is to plot each of the wil
 
 This "list of inputs" must first be created. Store the three wildfire smoke plume classifications in a vector of class character.
 
-```{r, eval = FALSE}
+```{r}
 dens_c <- c("Light", "Medium", "Heavy")
 ```
 
@@ -703,7 +706,7 @@ Code lines 3 through 9 define the plotting colors based on the wildfire smoke pl
 
 Code lines 12 through 32 create the plot based on the wildfire smoke plume classification (`dens_c[d]`), and previously defined plotting colors (`color_values`).
 
-```{r, eval = FALSE}
+```{r}
 for (d in seq_along(dens_c)) {
   # define color palette based on smoke density
   if (dens_c[d] == "Light") {
@@ -716,20 +719,20 @@ for (d in seq_along(dens_c)) {
 
   # create plot
   print(
-    ggplot() +
-      geom_spatvector(
-        data = conus_t,
+    ggplot2::ggplot() +
+      tidyterra::geom_spatvector(
+        data = conus_t_p,
         aes_string(fill = dens_c[d])
       ) +
-      scale_fill_manual(
+      ggplot2::scale_fill_manual(
         paste0(
           dens_c[d],
           " Smoke Plume Coverage Present"
         ),
         values = color_values
       ) +
-      theme_pubr(legend = "bottom") +
-      theme(
+      ggpubr::theme_pubr(legend = "bottom") +
+      ggplot2::theme(
         plot.title = element_text(hjust = 0.5),
         axis.line = element_blank(),
         axis.ticks = element_blank(),
@@ -738,9 +741,3 @@ for (d in seq_along(dens_c)) {
   )
 }
 ```
-
-<img src="images/intro_to_spatial/smoke_zonal_light.png" width = "50%" height = "auto" class = "centerimage">
-
-<img src="images/intro_to_spatial/smoke_zonal_medium.png" width = "50%" height = "auto" class = "centerimage">
-
-<img src="images/intro_to_spatial/smoke_zonal_heavy.png" width = "50%" height = "auto" class = "centerimage">
