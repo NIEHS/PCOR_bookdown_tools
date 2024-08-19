@@ -144,7 +144,7 @@ terra::crs(
 `narr` has a native coordinate reference system, but it is unnamed and was not identifiable by `terra::rast()`. The area of interest for these exploratory analyses is the conterminous United States, so we can project `narr` to the Albers Equal Area projected coordinate system (EPSG code: 5070).
 
 ```{r, eval = FALSE}
-narr <- terra::project(
+narr_p <- terra::project(
   narr,
   "EPSG:5070"
 )
@@ -185,20 +185,20 @@ conus_t <- terra::project(
 Ensure that both data sets have the same coordinate reference system.
 
 ```{r}
-terra::crs(conus_t) == terra::crs(narr)
+terra::crs(conus_t) == terra::crs(narr_p)
 ```
 
 ## Exploratory Analysis
 
 ### Plot (Multiple)
 
-Now that the data sets and coordinate reference systems have been prepared, create a plot with `ggplot2::gglot()`. Identifying the data sets to be plotted within the `tidyterra::geom_spatraster()` and `tidyterra::geom_spatvector()` argument informs the function that the `narr` and `conus_t` data sets are `SpatRaster` and `SpatVector` objects, respectively [@r-tidyterra].
+Now that the data sets and coordinate reference systems have been prepared, create a plot with `ggplot2::gglot()`. Identifying the data sets to be plotted within the `tidyterra::geom_spatraster()` and `tidyterra::geom_spatvector()` argument informs the function that the `narr_p` and `conus_t` data sets are `SpatRaster` and `SpatVector` objects, respectively [@r-tidyterra].
 
-Only the first layer of the `narr` data set will be plotted.
+Only the first layer of the `narr_p` data set will be plotted.
 
 ```{r}
 ggplot2::ggplot() +
-  tidyterra::geom_spatraster(data = narr$air_20210101) +
+  tidyterra::geom_spatraster(data = narr_p$air_20210101) +
   ggplot2::scale_fill_continuous(
     type = "viridis",
     na.value = NA,
@@ -221,7 +221,7 @@ The `terra::crop()` function can be used to reduce a `SpatRaster` to an area det
 
 ```{r}
 narr_crop <- terra::crop(
-  narr,
+  narr_p,
   conus_t,
   mask = TRUE
 )
@@ -350,16 +350,8 @@ The first step in the reclassification process is to create a matrix storing the
 Create the reclassification matrix.
 
 ```{r}
-from <- c(
-  -Inf,
-  10,
-  20
-)
-to <- c(
-  10,
-  20,
-  Inf
-)
+from <- c(-Inf, 10, 20)
+to <- c(10, 20, Inf)
 becomes <- 1:3
 reclass <- matrix(
   c(
@@ -391,7 +383,8 @@ level_values <- data.frame(
   c("1", "2", "3")
 )
 colnames(level_values) <- c("mean_continuous", "mean_discrete")
-terra::set.cats(narr_reclass,
+terra::set.cats(
+  narr_reclass,
   layer = "mean",
   value = level_values
 )

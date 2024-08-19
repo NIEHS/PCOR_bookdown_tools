@@ -68,7 +68,10 @@ unzip(
 After inspecting the file size, unzip `epa_data.zip`.
 
 ```{r, eval = FALSE}
-unzip("./dataset/epa/epa_data.zip")
+unzip(
+  "./dataset/epa/epa_data.zip",
+  exdir = "./dataset/epa/"
+)
 ```
 
 Inspecting the file with `utils::unzip(list = TRUE)` returned the size of the file, but also the name of the data file of interest. The desired data file can also be identified with `list.files()`.
@@ -111,22 +114,26 @@ Checking the data structure shows that `pm` is a very large data set. Each of th
 The data set can be reduced to include only the variables of interest with the `subset()` function. The `select =` argument indicates which variables to be retained in the new data set.
 
 ```{r}
-pm <- subset(pm, select = c(
-  State.Code,
-  County.Code,
-  Site.Num,
-  Latitude,
-  Longitude,
-  State.Name,
-  Date.Local,
-  Arithmetic.Mean
-))
+pm <- subset(
+  pm, 
+  select = c(
+    State.Code,
+    County.Code,
+    Site.Num,
+    Latitude,
+    Longitude,
+    State.Name,
+    Date.Local,
+    Arithmetic.Mean
+  )
+)
 ```
 
 Re-running `str(pm)` after subsetting the data set shows that all observations (n = 590,208) of the variables of interest (n = 8) have been retained.
 
 ```{r}
-str(pm,
+str(
+  pm,
   vec.len = 2
 )
 ```
@@ -160,7 +167,8 @@ The columns containing coordinate values will not always be "Latitude" and "Long
 :::
 
 ```{r}
-pm_sf <- sf::st_as_sf(pm,
+pm_sf <- sf::st_as_sf(
+  pm,
   coords = c("Longitude", "Latitude")
 )
 ```
@@ -339,7 +347,8 @@ min_max_monitors_id <- c(
 Finally, subset the `pm_sf` data set according to the monitor identification codes stored in `min_max_monitors_id`.
 
 ```{r}
-pm_min_max <- subset(pm_sf,
+pm_min_max <- subset(
+  pm_sf,
   subset = Monitor.ID == min_max_monitors_id
 )
 ```

@@ -86,7 +86,8 @@ Unzipping a `.zip` file will decompress the contents within. Spatial data sets c
 The numeric value size of each file is listed under `Length`.
 
 ```{r}
-unzip("./dataset/noaa/noaa_smoke20230901.zip",
+unzip(
+  "./dataset/noaa/noaa_smoke20230901.zip",
   list = TRUE
 )
 ```
@@ -94,7 +95,10 @@ unzip("./dataset/noaa/noaa_smoke20230901.zip",
 After inspecting the file sizes, unzip `noaa_smoke20230901.zip`.
 
 ```{r, eval = FALSE}
-unzip("./dataset/noaa/noaa_smoke20230901.zip", exdir = "./dataset/noaa/")
+unzip(
+  "./dataset/noaa/noaa_smoke20230901.zip",
+  exdir = "./dataset/noaa/"
+)
 ```
 
 Inspecting the file with `utils::unzip(list = TRUE)` returned the size of the file, but also the name of the data file of interest. The desired data file can also be identified with `list.files()`.
@@ -283,7 +287,10 @@ unzip(
 ```
 
 ```{r, eval = FALSE}
-unzip("./dataset/states/states.zip", exdir = "./dataset/states/")
+unzip(
+  "./dataset/states/states.zip",
+  exdir = "./dataset/states/"
+)
 ```
 
 ```{r}
@@ -337,7 +344,7 @@ Transform `conus_sf` to match the projected coordinate system of the `smoke_sf_d
 ```{r}
 conus_sf <- sf::st_transform(
   conus_sf,
-  st_crs(smoke_sf_density)
+  sf::st_crs(smoke_sf_density)
 )
 ```
 
@@ -706,7 +713,7 @@ Code lines 3 through 9 define the plotting colors based on the wildfire smoke pl
 
 Code lines 12 through 32 create the plot based on the wildfire smoke plume classification (`dens_c[d]`), and previously defined plotting colors (`color_values`).
 
-```{r}
+```{r, warning = FALSE}
 for (d in seq_along(dens_c)) {
   # define color palette based on smoke density
   if (dens_c[d] == "Light") {
