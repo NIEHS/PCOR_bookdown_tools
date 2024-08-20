@@ -13,7 +13,7 @@
 
 **Key Terms**: [Data Integration](https://tools.niehs.nih.gov/cchhglossary/?keyword=data+integration&termOnlySearch=true&exactSearch=true), [Social Determinants of Health](https://tools.niehs.nih.gov/cchhglossary/?keyword=social+determinants+of+health+(sdoh)&termOnlySearch=true&exactSearch=true), [Geocoded Address](#def-geocoded-address), [GeoID](#def-geoid), [Geographic Unit](#def-geographic-unit)
 
-**CHORDS Catalog Resources:** [AHRQ Social Determinants of Health (SDOH) Database](https://chordshealth.org/discovery/5f77a51e-d0df-45cc-9cdf-38e5950c3efa/)
+**Related CHORDS Catalog Resources:** [AHRQ Social Determinants of Health (SDOH) Database](https://chordshealth.org/discovery/5f77a51e-d0df-45cc-9cdf-38e5950c3efa/)
 
 **Programming Language**: R
 
