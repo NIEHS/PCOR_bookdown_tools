@@ -42,7 +42,7 @@ BiocManager::install("Biobase")
 The following code creates a local HTML version of the book:
 
 ```{r}
-bookdown::render_book("chapters/index.Rmd", "bookdown::gitbook")
+bookdown::render_book("index.Rmd", "bookdown::gitbook")
 ```
 
 ## Contributing Guide
