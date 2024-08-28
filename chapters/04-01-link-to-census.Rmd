@@ -320,7 +320,7 @@ Now that the geocoded addresses and Census tracts are in the same CRS, we can li
 
 ```{r eval = FALSE}
 # link geocoded addresses to the Census tracts that contain them
-geo_addresses_linkage_sf <- sf::st_join(geo_addresses_sf,
+geo_addresses_linkage_sf <- sf::st_join(geo_addresses_crs_sf,
                                         nc_tracts_2010_sf,
                                         left = TRUE)
 
@@ -393,7 +393,7 @@ sdoh_tracts_2010_tbl <- readxl::read_xlsx("sdoh_2010_tract_1_0.xlsx",
                                           sheet = "Data")
 
 # view the table
-head(sdoh_tracts_2010)
+head(sdoh_tracts_2010_tbl)
 ```
 
 ```{r eval = FALSE}
