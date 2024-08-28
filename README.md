@@ -16,11 +16,10 @@ Please note that the CHORDS Toolkit is a work in progress. The following chapter
 |Comparison of Spatial Regression Methods |Advanced Methods |A comparison of spatial regression methods used to develop exposure models for geospatial exposure assessment. |
 |Linkage to Exposures |Health Data Integration |A tutorial with code in R for linking geocoded addresses to environmental exposure data. |
 
-_This is a BETA Release. Please let us know of any improvements we can make._
-
 ## Contact Us
 
 Please open an [issue](https://github.com/NIEHS/PCOR_bookdown_tools/issues) to suggest edits or to ask questions.
+
 
 ## Set Up
 
@@ -47,43 +46,35 @@ bookdown::render_book("index.Rmd", "bookdown::gitbook")
 
 ## Contributing Guide
 
+This guide describes the workflow, file organization, and status checks used for contributing to the CHORDS Toolkit.
+
 ### Workflow
 
-The following workflow rules and branch protections facilitate development, revision, review, and publication of the CHORDS Toolkit.
+The following figure illustrates the workflow rules and branch protections.
 
 <img align="center" src="images/workflow_staging_2.png">
 
 #### Development Branches
 
-Contributors create, edit, and revise new and existing chapters in development branches. Development branches should be named according to contributor initials, a one to two word description, and four digit month/day code (MMDD) based on the date of branch creation. For example, a development branch created by Mitchell Manware on April 5, 2024 to develop a unit testing chapter would be named `mm-unittests-0405`.
+Development branches are used to create new chapters and to revise existing chapters. Development branches should be named with the contributor's initials, a short description, and the branch creation date (MMDD), as in the following exammple: `mm-unittests-0405`.
 
-A pull request must be opened to merge a development branch into the `staging-internal` branch. The pull request must pass all [status checks](#status-checks) and be reviewed by at least one other contributor.
+A pull request must be opened to merge a development branch into the `staging` branch. The pull request must pass all [status checks](#status-checks).
 
-#### Branch `staging-internal` [protected]
+#### Staging Branch [Protected]
 
-The first review branch is named `staging-internal`. This branch is used for the CHORDS team's internal review of the incoming additions and changes. The `staging-internal` branch must be rendered locally to review as it is not hosted on a URL.
+The branch `staging` is used to review changes before publication.
 
-Contributors can make significant edits directly to the `staging-internal` branch based on reviewer feedback.
+Only minor edits, such as fixing a broken link or typo, should be made directly to `staging`. Contributors should use a development branch for any substantial edits, such as adding a new chapter.
 
-A pull request must be opened to merge the `staging-internal` branch into the `staging-public` branch. **Pull requests into the `staging-public` branch are only accepted from the `staging-internal` branch.** Pull requests attempting to merge development branches into `staging-public` will fail. This branch protection is enforced by the "Protect Branch \`staging public\`" status check.
+A pull request must be opened to merge the `staging` branch into the `main` branch. **Pull requests into `main` are only accepted from `staging`.** This branch protection is enforced by the **Protect Branch `main`** [status check](#status-checks). Pull requests from `staging` into `main` require at least one review.
 
-When a pull request passes all [status checks](#status-checks), is reviewed, and is merged into the `staging-public` branch, a new version of `staging-internal` will automatically be created (see .github/workflows/update-staging-internal.yml). Do not manually create a new `staging-internal` branch.
+When a pull request passes all [status checks](#status-checks), is reviewed, and is merged into the `main` branch, a new version of `staging` will automatically be created (see .github/workflows/update-staging-public.yml). Do not manually create a new `staging` branch.
 
-#### Branch `staging-public` [protected]
+#### Main Branch [Protected]
 
-The second review branch is named `staging-public`. This branch is also used for the CHORDS team's internal review of the incoming additions and changes. The `staging-public` branch will be available on the R Studio Connect Posit Server (link incoming) to facilitate web version review and feedback.
+The branch `main` is used to display the public CHORDS Toolkit web page. A push (closed and merged pull request) to the `main` branch will automatically build and deploy the public CHORDS Toolkit web page.
 
-Contributors **should not** make significant edits directly to the `staging-public` branch. Minor revisions (i.e., punctuation, word choice) are acceptable. Substantial changes to code, images, datasets, or style files should be addressed in the `staging-internal` review process or implemented on a new development branch.
-
-A pull request must be opened to merge the `staging-public` branch into the `main` branch. **Pull requests into the `main` branch are only accepted from the `staging-public` branch.** Pull requests attempting to merge development branches or the `staging-internal` branch into `main` will fail. This branch protection is enforced by the "Protect Branch \`main\`" status check.
-
-When a pull request passes all [status checks](#status-checks), is reviewed, and is merged into the `main` branch, a new version of `staging-public` will automatically be created (see .github/workflows/update-staging-public.yml). Do not manually create a new `staging-public` branch.
-
-#### Branch `main` [protected]
-
-A push (closed and merged pull request) to the `main` branch will automatically build and deploy the public facing version of the toolkit web page.
-
-The `main` branch can not be edited directly. All file edits must follow the outlined workflow to ensure the quality and reliability of the final web page.
+The `main` branch can not be edited directly and can only be edited using the workflow outlined above.
 
 ### Templates and File Organization
 
@@ -92,13 +83,10 @@ Please use the chapter template file in the `templates` folder to create a new c
 ### Status Checks
 
 **Check Super Linter**<br>
-Checks that `.Rmd` chapters and style files have valid source code and adhere to consistent formatting (see .github/workflows/check-super-linter.yml). Utilizes [super-linter/super-linter](https://github.com/super-linter/super-linter).
+Checks that `RMD` and style files have valid source code and consistent formatting (.github/workflows/check-super-linter.yml) using [super-linter/super-linter](https://github.com/super-linter/super-linter).
 
 **Check Render Bookdown**<br>
-Checks that new chapters, file edits, and images and data do not cause errors in rendering the book (see .github/workflows/check-render-bookdown.yml).
-
-**Protect Branch `staging-public`**<br>
-Checks that a pull request into the `staging-public` branch is from `staging-internal` (see .github/workflows/protect-staging-public.yml).
+Checks for errors in rendering the book (.github/workflows/check-render-bookdown.yml).
 
 **Protect Branch `main`**<br>
-Checks that a pull request into the `main` branch is from `staging-public` (see .github/workflows/protect-main.yml).
+Checks that a pull request into `main` is from `staging` (.github/workflows/protect-main.yml).
