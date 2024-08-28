@@ -18,7 +18,7 @@ Please note that the CHORDS Toolkit is a work in progress. The following chapter
 
 ## Contact Us
 
-This is a BETA Release. Please let us know of any improvements we can make. 
+This is a BETA Release. Please let us know of any improvements we can make.
 
 You can contact us by [email](mailto:chordshelp@nih.gov) or by opening an [issue](https://github.com/NIEHS/PCOR_bookdown_tools/issues). Please open an issue to suggest edits or to ask questions relating to the code in this repository.
 
