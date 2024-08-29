@@ -281,24 +281,24 @@ Example Environmental Health Data Sources
 <col width="33%" />
 </colgroup>
 <thead>
-<tr>
+<tr class="header">
 <th>Data source</th>
 <th>Geographic units</th>
 <th>Example topics</th>
 </tr>
 </thead>
 <tbody>
-<tr>
+<tr class="odd">
 <td><a href="https://www.ahrq.gov/sdoh/data-analytics/sdoh-data.html">AHRQ Social Detrminants of Health Database</a></td>
 <td>County, ZIP code, tract</td>
 <td>Demographic characteristics, housing and transportation characteristics, food access, healthcare characteristics</td>
 </tr>
-<tr>
+<tr class="even">
 <td><a href="https://www.epa.gov/ejscreen">EPA Environmental Justice Screening and Mapping Tool</a></td>
 <td>Block group</td>
 <td>Air pollution, hazardous waste, flood risk, wildfire risk, environmental justice indices</td>
 </tr>
-<tr>
+<tr class="odd">
 <td><a href="https://ephtracking.cdc.gov">CDC National Environmental Public Health Tracking Network</a></td>
 <td>State, county</td>
 <td>Heat, sunlight and ultraviolet exposure, built environment characteristics, asthma, heat-related illnesses</td>
@@ -335,7 +335,7 @@ Common Census Geographic Units in the United States
 <col width="20%" />
 </colgroup>
 <thead>
-<tr>
+<tr class="header">
 <th>Geographic Unit</th>
 <th>Total Units<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></th>
 <th>GeoID Description and Structure</th>
@@ -344,42 +344,42 @@ Common Census Geographic Units in the United States
 </tr>
 </thead>
 <tbody>
-<tr>
+<tr class="odd">
 <td>State</td>
 <td>50</td>
 <td>2-digit state (S) code = SS</td>
 <td>09</td>
 <td>Connecticut (CT)</td>
 </tr>
-<tr>
+<tr class="even">
 <td>County</td>
 <td>3143</td>
 <td>5-digit code = 2-digit state (S) code + 3-digit county (C) code = SSCCC</td>
 <td>09007</td>
 <td>Middlesex County, CT</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>Zip Code Tabulation Area (ZCTA)</td>
 <td>33,642</td>
 <td>5-digit ZCTA (Z) code = ZZZZZ</td>
 <td>06480</td>
 <td>ZCTA for Portland, CT</td>
 </tr>
-<tr>
+<tr class="even">
 <td>Tract</td>
 <td>84,414</td>
 <td>11-digit code = 2-digit state (S) code + 3 digit county (C) code + 6-digit tract (T) code = SSCCCTTTTTT</td>
 <td>09007560100</td>
 <td>Tract 560100 in Middlesex County, CT</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>Block group</td>
 <td>239,780</td>
 <td>12-digit code = 2-digit state (S) code + 3 digit county (C) code + 6-digit tract (T) code + 1-digit block group (G) code = SSCCCTTTTTTG</td>
 <td>090075601001</td>
 <td>Block group 1 in Tract 560100 in Middlesex County, CT</td>
 </tr>
-<tr>
+<tr class="even">
 <td>Block</td>
 <td>8,132,968</td>
 <td>15-digit code = 2-digit state (S) code + 3 digit county (C) code + 6-digit tract (T) code + 4-digit block (B) code (which contains the block group code as its first digit) = SSCCCTTTTTTBBBB</td>
@@ -585,7 +585,7 @@ Census Tracts in North Carolina in 2010 (Grey) with Sample Geocoded Addresses (R
 </div>
 <p>Now that the geocoded addresses and Census tracts are in the same CRS, we can link each geocoded address to the Census tract that contains it using a spatial join. The following code produces a table of geocoded addresses linked to Census tract geoIDs:</p>
 <div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb143-1"><a href="chapter-link-to-census.html#cb143-1" tabindex="-1"></a><span class="co"># link geocoded addresses to the Census tracts that contain them</span></span>
-<span id="cb143-2"><a href="chapter-link-to-census.html#cb143-2" tabindex="-1"></a>geo_addresses_linkage_sf <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_join</span>(geo_addresses_sf,</span>
+<span id="cb143-2"><a href="chapter-link-to-census.html#cb143-2" tabindex="-1"></a>geo_addresses_linkage_sf <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_join</span>(geo_addresses_crs_sf,</span>
 <span id="cb143-3"><a href="chapter-link-to-census.html#cb143-3" tabindex="-1"></a>                                        nc_tracts_2010_sf,</span>
 <span id="cb143-4"><a href="chapter-link-to-census.html#cb143-4" tabindex="-1"></a>                                        <span class="at">left =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb143-5"><a href="chapter-link-to-census.html#cb143-5" tabindex="-1"></a></span>
@@ -650,7 +650,7 @@ Screenshot of Second Sheet in Excel File (September 14, 2023)
 <span id="cb145-9"><a href="chapter-link-to-census.html#cb145-9" tabindex="-1"></a>                                          <span class="at">sheet =</span> <span class="st">&quot;Data&quot;</span>)</span>
 <span id="cb145-10"><a href="chapter-link-to-census.html#cb145-10" tabindex="-1"></a></span>
 <span id="cb145-11"><a href="chapter-link-to-census.html#cb145-11" tabindex="-1"></a><span class="co"># view the table</span></span>
-<span id="cb145-12"><a href="chapter-link-to-census.html#cb145-12" tabindex="-1"></a><span class="fu">head</span>(sdoh_tracts_2010)</span></code></pre></div>
+<span id="cb145-12"><a href="chapter-link-to-census.html#cb145-12" tabindex="-1"></a><span class="fu">head</span>(sdoh_tracts_2010_tbl)</span></code></pre></div>
 <div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb146-1"><a href="chapter-link-to-census.html#cb146-1" tabindex="-1"></a><span class="co"># A tibble: 6 × 355</span></span>
 <span id="cb146-2"><a href="chapter-link-to-census.html#cb146-2" tabindex="-1"></a><span class="co">#    YEAR TRACTFIPS   COUNTYFIPS STATEFIPS STATE   COUNTY         REGION</span></span>
 <span id="cb146-3"><a href="chapter-link-to-census.html#cb146-3" tabindex="-1"></a><span class="co">#   &lt;dbl&gt; &lt;chr&gt;       &lt;chr&gt;      &lt;chr&gt;     &lt;chr&gt;   &lt;chr&gt;          &lt;chr&gt;</span></span>
