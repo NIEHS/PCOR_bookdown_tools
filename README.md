@@ -57,7 +57,7 @@ The following figure illustrates the workflow rules and branch protections.
 
 #### Development Branches
 
-Development branches are used to create new chapters and to revise existing chapters. Development branches should be named with the contributor's initials, a short description, and the branch creation date (MMDD), as in the following exammple: `mm-unittests-0405`.
+Development branches are used to create new chapters and to revise existing chapters. Development branches should be named with the contributor's initials, a short description, and the branch creation date (MMDD), as in the following example: `mm-unittests-0405`.
 
 A pull request must be opened to merge a development branch into the `staging` branch. The pull request must pass all [status checks](#status-checks).
 
