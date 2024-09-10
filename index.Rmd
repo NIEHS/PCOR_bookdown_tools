@@ -7,7 +7,7 @@ bibliography: ["bibliography/book.bib", "bibliography/packages.bib"]
 csl: "bibliography/chicago-numeric-with-note.csl"
 link-citations: true
 link-bibliography: true
-description: The CHORDS Toolkit provides guides, tools, and example code to support climate change and human health research.
+description: The CHORDS Training and Use Cases Toolkit provides guides, tutorials, and example code to support climate change and human health research.
 github-repo: NIEHS/PCOR_bookdown_tools
 output: bookdown::html_document2
 ---
