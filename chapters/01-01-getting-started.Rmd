@@ -23,7 +23,7 @@ Environmental health research relies on various types of data to accurately meas
 
 The objectives of this chapter are to:
 
-1. Introduce concepts and terminology used throughout the CHORDS Toolkit for geospatial data and geospatial analysis methods.
+1. Introduce concepts and terminology used in the following tutorials for geospatial data and geospatial analysis methods.
 2. Describe the geospatial datasets and `R` packages used in the following tutorials.
 3. Provide a list of useful resources for getting started with `R` and for further exploration of geospatial data analysis methods in environmental health.
 
