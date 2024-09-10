@@ -1,5 +1,5 @@
 ---
-title: "The CHORDS Training and Use Cases Toolkit"
+title: "CHORDS Training and Use Cases Toolkit"
 date: "Last Modified: `r format(Sys.time(), '%B %d, %Y')` (Version 1.0)"
 site: bookdown::bookdown_site
 documentclass: book

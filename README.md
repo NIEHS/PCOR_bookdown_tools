@@ -1,4 +1,4 @@
-# The CHORDS Training and Uses Cases Toolkit <img align="right" width="250" src="images/chords-icon-web.jpg">
+# CHORDS Training and Uses Cases Toolkit <img align="right" width="250" src="images/chords-icon-web.jpg">
 
 [![Super-Lint](https://github.com/NIEHS/PCOR_bookdown_tools/actions/workflows/check-super-linter.yml/badge.svg)](https://github.com/NIEHS/PCOR_bookdown_tools/actions/workflows/check-super-linter.yml)
 [![Render-Bookdown](https://github.com/NIEHS/PCOR_bookdown_tools/actions/workflows/check-render-bookdown.yml/badge.svg)](https://github.com/NIEHS/PCOR_bookdown_tools/actions/workflows/check-render-bookdown.yml)
