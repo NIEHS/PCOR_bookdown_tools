@@ -1,9 +1,9 @@
-# (PART\*) Case Studies {.unnumbered .unlisted}
+# (PART\*) Use Cases {.unnumbered .unlisted}
 
-# **Case Studies** {-}
+# **Use Cases** {-}
 
 ---
 
-This unit provides example case studies that analyze integrated wildfire-related data and other environmental exposures data with health outcomes data. 
+This unit provides example use cases that analyze integrated wildfire-related data and other environmental exposures data with health outcomes data. 
 
 _Please note that the CHORDS Toolkit is a work in progress. This unit is currently in development._

@@ -1,5 +1,5 @@
 ---
-title: "The CHORDS Toolkit for Health and Geospatial Exposures Research"
+title: "CHORDS Training and Use Cases Toolkit"
 date: "Last Modified: `r format(Sys.time(), '%B %d, %Y')` (Version 1.0)"
 site: bookdown::bookdown_site
 documentclass: book
@@ -7,7 +7,7 @@ bibliography: ["bibliography/book.bib", "bibliography/packages.bib"]
 csl: "bibliography/chicago-numeric-with-note.csl"
 link-citations: true
 link-bibliography: true
-description: The CHORDS Toolkit provides guides, tools, and example code to support climate change and human health research.
+description: The CHORDS Training and Use Cases Toolkit provides guides, tutorials, and example code to support climate change and human health research.
 github-repo: NIEHS/PCOR_bookdown_tools
 output: bookdown::html_document2
 ---
@@ -16,7 +16,7 @@ output: bookdown::html_document2
 
 ---
 
-Researchers interested in studying the health impacts of climate change and climate related disasters need access to relevant, timely, and harmonized data on environmental exposures, social determinants of health variables, and health outcomes. However, such datasets are often developed for different purposes, reside in multiple locations, and require linkage. The Climate and Health Outcomes Research Data Systems (CHORDS) Project seeks to connect researchers to environmental and health datasets with a toolkit that provides guides, tutorials, and example code to improve integration of geospatial data-based exposures and health data and records into their research. 
+Researchers interested in studying the health impacts of climate change and climate related disasters need access to relevant, timely, and harmonized data on environmental exposures, social determinants of health variables, and health outcomes. However, such data sets are often developed for different purposes, reside in multiple locations, and require linkage. The Climate and Health Outcomes Research Data Systems (CHORDS) Project seeks to connect researchers to environmental and health data sets with a toolkit that provides guides, tutorials, and example code to improve integration of geospatial data-based exposures and health data and records into their research. 
 
 ## About CHORDS {-}
 
@@ -28,9 +28,9 @@ The [Climate and Health Outcomes Research Data Systems (CHORDS)](https://www.nie
 
 ## About This Toolkit {-}
 
-This toolkit provides guides, tools, and example code in `R`. The [CHORDS Toolkit GitHub repository](https://github.com/NIEHS/PCOR_bookdown_tools) provides the underlying code and data for this book. 
+The CHORDS Training and Use Cases Toolkit (CHORDS Toolkit) provides guides, tutorials, and example code in `R`. The [CHORDS Toolkit GitHub repository](https://github.com/NIEHS/PCOR_bookdown_tools) provides the underlying code and data for this toolkit. 
 
-The CHORDS toolkit has been developed to support different types of users, such as students, clinicians, and data managers. Please see the [User Profile Appendix](#chapter-user-profiles) for descriptions and suggested relevant toolkit chapters for each user profile. 
+The CHORDS Toolkit has been developed to support different types of users, such as students, clinicians, and data managers. Please see the [User Profile Appendix](#chapter-user-profiles) for descriptions and suggested relevant toolkit chapters for each user profile. 
 
 This toolkit requires familiarity with the `R` programming language and the use of `R` for working with, visualizing, and analyzing scientific data. Please see the [Getting Started](#chapter-getting-started-spatial-resources) chapter for a list of resources for getting started with `R` for geospatial data analysis in environmental health research.
 
@@ -44,7 +44,7 @@ The toolkit consists of a series of chapters organized into the following units:
 
 - **Health Data Integration**: This unit provides guidance and code for integrating environmental and health data in climate change and health research, both at the individual level and at the population level.
 
-- **Case Studies**: This unit provides example case studies that analyze integrated wildfire-related data and other environmental exposures data with health outcomes data.
+- **Use Cases**: This unit provides example use cases that analyze integrated wildfire-related data and other environmental exposures data with health outcomes data.
 
 The CHORDS Toolkit is a work in progress. Please see the [CHORDS Toolkit GitHub repository](https://github.com/NIEHS/PCOR_bookdown_tools) for a list of chapters currently in development.
 
