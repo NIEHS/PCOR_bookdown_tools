@@ -114,7 +114,7 @@ This tutorial uses the `R` packages `sf` [@r-sf-1; @r-sf-2], `tidyverse` [@r-tid
 install.packages(c("sf", "tidyverse", "tigris", "tmap"))
 ```
 
-```{r eval = TRUE}
+```{r eval = TRUE, echo = FALSE, message = FALSE}
 # load required packages
 library(sf)
 library(tidyverse)
@@ -193,7 +193,7 @@ Now, we can see that each city hall has associated `geometry` in point format. W
 
 The second step is to prepare the Census geographic boundaries for mapping in `R`. For this tutorial, we'll use the `tigris` package to load the Census tract boundaries for North Carolina in year-2010 (i.e., year-2010 vintage). Using an `R` package like `tigris` to load the Census geographic boundaries will help keep the workflow reproducible by documenting all of the steps in `R`. The following code reads the North Carolina 2010 Census tract boundaries into `R` as simple features:
 
-```{r eval = TRUE, message = FALSE}
+```{r eval = TRUE, message = FALSE, results = FALSE}
 # download Census tracts in North Carolina in 2010 as simple features
 nc_tracts_2010_sf <- tigris::tracts(state = "NC", year = 2010)
 
@@ -207,7 +207,7 @@ We can see that the CRS listed above for the Census tract boundaries (`NAD83`) i
 
 Next, we can view the geometry of the tracts by creating a map:
 
-```{r eval = TRUE, fig.align = "center", fig.width = 8, fig.asp = 0.4419055, out.width = '100%}
+```{r eval = TRUE, fig.align = "center", fig.width = 8, fig.asp = 0.4419055, out.width = '100%'}
 # create a map of the Census tracts
 nc_tracts_2010_map <- tmap::tm_shape(nc_tracts_2010_sf) +
   tmap::tm_polygons(lwd = 0.5)
