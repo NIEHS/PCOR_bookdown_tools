@@ -226,7 +226,7 @@ Historic Census geographic boundaries (i.e., 1910 to present) are available thro
 
 The third step is to link each geocoded addresses to the geoID of the Census geographic unit that contains it. To do this, we'll first need to prepare the geocoded addresses and Census geographic boundaries in the same CRS. The following code transforms the CRS of the geocoded addresses to match the the CRS of the Census geographic boundaries (`NAD83`) and then maps them together:
 
-```{r eval = TRUE}
+```{r eval = TRUE, fig.align = "center", fig.width = 8, fig.asp = 0.4419055, out.width = '100%'}
 # transform city hall locations to match CRS of Census tracts
 geo_addresses_crs_sf <- sf::st_transform(geo_addresses_sf,
   crs = sf::st_crs(nc_tracts_2010_sf)
@@ -247,7 +247,7 @@ print(linkage_map)
 
 Now that the geocoded addresses and Census tracts are in the same CRS, we can link each geocoded address to the Census tract that contains it using a spatial join. The following code produces a table of geocoded addresses linked to Census tract geoIDs:
 
-```{r eval = TRUE, fig.align = "center", fig.width = 8, fig.asp = 0.4419055, out.width = '100%'}
+```{r eval = TRUE}
 # link geocoded addresses to the Census tracts that contain them
 geo_addresses_linkage_sf <- sf::st_join(geo_addresses_crs_sf,
                                         nc_tracts_2010_sf,
