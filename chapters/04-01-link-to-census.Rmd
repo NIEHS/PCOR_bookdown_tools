@@ -295,7 +295,7 @@ We find that the Excel file has two sheets: `Layout` and `Data`. The `Layout` sh
 
 The following code downloads the Excel file and reads its `Data` sheet into a table in `R`:
 
-```{r eval = FALSE}
+```{r eval = FALSE, echo = TRUE}
 # download Excel file using the URL provided in the screenshot above
 sdoh_tracts_2010_url <-
   "https://www.ahrq.gov/downloads/sdoh/sdoh_2010_tract_1_0.xlsx"
@@ -310,7 +310,22 @@ sdoh_tracts_2010_tbl <- readxl::read_xlsx(sdoh_tracts_2010_xlsx,
                                           sheet = "Data")
 ```
 
-```{r eval = TRUE, echo = FALSE}
+```{r eval = TRUE, message = FALSE, results = FALSE}
+# download Excel file using the URL provided in the screenshot above
+sdoh_tracts_2010_url <-
+  "https://www.ahrq.gov/downloads/sdoh/sdoh_2010_tract_1_0.xlsx"
+
+# specify your file path for downloading the Excel file
+sdoh_tracts_2010_xlsx <-
+  "/ YOUR FILE PATH /sdoh_2010_tract_1_0.xlsx"
+
+# read the "Data" sheet of the Excel file into a table R
+# note that you may need to provide a complete filepath for the Excel file
+sdoh_tracts_2010_tbl <- readxl::read_xlsx(sdoh_tracts_2010_xlsx,
+                                          sheet = "Data")
+```
+
+```{r eval = FALSE, echo = FALSE}
 # read in the RDS file
 sdoh_tracts_2010_tbl <-
   readr::read_rds("dataset/sdoh_2010_tract_1_0.rds")
