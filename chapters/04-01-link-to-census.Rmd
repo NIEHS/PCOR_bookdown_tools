@@ -306,14 +306,14 @@ sdoh_tracts_2010_xlsx <-
 
 # read the "Data" sheet of the Excel file into a table R
 # note that you may need to provide a complete filepath for the Excel file
-sdoh_tracts_2010_tbl <- readxl::read_xlsx("sdoh_2010_tract_1_0.xlsx",
+sdoh_tracts_2010_tbl <- readxl::read_xlsx(sdoh_tracts_2010_xlsx,
                                           sheet = "Data")
 ```
 
 ```{r eval = TRUE, echo = FALSE}
 # read in the RDS file
 sdoh_tracts_2010_tbl <-
-  readr::read_rds("datasets/link-to-census/sdoh_2010_tract_1_0.rds")
+  readr::read_rds("dataset/sdoh_2010_tract_1_0.rds")
 ```
 
 ```{r eval = TRUE, echo = TRUE}
