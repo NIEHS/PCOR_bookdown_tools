@@ -57,7 +57,7 @@ url_narr <- paste0(
 
 # specify where to save downloaded data
 destination_narr <- paste0(
-  "./data/narr/air.2m_",
+  "./dataset/narr/air.2m_",
   year,
   ".nc"
 )
