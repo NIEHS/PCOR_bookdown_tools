@@ -80,8 +80,11 @@ Inspecting the file with `utils::unzip(list = TRUE)` returned the size of the fi
 Multiple chunks of code in this tutorial will contain `./dataset/`, a fixed directory path to run the tutorial code. To run the code on your machine, substitute `./dataset/` with the file path where you would like to store the tutorial data.
 :::
 
-```{r}
+```{r, eval = FALSE}
 list.files("./dataset/epa")
+```
+```{r, echo = FALSE, include = FALSE}
+cat("[1] \"daily_88101_2021.csv\" \"epa_data.zip\"")
 ```
 
 ## Data Preparation
@@ -90,8 +93,18 @@ list.files("./dataset/epa")
 
 Now that the contents of the zip file have been saved on your machine and the data file of interest has been identified, import the data with `sf::st_read()`.
 
-```{r}
+```{r, eval = FALSE}
 pm <- sf::st_read("./dataset/epa/daily_88101_2021.csv")
+```
+```{r, echo = FALSE, include = FALSE}
+pm <- readRDS("./dataset/epa/daily_sf.rds")
+```
+```{r, echo = FALSE, include = FALSE}
+cat("Reading layer `daily_88101_2021' from data source 
+  `/Users/manwareme/Documents/bookdown/niehs/PCOR_bookdown_tools/dataset/epa/daily_88101_2021.csv' 
+  using driver `CSV'
+Warning message:
+no simple feature geometries present: returning a data.frame or tbl_df ")
 ```
 
 The previous chunk of code returned a `Warning:` message. This warning informs the user that the imported data does not have native spatial features, so the data was imported as a `data.frame`.

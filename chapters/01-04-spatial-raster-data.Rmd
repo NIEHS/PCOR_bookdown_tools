@@ -71,8 +71,12 @@ download.file(
 
 Identify the desired data file with `utils::list.files()`
 
-```{r}
+```{r, eval = FALSE}
 list.files("./dataset/narr/")
+```
+
+```{r, echo = FALSE, include = FALSE}
+cat("[1] \"air_2m.2021.nc\"")
 ```
 
 The file downloaded from NOAA's NARR data set is an `.nc`, or netCDF, file. NetCDF files are common for raster data, and do not need to be unzipped.
@@ -83,8 +87,12 @@ The file downloaded from NOAA's NARR data set is an `.nc`, or netCDF, file. NetC
 
 Now that the data file of interest has been downloaded and identified, import the data with `terra::rast()`.
 
-```{r}
+```{r, eval = FALSE}
 narr <- terra::rast("./dataset/narr/air.2m_2021.nc")
+```
+
+```{r, echo = FALSE, include = FALSE}
+narr <- readRDS("./dataset/narr/air.2m_2021.rds")
 ```
 
 ### Inspect Structure
