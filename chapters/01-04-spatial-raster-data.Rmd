@@ -47,7 +47,7 @@ The `utils::download.file()` function downloads the file according to the define
 Multiple chunks of code in this tutorial will contain `./dataset/`, a fixed directory path to run the tutorial code. To run the code on your machine, substitute `./dataset/` with the file path where you would like to store the tutorial data.
 :::
 
-```{r, eval = FALSE}
+```{r, eval = TRUE}
 # specify the URL where data is stored based on year variable of interest
 url_narr <- paste0(
   "https://downloads.psl.noaa.gov//Datasets/NARR/Dailies/monolevel/air.2m.",
@@ -72,11 +72,7 @@ download.file(
 Identify the desired data file with `utils::list.files()`
 
 ```{r, eval = FALSE}
-list.files("./dataset/narr/")
-```
-
-```{r, echo = FALSE, include = FALSE}
-cat("[1] \"air_2m.2021.nc\"")
+list.files("./dataset/narr")
 ```
 
 The file downloaded from NOAA's NARR data set is an `.nc`, or netCDF, file. NetCDF files are common for raster data, and do not need to be unzipped.
@@ -87,12 +83,8 @@ The file downloaded from NOAA's NARR data set is an `.nc`, or netCDF, file. NetC
 
 Now that the data file of interest has been downloaded and identified, import the data with `terra::rast()`.
 
-```{r, eval = FALSE}
+```{r}
 narr <- terra::rast("./dataset/narr/air.2m_2021.nc")
-```
-
-```{r, echo = FALSE, include = FALSE}
-narr <- readRDS("./dataset/narr/air.2m_2021.rds")
 ```
 
 ### Inspect Structure

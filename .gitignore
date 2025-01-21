@@ -9,5 +9,4 @@ _bookdown_files/
 _main_files
 .DS_Store
 docs/
-dataset/epa/daily_88101_2021.csv
 dataset/narr/air.2m_2021.nc
