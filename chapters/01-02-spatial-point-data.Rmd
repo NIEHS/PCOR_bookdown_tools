@@ -6,7 +6,7 @@
 
 ### Point Data Access, Preparation, and Exploratory Analysis in R {-}
 
-**Date Modified:** August 16, 2024
+**Date Modified:** January 21, 2025
 
 **Authors:** Mitchell Manware [![author-mm](images/orcid.png){width=10}](https://orcid.org/0009-0003-6440-6106), Kyle P. Messier [![author-kpm](images/orcid.png){width=10}](https://orcid.org/0000-0001-9508-9623)
 
@@ -80,7 +80,7 @@ Inspecting the file with `utils::unzip(list = TRUE)` returned the size of the fi
 Multiple chunks of code in this tutorial will contain `./dataset/`, a fixed directory path to run the tutorial code. To run the code on your machine, substitute `./dataset/` with the file path where you would like to store the tutorial data.
 :::
 
-```{r, eval = FALSE}
+```{r}
 list.files("./dataset/epa")
 ```
 
