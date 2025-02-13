@@ -4,7 +4,7 @@ output_dir: "docs"
 rmd_files:
   - index.Rmd
   - chapters/01-00-spatial-data-foundations.Rmd
-  - chapters/01-01-getting-started-spatial.Rmd
+  - chapters/01-01-getting-started.Rmd
   - chapters/01-02-spatial-point-data.Rmd
   - chapters/01-03-spatial-polygon-data.Rmd
   - chapters/01-04-spatial-raster-data.Rmd
