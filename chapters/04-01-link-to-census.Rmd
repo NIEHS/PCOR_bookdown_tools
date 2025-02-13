@@ -311,7 +311,7 @@ sdoh_tracts_2010_tbl <- readxl::read_xlsx(sdoh_tracts_2010_xlsx,
 ```
 
 
-```{r eval = TRUE, echo = FALSE, message = FALSE, results = FALSE}
+```{r eval = FALSE, echo = FALSE, message = FALSE, results = FALSE}
 
 # download Excel file using the URL provided in the screenshot above
 sdoh_tracts_2010_url <-
