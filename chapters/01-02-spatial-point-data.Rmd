@@ -6,7 +6,7 @@
 
 ### Point Data Access, Preparation, and Exploratory Analysis in R {-}
 
-**Date Modified:** May 6, 2024
+**Date Modified:** January 21, 2025
 
 **Authors:** Mitchell Manware [![author-mm](images/orcid.png){width=10}](https://orcid.org/0009-0003-6440-6106), Kyle P. Messier [![author-kpm](images/orcid.png){width=10}](https://orcid.org/0000-0001-9508-9623)
 
@@ -36,13 +36,13 @@ The exploratory analyses in this unit are designed for educational purposes only
 To download data with the `utils::download.file()` function, define two variables. One variable to store the website URL where the data exists and a second to store the file path for where the file should be saved.
 
 ::: {.note}
-Multiple chunks of code in this tutorial will contain `/   YOUR FILE PATH   /`. To run the code on your machine, substitute `/   YOUR FILE PATH   /` with the file path where you would like to store the tutorial data.
+Multiple chunks of code in this tutorial will contain `./dataset/`, a fixed directory path to run the tutorial code. To run the code on your machine, substitute `./dataset/` with the file path where you would like to store the tutorial data.
 :::
 
 ```{r, eval = FALSE}
 url_epa <- "https://aqs.epa.gov/aqsweb/airdata/daily_88101_2021.zip"
 
-destination_epa <- "/   YOUR FILE PATH   /epa_data.zip"
+destination_epa <- "./dataset/epa/epa_data.zip"
 
 download.file(
   url_epa,
@@ -58,26 +58,30 @@ Unzipping a `.zip` file will decompress the contents within. Spatial data sets c
 
 The numeric value size of the file is listed under `Length`.
 
-```{r, eval = FALSE}
-unzip("/   YOUR FILE PATH   /epa_data.zip",
+```{r}
+unzip(
+  "./dataset/epa/epa_data.zip",
   list = TRUE
 )
 ```
 
 After inspecting the file size, unzip `epa_data.zip`.
 
-```{r, eval = FALSE}
-unzip("/   YOUR FILE PATH   /epa_data.zip")
+```{r, eval = TRUE}
+unzip(
+  "./dataset/epa/epa_data.zip",
+  exdir = "./dataset/epa/"
+)
 ```
 
 Inspecting the file with `utils::unzip(list = TRUE)` returned the size of the file, but also the name of the data file of interest. The desired data file can also be identified with `list.files()`.
 
 ::: {.note}
-Other file names may be returned if `/   YOUR FILE PATH   /` is a directory with other contents (e.g., Desktop or Documents folder).
+Multiple chunks of code in this tutorial will contain `./dataset/`, a fixed directory path to run the tutorial code. To run the code on your machine, substitute `./dataset/` with the file path where you would like to store the tutorial data.
 :::
 
-```{r, eval = FALSE}
-list.files("/   YOUR FILE PATH   /")
+```{r}
+list.files("./dataset/epa")
 ```
 
 ## Data Preparation
@@ -86,8 +90,8 @@ list.files("/   YOUR FILE PATH   /")
 
 Now that the contents of the zip file have been saved on your machine and the data file of interest has been identified, import the data with `sf::st_read()`.
 
-```{r, eval = FALSE}
-pm <- st_read("/   YOUR FILE PATH   /daily_88101_2021.csv")
+```{r}
+pm <- sf::st_read("./dataset/epa/daily_88101_2021.csv")
 ```
 
 The previous chunk of code returned a `Warning:` message. This warning informs the user that the imported data does not have native spatial features, so the data was imported as a `data.frame`.
@@ -96,8 +100,9 @@ The previous chunk of code returned a `Warning:` message. This warning informs t
 
 Inspect the structure of `pm` to see its class, column names, column classes, and the first two (specified by `vec.len = 2`) data points from each column.
 
-```{r, eval = FALSE}
-str(pm,
+```{r}
+str(
+  pm,
   vec.len = 2
 )
 ```
@@ -108,23 +113,27 @@ Checking the data structure shows that `pm` is a very large data set. Each of th
 
 The data set can be reduced to include only the variables of interest with the `subset()` function. The `select =` argument indicates which variables to be retained in the new data set.
 
-```{r, eval = FALSE}
-pm <- subset(pm, select = c(
-  State.Code,
-  County.Code,
-  Site.Num,
-  Latitude,
-  Longitude,
-  State.Name,
-  Date.Local,
-  Arithmetic.Mean
-))
+```{r}
+pm <- subset(
+  pm,
+  select = c(
+    State.Code,
+    County.Code,
+    Site.Num,
+    Latitude,
+    Longitude,
+    State.Name,
+    Date.Local,
+    Arithmetic.Mean
+  )
+)
 ```
 
 Re-running `str(pm)` after subsetting the data set shows that all observations (n = 590,208) of the variables of interest (n = 8) have been retained.
 
-```{r, eval = FALSE}
-str(pm,
+```{r}
+str(
+  pm,
   vec.len = 2
 )
 ```
@@ -137,14 +146,14 @@ The class of a variable depends on the information conveyed by the data stored w
 
 The `as.` functions can be used for reclassifying data. Reclassify `pm$Arithmetic.Mean` as a number, and `pm$Date.Local` as a date.
 
-```{r, eval = FALSE}
+```{r}
 pm$Arithmetic.Mean <- as.numeric(pm$Arithmetic.Mean)
 pm$Date.Local <- as.Date(pm$Date.Local)
 ```
 
 After running the `as.` functions, ensure that the two variables have been reclassified to the desired classes.
 
-```{r, eval = FALSE}
+```{r}
 class(pm$Arithmetic.Mean)
 class(pm$Date.Local)
 ```
@@ -157,15 +166,16 @@ With the variables of interest selected and reclassified, `pm` can be converted 
 The columns containing coordinate values will not always be "Latitude" and "Longitude". Use `str()` to see column names and identify which contain the coordinate values.
 :::
 
-```{r, eval = FALSE}
-pm_sf <- st_as_sf(pm,
+```{r}
+pm_sf <- sf::st_as_sf(
+  pm,
   coords = c("Longitude", "Latitude")
 )
 ```
 
 Inspect the classes of `pm_sf` and `pm_sf$geometry` to see their differences, and how each are different than `class(pm)`.
 
-```{r, eval = FALSE}
+```{r}
 class(pm_sf)
 class(pm_sf$geometry)
 ```
@@ -176,15 +186,15 @@ class(pm_sf$geometry)
 
 The coordinate reference system of an `sf` object can be checked with `sf::st_crs()`.
 
-```{r, eval = FALSE}
-st_crs(pm_sf)
+```{r}
+sf::st_crs(pm_sf)
 ```
 
 The previous chunk of code shows that `pm_sf` does not have a native coordinate reference system. The same function, `sf::st_crs()`, can be used to assign a coordinate reference system to an `sf` object. For this example, the World Geodetic System 1984 (WGS 84) will be used (EPSG code: 4326).
 
-```{r, eval = FALSE}
-st_crs(pm_sf) <- 4326
-st_crs(pm_sf)
+```{r}
+sf::st_crs(pm_sf) <- 4326
+sf::st_crs(pm_sf)
 ```
 
 An `sf` object with a coordinate reference system can be transformed (projected) into a different coordinate reference system with `sf::st_transform()`. The area of interest for these exploratory analyses is the conterminous United States, so the Albers Equal Area projected coordinate system will be used (EPSG code: 5070). For a detailed description of coordinate reference systems, and how to select the best system for your analyses, see Section [Coordinate Reference Systems and Projections](#getting-started-spatial-crs) in the Chapter [Getting Started](#chapter-getting-started-spatial).
@@ -193,8 +203,8 @@ An `sf` object with a coordinate reference system can be transformed (projected)
 An `sf` object without an assigned coordinate reference system cannot be transformed. `sf::st_crs()` must be used to assign a coordinate reference system to an `sf` object that does not have one.
 :::
 
-```{r, eval = FALSE}
-pm_sf <- st_transform(
+```{r}
+pm_sf <- sf::st_transform(
   pm_sf,
   5070
 )
@@ -206,20 +216,18 @@ pm_sf <- st_transform(
 
 Plotting spatial data is important for visualizing and analyzing patterns in the data. Initialize a plot for the locations of each air pollution monitoring station with `ggplot2::ggplot()`. Identifying the data set to be plotted within the `geom_sf()` argument informs the function that the data is an `sf` object.
 
-```{r, eval = FALSE}
-ggplot() +
-  geom_sf(data = pm_sf) +
-  ggtitle("Air Pollution Monitor Locations") +
-  theme_pubr() +
-  theme(plot.title = element_text(hjust = 0.5)) +
-  grids()
+```{r}
+ggplot2::ggplot() +
+  ggplot2::geom_sf(data = pm_sf) +
+  ggplot2::ggtitle("Air Pollution Monitor Locations") +
+  ggpubr::theme_pubr() +
+  ggplot2::theme(plot.title = element_text(hjust = 0.5)) +
+  ggpubr::grids()
 ```
-
-<img src="images/intro_to_spatial/epa_monitors.png" width = "75%" height = "auto" class = "centerimage">
 
 The plot shows the distribution of monitoring locations, and roughly depicts the outline of the United States due to the large number of monitors. The plot does not, however, convey any information about the concentration of PM~2.5~ measured by each monitor. Inspect the summary statistics of the PM~2.5~ measurements before creating any plots to visualize the data.
 
-```{r, eval = FALSE}
+```{r}
 summary(pm_sf$Arithmetic.Mean)
 sd(pm_sf$Arithmetic.Mean)
 ```
@@ -230,26 +238,24 @@ After inspecting the summary statistics, create a histogram of the PM~2.5~ conce
 The histogram is not a spatially defined plot, so the data set to be plotted is identified within `ggplot()`.
 :::
 
-```{r, eval = FALSE}
-ggplot(
+```{r}
+ggplot2::ggplot(
   data = pm_sf,
   aes(Arithmetic.Mean)
 ) +
-  geom_histogram(
+  ggplot2::geom_histogram(
     fill = "blue",
     binwidth = 5
   ) +
-  ggtitle(
+  ggplot2::ggtitle(
     expression("PM"[2.5] * " Concentration Measurements")
   ) +
-  xlab(expression("PM"[2.5] * " Concentration (µg/m"^3 * ")")) +
-  ylab("Number of Measurements") +
-  theme_pubr() +
-  theme(plot.title = element_text(hjust = 0.5)) +
-  grids()
+  ggplot2::xlab(expression("PM"[2.5] * " Concentration (µg/m"^3 * ")")) +
+  ggplot2::ylab("Number of Measurements") +
+  ggpubr::theme_pubr() +
+  ggplot2::theme(plot.title = element_text(hjust = 0.5)) +
+  ggpubr::grids()
 ```
-
-<img src="images/intro_to_spatial/pm_concentrations_histogram.png" width = "75%" height = "auto" class = "centerimage">
 
 ### Calculate Annual Mean
 
@@ -257,7 +263,7 @@ A common summary statistic of interest to researchers is the mean over a certain
 
 The `pm_sf$Monitor.ID` variable can be created by concatenating each monitor's state code, county code, and site number together into a single character string.
 
-```{r, eval = FALSE}
+```{r}
 pm_sf$Monitor.ID <- paste0(
   pm_sf$State.Code,
   pm_sf$County.Code,
@@ -267,7 +273,7 @@ pm_sf$Monitor.ID <- paste0(
 
 Each unique monitor identification code should be matched with a unique monitor location geometry. To ensure that each monitor location has a unique identification code, check that there are an equal number of unique geometries and identification codes.
 
-```{r, eval = FALSE}
+```{r}
 length(unique(pm_sf$Monitor.ID)) == length(unique(pm_sf$geometry))
 ```
 
@@ -275,40 +281,39 @@ Now that each monitor location has a unique identification code, we can calculat
 
 The `group_by(Monitor.ID, )` argument specifies that an annual mean should be calculated for each unique `Monitor.ID`. Including `State.Name` in this argument retains the column in the new `pm_mean` data set, but does not influence the calculation of the annual mean.
 
-```{r, eval = FALSE}
+```{r}
+library(dplyr)
 pm_mean <-
   pm_sf %>%
-  group_by(Monitor.ID, State.Name) %>%
-  summarise(Annual.Mean = mean(Arithmetic.Mean))
+  dplyr::group_by(Monitor.ID, State.Name) %>%
+  dplyr::summarise(Annual.Mean = mean(Arithmetic.Mean))
 ```
 
 Inspect the summary statistics of `pm_mean`.
 
-```{r, eval = FALSE}
+```{r}
 summary(pm_mean$Annual.Mean)
 sd(pm_mean$Annual.Mean)
 ```
 
 Create a plot which shows the distribution of monitoring locations, and color each point according to the monitor's annual mean concentration of PM~2.5~.
 
-```{r, eval = FALSE}
-ggplot() +
-  geom_sf(
+```{r}
+ggplot2::ggplot() +
+  ggplot2::geom_sf(
     data = pm_mean,
     aes(color = Annual.Mean)
   ) +
-  scale_color_viridis_b(
+  ggplot2::scale_color_viridis_b(
     expression("PM"[2.5] * " Concentration (µg/m"^3 * ")")
   ) +
-  ggtitle(
+  ggplot2::ggtitle(
     expression("Annual Mean PM"[2.5] * " Concentration")
   ) +
-  theme_pubr(legend = "bottom") +
-  theme(plot.title = element_text(hjust = 0.5)) +
-  grids()
+  ggpubr::theme_pubr(legend = "bottom") +
+  ggplot2::theme(plot.title = element_text(hjust = 0.5)) +
+  ggpubr::grids()
 ```
-
-<img src="images/intro_to_spatial/epa_monitors_concentrations.png" width = "75%" height = "auto" class = "centerimage">
 
 Now the plot depicts both spatial and non-spatial data.
 
@@ -318,21 +323,21 @@ A close visual inspection of the previous plot shows a few monitoring locations 
 
 To do this, first identify the monitors with the highest and lowest annual mean concentrations.
 
-```{r, eval = FALSE}
+```{r}
 min_monitors <-
   pm_mean %>%
-  arrange(Annual.Mean) %>%
+  dplyr::arrange(Annual.Mean) %>%
   head(n = 3)
 
 max_monitors <-
   pm_mean %>%
-  arrange(Annual.Mean) %>%
+  dplyr::arrange(Annual.Mean) %>%
   tail(n = 3)
 ```
 
 Next, create a variable storing only the unique identification codes of these six monitors.
 
-```{r, eval = FALSE}
+```{r}
 min_max_monitors_id <- c(
   min_monitors$Monitor.ID,
   max_monitors$Monitor.ID
@@ -341,22 +346,23 @@ min_max_monitors_id <- c(
 
 Finally, subset the `pm_sf` data set according to the monitor identification codes stored in `min_max_monitors_id`.
 
-```{r, eval = FALSE}
-pm_min_max <- subset(pm_sf,
+```{r}
+pm_min_max <- subset(
+  pm_sf,
   subset = Monitor.ID == min_max_monitors_id
 )
 ```
 
 The resulting `pm_min_max` data set contains data for only six monitoring locations. Check the unique monitor identification codes that constitute the new data set.
 
-```{r, eval = FALSE}
+```{r}
 unique(pm_min_max$Monitor.ID)
 ```
 
 The temporal trend of PM~2.5~ concentrations measured at each of these locations in 2021 can be depicted with `ggplot::geom_line()`.
 
-```{r, eval = FALSE}
-ggplot(
+```{r}
+ggplot2::ggplot(
   data = pm_min_max,
   aes(
     x = Date.Local,
@@ -365,20 +371,18 @@ ggplot(
     color = Monitor.ID
   )
 ) +
-  geom_line() +
-  ggtitle("Minimum and Maximum Monitors") +
-  xlab("Date") +
-  ylab(expression("PM"[2.5] * " Concentrations (µg/m"^3 * ")")) +
-  theme_pubr(legend = "bottom") +
-  theme(plot.title = element_text(hjust = 0.5))
+  ggplot2::geom_line() +
+  ggplot2::ggtitle("Minimum and Maximum Monitors") +
+  ggplot2::xlab("Date") +
+  ggplot2::ylab(expression("PM"[2.5] * " Concentrations (µg/m"^3 * ")")) +
+  ggpubr::theme_pubr(legend = "bottom") +
+  ggplot2::theme(plot.title = element_text(hjust = 0.5))
 ```
-
-<img src="images/intro_to_spatial/min_max_monitors.png" width = "75%" height = "auto" class = "centerimage">
 
 Alternatively, the `ggplot2::geom_boxplot()` function compares the median, interquartile range, and outliers of the monitors' measurements.
 
 ```{r, eval = FALSE}
-ggplot(
+ggplot2::ggplot(
   data = pm_min_max,
   aes(
     x = Monitor.ID,
@@ -386,11 +390,8 @@ ggplot(
     fill = Monitor.ID
   )
 ) +
-  geom_boxplot() +
-  xlab("Monitor ID") +
-  ylab(expression("PM"[2.5] * " Concentrations (µg/m"^3 * ")")) +
-  theme_pubr(legend = "none")
+  ggplot2::geom_boxplot() +
+  ggplot2::xlab("Monitor ID") +
+  ggplot2::ylab(expression("PM"[2.5] * " Concentrations (µg/m"^3 * ")")) +
+  ggpubr::theme_pubr(legend = "none")
 ```
-
-<img src="images/intro_to_spatial/monitors_boxplot.png" width = "75%" height = "auto" class = "centerimage">
-
