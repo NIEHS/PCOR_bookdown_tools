@@ -329,8 +329,10 @@ sdoh_tracts_2010_tbl <- readxl::read_xlsx(sdoh_tracts_2010_xlsx,
 
 ```{r eval = FALSE, echo = FALSE}
 # read in the RDS file
+tmp <- tempdir()
+unzip("./dataset/ahrq/sdoh_2010_tract_1_0.csv.zip", exdir = "tmp/")
 sdoh_tracts_2010_tbl <-
-  readr::read_rds("dataset/sdoh_2010_tract_1_0.rds")
+  readr::read_csv("./tmp/sdoh_2010_tract_1_0.csv")
 ```
 
 ```{r eval = TRUE, echo = TRUE}
