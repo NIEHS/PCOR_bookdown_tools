@@ -112,7 +112,9 @@ This tutorial uses the `R` packages `sf` [@r-sf-1; @r-sf-2], `tidyverse` [@r-tid
 ```{r eval = FALSE}
 # install required packages
 install.packages(c("sf", "tidyverse", "tigris", "tmap"))
+```
 
+```{r eval = TRUE, echo = FALSE, message = FALSE}
 # load required packages
 library(sf)
 library(tidyverse)
@@ -126,7 +128,7 @@ The first step is to prepare the geocoded addresses (i.e., geographic coordinate
 
 For this tutorial, we will use sample public data to represent geocoded addresses of, for example, participants in a health cohort study. This sample public data will be the coordinates for the city halls of the five largest cities in North Carolina. These coordinates were identified by searching Google Maps. The following code reads these coordinates into a table in `R` with columns for `id`, `latitude`, and `longitude`:
 
-```{r eval = FALSE}
+```{r eval = TRUE}
 # create a table of sample public geocoded addresses
 geo_addresses_tbl <- tibble(
   id = c(
@@ -156,19 +158,6 @@ geo_addresses_tbl <- tibble(
 print(geo_addresses_tbl)
 ```
 
-Here is the table produced by the code above:
-
-```{r eval = FALSE}
-# A tibble: 5 × 3
-#   id               latitude longitude
-#   <chr>               <dbl>     <dbl>
-# 1 01-charlotte         35.2     -80.8
-# 2 02-raleigh           35.8     -78.6
-# 3 03-greensboro        36.1     -79.8
-# 4 04-durham            36.0     -78.9
-# 5 05-winston-salem     36.1     -80.2
-```
-
 Next, we'll transform this table to an explicitly spatial data type: [simple features (sf)](https://r-spatial.github.io/sf/articles/sf1.html). This will allow us to use the point locations for spatial analysis using the `sf` package in `R`.
 
 To do this, we will need to specify the [coordinate reference system (CRS)](https://www.nceas.ucsb.edu/sites/default/files/2020-04/OverviewCoordinateReferenceSystems.pdf) used for the city hall coordinates. For this example, we retrieved the city hall coordinates from Google Maps, which uses the [World Geodetic System 1984](https://developers.google.com/maps/documentation/javascript/coordinates) (`WGS84`) CRS.
@@ -187,7 +176,7 @@ There are multiple formats available in `R` for [specifying the CRS](https://www
 
 The following code transforms the table of city hall locations to a simple features object:
 
-```{r eval = FALSE}
+```{r eval = TRUE}
 # transform table to simple features
 geo_addresses_sf <- sf::st_as_sf(geo_addresses_tbl,
   coords = c("longitude", "latitude"),
@@ -198,68 +187,18 @@ geo_addresses_sf <- sf::st_as_sf(geo_addresses_tbl,
 print(geo_addresses_sf)
 ```
 
-Here is the description of the simple features object produced by the code above:
-
-```{r eval = FALSE}
-# Simple feature collection with 5 features and 1 field
-# Geometry type: POINT
-# Dimension:     XY
-# Bounding box:  xmin: -80.80171 ymin: 35.21599 xmax: -78.64279 ymax: 36.09512
-# Geodetic CRS:  WGS 84
-# # A tibble: 5 × 2
-#   id                           geometry
-# * <chr>                     <POINT [°]>
-# 1 01-charlotte     (-80.80171 35.21599)
-# 2 02-raleigh       (-78.64279 35.78019)
-# 3 03-greensboro    (-79.78835 36.07391)
-# 4 04-durham        (-78.89907 35.99608)
-# 5 05-winston-salem (-80.24284 36.09512)
-```
-
 Now, we can see that each city hall has associated `geometry` in point format. We can also confirm that the correct CRS (`WGS84`) is now associated with the city hall locations.
 
 ### Access Census Geographic Boundaries {#link-to-census-step-2}
 
 The second step is to prepare the Census geographic boundaries for mapping in `R`. For this tutorial, we'll use the `tigris` package to load the Census tract boundaries for North Carolina in year-2010 (i.e., year-2010 vintage). Using an `R` package like `tigris` to load the Census geographic boundaries will help keep the workflow reproducible by documenting all of the steps in `R`. The following code reads the North Carolina 2010 Census tract boundaries into `R` as simple features:
 
-```{r eval = FALSE}
+```{r eval = TRUE, message = FALSE, results = FALSE}
 # download Census tracts in North Carolina in 2010 as simple features
 nc_tracts_2010_sf <- tigris::tracts(state = "NC", year = 2010)
 
 # view the first several rows of the Census tracts simple features
 head(nc_tracts_2010_sf)
-```
-
-Here is the description of the simple features object produced by the code above:
-
-```{r eval = FALSE}
-# Simple feature collection with 6 features and 14 fields
-# Geometry type: MULTIPOLYGON
-# Dimension:     XY
-# Bounding box:  xmin: -80.07571 ymin: 34.80499 xmax: -79.45918 ymax: 35.18342
-# Geodetic CRS:  NAD83
-#   STATEFP10 COUNTYFP10 TRACTCE10     GEOID10 NAME10        NAMELSAD10 MTFCC10
-# 1        37        153    970100 37153970100   9701 Census Tract 9701   G5020
-# 2        37        153    970200 37153970200   9702 Census Tract 9702   G5020
-# 3        37        153    970800 37153970800   9708 Census Tract 9708   G5020
-# 4        37        153    970900 37153970900   9709 Census Tract 9709   G5020
-# 5        37        153    971000 37153971000   9710 Census Tract 9710   G5020
-# 6        37        153    971100 37153971100   9711 Census Tract 9711   G5020
-#
-#   FUNCSTAT10   ALAND10 AWATER10  INTPTLAT10   INTPTLON10
-# 1          S 246281647  2106825 +35.0503203 -079.6180454
-# 2          S 457736198  7835811 +35.0967892 -079.8225512
-# 3          S 139358521  2752112 +34.8508484 -079.8201950
-# 4          S  23311020    78240 +34.8785679 -079.7346295
-# 5          S  49233222   188190 +34.9395795 -079.6628977
-# 6.         S 161136716   948938 +34.8751742 -079.6567146
-#                         geometry COUNTYFP STATEFP
-# 1 MULTIPOLYGON (((-79.56729 3...      153      37
-# 2 MULTIPOLYGON (((-79.71753 3...      153      37
-# 3 MULTIPOLYGON (((-79.76773 3...      153      37
-# 4 MULTIPOLYGON (((-79.76773 3...      153      37
-# 5 MULTIPOLYGON (((-79.69038 3...      153      37
-# 6 MULTIPOLYGON (((-79.5684 34...      153      37
 ```
 
 Each tract has associated `geometry` in polygon format plus 14 additional attributes (i.e., variables, columns). Importantly, the Census tract geoID (i.e., [11-digit identifying code](#intro-census-geoids)) for year-2010 is stored in the column `GEOID10`.
@@ -268,7 +207,7 @@ We can see that the CRS listed above for the Census tract boundaries (`NAD83`) i
 
 Next, we can view the geometry of the tracts by creating a map:
 
-```{r eval = FALSE}
+```{r eval = TRUE, fig.align = "center", fig.width = 8, fig.asp = 0.4419055, out.width = '100%'}
 # create a map of the Census tracts
 nc_tracts_2010_map <- tmap::tm_shape(nc_tracts_2010_sf) +
   tmap::tm_polygons(lwd = 0.5)
@@ -276,11 +215,6 @@ nc_tracts_2010_map <- tmap::tm_shape(nc_tracts_2010_sf) +
 # view the map
 print(nc_tracts_2010_map)
 ```
-
-::: {.figure}
-  <img src="images/link_to_census/nc_tracts_2010_map.png" style="width:100%">
-  <figcaption>Census Tracts in North Carolina in 2010</figcaption>
-:::
 
 Other [types and vintages of Census geographic boundaries](https://github.com/walkerke/tigris) are available through `tigris` and the related `tidycensus` package [@r-tidycensus]. In most cases, these boundaries are available for recent years (i.e., 1990 to present) and are accessed by state (i.e., users can download geographic boundaries for one state at a time, in separate files).
 
@@ -292,7 +226,7 @@ Historic Census geographic boundaries (i.e., 1910 to present) are available thro
 
 The third step is to link each geocoded addresses to the geoID of the Census geographic unit that contains it. To do this, we'll first need to prepare the geocoded addresses and Census geographic boundaries in the same CRS. The following code transforms the CRS of the geocoded addresses to match the the CRS of the Census geographic boundaries (`NAD83`) and then maps them together:
 
-```{r eval = FALSE}
+```{r eval = TRUE, fig.align = "center", fig.width = 8, fig.asp = 0.4419055, out.width = '100%'}
 # transform city hall locations to match CRS of Census tracts
 geo_addresses_crs_sf <- sf::st_transform(geo_addresses_sf,
   crs = sf::st_crs(nc_tracts_2010_sf)
@@ -311,14 +245,9 @@ linkage_map <- tmap::tm_shape(nc_tracts_2010_sf) +
 print(linkage_map)
 ```
 
-::: {.figure}
-  <img src="images/link_to_census/linkage_map.png" style="width:100%">
-  <figcaption>Census Tracts in North Carolina in 2010 (Grey) with Sample Geocoded Addresses (Red)</figcaption>
-:::
-
 Now that the geocoded addresses and Census tracts are in the same CRS, we can link each geocoded address to the Census tract that contains it using a spatial join. The following code produces a table of geocoded addresses linked to Census tract geoIDs:
 
-```{r eval = FALSE}
+```{r eval = TRUE}
 # link geocoded addresses to the Census tracts that contain them
 geo_addresses_linkage_sf <- sf::st_join(geo_addresses_crs_sf,
                                         nc_tracts_2010_sf,
@@ -329,23 +258,8 @@ geo_addresses_linkage_tbl <- sf::st_drop_geometry(geo_addresses_linkage_sf) %>%
   dplyr::rename(geoid_tract_2010 = GEOID10) %>%
   dplyr::select(id, geoid_tract_2010)
 
-# write linked table to CSV file
-readr::write_csv(geo_addresses_linkage_tbl,
-                 "city_hall_census_tract_2010_linkage.csv")
-
 # view the linked table
 print(geo_addresses_linkage_tbl)
-```
-
-```{r eval = FALSE}
-# A tibble: 5 × 2
-#   id               geoid_tract_2010
-#   <chr>            <chr>
-# 1 01-charlotte     37119001100
-# 2 02-raleigh       37183050100
-# 3 03-greensboro    37081010800
-# 4 04-durham        37063002200
-# 5 05-winston-salem 37067000100
 ```
 
 ### Link AHRQ SDOH Data to Geocoded Addresses {#link-to-census-step-4}
@@ -381,35 +295,49 @@ We find that the Excel file has two sheets: `Layout` and `Data`. The `Layout` sh
 
 The following code downloads the Excel file and reads its `Data` sheet into a table in `R`:
 
-```{r eval = FALSE}
+```{r eval = FALSE, echo = TRUE}
 # download Excel file using the URL provided in the screenshot above
 sdoh_tracts_2010_url <-
   "https://www.ahrq.gov/downloads/sdoh/sdoh_2010_tract_1_0.xlsx"
-download.file(sdoh_tracts_2010_url, destfile = "sdoh_2010_tract_1_0.xlsx")
+
+# specify your file path for downloading the Excel file
+sdoh_tracts_2010_xlsx <-
+  "/ YOUR FILE PATH /sdoh_2010_tract_1_0.xlsx"
 
 # read the "Data" sheet of the Excel file into a table R
 # note that you may need to provide a complete filepath for the Excel file
-sdoh_tracts_2010_tbl <- readxl::read_xlsx("sdoh_2010_tract_1_0.xlsx",
+sdoh_tracts_2010_tbl <- readxl::read_xlsx(sdoh_tracts_2010_xlsx,
                                           sheet = "Data")
-
-# view the table
-head(sdoh_tracts_2010_tbl)
 ```
 
-```{r eval = FALSE}
-# A tibble: 6 × 355
-#    YEAR TRACTFIPS   COUNTYFIPS STATEFIPS STATE   COUNTY         REGION
-#   <dbl> <chr>       <chr>      <chr>     <chr>   <chr>          <chr>
-# 1  2010 01001020100 01001      01        Alabama Autauga County South
-# 2  2010 01001020200 01001      01        Alabama Autauga County South
-# 3  2010 01001020300 01001      01        Alabama Autauga County South
-# 4  2010 01001020400 01001      01        Alabama Autauga County South
-# 5  2010 01001020500 01001      01        Alabama Autauga County South
-# 6  2010 01001020600 01001      01        Alabama Autauga County South
-# ℹ 348 more variables: TERRITORY <dbl>, ACS_TOT_POP_WT <dbl>,
-#   ACS_TOT_POP_US_ABOVE1 <dbl>, ACS_TOT_POP_ABOVE5 <dbl>,
-#   ACS_TOT_POP_ABOVE15 <dbl>, ACS_TOT_POP_ABOVE16 <dbl>, …
-# ℹ Use `colnames()` to see all variable names
+
+```{r eval = FALSE, echo = FALSE, message = FALSE, results = FALSE}
+
+# download Excel file using the URL provided in the screenshot above
+sdoh_tracts_2010_url <-
+  "https://www.ahrq.gov/downloads/sdoh/sdoh_2010_tract_1_0.xlsx"
+
+# specify your file path for downloading the Excel file
+sdoh_tracts_2010_xlsx <-
+  "dataset/sdoh_2010_tract_1_0.xlsx"
+
+# read the "Data" sheet of the Excel file into a table R
+# note that you may need to provide a complete filepath for the Excel file
+sdoh_tracts_2010_tbl <- readxl::read_xlsx(sdoh_tracts_2010_xlsx,
+                                          sheet = "Data")
+```
+
+```{r eval = TRUE, include = FALSE}
+# read in the RDS file
+tmp <- tempdir()
+unzip("./dataset/ahrq/sdoh_2010_tract_1_0.csv.zip", exdir = tmp)
+sdoh_tracts_2010_tbl <-
+  readr::read_csv(file.path(tmp, "sdoh_2010_tract_1_0.csv"))
+```
+
+```{r eval = TRUE, echo = TRUE}
+# view the top of the table
+head(sdoh_tracts_2010_tbl)
 ```
 
 We can see that the variable `TRACTFIPS` contains the 11-digit geoID for Census tracts in character format, which matches the geoID format we prepared in the previous [step](#link-to-census-step-3) .
@@ -428,7 +356,7 @@ For this example, we can choose to link the following sample of SDOH variables i
 
 The following code joins those SDOH data variables to the geocoded addresses based on the Census tract geoID:
 
-```{r eval = FALSE}
+```{r eval = TRUE}
 # rename geoID in SDOH table to match the geoID in the geocoded addresses table
 # select the SDOH variables of interest
 sdoh_tracts_2010_tbl <- sdoh_tracts_2010_tbl %>%
@@ -447,25 +375,13 @@ geo_addresses_sdoh_tbl <- dplyr::left_join(geo_addresses_linkage_tbl,
 print(geo_addresses_sdoh_tbl)
 ```
 
-```{r eval = FALSE}
-# A tibble: 5 × 5
-#   id               geoid_tract_2010 ACS_PCT_INC50 POS_DIST_ED_TRACT
-#   <chr>            <chr>                    <dbl>             <dbl>
-# 1 01-charlotte     37119001100               3.68              0.85
-# 2 02-raleigh       37183050100               6.77              2.8
-# 3 03-greensboro    37081010800               6.16              0.99
-# 4 04-durham        37063002200              25.9               2.62
-# 5 05-winston-salem 37067000100               9.01              3.35
-#   ACS_PCT_HU_NO_VEH
-#               <dbl>
-# 1             7.24
-# 2            25.5
-# 3            16.4
-# 4             7.63
-# 5            16.5
-```
+Now, we have a linked table of geocoded addresses (by individual id) linked to the SDOH data. We can also save the linked table as a CSV file using the following code:
 
-Now, we have a linked table of geocoded addresses (by individual id) linked to the SDOH data.
+```{r eval = FALSE}
+# write linked table to CSV file using your file path
+readr::write_csv(geo_addresses_sdoh_tbl,
+                 "/ YOUR FILE PATH /geo-addresses-sdoh.csv")
+```
 
 ## Concluding Remarks
 
