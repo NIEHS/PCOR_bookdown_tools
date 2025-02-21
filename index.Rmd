@@ -7,7 +7,7 @@ bibliography: ["bibliography/book.bib", "bibliography/packages.bib"]
 csl: "bibliography/chicago-numeric-with-note.csl"
 link-citations: true
 link-bibliography: true
-description: The CHORDS Training and Use Cases Toolkit provides guides, tutorials, and example code to support climate change and human health research.
+description: The CHORDS Training and Use Cases Toolkit provides guides, tutorials, and example code to support environmental health and disaster research.
 github-repo: NIEHS/PCOR_bookdown_tools
 output: bookdown::html_document2
 ---
@@ -16,11 +16,11 @@ output: bookdown::html_document2
 
 ---
 
-Researchers interested in studying the health impacts of climate change and climate related disasters need access to relevant, timely, and harmonized data on environmental exposures, social determinants of health variables, and health outcomes. However, such data sets are often developed for different purposes, reside in multiple locations, and require linkage. The Climate and Health Outcomes Research Data Systems (CHORDS) Project seeks to connect researchers to environmental and health data sets with a toolkit that provides guides, tutorials, and example code to improve integration of geospatial data-based exposures and health data and records into their research. 
+Researchers interested in studying the health impacts of extreme weather events and related disasters need access to relevant, timely, and harmonized data on environmental exposures, social determinants of health variables, and health outcomes. However, such data sets are often developed for different purposes, reside in multiple locations, and require linkage. The Connecting Health Outcomes and Research Data Systems (CHORDS) Project seeks to connect researchers to environmental and health data sets with a toolkit that provides guides, tutorials, and example code to improve integration of geospatial data-based exposures and health data and records into their research. 
 
 ## About CHORDS {-}
 
-The [Climate and Health Outcomes Research Data Systems (CHORDS)](https://www.niehs.nih.gov/research/programs/chords) program provides resources aimed at making it easier for researchers to study the effects of place-based environmental exposures on health outcomes. The CHORDS resources include a web-based data catalog, standardized data sets, and this toolkit.
+The [Connecting Health Outcomes Research and Data Systems (CHORDS)](https://www.niehs.nih.gov/research/programs/chords) program provides resources aimed at making it easier for researchers to study the effects of place-based environmental exposures on health outcomes. The CHORDS resources include a web-based data catalog, standardized data sets, and this toolkit.
 
 ::: {.figure}
   <img src="images/chords-art-logo.png" style="width:100%">
@@ -38,11 +38,11 @@ The toolkit consists of a series of chapters organized into the following units:
 
 - **Geospatial Data Foundations**: This unit provides background, guidance and example code for working with different types of geospatial data common in environmental health research. This unit is intended as a starting point for users with less familiarity with geospatial data and geospatial analysis methods in environmental health using `R`.
 
-- **Wildfire Data**: This unit provides guidance for working with different types of wildfire-related data in climate change and health research.
+- **Wildfire Data**: This unit provides guidance for working with different types of wildfire-related data in environmental health and disaster research.
 
 - **Other Environmental Data**: This unit provides guidance and code for working with specific sources of environmental data common in environmental health research for characterizing environmental exposures as well as social determinants of health.
 
-- **Health Data Integration**: This unit provides guidance and code for integrating environmental and health data in climate change and health research, both at the individual level and at the population level.
+- **Health Data Integration**: This unit provides guidance and code for integrating environmental and health data, both at the individual level and at the population level.
 
 - **Use Cases**: This unit provides example use cases that analyze integrated wildfire-related data and other environmental exposures data with health outcomes data.
 

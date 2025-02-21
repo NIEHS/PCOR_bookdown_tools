@@ -2,7 +2,6 @@
 .Rhistory
 .RData
 .Ruserdata
-dataset/
 *.csv
 shap_files/
 _book/
@@ -10,3 +9,4 @@ _bookdown_files/
 _main_files
 .DS_Store
 docs/
+dataset/narr/air.2m_2021.nc
