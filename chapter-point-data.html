@@ -5,19 +5,19 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>2 Point Data | CHORDS Training and Use Cases Toolkit</title>
-  <meta name="description" content="The CHORDS Training and Use Cases Toolkit provides guides, tutorials, and example code to support climate change and human health research." />
-  <meta name="generator" content="bookdown 0.40 and GitBook 2.6.7" />
+  <meta name="description" content="The CHORDS Training and Use Cases Toolkit provides guides, tutorials, and example code to support environmental health and disaster research." />
+  <meta name="generator" content="bookdown 0.42 and GitBook 2.6.7" />
 
   <meta property="og:title" content="2 Point Data | CHORDS Training and Use Cases Toolkit" />
   <meta property="og:type" content="book" />
   
-  <meta property="og:description" content="The CHORDS Training and Use Cases Toolkit provides guides, tutorials, and example code to support climate change and human health research." />
+  <meta property="og:description" content="The CHORDS Training and Use Cases Toolkit provides guides, tutorials, and example code to support environmental health and disaster research." />
   <meta name="github-repo" content="NIEHS/PCOR_bookdown_tools" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="2 Point Data | CHORDS Training and Use Cases Toolkit" />
   
-  <meta name="twitter:description" content="The CHORDS Training and Use Cases Toolkit provides guides, tutorials, and example code to support climate change and human health research." />
+  <meta name="twitter:description" content="The CHORDS Training and Use Cases Toolkit provides guides, tutorials, and example code to support environmental health and disaster research." />
   
 
 
@@ -53,8 +53,9 @@
 
 
 <style type="text/css">
+html { -webkit-text-size-adjust: 100%; }
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -64,7 +65,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -253,7 +254,7 @@ target="blank">Published with bookdown</a></li>
 <a href="chapter-user-profiles.html#profilestu"><img src="images/user_profiles/profilestu.svg" alt="Profile-STU" /></a></p>
 <div id="point-data-access-preparation-and-exploratory-analysis-in-r" class="section level3 unnumbered hasAnchor">
 <h3>Point Data Access, Preparation, and Exploratory Analysis in R<a href="chapter-point-data.html#point-data-access-preparation-and-exploratory-analysis-in-r" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p><strong>Date Modified:</strong> May 6, 2024</p>
+<p><strong>Date Modified:</strong> January 21, 2025</p>
 <p><strong>Authors:</strong> Mitchell Manware <a href="https://orcid.org/0009-0003-6440-6106"><img src="images/orcid.png" width="10" alt="author-mm" /></a>, Kyle P. Messier <a href="https://orcid.org/0000-0001-9508-9623"><img src="images/orcid.png" width="10" alt="author-kpm" /></a></p>
 <p><strong>Key Terms:</strong> <a href="https://tools.niehs.nih.gov/cchhglossary/?keyword=air+pollution&amp;termOnlySearch=true&amp;exactSearch=true">Air Pollution</a>, <a href="chords-glossary.html#def-geospatial-data">Geospatial Data</a>, <a href="https://tools.niehs.nih.gov/cchhglossary/?keyword=particulate+matter&amp;termOnlySearch=true&amp;exactSearch=true">Particulate Matter</a></p>
 <p><strong>Programming Language:</strong> R</p>
@@ -278,76 +279,133 @@ target="blank">Published with bookdown</a></li>
 <h2><span class="header-section-number">2.2</span> Access, Download, and Unzip<a href="chapter-point-data.html#access-download-and-unzip" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>To download data with the <code>utils::download.file()</code> function, define two variables. One variable to store the website URL where the data exists and a second to store the file path for where the file should be saved.</p>
 <div class="note">
-<p>Multiple chunks of code in this tutorial will contain <code>/   YOUR FILE PATH   /</code>. To run the code on your machine, substitute <code>/   YOUR FILE PATH   /</code> with the file path where you would like to store the tutorial data.</p>
+<p>Multiple chunks of code in this tutorial will contain <code>./dataset/</code>, a fixed directory path to run the tutorial code. To run the code on your machine, substitute <code>./dataset/</code> with the file path where you would like to store the tutorial data.</p>
 </div>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="chapter-point-data.html#cb2-1" tabindex="-1"></a>url_epa <span class="ot">&lt;-</span> <span class="st">&quot;https://aqs.epa.gov/aqsweb/airdata/daily_88101_2021.zip&quot;</span></span>
-<span id="cb2-2"><a href="chapter-point-data.html#cb2-2" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="chapter-point-data.html#cb2-3" tabindex="-1"></a>destination_epa <span class="ot">&lt;-</span> <span class="st">&quot;/   YOUR FILE PATH   /epa_data.zip&quot;</span></span>
-<span id="cb2-4"><a href="chapter-point-data.html#cb2-4" tabindex="-1"></a></span>
-<span id="cb2-5"><a href="chapter-point-data.html#cb2-5" tabindex="-1"></a><span class="fu">download.file</span>(</span>
-<span id="cb2-6"><a href="chapter-point-data.html#cb2-6" tabindex="-1"></a>  url_epa,</span>
-<span id="cb2-7"><a href="chapter-point-data.html#cb2-7" tabindex="-1"></a>  destination_epa</span>
-<span id="cb2-8"><a href="chapter-point-data.html#cb2-8" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="chapter-point-data.html#cb22-1" tabindex="-1"></a>url_epa <span class="ot">&lt;-</span> <span class="st">&quot;https://aqs.epa.gov/aqsweb/airdata/daily_88101_2021.zip&quot;</span></span>
+<span id="cb22-2"><a href="chapter-point-data.html#cb22-2" tabindex="-1"></a></span>
+<span id="cb22-3"><a href="chapter-point-data.html#cb22-3" tabindex="-1"></a>destination_epa <span class="ot">&lt;-</span> <span class="st">&quot;./dataset/epa/epa_data.zip&quot;</span></span>
+<span id="cb22-4"><a href="chapter-point-data.html#cb22-4" tabindex="-1"></a></span>
+<span id="cb22-5"><a href="chapter-point-data.html#cb22-5" tabindex="-1"></a><span class="fu">download.file</span>(</span>
+<span id="cb22-6"><a href="chapter-point-data.html#cb22-6" tabindex="-1"></a>  url_epa,</span>
+<span id="cb22-7"><a href="chapter-point-data.html#cb22-7" tabindex="-1"></a>  destination_epa</span>
+<span id="cb22-8"><a href="chapter-point-data.html#cb22-8" tabindex="-1"></a>)</span></code></pre></div>
 <p>The file downloaded from the EPA website is a zip file. Zip files need to be unzipped (decompressed) in order to access the data within. Unzip the EPA air pollution file with <code>utils::unzip()</code>.</p>
 <div class="warning">
 <p>Unzipping a <code>.zip</code> file will decompress the contents within. Spatial data sets can be very large (i.e., &gt; 1 GB ), so check the size of the data before unzipping on your machine.</p>
 </div>
 <p>The numeric value size of the file is listed under <code>Length</code>.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="chapter-point-data.html#cb3-1" tabindex="-1"></a><span class="fu">unzip</span>(<span class="st">&quot;/   YOUR FILE PATH   /epa_data.zip&quot;</span>,</span>
-<span id="cb3-2"><a href="chapter-point-data.html#cb3-2" tabindex="-1"></a>  <span class="at">list =</span> <span class="cn">TRUE</span></span>
-<span id="cb3-3"><a href="chapter-point-data.html#cb3-3" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="chapter-point-data.html#cb23-1" tabindex="-1"></a><span class="fu">unzip</span>(</span>
+<span id="cb23-2"><a href="chapter-point-data.html#cb23-2" tabindex="-1"></a>  <span class="st">&quot;./dataset/epa/epa_data.zip&quot;</span>,</span>
+<span id="cb23-3"><a href="chapter-point-data.html#cb23-3" tabindex="-1"></a>  <span class="at">list =</span> <span class="cn">TRUE</span></span>
+<span id="cb23-4"><a href="chapter-point-data.html#cb23-4" tabindex="-1"></a>)</span></code></pre></div>
+<pre><code>##                   Name    Length                Date
+## 1 daily_88101_2021.csv 218074103 2023-10-26 19:06:00</code></pre>
 <p>After inspecting the file size, unzip <code>epa_data.zip</code>.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="chapter-point-data.html#cb4-1" tabindex="-1"></a><span class="fu">unzip</span>(<span class="st">&quot;/   YOUR FILE PATH   /epa_data.zip&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="chapter-point-data.html#cb25-1" tabindex="-1"></a><span class="fu">unzip</span>(</span>
+<span id="cb25-2"><a href="chapter-point-data.html#cb25-2" tabindex="-1"></a>  <span class="st">&quot;./dataset/epa/epa_data.zip&quot;</span>,</span>
+<span id="cb25-3"><a href="chapter-point-data.html#cb25-3" tabindex="-1"></a>  <span class="at">exdir =</span> <span class="st">&quot;./dataset/epa/&quot;</span></span>
+<span id="cb25-4"><a href="chapter-point-data.html#cb25-4" tabindex="-1"></a>)</span></code></pre></div>
 <p>Inspecting the file with <code>utils::unzip(list = TRUE)</code> returned the size of the file, but also the name of the data file of interest. The desired data file can also be identified with <code>list.files()</code>.</p>
 <div class="note">
-<p>Other file names may be returned if <code>/   YOUR FILE PATH   /</code> is a directory with other contents (e.g., Desktop or Documents folder).</p>
+<p>Multiple chunks of code in this tutorial will contain <code>./dataset/</code>, a fixed directory path to run the tutorial code. To run the code on your machine, substitute <code>./dataset/</code> with the file path where you would like to store the tutorial data.</p>
 </div>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="chapter-point-data.html#cb5-1" tabindex="-1"></a><span class="fu">list.files</span>(<span class="st">&quot;/   YOUR FILE PATH   /&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="chapter-point-data.html#cb26-1" tabindex="-1"></a><span class="fu">list.files</span>(<span class="st">&quot;./dataset/epa&quot;</span>)</span></code></pre></div>
+<pre><code>## [1] &quot;daily_88101_2021.csv&quot; &quot;epa_data.zip&quot;</code></pre>
 </div>
 <div id="data-preparation" class="section level2 hasAnchor" number="2.3">
 <h2><span class="header-section-number">2.3</span> Data Preparation<a href="chapter-point-data.html#data-preparation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div id="import" class="section level3 hasAnchor" number="2.3.1">
 <h3><span class="header-section-number">2.3.1</span> Import<a href="chapter-point-data.html#import" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Now that the contents of the zip file have been saved on your machine and the data file of interest has been identified, import the data with <code>sf::st_read()</code>.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="chapter-point-data.html#cb6-1" tabindex="-1"></a>pm <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">&quot;/   YOUR FILE PATH   /daily_88101_2021.csv&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="chapter-point-data.html#cb28-1" tabindex="-1"></a>pm <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_read</span>(<span class="st">&quot;./dataset/epa/daily_88101_2021.csv&quot;</span>)</span></code></pre></div>
+<pre><code>## Reading layer `daily_88101_2021&#39; from data source 
+##   `/home/runner/work/PCOR_bookdown_tools/PCOR_bookdown_tools/dataset/epa/daily_88101_2021.csv&#39; 
+##   using driver `CSV&#39;</code></pre>
+<pre><code>## Warning: no simple feature geometries present: returning a data.frame or tbl_df</code></pre>
 <p>The previous chunk of code returned a <code>Warning:</code> message. This warning informs the user that the imported data does not have native spatial features, so the data was imported as a <code>data.frame</code>.</p>
 </div>
 <div id="inspect-structure" class="section level3 hasAnchor" number="2.3.2">
 <h3><span class="header-section-number">2.3.2</span> Inspect Structure<a href="chapter-point-data.html#inspect-structure" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Inspect the structure of <code>pm</code> to see its class, column names, column classes, and the first two (specified by <code>vec.len = 2</code>) data points from each column.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="chapter-point-data.html#cb7-1" tabindex="-1"></a><span class="fu">str</span>(pm,</span>
-<span id="cb7-2"><a href="chapter-point-data.html#cb7-2" tabindex="-1"></a>  <span class="at">vec.len =</span> <span class="dv">2</span></span>
-<span id="cb7-3"><a href="chapter-point-data.html#cb7-3" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="chapter-point-data.html#cb31-1" tabindex="-1"></a><span class="fu">str</span>(</span>
+<span id="cb31-2"><a href="chapter-point-data.html#cb31-2" tabindex="-1"></a>  pm,</span>
+<span id="cb31-3"><a href="chapter-point-data.html#cb31-3" tabindex="-1"></a>  <span class="at">vec.len =</span> <span class="dv">2</span></span>
+<span id="cb31-4"><a href="chapter-point-data.html#cb31-4" tabindex="-1"></a>)</span></code></pre></div>
+<pre><code>## &#39;data.frame&#39;:    589917 obs. of  29 variables:
+##  $ State.Code         : chr  &quot;01&quot; &quot;01&quot; ...
+##  $ County.Code        : chr  &quot;003&quot; &quot;003&quot; ...
+##  $ Site.Num           : chr  &quot;0010&quot; &quot;0010&quot; ...
+##  $ Parameter.Code     : chr  &quot;88101&quot; &quot;88101&quot; ...
+##  $ POC                : chr  &quot;1&quot; &quot;1&quot; ...
+##  $ Latitude           : chr  &quot;30.497478&quot; &quot;30.497478&quot; ...
+##  $ Longitude          : chr  &quot;-87.880258&quot; &quot;-87.880258&quot; ...
+##  $ Datum              : chr  &quot;NAD83&quot; &quot;NAD83&quot; ...
+##  $ Parameter.Name     : chr  &quot;PM2.5 - Local Conditions&quot; &quot;PM2.5 - Local Conditions&quot; ...
+##  $ Sample.Duration    : chr  &quot;24 HOUR&quot; &quot;24 HOUR&quot; ...
+##  $ Pollutant.Standard : chr  &quot;PM25 24-hour 2012&quot; &quot;PM25 24-hour 2012&quot; ...
+##  $ Date.Local         : chr  &quot;2021-01-01&quot; &quot;2021-01-07&quot; ...
+##  $ Units.of.Measure   : chr  &quot;Micrograms/cubic meter (LC)&quot; &quot;Micrograms/cubic meter (LC)&quot; ...
+##  $ Event.Type         : chr  &quot;None&quot; &quot;None&quot; ...
+##  $ Observation.Count  : chr  &quot;1&quot; &quot;1&quot; ...
+##  $ Observation.Percent: chr  &quot;100.0&quot; &quot;100.0&quot; ...
+##  $ Arithmetic.Mean    : chr  &quot;6.4&quot; &quot;5.7&quot; ...
+##  $ X1st.Max.Value     : chr  &quot;6.4&quot; &quot;5.7&quot; ...
+##  $ X1st.Max.Hour      : chr  &quot;0&quot; &quot;0&quot; ...
+##  $ AQI                : chr  &quot;27&quot; &quot;24&quot; ...
+##  $ Method.Code        : chr  &quot;145&quot; &quot;145&quot; ...
+##  $ Method.Name        : chr  &quot;R &amp; P Model 2025 PM-2.5 Sequential Air Sampler w/VSCC - Gravimetric&quot; &quot;R &amp; P Model 2025 PM-2.5 Sequential Air Sampler w/VSCC - Gravimetric&quot; ...
+##  $ Local.Site.Name    : chr  &quot;FAIRHOPE, Alabama&quot; &quot;FAIRHOPE, Alabama&quot; ...
+##  $ Address            : chr  &quot;FAIRHOPE HIGH SCHOOL, 1 PIRATE DRIVE, FAIRHOPE,  ALABAMA&quot; &quot;FAIRHOPE HIGH SCHOOL, 1 PIRATE DRIVE, FAIRHOPE,  ALABAMA&quot; ...
+##  $ State.Name         : chr  &quot;Alabama&quot; &quot;Alabama&quot; ...
+##  $ County.Name        : chr  &quot;Baldwin&quot; &quot;Baldwin&quot; ...
+##  $ City.Name          : chr  &quot;Fairhope&quot; &quot;Fairhope&quot; ...
+##  $ CBSA.Name          : chr  &quot;Daphne-Fairhope-Foley, AL&quot; &quot;Daphne-Fairhope-Foley, AL&quot; ...
+##  $ Date.of.Last.Change: chr  &quot;2023-05-16&quot; &quot;2023-05-16&quot; ...</code></pre>
 </div>
 <div id="subset" class="section level3 hasAnchor" number="2.3.3">
 <h3><span class="header-section-number">2.3.3</span> Subset<a href="chapter-point-data.html#subset" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Checking the data structure shows that <code>pm</code> is a very large data set. Each of the variables convey important information related to air pollution monitoring, but not all will be utilized in these exploratory analyses.</p>
 <p>The data set can be reduced to include only the variables of interest with the <code>subset()</code> function. The <code>select =</code> argument indicates which variables to be retained in the new data set.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="chapter-point-data.html#cb8-1" tabindex="-1"></a>pm <span class="ot">&lt;-</span> <span class="fu">subset</span>(pm, <span class="at">select =</span> <span class="fu">c</span>(</span>
-<span id="cb8-2"><a href="chapter-point-data.html#cb8-2" tabindex="-1"></a>  State.Code,</span>
-<span id="cb8-3"><a href="chapter-point-data.html#cb8-3" tabindex="-1"></a>  County.Code,</span>
-<span id="cb8-4"><a href="chapter-point-data.html#cb8-4" tabindex="-1"></a>  Site.Num,</span>
-<span id="cb8-5"><a href="chapter-point-data.html#cb8-5" tabindex="-1"></a>  Latitude,</span>
-<span id="cb8-6"><a href="chapter-point-data.html#cb8-6" tabindex="-1"></a>  Longitude,</span>
-<span id="cb8-7"><a href="chapter-point-data.html#cb8-7" tabindex="-1"></a>  State.Name,</span>
-<span id="cb8-8"><a href="chapter-point-data.html#cb8-8" tabindex="-1"></a>  Date.Local,</span>
-<span id="cb8-9"><a href="chapter-point-data.html#cb8-9" tabindex="-1"></a>  Arithmetic.Mean</span>
-<span id="cb8-10"><a href="chapter-point-data.html#cb8-10" tabindex="-1"></a>))</span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="chapter-point-data.html#cb33-1" tabindex="-1"></a>pm <span class="ot">&lt;-</span> <span class="fu">subset</span>(</span>
+<span id="cb33-2"><a href="chapter-point-data.html#cb33-2" tabindex="-1"></a>  pm,</span>
+<span id="cb33-3"><a href="chapter-point-data.html#cb33-3" tabindex="-1"></a>  <span class="at">select =</span> <span class="fu">c</span>(</span>
+<span id="cb33-4"><a href="chapter-point-data.html#cb33-4" tabindex="-1"></a>    State.Code,</span>
+<span id="cb33-5"><a href="chapter-point-data.html#cb33-5" tabindex="-1"></a>    County.Code,</span>
+<span id="cb33-6"><a href="chapter-point-data.html#cb33-6" tabindex="-1"></a>    Site.Num,</span>
+<span id="cb33-7"><a href="chapter-point-data.html#cb33-7" tabindex="-1"></a>    Latitude,</span>
+<span id="cb33-8"><a href="chapter-point-data.html#cb33-8" tabindex="-1"></a>    Longitude,</span>
+<span id="cb33-9"><a href="chapter-point-data.html#cb33-9" tabindex="-1"></a>    State.Name,</span>
+<span id="cb33-10"><a href="chapter-point-data.html#cb33-10" tabindex="-1"></a>    Date.Local,</span>
+<span id="cb33-11"><a href="chapter-point-data.html#cb33-11" tabindex="-1"></a>    Arithmetic.Mean</span>
+<span id="cb33-12"><a href="chapter-point-data.html#cb33-12" tabindex="-1"></a>  )</span>
+<span id="cb33-13"><a href="chapter-point-data.html#cb33-13" tabindex="-1"></a>)</span></code></pre></div>
 <p>Re-running <code>str(pm)</code> after subsetting the data set shows that all observations (n = 590,208) of the variables of interest (n = 8) have been retained.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="chapter-point-data.html#cb9-1" tabindex="-1"></a><span class="fu">str</span>(pm,</span>
-<span id="cb9-2"><a href="chapter-point-data.html#cb9-2" tabindex="-1"></a>  <span class="at">vec.len =</span> <span class="dv">2</span></span>
-<span id="cb9-3"><a href="chapter-point-data.html#cb9-3" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="chapter-point-data.html#cb34-1" tabindex="-1"></a><span class="fu">str</span>(</span>
+<span id="cb34-2"><a href="chapter-point-data.html#cb34-2" tabindex="-1"></a>  pm,</span>
+<span id="cb34-3"><a href="chapter-point-data.html#cb34-3" tabindex="-1"></a>  <span class="at">vec.len =</span> <span class="dv">2</span></span>
+<span id="cb34-4"><a href="chapter-point-data.html#cb34-4" tabindex="-1"></a>)</span></code></pre></div>
+<pre><code>## &#39;data.frame&#39;:    589917 obs. of  8 variables:
+##  $ State.Code     : chr  &quot;01&quot; &quot;01&quot; ...
+##  $ County.Code    : chr  &quot;003&quot; &quot;003&quot; ...
+##  $ Site.Num       : chr  &quot;0010&quot; &quot;0010&quot; ...
+##  $ Latitude       : chr  &quot;30.497478&quot; &quot;30.497478&quot; ...
+##  $ Longitude      : chr  &quot;-87.880258&quot; &quot;-87.880258&quot; ...
+##  $ State.Name     : chr  &quot;Alabama&quot; &quot;Alabama&quot; ...
+##  $ Date.Local     : chr  &quot;2021-01-01&quot; &quot;2021-01-07&quot; ...
+##  $ Arithmetic.Mean: chr  &quot;6.4&quot; &quot;5.7&quot; ...</code></pre>
 </div>
 <div id="reclassify" class="section level3 hasAnchor" number="2.3.4">
 <h3><span class="header-section-number">2.3.4</span> Reclassify<a href="chapter-point-data.html#reclassify" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The <code>str()</code> function showed the class of each variable within the data set. All of the retained variables are of class character, indicated by <code>: chr</code> and the quotations around each observation (<code>"01" "01" ...</code>).</p>
 <p>The class of a variable depends on the information conveyed by the data stored within that variable. For example, character is an appropriate class for the <code>pm$State.Name</code> variable because each observation is a character string labeling in which state the monitor was located. Alternatively, character is not appropriate for the <code>pm$Arithmetic.Mean</code> or <code>pm$Date.Local</code> variables because each observation is a numeric decimal or time-referenced date, respectively.</p>
 <p>The <code>as.</code> functions can be used for reclassifying data. Reclassify <code>pm$Arithmetic.Mean</code> as a number, and <code>pm$Date.Local</code> as a date.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="chapter-point-data.html#cb10-1" tabindex="-1"></a>pm<span class="sc">$</span>Arithmetic.Mean <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(pm<span class="sc">$</span>Arithmetic.Mean)</span>
-<span id="cb10-2"><a href="chapter-point-data.html#cb10-2" tabindex="-1"></a>pm<span class="sc">$</span>Date.Local <span class="ot">&lt;-</span> <span class="fu">as.Date</span>(pm<span class="sc">$</span>Date.Local)</span></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="chapter-point-data.html#cb36-1" tabindex="-1"></a>pm<span class="sc">$</span>Arithmetic.Mean <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(pm<span class="sc">$</span>Arithmetic.Mean)</span>
+<span id="cb36-2"><a href="chapter-point-data.html#cb36-2" tabindex="-1"></a>pm<span class="sc">$</span>Date.Local <span class="ot">&lt;-</span> <span class="fu">as.Date</span>(pm<span class="sc">$</span>Date.Local)</span></code></pre></div>
 <p>After running the <code>as.</code> functions, ensure that the two variables have been reclassified to the desired classes.</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="chapter-point-data.html#cb11-1" tabindex="-1"></a><span class="fu">class</span>(pm<span class="sc">$</span>Arithmetic.Mean)</span>
-<span id="cb11-2"><a href="chapter-point-data.html#cb11-2" tabindex="-1"></a><span class="fu">class</span>(pm<span class="sc">$</span>Date.Local)</span></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="chapter-point-data.html#cb37-1" tabindex="-1"></a><span class="fu">class</span>(pm<span class="sc">$</span>Arithmetic.Mean)</span></code></pre></div>
+<pre><code>## [1] &quot;numeric&quot;</code></pre>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="chapter-point-data.html#cb39-1" tabindex="-1"></a><span class="fu">class</span>(pm<span class="sc">$</span>Date.Local)</span></code></pre></div>
+<pre><code>## [1] &quot;Date&quot;</code></pre>
 </div>
 <div id="convert-to-sf-object" class="section level3 hasAnchor" number="2.3.5">
 <h3><span class="header-section-number">2.3.5</span> Convert to <code>sf</code> Object<a href="chapter-point-data.html#convert-to-sf-object" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -355,29 +413,62 @@ target="blank">Published with bookdown</a></li>
 <div class="note">
 <p>The columns containing coordinate values will not always be “Latitude” and “Longitude”. Use <code>str()</code> to see column names and identify which contain the coordinate values.</p>
 </div>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="chapter-point-data.html#cb12-1" tabindex="-1"></a>pm_sf <span class="ot">&lt;-</span> <span class="fu">st_as_sf</span>(pm,</span>
-<span id="cb12-2"><a href="chapter-point-data.html#cb12-2" tabindex="-1"></a>  <span class="at">coords =</span> <span class="fu">c</span>(<span class="st">&quot;Longitude&quot;</span>, <span class="st">&quot;Latitude&quot;</span>)</span>
-<span id="cb12-3"><a href="chapter-point-data.html#cb12-3" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="chapter-point-data.html#cb41-1" tabindex="-1"></a>pm_sf <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>(</span>
+<span id="cb41-2"><a href="chapter-point-data.html#cb41-2" tabindex="-1"></a>  pm,</span>
+<span id="cb41-3"><a href="chapter-point-data.html#cb41-3" tabindex="-1"></a>  <span class="at">coords =</span> <span class="fu">c</span>(<span class="st">&quot;Longitude&quot;</span>, <span class="st">&quot;Latitude&quot;</span>)</span>
+<span id="cb41-4"><a href="chapter-point-data.html#cb41-4" tabindex="-1"></a>)</span></code></pre></div>
 <p>Inspect the classes of <code>pm_sf</code> and <code>pm_sf$geometry</code> to see their differences, and how each are different than <code>class(pm)</code>.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="chapter-point-data.html#cb13-1" tabindex="-1"></a><span class="fu">class</span>(pm_sf)</span>
-<span id="cb13-2"><a href="chapter-point-data.html#cb13-2" tabindex="-1"></a><span class="fu">class</span>(pm_sf<span class="sc">$</span>geometry)</span></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="chapter-point-data.html#cb42-1" tabindex="-1"></a><span class="fu">class</span>(pm_sf)</span></code></pre></div>
+<pre><code>## [1] &quot;sf&quot;         &quot;data.frame&quot;</code></pre>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="chapter-point-data.html#cb44-1" tabindex="-1"></a><span class="fu">class</span>(pm_sf<span class="sc">$</span>geometry)</span></code></pre></div>
+<pre><code>## [1] &quot;sfc_POINT&quot; &quot;sfc&quot;</code></pre>
 <p><code>class(pm_sf)</code> returned both <code>"sf"</code> and <code>"data.frame"</code>, indicating that it contains both spatial and non-spatial data.</p>
 </div>
 <div id="coordinate-reference-system-and-projection" class="section level3 hasAnchor" number="2.3.6">
 <h3><span class="header-section-number">2.3.6</span> Coordinate Reference System and Projection<a href="chapter-point-data.html#coordinate-reference-system-and-projection" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The coordinate reference system of an <code>sf</code> object can be checked with <code>sf::st_crs()</code>.</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="chapter-point-data.html#cb14-1" tabindex="-1"></a><span class="fu">st_crs</span>(pm_sf)</span></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="chapter-point-data.html#cb46-1" tabindex="-1"></a>sf<span class="sc">::</span><span class="fu">st_crs</span>(pm_sf)</span></code></pre></div>
+<pre><code>## Coordinate Reference System: NA</code></pre>
 <p>The previous chunk of code shows that <code>pm_sf</code> does not have a native coordinate reference system. The same function, <code>sf::st_crs()</code>, can be used to assign a coordinate reference system to an <code>sf</code> object. For this example, the World Geodetic System 1984 (WGS 84) will be used (EPSG code: 4326).</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="chapter-point-data.html#cb15-1" tabindex="-1"></a><span class="fu">st_crs</span>(pm_sf) <span class="ot">&lt;-</span> <span class="dv">4326</span></span>
-<span id="cb15-2"><a href="chapter-point-data.html#cb15-2" tabindex="-1"></a><span class="fu">st_crs</span>(pm_sf)</span></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="chapter-point-data.html#cb48-1" tabindex="-1"></a>sf<span class="sc">::</span><span class="fu">st_crs</span>(pm_sf) <span class="ot">&lt;-</span> <span class="dv">4326</span></span>
+<span id="cb48-2"><a href="chapter-point-data.html#cb48-2" tabindex="-1"></a>sf<span class="sc">::</span><span class="fu">st_crs</span>(pm_sf)</span></code></pre></div>
+<pre><code>## Coordinate Reference System:
+##   User input: EPSG:4326 
+##   wkt:
+## GEOGCRS[&quot;WGS 84&quot;,
+##     ENSEMBLE[&quot;World Geodetic System 1984 ensemble&quot;,
+##         MEMBER[&quot;World Geodetic System 1984 (Transit)&quot;],
+##         MEMBER[&quot;World Geodetic System 1984 (G730)&quot;],
+##         MEMBER[&quot;World Geodetic System 1984 (G873)&quot;],
+##         MEMBER[&quot;World Geodetic System 1984 (G1150)&quot;],
+##         MEMBER[&quot;World Geodetic System 1984 (G1674)&quot;],
+##         MEMBER[&quot;World Geodetic System 1984 (G1762)&quot;],
+##         MEMBER[&quot;World Geodetic System 1984 (G2139)&quot;],
+##         ELLIPSOID[&quot;WGS 84&quot;,6378137,298.257223563,
+##             LENGTHUNIT[&quot;metre&quot;,1]],
+##         ENSEMBLEACCURACY[2.0]],
+##     PRIMEM[&quot;Greenwich&quot;,0,
+##         ANGLEUNIT[&quot;degree&quot;,0.0174532925199433]],
+##     CS[ellipsoidal,2],
+##         AXIS[&quot;geodetic latitude (Lat)&quot;,north,
+##             ORDER[1],
+##             ANGLEUNIT[&quot;degree&quot;,0.0174532925199433]],
+##         AXIS[&quot;geodetic longitude (Lon)&quot;,east,
+##             ORDER[2],
+##             ANGLEUNIT[&quot;degree&quot;,0.0174532925199433]],
+##     USAGE[
+##         SCOPE[&quot;Horizontal component of 3D system.&quot;],
+##         AREA[&quot;World.&quot;],
+##         BBOX[-90,-180,90,180]],
+##     ID[&quot;EPSG&quot;,4326]]</code></pre>
 <p>An <code>sf</code> object with a coordinate reference system can be transformed (projected) into a different coordinate reference system with <code>sf::st_transform()</code>. The area of interest for these exploratory analyses is the conterminous United States, so the Albers Equal Area projected coordinate system will be used (EPSG code: 5070). For a detailed description of coordinate reference systems, and how to select the best system for your analyses, see Section <a href="chapter-getting-started-spatial.html#getting-started-spatial-crs">Coordinate Reference Systems and Projections</a> in the Chapter <a href="chapter-getting-started-spatial.html#chapter-getting-started-spatial">Getting Started</a>.</p>
 <div class="note">
 <p>An <code>sf</code> object without an assigned coordinate reference system cannot be transformed. <code>sf::st_crs()</code> must be used to assign a coordinate reference system to an <code>sf</code> object that does not have one.</p>
 </div>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="chapter-point-data.html#cb16-1" tabindex="-1"></a>pm_sf <span class="ot">&lt;-</span> <span class="fu">st_transform</span>(</span>
-<span id="cb16-2"><a href="chapter-point-data.html#cb16-2" tabindex="-1"></a>  pm_sf,</span>
-<span id="cb16-3"><a href="chapter-point-data.html#cb16-3" tabindex="-1"></a>  <span class="dv">5070</span></span>
-<span id="cb16-4"><a href="chapter-point-data.html#cb16-4" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="chapter-point-data.html#cb50-1" tabindex="-1"></a>pm_sf <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_transform</span>(</span>
+<span id="cb50-2"><a href="chapter-point-data.html#cb50-2" tabindex="-1"></a>  pm_sf,</span>
+<span id="cb50-3"><a href="chapter-point-data.html#cb50-3" tabindex="-1"></a>  <span class="dv">5070</span></span>
+<span id="cb50-4"><a href="chapter-point-data.html#cb50-4" tabindex="-1"></a>)</span></code></pre></div>
 </div>
 </div>
 <div id="exploratory-analysis" class="section level2 hasAnchor" number="2.4">
@@ -385,131 +476,144 @@ target="blank">Published with bookdown</a></li>
 <div id="plot" class="section level3 hasAnchor" number="2.4.1">
 <h3><span class="header-section-number">2.4.1</span> Plot<a href="chapter-point-data.html#plot" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Plotting spatial data is important for visualizing and analyzing patterns in the data. Initialize a plot for the locations of each air pollution monitoring station with <code>ggplot2::ggplot()</code>. Identifying the data set to be plotted within the <code>geom_sf()</code> argument informs the function that the data is an <code>sf</code> object.</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="chapter-point-data.html#cb17-1" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb17-2"><a href="chapter-point-data.html#cb17-2" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> pm_sf) <span class="sc">+</span></span>
-<span id="cb17-3"><a href="chapter-point-data.html#cb17-3" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Air Pollution Monitor Locations&quot;</span>) <span class="sc">+</span></span>
-<span id="cb17-4"><a href="chapter-point-data.html#cb17-4" tabindex="-1"></a>  <span class="fu">theme_pubr</span>() <span class="sc">+</span></span>
-<span id="cb17-5"><a href="chapter-point-data.html#cb17-5" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>)) <span class="sc">+</span></span>
-<span id="cb17-6"><a href="chapter-point-data.html#cb17-6" tabindex="-1"></a>  <span class="fu">grids</span>()</span></code></pre></div>
-<p><img src="images/intro_to_spatial/epa_monitors.png" width = "75%" height = "auto" class = "centerimage"></p>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="chapter-point-data.html#cb51-1" tabindex="-1"></a>ggplot2<span class="sc">::</span><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb51-2"><a href="chapter-point-data.html#cb51-2" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_sf</span>(<span class="at">data =</span> pm_sf) <span class="sc">+</span></span>
+<span id="cb51-3"><a href="chapter-point-data.html#cb51-3" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">ggtitle</span>(<span class="st">&quot;Air Pollution Monitor Locations&quot;</span>) <span class="sc">+</span></span>
+<span id="cb51-4"><a href="chapter-point-data.html#cb51-4" tabindex="-1"></a>  ggpubr<span class="sc">::</span><span class="fu">theme_pubr</span>() <span class="sc">+</span></span>
+<span id="cb51-5"><a href="chapter-point-data.html#cb51-5" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>)) <span class="sc">+</span></span>
+<span id="cb51-6"><a href="chapter-point-data.html#cb51-6" tabindex="-1"></a>  ggpubr<span class="sc">::</span><span class="fu">grids</span>()</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
 <p>The plot shows the distribution of monitoring locations, and roughly depicts the outline of the United States due to the large number of monitors. The plot does not, however, convey any information about the concentration of PM<sub>2.5</sub> measured by each monitor. Inspect the summary statistics of the PM<sub>2.5</sub> measurements before creating any plots to visualize the data.</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="chapter-point-data.html#cb18-1" tabindex="-1"></a><span class="fu">summary</span>(pm_sf<span class="sc">$</span>Arithmetic.Mean)</span>
-<span id="cb18-2"><a href="chapter-point-data.html#cb18-2" tabindex="-1"></a><span class="fu">sd</span>(pm_sf<span class="sc">$</span>Arithmetic.Mean)</span></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="chapter-point-data.html#cb52-1" tabindex="-1"></a><span class="fu">summary</span>(pm_sf<span class="sc">$</span>Arithmetic.Mean)</span></code></pre></div>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##  -6.500   4.700   7.100   8.623  10.500 556.778</code></pre>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="chapter-point-data.html#cb54-1" tabindex="-1"></a><span class="fu">sd</span>(pm_sf<span class="sc">$</span>Arithmetic.Mean)</span></code></pre></div>
+<pre><code>## [1] 7.376458</code></pre>
 <p>After inspecting the summary statistics, create a histogram of the PM<sub>2.5</sub> concentration measurements to visualize the distribution of the data.</p>
 <div class="note">
 <p>The histogram is not a spatially defined plot, so the data set to be plotted is identified within <code>ggplot()</code>.</p>
 </div>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="chapter-point-data.html#cb19-1" tabindex="-1"></a><span class="fu">ggplot</span>(</span>
-<span id="cb19-2"><a href="chapter-point-data.html#cb19-2" tabindex="-1"></a>  <span class="at">data =</span> pm_sf,</span>
-<span id="cb19-3"><a href="chapter-point-data.html#cb19-3" tabindex="-1"></a>  <span class="fu">aes</span>(Arithmetic.Mean)</span>
-<span id="cb19-4"><a href="chapter-point-data.html#cb19-4" tabindex="-1"></a>) <span class="sc">+</span></span>
-<span id="cb19-5"><a href="chapter-point-data.html#cb19-5" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(</span>
-<span id="cb19-6"><a href="chapter-point-data.html#cb19-6" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">&quot;blue&quot;</span>,</span>
-<span id="cb19-7"><a href="chapter-point-data.html#cb19-7" tabindex="-1"></a>    <span class="at">binwidth =</span> <span class="dv">5</span></span>
-<span id="cb19-8"><a href="chapter-point-data.html#cb19-8" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb19-9"><a href="chapter-point-data.html#cb19-9" tabindex="-1"></a>  <span class="fu">ggtitle</span>(</span>
-<span id="cb19-10"><a href="chapter-point-data.html#cb19-10" tabindex="-1"></a>    <span class="fu">expression</span>(<span class="st">&quot;PM&quot;</span>[<span class="fl">2.5</span>] <span class="sc">*</span> <span class="st">&quot; Concentration Measurements&quot;</span>)</span>
-<span id="cb19-11"><a href="chapter-point-data.html#cb19-11" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb19-12"><a href="chapter-point-data.html#cb19-12" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="fu">expression</span>(<span class="st">&quot;PM&quot;</span>[<span class="fl">2.5</span>] <span class="sc">*</span> <span class="st">&quot; Concentration (µg/m&quot;</span><span class="sc">^</span><span class="dv">3</span> <span class="sc">*</span> <span class="st">&quot;)&quot;</span>)) <span class="sc">+</span></span>
-<span id="cb19-13"><a href="chapter-point-data.html#cb19-13" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Number of Measurements&quot;</span>) <span class="sc">+</span></span>
-<span id="cb19-14"><a href="chapter-point-data.html#cb19-14" tabindex="-1"></a>  <span class="fu">theme_pubr</span>() <span class="sc">+</span></span>
-<span id="cb19-15"><a href="chapter-point-data.html#cb19-15" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>)) <span class="sc">+</span></span>
-<span id="cb19-16"><a href="chapter-point-data.html#cb19-16" tabindex="-1"></a>  <span class="fu">grids</span>()</span></code></pre></div>
-<p><img src="images/intro_to_spatial/pm_concentrations_histogram.png" width = "75%" height = "auto" class = "centerimage"></p>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="chapter-point-data.html#cb56-1" tabindex="-1"></a>ggplot2<span class="sc">::</span><span class="fu">ggplot</span>(</span>
+<span id="cb56-2"><a href="chapter-point-data.html#cb56-2" tabindex="-1"></a>  <span class="at">data =</span> pm_sf,</span>
+<span id="cb56-3"><a href="chapter-point-data.html#cb56-3" tabindex="-1"></a>  <span class="fu">aes</span>(Arithmetic.Mean)</span>
+<span id="cb56-4"><a href="chapter-point-data.html#cb56-4" tabindex="-1"></a>) <span class="sc">+</span></span>
+<span id="cb56-5"><a href="chapter-point-data.html#cb56-5" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_histogram</span>(</span>
+<span id="cb56-6"><a href="chapter-point-data.html#cb56-6" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">&quot;blue&quot;</span>,</span>
+<span id="cb56-7"><a href="chapter-point-data.html#cb56-7" tabindex="-1"></a>    <span class="at">binwidth =</span> <span class="dv">5</span></span>
+<span id="cb56-8"><a href="chapter-point-data.html#cb56-8" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb56-9"><a href="chapter-point-data.html#cb56-9" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">ggtitle</span>(</span>
+<span id="cb56-10"><a href="chapter-point-data.html#cb56-10" tabindex="-1"></a>    <span class="fu">expression</span>(<span class="st">&quot;PM&quot;</span>[<span class="fl">2.5</span>] <span class="sc">*</span> <span class="st">&quot; Concentration Measurements&quot;</span>)</span>
+<span id="cb56-11"><a href="chapter-point-data.html#cb56-11" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb56-12"><a href="chapter-point-data.html#cb56-12" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">xlab</span>(<span class="fu">expression</span>(<span class="st">&quot;PM&quot;</span>[<span class="fl">2.5</span>] <span class="sc">*</span> <span class="st">&quot; Concentration (µg/m&quot;</span><span class="sc">^</span><span class="dv">3</span> <span class="sc">*</span> <span class="st">&quot;)&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb56-13"><a href="chapter-point-data.html#cb56-13" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">ylab</span>(<span class="st">&quot;Number of Measurements&quot;</span>) <span class="sc">+</span></span>
+<span id="cb56-14"><a href="chapter-point-data.html#cb56-14" tabindex="-1"></a>  ggpubr<span class="sc">::</span><span class="fu">theme_pubr</span>() <span class="sc">+</span></span>
+<span id="cb56-15"><a href="chapter-point-data.html#cb56-15" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>)) <span class="sc">+</span></span>
+<span id="cb56-16"><a href="chapter-point-data.html#cb56-16" tabindex="-1"></a>  ggpubr<span class="sc">::</span><span class="fu">grids</span>()</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
 </div>
 <div id="calculate-annual-mean" class="section level3 hasAnchor" number="2.4.2">
 <h3><span class="header-section-number">2.4.2</span> Calculate Annual Mean<a href="chapter-point-data.html#calculate-annual-mean" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>A common summary statistic of interest to researchers is the mean over a certain period of time. For this example, we will calculate the mean PM<sub>2.5</sub> concentration for each monitoring location for the year 2021. To do this, a unique identification code must be created for each monitoring location.</p>
 <p>The <code>pm_sf$Monitor.ID</code> variable can be created by concatenating each monitor’s state code, county code, and site number together into a single character string.</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="chapter-point-data.html#cb20-1" tabindex="-1"></a>pm_sf<span class="sc">$</span>Monitor.ID <span class="ot">&lt;-</span> <span class="fu">paste0</span>(</span>
-<span id="cb20-2"><a href="chapter-point-data.html#cb20-2" tabindex="-1"></a>  pm_sf<span class="sc">$</span>State.Code,</span>
-<span id="cb20-3"><a href="chapter-point-data.html#cb20-3" tabindex="-1"></a>  pm_sf<span class="sc">$</span>County.Code,</span>
-<span id="cb20-4"><a href="chapter-point-data.html#cb20-4" tabindex="-1"></a>  pm_sf<span class="sc">$</span>Site.Num</span>
-<span id="cb20-5"><a href="chapter-point-data.html#cb20-5" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="chapter-point-data.html#cb57-1" tabindex="-1"></a>pm_sf<span class="sc">$</span>Monitor.ID <span class="ot">&lt;-</span> <span class="fu">paste0</span>(</span>
+<span id="cb57-2"><a href="chapter-point-data.html#cb57-2" tabindex="-1"></a>  pm_sf<span class="sc">$</span>State.Code,</span>
+<span id="cb57-3"><a href="chapter-point-data.html#cb57-3" tabindex="-1"></a>  pm_sf<span class="sc">$</span>County.Code,</span>
+<span id="cb57-4"><a href="chapter-point-data.html#cb57-4" tabindex="-1"></a>  pm_sf<span class="sc">$</span>Site.Num</span>
+<span id="cb57-5"><a href="chapter-point-data.html#cb57-5" tabindex="-1"></a>)</span></code></pre></div>
 <p>Each unique monitor identification code should be matched with a unique monitor location geometry. To ensure that each monitor location has a unique identification code, check that there are an equal number of unique geometries and identification codes.</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="chapter-point-data.html#cb21-1" tabindex="-1"></a><span class="fu">length</span>(<span class="fu">unique</span>(pm_sf<span class="sc">$</span>Monitor.ID)) <span class="sc">==</span> <span class="fu">length</span>(<span class="fu">unique</span>(pm_sf<span class="sc">$</span>geometry))</span></code></pre></div>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="chapter-point-data.html#cb58-1" tabindex="-1"></a><span class="fu">length</span>(<span class="fu">unique</span>(pm_sf<span class="sc">$</span>Monitor.ID)) <span class="sc">==</span> <span class="fu">length</span>(<span class="fu">unique</span>(pm_sf<span class="sc">$</span>geometry))</span></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
 <p>Now that each monitor location has a unique identification code, we can calculate the mean PM<sub>2.5</sub> concentration measured at each monitoring location. Functions and syntax from the <code>dplyr</code> package will be used to do this. For more on the <code>dplyr</code> package, please see <a href="https://dplyr.tidyverse.org/articles/dplyr.html">Introduction to dplyr</a>.</p>
 <p>The <code>group_by(Monitor.ID, )</code> argument specifies that an annual mean should be calculated for each unique <code>Monitor.ID</code>. Including <code>State.Name</code> in this argument retains the column in the new <code>pm_mean</code> data set, but does not influence the calculation of the annual mean.</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="chapter-point-data.html#cb22-1" tabindex="-1"></a>pm_mean <span class="ot">&lt;-</span></span>
-<span id="cb22-2"><a href="chapter-point-data.html#cb22-2" tabindex="-1"></a>  pm_sf <span class="sc">%&gt;%</span></span>
-<span id="cb22-3"><a href="chapter-point-data.html#cb22-3" tabindex="-1"></a>  <span class="fu">group_by</span>(Monitor.ID, State.Name) <span class="sc">%&gt;%</span></span>
-<span id="cb22-4"><a href="chapter-point-data.html#cb22-4" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Annual.Mean =</span> <span class="fu">mean</span>(Arithmetic.Mean))</span></code></pre></div>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="chapter-point-data.html#cb60-1" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb60-2"><a href="chapter-point-data.html#cb60-2" tabindex="-1"></a>pm_mean <span class="ot">&lt;-</span></span>
+<span id="cb60-3"><a href="chapter-point-data.html#cb60-3" tabindex="-1"></a>  pm_sf <span class="sc">%&gt;%</span></span>
+<span id="cb60-4"><a href="chapter-point-data.html#cb60-4" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(Monitor.ID, State.Name) <span class="sc">%&gt;%</span></span>
+<span id="cb60-5"><a href="chapter-point-data.html#cb60-5" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">summarise</span>(<span class="at">Annual.Mean =</span> <span class="fu">mean</span>(Arithmetic.Mean))</span></code></pre></div>
+<pre><code>## `summarise()` has grouped output by &#39;Monitor.ID&#39;. You can override using the
+## `.groups` argument.</code></pre>
 <p>Inspect the summary statistics of <code>pm_mean</code>.</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="chapter-point-data.html#cb23-1" tabindex="-1"></a><span class="fu">summary</span>(pm_mean<span class="sc">$</span>Annual.Mean)</span>
-<span id="cb23-2"><a href="chapter-point-data.html#cb23-2" tabindex="-1"></a><span class="fu">sd</span>(pm_mean<span class="sc">$</span>Annual.Mean)</span></code></pre></div>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="chapter-point-data.html#cb62-1" tabindex="-1"></a><span class="fu">summary</span>(pm_mean<span class="sc">$</span>Annual.Mean)</span></code></pre></div>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   1.748   7.154   8.379   8.505   9.707  24.117</code></pre>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="chapter-point-data.html#cb64-1" tabindex="-1"></a><span class="fu">sd</span>(pm_mean<span class="sc">$</span>Annual.Mean)</span></code></pre></div>
+<pre><code>## [1] 2.384076</code></pre>
 <p>Create a plot which shows the distribution of monitoring locations, and color each point according to the monitor’s annual mean concentration of PM<sub>2.5</sub>.</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="chapter-point-data.html#cb24-1" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb24-2"><a href="chapter-point-data.html#cb24-2" tabindex="-1"></a>  <span class="fu">geom_sf</span>(</span>
-<span id="cb24-3"><a href="chapter-point-data.html#cb24-3" tabindex="-1"></a>    <span class="at">data =</span> pm_mean,</span>
-<span id="cb24-4"><a href="chapter-point-data.html#cb24-4" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">color =</span> Annual.Mean)</span>
-<span id="cb24-5"><a href="chapter-point-data.html#cb24-5" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb24-6"><a href="chapter-point-data.html#cb24-6" tabindex="-1"></a>  <span class="fu">scale_color_viridis_b</span>(</span>
-<span id="cb24-7"><a href="chapter-point-data.html#cb24-7" tabindex="-1"></a>    <span class="fu">expression</span>(<span class="st">&quot;PM&quot;</span>[<span class="fl">2.5</span>] <span class="sc">*</span> <span class="st">&quot; Concentration (µg/m&quot;</span><span class="sc">^</span><span class="dv">3</span> <span class="sc">*</span> <span class="st">&quot;)&quot;</span>)</span>
-<span id="cb24-8"><a href="chapter-point-data.html#cb24-8" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb24-9"><a href="chapter-point-data.html#cb24-9" tabindex="-1"></a>  <span class="fu">ggtitle</span>(</span>
-<span id="cb24-10"><a href="chapter-point-data.html#cb24-10" tabindex="-1"></a>    <span class="fu">expression</span>(<span class="st">&quot;Annual Mean PM&quot;</span>[<span class="fl">2.5</span>] <span class="sc">*</span> <span class="st">&quot; Concentration&quot;</span>)</span>
-<span id="cb24-11"><a href="chapter-point-data.html#cb24-11" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb24-12"><a href="chapter-point-data.html#cb24-12" tabindex="-1"></a>  <span class="fu">theme_pubr</span>(<span class="at">legend =</span> <span class="st">&quot;bottom&quot;</span>) <span class="sc">+</span></span>
-<span id="cb24-13"><a href="chapter-point-data.html#cb24-13" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>)) <span class="sc">+</span></span>
-<span id="cb24-14"><a href="chapter-point-data.html#cb24-14" tabindex="-1"></a>  <span class="fu">grids</span>()</span></code></pre></div>
-<p><img src="images/intro_to_spatial/epa_monitors_concentrations.png" width = "75%" height = "auto" class = "centerimage"></p>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="chapter-point-data.html#cb66-1" tabindex="-1"></a>ggplot2<span class="sc">::</span><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb66-2"><a href="chapter-point-data.html#cb66-2" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_sf</span>(</span>
+<span id="cb66-3"><a href="chapter-point-data.html#cb66-3" tabindex="-1"></a>    <span class="at">data =</span> pm_mean,</span>
+<span id="cb66-4"><a href="chapter-point-data.html#cb66-4" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">color =</span> Annual.Mean)</span>
+<span id="cb66-5"><a href="chapter-point-data.html#cb66-5" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb66-6"><a href="chapter-point-data.html#cb66-6" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">scale_color_viridis_b</span>(</span>
+<span id="cb66-7"><a href="chapter-point-data.html#cb66-7" tabindex="-1"></a>    <span class="fu">expression</span>(<span class="st">&quot;PM&quot;</span>[<span class="fl">2.5</span>] <span class="sc">*</span> <span class="st">&quot; Concentration (µg/m&quot;</span><span class="sc">^</span><span class="dv">3</span> <span class="sc">*</span> <span class="st">&quot;)&quot;</span>)</span>
+<span id="cb66-8"><a href="chapter-point-data.html#cb66-8" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb66-9"><a href="chapter-point-data.html#cb66-9" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">ggtitle</span>(</span>
+<span id="cb66-10"><a href="chapter-point-data.html#cb66-10" tabindex="-1"></a>    <span class="fu">expression</span>(<span class="st">&quot;Annual Mean PM&quot;</span>[<span class="fl">2.5</span>] <span class="sc">*</span> <span class="st">&quot; Concentration&quot;</span>)</span>
+<span id="cb66-11"><a href="chapter-point-data.html#cb66-11" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb66-12"><a href="chapter-point-data.html#cb66-12" tabindex="-1"></a>  ggpubr<span class="sc">::</span><span class="fu">theme_pubr</span>(<span class="at">legend =</span> <span class="st">&quot;bottom&quot;</span>) <span class="sc">+</span></span>
+<span id="cb66-13"><a href="chapter-point-data.html#cb66-13" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>)) <span class="sc">+</span></span>
+<span id="cb66-14"><a href="chapter-point-data.html#cb66-14" tabindex="-1"></a>  ggpubr<span class="sc">::</span><span class="fu">grids</span>()</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
 <p>Now the plot depicts both spatial and non-spatial data.</p>
 </div>
 <div id="compare-highest-annual-means" class="section level3 hasAnchor" number="2.4.3">
 <h3><span class="header-section-number">2.4.3</span> Compare Highest Annual Means<a href="chapter-point-data.html#compare-highest-annual-means" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>A close visual inspection of the previous plot shows a few monitoring locations in the southwestern region of the United States with very high (&gt; 20 µm/m<sup>3</sup>) annual mean concentrations of PM<sub>2.5</sub>. To investigate the differences between the monitors with the highest and lowest annual mean concentrations, create a subset of <code>pm_sf</code> with only the three highest and lowest monitors.</p>
 <p>To do this, first identify the monitors with the highest and lowest annual mean concentrations.</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="chapter-point-data.html#cb25-1" tabindex="-1"></a>min_monitors <span class="ot">&lt;-</span></span>
-<span id="cb25-2"><a href="chapter-point-data.html#cb25-2" tabindex="-1"></a>  pm_mean <span class="sc">%&gt;%</span></span>
-<span id="cb25-3"><a href="chapter-point-data.html#cb25-3" tabindex="-1"></a>  <span class="fu">arrange</span>(Annual.Mean) <span class="sc">%&gt;%</span></span>
-<span id="cb25-4"><a href="chapter-point-data.html#cb25-4" tabindex="-1"></a>  <span class="fu">head</span>(<span class="at">n =</span> <span class="dv">3</span>)</span>
-<span id="cb25-5"><a href="chapter-point-data.html#cb25-5" tabindex="-1"></a></span>
-<span id="cb25-6"><a href="chapter-point-data.html#cb25-6" tabindex="-1"></a>max_monitors <span class="ot">&lt;-</span></span>
-<span id="cb25-7"><a href="chapter-point-data.html#cb25-7" tabindex="-1"></a>  pm_mean <span class="sc">%&gt;%</span></span>
-<span id="cb25-8"><a href="chapter-point-data.html#cb25-8" tabindex="-1"></a>  <span class="fu">arrange</span>(Annual.Mean) <span class="sc">%&gt;%</span></span>
-<span id="cb25-9"><a href="chapter-point-data.html#cb25-9" tabindex="-1"></a>  <span class="fu">tail</span>(<span class="at">n =</span> <span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="chapter-point-data.html#cb67-1" tabindex="-1"></a>min_monitors <span class="ot">&lt;-</span></span>
+<span id="cb67-2"><a href="chapter-point-data.html#cb67-2" tabindex="-1"></a>  pm_mean <span class="sc">%&gt;%</span></span>
+<span id="cb67-3"><a href="chapter-point-data.html#cb67-3" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">arrange</span>(Annual.Mean) <span class="sc">%&gt;%</span></span>
+<span id="cb67-4"><a href="chapter-point-data.html#cb67-4" tabindex="-1"></a>  <span class="fu">head</span>(<span class="at">n =</span> <span class="dv">3</span>)</span>
+<span id="cb67-5"><a href="chapter-point-data.html#cb67-5" tabindex="-1"></a></span>
+<span id="cb67-6"><a href="chapter-point-data.html#cb67-6" tabindex="-1"></a>max_monitors <span class="ot">&lt;-</span></span>
+<span id="cb67-7"><a href="chapter-point-data.html#cb67-7" tabindex="-1"></a>  pm_mean <span class="sc">%&gt;%</span></span>
+<span id="cb67-8"><a href="chapter-point-data.html#cb67-8" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">arrange</span>(Annual.Mean) <span class="sc">%&gt;%</span></span>
+<span id="cb67-9"><a href="chapter-point-data.html#cb67-9" tabindex="-1"></a>  <span class="fu">tail</span>(<span class="at">n =</span> <span class="dv">3</span>)</span></code></pre></div>
 <p>Next, create a variable storing only the unique identification codes of these six monitors.</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="chapter-point-data.html#cb26-1" tabindex="-1"></a>min_max_monitors_id <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
-<span id="cb26-2"><a href="chapter-point-data.html#cb26-2" tabindex="-1"></a>  min_monitors<span class="sc">$</span>Monitor.ID,</span>
-<span id="cb26-3"><a href="chapter-point-data.html#cb26-3" tabindex="-1"></a>  max_monitors<span class="sc">$</span>Monitor.ID</span>
-<span id="cb26-4"><a href="chapter-point-data.html#cb26-4" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="chapter-point-data.html#cb68-1" tabindex="-1"></a>min_max_monitors_id <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb68-2"><a href="chapter-point-data.html#cb68-2" tabindex="-1"></a>  min_monitors<span class="sc">$</span>Monitor.ID,</span>
+<span id="cb68-3"><a href="chapter-point-data.html#cb68-3" tabindex="-1"></a>  max_monitors<span class="sc">$</span>Monitor.ID</span>
+<span id="cb68-4"><a href="chapter-point-data.html#cb68-4" tabindex="-1"></a>)</span></code></pre></div>
 <p>Finally, subset the <code>pm_sf</code> data set according to the monitor identification codes stored in <code>min_max_monitors_id</code>.</p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="chapter-point-data.html#cb27-1" tabindex="-1"></a>pm_min_max <span class="ot">&lt;-</span> <span class="fu">subset</span>(pm_sf,</span>
-<span id="cb27-2"><a href="chapter-point-data.html#cb27-2" tabindex="-1"></a>  <span class="at">subset =</span> Monitor.ID <span class="sc">==</span> min_max_monitors_id</span>
-<span id="cb27-3"><a href="chapter-point-data.html#cb27-3" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="chapter-point-data.html#cb69-1" tabindex="-1"></a>pm_min_max <span class="ot">&lt;-</span> <span class="fu">subset</span>(</span>
+<span id="cb69-2"><a href="chapter-point-data.html#cb69-2" tabindex="-1"></a>  pm_sf,</span>
+<span id="cb69-3"><a href="chapter-point-data.html#cb69-3" tabindex="-1"></a>  <span class="at">subset =</span> Monitor.ID <span class="sc">==</span> min_max_monitors_id</span>
+<span id="cb69-4"><a href="chapter-point-data.html#cb69-4" tabindex="-1"></a>)</span></code></pre></div>
+<pre><code>## Warning in Monitor.ID == min_max_monitors_id: longer object length is not a
+## multiple of shorter object length</code></pre>
 <p>The resulting <code>pm_min_max</code> data set contains data for only six monitoring locations. Check the unique monitor identification codes that constitute the new data set.</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="chapter-point-data.html#cb28-1" tabindex="-1"></a><span class="fu">unique</span>(pm_min_max<span class="sc">$</span>Monitor.ID)</span></code></pre></div>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="chapter-point-data.html#cb71-1" tabindex="-1"></a><span class="fu">unique</span>(pm_min_max<span class="sc">$</span>Monitor.ID)</span></code></pre></div>
+<pre><code>## [1] &quot;060290016&quot; &quot;061072002&quot; &quot;150010005&quot; &quot;150012021&quot; &quot;150012023&quot; &quot;800020014&quot;</code></pre>
 <p>The temporal trend of PM<sub>2.5</sub> concentrations measured at each of these locations in 2021 can be depicted with <code>ggplot::geom_line()</code>.</p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="chapter-point-data.html#cb29-1" tabindex="-1"></a><span class="fu">ggplot</span>(</span>
-<span id="cb29-2"><a href="chapter-point-data.html#cb29-2" tabindex="-1"></a>  <span class="at">data =</span> pm_min_max,</span>
-<span id="cb29-3"><a href="chapter-point-data.html#cb29-3" tabindex="-1"></a>  <span class="fu">aes</span>(</span>
-<span id="cb29-4"><a href="chapter-point-data.html#cb29-4" tabindex="-1"></a>    <span class="at">x =</span> Date.Local,</span>
-<span id="cb29-5"><a href="chapter-point-data.html#cb29-5" tabindex="-1"></a>    <span class="at">y =</span> Arithmetic.Mean,</span>
-<span id="cb29-6"><a href="chapter-point-data.html#cb29-6" tabindex="-1"></a>    <span class="at">group =</span> Monitor.ID,</span>
-<span id="cb29-7"><a href="chapter-point-data.html#cb29-7" tabindex="-1"></a>    <span class="at">color =</span> Monitor.ID</span>
-<span id="cb29-8"><a href="chapter-point-data.html#cb29-8" tabindex="-1"></a>  )</span>
-<span id="cb29-9"><a href="chapter-point-data.html#cb29-9" tabindex="-1"></a>) <span class="sc">+</span></span>
-<span id="cb29-10"><a href="chapter-point-data.html#cb29-10" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb29-11"><a href="chapter-point-data.html#cb29-11" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Minimum and Maximum Monitors&quot;</span>) <span class="sc">+</span></span>
-<span id="cb29-12"><a href="chapter-point-data.html#cb29-12" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Date&quot;</span>) <span class="sc">+</span></span>
-<span id="cb29-13"><a href="chapter-point-data.html#cb29-13" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="fu">expression</span>(<span class="st">&quot;PM&quot;</span>[<span class="fl">2.5</span>] <span class="sc">*</span> <span class="st">&quot; Concentrations (µg/m&quot;</span><span class="sc">^</span><span class="dv">3</span> <span class="sc">*</span> <span class="st">&quot;)&quot;</span>)) <span class="sc">+</span></span>
-<span id="cb29-14"><a href="chapter-point-data.html#cb29-14" tabindex="-1"></a>  <span class="fu">theme_pubr</span>(<span class="at">legend =</span> <span class="st">&quot;bottom&quot;</span>) <span class="sc">+</span></span>
-<span id="cb29-15"><a href="chapter-point-data.html#cb29-15" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>))</span></code></pre></div>
-<p><img src="images/intro_to_spatial/min_max_monitors.png" width = "75%" height = "auto" class = "centerimage"></p>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="chapter-point-data.html#cb73-1" tabindex="-1"></a>ggplot2<span class="sc">::</span><span class="fu">ggplot</span>(</span>
+<span id="cb73-2"><a href="chapter-point-data.html#cb73-2" tabindex="-1"></a>  <span class="at">data =</span> pm_min_max,</span>
+<span id="cb73-3"><a href="chapter-point-data.html#cb73-3" tabindex="-1"></a>  <span class="fu">aes</span>(</span>
+<span id="cb73-4"><a href="chapter-point-data.html#cb73-4" tabindex="-1"></a>    <span class="at">x =</span> Date.Local,</span>
+<span id="cb73-5"><a href="chapter-point-data.html#cb73-5" tabindex="-1"></a>    <span class="at">y =</span> Arithmetic.Mean,</span>
+<span id="cb73-6"><a href="chapter-point-data.html#cb73-6" tabindex="-1"></a>    <span class="at">group =</span> Monitor.ID,</span>
+<span id="cb73-7"><a href="chapter-point-data.html#cb73-7" tabindex="-1"></a>    <span class="at">color =</span> Monitor.ID</span>
+<span id="cb73-8"><a href="chapter-point-data.html#cb73-8" tabindex="-1"></a>  )</span>
+<span id="cb73-9"><a href="chapter-point-data.html#cb73-9" tabindex="-1"></a>) <span class="sc">+</span></span>
+<span id="cb73-10"><a href="chapter-point-data.html#cb73-10" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb73-11"><a href="chapter-point-data.html#cb73-11" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">ggtitle</span>(<span class="st">&quot;Minimum and Maximum Monitors&quot;</span>) <span class="sc">+</span></span>
+<span id="cb73-12"><a href="chapter-point-data.html#cb73-12" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">xlab</span>(<span class="st">&quot;Date&quot;</span>) <span class="sc">+</span></span>
+<span id="cb73-13"><a href="chapter-point-data.html#cb73-13" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">ylab</span>(<span class="fu">expression</span>(<span class="st">&quot;PM&quot;</span>[<span class="fl">2.5</span>] <span class="sc">*</span> <span class="st">&quot; Concentrations (µg/m&quot;</span><span class="sc">^</span><span class="dv">3</span> <span class="sc">*</span> <span class="st">&quot;)&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb73-14"><a href="chapter-point-data.html#cb73-14" tabindex="-1"></a>  ggpubr<span class="sc">::</span><span class="fu">theme_pubr</span>(<span class="at">legend =</span> <span class="st">&quot;bottom&quot;</span>) <span class="sc">+</span></span>
+<span id="cb73-15"><a href="chapter-point-data.html#cb73-15" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>))</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-30-1.png" width="672" /></p>
 <p>Alternatively, the <code>ggplot2::geom_boxplot()</code> function compares the median, interquartile range, and outliers of the monitors’ measurements.</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="chapter-point-data.html#cb30-1" tabindex="-1"></a><span class="fu">ggplot</span>(</span>
-<span id="cb30-2"><a href="chapter-point-data.html#cb30-2" tabindex="-1"></a>  <span class="at">data =</span> pm_min_max,</span>
-<span id="cb30-3"><a href="chapter-point-data.html#cb30-3" tabindex="-1"></a>  <span class="fu">aes</span>(</span>
-<span id="cb30-4"><a href="chapter-point-data.html#cb30-4" tabindex="-1"></a>    <span class="at">x =</span> Monitor.ID,</span>
-<span id="cb30-5"><a href="chapter-point-data.html#cb30-5" tabindex="-1"></a>    <span class="at">y =</span> Arithmetic.Mean,</span>
-<span id="cb30-6"><a href="chapter-point-data.html#cb30-6" tabindex="-1"></a>    <span class="at">fill =</span> Monitor.ID</span>
-<span id="cb30-7"><a href="chapter-point-data.html#cb30-7" tabindex="-1"></a>  )</span>
-<span id="cb30-8"><a href="chapter-point-data.html#cb30-8" tabindex="-1"></a>) <span class="sc">+</span></span>
-<span id="cb30-9"><a href="chapter-point-data.html#cb30-9" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
-<span id="cb30-10"><a href="chapter-point-data.html#cb30-10" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Monitor ID&quot;</span>) <span class="sc">+</span></span>
-<span id="cb30-11"><a href="chapter-point-data.html#cb30-11" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="fu">expression</span>(<span class="st">&quot;PM&quot;</span>[<span class="fl">2.5</span>] <span class="sc">*</span> <span class="st">&quot; Concentrations (µg/m&quot;</span><span class="sc">^</span><span class="dv">3</span> <span class="sc">*</span> <span class="st">&quot;)&quot;</span>)) <span class="sc">+</span></span>
-<span id="cb30-12"><a href="chapter-point-data.html#cb30-12" tabindex="-1"></a>  <span class="fu">theme_pubr</span>(<span class="at">legend =</span> <span class="st">&quot;none&quot;</span>)</span></code></pre></div>
-<p><img src="images/intro_to_spatial/monitors_boxplot.png" width = "75%" height = "auto" class = "centerimage"></p>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="chapter-point-data.html#cb74-1" tabindex="-1"></a>ggplot2<span class="sc">::</span><span class="fu">ggplot</span>(</span>
+<span id="cb74-2"><a href="chapter-point-data.html#cb74-2" tabindex="-1"></a>  <span class="at">data =</span> pm_min_max,</span>
+<span id="cb74-3"><a href="chapter-point-data.html#cb74-3" tabindex="-1"></a>  <span class="fu">aes</span>(</span>
+<span id="cb74-4"><a href="chapter-point-data.html#cb74-4" tabindex="-1"></a>    <span class="at">x =</span> Monitor.ID,</span>
+<span id="cb74-5"><a href="chapter-point-data.html#cb74-5" tabindex="-1"></a>    <span class="at">y =</span> Arithmetic.Mean,</span>
+<span id="cb74-6"><a href="chapter-point-data.html#cb74-6" tabindex="-1"></a>    <span class="at">fill =</span> Monitor.ID</span>
+<span id="cb74-7"><a href="chapter-point-data.html#cb74-7" tabindex="-1"></a>  )</span>
+<span id="cb74-8"><a href="chapter-point-data.html#cb74-8" tabindex="-1"></a>) <span class="sc">+</span></span>
+<span id="cb74-9"><a href="chapter-point-data.html#cb74-9" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb74-10"><a href="chapter-point-data.html#cb74-10" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">xlab</span>(<span class="st">&quot;Monitor ID&quot;</span>) <span class="sc">+</span></span>
+<span id="cb74-11"><a href="chapter-point-data.html#cb74-11" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">ylab</span>(<span class="fu">expression</span>(<span class="st">&quot;PM&quot;</span>[<span class="fl">2.5</span>] <span class="sc">*</span> <span class="st">&quot; Concentrations (µg/m&quot;</span><span class="sc">^</span><span class="dv">3</span> <span class="sc">*</span> <span class="st">&quot;)&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb74-12"><a href="chapter-point-data.html#cb74-12" tabindex="-1"></a>  ggpubr<span class="sc">::</span><span class="fu">theme_pubr</span>(<span class="at">legend =</span> <span class="st">&quot;none&quot;</span>)</span></code></pre></div>
 
 </div>
 </div>
@@ -542,42 +646,42 @@ target="blank">Published with bookdown</a></li>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
-"sharing": {
-"github": true,
-"facebook": false,
-"twitter": false,
-"linkedin": false,
-"weibo": false,
-"instapaper": false,
-"vk": false,
-"whatsapp": false,
-"all": false
-},
-"fontsettings": {
-"theme": "white",
-"family": "sans",
-"size": 2
-},
-"edit": {
-"link": null,
-"text": null
-},
-"history": {
-"link": null,
-"text": null
-},
-"view": {
-"link": null,
-"text": null
-},
-"download": null,
-"search": {
-"engine": "fuse",
-"options": null
-},
-"toc": {
-"collapse": "section"
-}
+  "sharing": {
+    "github": true,
+    "facebook": false,
+    "twitter": false,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": false
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": null,
+    "text": null
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": null,
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "section"
+  }
 });
 });
 </script>

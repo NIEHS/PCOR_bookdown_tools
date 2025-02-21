@@ -5,19 +5,19 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>6 Linkage to Census Units | CHORDS Training and Use Cases Toolkit</title>
-  <meta name="description" content="The CHORDS Training and Use Cases Toolkit provides guides, tutorials, and example code to support climate change and human health research." />
-  <meta name="generator" content="bookdown 0.40 and GitBook 2.6.7" />
+  <meta name="description" content="The CHORDS Training and Use Cases Toolkit provides guides, tutorials, and example code to support environmental health and disaster research." />
+  <meta name="generator" content="bookdown 0.42 and GitBook 2.6.7" />
 
   <meta property="og:title" content="6 Linkage to Census Units | CHORDS Training and Use Cases Toolkit" />
   <meta property="og:type" content="book" />
   
-  <meta property="og:description" content="The CHORDS Training and Use Cases Toolkit provides guides, tutorials, and example code to support climate change and human health research." />
+  <meta property="og:description" content="The CHORDS Training and Use Cases Toolkit provides guides, tutorials, and example code to support environmental health and disaster research." />
   <meta name="github-repo" content="NIEHS/PCOR_bookdown_tools" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="6 Linkage to Census Units | CHORDS Training and Use Cases Toolkit" />
   
-  <meta name="twitter:description" content="The CHORDS Training and Use Cases Toolkit provides guides, tutorials, and example code to support climate change and human health research." />
+  <meta name="twitter:description" content="The CHORDS Training and Use Cases Toolkit provides guides, tutorials, and example code to support environmental health and disaster research." />
   
 
 
@@ -53,8 +53,9 @@
 
 
 <style type="text/css">
+html { -webkit-text-size-adjust: 100%; }
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -64,7 +65,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -269,7 +270,7 @@ target="blank">Published with bookdown</a></li>
 <div id="motivation-2" class="section level3 hasAnchor" number="6.1.1">
 <h3><span class="header-section-number">6.1.1</span> Motivation<a href="chapter-link-to-census.html#motivation-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Linking geocoded addresses to US Census geographic units is a common step in environmental health data integration workflows. First, using geographic information systems (GIS) software, the geocoded addresses are mapped to the specific Census geographic units (e.g., Census tracts) in which they are located. Second, the Census geographic unit identifying code (or, <a href="https://www.census.gov/programs-surveys/geography/guidance/geo-identifiers.html">geoID</a>) is matched to each geocoded address. The result is a table of geocoded addresses and their corresponding Census geoIDs.</p>
-<p>The Census geoIDs can then serve as the basis for linking additional data to each geocoded address. Many types of data with importance for environmental health applications are available by Census geoID. Specifically, the Census collects and provides data by Census geoID for various social determinants of health (SDOH). Such Census SDOH data describe poverty, race/ethnicity, language, housing, and other socioeconomic characteristics. Increasingly, other data providers (e.g., other government agencies, research institutions, community science groups) are making their data available by Census geoID to help facilitate linkages with SDOH data. Such data cover various environment, climate, health, and built environment characteristics.</p>
+<p>The Census geoIDs can then serve as the basis for linking additional data to each geocoded address. Many types of data with importance for environmental health applications are available by Census geoID. Specifically, the Census collects and provides data by Census geoID for various social determinants of health (SDOH). Such Census SDOH data describe poverty, race/ethnicity, language, housing, and other socioeconomic characteristics. Increasingly, other data providers (e.g., other government agencies, research institutions, community science groups) are making their data available by Census geoID to help facilitate linkages with SDOH data. Such data cover various environment, disaster-related, health, and built environment characteristics.</p>
 <p>The following table lists example environmental health data sources readily available by Census geoID from US federal agencies.</p>
 <figcaption>
 Example Environmental Health Data Sources
@@ -289,16 +290,11 @@ Example Environmental Health Data Sources
 </thead>
 <tbody>
 <tr class="odd">
-<td><a href="https://www.ahrq.gov/sdoh/data-analytics/sdoh-data.html">AHRQ Social Detrminants of Health Database</a></td>
+<td><a href="https://www.ahrq.gov/sdoh/data-analytics/sdoh-data.html">AHRQ Social Determinants of Health Database</a></td>
 <td>County, ZIP code, tract</td>
 <td>Demographic characteristics, housing and transportation characteristics, food access, healthcare characteristics</td>
 </tr>
 <tr class="even">
-<td><a href="https://www.epa.gov/ejscreen">EPA Environmental Justice Screening and Mapping Tool</a></td>
-<td>Block group</td>
-<td>Air pollution, hazardous waste, flood risk, wildfire risk, environmental justice indices</td>
-</tr>
-<tr class="odd">
 <td><a href="https://ephtracking.cdc.gov">CDC National Environmental Public Health Tracking Network</a></td>
 <td>State, county</td>
 <td>Heat, sunlight and ultraviolet exposure, built environment characteristics, asthma, heat-related illnesses</td>
@@ -311,7 +307,7 @@ Example Environmental Health Data Sources
 <p>The Census defines <a href="https://www.census.gov/newsroom/blogs/random-samplings/2014/07/understanding-geographic-relationships-counties-places-tracts-and-more.html">geographic boundaries</a> at various spatial scales. Common examples in environmental health workflows include (from coarsest to finest spatial scale): states, counties, tracts, block groups, and blocks. These boundaries are completely non-overlapping, such that block boundaries are nested within block groups, which are nested within tracts, which are nested within counties, which are nested within states.</p>
 <p>The Census defines the boundaries of tracts and block groups to scale with local population: that is, in areas with higher population density (e.g., urban cores), these geographic units have finer spatial scale (i.e., smaller land area per unit) and in areas with lower population density (e.g., rural areas), the geographic units have coarser spatial scale (i.e., larger land area per unit). As a result, the spatial scale of geographic units varies substantially across the US. The shape of geographic units also varies substantially: the Census defines these boundaries to follow political boundaries (e.g., state boundaries) as well as physical features (e.g., roads, rivers), which often have irregular shapes.</p>
 <div class="note">
-<p>The variable shape and spatial scale of Census geographic units is in contrast with spatial grids– in which each geographic unit (i.e., grid cell) has the same shape and spatial resolution. Such spatial grids are common for environment and climate data.</p>
+<p>The variable shape and spatial scale of Census geographic units is in contrast with spatial grids– in which each geographic unit (i.e., grid cell) has the same shape and spatial resolution. Such spatial grids are common for environmental data.</p>
 </div>
 <p><a href="https://www.census.gov/programs-surveys/geography/guidance/geo-areas/zctas.html">ZIP Code Tabulation Areas (ZCTAs)</a>, which represent the geographic areas used by the US Postal Service for ZIP codes, are another common boundary used in environmental health workflows. ZCTAs have no spatial relationship with block groups, tracts, counties, or states: that is, ZCTAs can cross or overlap those other geographic boundaries. Like other Census geographic boundaries, ZCTAs vary in spatial resolution and shape across the US. The spatial scale of ZCTAs is, on average, finer than counties but coarser than tracts.</p>
 <p>The following figure illustrates the variable spatial scale and shape of each type of geographic boundary:</p>
@@ -418,55 +414,48 @@ Common Census Geographic Units in the United States
 <div id="link-to-census-step-0" class="section level3 hasAnchor" number="6.2.1">
 <h3><span class="header-section-number">6.2.1</span> Install R Packages<a href="chapter-link-to-census.html#link-to-census-step-0" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>This tutorial uses the <code>R</code> packages <code>sf</code> <span class="citation">(<a href="#ref-r-sf-1">1</a>,<a href="#ref-r-sf-2">8</a>)</span>, <code>tidyverse</code> <span class="citation">(<a href="#ref-r-tidyverse">18</a>)</span>, <code>tigris</code> <span class="citation">(<a href="#ref-r-tigris">19</a>)</span>, and <code>tmap</code> <span class="citation">(<a href="#ref-r-tmap">20</a>)</span>. The following code installs and loads these packages:</p>
-<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb134-1"><a href="chapter-link-to-census.html#cb134-1" tabindex="-1"></a><span class="co"># install required packages</span></span>
-<span id="cb134-2"><a href="chapter-link-to-census.html#cb134-2" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="fu">c</span>(<span class="st">&quot;sf&quot;</span>, <span class="st">&quot;tidyverse&quot;</span>, <span class="st">&quot;tigris&quot;</span>, <span class="st">&quot;tmap&quot;</span>))</span>
-<span id="cb134-3"><a href="chapter-link-to-census.html#cb134-3" tabindex="-1"></a></span>
-<span id="cb134-4"><a href="chapter-link-to-census.html#cb134-4" tabindex="-1"></a><span class="co"># load required packages</span></span>
-<span id="cb134-5"><a href="chapter-link-to-census.html#cb134-5" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
-<span id="cb134-6"><a href="chapter-link-to-census.html#cb134-6" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb134-7"><a href="chapter-link-to-census.html#cb134-7" tabindex="-1"></a><span class="fu">library</span>(tigris)</span>
-<span id="cb134-8"><a href="chapter-link-to-census.html#cb134-8" tabindex="-1"></a><span class="fu">library</span>(tmap)</span></code></pre></div>
+<div class="sourceCode" id="cb218"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb218-1"><a href="chapter-link-to-census.html#cb218-1" tabindex="-1"></a><span class="co"># install required packages</span></span>
+<span id="cb218-2"><a href="chapter-link-to-census.html#cb218-2" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="fu">c</span>(<span class="st">&quot;sf&quot;</span>, <span class="st">&quot;tidyverse&quot;</span>, <span class="st">&quot;tigris&quot;</span>, <span class="st">&quot;tmap&quot;</span>))</span></code></pre></div>
 </div>
 <div id="link-to-census-step-1" class="section level3 hasAnchor" number="6.2.2">
 <h3><span class="header-section-number">6.2.2</span> Prepare Geocoded Addresses<a href="chapter-link-to-census.html#link-to-census-step-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The first step is to prepare the geocoded addresses (i.e., geographic coordinates or latitude/longitude) for mapping in <code>R</code>.</p>
 <p>For this tutorial, we will use sample public data to represent geocoded addresses of, for example, participants in a health cohort study. This sample public data will be the coordinates for the city halls of the five largest cities in North Carolina. These coordinates were identified by searching Google Maps. The following code reads these coordinates into a table in <code>R</code> with columns for <code>id</code>, <code>latitude</code>, and <code>longitude</code>:</p>
-<div class="sourceCode" id="cb135"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb135-1"><a href="chapter-link-to-census.html#cb135-1" tabindex="-1"></a><span class="co"># create a table of sample public geocoded addresses</span></span>
-<span id="cb135-2"><a href="chapter-link-to-census.html#cb135-2" tabindex="-1"></a>geo_addresses_tbl <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb135-3"><a href="chapter-link-to-census.html#cb135-3" tabindex="-1"></a>  <span class="at">id =</span> <span class="fu">c</span>(</span>
-<span id="cb135-4"><a href="chapter-link-to-census.html#cb135-4" tabindex="-1"></a>    <span class="st">&quot;01-charlotte&quot;</span>,</span>
-<span id="cb135-5"><a href="chapter-link-to-census.html#cb135-5" tabindex="-1"></a>    <span class="st">&quot;02-raleigh&quot;</span>,</span>
-<span id="cb135-6"><a href="chapter-link-to-census.html#cb135-6" tabindex="-1"></a>    <span class="st">&quot;03-greensboro&quot;</span>,</span>
-<span id="cb135-7"><a href="chapter-link-to-census.html#cb135-7" tabindex="-1"></a>    <span class="st">&quot;04-durham&quot;</span>,</span>
-<span id="cb135-8"><a href="chapter-link-to-census.html#cb135-8" tabindex="-1"></a>    <span class="st">&quot;05-winston-salem&quot;</span></span>
-<span id="cb135-9"><a href="chapter-link-to-census.html#cb135-9" tabindex="-1"></a>  ),</span>
-<span id="cb135-10"><a href="chapter-link-to-census.html#cb135-10" tabindex="-1"></a>  <span class="at">latitude =</span> <span class="fu">c</span>(</span>
-<span id="cb135-11"><a href="chapter-link-to-census.html#cb135-11" tabindex="-1"></a>    <span class="fl">35.21599030178876</span>,</span>
-<span id="cb135-12"><a href="chapter-link-to-census.html#cb135-12" tabindex="-1"></a>    <span class="fl">35.78019493350421</span>,</span>
-<span id="cb135-13"><a href="chapter-link-to-census.html#cb135-13" tabindex="-1"></a>    <span class="fl">36.07391214865624</span>,</span>
-<span id="cb135-14"><a href="chapter-link-to-census.html#cb135-14" tabindex="-1"></a>    <span class="fl">35.99607916214782</span>,</span>
-<span id="cb135-15"><a href="chapter-link-to-census.html#cb135-15" tabindex="-1"></a>    <span class="fl">36.09512361249636</span></span>
-<span id="cb135-16"><a href="chapter-link-to-census.html#cb135-16" tabindex="-1"></a>  ),</span>
-<span id="cb135-17"><a href="chapter-link-to-census.html#cb135-17" tabindex="-1"></a>  <span class="at">longitude =</span> <span class="fu">c</span>(</span>
-<span id="cb135-18"><a href="chapter-link-to-census.html#cb135-18" tabindex="-1"></a>    <span class="sc">-</span><span class="fl">80.80170873958926</span>,</span>
-<span id="cb135-19"><a href="chapter-link-to-census.html#cb135-19" tabindex="-1"></a>    <span class="sc">-</span><span class="fl">78.64278743612566</span>,</span>
-<span id="cb135-20"><a href="chapter-link-to-census.html#cb135-20" tabindex="-1"></a>    <span class="sc">-</span><span class="fl">79.7883534467845</span>,</span>
-<span id="cb135-21"><a href="chapter-link-to-census.html#cb135-21" tabindex="-1"></a>    <span class="sc">-</span><span class="fl">78.89907326845271</span>,</span>
-<span id="cb135-22"><a href="chapter-link-to-census.html#cb135-22" tabindex="-1"></a>    <span class="sc">-</span><span class="fl">80.24283630316438</span></span>
-<span id="cb135-23"><a href="chapter-link-to-census.html#cb135-23" tabindex="-1"></a>  )</span>
-<span id="cb135-24"><a href="chapter-link-to-census.html#cb135-24" tabindex="-1"></a>)</span>
-<span id="cb135-25"><a href="chapter-link-to-census.html#cb135-25" tabindex="-1"></a></span>
-<span id="cb135-26"><a href="chapter-link-to-census.html#cb135-26" tabindex="-1"></a><span class="co"># view the table</span></span>
-<span id="cb135-27"><a href="chapter-link-to-census.html#cb135-27" tabindex="-1"></a><span class="fu">print</span>(geo_addresses_tbl)</span></code></pre></div>
-<p>Here is the table produced by the code above:</p>
-<div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb136-1"><a href="chapter-link-to-census.html#cb136-1" tabindex="-1"></a><span class="co"># A tibble: 5 × 3</span></span>
-<span id="cb136-2"><a href="chapter-link-to-census.html#cb136-2" tabindex="-1"></a><span class="co">#   id               latitude longitude</span></span>
-<span id="cb136-3"><a href="chapter-link-to-census.html#cb136-3" tabindex="-1"></a><span class="co">#   &lt;chr&gt;               &lt;dbl&gt;     &lt;dbl&gt;</span></span>
-<span id="cb136-4"><a href="chapter-link-to-census.html#cb136-4" tabindex="-1"></a><span class="co"># 1 01-charlotte         35.2     -80.8</span></span>
-<span id="cb136-5"><a href="chapter-link-to-census.html#cb136-5" tabindex="-1"></a><span class="co"># 2 02-raleigh           35.8     -78.6</span></span>
-<span id="cb136-6"><a href="chapter-link-to-census.html#cb136-6" tabindex="-1"></a><span class="co"># 3 03-greensboro        36.1     -79.8</span></span>
-<span id="cb136-7"><a href="chapter-link-to-census.html#cb136-7" tabindex="-1"></a><span class="co"># 4 04-durham            36.0     -78.9</span></span>
-<span id="cb136-8"><a href="chapter-link-to-census.html#cb136-8" tabindex="-1"></a><span class="co"># 5 05-winston-salem     36.1     -80.2</span></span></code></pre></div>
+<div class="sourceCode" id="cb219"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb219-1"><a href="chapter-link-to-census.html#cb219-1" tabindex="-1"></a><span class="co"># create a table of sample public geocoded addresses</span></span>
+<span id="cb219-2"><a href="chapter-link-to-census.html#cb219-2" tabindex="-1"></a>geo_addresses_tbl <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb219-3"><a href="chapter-link-to-census.html#cb219-3" tabindex="-1"></a>  <span class="at">id =</span> <span class="fu">c</span>(</span>
+<span id="cb219-4"><a href="chapter-link-to-census.html#cb219-4" tabindex="-1"></a>    <span class="st">&quot;01-charlotte&quot;</span>,</span>
+<span id="cb219-5"><a href="chapter-link-to-census.html#cb219-5" tabindex="-1"></a>    <span class="st">&quot;02-raleigh&quot;</span>,</span>
+<span id="cb219-6"><a href="chapter-link-to-census.html#cb219-6" tabindex="-1"></a>    <span class="st">&quot;03-greensboro&quot;</span>,</span>
+<span id="cb219-7"><a href="chapter-link-to-census.html#cb219-7" tabindex="-1"></a>    <span class="st">&quot;04-durham&quot;</span>,</span>
+<span id="cb219-8"><a href="chapter-link-to-census.html#cb219-8" tabindex="-1"></a>    <span class="st">&quot;05-winston-salem&quot;</span></span>
+<span id="cb219-9"><a href="chapter-link-to-census.html#cb219-9" tabindex="-1"></a>  ),</span>
+<span id="cb219-10"><a href="chapter-link-to-census.html#cb219-10" tabindex="-1"></a>  <span class="at">latitude =</span> <span class="fu">c</span>(</span>
+<span id="cb219-11"><a href="chapter-link-to-census.html#cb219-11" tabindex="-1"></a>    <span class="fl">35.21599030178876</span>,</span>
+<span id="cb219-12"><a href="chapter-link-to-census.html#cb219-12" tabindex="-1"></a>    <span class="fl">35.78019493350421</span>,</span>
+<span id="cb219-13"><a href="chapter-link-to-census.html#cb219-13" tabindex="-1"></a>    <span class="fl">36.07391214865624</span>,</span>
+<span id="cb219-14"><a href="chapter-link-to-census.html#cb219-14" tabindex="-1"></a>    <span class="fl">35.99607916214782</span>,</span>
+<span id="cb219-15"><a href="chapter-link-to-census.html#cb219-15" tabindex="-1"></a>    <span class="fl">36.09512361249636</span></span>
+<span id="cb219-16"><a href="chapter-link-to-census.html#cb219-16" tabindex="-1"></a>  ),</span>
+<span id="cb219-17"><a href="chapter-link-to-census.html#cb219-17" tabindex="-1"></a>  <span class="at">longitude =</span> <span class="fu">c</span>(</span>
+<span id="cb219-18"><a href="chapter-link-to-census.html#cb219-18" tabindex="-1"></a>    <span class="sc">-</span><span class="fl">80.80170873958926</span>,</span>
+<span id="cb219-19"><a href="chapter-link-to-census.html#cb219-19" tabindex="-1"></a>    <span class="sc">-</span><span class="fl">78.64278743612566</span>,</span>
+<span id="cb219-20"><a href="chapter-link-to-census.html#cb219-20" tabindex="-1"></a>    <span class="sc">-</span><span class="fl">79.7883534467845</span>,</span>
+<span id="cb219-21"><a href="chapter-link-to-census.html#cb219-21" tabindex="-1"></a>    <span class="sc">-</span><span class="fl">78.89907326845271</span>,</span>
+<span id="cb219-22"><a href="chapter-link-to-census.html#cb219-22" tabindex="-1"></a>    <span class="sc">-</span><span class="fl">80.24283630316438</span></span>
+<span id="cb219-23"><a href="chapter-link-to-census.html#cb219-23" tabindex="-1"></a>  )</span>
+<span id="cb219-24"><a href="chapter-link-to-census.html#cb219-24" tabindex="-1"></a>)</span>
+<span id="cb219-25"><a href="chapter-link-to-census.html#cb219-25" tabindex="-1"></a></span>
+<span id="cb219-26"><a href="chapter-link-to-census.html#cb219-26" tabindex="-1"></a><span class="co"># view the table</span></span>
+<span id="cb219-27"><a href="chapter-link-to-census.html#cb219-27" tabindex="-1"></a><span class="fu">print</span>(geo_addresses_tbl)</span></code></pre></div>
+<pre><code>## # A tibble: 5 × 3
+##   id               latitude longitude
+##   &lt;chr&gt;               &lt;dbl&gt;     &lt;dbl&gt;
+## 1 01-charlotte         35.2     -80.8
+## 2 02-raleigh           35.8     -78.6
+## 3 03-greensboro        36.1     -79.8
+## 4 04-durham            36.0     -78.9
+## 5 05-winston-salem     36.1     -80.2</code></pre>
 <p>Next, we’ll transform this table to an explicitly spatial data type: <a href="https://r-spatial.github.io/sf/articles/sf1.html">simple features (sf)</a>. This will allow us to use the point locations for spatial analysis using the <code>sf</code> package in <code>R</code>.</p>
 <p>To do this, we will need to specify the <a href="https://www.nceas.ucsb.edu/sites/default/files/2020-04/OverviewCoordinateReferenceSystems.pdf">coordinate reference system (CRS)</a> used for the city hall coordinates. For this example, we retrieved the city hall coordinates from Google Maps, which uses the <a href="https://developers.google.com/maps/documentation/javascript/coordinates">World Geodetic System 1984</a> (<code>WGS84</code>) CRS.</p>
 <div class="note">
@@ -479,81 +468,47 @@ Common Census Geographic Units in the United States
 </div>
 <p>There are multiple formats available in <code>R</code> for <a href="https://www.earthdatascience.org/courses/earth-analytics/spatial-data-r/understand-epsg-wkt-and-other-crs-definition-file-types/">specifying the CRS</a>: <code>proj4</code>, well known text (<code>wkt</code>), and European Petroleum Survey Group (<code>EPSG</code>) format <span class="citation">(<a href="#ref-wasser-lesson5">21</a>)</span>. Here, we will specify the <code>WGS84</code> CRS using the <code>EPSG</code> format, which is a 4-digit numeric identifying code. We can look up the <code>EPSG</code> code for <code>WGS84</code> by searching a <a href="https://spatialreference.org/ref/epsg/">spatial reference catalog</a>. There, we find that the <code>EPSG</code> code is<code>4326</code>.</p>
 <p>The following code transforms the table of city hall locations to a simple features object:</p>
-<div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb137-1"><a href="chapter-link-to-census.html#cb137-1" tabindex="-1"></a><span class="co"># transform table to simple features</span></span>
-<span id="cb137-2"><a href="chapter-link-to-census.html#cb137-2" tabindex="-1"></a>geo_addresses_sf <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>(geo_addresses_tbl,</span>
-<span id="cb137-3"><a href="chapter-link-to-census.html#cb137-3" tabindex="-1"></a>  <span class="at">coords =</span> <span class="fu">c</span>(<span class="st">&quot;longitude&quot;</span>, <span class="st">&quot;latitude&quot;</span>),</span>
-<span id="cb137-4"><a href="chapter-link-to-census.html#cb137-4" tabindex="-1"></a>  <span class="at">crs =</span> <span class="st">&quot;EPSG:4326&quot;</span></span>
-<span id="cb137-5"><a href="chapter-link-to-census.html#cb137-5" tabindex="-1"></a>)</span>
-<span id="cb137-6"><a href="chapter-link-to-census.html#cb137-6" tabindex="-1"></a></span>
-<span id="cb137-7"><a href="chapter-link-to-census.html#cb137-7" tabindex="-1"></a><span class="co"># view simple features</span></span>
-<span id="cb137-8"><a href="chapter-link-to-census.html#cb137-8" tabindex="-1"></a><span class="fu">print</span>(geo_addresses_sf)</span></code></pre></div>
-<p>Here is the description of the simple features object produced by the code above:</p>
-<div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb138-1"><a href="chapter-link-to-census.html#cb138-1" tabindex="-1"></a><span class="co"># Simple feature collection with 5 features and 1 field</span></span>
-<span id="cb138-2"><a href="chapter-link-to-census.html#cb138-2" tabindex="-1"></a><span class="co"># Geometry type: POINT</span></span>
-<span id="cb138-3"><a href="chapter-link-to-census.html#cb138-3" tabindex="-1"></a><span class="co"># Dimension:     XY</span></span>
-<span id="cb138-4"><a href="chapter-link-to-census.html#cb138-4" tabindex="-1"></a><span class="co"># Bounding box:  xmin: -80.80171 ymin: 35.21599 xmax: -78.64279 ymax: 36.09512</span></span>
-<span id="cb138-5"><a href="chapter-link-to-census.html#cb138-5" tabindex="-1"></a><span class="co"># Geodetic CRS:  WGS 84</span></span>
-<span id="cb138-6"><a href="chapter-link-to-census.html#cb138-6" tabindex="-1"></a><span class="co"># # A tibble: 5 × 2</span></span>
-<span id="cb138-7"><a href="chapter-link-to-census.html#cb138-7" tabindex="-1"></a><span class="co">#   id                           geometry</span></span>
-<span id="cb138-8"><a href="chapter-link-to-census.html#cb138-8" tabindex="-1"></a><span class="co"># * &lt;chr&gt;                     &lt;POINT [°]&gt;</span></span>
-<span id="cb138-9"><a href="chapter-link-to-census.html#cb138-9" tabindex="-1"></a><span class="co"># 1 01-charlotte     (-80.80171 35.21599)</span></span>
-<span id="cb138-10"><a href="chapter-link-to-census.html#cb138-10" tabindex="-1"></a><span class="co"># 2 02-raleigh       (-78.64279 35.78019)</span></span>
-<span id="cb138-11"><a href="chapter-link-to-census.html#cb138-11" tabindex="-1"></a><span class="co"># 3 03-greensboro    (-79.78835 36.07391)</span></span>
-<span id="cb138-12"><a href="chapter-link-to-census.html#cb138-12" tabindex="-1"></a><span class="co"># 4 04-durham        (-78.89907 35.99608)</span></span>
-<span id="cb138-13"><a href="chapter-link-to-census.html#cb138-13" tabindex="-1"></a><span class="co"># 5 05-winston-salem (-80.24284 36.09512)</span></span></code></pre></div>
+<div class="sourceCode" id="cb221"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb221-1"><a href="chapter-link-to-census.html#cb221-1" tabindex="-1"></a><span class="co"># transform table to simple features</span></span>
+<span id="cb221-2"><a href="chapter-link-to-census.html#cb221-2" tabindex="-1"></a>geo_addresses_sf <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>(geo_addresses_tbl,</span>
+<span id="cb221-3"><a href="chapter-link-to-census.html#cb221-3" tabindex="-1"></a>  <span class="at">coords =</span> <span class="fu">c</span>(<span class="st">&quot;longitude&quot;</span>, <span class="st">&quot;latitude&quot;</span>),</span>
+<span id="cb221-4"><a href="chapter-link-to-census.html#cb221-4" tabindex="-1"></a>  <span class="at">crs =</span> <span class="st">&quot;EPSG:4326&quot;</span></span>
+<span id="cb221-5"><a href="chapter-link-to-census.html#cb221-5" tabindex="-1"></a>)</span>
+<span id="cb221-6"><a href="chapter-link-to-census.html#cb221-6" tabindex="-1"></a></span>
+<span id="cb221-7"><a href="chapter-link-to-census.html#cb221-7" tabindex="-1"></a><span class="co"># view simple features</span></span>
+<span id="cb221-8"><a href="chapter-link-to-census.html#cb221-8" tabindex="-1"></a><span class="fu">print</span>(geo_addresses_sf)</span></code></pre></div>
+<pre><code>## Simple feature collection with 5 features and 1 field
+## Geometry type: POINT
+## Dimension:     XY
+## Bounding box:  xmin: -80.80171 ymin: 35.21599 xmax: -78.64279 ymax: 36.09512
+## Geodetic CRS:  WGS 84
+## # A tibble: 5 × 2
+##   id                           geometry
+## * &lt;chr&gt;                     &lt;POINT [°]&gt;
+## 1 01-charlotte     (-80.80171 35.21599)
+## 2 02-raleigh       (-78.64279 35.78019)
+## 3 03-greensboro    (-79.78835 36.07391)
+## 4 04-durham        (-78.89907 35.99608)
+## 5 05-winston-salem (-80.24284 36.09512)</code></pre>
 <p>Now, we can see that each city hall has associated <code>geometry</code> in point format. We can also confirm that the correct CRS (<code>WGS84</code>) is now associated with the city hall locations.</p>
 </div>
 <div id="link-to-census-step-2" class="section level3 hasAnchor" number="6.2.3">
 <h3><span class="header-section-number">6.2.3</span> Access Census Geographic Boundaries<a href="chapter-link-to-census.html#link-to-census-step-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The second step is to prepare the Census geographic boundaries for mapping in <code>R</code>. For this tutorial, we’ll use the <code>tigris</code> package to load the Census tract boundaries for North Carolina in year-2010 (i.e., year-2010 vintage). Using an <code>R</code> package like <code>tigris</code> to load the Census geographic boundaries will help keep the workflow reproducible by documenting all of the steps in <code>R</code>. The following code reads the North Carolina 2010 Census tract boundaries into <code>R</code> as simple features:</p>
-<div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb139-1"><a href="chapter-link-to-census.html#cb139-1" tabindex="-1"></a><span class="co"># download Census tracts in North Carolina in 2010 as simple features</span></span>
-<span id="cb139-2"><a href="chapter-link-to-census.html#cb139-2" tabindex="-1"></a>nc_tracts_2010_sf <span class="ot">&lt;-</span> tigris<span class="sc">::</span><span class="fu">tracts</span>(<span class="at">state =</span> <span class="st">&quot;NC&quot;</span>, <span class="at">year =</span> <span class="dv">2010</span>)</span>
-<span id="cb139-3"><a href="chapter-link-to-census.html#cb139-3" tabindex="-1"></a></span>
-<span id="cb139-4"><a href="chapter-link-to-census.html#cb139-4" tabindex="-1"></a><span class="co"># view the first several rows of the Census tracts simple features</span></span>
-<span id="cb139-5"><a href="chapter-link-to-census.html#cb139-5" tabindex="-1"></a><span class="fu">head</span>(nc_tracts_2010_sf)</span></code></pre></div>
-<p>Here is the description of the simple features object produced by the code above:</p>
-<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb140-1"><a href="chapter-link-to-census.html#cb140-1" tabindex="-1"></a><span class="co"># Simple feature collection with 6 features and 14 fields</span></span>
-<span id="cb140-2"><a href="chapter-link-to-census.html#cb140-2" tabindex="-1"></a><span class="co"># Geometry type: MULTIPOLYGON</span></span>
-<span id="cb140-3"><a href="chapter-link-to-census.html#cb140-3" tabindex="-1"></a><span class="co"># Dimension:     XY</span></span>
-<span id="cb140-4"><a href="chapter-link-to-census.html#cb140-4" tabindex="-1"></a><span class="co"># Bounding box:  xmin: -80.07571 ymin: 34.80499 xmax: -79.45918 ymax: 35.18342</span></span>
-<span id="cb140-5"><a href="chapter-link-to-census.html#cb140-5" tabindex="-1"></a><span class="co"># Geodetic CRS:  NAD83</span></span>
-<span id="cb140-6"><a href="chapter-link-to-census.html#cb140-6" tabindex="-1"></a><span class="co">#   STATEFP10 COUNTYFP10 TRACTCE10     GEOID10 NAME10        NAMELSAD10 MTFCC10</span></span>
-<span id="cb140-7"><a href="chapter-link-to-census.html#cb140-7" tabindex="-1"></a><span class="co"># 1        37        153    970100 37153970100   9701 Census Tract 9701   G5020</span></span>
-<span id="cb140-8"><a href="chapter-link-to-census.html#cb140-8" tabindex="-1"></a><span class="co"># 2        37        153    970200 37153970200   9702 Census Tract 9702   G5020</span></span>
-<span id="cb140-9"><a href="chapter-link-to-census.html#cb140-9" tabindex="-1"></a><span class="co"># 3        37        153    970800 37153970800   9708 Census Tract 9708   G5020</span></span>
-<span id="cb140-10"><a href="chapter-link-to-census.html#cb140-10" tabindex="-1"></a><span class="co"># 4        37        153    970900 37153970900   9709 Census Tract 9709   G5020</span></span>
-<span id="cb140-11"><a href="chapter-link-to-census.html#cb140-11" tabindex="-1"></a><span class="co"># 5        37        153    971000 37153971000   9710 Census Tract 9710   G5020</span></span>
-<span id="cb140-12"><a href="chapter-link-to-census.html#cb140-12" tabindex="-1"></a><span class="co"># 6        37        153    971100 37153971100   9711 Census Tract 9711   G5020</span></span>
-<span id="cb140-13"><a href="chapter-link-to-census.html#cb140-13" tabindex="-1"></a><span class="co">#</span></span>
-<span id="cb140-14"><a href="chapter-link-to-census.html#cb140-14" tabindex="-1"></a><span class="co">#   FUNCSTAT10   ALAND10 AWATER10  INTPTLAT10   INTPTLON10</span></span>
-<span id="cb140-15"><a href="chapter-link-to-census.html#cb140-15" tabindex="-1"></a><span class="co"># 1          S 246281647  2106825 +35.0503203 -079.6180454</span></span>
-<span id="cb140-16"><a href="chapter-link-to-census.html#cb140-16" tabindex="-1"></a><span class="co"># 2          S 457736198  7835811 +35.0967892 -079.8225512</span></span>
-<span id="cb140-17"><a href="chapter-link-to-census.html#cb140-17" tabindex="-1"></a><span class="co"># 3          S 139358521  2752112 +34.8508484 -079.8201950</span></span>
-<span id="cb140-18"><a href="chapter-link-to-census.html#cb140-18" tabindex="-1"></a><span class="co"># 4          S  23311020    78240 +34.8785679 -079.7346295</span></span>
-<span id="cb140-19"><a href="chapter-link-to-census.html#cb140-19" tabindex="-1"></a><span class="co"># 5          S  49233222   188190 +34.9395795 -079.6628977</span></span>
-<span id="cb140-20"><a href="chapter-link-to-census.html#cb140-20" tabindex="-1"></a><span class="co"># 6.         S 161136716   948938 +34.8751742 -079.6567146</span></span>
-<span id="cb140-21"><a href="chapter-link-to-census.html#cb140-21" tabindex="-1"></a><span class="co">#                         geometry COUNTYFP STATEFP</span></span>
-<span id="cb140-22"><a href="chapter-link-to-census.html#cb140-22" tabindex="-1"></a><span class="co"># 1 MULTIPOLYGON (((-79.56729 3...      153      37</span></span>
-<span id="cb140-23"><a href="chapter-link-to-census.html#cb140-23" tabindex="-1"></a><span class="co"># 2 MULTIPOLYGON (((-79.71753 3...      153      37</span></span>
-<span id="cb140-24"><a href="chapter-link-to-census.html#cb140-24" tabindex="-1"></a><span class="co"># 3 MULTIPOLYGON (((-79.76773 3...      153      37</span></span>
-<span id="cb140-25"><a href="chapter-link-to-census.html#cb140-25" tabindex="-1"></a><span class="co"># 4 MULTIPOLYGON (((-79.76773 3...      153      37</span></span>
-<span id="cb140-26"><a href="chapter-link-to-census.html#cb140-26" tabindex="-1"></a><span class="co"># 5 MULTIPOLYGON (((-79.69038 3...      153      37</span></span>
-<span id="cb140-27"><a href="chapter-link-to-census.html#cb140-27" tabindex="-1"></a><span class="co"># 6 MULTIPOLYGON (((-79.5684 34...      153      37</span></span></code></pre></div>
+<div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb223-1"><a href="chapter-link-to-census.html#cb223-1" tabindex="-1"></a><span class="co"># download Census tracts in North Carolina in 2010 as simple features</span></span>
+<span id="cb223-2"><a href="chapter-link-to-census.html#cb223-2" tabindex="-1"></a>nc_tracts_2010_sf <span class="ot">&lt;-</span> tigris<span class="sc">::</span><span class="fu">tracts</span>(<span class="at">state =</span> <span class="st">&quot;NC&quot;</span>, <span class="at">year =</span> <span class="dv">2010</span>)</span>
+<span id="cb223-3"><a href="chapter-link-to-census.html#cb223-3" tabindex="-1"></a></span>
+<span id="cb223-4"><a href="chapter-link-to-census.html#cb223-4" tabindex="-1"></a><span class="co"># view the first several rows of the Census tracts simple features</span></span>
+<span id="cb223-5"><a href="chapter-link-to-census.html#cb223-5" tabindex="-1"></a><span class="fu">head</span>(nc_tracts_2010_sf)</span></code></pre></div>
 <p>Each tract has associated <code>geometry</code> in polygon format plus 14 additional attributes (i.e., variables, columns). Importantly, the Census tract geoID (i.e., <a href="chapter-link-to-census.html#intro-census-geoids">11-digit identifying code</a>) for year-2010 is stored in the column <code>GEOID10</code>.</p>
 <p>We can see that the CRS listed above for the Census tract boundaries (<code>NAD83</code>) is different from the CRS for the city hall locations (<code>WGS84</code>). This will be important for the <a href="chapter-link-to-census.html#link-to-census-step-3">linkage step</a>.</p>
 <p>Next, we can view the geometry of the tracts by creating a map:</p>
-<div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb141-1"><a href="chapter-link-to-census.html#cb141-1" tabindex="-1"></a><span class="co"># create a map of the Census tracts</span></span>
-<span id="cb141-2"><a href="chapter-link-to-census.html#cb141-2" tabindex="-1"></a>nc_tracts_2010_map <span class="ot">&lt;-</span> tmap<span class="sc">::</span><span class="fu">tm_shape</span>(nc_tracts_2010_sf) <span class="sc">+</span></span>
-<span id="cb141-3"><a href="chapter-link-to-census.html#cb141-3" tabindex="-1"></a>  tmap<span class="sc">::</span><span class="fu">tm_polygons</span>(<span class="at">lwd =</span> <span class="fl">0.5</span>)</span>
-<span id="cb141-4"><a href="chapter-link-to-census.html#cb141-4" tabindex="-1"></a></span>
-<span id="cb141-5"><a href="chapter-link-to-census.html#cb141-5" tabindex="-1"></a><span class="co"># view the map</span></span>
-<span id="cb141-6"><a href="chapter-link-to-census.html#cb141-6" tabindex="-1"></a><span class="fu">print</span>(nc_tracts_2010_map)</span></code></pre></div>
-<div class="figure">
-<img src="images/link_to_census/nc_tracts_2010_map.png" style="width:100%">
-<figcaption>
-Census Tracts in North Carolina in 2010
-</figcaption>
-</div>
+<div class="sourceCode" id="cb224"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb224-1"><a href="chapter-link-to-census.html#cb224-1" tabindex="-1"></a><span class="co"># create a map of the Census tracts</span></span>
+<span id="cb224-2"><a href="chapter-link-to-census.html#cb224-2" tabindex="-1"></a>nc_tracts_2010_map <span class="ot">&lt;-</span> tmap<span class="sc">::</span><span class="fu">tm_shape</span>(nc_tracts_2010_sf) <span class="sc">+</span></span>
+<span id="cb224-3"><a href="chapter-link-to-census.html#cb224-3" tabindex="-1"></a>  tmap<span class="sc">::</span><span class="fu">tm_polygons</span>(<span class="at">lwd =</span> <span class="fl">0.5</span>)</span>
+<span id="cb224-4"><a href="chapter-link-to-census.html#cb224-4" tabindex="-1"></a></span>
+<span id="cb224-5"><a href="chapter-link-to-census.html#cb224-5" tabindex="-1"></a><span class="co"># view the map</span></span>
+<span id="cb224-6"><a href="chapter-link-to-census.html#cb224-6" tabindex="-1"></a><span class="fu">print</span>(nc_tracts_2010_map)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-141-1.png" width="100%" style="display: block; margin: auto;" /></p>
 <p>Other <a href="https://github.com/walkerke/tigris">types and vintages of Census geographic boundaries</a> are available through <code>tigris</code> and the related <code>tidycensus</code> package <span class="citation">(<a href="#ref-r-tidycensus">22</a>)</span>. In most cases, these boundaries are available for recent years (i.e., 1990 to present) and are accessed by state (i.e., users can download geographic boundaries for one state at a time, in separate files).</p>
 <p>Census geographic boundaries are also available to download by state for years 2007 to present via the Census TIGER/Lines website <span class="citation">(<a href="#ref-census-tiger-line-shapefiles">23</a>)</span>.</p>
 <p>Historic Census geographic boundaries (i.e., 1910 to present) are available through <a href="https://www.nhgis.org">IPUMS NHGIS</a> <span class="citation">(<a href="#ref-ipums-nhgis">24</a>)</span>. Additionally, IPUMS NHGIS provides many boundaries at the national scale (i.e., such that users can download geographic boundaries for the entire US in a single file). Here is an <a href="https://walker-data.com/census-r/other-census-and-government-data-resources.html#mapping-historical-geographies-of-new-york-city-with-nhgis">example workflow</a> for accessing historic Census geographic boundaries via IPUMS NHGIS in <code>R</code> <span class="citation">(<a href="#ref-walker2023analyzing">25</a>)</span>.</p>
@@ -561,53 +516,44 @@ Census Tracts in North Carolina in 2010
 <div id="link-to-census-step-3" class="section level3 hasAnchor" number="6.2.4">
 <h3><span class="header-section-number">6.2.4</span> Link Geocoded Addresses to Census Geographic Boundaries<a href="chapter-link-to-census.html#link-to-census-step-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The third step is to link each geocoded addresses to the geoID of the Census geographic unit that contains it. To do this, we’ll first need to prepare the geocoded addresses and Census geographic boundaries in the same CRS. The following code transforms the CRS of the geocoded addresses to match the the CRS of the Census geographic boundaries (<code>NAD83</code>) and then maps them together:</p>
-<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="chapter-link-to-census.html#cb142-1" tabindex="-1"></a><span class="co"># transform city hall locations to match CRS of Census tracts</span></span>
-<span id="cb142-2"><a href="chapter-link-to-census.html#cb142-2" tabindex="-1"></a>geo_addresses_crs_sf <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_transform</span>(geo_addresses_sf,</span>
-<span id="cb142-3"><a href="chapter-link-to-census.html#cb142-3" tabindex="-1"></a>  <span class="at">crs =</span> sf<span class="sc">::</span><span class="fu">st_crs</span>(nc_tracts_2010_sf)</span>
-<span id="cb142-4"><a href="chapter-link-to-census.html#cb142-4" tabindex="-1"></a>)</span>
-<span id="cb142-5"><a href="chapter-link-to-census.html#cb142-5" tabindex="-1"></a></span>
-<span id="cb142-6"><a href="chapter-link-to-census.html#cb142-6" tabindex="-1"></a><span class="co"># create a map of the Census tracts with the city hall locations</span></span>
-<span id="cb142-7"><a href="chapter-link-to-census.html#cb142-7" tabindex="-1"></a>linkage_map <span class="ot">&lt;-</span> tmap<span class="sc">::</span><span class="fu">tm_shape</span>(nc_tracts_2010_sf) <span class="sc">+</span></span>
-<span id="cb142-8"><a href="chapter-link-to-census.html#cb142-8" tabindex="-1"></a>  tmap<span class="sc">::</span><span class="fu">tm_polygons</span>(<span class="at">lwd =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
-<span id="cb142-9"><a href="chapter-link-to-census.html#cb142-9" tabindex="-1"></a>  tmap<span class="sc">::</span><span class="fu">tm_shape</span>(geo_addresses_crs_sf) <span class="sc">+</span></span>
-<span id="cb142-10"><a href="chapter-link-to-census.html#cb142-10" tabindex="-1"></a>  tmap<span class="sc">::</span><span class="fu">tm_dots</span>(</span>
-<span id="cb142-11"><a href="chapter-link-to-census.html#cb142-11" tabindex="-1"></a>    <span class="at">col =</span> <span class="st">&quot;red&quot;</span>,</span>
-<span id="cb142-12"><a href="chapter-link-to-census.html#cb142-12" tabindex="-1"></a>    <span class="at">size =</span> <span class="fl">0.25</span></span>
-<span id="cb142-13"><a href="chapter-link-to-census.html#cb142-13" tabindex="-1"></a>  )</span>
-<span id="cb142-14"><a href="chapter-link-to-census.html#cb142-14" tabindex="-1"></a></span>
-<span id="cb142-15"><a href="chapter-link-to-census.html#cb142-15" tabindex="-1"></a><span class="co"># view the map</span></span>
-<span id="cb142-16"><a href="chapter-link-to-census.html#cb142-16" tabindex="-1"></a><span class="fu">print</span>(linkage_map)</span></code></pre></div>
-<div class="figure">
-<img src="images/link_to_census/linkage_map.png" style="width:100%">
-<figcaption>
-Census Tracts in North Carolina in 2010 (Grey) with Sample Geocoded Addresses (Red)
-</figcaption>
-</div>
+<div class="sourceCode" id="cb225"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb225-1"><a href="chapter-link-to-census.html#cb225-1" tabindex="-1"></a><span class="co"># transform city hall locations to match CRS of Census tracts</span></span>
+<span id="cb225-2"><a href="chapter-link-to-census.html#cb225-2" tabindex="-1"></a>geo_addresses_crs_sf <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_transform</span>(geo_addresses_sf,</span>
+<span id="cb225-3"><a href="chapter-link-to-census.html#cb225-3" tabindex="-1"></a>  <span class="at">crs =</span> sf<span class="sc">::</span><span class="fu">st_crs</span>(nc_tracts_2010_sf)</span>
+<span id="cb225-4"><a href="chapter-link-to-census.html#cb225-4" tabindex="-1"></a>)</span>
+<span id="cb225-5"><a href="chapter-link-to-census.html#cb225-5" tabindex="-1"></a></span>
+<span id="cb225-6"><a href="chapter-link-to-census.html#cb225-6" tabindex="-1"></a><span class="co"># create a map of the Census tracts with the city hall locations</span></span>
+<span id="cb225-7"><a href="chapter-link-to-census.html#cb225-7" tabindex="-1"></a>linkage_map <span class="ot">&lt;-</span> tmap<span class="sc">::</span><span class="fu">tm_shape</span>(nc_tracts_2010_sf) <span class="sc">+</span></span>
+<span id="cb225-8"><a href="chapter-link-to-census.html#cb225-8" tabindex="-1"></a>  tmap<span class="sc">::</span><span class="fu">tm_polygons</span>(<span class="at">lwd =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb225-9"><a href="chapter-link-to-census.html#cb225-9" tabindex="-1"></a>  tmap<span class="sc">::</span><span class="fu">tm_shape</span>(geo_addresses_crs_sf) <span class="sc">+</span></span>
+<span id="cb225-10"><a href="chapter-link-to-census.html#cb225-10" tabindex="-1"></a>  tmap<span class="sc">::</span><span class="fu">tm_dots</span>(</span>
+<span id="cb225-11"><a href="chapter-link-to-census.html#cb225-11" tabindex="-1"></a>    <span class="at">col =</span> <span class="st">&quot;red&quot;</span>,</span>
+<span id="cb225-12"><a href="chapter-link-to-census.html#cb225-12" tabindex="-1"></a>    <span class="at">size =</span> <span class="fl">0.25</span></span>
+<span id="cb225-13"><a href="chapter-link-to-census.html#cb225-13" tabindex="-1"></a>  )</span>
+<span id="cb225-14"><a href="chapter-link-to-census.html#cb225-14" tabindex="-1"></a></span>
+<span id="cb225-15"><a href="chapter-link-to-census.html#cb225-15" tabindex="-1"></a><span class="co"># view the map</span></span>
+<span id="cb225-16"><a href="chapter-link-to-census.html#cb225-16" tabindex="-1"></a><span class="fu">print</span>(linkage_map)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-142-1.png" width="100%" style="display: block; margin: auto;" /></p>
 <p>Now that the geocoded addresses and Census tracts are in the same CRS, we can link each geocoded address to the Census tract that contains it using a spatial join. The following code produces a table of geocoded addresses linked to Census tract geoIDs:</p>
-<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb143-1"><a href="chapter-link-to-census.html#cb143-1" tabindex="-1"></a><span class="co"># link geocoded addresses to the Census tracts that contain them</span></span>
-<span id="cb143-2"><a href="chapter-link-to-census.html#cb143-2" tabindex="-1"></a>geo_addresses_linkage_sf <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_join</span>(geo_addresses_crs_sf,</span>
-<span id="cb143-3"><a href="chapter-link-to-census.html#cb143-3" tabindex="-1"></a>                                        nc_tracts_2010_sf,</span>
-<span id="cb143-4"><a href="chapter-link-to-census.html#cb143-4" tabindex="-1"></a>                                        <span class="at">left =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb143-5"><a href="chapter-link-to-census.html#cb143-5" tabindex="-1"></a></span>
-<span id="cb143-6"><a href="chapter-link-to-census.html#cb143-6" tabindex="-1"></a><span class="co"># create linked table with geocoded addresses id paired with Census tract geoID</span></span>
-<span id="cb143-7"><a href="chapter-link-to-census.html#cb143-7" tabindex="-1"></a>geo_addresses_linkage_tbl <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_drop_geometry</span>(geo_addresses_linkage_sf) <span class="sc">%&gt;%</span></span>
-<span id="cb143-8"><a href="chapter-link-to-census.html#cb143-8" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">rename</span>(<span class="at">geoid_tract_2010 =</span> GEOID10) <span class="sc">%&gt;%</span></span>
-<span id="cb143-9"><a href="chapter-link-to-census.html#cb143-9" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(id, geoid_tract_2010)</span>
-<span id="cb143-10"><a href="chapter-link-to-census.html#cb143-10" tabindex="-1"></a></span>
-<span id="cb143-11"><a href="chapter-link-to-census.html#cb143-11" tabindex="-1"></a><span class="co"># write linked table to CSV file</span></span>
-<span id="cb143-12"><a href="chapter-link-to-census.html#cb143-12" tabindex="-1"></a>readr<span class="sc">::</span><span class="fu">write_csv</span>(geo_addresses_linkage_tbl,</span>
-<span id="cb143-13"><a href="chapter-link-to-census.html#cb143-13" tabindex="-1"></a>                 <span class="st">&quot;city_hall_census_tract_2010_linkage.csv&quot;</span>)</span>
-<span id="cb143-14"><a href="chapter-link-to-census.html#cb143-14" tabindex="-1"></a></span>
-<span id="cb143-15"><a href="chapter-link-to-census.html#cb143-15" tabindex="-1"></a><span class="co"># view the linked table</span></span>
-<span id="cb143-16"><a href="chapter-link-to-census.html#cb143-16" tabindex="-1"></a><span class="fu">print</span>(geo_addresses_linkage_tbl)</span></code></pre></div>
-<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb144-1"><a href="chapter-link-to-census.html#cb144-1" tabindex="-1"></a><span class="co"># A tibble: 5 × 2</span></span>
-<span id="cb144-2"><a href="chapter-link-to-census.html#cb144-2" tabindex="-1"></a><span class="co">#   id               geoid_tract_2010</span></span>
-<span id="cb144-3"><a href="chapter-link-to-census.html#cb144-3" tabindex="-1"></a><span class="co">#   &lt;chr&gt;            &lt;chr&gt;</span></span>
-<span id="cb144-4"><a href="chapter-link-to-census.html#cb144-4" tabindex="-1"></a><span class="co"># 1 01-charlotte     37119001100</span></span>
-<span id="cb144-5"><a href="chapter-link-to-census.html#cb144-5" tabindex="-1"></a><span class="co"># 2 02-raleigh       37183050100</span></span>
-<span id="cb144-6"><a href="chapter-link-to-census.html#cb144-6" tabindex="-1"></a><span class="co"># 3 03-greensboro    37081010800</span></span>
-<span id="cb144-7"><a href="chapter-link-to-census.html#cb144-7" tabindex="-1"></a><span class="co"># 4 04-durham        37063002200</span></span>
-<span id="cb144-8"><a href="chapter-link-to-census.html#cb144-8" tabindex="-1"></a><span class="co"># 5 05-winston-salem 37067000100</span></span></code></pre></div>
+<div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb226-1"><a href="chapter-link-to-census.html#cb226-1" tabindex="-1"></a><span class="co"># link geocoded addresses to the Census tracts that contain them</span></span>
+<span id="cb226-2"><a href="chapter-link-to-census.html#cb226-2" tabindex="-1"></a>geo_addresses_linkage_sf <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_join</span>(geo_addresses_crs_sf,</span>
+<span id="cb226-3"><a href="chapter-link-to-census.html#cb226-3" tabindex="-1"></a>                                        nc_tracts_2010_sf,</span>
+<span id="cb226-4"><a href="chapter-link-to-census.html#cb226-4" tabindex="-1"></a>                                        <span class="at">left =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb226-5"><a href="chapter-link-to-census.html#cb226-5" tabindex="-1"></a></span>
+<span id="cb226-6"><a href="chapter-link-to-census.html#cb226-6" tabindex="-1"></a><span class="co"># create linked table with geocoded addresses id paired with Census tract geoID</span></span>
+<span id="cb226-7"><a href="chapter-link-to-census.html#cb226-7" tabindex="-1"></a>geo_addresses_linkage_tbl <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_drop_geometry</span>(geo_addresses_linkage_sf) <span class="sc">%&gt;%</span></span>
+<span id="cb226-8"><a href="chapter-link-to-census.html#cb226-8" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">rename</span>(<span class="at">geoid_tract_2010 =</span> GEOID10) <span class="sc">%&gt;%</span></span>
+<span id="cb226-9"><a href="chapter-link-to-census.html#cb226-9" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(id, geoid_tract_2010)</span>
+<span id="cb226-10"><a href="chapter-link-to-census.html#cb226-10" tabindex="-1"></a></span>
+<span id="cb226-11"><a href="chapter-link-to-census.html#cb226-11" tabindex="-1"></a><span class="co"># view the linked table</span></span>
+<span id="cb226-12"><a href="chapter-link-to-census.html#cb226-12" tabindex="-1"></a><span class="fu">print</span>(geo_addresses_linkage_tbl)</span></code></pre></div>
+<pre><code>## # A tibble: 5 × 2
+##   id               geoid_tract_2010
+##   &lt;chr&gt;            &lt;chr&gt;           
+## 1 01-charlotte     37119001100     
+## 2 02-raleigh       37183050100     
+## 3 03-greensboro    37081010800     
+## 4 04-durham        37063002200     
+## 5 05-winston-salem 37067000100</code></pre>
 </div>
 <div id="link-to-census-step-4" class="section level3 hasAnchor" number="6.2.5">
 <h3><span class="header-section-number">6.2.5</span> Link AHRQ SDOH Data to Geocoded Addresses<a href="chapter-link-to-census.html#link-to-census-step-4" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -639,31 +585,36 @@ Screenshot of Second Sheet in Excel File (September 14, 2023)
 </div>
 <p>We find that the Excel file has two sheets: <code>Layout</code> and <code>Data</code>. The <code>Layout</code> sheet contains the data dictionary. The <code>Data</code> sheet contains &gt;300 columns of SDOH data by geoID for the &gt;70,000 Census tracts in the US in 2010.</p>
 <p>The following code downloads the Excel file and reads its <code>Data</code> sheet into a table in <code>R</code>:</p>
-<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb145-1"><a href="chapter-link-to-census.html#cb145-1" tabindex="-1"></a><span class="co"># download Excel file using the URL provided in the screenshot above</span></span>
-<span id="cb145-2"><a href="chapter-link-to-census.html#cb145-2" tabindex="-1"></a>sdoh_tracts_2010_url <span class="ot">&lt;-</span></span>
-<span id="cb145-3"><a href="chapter-link-to-census.html#cb145-3" tabindex="-1"></a>  <span class="st">&quot;https://www.ahrq.gov/downloads/sdoh/sdoh_2010_tract_1_0.xlsx&quot;</span></span>
-<span id="cb145-4"><a href="chapter-link-to-census.html#cb145-4" tabindex="-1"></a><span class="fu">download.file</span>(sdoh_tracts_2010_url, <span class="at">destfile =</span> <span class="st">&quot;sdoh_2010_tract_1_0.xlsx&quot;</span>)</span>
-<span id="cb145-5"><a href="chapter-link-to-census.html#cb145-5" tabindex="-1"></a></span>
-<span id="cb145-6"><a href="chapter-link-to-census.html#cb145-6" tabindex="-1"></a><span class="co"># read the &quot;Data&quot; sheet of the Excel file into a table R</span></span>
-<span id="cb145-7"><a href="chapter-link-to-census.html#cb145-7" tabindex="-1"></a><span class="co"># note that you may need to provide a complete filepath for the Excel file</span></span>
-<span id="cb145-8"><a href="chapter-link-to-census.html#cb145-8" tabindex="-1"></a>sdoh_tracts_2010_tbl <span class="ot">&lt;-</span> readxl<span class="sc">::</span><span class="fu">read_xlsx</span>(<span class="st">&quot;sdoh_2010_tract_1_0.xlsx&quot;</span>,</span>
-<span id="cb145-9"><a href="chapter-link-to-census.html#cb145-9" tabindex="-1"></a>                                          <span class="at">sheet =</span> <span class="st">&quot;Data&quot;</span>)</span>
-<span id="cb145-10"><a href="chapter-link-to-census.html#cb145-10" tabindex="-1"></a></span>
-<span id="cb145-11"><a href="chapter-link-to-census.html#cb145-11" tabindex="-1"></a><span class="co"># view the table</span></span>
-<span id="cb145-12"><a href="chapter-link-to-census.html#cb145-12" tabindex="-1"></a><span class="fu">head</span>(sdoh_tracts_2010_tbl)</span></code></pre></div>
-<div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb146-1"><a href="chapter-link-to-census.html#cb146-1" tabindex="-1"></a><span class="co"># A tibble: 6 × 355</span></span>
-<span id="cb146-2"><a href="chapter-link-to-census.html#cb146-2" tabindex="-1"></a><span class="co">#    YEAR TRACTFIPS   COUNTYFIPS STATEFIPS STATE   COUNTY         REGION</span></span>
-<span id="cb146-3"><a href="chapter-link-to-census.html#cb146-3" tabindex="-1"></a><span class="co">#   &lt;dbl&gt; &lt;chr&gt;       &lt;chr&gt;      &lt;chr&gt;     &lt;chr&gt;   &lt;chr&gt;          &lt;chr&gt;</span></span>
-<span id="cb146-4"><a href="chapter-link-to-census.html#cb146-4" tabindex="-1"></a><span class="co"># 1  2010 01001020100 01001      01        Alabama Autauga County South</span></span>
-<span id="cb146-5"><a href="chapter-link-to-census.html#cb146-5" tabindex="-1"></a><span class="co"># 2  2010 01001020200 01001      01        Alabama Autauga County South</span></span>
-<span id="cb146-6"><a href="chapter-link-to-census.html#cb146-6" tabindex="-1"></a><span class="co"># 3  2010 01001020300 01001      01        Alabama Autauga County South</span></span>
-<span id="cb146-7"><a href="chapter-link-to-census.html#cb146-7" tabindex="-1"></a><span class="co"># 4  2010 01001020400 01001      01        Alabama Autauga County South</span></span>
-<span id="cb146-8"><a href="chapter-link-to-census.html#cb146-8" tabindex="-1"></a><span class="co"># 5  2010 01001020500 01001      01        Alabama Autauga County South</span></span>
-<span id="cb146-9"><a href="chapter-link-to-census.html#cb146-9" tabindex="-1"></a><span class="co"># 6  2010 01001020600 01001      01        Alabama Autauga County South</span></span>
-<span id="cb146-10"><a href="chapter-link-to-census.html#cb146-10" tabindex="-1"></a><span class="co"># ℹ 348 more variables: TERRITORY &lt;dbl&gt;, ACS_TOT_POP_WT &lt;dbl&gt;,</span></span>
-<span id="cb146-11"><a href="chapter-link-to-census.html#cb146-11" tabindex="-1"></a><span class="co">#   ACS_TOT_POP_US_ABOVE1 &lt;dbl&gt;, ACS_TOT_POP_ABOVE5 &lt;dbl&gt;,</span></span>
-<span id="cb146-12"><a href="chapter-link-to-census.html#cb146-12" tabindex="-1"></a><span class="co">#   ACS_TOT_POP_ABOVE15 &lt;dbl&gt;, ACS_TOT_POP_ABOVE16 &lt;dbl&gt;, …</span></span>
-<span id="cb146-13"><a href="chapter-link-to-census.html#cb146-13" tabindex="-1"></a><span class="co"># ℹ Use `colnames()` to see all variable names</span></span></code></pre></div>
+<div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb228-1"><a href="chapter-link-to-census.html#cb228-1" tabindex="-1"></a><span class="co"># download Excel file using the URL provided in the screenshot above</span></span>
+<span id="cb228-2"><a href="chapter-link-to-census.html#cb228-2" tabindex="-1"></a>sdoh_tracts_2010_url <span class="ot">&lt;-</span></span>
+<span id="cb228-3"><a href="chapter-link-to-census.html#cb228-3" tabindex="-1"></a>  <span class="st">&quot;https://www.ahrq.gov/downloads/sdoh/sdoh_2010_tract_1_0.xlsx&quot;</span></span>
+<span id="cb228-4"><a href="chapter-link-to-census.html#cb228-4" tabindex="-1"></a></span>
+<span id="cb228-5"><a href="chapter-link-to-census.html#cb228-5" tabindex="-1"></a><span class="co"># specify your file path for downloading the Excel file</span></span>
+<span id="cb228-6"><a href="chapter-link-to-census.html#cb228-6" tabindex="-1"></a>sdoh_tracts_2010_xlsx <span class="ot">&lt;-</span></span>
+<span id="cb228-7"><a href="chapter-link-to-census.html#cb228-7" tabindex="-1"></a>  <span class="st">&quot;/ YOUR FILE PATH /sdoh_2010_tract_1_0.xlsx&quot;</span></span>
+<span id="cb228-8"><a href="chapter-link-to-census.html#cb228-8" tabindex="-1"></a></span>
+<span id="cb228-9"><a href="chapter-link-to-census.html#cb228-9" tabindex="-1"></a><span class="co"># read the &quot;Data&quot; sheet of the Excel file into a table R</span></span>
+<span id="cb228-10"><a href="chapter-link-to-census.html#cb228-10" tabindex="-1"></a><span class="co"># note that you may need to provide a complete file path for the Excel file</span></span>
+<span id="cb228-11"><a href="chapter-link-to-census.html#cb228-11" tabindex="-1"></a>sdoh_tracts_2010_tbl <span class="ot">&lt;-</span> readxl<span class="sc">::</span><span class="fu">read_xlsx</span>(sdoh_tracts_2010_xlsx,</span>
+<span id="cb228-12"><a href="chapter-link-to-census.html#cb228-12" tabindex="-1"></a>                                          <span class="at">sheet =</span> <span class="st">&quot;Data&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb229"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb229-1"><a href="chapter-link-to-census.html#cb229-1" tabindex="-1"></a><span class="co"># view the top of the table</span></span>
+<span id="cb229-2"><a href="chapter-link-to-census.html#cb229-2" tabindex="-1"></a><span class="fu">head</span>(sdoh_tracts_2010_tbl)</span></code></pre></div>
+<pre><code>## # A tibble: 6 × 355
+##    YEAR TRACTFIPS   COUNTYFIPS STATEFIPS STATE   COUNTY         REGION TERRITORY
+##   &lt;dbl&gt; &lt;chr&gt;       &lt;chr&gt;      &lt;chr&gt;     &lt;chr&gt;   &lt;chr&gt;          &lt;chr&gt;      &lt;dbl&gt;
+## 1  2010 01001020100 01001      01        Alabama Autauga County South          0
+## 2  2010 01001020200 01001      01        Alabama Autauga County South          0
+## 3  2010 01001020300 01001      01        Alabama Autauga County South          0
+## 4  2010 01001020400 01001      01        Alabama Autauga County South          0
+## 5  2010 01001020500 01001      01        Alabama Autauga County South          0
+## 6  2010 01001020600 01001      01        Alabama Autauga County South          0
+## # ℹ 347 more variables: ACS_TOT_POP_WT &lt;dbl&gt;, ACS_TOT_POP_US_ABOVE1 &lt;dbl&gt;,
+## #   ACS_TOT_POP_ABOVE5 &lt;dbl&gt;, ACS_TOT_POP_ABOVE15 &lt;dbl&gt;,
+## #   ACS_TOT_POP_ABOVE16 &lt;dbl&gt;, ACS_TOT_POP_16_19 &lt;dbl&gt;,
+## #   ACS_TOT_POP_ABOVE25 &lt;dbl&gt;, ACS_TOT_CIVIL_POP_ABOVE18 &lt;dbl&gt;,
+## #   ACS_TOT_CIVIL_VET_POP_ABOVE25 &lt;dbl&gt;, ACS_TOT_OWN_CHILD_BELOW17 &lt;dbl&gt;,
+## #   ACS_TOT_CIVILIAN_LABOR &lt;dbl&gt;, ACS_TOT_CIVIL_EMPLOY_POP &lt;dbl&gt;,
+## #   ACS_TOT_WORKER_HH &lt;dbl&gt;, ACS_TOT_WORKER_NWFH &lt;dbl&gt;, …</code></pre>
 <p>We can see that the variable <code>TRACTFIPS</code> contains the 11-digit geoID for Census tracts in character format, which matches the geoID format we prepared in the previous <a href="chapter-link-to-census.html#link-to-census-step-3">step</a> .</p>
 <div class="note">
 <p>For linkages based on geoID, it is important to check that the geoID is in the same format across data sources. We recommend using character format (rather than numeric format) for Census geoIDs. This will preserve padded zeroes in geoIDs (e.g., state geoID for Alabama is <code>01</code> rather than <code>1</code>) such that each type of geoID has the expected number of digits (e.g., 2-digits for state geoID).</p>
@@ -675,38 +626,34 @@ Screenshot of Second Sheet in Excel File (September 14, 2023)
 <li><p><code>ACS_PCT_HU_NO_VEH</code>: Percentage of housing units with no vehicle available</p></li>
 </ul>
 <p>The following code joins those SDOH data variables to the geocoded addresses based on the Census tract geoID:</p>
-<div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb147-1"><a href="chapter-link-to-census.html#cb147-1" tabindex="-1"></a><span class="co"># rename geoID in SDOH table to match the geoID in the geocoded addresses table</span></span>
-<span id="cb147-2"><a href="chapter-link-to-census.html#cb147-2" tabindex="-1"></a><span class="co"># select the SDOH variables of interest</span></span>
-<span id="cb147-3"><a href="chapter-link-to-census.html#cb147-3" tabindex="-1"></a>sdoh_tracts_2010_tbl <span class="ot">&lt;-</span> sdoh_tracts_2010_tbl <span class="sc">%&gt;%</span></span>
-<span id="cb147-4"><a href="chapter-link-to-census.html#cb147-4" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">rename</span>(<span class="at">geoid_tract_2010 =</span> TRACTFIPS) <span class="sc">%&gt;%</span></span>
-<span id="cb147-5"><a href="chapter-link-to-census.html#cb147-5" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(geoid_tract_2010,</span>
-<span id="cb147-6"><a href="chapter-link-to-census.html#cb147-6" tabindex="-1"></a>                ACS_PCT_INC50,</span>
-<span id="cb147-7"><a href="chapter-link-to-census.html#cb147-7" tabindex="-1"></a>                POS_DIST_ED_TRACT,</span>
-<span id="cb147-8"><a href="chapter-link-to-census.html#cb147-8" tabindex="-1"></a>                ACS_PCT_HU_NO_VEH)</span>
-<span id="cb147-9"><a href="chapter-link-to-census.html#cb147-9" tabindex="-1"></a></span>
-<span id="cb147-10"><a href="chapter-link-to-census.html#cb147-10" tabindex="-1"></a><span class="co"># join the SDOH table to the geocoded addresses based on geoID</span></span>
-<span id="cb147-11"><a href="chapter-link-to-census.html#cb147-11" tabindex="-1"></a>geo_addresses_sdoh_tbl <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">left_join</span>(geo_addresses_linkage_tbl,</span>
-<span id="cb147-12"><a href="chapter-link-to-census.html#cb147-12" tabindex="-1"></a>                                           sdoh_tracts_2010_tbl,</span>
-<span id="cb147-13"><a href="chapter-link-to-census.html#cb147-13" tabindex="-1"></a>                                           <span class="at">by =</span> <span class="st">&quot;geoid_tract_2010&quot;</span>)</span>
-<span id="cb147-14"><a href="chapter-link-to-census.html#cb147-14" tabindex="-1"></a></span>
-<span id="cb147-15"><a href="chapter-link-to-census.html#cb147-15" tabindex="-1"></a><span class="co"># view the resulting linked table</span></span>
-<span id="cb147-16"><a href="chapter-link-to-census.html#cb147-16" tabindex="-1"></a><span class="fu">print</span>(geo_addresses_sdoh_tbl)</span></code></pre></div>
-<div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb148-1"><a href="chapter-link-to-census.html#cb148-1" tabindex="-1"></a><span class="co"># A tibble: 5 × 5</span></span>
-<span id="cb148-2"><a href="chapter-link-to-census.html#cb148-2" tabindex="-1"></a><span class="co">#   id               geoid_tract_2010 ACS_PCT_INC50 POS_DIST_ED_TRACT</span></span>
-<span id="cb148-3"><a href="chapter-link-to-census.html#cb148-3" tabindex="-1"></a><span class="co">#   &lt;chr&gt;            &lt;chr&gt;                    &lt;dbl&gt;             &lt;dbl&gt;</span></span>
-<span id="cb148-4"><a href="chapter-link-to-census.html#cb148-4" tabindex="-1"></a><span class="co"># 1 01-charlotte     37119001100               3.68              0.85</span></span>
-<span id="cb148-5"><a href="chapter-link-to-census.html#cb148-5" tabindex="-1"></a><span class="co"># 2 02-raleigh       37183050100               6.77              2.8</span></span>
-<span id="cb148-6"><a href="chapter-link-to-census.html#cb148-6" tabindex="-1"></a><span class="co"># 3 03-greensboro    37081010800               6.16              0.99</span></span>
-<span id="cb148-7"><a href="chapter-link-to-census.html#cb148-7" tabindex="-1"></a><span class="co"># 4 04-durham        37063002200              25.9               2.62</span></span>
-<span id="cb148-8"><a href="chapter-link-to-census.html#cb148-8" tabindex="-1"></a><span class="co"># 5 05-winston-salem 37067000100               9.01              3.35</span></span>
-<span id="cb148-9"><a href="chapter-link-to-census.html#cb148-9" tabindex="-1"></a><span class="co">#   ACS_PCT_HU_NO_VEH</span></span>
-<span id="cb148-10"><a href="chapter-link-to-census.html#cb148-10" tabindex="-1"></a><span class="co">#               &lt;dbl&gt;</span></span>
-<span id="cb148-11"><a href="chapter-link-to-census.html#cb148-11" tabindex="-1"></a><span class="co"># 1             7.24</span></span>
-<span id="cb148-12"><a href="chapter-link-to-census.html#cb148-12" tabindex="-1"></a><span class="co"># 2            25.5</span></span>
-<span id="cb148-13"><a href="chapter-link-to-census.html#cb148-13" tabindex="-1"></a><span class="co"># 3            16.4</span></span>
-<span id="cb148-14"><a href="chapter-link-to-census.html#cb148-14" tabindex="-1"></a><span class="co"># 4             7.63</span></span>
-<span id="cb148-15"><a href="chapter-link-to-census.html#cb148-15" tabindex="-1"></a><span class="co"># 5            16.5</span></span></code></pre></div>
-<p>Now, we have a linked table of geocoded addresses (by individual id) linked to the SDOH data.</p>
+<div class="sourceCode" id="cb231"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb231-1"><a href="chapter-link-to-census.html#cb231-1" tabindex="-1"></a><span class="co"># rename geoID in SDOH table to match the geoID in the geocoded addresses table</span></span>
+<span id="cb231-2"><a href="chapter-link-to-census.html#cb231-2" tabindex="-1"></a><span class="co"># select the SDOH variables of interest</span></span>
+<span id="cb231-3"><a href="chapter-link-to-census.html#cb231-3" tabindex="-1"></a>sdoh_tracts_2010_tbl <span class="ot">&lt;-</span> sdoh_tracts_2010_tbl <span class="sc">%&gt;%</span></span>
+<span id="cb231-4"><a href="chapter-link-to-census.html#cb231-4" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">rename</span>(<span class="at">geoid_tract_2010 =</span> TRACTFIPS) <span class="sc">%&gt;%</span></span>
+<span id="cb231-5"><a href="chapter-link-to-census.html#cb231-5" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(geoid_tract_2010,</span>
+<span id="cb231-6"><a href="chapter-link-to-census.html#cb231-6" tabindex="-1"></a>                ACS_PCT_INC50,</span>
+<span id="cb231-7"><a href="chapter-link-to-census.html#cb231-7" tabindex="-1"></a>                POS_DIST_ED_TRACT,</span>
+<span id="cb231-8"><a href="chapter-link-to-census.html#cb231-8" tabindex="-1"></a>                ACS_PCT_HU_NO_VEH)</span>
+<span id="cb231-9"><a href="chapter-link-to-census.html#cb231-9" tabindex="-1"></a></span>
+<span id="cb231-10"><a href="chapter-link-to-census.html#cb231-10" tabindex="-1"></a><span class="co"># join the SDOH table to the geocoded addresses based on geoID</span></span>
+<span id="cb231-11"><a href="chapter-link-to-census.html#cb231-11" tabindex="-1"></a>geo_addresses_sdoh_tbl <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">left_join</span>(geo_addresses_linkage_tbl,</span>
+<span id="cb231-12"><a href="chapter-link-to-census.html#cb231-12" tabindex="-1"></a>                                           sdoh_tracts_2010_tbl,</span>
+<span id="cb231-13"><a href="chapter-link-to-census.html#cb231-13" tabindex="-1"></a>                                           <span class="at">by =</span> <span class="st">&quot;geoid_tract_2010&quot;</span>)</span>
+<span id="cb231-14"><a href="chapter-link-to-census.html#cb231-14" tabindex="-1"></a></span>
+<span id="cb231-15"><a href="chapter-link-to-census.html#cb231-15" tabindex="-1"></a><span class="co"># view the resulting linked table</span></span>
+<span id="cb231-16"><a href="chapter-link-to-census.html#cb231-16" tabindex="-1"></a><span class="fu">print</span>(geo_addresses_sdoh_tbl)</span></code></pre></div>
+<pre><code>## # A tibble: 5 × 5
+##   id          geoid_tract_2010 ACS_PCT_INC50 POS_DIST_ED_TRACT ACS_PCT_HU_NO_VEH
+##   &lt;chr&gt;       &lt;chr&gt;                    &lt;dbl&gt;             &lt;dbl&gt;             &lt;dbl&gt;
+## 1 01-charlot… 37119001100               3.68              0.85              7.24
+## 2 02-raleigh  37183050100               6.77              2.8              25.5 
+## 3 03-greensb… 37081010800               6.16              0.99             16.4 
+## 4 04-durham   37063002200              25.9               2.62              7.63
+## 5 05-winston… 37067000100               9.01              3.35             16.5</code></pre>
+<p>Now, we have a linked table of geocoded addresses (by individual id) linked to the SDOH data. We can also save the linked table as a CSV file using the following code:</p>
+<div class="sourceCode" id="cb233"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb233-1"><a href="chapter-link-to-census.html#cb233-1" tabindex="-1"></a><span class="co"># write linked table to CSV file using your file path</span></span>
+<span id="cb233-2"><a href="chapter-link-to-census.html#cb233-2" tabindex="-1"></a>readr<span class="sc">::</span><span class="fu">write_csv</span>(geo_addresses_sdoh_tbl,</span>
+<span id="cb233-3"><a href="chapter-link-to-census.html#cb233-3" tabindex="-1"></a>                 <span class="st">&quot;/ YOUR FILE PATH /geo-addresses-sdoh.csv&quot;</span>)</span></code></pre></div>
 </div>
 </div>
 <div id="concluding-remarks" class="section level2 hasAnchor" number="6.3">
@@ -779,42 +726,42 @@ Screenshot of Second Sheet in Excel File (September 14, 2023)
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
-"sharing": {
-"github": true,
-"facebook": false,
-"twitter": false,
-"linkedin": false,
-"weibo": false,
-"instapaper": false,
-"vk": false,
-"whatsapp": false,
-"all": false
-},
-"fontsettings": {
-"theme": "white",
-"family": "sans",
-"size": 2
-},
-"edit": {
-"link": null,
-"text": null
-},
-"history": {
-"link": null,
-"text": null
-},
-"view": {
-"link": null,
-"text": null
-},
-"download": null,
-"search": {
-"engine": "fuse",
-"options": null
-},
-"toc": {
-"collapse": "section"
-}
+  "sharing": {
+    "github": true,
+    "facebook": false,
+    "twitter": false,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": false
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": null,
+    "text": null
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": null,
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "section"
+  }
 });
 });
 </script>

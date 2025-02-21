@@ -5,19 +5,19 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>5 NASA EarthData Download | CHORDS Training and Use Cases Toolkit</title>
-  <meta name="description" content="The CHORDS Training and Use Cases Toolkit provides guides, tutorials, and example code to support climate change and human health research." />
-  <meta name="generator" content="bookdown 0.40 and GitBook 2.6.7" />
+  <meta name="description" content="The CHORDS Training and Use Cases Toolkit provides guides, tutorials, and example code to support environmental health and disaster research." />
+  <meta name="generator" content="bookdown 0.42 and GitBook 2.6.7" />
 
   <meta property="og:title" content="5 NASA EarthData Download | CHORDS Training and Use Cases Toolkit" />
   <meta property="og:type" content="book" />
   
-  <meta property="og:description" content="The CHORDS Training and Use Cases Toolkit provides guides, tutorials, and example code to support climate change and human health research." />
+  <meta property="og:description" content="The CHORDS Training and Use Cases Toolkit provides guides, tutorials, and example code to support environmental health and disaster research." />
   <meta name="github-repo" content="NIEHS/PCOR_bookdown_tools" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="5 NASA EarthData Download | CHORDS Training and Use Cases Toolkit" />
   
-  <meta name="twitter:description" content="The CHORDS Training and Use Cases Toolkit provides guides, tutorials, and example code to support climate change and human health research." />
+  <meta name="twitter:description" content="The CHORDS Training and Use Cases Toolkit provides guides, tutorials, and example code to support environmental health and disaster research." />
   
 
 
@@ -53,8 +53,9 @@
 
 
 <style type="text/css">
+html { -webkit-text-size-adjust: 100%; }
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -64,7 +65,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -353,23 +354,23 @@ NASA SEDAC Population Density Data Characteristics
 </tbody>
 </table>
 <p>Define the data URL and destination file.</p>
-<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="chapter-nasa-earthdata.html#cb111-1" tabindex="-1"></a>url <span class="ot">&lt;-</span> <span class="fu">paste0</span>(</span>
-<span id="cb111-2"><a href="chapter-nasa-earthdata.html#cb111-2" tabindex="-1"></a>  <span class="st">&quot;https://sedac.ciesin.columbia.edu/downloads/data/gpw-v4/gpw-v4-population-&quot;</span>,</span>
-<span id="cb111-3"><a href="chapter-nasa-earthdata.html#cb111-3" tabindex="-1"></a>  <span class="st">&quot;density-rev11/gpw-v4-population-density-rev11_2020_2pt5_min_tif.zip&quot;</span></span>
-<span id="cb111-4"><a href="chapter-nasa-earthdata.html#cb111-4" tabindex="-1"></a>)</span>
-<span id="cb111-5"><a href="chapter-nasa-earthdata.html#cb111-5" tabindex="-1"></a>destfile <span class="ot">&lt;-</span> <span class="fu">paste0</span>(</span>
-<span id="cb111-6"><a href="chapter-nasa-earthdata.html#cb111-6" tabindex="-1"></a>  <span class="st">&quot;/   YOUR FILE PATH   /sedac_population_2020_5km.zip&quot;</span></span>
-<span id="cb111-7"><a href="chapter-nasa-earthdata.html#cb111-7" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb195-1"><a href="chapter-nasa-earthdata.html#cb195-1" tabindex="-1"></a>url <span class="ot">&lt;-</span> <span class="fu">paste0</span>(</span>
+<span id="cb195-2"><a href="chapter-nasa-earthdata.html#cb195-2" tabindex="-1"></a>  <span class="st">&quot;https://sedac.ciesin.columbia.edu/downloads/data/gpw-v4/gpw-v4-population-&quot;</span>,</span>
+<span id="cb195-3"><a href="chapter-nasa-earthdata.html#cb195-3" tabindex="-1"></a>  <span class="st">&quot;density-rev11/gpw-v4-population-density-rev11_2020_2pt5_min_tif.zip&quot;</span></span>
+<span id="cb195-4"><a href="chapter-nasa-earthdata.html#cb195-4" tabindex="-1"></a>)</span>
+<span id="cb195-5"><a href="chapter-nasa-earthdata.html#cb195-5" tabindex="-1"></a>destfile <span class="ot">&lt;-</span> <span class="fu">paste0</span>(</span>
+<span id="cb195-6"><a href="chapter-nasa-earthdata.html#cb195-6" tabindex="-1"></a>  <span class="st">&quot;/   YOUR FILE PATH   /sedac_population_2020_5km.zip&quot;</span></span>
+<span id="cb195-7"><a href="chapter-nasa-earthdata.html#cb195-7" tabindex="-1"></a>)</span></code></pre></div>
 <p>Run the download command using <code>system()</code> and unzip the file with <code>unzip()</code>.</p>
-<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="chapter-nasa-earthdata.html#cb112-1" tabindex="-1"></a><span class="fu">system</span>(</span>
-<span id="cb112-2"><a href="chapter-nasa-earthdata.html#cb112-2" tabindex="-1"></a>  <span class="at">command =</span> <span class="fu">paste0</span>(</span>
-<span id="cb112-3"><a href="chapter-nasa-earthdata.html#cb112-3" tabindex="-1"></a>    <span class="st">&quot;curl -n -c -b -LJ -o &quot;</span>,</span>
-<span id="cb112-4"><a href="chapter-nasa-earthdata.html#cb112-4" tabindex="-1"></a>    destfile,</span>
-<span id="cb112-5"><a href="chapter-nasa-earthdata.html#cb112-5" tabindex="-1"></a>    <span class="st">&quot; --url &quot;</span>,</span>
-<span id="cb112-6"><a href="chapter-nasa-earthdata.html#cb112-6" tabindex="-1"></a>    url</span>
-<span id="cb112-7"><a href="chapter-nasa-earthdata.html#cb112-7" tabindex="-1"></a>  )</span>
-<span id="cb112-8"><a href="chapter-nasa-earthdata.html#cb112-8" tabindex="-1"></a>)</span>
-<span id="cb112-9"><a href="chapter-nasa-earthdata.html#cb112-9" tabindex="-1"></a><span class="fu">unzip</span>(destfile)</span></code></pre></div>
+<div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb196-1"><a href="chapter-nasa-earthdata.html#cb196-1" tabindex="-1"></a><span class="fu">system</span>(</span>
+<span id="cb196-2"><a href="chapter-nasa-earthdata.html#cb196-2" tabindex="-1"></a>  <span class="at">command =</span> <span class="fu">paste0</span>(</span>
+<span id="cb196-3"><a href="chapter-nasa-earthdata.html#cb196-3" tabindex="-1"></a>    <span class="st">&quot;curl -n -c -b -LJ -o &quot;</span>,</span>
+<span id="cb196-4"><a href="chapter-nasa-earthdata.html#cb196-4" tabindex="-1"></a>    destfile,</span>
+<span id="cb196-5"><a href="chapter-nasa-earthdata.html#cb196-5" tabindex="-1"></a>    <span class="st">&quot; --url &quot;</span>,</span>
+<span id="cb196-6"><a href="chapter-nasa-earthdata.html#cb196-6" tabindex="-1"></a>    url</span>
+<span id="cb196-7"><a href="chapter-nasa-earthdata.html#cb196-7" tabindex="-1"></a>  )</span>
+<span id="cb196-8"><a href="chapter-nasa-earthdata.html#cb196-8" tabindex="-1"></a>)</span>
+<span id="cb196-9"><a href="chapter-nasa-earthdata.html#cb196-9" tabindex="-1"></a><span class="fu">unzip</span>(destfile)</span></code></pre></div>
 <p>As expected, the data was not downloaded.</p>
 <p>To download the password protected data with command line commands, we must generate the <code>.netrc</code>, <code>.urs_cookies</code>, and <code>.dodsrc</code> prerequisite files.</p>
 <div class="warning">
@@ -379,81 +380,81 @@ NASA SEDAC Population Density Data Characteristics
 <h3><span class="header-section-number">5.3.1</span> <code>.netrc</code><a href="chapter-nasa-earthdata.html#netrc" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The following commands create the <code>.netrc</code> file, which contains your NASA EarthData Account credentials.</p>
 <p>First, set your working directory to the home directory. Setting a working directory differs between Mac/Linux and Windows machines.</p>
-<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb113-1"><a href="chapter-nasa-earthdata.html#cb113-1" tabindex="-1"></a><span class="cf">if</span> (.Platform<span class="sc">$</span>OS.type <span class="sc">==</span> <span class="st">&quot;unix&quot;</span>) {</span>
-<span id="cb113-2"><a href="chapter-nasa-earthdata.html#cb113-2" tabindex="-1"></a>  <span class="fu">setwd</span>(<span class="st">&quot;~/&quot;</span>)</span>
-<span id="cb113-3"><a href="chapter-nasa-earthdata.html#cb113-3" tabindex="-1"></a>} <span class="cf">else</span> <span class="cf">if</span> (.Platform<span class="sc">$</span>OS.type <span class="sc">==</span> <span class="st">&quot;windows&quot;</span>) {</span>
-<span id="cb113-4"><a href="chapter-nasa-earthdata.html#cb113-4" tabindex="-1"></a>  <span class="fu">setwd</span>(<span class="st">&quot;C:/&quot;</span>)</span>
-<span id="cb113-5"><a href="chapter-nasa-earthdata.html#cb113-5" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb197"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb197-1"><a href="chapter-nasa-earthdata.html#cb197-1" tabindex="-1"></a><span class="cf">if</span> (.Platform<span class="sc">$</span>OS.type <span class="sc">==</span> <span class="st">&quot;unix&quot;</span>) {</span>
+<span id="cb197-2"><a href="chapter-nasa-earthdata.html#cb197-2" tabindex="-1"></a>  <span class="fu">setwd</span>(<span class="st">&quot;~/&quot;</span>)</span>
+<span id="cb197-3"><a href="chapter-nasa-earthdata.html#cb197-3" tabindex="-1"></a>} <span class="cf">else</span> <span class="cf">if</span> (.Platform<span class="sc">$</span>OS.type <span class="sc">==</span> <span class="st">&quot;windows&quot;</span>) {</span>
+<span id="cb197-4"><a href="chapter-nasa-earthdata.html#cb197-4" tabindex="-1"></a>  <span class="fu">setwd</span>(<span class="st">&quot;C:/&quot;</span>)</span>
+<span id="cb197-5"><a href="chapter-nasa-earthdata.html#cb197-5" tabindex="-1"></a>}</span></code></pre></div>
 <p>Create a file named <code>.netrc</code> with <code>file.create()</code>.</p>
-<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="chapter-nasa-earthdata.html#cb114-1" tabindex="-1"></a><span class="fu">file.create</span>(<span class="st">&quot;.netrc&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb198-1"><a href="chapter-nasa-earthdata.html#cb198-1" tabindex="-1"></a><span class="fu">file.create</span>(<span class="st">&quot;.netrc&quot;</span>)</span></code></pre></div>
 <p>Open a connection to <code>.netrc</code> with <code>sink()</code>. Write the line <code>machine urs...</code> replacing <code>YOUR_USERNAME</code> and <code>YOUR_PASSWORD</code> with your NASA EarthData username and password, respectively. After writing the line, close the connection with <code>sink()</code> again.</p>
-<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="chapter-nasa-earthdata.html#cb115-1" tabindex="-1"></a><span class="fu">sink</span>(<span class="st">&quot;.netrc&quot;</span>)</span>
-<span id="cb115-2"><a href="chapter-nasa-earthdata.html#cb115-2" tabindex="-1"></a><span class="fu">writeLines</span>(</span>
-<span id="cb115-3"><a href="chapter-nasa-earthdata.html#cb115-3" tabindex="-1"></a>  <span class="st">&quot;machine urs.earthdata.nasa.gov login YOUR_USERNAME password YOUR_PASSWORD&quot;</span></span>
-<span id="cb115-4"><a href="chapter-nasa-earthdata.html#cb115-4" tabindex="-1"></a>)</span>
-<span id="cb115-5"><a href="chapter-nasa-earthdata.html#cb115-5" tabindex="-1"></a><span class="fu">sink</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb199-1"><a href="chapter-nasa-earthdata.html#cb199-1" tabindex="-1"></a><span class="fu">sink</span>(<span class="st">&quot;.netrc&quot;</span>)</span>
+<span id="cb199-2"><a href="chapter-nasa-earthdata.html#cb199-2" tabindex="-1"></a><span class="fu">writeLines</span>(</span>
+<span id="cb199-3"><a href="chapter-nasa-earthdata.html#cb199-3" tabindex="-1"></a>  <span class="st">&quot;machine urs.earthdata.nasa.gov login YOUR_USERNAME password YOUR_PASSWORD&quot;</span></span>
+<span id="cb199-4"><a href="chapter-nasa-earthdata.html#cb199-4" tabindex="-1"></a>)</span>
+<span id="cb199-5"><a href="chapter-nasa-earthdata.html#cb199-5" tabindex="-1"></a><span class="fu">sink</span>()</span></code></pre></div>
 <p>Edit the settings so only you, the owner of the file, can read and write <code>.netrc</code>.</p>
-<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="chapter-nasa-earthdata.html#cb116-1" tabindex="-1"></a><span class="fu">system</span>(<span class="st">&quot;chmod 0600 .netrc&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb200-1"><a href="chapter-nasa-earthdata.html#cb200-1" tabindex="-1"></a><span class="fu">system</span>(<span class="st">&quot;chmod 0600 .netrc&quot;</span>)</span></code></pre></div>
 <p>After, check to ensure the file was created properly.</p>
-<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb117-1"><a href="chapter-nasa-earthdata.html#cb117-1" tabindex="-1"></a><span class="fu">file.exists</span>(<span class="st">&quot;.netrc&quot;</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb118-1"><a href="chapter-nasa-earthdata.html#cb118-1" tabindex="-1"></a><span class="cn">TRUE</span></span></code></pre></div>
-<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="chapter-nasa-earthdata.html#cb119-1" tabindex="-1"></a><span class="fu">readLines</span>(<span class="st">&quot;.netrc&quot;</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="chapter-nasa-earthdata.html#cb120-1" tabindex="-1"></a><span class="fu">paste0</span>(</span>
-<span id="cb120-2"><a href="chapter-nasa-earthdata.html#cb120-2" tabindex="-1"></a>  <span class="st">&quot;machine urs.earthdata.nasa.gov login YOUR_USERNAME password YOUR_PASSWORD&quot;</span></span>
-<span id="cb120-3"><a href="chapter-nasa-earthdata.html#cb120-3" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb201-1"><a href="chapter-nasa-earthdata.html#cb201-1" tabindex="-1"></a><span class="fu">file.exists</span>(<span class="st">&quot;.netrc&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb202-1"><a href="chapter-nasa-earthdata.html#cb202-1" tabindex="-1"></a><span class="cn">TRUE</span></span></code></pre></div>
+<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb203-1"><a href="chapter-nasa-earthdata.html#cb203-1" tabindex="-1"></a><span class="fu">readLines</span>(<span class="st">&quot;.netrc&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb204-1"><a href="chapter-nasa-earthdata.html#cb204-1" tabindex="-1"></a><span class="fu">paste0</span>(</span>
+<span id="cb204-2"><a href="chapter-nasa-earthdata.html#cb204-2" tabindex="-1"></a>  <span class="st">&quot;machine urs.earthdata.nasa.gov login YOUR_USERNAME password YOUR_PASSWORD&quot;</span></span>
+<span id="cb204-3"><a href="chapter-nasa-earthdata.html#cb204-3" tabindex="-1"></a>)</span></code></pre></div>
 </div>
 <div id="urs_cookies" class="section level3 hasAnchor" number="5.3.2">
 <h3><span class="header-section-number">5.3.2</span> <code>.urs_cookies</code><a href="chapter-nasa-earthdata.html#urs_cookies" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The following commands create the <code>.urs_cookies</code> file.</p>
 <p>First, set your working directory to the home directory.</p>
-<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb121-1"><a href="chapter-nasa-earthdata.html#cb121-1" tabindex="-1"></a><span class="cf">if</span> (.Platform<span class="sc">$</span>OS.type <span class="sc">==</span> <span class="st">&quot;unix&quot;</span>) {</span>
-<span id="cb121-2"><a href="chapter-nasa-earthdata.html#cb121-2" tabindex="-1"></a>  <span class="fu">setwd</span>(<span class="st">&quot;~/&quot;</span>)</span>
-<span id="cb121-3"><a href="chapter-nasa-earthdata.html#cb121-3" tabindex="-1"></a>} <span class="cf">else</span> <span class="cf">if</span> (.Platform<span class="sc">$</span>OS.type <span class="sc">==</span> <span class="st">&quot;windows&quot;</span>) {</span>
-<span id="cb121-4"><a href="chapter-nasa-earthdata.html#cb121-4" tabindex="-1"></a>  <span class="fu">setwd</span>(<span class="st">&quot;C:/&quot;</span>)</span>
-<span id="cb121-5"><a href="chapter-nasa-earthdata.html#cb121-5" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb205-1"><a href="chapter-nasa-earthdata.html#cb205-1" tabindex="-1"></a><span class="cf">if</span> (.Platform<span class="sc">$</span>OS.type <span class="sc">==</span> <span class="st">&quot;unix&quot;</span>) {</span>
+<span id="cb205-2"><a href="chapter-nasa-earthdata.html#cb205-2" tabindex="-1"></a>  <span class="fu">setwd</span>(<span class="st">&quot;~/&quot;</span>)</span>
+<span id="cb205-3"><a href="chapter-nasa-earthdata.html#cb205-3" tabindex="-1"></a>} <span class="cf">else</span> <span class="cf">if</span> (.Platform<span class="sc">$</span>OS.type <span class="sc">==</span> <span class="st">&quot;windows&quot;</span>) {</span>
+<span id="cb205-4"><a href="chapter-nasa-earthdata.html#cb205-4" tabindex="-1"></a>  <span class="fu">setwd</span>(<span class="st">&quot;C:/&quot;</span>)</span>
+<span id="cb205-5"><a href="chapter-nasa-earthdata.html#cb205-5" tabindex="-1"></a>}</span></code></pre></div>
 <p>Create a file named <code>.netrc</code> with <code>file.create()</code>.</p>
-<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="chapter-nasa-earthdata.html#cb122-1" tabindex="-1"></a><span class="fu">file.create</span>(<span class="st">&quot;.urs_cookies&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb206-1"><a href="chapter-nasa-earthdata.html#cb206-1" tabindex="-1"></a><span class="fu">file.create</span>(<span class="st">&quot;.urs_cookies&quot;</span>)</span></code></pre></div>
 <p>After, check to ensure the file was created properly.</p>
-<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="chapter-nasa-earthdata.html#cb123-1" tabindex="-1"></a><span class="fu">file.exists</span>(<span class="st">&quot;.urs_cookies&quot;</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="chapter-nasa-earthdata.html#cb124-1" tabindex="-1"></a><span class="cn">TRUE</span></span></code></pre></div>
+<div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb207-1"><a href="chapter-nasa-earthdata.html#cb207-1" tabindex="-1"></a><span class="fu">file.exists</span>(<span class="st">&quot;.urs_cookies&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb208-1"><a href="chapter-nasa-earthdata.html#cb208-1" tabindex="-1"></a><span class="cn">TRUE</span></span></code></pre></div>
 </div>
 <div id="dodsrc" class="section level3 hasAnchor" number="5.3.3">
 <h3><span class="header-section-number">5.3.3</span> <code>.dodsrc</code><a href="chapter-nasa-earthdata.html#dodsrc" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The following commands create the <code>.dodsrc</code> file.</p>
 <p>First, set your working directory to the home directory.</p>
-<div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb125-1"><a href="chapter-nasa-earthdata.html#cb125-1" tabindex="-1"></a><span class="cf">if</span> (.Platform<span class="sc">$</span>OS.type <span class="sc">==</span> <span class="st">&quot;unix&quot;</span>) {</span>
-<span id="cb125-2"><a href="chapter-nasa-earthdata.html#cb125-2" tabindex="-1"></a>  <span class="fu">setwd</span>(<span class="st">&quot;~/&quot;</span>)</span>
-<span id="cb125-3"><a href="chapter-nasa-earthdata.html#cb125-3" tabindex="-1"></a>} <span class="cf">else</span> <span class="cf">if</span> (.Platform<span class="sc">$</span>OS.type <span class="sc">==</span> <span class="st">&quot;windows&quot;</span>) {</span>
-<span id="cb125-4"><a href="chapter-nasa-earthdata.html#cb125-4" tabindex="-1"></a>  <span class="fu">setwd</span>(<span class="st">&quot;C:/&quot;</span>)</span>
-<span id="cb125-5"><a href="chapter-nasa-earthdata.html#cb125-5" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb209-1"><a href="chapter-nasa-earthdata.html#cb209-1" tabindex="-1"></a><span class="cf">if</span> (.Platform<span class="sc">$</span>OS.type <span class="sc">==</span> <span class="st">&quot;unix&quot;</span>) {</span>
+<span id="cb209-2"><a href="chapter-nasa-earthdata.html#cb209-2" tabindex="-1"></a>  <span class="fu">setwd</span>(<span class="st">&quot;~/&quot;</span>)</span>
+<span id="cb209-3"><a href="chapter-nasa-earthdata.html#cb209-3" tabindex="-1"></a>} <span class="cf">else</span> <span class="cf">if</span> (.Platform<span class="sc">$</span>OS.type <span class="sc">==</span> <span class="st">&quot;windows&quot;</span>) {</span>
+<span id="cb209-4"><a href="chapter-nasa-earthdata.html#cb209-4" tabindex="-1"></a>  <span class="fu">setwd</span>(<span class="st">&quot;C:/&quot;</span>)</span>
+<span id="cb209-5"><a href="chapter-nasa-earthdata.html#cb209-5" tabindex="-1"></a>}</span></code></pre></div>
 <p>Create a file named “.dodsrc” with <code>file.create()</code></p>
-<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="chapter-nasa-earthdata.html#cb126-1" tabindex="-1"></a><span class="fu">file.create</span>(<span class="st">&quot;.dodsrc&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb210"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb210-1"><a href="chapter-nasa-earthdata.html#cb210-1" tabindex="-1"></a><span class="fu">file.create</span>(<span class="st">&quot;.dodsrc&quot;</span>)</span></code></pre></div>
 <p>Open a connection to <code>.dodsrc</code> with <code>sink()</code>. Write the lines beginning with <code>HTTP.</code>, replacing <code>YOUR_USERNAME</code> and <code>YOUR_PASSWORD</code> with your NASA EarthData username and password, respectively. After writing the line, close the connection with <code>sink()</code> again.</p>
-<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb127-1"><a href="chapter-nasa-earthdata.html#cb127-1" tabindex="-1"></a><span class="fu">sink</span>(<span class="st">&quot;.dodsrc&quot;</span>)</span>
-<span id="cb127-2"><a href="chapter-nasa-earthdata.html#cb127-2" tabindex="-1"></a><span class="fu">writeLines</span>(</span>
-<span id="cb127-3"><a href="chapter-nasa-earthdata.html#cb127-3" tabindex="-1"></a>  <span class="fu">paste0</span>(</span>
-<span id="cb127-4"><a href="chapter-nasa-earthdata.html#cb127-4" tabindex="-1"></a>    <span class="st">&quot;HTTP.NETRC=YOUR_HOME_DIRECTORY/.netrc</span><span class="sc">\n</span><span class="st">&quot;</span>,</span>
-<span id="cb127-5"><a href="chapter-nasa-earthdata.html#cb127-5" tabindex="-1"></a>    <span class="st">&quot;HTTP.COOKIE.JAR=YOUR_HOME_DIRECTORY/.urs_cookies&quot;</span></span>
-<span id="cb127-6"><a href="chapter-nasa-earthdata.html#cb127-6" tabindex="-1"></a>  )</span>
-<span id="cb127-7"><a href="chapter-nasa-earthdata.html#cb127-7" tabindex="-1"></a>)</span>
-<span id="cb127-8"><a href="chapter-nasa-earthdata.html#cb127-8" tabindex="-1"></a><span class="fu">sink</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb211-1"><a href="chapter-nasa-earthdata.html#cb211-1" tabindex="-1"></a><span class="fu">sink</span>(<span class="st">&quot;.dodsrc&quot;</span>)</span>
+<span id="cb211-2"><a href="chapter-nasa-earthdata.html#cb211-2" tabindex="-1"></a><span class="fu">writeLines</span>(</span>
+<span id="cb211-3"><a href="chapter-nasa-earthdata.html#cb211-3" tabindex="-1"></a>  <span class="fu">paste0</span>(</span>
+<span id="cb211-4"><a href="chapter-nasa-earthdata.html#cb211-4" tabindex="-1"></a>    <span class="st">&quot;HTTP.NETRC=YOUR_HOME_DIRECTORY/.netrc</span><span class="sc">\n</span><span class="st">&quot;</span>,</span>
+<span id="cb211-5"><a href="chapter-nasa-earthdata.html#cb211-5" tabindex="-1"></a>    <span class="st">&quot;HTTP.COOKIE.JAR=YOUR_HOME_DIRECTORY/.urs_cookies&quot;</span></span>
+<span id="cb211-6"><a href="chapter-nasa-earthdata.html#cb211-6" tabindex="-1"></a>  )</span>
+<span id="cb211-7"><a href="chapter-nasa-earthdata.html#cb211-7" tabindex="-1"></a>)</span>
+<span id="cb211-8"><a href="chapter-nasa-earthdata.html#cb211-8" tabindex="-1"></a><span class="fu">sink</span>()</span></code></pre></div>
 <p>After, check to ensure the file was created properly.</p>
-<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="chapter-nasa-earthdata.html#cb128-1" tabindex="-1"></a><span class="fu">file.exists</span>(<span class="st">&quot;.dodsrc&quot;</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb129-1"><a href="chapter-nasa-earthdata.html#cb129-1" tabindex="-1"></a><span class="cn">TRUE</span></span></code></pre></div>
-<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb130-1"><a href="chapter-nasa-earthdata.html#cb130-1" tabindex="-1"></a><span class="fu">readLines</span>(<span class="st">&quot;.dodsrc&quot;</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb131"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb131-1"><a href="chapter-nasa-earthdata.html#cb131-1" tabindex="-1"></a><span class="fu">paste0</span>(</span>
-<span id="cb131-2"><a href="chapter-nasa-earthdata.html#cb131-2" tabindex="-1"></a>  <span class="fu">c</span>(</span>
-<span id="cb131-3"><a href="chapter-nasa-earthdata.html#cb131-3" tabindex="-1"></a>    <span class="st">&quot;HTTP.NETRC=YOUR_HOME_DIRECTORY/.netrc&quot;</span>,</span>
-<span id="cb131-4"><a href="chapter-nasa-earthdata.html#cb131-4" tabindex="-1"></a>    <span class="st">&quot;HTTP.COOKIE.JAR=YOUR_HOME_DIRECTORY/.urs_cookies&quot;</span></span>
-<span id="cb131-5"><a href="chapter-nasa-earthdata.html#cb131-5" tabindex="-1"></a>  )</span>
-<span id="cb131-6"><a href="chapter-nasa-earthdata.html#cb131-6" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb212"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb212-1"><a href="chapter-nasa-earthdata.html#cb212-1" tabindex="-1"></a><span class="fu">file.exists</span>(<span class="st">&quot;.dodsrc&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb213-1"><a href="chapter-nasa-earthdata.html#cb213-1" tabindex="-1"></a><span class="cn">TRUE</span></span></code></pre></div>
+<div class="sourceCode" id="cb214"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb214-1"><a href="chapter-nasa-earthdata.html#cb214-1" tabindex="-1"></a><span class="fu">readLines</span>(<span class="st">&quot;.dodsrc&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb215-1"><a href="chapter-nasa-earthdata.html#cb215-1" tabindex="-1"></a><span class="fu">paste0</span>(</span>
+<span id="cb215-2"><a href="chapter-nasa-earthdata.html#cb215-2" tabindex="-1"></a>  <span class="fu">c</span>(</span>
+<span id="cb215-3"><a href="chapter-nasa-earthdata.html#cb215-3" tabindex="-1"></a>    <span class="st">&quot;HTTP.NETRC=YOUR_HOME_DIRECTORY/.netrc&quot;</span>,</span>
+<span id="cb215-4"><a href="chapter-nasa-earthdata.html#cb215-4" tabindex="-1"></a>    <span class="st">&quot;HTTP.COOKIE.JAR=YOUR_HOME_DIRECTORY/.urs_cookies&quot;</span></span>
+<span id="cb215-5"><a href="chapter-nasa-earthdata.html#cb215-5" tabindex="-1"></a>  )</span>
+<span id="cb215-6"><a href="chapter-nasa-earthdata.html#cb215-6" tabindex="-1"></a>)</span></code></pre></div>
 <p>If working on a <strong>Windows</strong> machine, copy the <code>.dodsrc</code> file to the project working directory. Replace <code>YOUR_WORKING_DIRECTORY</code> with the absolute path to the project working directory.</p>
-<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb132-1"><a href="chapter-nasa-earthdata.html#cb132-1" tabindex="-1"></a><span class="cf">if</span> (.Platform<span class="sc">$</span>OS.type <span class="sc">==</span> <span class="st">&quot;windows&quot;</span>) {</span>
-<span id="cb132-2"><a href="chapter-nasa-earthdata.html#cb132-2" tabindex="-1"></a>  <span class="fu">file.copy</span>(</span>
-<span id="cb132-3"><a href="chapter-nasa-earthdata.html#cb132-3" tabindex="-1"></a>    <span class="st">&quot;C:/.dodsrc&quot;</span>,</span>
-<span id="cb132-4"><a href="chapter-nasa-earthdata.html#cb132-4" tabindex="-1"></a>    <span class="st">&quot;YOUR_WORKING_DIRECTORY/.dodsrc&quot;</span></span>
-<span id="cb132-5"><a href="chapter-nasa-earthdata.html#cb132-5" tabindex="-1"></a>  )</span>
-<span id="cb132-6"><a href="chapter-nasa-earthdata.html#cb132-6" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb216"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb216-1"><a href="chapter-nasa-earthdata.html#cb216-1" tabindex="-1"></a><span class="cf">if</span> (.Platform<span class="sc">$</span>OS.type <span class="sc">==</span> <span class="st">&quot;windows&quot;</span>) {</span>
+<span id="cb216-2"><a href="chapter-nasa-earthdata.html#cb216-2" tabindex="-1"></a>  <span class="fu">file.copy</span>(</span>
+<span id="cb216-3"><a href="chapter-nasa-earthdata.html#cb216-3" tabindex="-1"></a>    <span class="st">&quot;C:/.dodsrc&quot;</span>,</span>
+<span id="cb216-4"><a href="chapter-nasa-earthdata.html#cb216-4" tabindex="-1"></a>    <span class="st">&quot;YOUR_WORKING_DIRECTORY/.dodsrc&quot;</span></span>
+<span id="cb216-5"><a href="chapter-nasa-earthdata.html#cb216-5" tabindex="-1"></a>  )</span>
+<span id="cb216-6"><a href="chapter-nasa-earthdata.html#cb216-6" tabindex="-1"></a>}</span></code></pre></div>
 <div class="important">
 <p>Enter these commands, as well as your username, password, and home directory, without error. Even a single misplaced character can disrupt the verification of your EarthData credentials.</p>
 </div>
@@ -465,15 +466,15 @@ NASA SEDAC Population Density Data Characteristics
 <div class="note">
 <p>Be sure to authorize the “SEDAC” applications at “My Profile”(<a href="https://urs.earthdata.nasa.gov/profile" class="uri">https://urs.earthdata.nasa.gov/profile</a>) under “Applications &gt; Authorized Apps” before running the following command.</p>
 </div>
-<div class="sourceCode" id="cb133"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb133-1"><a href="chapter-nasa-earthdata.html#cb133-1" tabindex="-1"></a><span class="fu">system</span>(</span>
-<span id="cb133-2"><a href="chapter-nasa-earthdata.html#cb133-2" tabindex="-1"></a>  <span class="at">command =</span> <span class="fu">paste0</span>(</span>
-<span id="cb133-3"><a href="chapter-nasa-earthdata.html#cb133-3" tabindex="-1"></a>    <span class="st">&quot;curl -n -c ~/.urs_cookies -b .urs_cookies -LJ -o &quot;</span>,</span>
-<span id="cb133-4"><a href="chapter-nasa-earthdata.html#cb133-4" tabindex="-1"></a>    destfile,</span>
-<span id="cb133-5"><a href="chapter-nasa-earthdata.html#cb133-5" tabindex="-1"></a>    <span class="st">&quot; --url &quot;</span>,</span>
-<span id="cb133-6"><a href="chapter-nasa-earthdata.html#cb133-6" tabindex="-1"></a>    url</span>
-<span id="cb133-7"><a href="chapter-nasa-earthdata.html#cb133-7" tabindex="-1"></a>  )</span>
-<span id="cb133-8"><a href="chapter-nasa-earthdata.html#cb133-8" tabindex="-1"></a>)</span>
-<span id="cb133-9"><a href="chapter-nasa-earthdata.html#cb133-9" tabindex="-1"></a><span class="fu">unzip</span>(destfile)</span></code></pre></div>
+<div class="sourceCode" id="cb217"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb217-1"><a href="chapter-nasa-earthdata.html#cb217-1" tabindex="-1"></a><span class="fu">system</span>(</span>
+<span id="cb217-2"><a href="chapter-nasa-earthdata.html#cb217-2" tabindex="-1"></a>  <span class="at">command =</span> <span class="fu">paste0</span>(</span>
+<span id="cb217-3"><a href="chapter-nasa-earthdata.html#cb217-3" tabindex="-1"></a>    <span class="st">&quot;curl -n -c ~/.urs_cookies -b .urs_cookies -LJ -o &quot;</span>,</span>
+<span id="cb217-4"><a href="chapter-nasa-earthdata.html#cb217-4" tabindex="-1"></a>    destfile,</span>
+<span id="cb217-5"><a href="chapter-nasa-earthdata.html#cb217-5" tabindex="-1"></a>    <span class="st">&quot; --url &quot;</span>,</span>
+<span id="cb217-6"><a href="chapter-nasa-earthdata.html#cb217-6" tabindex="-1"></a>    url</span>
+<span id="cb217-7"><a href="chapter-nasa-earthdata.html#cb217-7" tabindex="-1"></a>  )</span>
+<span id="cb217-8"><a href="chapter-nasa-earthdata.html#cb217-8" tabindex="-1"></a>)</span>
+<span id="cb217-9"><a href="chapter-nasa-earthdata.html#cb217-9" tabindex="-1"></a><span class="fu">unzip</span>(destfile)</span></code></pre></div>
 <p>The data is downloaded successfully after the prerequisite files have been generated and the “SEDAC” applications have been authorized.</p>
 
 </div>
@@ -515,42 +516,42 @@ NASA SEDAC Population Density Data Characteristics
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
-"sharing": {
-"github": true,
-"facebook": false,
-"twitter": false,
-"linkedin": false,
-"weibo": false,
-"instapaper": false,
-"vk": false,
-"whatsapp": false,
-"all": false
-},
-"fontsettings": {
-"theme": "white",
-"family": "sans",
-"size": 2
-},
-"edit": {
-"link": null,
-"text": null
-},
-"history": {
-"link": null,
-"text": null
-},
-"view": {
-"link": null,
-"text": null
-},
-"download": null,
-"search": {
-"engine": "fuse",
-"options": null
-},
-"toc": {
-"collapse": "section"
-}
+  "sharing": {
+    "github": true,
+    "facebook": false,
+    "twitter": false,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": false
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": null,
+    "text": null
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": null,
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "section"
+  }
 });
 });
 </script>

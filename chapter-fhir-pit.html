@@ -5,19 +5,19 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>7 A FHIR PIT Tutorial | CHORDS Training and Use Cases Toolkit</title>
-  <meta name="description" content="The CHORDS Training and Use Cases Toolkit provides guides, tutorials, and example code to support climate change and human health research." />
-  <meta name="generator" content="bookdown 0.40 and GitBook 2.6.7" />
+  <meta name="description" content="The CHORDS Training and Use Cases Toolkit provides guides, tutorials, and example code to support environmental health and disaster research." />
+  <meta name="generator" content="bookdown 0.42 and GitBook 2.6.7" />
 
   <meta property="og:title" content="7 A FHIR PIT Tutorial | CHORDS Training and Use Cases Toolkit" />
   <meta property="og:type" content="book" />
   
-  <meta property="og:description" content="The CHORDS Training and Use Cases Toolkit provides guides, tutorials, and example code to support climate change and human health research." />
+  <meta property="og:description" content="The CHORDS Training and Use Cases Toolkit provides guides, tutorials, and example code to support environmental health and disaster research." />
   <meta name="github-repo" content="NIEHS/PCOR_bookdown_tools" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="7 A FHIR PIT Tutorial | CHORDS Training and Use Cases Toolkit" />
   
-  <meta name="twitter:description" content="The CHORDS Training and Use Cases Toolkit provides guides, tutorials, and example code to support climate change and human health research." />
+  <meta name="twitter:description" content="The CHORDS Training and Use Cases Toolkit provides guides, tutorials, and example code to support environmental health and disaster research." />
   
 
 
@@ -53,8 +53,9 @@
 
 
 <style type="text/css">
+html { -webkit-text-size-adjust: 100%; }
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -64,7 +65,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -297,196 +298,196 @@ target="blank">Published with bookdown</a></li>
 </div>
 <div id="tutorial-1" class="section level2 hasAnchor" number="7.2">
 <h2><span class="header-section-number">7.2</span> Tutorial<a href="chapter-fhir-pit.html#tutorial-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb149-1"><a href="chapter-fhir-pit.html#cb149-1" tabindex="-1"></a><span class="co"># Loading library</span></span>
-<span id="cb149-2"><a href="chapter-fhir-pit.html#cb149-2" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span></code></pre></div>
+<div class="sourceCode" id="cb234"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb234-1"><a href="chapter-fhir-pit.html#cb234-1" tabindex="-1"></a><span class="co"># Loading library</span></span>
+<span id="cb234-2"><a href="chapter-fhir-pit.html#cb234-2" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span></code></pre></div>
 <div id="fhir-pit-step-0" class="section level3 hasAnchor" number="7.2.1">
 <h3><span class="header-section-number">7.2.1</span> Setup<a href="chapter-fhir-pit.html#fhir-pit-step-0" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Install Docker. Follow instructions in <a href="https://docs.docker.com/engine/install/">Docker installation documentation</a> for your operating system.</p>
 <p>Assign WORK_DIR the directory you would like to save FHIR PIT and its outputs to.</p>
-<div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb150-1"><a href="chapter-fhir-pit.html#cb150-1" tabindex="-1"></a>work_dir <span class="ot">&lt;-</span> <span class="st">&quot;/ADD/YOUR/FILEPATH/HERE&quot;</span></span>
-<span id="cb150-2"><a href="chapter-fhir-pit.html#cb150-2" tabindex="-1"></a><span class="fu">Sys.setenv</span>(<span class="at">WORK_DIR =</span> work_dir)</span></code></pre></div>
+<div class="sourceCode" id="cb235"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb235-1"><a href="chapter-fhir-pit.html#cb235-1" tabindex="-1"></a>work_dir <span class="ot">&lt;-</span> <span class="st">&quot;/ADD/YOUR/FILEPATH/HERE&quot;</span></span>
+<span id="cb235-2"><a href="chapter-fhir-pit.html#cb235-2" tabindex="-1"></a><span class="fu">Sys.setenv</span>(<span class="at">WORK_DIR =</span> work_dir)</span></code></pre></div>
 <p>Clone FHIR PIT into the WORK_DIR directory.</p>
-<div class="sourceCode" id="cb151"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb151-1"><a href="chapter-fhir-pit.html#cb151-1" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> <span class="va">$WORK_DIR</span></span>
-<span id="cb151-2"><a href="chapter-fhir-pit.html#cb151-2" tabindex="-1"></a><span class="fu">git</span> clone <span class="at">--recursive</span> https://github.com/ExposuresProvider/FHIR-PIT.git <span class="va">$WORK_DIR</span></span></code></pre></div>
+<div class="sourceCode" id="cb236"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb236-1"><a href="chapter-fhir-pit.html#cb236-1" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> <span class="va">$WORK_DIR</span></span>
+<span id="cb236-2"><a href="chapter-fhir-pit.html#cb236-2" tabindex="-1"></a><span class="fu">git</span> clone <span class="at">--recursive</span> https://github.com/ExposuresProvider/FHIR-PIT.git <span class="va">$WORK_DIR</span></span></code></pre></div>
 </div>
 <div id="fhir-pit-step-1" class="section level3 hasAnchor" number="7.2.2">
 <h3><span class="header-section-number">7.2.2</span> Execute FHIR-PIT<a href="chapter-fhir-pit.html#fhir-pit-step-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb152"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb152-1"><a href="chapter-fhir-pit.html#cb152-1" tabindex="-1"></a><span class="bu">echo</span> <span class="st">&quot;</span><span class="va">$WORK_DIR</span><span class="st">/data/output&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb237"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb237-1"><a href="chapter-fhir-pit.html#cb237-1" tabindex="-1"></a><span class="bu">echo</span> <span class="st">&quot;</span><span class="va">$WORK_DIR</span><span class="st">/data/output&quot;</span></span></code></pre></div>
 <p>Run FHIR PIT in a docker container with -v. This will allow the output data to persist and be easily accessible by users on the host.</p>
-<div class="sourceCode" id="cb153"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb153-1"><a href="chapter-fhir-pit.html#cb153-1" tabindex="-1"></a><span class="ex">docker</span> run <span class="at">-m</span><span class="op">=</span>4g <span class="at">-v</span> <span class="st">&quot;</span><span class="va">$WORK_DIR</span><span class="st">/data/output&quot;</span>:<span class="st">&quot;/FHIR-PIT/data/output&quot;</span> renci/fhir-pit:1.0</span></code></pre></div>
+<div class="sourceCode" id="cb238"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb238-1"><a href="chapter-fhir-pit.html#cb238-1" tabindex="-1"></a><span class="ex">docker</span> run <span class="at">-m</span><span class="op">=</span>4g <span class="at">-v</span> <span class="st">&quot;</span><span class="va">$WORK_DIR</span><span class="st">/data/output&quot;</span>:<span class="st">&quot;/FHIR-PIT/data/output&quot;</span> renci/fhir-pit:1.0</span></code></pre></div>
 </div>
 <div id="fhir-pit-step-2" class="section level3 hasAnchor" number="7.2.3">
 <h3><span class="header-section-number">7.2.3</span> Access and Analyze Results<a href="chapter-fhir-pit.html#fhir-pit-step-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The main outputs to consider are in ICEES, ICEES2 and ICEES2_dei directories (named in reference to ICEES, but not specific to ICEES). Each directory contains one or more CSV files with information at different granularities.</p>
-<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb154-1"><a href="chapter-fhir-pit.html#cb154-1" tabindex="-1"></a>year_ <span class="ot">&lt;-</span> <span class="dv">2010</span></span>
-<span id="cb154-2"><a href="chapter-fhir-pit.html#cb154-2" tabindex="-1"></a>basepath <span class="ot">&lt;-</span> <span class="fu">file.path</span>(work_dir, <span class="st">&quot;data&quot;</span>, <span class="st">&quot;output&quot;</span>)</span>
-<span id="cb154-3"><a href="chapter-fhir-pit.html#cb154-3" tabindex="-1"></a>icees2dei_patient_url <span class="ot">&lt;-</span> <span class="fu">file.path</span>(basepath, <span class="st">&quot;icees2_dei&quot;</span>,</span>
-<span id="cb154-4"><a href="chapter-fhir-pit.html#cb154-4" tabindex="-1"></a>                                   <span class="fu">sprintf</span>(<span class="st">&quot;%spatient_deidentified&quot;</span>, year_))</span></code></pre></div>
+<div class="sourceCode" id="cb239"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb239-1"><a href="chapter-fhir-pit.html#cb239-1" tabindex="-1"></a>year_ <span class="ot">&lt;-</span> <span class="dv">2010</span></span>
+<span id="cb239-2"><a href="chapter-fhir-pit.html#cb239-2" tabindex="-1"></a>basepath <span class="ot">&lt;-</span> <span class="fu">file.path</span>(work_dir, <span class="st">&quot;data&quot;</span>, <span class="st">&quot;output&quot;</span>)</span>
+<span id="cb239-3"><a href="chapter-fhir-pit.html#cb239-3" tabindex="-1"></a>icees2dei_patient_url <span class="ot">&lt;-</span> <span class="fu">file.path</span>(basepath, <span class="st">&quot;icees2_dei&quot;</span>,</span>
+<span id="cb239-4"><a href="chapter-fhir-pit.html#cb239-4" tabindex="-1"></a>                                   <span class="fu">sprintf</span>(<span class="st">&quot;%spatient_deidentified&quot;</span>, year_))</span></code></pre></div>
 <p>The ICEES directory contains one CSV file per subject. Each CSV file consists of the subject’s visits, concatenated with the corresponding environmental exposure estimates for that day and that subject’s location. If a subject has multiple visits per day, then the transformation “PreprocPerPatSeriesToVector” step aggregates multiple daily visits by counting how many times a drug or diagnosis occurred. The directory for each subject is indexed by the “patient_num” column. The ICEES2 directory contains a single CSV file with the aggregation of all subjects grouped by (subject, study period). Lastly, the ICEES2DEI directory contains the same aggregated CSV file, but the data have been stripped of all PHI per HIPAA Safe Harbor method <span class="citation">(<a href="#ref-hhs2023hipaa">30</a>)</span>. The fully deidentified file then abides by all federal regulations surrounding privacy and security, although institutional regulations may remain. For exposition purposes, we focus on the deidentified ICEES2DEI CSV file and reorder its columns.</p>
-<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb155-1"><a href="chapter-fhir-pit.html#cb155-1" tabindex="-1"></a>icees2dei_colorder <span class="ot">&lt;-</span> <span class="fu">scan</span>(<span class="st">&quot;icees2dei_patient_column_order.txt&quot;</span>,</span>
-<span id="cb155-2"><a href="chapter-fhir-pit.html#cb155-2" tabindex="-1"></a>                           <span class="at">what =</span> <span class="st">&quot;&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
-<span id="cb155-3"><a href="chapter-fhir-pit.html#cb155-3" tabindex="-1"></a>icees2dei <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(icees2dei_patient_url,</span>
-<span id="cb155-4"><a href="chapter-fhir-pit.html#cb155-4" tabindex="-1"></a>                      <span class="at">header =</span> <span class="cn">TRUE</span>)[, icees2dei_colorder]</span>
-<span id="cb155-5"><a href="chapter-fhir-pit.html#cb155-5" tabindex="-1"></a>icees2dei</span></code></pre></div>
-<div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb156-1"><a href="chapter-fhir-pit.html#cb156-1" tabindex="-1"></a><span class="co">#   index year AvgDailyPM2.5Exposure AvgDailyPM2.5Exposure_StudyAvg</span></span>
-<span id="cb156-2"><a href="chapter-fhir-pit.html#cb156-2" tabindex="-1"></a><span class="co"># 1     0 2010              7.949999                       8.645932</span></span>
-<span id="cb156-3"><a href="chapter-fhir-pit.html#cb156-3" tabindex="-1"></a><span class="co"># 2     1 2010             10.520382                       8.645932</span></span>
-<span id="cb156-4"><a href="chapter-fhir-pit.html#cb156-4" tabindex="-1"></a><span class="co"># 3     2 2010             22.711028                      12.472791</span></span>
-<span id="cb156-5"><a href="chapter-fhir-pit.html#cb156-5" tabindex="-1"></a><span class="co"># 4     3 2010             22.134923                      10.000803</span></span>
-<span id="cb156-6"><a href="chapter-fhir-pit.html#cb156-6" tabindex="-1"></a><span class="co">#   AvgDailyPM2.5Exposure_StudyMax MaxDailyPM2.5Exposure</span></span>
-<span id="cb156-7"><a href="chapter-fhir-pit.html#cb156-7" tabindex="-1"></a><span class="co"># 1                       38.89938              20.42399</span></span>
-<span id="cb156-8"><a href="chapter-fhir-pit.html#cb156-8" tabindex="-1"></a><span class="co"># 2                       38.89938              16.50489</span></span>
-<span id="cb156-9"><a href="chapter-fhir-pit.html#cb156-9" tabindex="-1"></a><span class="co"># 3                       49.20912              35.83996</span></span>
-<span id="cb156-10"><a href="chapter-fhir-pit.html#cb156-10" tabindex="-1"></a><span class="co"># 4                       50.76701              37.09866</span></span>
-<span id="cb156-11"><a href="chapter-fhir-pit.html#cb156-11" tabindex="-1"></a><span class="co">#   MaxDailyPM2.5Exposure_StudyAvg MaxDailyPM2.5Exposure_StudyMax</span></span>
-<span id="cb156-12"><a href="chapter-fhir-pit.html#cb156-12" tabindex="-1"></a><span class="co"># 1                       14.07015                       54.65602</span></span>
-<span id="cb156-13"><a href="chapter-fhir-pit.html#cb156-13" tabindex="-1"></a><span class="co"># 2                       14.07015                       54.65602</span></span>
-<span id="cb156-14"><a href="chapter-fhir-pit.html#cb156-14" tabindex="-1"></a><span class="co"># 3                       20.50664                       71.36617</span></span>
-<span id="cb156-15"><a href="chapter-fhir-pit.html#cb156-15" tabindex="-1"></a><span class="co"># 4                       16.74545                       67.37352</span></span>
-<span id="cb156-16"><a href="chapter-fhir-pit.html#cb156-16" tabindex="-1"></a><span class="co">#   AvgDailyOzoneExposure AvgDailyOzoneExposure_StudyAvg</span></span>
-<span id="cb156-17"><a href="chapter-fhir-pit.html#cb156-17" tabindex="-1"></a><span class="co"># 1              36.97466                       46.99595</span></span>
-<span id="cb156-18"><a href="chapter-fhir-pit.html#cb156-18" tabindex="-1"></a><span class="co"># 2              18.62635                       46.99595</span></span>
-<span id="cb156-19"><a href="chapter-fhir-pit.html#cb156-19" tabindex="-1"></a><span class="co"># 3              55.75696                       38.58856</span></span>
-<span id="cb156-20"><a href="chapter-fhir-pit.html#cb156-20" tabindex="-1"></a><span class="co"># 4              38.33320                       40.13805</span></span>
-<span id="cb156-21"><a href="chapter-fhir-pit.html#cb156-21" tabindex="-1"></a><span class="co">#   AvgDailyOzoneExposure_StudyMax MaxDailyOzoneExposure</span></span>
-<span id="cb156-22"><a href="chapter-fhir-pit.html#cb156-22" tabindex="-1"></a><span class="co"># 1                      128.36066              42.67887</span></span>
-<span id="cb156-23"><a href="chapter-fhir-pit.html#cb156-23" tabindex="-1"></a><span class="co"># 2                      128.36066              28.94073</span></span>
-<span id="cb156-24"><a href="chapter-fhir-pit.html#cb156-24" tabindex="-1"></a><span class="co"># 3                       69.68106              94.79951</span></span>
-<span id="cb156-25"><a href="chapter-fhir-pit.html#cb156-25" tabindex="-1"></a><span class="co"># 4                       76.71777              67.85281</span></span>
-<span id="cb156-26"><a href="chapter-fhir-pit.html#cb156-26" tabindex="-1"></a><span class="co">#   MaxDailyOzoneExposure_StudyAvg MaxDailyOzoneExposure_StudyMax</span></span>
-<span id="cb156-27"><a href="chapter-fhir-pit.html#cb156-27" tabindex="-1"></a><span class="co"># 1                       61.60031                       198.8417</span></span>
-<span id="cb156-28"><a href="chapter-fhir-pit.html#cb156-28" tabindex="-1"></a><span class="co"># 2                       61.60031                       198.8417</span></span>
-<span id="cb156-29"><a href="chapter-fhir-pit.html#cb156-29" tabindex="-1"></a><span class="co"># 3                       55.08151                       103.9576</span></span>
-<span id="cb156-30"><a href="chapter-fhir-pit.html#cb156-30" tabindex="-1"></a><span class="co"># 4                       55.48645                       115.6936</span></span>
-<span id="cb156-31"><a href="chapter-fhir-pit.html#cb156-31" tabindex="-1"></a><span class="co">#   AvgDailyPM2.5Exposure_2 MaxDailyOzoneExposure_2 AvgDailyCOExposure_2</span></span>
-<span id="cb156-32"><a href="chapter-fhir-pit.html#cb156-32" tabindex="-1"></a><span class="co"># 1                9.274049                36.54099             213.2262</span></span>
-<span id="cb156-33"><a href="chapter-fhir-pit.html#cb156-33" tabindex="-1"></a><span class="co"># 2                9.498967                35.70597             358.0131</span></span>
-<span id="cb156-34"><a href="chapter-fhir-pit.html#cb156-34" tabindex="-1"></a><span class="co"># 3                8.238118                39.11024             212.4620</span></span>
-<span id="cb156-35"><a href="chapter-fhir-pit.html#cb156-35" tabindex="-1"></a><span class="co"># 4                8.300655                38.53758             193.7690</span></span>
-<span id="cb156-36"><a href="chapter-fhir-pit.html#cb156-36" tabindex="-1"></a><span class="co">#   AvgDailyNOExposure_2 AvgDailyNO2Exposure_2 AvgDailyNOxExposure_2</span></span>
-<span id="cb156-37"><a href="chapter-fhir-pit.html#cb156-37" tabindex="-1"></a><span class="co"># 1             3.048349             11.539853              14.58820</span></span>
-<span id="cb156-38"><a href="chapter-fhir-pit.html#cb156-38" tabindex="-1"></a><span class="co"># 2            14.655994             22.662306              37.31830</span></span>
-<span id="cb156-39"><a href="chapter-fhir-pit.html#cb156-39" tabindex="-1"></a><span class="co"># 3             2.493993             10.630901              13.12489</span></span>
-<span id="cb156-40"><a href="chapter-fhir-pit.html#cb156-40" tabindex="-1"></a><span class="co"># 4             1.840359              8.475516              10.31587</span></span>
-<span id="cb156-41"><a href="chapter-fhir-pit.html#cb156-41" tabindex="-1"></a><span class="co">#   AvgDailySO2Exposure_2 AvgDailyAcetaldehydeExposure_2</span></span>
-<span id="cb156-42"><a href="chapter-fhir-pit.html#cb156-42" tabindex="-1"></a><span class="co"># 1              1.956961                      0.6987113</span></span>
-<span id="cb156-43"><a href="chapter-fhir-pit.html#cb156-43" tabindex="-1"></a><span class="co"># 2              3.789237                      0.9583015</span></span>
-<span id="cb156-44"><a href="chapter-fhir-pit.html#cb156-44" tabindex="-1"></a><span class="co"># 3              1.613538                      0.8120486</span></span>
-<span id="cb156-45"><a href="chapter-fhir-pit.html#cb156-45" tabindex="-1"></a><span class="co"># 4              1.097606                      0.7321192</span></span>
-<span id="cb156-46"><a href="chapter-fhir-pit.html#cb156-46" tabindex="-1"></a><span class="co">#   AvgDailyFormaldehydeExposure_2 AvgDailyBenzeneExposure_2 ObesityBMI</span></span>
-<span id="cb156-47"><a href="chapter-fhir-pit.html#cb156-47" tabindex="-1"></a><span class="co"># 1                      0.9163324                        NA          0</span></span>
-<span id="cb156-48"><a href="chapter-fhir-pit.html#cb156-48" tabindex="-1"></a><span class="co"># 2                      1.3879702                        NA          0</span></span>
-<span id="cb156-49"><a href="chapter-fhir-pit.html#cb156-49" tabindex="-1"></a><span class="co"># 3                      1.0863108                        NA          0</span></span>
-<span id="cb156-50"><a href="chapter-fhir-pit.html#cb156-50" tabindex="-1"></a><span class="co"># 4                      0.9295859                        NA          0</span></span>
-<span id="cb156-51"><a href="chapter-fhir-pit.html#cb156-51" tabindex="-1"></a><span class="co">#   TotalEDVisits TotalInpatientVisits TotalEDInpatientVisits Sex2  Sex</span></span>
-<span id="cb156-52"><a href="chapter-fhir-pit.html#cb156-52" tabindex="-1"></a><span class="co"># 1             0                    0                      0 Male Male</span></span>
-<span id="cb156-53"><a href="chapter-fhir-pit.html#cb156-53" tabindex="-1"></a><span class="co"># 2             0                    0                      0 Male Male</span></span>
-<span id="cb156-54"><a href="chapter-fhir-pit.html#cb156-54" tabindex="-1"></a><span class="co"># 3             0                    0                      0 Male Male</span></span>
-<span id="cb156-55"><a href="chapter-fhir-pit.html#cb156-55" tabindex="-1"></a><span class="co"># 4             0                    0                      0 Male Male</span></span>
-<span id="cb156-56"><a href="chapter-fhir-pit.html#cb156-56" tabindex="-1"></a><span class="co">#      Race Ethnicity MajorRoadwayHighwayExposure RoadwayDistanceExposure</span></span>
-<span id="cb156-57"><a href="chapter-fhir-pit.html#cb156-57" tabindex="-1"></a><span class="co"># 1 Unknown   Unknown                    227.9604                12.42057</span></span>
-<span id="cb156-58"><a href="chapter-fhir-pit.html#cb156-58" tabindex="-1"></a><span class="co"># 2 Unknown   Unknown                   2098.2448               301.82455</span></span>
-<span id="cb156-59"><a href="chapter-fhir-pit.html#cb156-59" tabindex="-1"></a><span class="co"># 3 Unknown   Unknown                    336.5802               252.79614</span></span>
-<span id="cb156-60"><a href="chapter-fhir-pit.html#cb156-60" tabindex="-1"></a><span class="co"># 4 Unknown   Unknown                    460.0862               462.22059</span></span>
-<span id="cb156-61"><a href="chapter-fhir-pit.html#cb156-61" tabindex="-1"></a><span class="co">#   RoadwayType RoadwayAADT RoadwaySpeedLimit RoadwayLanes CAFO_Exposure</span></span>
-<span id="cb156-62"><a href="chapter-fhir-pit.html#cb156-62" tabindex="-1"></a><span class="co"># 1          NA          NA                NA           NA      574089.1</span></span>
-<span id="cb156-63"><a href="chapter-fhir-pit.html#cb156-63" tabindex="-1"></a><span class="co"># 2          NA          NA                NA           NA      567777.9</span></span>
-<span id="cb156-64"><a href="chapter-fhir-pit.html#cb156-64" tabindex="-1"></a><span class="co"># 3          NA          NA                NA           NA      472817.7</span></span>
-<span id="cb156-65"><a href="chapter-fhir-pit.html#cb156-65" tabindex="-1"></a><span class="co"># 4          NA          NA                NA           NA      572968.6</span></span>
-<span id="cb156-66"><a href="chapter-fhir-pit.html#cb156-66" tabindex="-1"></a><span class="co">#   Landfill_Exposure EstResidentialDensity</span></span>
-<span id="cb156-67"><a href="chapter-fhir-pit.html#cb156-67" tabindex="-1"></a><span class="co"># 1          819888.5                    NA</span></span>
-<span id="cb156-68"><a href="chapter-fhir-pit.html#cb156-68" tabindex="-1"></a><span class="co"># 2          813577.6                    NA</span></span>
-<span id="cb156-69"><a href="chapter-fhir-pit.html#cb156-69" tabindex="-1"></a><span class="co"># 3          732120.1                    NA</span></span>
-<span id="cb156-70"><a href="chapter-fhir-pit.html#cb156-70" tabindex="-1"></a><span class="co"># 4          826018.3                    NA</span></span>
-<span id="cb156-71"><a href="chapter-fhir-pit.html#cb156-71" tabindex="-1"></a><span class="co">#   EstProbabilityHighSchoolMaxEducation EstProbabilityNoHealthIns</span></span>
-<span id="cb156-72"><a href="chapter-fhir-pit.html#cb156-72" tabindex="-1"></a><span class="co"># 1                                   NA                        NA</span></span>
-<span id="cb156-73"><a href="chapter-fhir-pit.html#cb156-73" tabindex="-1"></a><span class="co"># 2                                   NA                        NA</span></span>
-<span id="cb156-74"><a href="chapter-fhir-pit.html#cb156-74" tabindex="-1"></a><span class="co"># 3                                   NA                        NA</span></span>
-<span id="cb156-75"><a href="chapter-fhir-pit.html#cb156-75" tabindex="-1"></a><span class="co"># 4                                   NA                        NA</span></span>
-<span id="cb156-76"><a href="chapter-fhir-pit.html#cb156-76" tabindex="-1"></a><span class="co">#   EstProbabilityHouseholdNonHispWhite EstProbabilityESL</span></span>
-<span id="cb156-77"><a href="chapter-fhir-pit.html#cb156-77" tabindex="-1"></a><span class="co"># 1                                  NA                NA</span></span>
-<span id="cb156-78"><a href="chapter-fhir-pit.html#cb156-78" tabindex="-1"></a><span class="co"># 2                                  NA                NA</span></span>
-<span id="cb156-79"><a href="chapter-fhir-pit.html#cb156-79" tabindex="-1"></a><span class="co"># 3                                  NA                NA</span></span>
-<span id="cb156-80"><a href="chapter-fhir-pit.html#cb156-80" tabindex="-1"></a><span class="co"># 4                                  NA                NA</span></span>
-<span id="cb156-81"><a href="chapter-fhir-pit.html#cb156-81" tabindex="-1"></a><span class="co">#   EstProbabilityNonHispWhite EstHouseholdIncome EstResidentialDensity25Plus</span></span>
-<span id="cb156-82"><a href="chapter-fhir-pit.html#cb156-82" tabindex="-1"></a><span class="co"># 1                         NA                 NA                          NA</span></span>
-<span id="cb156-83"><a href="chapter-fhir-pit.html#cb156-83" tabindex="-1"></a><span class="co"># 2                         NA                 NA                          NA</span></span>
-<span id="cb156-84"><a href="chapter-fhir-pit.html#cb156-84" tabindex="-1"></a><span class="co"># 3                         NA                 NA                          NA</span></span>
-<span id="cb156-85"><a href="chapter-fhir-pit.html#cb156-85" tabindex="-1"></a><span class="co"># 4                         NA                 NA                          NA</span></span>
-<span id="cb156-86"><a href="chapter-fhir-pit.html#cb156-86" tabindex="-1"></a><span class="co">#   EstProbabilityNoAuto ur Estradiol TesticularDysfunctionDx ProstateCancerDx</span></span>
-<span id="cb156-87"><a href="chapter-fhir-pit.html#cb156-87" tabindex="-1"></a><span class="co"># 1                   NA NA         0                       0                0</span></span>
-<span id="cb156-88"><a href="chapter-fhir-pit.html#cb156-88" tabindex="-1"></a><span class="co"># 2                   NA NA         0                       0                0</span></span>
-<span id="cb156-89"><a href="chapter-fhir-pit.html#cb156-89" tabindex="-1"></a><span class="co"># 3                   NA NA         0                       0                0</span></span>
-<span id="cb156-90"><a href="chapter-fhir-pit.html#cb156-90" tabindex="-1"></a><span class="co"># 4                   NA NA         0                       0                0</span></span>
-<span id="cb156-91"><a href="chapter-fhir-pit.html#cb156-91" tabindex="-1"></a><span class="co">#   AnxietyDx Formoterol FibromyalgiaDx Metaproterenol Indacaterol</span></span>
-<span id="cb156-92"><a href="chapter-fhir-pit.html#cb156-92" tabindex="-1"></a><span class="co"># 1         0          0              0              0           0</span></span>
-<span id="cb156-93"><a href="chapter-fhir-pit.html#cb156-93" tabindex="-1"></a><span class="co"># 2         0          0              0              0           0</span></span>
-<span id="cb156-94"><a href="chapter-fhir-pit.html#cb156-94" tabindex="-1"></a><span class="co"># 3         0          0              0              0           0</span></span>
-<span id="cb156-95"><a href="chapter-fhir-pit.html#cb156-95" tabindex="-1"></a><span class="co"># 4         0          0              0              0           0</span></span>
-<span id="cb156-96"><a href="chapter-fhir-pit.html#cb156-96" tabindex="-1"></a><span class="co">#   OvarianDysfunctionDx Fluoxetine PneumoniaDx Triptorelin Omalizumab</span></span>
-<span id="cb156-97"><a href="chapter-fhir-pit.html#cb156-97" tabindex="-1"></a><span class="co"># 1                    0          0           0           0          0</span></span>
-<span id="cb156-98"><a href="chapter-fhir-pit.html#cb156-98" tabindex="-1"></a><span class="co"># 2                    0          0           0           0          0</span></span>
-<span id="cb156-99"><a href="chapter-fhir-pit.html#cb156-99" tabindex="-1"></a><span class="co"># 3                    0          0           0           0          0</span></span>
-<span id="cb156-100"><a href="chapter-fhir-pit.html#cb156-100" tabindex="-1"></a><span class="co"># 4                    0          0           0           0          0</span></span>
-<span id="cb156-101"><a href="chapter-fhir-pit.html#cb156-101" tabindex="-1"></a><span class="co">#   Mepolizumab Fluticasone Sertraline Budesonide AlcoholDependenceDx</span></span>
-<span id="cb156-102"><a href="chapter-fhir-pit.html#cb156-102" tabindex="-1"></a><span class="co"># 1           0           0          0          0                   0</span></span>
-<span id="cb156-103"><a href="chapter-fhir-pit.html#cb156-103" tabindex="-1"></a><span class="co"># 2           0           0          0          0                   0</span></span>
-<span id="cb156-104"><a href="chapter-fhir-pit.html#cb156-104" tabindex="-1"></a><span class="co"># 3           0           0          0          0                   0</span></span>
-<span id="cb156-105"><a href="chapter-fhir-pit.html#cb156-105" tabindex="-1"></a><span class="co"># 4           0           0          0          0                   0</span></span>
-<span id="cb156-106"><a href="chapter-fhir-pit.html#cb156-106" tabindex="-1"></a><span class="co">#   Flunisolide Nandrolone Venlafaxine Androstenedione Arformoterol</span></span>
-<span id="cb156-107"><a href="chapter-fhir-pit.html#cb156-107" tabindex="-1"></a><span class="co"># 1           0          0           0               0            0</span></span>
-<span id="cb156-108"><a href="chapter-fhir-pit.html#cb156-108" tabindex="-1"></a><span class="co"># 2           0          0           0               0            0</span></span>
-<span id="cb156-109"><a href="chapter-fhir-pit.html#cb156-109" tabindex="-1"></a><span class="co"># 3           0          0           0               0            0</span></span>
-<span id="cb156-110"><a href="chapter-fhir-pit.html#cb156-110" tabindex="-1"></a><span class="co"># 4           0          0           0               0            0</span></span>
-<span id="cb156-111"><a href="chapter-fhir-pit.html#cb156-111" tabindex="-1"></a><span class="co">#   MenopauseDx Diphenhydramine Paroxetine DrugDependenceDx DepressionDx</span></span>
-<span id="cb156-112"><a href="chapter-fhir-pit.html#cb156-112" tabindex="-1"></a><span class="co"># 1           0               0          0                0            0</span></span>
-<span id="cb156-113"><a href="chapter-fhir-pit.html#cb156-113" tabindex="-1"></a><span class="co"># 2           0               0          0                0            0</span></span>
-<span id="cb156-114"><a href="chapter-fhir-pit.html#cb156-114" tabindex="-1"></a><span class="co"># 3           0               0          0                0            0</span></span>
-<span id="cb156-115"><a href="chapter-fhir-pit.html#cb156-115" tabindex="-1"></a><span class="co"># 4           0               0          0                0            0</span></span>
-<span id="cb156-116"><a href="chapter-fhir-pit.html#cb156-116" tabindex="-1"></a><span class="co">#   Mometasone AutismDx Progesterone Prednisone Escitalopram CroupDx Goserelin</span></span>
-<span id="cb156-117"><a href="chapter-fhir-pit.html#cb156-117" tabindex="-1"></a><span class="co"># 1          0        0            0          0            0       0         0</span></span>
-<span id="cb156-118"><a href="chapter-fhir-pit.html#cb156-118" tabindex="-1"></a><span class="co"># 2          0        0            0          0            0       0         0</span></span>
-<span id="cb156-119"><a href="chapter-fhir-pit.html#cb156-119" tabindex="-1"></a><span class="co"># 3          0        0            0          0            0       0         0</span></span>
-<span id="cb156-120"><a href="chapter-fhir-pit.html#cb156-120" tabindex="-1"></a><span class="co"># 4          0        0            0          0            0       0         0</span></span>
-<span id="cb156-121"><a href="chapter-fhir-pit.html#cb156-121" tabindex="-1"></a><span class="co">#   Cetirizine Citalopram CoughDx EndometriosisDx TesticularCancerDx</span></span>
-<span id="cb156-122"><a href="chapter-fhir-pit.html#cb156-122" tabindex="-1"></a><span class="co"># 1          0          0       0               0                  0</span></span>
-<span id="cb156-123"><a href="chapter-fhir-pit.html#cb156-123" tabindex="-1"></a><span class="co"># 2          0          0       0               0                  0</span></span>
-<span id="cb156-124"><a href="chapter-fhir-pit.html#cb156-124" tabindex="-1"></a><span class="co"># 3          0          0       0               0                  0</span></span>
-<span id="cb156-125"><a href="chapter-fhir-pit.html#cb156-125" tabindex="-1"></a><span class="co"># 4          0          0       0               0                  0</span></span>
-<span id="cb156-126"><a href="chapter-fhir-pit.html#cb156-126" tabindex="-1"></a><span class="co">#   UterineCancerDx Fexofenadine Salmeterol Prasterone Duloxetine Estrogen</span></span>
-<span id="cb156-127"><a href="chapter-fhir-pit.html#cb156-127" tabindex="-1"></a><span class="co"># 1               0            0          0          0          0        0</span></span>
-<span id="cb156-128"><a href="chapter-fhir-pit.html#cb156-128" tabindex="-1"></a><span class="co"># 2               0            0          0          0          0        0</span></span>
-<span id="cb156-129"><a href="chapter-fhir-pit.html#cb156-129" tabindex="-1"></a><span class="co"># 3               0            0          0          0          0        0</span></span>
-<span id="cb156-130"><a href="chapter-fhir-pit.html#cb156-130" tabindex="-1"></a><span class="co"># 4               0            0          0          0          0        0</span></span>
-<span id="cb156-131"><a href="chapter-fhir-pit.html#cb156-131" tabindex="-1"></a><span class="co">#   PregnancyDx Ciclesonide ObesityDx Testosterone Beclomethasone</span></span>
-<span id="cb156-132"><a href="chapter-fhir-pit.html#cb156-132" tabindex="-1"></a><span class="co"># 1           0           0         0            0              0</span></span>
-<span id="cb156-133"><a href="chapter-fhir-pit.html#cb156-133" tabindex="-1"></a><span class="co"># 2           0           0         0            0              0</span></span>
-<span id="cb156-134"><a href="chapter-fhir-pit.html#cb156-134" tabindex="-1"></a><span class="co"># 3           0           0         0            0              0</span></span>
-<span id="cb156-135"><a href="chapter-fhir-pit.html#cb156-135" tabindex="-1"></a><span class="co"># 4           0           0         0            0              0</span></span>
-<span id="cb156-136"><a href="chapter-fhir-pit.html#cb156-136" tabindex="-1"></a><span class="co">#   OvarianCancerDx ReactiveAirwayDx Medroxyprogresterone DiabetesDx</span></span>
-<span id="cb156-137"><a href="chapter-fhir-pit.html#cb156-137" tabindex="-1"></a><span class="co"># 1               0                0                    0          0</span></span>
-<span id="cb156-138"><a href="chapter-fhir-pit.html#cb156-138" tabindex="-1"></a><span class="co"># 2               0                0                    0          0</span></span>
-<span id="cb156-139"><a href="chapter-fhir-pit.html#cb156-139" tabindex="-1"></a><span class="co"># 3               0                0                    0          0</span></span>
-<span id="cb156-140"><a href="chapter-fhir-pit.html#cb156-140" tabindex="-1"></a><span class="co"># 4               0                0                    0          0</span></span>
-<span id="cb156-141"><a href="chapter-fhir-pit.html#cb156-141" tabindex="-1"></a><span class="co">#   Hydroxyzine AlopeciaDx Propranolol Theophylline KidneyCancerDx AsthmaDx</span></span>
-<span id="cb156-142"><a href="chapter-fhir-pit.html#cb156-142" tabindex="-1"></a><span class="co"># 1           0          0           0            0              0        0</span></span>
-<span id="cb156-143"><a href="chapter-fhir-pit.html#cb156-143" tabindex="-1"></a><span class="co"># 2           0          0           0            0              0        0</span></span>
-<span id="cb156-144"><a href="chapter-fhir-pit.html#cb156-144" tabindex="-1"></a><span class="co"># 3           0          0           0            0              0        0</span></span>
-<span id="cb156-145"><a href="chapter-fhir-pit.html#cb156-145" tabindex="-1"></a><span class="co"># 4           0          0           0            0              0        0</span></span>
-<span id="cb156-146"><a href="chapter-fhir-pit.html#cb156-146" tabindex="-1"></a><span class="co">#   Metformin Albuterol Tamoxifen Estropipate Leuprolide CervicalCancerDx</span></span>
-<span id="cb156-147"><a href="chapter-fhir-pit.html#cb156-147" tabindex="-1"></a><span class="co"># 1         0         0         0           0          0                0</span></span>
-<span id="cb156-148"><a href="chapter-fhir-pit.html#cb156-148" tabindex="-1"></a><span class="co"># 2         0         0         0           0          0                0</span></span>
-<span id="cb156-149"><a href="chapter-fhir-pit.html#cb156-149" tabindex="-1"></a><span class="co"># 3         0         0         0           0          0                0</span></span>
-<span id="cb156-150"><a href="chapter-fhir-pit.html#cb156-150" tabindex="-1"></a><span class="co"># 4         0         0         0           0          0                0</span></span>
-<span id="cb156-151"><a href="chapter-fhir-pit.html#cb156-151" tabindex="-1"></a><span class="co">#   Histrelin Ipratropium Trazodone AgeStudyStart Active_In_Year</span></span>
-<span id="cb156-152"><a href="chapter-fhir-pit.html#cb156-152" tabindex="-1"></a><span class="co"># 1         0           0         0            14              1</span></span>
-<span id="cb156-153"><a href="chapter-fhir-pit.html#cb156-153" tabindex="-1"></a><span class="co"># 2         0           0         0            17              1</span></span>
-<span id="cb156-154"><a href="chapter-fhir-pit.html#cb156-154" tabindex="-1"></a><span class="co"># 3         0           0         0            20              1</span></span>
-<span id="cb156-155"><a href="chapter-fhir-pit.html#cb156-155" tabindex="-1"></a><span class="co"># 4         0           0         0            17              1</span></span></code></pre></div>
+<div class="sourceCode" id="cb240"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb240-1"><a href="chapter-fhir-pit.html#cb240-1" tabindex="-1"></a>icees2dei_colorder <span class="ot">&lt;-</span> <span class="fu">scan</span>(<span class="st">&quot;icees2dei_patient_column_order.txt&quot;</span>,</span>
+<span id="cb240-2"><a href="chapter-fhir-pit.html#cb240-2" tabindex="-1"></a>                           <span class="at">what =</span> <span class="st">&quot;&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb240-3"><a href="chapter-fhir-pit.html#cb240-3" tabindex="-1"></a>icees2dei <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(icees2dei_patient_url,</span>
+<span id="cb240-4"><a href="chapter-fhir-pit.html#cb240-4" tabindex="-1"></a>                      <span class="at">header =</span> <span class="cn">TRUE</span>)[, icees2dei_colorder]</span>
+<span id="cb240-5"><a href="chapter-fhir-pit.html#cb240-5" tabindex="-1"></a>icees2dei</span></code></pre></div>
+<div class="sourceCode" id="cb241"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb241-1"><a href="chapter-fhir-pit.html#cb241-1" tabindex="-1"></a><span class="co">#   index year AvgDailyPM2.5Exposure AvgDailyPM2.5Exposure_StudyAvg</span></span>
+<span id="cb241-2"><a href="chapter-fhir-pit.html#cb241-2" tabindex="-1"></a><span class="co"># 1     0 2010              7.949999                       8.645932</span></span>
+<span id="cb241-3"><a href="chapter-fhir-pit.html#cb241-3" tabindex="-1"></a><span class="co"># 2     1 2010             10.520382                       8.645932</span></span>
+<span id="cb241-4"><a href="chapter-fhir-pit.html#cb241-4" tabindex="-1"></a><span class="co"># 3     2 2010             22.711028                      12.472791</span></span>
+<span id="cb241-5"><a href="chapter-fhir-pit.html#cb241-5" tabindex="-1"></a><span class="co"># 4     3 2010             22.134923                      10.000803</span></span>
+<span id="cb241-6"><a href="chapter-fhir-pit.html#cb241-6" tabindex="-1"></a><span class="co">#   AvgDailyPM2.5Exposure_StudyMax MaxDailyPM2.5Exposure</span></span>
+<span id="cb241-7"><a href="chapter-fhir-pit.html#cb241-7" tabindex="-1"></a><span class="co"># 1                       38.89938              20.42399</span></span>
+<span id="cb241-8"><a href="chapter-fhir-pit.html#cb241-8" tabindex="-1"></a><span class="co"># 2                       38.89938              16.50489</span></span>
+<span id="cb241-9"><a href="chapter-fhir-pit.html#cb241-9" tabindex="-1"></a><span class="co"># 3                       49.20912              35.83996</span></span>
+<span id="cb241-10"><a href="chapter-fhir-pit.html#cb241-10" tabindex="-1"></a><span class="co"># 4                       50.76701              37.09866</span></span>
+<span id="cb241-11"><a href="chapter-fhir-pit.html#cb241-11" tabindex="-1"></a><span class="co">#   MaxDailyPM2.5Exposure_StudyAvg MaxDailyPM2.5Exposure_StudyMax</span></span>
+<span id="cb241-12"><a href="chapter-fhir-pit.html#cb241-12" tabindex="-1"></a><span class="co"># 1                       14.07015                       54.65602</span></span>
+<span id="cb241-13"><a href="chapter-fhir-pit.html#cb241-13" tabindex="-1"></a><span class="co"># 2                       14.07015                       54.65602</span></span>
+<span id="cb241-14"><a href="chapter-fhir-pit.html#cb241-14" tabindex="-1"></a><span class="co"># 3                       20.50664                       71.36617</span></span>
+<span id="cb241-15"><a href="chapter-fhir-pit.html#cb241-15" tabindex="-1"></a><span class="co"># 4                       16.74545                       67.37352</span></span>
+<span id="cb241-16"><a href="chapter-fhir-pit.html#cb241-16" tabindex="-1"></a><span class="co">#   AvgDailyOzoneExposure AvgDailyOzoneExposure_StudyAvg</span></span>
+<span id="cb241-17"><a href="chapter-fhir-pit.html#cb241-17" tabindex="-1"></a><span class="co"># 1              36.97466                       46.99595</span></span>
+<span id="cb241-18"><a href="chapter-fhir-pit.html#cb241-18" tabindex="-1"></a><span class="co"># 2              18.62635                       46.99595</span></span>
+<span id="cb241-19"><a href="chapter-fhir-pit.html#cb241-19" tabindex="-1"></a><span class="co"># 3              55.75696                       38.58856</span></span>
+<span id="cb241-20"><a href="chapter-fhir-pit.html#cb241-20" tabindex="-1"></a><span class="co"># 4              38.33320                       40.13805</span></span>
+<span id="cb241-21"><a href="chapter-fhir-pit.html#cb241-21" tabindex="-1"></a><span class="co">#   AvgDailyOzoneExposure_StudyMax MaxDailyOzoneExposure</span></span>
+<span id="cb241-22"><a href="chapter-fhir-pit.html#cb241-22" tabindex="-1"></a><span class="co"># 1                      128.36066              42.67887</span></span>
+<span id="cb241-23"><a href="chapter-fhir-pit.html#cb241-23" tabindex="-1"></a><span class="co"># 2                      128.36066              28.94073</span></span>
+<span id="cb241-24"><a href="chapter-fhir-pit.html#cb241-24" tabindex="-1"></a><span class="co"># 3                       69.68106              94.79951</span></span>
+<span id="cb241-25"><a href="chapter-fhir-pit.html#cb241-25" tabindex="-1"></a><span class="co"># 4                       76.71777              67.85281</span></span>
+<span id="cb241-26"><a href="chapter-fhir-pit.html#cb241-26" tabindex="-1"></a><span class="co">#   MaxDailyOzoneExposure_StudyAvg MaxDailyOzoneExposure_StudyMax</span></span>
+<span id="cb241-27"><a href="chapter-fhir-pit.html#cb241-27" tabindex="-1"></a><span class="co"># 1                       61.60031                       198.8417</span></span>
+<span id="cb241-28"><a href="chapter-fhir-pit.html#cb241-28" tabindex="-1"></a><span class="co"># 2                       61.60031                       198.8417</span></span>
+<span id="cb241-29"><a href="chapter-fhir-pit.html#cb241-29" tabindex="-1"></a><span class="co"># 3                       55.08151                       103.9576</span></span>
+<span id="cb241-30"><a href="chapter-fhir-pit.html#cb241-30" tabindex="-1"></a><span class="co"># 4                       55.48645                       115.6936</span></span>
+<span id="cb241-31"><a href="chapter-fhir-pit.html#cb241-31" tabindex="-1"></a><span class="co">#   AvgDailyPM2.5Exposure_2 MaxDailyOzoneExposure_2 AvgDailyCOExposure_2</span></span>
+<span id="cb241-32"><a href="chapter-fhir-pit.html#cb241-32" tabindex="-1"></a><span class="co"># 1                9.274049                36.54099             213.2262</span></span>
+<span id="cb241-33"><a href="chapter-fhir-pit.html#cb241-33" tabindex="-1"></a><span class="co"># 2                9.498967                35.70597             358.0131</span></span>
+<span id="cb241-34"><a href="chapter-fhir-pit.html#cb241-34" tabindex="-1"></a><span class="co"># 3                8.238118                39.11024             212.4620</span></span>
+<span id="cb241-35"><a href="chapter-fhir-pit.html#cb241-35" tabindex="-1"></a><span class="co"># 4                8.300655                38.53758             193.7690</span></span>
+<span id="cb241-36"><a href="chapter-fhir-pit.html#cb241-36" tabindex="-1"></a><span class="co">#   AvgDailyNOExposure_2 AvgDailyNO2Exposure_2 AvgDailyNOxExposure_2</span></span>
+<span id="cb241-37"><a href="chapter-fhir-pit.html#cb241-37" tabindex="-1"></a><span class="co"># 1             3.048349             11.539853              14.58820</span></span>
+<span id="cb241-38"><a href="chapter-fhir-pit.html#cb241-38" tabindex="-1"></a><span class="co"># 2            14.655994             22.662306              37.31830</span></span>
+<span id="cb241-39"><a href="chapter-fhir-pit.html#cb241-39" tabindex="-1"></a><span class="co"># 3             2.493993             10.630901              13.12489</span></span>
+<span id="cb241-40"><a href="chapter-fhir-pit.html#cb241-40" tabindex="-1"></a><span class="co"># 4             1.840359              8.475516              10.31587</span></span>
+<span id="cb241-41"><a href="chapter-fhir-pit.html#cb241-41" tabindex="-1"></a><span class="co">#   AvgDailySO2Exposure_2 AvgDailyAcetaldehydeExposure_2</span></span>
+<span id="cb241-42"><a href="chapter-fhir-pit.html#cb241-42" tabindex="-1"></a><span class="co"># 1              1.956961                      0.6987113</span></span>
+<span id="cb241-43"><a href="chapter-fhir-pit.html#cb241-43" tabindex="-1"></a><span class="co"># 2              3.789237                      0.9583015</span></span>
+<span id="cb241-44"><a href="chapter-fhir-pit.html#cb241-44" tabindex="-1"></a><span class="co"># 3              1.613538                      0.8120486</span></span>
+<span id="cb241-45"><a href="chapter-fhir-pit.html#cb241-45" tabindex="-1"></a><span class="co"># 4              1.097606                      0.7321192</span></span>
+<span id="cb241-46"><a href="chapter-fhir-pit.html#cb241-46" tabindex="-1"></a><span class="co">#   AvgDailyFormaldehydeExposure_2 AvgDailyBenzeneExposure_2 ObesityBMI</span></span>
+<span id="cb241-47"><a href="chapter-fhir-pit.html#cb241-47" tabindex="-1"></a><span class="co"># 1                      0.9163324                        NA          0</span></span>
+<span id="cb241-48"><a href="chapter-fhir-pit.html#cb241-48" tabindex="-1"></a><span class="co"># 2                      1.3879702                        NA          0</span></span>
+<span id="cb241-49"><a href="chapter-fhir-pit.html#cb241-49" tabindex="-1"></a><span class="co"># 3                      1.0863108                        NA          0</span></span>
+<span id="cb241-50"><a href="chapter-fhir-pit.html#cb241-50" tabindex="-1"></a><span class="co"># 4                      0.9295859                        NA          0</span></span>
+<span id="cb241-51"><a href="chapter-fhir-pit.html#cb241-51" tabindex="-1"></a><span class="co">#   TotalEDVisits TotalInpatientVisits TotalEDInpatientVisits Sex2  Sex</span></span>
+<span id="cb241-52"><a href="chapter-fhir-pit.html#cb241-52" tabindex="-1"></a><span class="co"># 1             0                    0                      0 Male Male</span></span>
+<span id="cb241-53"><a href="chapter-fhir-pit.html#cb241-53" tabindex="-1"></a><span class="co"># 2             0                    0                      0 Male Male</span></span>
+<span id="cb241-54"><a href="chapter-fhir-pit.html#cb241-54" tabindex="-1"></a><span class="co"># 3             0                    0                      0 Male Male</span></span>
+<span id="cb241-55"><a href="chapter-fhir-pit.html#cb241-55" tabindex="-1"></a><span class="co"># 4             0                    0                      0 Male Male</span></span>
+<span id="cb241-56"><a href="chapter-fhir-pit.html#cb241-56" tabindex="-1"></a><span class="co">#      Race Ethnicity MajorRoadwayHighwayExposure RoadwayDistanceExposure</span></span>
+<span id="cb241-57"><a href="chapter-fhir-pit.html#cb241-57" tabindex="-1"></a><span class="co"># 1 Unknown   Unknown                    227.9604                12.42057</span></span>
+<span id="cb241-58"><a href="chapter-fhir-pit.html#cb241-58" tabindex="-1"></a><span class="co"># 2 Unknown   Unknown                   2098.2448               301.82455</span></span>
+<span id="cb241-59"><a href="chapter-fhir-pit.html#cb241-59" tabindex="-1"></a><span class="co"># 3 Unknown   Unknown                    336.5802               252.79614</span></span>
+<span id="cb241-60"><a href="chapter-fhir-pit.html#cb241-60" tabindex="-1"></a><span class="co"># 4 Unknown   Unknown                    460.0862               462.22059</span></span>
+<span id="cb241-61"><a href="chapter-fhir-pit.html#cb241-61" tabindex="-1"></a><span class="co">#   RoadwayType RoadwayAADT RoadwaySpeedLimit RoadwayLanes CAFO_Exposure</span></span>
+<span id="cb241-62"><a href="chapter-fhir-pit.html#cb241-62" tabindex="-1"></a><span class="co"># 1          NA          NA                NA           NA      574089.1</span></span>
+<span id="cb241-63"><a href="chapter-fhir-pit.html#cb241-63" tabindex="-1"></a><span class="co"># 2          NA          NA                NA           NA      567777.9</span></span>
+<span id="cb241-64"><a href="chapter-fhir-pit.html#cb241-64" tabindex="-1"></a><span class="co"># 3          NA          NA                NA           NA      472817.7</span></span>
+<span id="cb241-65"><a href="chapter-fhir-pit.html#cb241-65" tabindex="-1"></a><span class="co"># 4          NA          NA                NA           NA      572968.6</span></span>
+<span id="cb241-66"><a href="chapter-fhir-pit.html#cb241-66" tabindex="-1"></a><span class="co">#   Landfill_Exposure EstResidentialDensity</span></span>
+<span id="cb241-67"><a href="chapter-fhir-pit.html#cb241-67" tabindex="-1"></a><span class="co"># 1          819888.5                    NA</span></span>
+<span id="cb241-68"><a href="chapter-fhir-pit.html#cb241-68" tabindex="-1"></a><span class="co"># 2          813577.6                    NA</span></span>
+<span id="cb241-69"><a href="chapter-fhir-pit.html#cb241-69" tabindex="-1"></a><span class="co"># 3          732120.1                    NA</span></span>
+<span id="cb241-70"><a href="chapter-fhir-pit.html#cb241-70" tabindex="-1"></a><span class="co"># 4          826018.3                    NA</span></span>
+<span id="cb241-71"><a href="chapter-fhir-pit.html#cb241-71" tabindex="-1"></a><span class="co">#   EstProbabilityHighSchoolMaxEducation EstProbabilityNoHealthIns</span></span>
+<span id="cb241-72"><a href="chapter-fhir-pit.html#cb241-72" tabindex="-1"></a><span class="co"># 1                                   NA                        NA</span></span>
+<span id="cb241-73"><a href="chapter-fhir-pit.html#cb241-73" tabindex="-1"></a><span class="co"># 2                                   NA                        NA</span></span>
+<span id="cb241-74"><a href="chapter-fhir-pit.html#cb241-74" tabindex="-1"></a><span class="co"># 3                                   NA                        NA</span></span>
+<span id="cb241-75"><a href="chapter-fhir-pit.html#cb241-75" tabindex="-1"></a><span class="co"># 4                                   NA                        NA</span></span>
+<span id="cb241-76"><a href="chapter-fhir-pit.html#cb241-76" tabindex="-1"></a><span class="co">#   EstProbabilityHouseholdNonHispWhite EstProbabilityESL</span></span>
+<span id="cb241-77"><a href="chapter-fhir-pit.html#cb241-77" tabindex="-1"></a><span class="co"># 1                                  NA                NA</span></span>
+<span id="cb241-78"><a href="chapter-fhir-pit.html#cb241-78" tabindex="-1"></a><span class="co"># 2                                  NA                NA</span></span>
+<span id="cb241-79"><a href="chapter-fhir-pit.html#cb241-79" tabindex="-1"></a><span class="co"># 3                                  NA                NA</span></span>
+<span id="cb241-80"><a href="chapter-fhir-pit.html#cb241-80" tabindex="-1"></a><span class="co"># 4                                  NA                NA</span></span>
+<span id="cb241-81"><a href="chapter-fhir-pit.html#cb241-81" tabindex="-1"></a><span class="co">#   EstProbabilityNonHispWhite EstHouseholdIncome EstResidentialDensity25Plus</span></span>
+<span id="cb241-82"><a href="chapter-fhir-pit.html#cb241-82" tabindex="-1"></a><span class="co"># 1                         NA                 NA                          NA</span></span>
+<span id="cb241-83"><a href="chapter-fhir-pit.html#cb241-83" tabindex="-1"></a><span class="co"># 2                         NA                 NA                          NA</span></span>
+<span id="cb241-84"><a href="chapter-fhir-pit.html#cb241-84" tabindex="-1"></a><span class="co"># 3                         NA                 NA                          NA</span></span>
+<span id="cb241-85"><a href="chapter-fhir-pit.html#cb241-85" tabindex="-1"></a><span class="co"># 4                         NA                 NA                          NA</span></span>
+<span id="cb241-86"><a href="chapter-fhir-pit.html#cb241-86" tabindex="-1"></a><span class="co">#   EstProbabilityNoAuto ur Estradiol TesticularDysfunctionDx ProstateCancerDx</span></span>
+<span id="cb241-87"><a href="chapter-fhir-pit.html#cb241-87" tabindex="-1"></a><span class="co"># 1                   NA NA         0                       0                0</span></span>
+<span id="cb241-88"><a href="chapter-fhir-pit.html#cb241-88" tabindex="-1"></a><span class="co"># 2                   NA NA         0                       0                0</span></span>
+<span id="cb241-89"><a href="chapter-fhir-pit.html#cb241-89" tabindex="-1"></a><span class="co"># 3                   NA NA         0                       0                0</span></span>
+<span id="cb241-90"><a href="chapter-fhir-pit.html#cb241-90" tabindex="-1"></a><span class="co"># 4                   NA NA         0                       0                0</span></span>
+<span id="cb241-91"><a href="chapter-fhir-pit.html#cb241-91" tabindex="-1"></a><span class="co">#   AnxietyDx Formoterol FibromyalgiaDx Metaproterenol Indacaterol</span></span>
+<span id="cb241-92"><a href="chapter-fhir-pit.html#cb241-92" tabindex="-1"></a><span class="co"># 1         0          0              0              0           0</span></span>
+<span id="cb241-93"><a href="chapter-fhir-pit.html#cb241-93" tabindex="-1"></a><span class="co"># 2         0          0              0              0           0</span></span>
+<span id="cb241-94"><a href="chapter-fhir-pit.html#cb241-94" tabindex="-1"></a><span class="co"># 3         0          0              0              0           0</span></span>
+<span id="cb241-95"><a href="chapter-fhir-pit.html#cb241-95" tabindex="-1"></a><span class="co"># 4         0          0              0              0           0</span></span>
+<span id="cb241-96"><a href="chapter-fhir-pit.html#cb241-96" tabindex="-1"></a><span class="co">#   OvarianDysfunctionDx Fluoxetine PneumoniaDx Triptorelin Omalizumab</span></span>
+<span id="cb241-97"><a href="chapter-fhir-pit.html#cb241-97" tabindex="-1"></a><span class="co"># 1                    0          0           0           0          0</span></span>
+<span id="cb241-98"><a href="chapter-fhir-pit.html#cb241-98" tabindex="-1"></a><span class="co"># 2                    0          0           0           0          0</span></span>
+<span id="cb241-99"><a href="chapter-fhir-pit.html#cb241-99" tabindex="-1"></a><span class="co"># 3                    0          0           0           0          0</span></span>
+<span id="cb241-100"><a href="chapter-fhir-pit.html#cb241-100" tabindex="-1"></a><span class="co"># 4                    0          0           0           0          0</span></span>
+<span id="cb241-101"><a href="chapter-fhir-pit.html#cb241-101" tabindex="-1"></a><span class="co">#   Mepolizumab Fluticasone Sertraline Budesonide AlcoholDependenceDx</span></span>
+<span id="cb241-102"><a href="chapter-fhir-pit.html#cb241-102" tabindex="-1"></a><span class="co"># 1           0           0          0          0                   0</span></span>
+<span id="cb241-103"><a href="chapter-fhir-pit.html#cb241-103" tabindex="-1"></a><span class="co"># 2           0           0          0          0                   0</span></span>
+<span id="cb241-104"><a href="chapter-fhir-pit.html#cb241-104" tabindex="-1"></a><span class="co"># 3           0           0          0          0                   0</span></span>
+<span id="cb241-105"><a href="chapter-fhir-pit.html#cb241-105" tabindex="-1"></a><span class="co"># 4           0           0          0          0                   0</span></span>
+<span id="cb241-106"><a href="chapter-fhir-pit.html#cb241-106" tabindex="-1"></a><span class="co">#   Flunisolide Nandrolone Venlafaxine Androstenedione Arformoterol</span></span>
+<span id="cb241-107"><a href="chapter-fhir-pit.html#cb241-107" tabindex="-1"></a><span class="co"># 1           0          0           0               0            0</span></span>
+<span id="cb241-108"><a href="chapter-fhir-pit.html#cb241-108" tabindex="-1"></a><span class="co"># 2           0          0           0               0            0</span></span>
+<span id="cb241-109"><a href="chapter-fhir-pit.html#cb241-109" tabindex="-1"></a><span class="co"># 3           0          0           0               0            0</span></span>
+<span id="cb241-110"><a href="chapter-fhir-pit.html#cb241-110" tabindex="-1"></a><span class="co"># 4           0          0           0               0            0</span></span>
+<span id="cb241-111"><a href="chapter-fhir-pit.html#cb241-111" tabindex="-1"></a><span class="co">#   MenopauseDx Diphenhydramine Paroxetine DrugDependenceDx DepressionDx</span></span>
+<span id="cb241-112"><a href="chapter-fhir-pit.html#cb241-112" tabindex="-1"></a><span class="co"># 1           0               0          0                0            0</span></span>
+<span id="cb241-113"><a href="chapter-fhir-pit.html#cb241-113" tabindex="-1"></a><span class="co"># 2           0               0          0                0            0</span></span>
+<span id="cb241-114"><a href="chapter-fhir-pit.html#cb241-114" tabindex="-1"></a><span class="co"># 3           0               0          0                0            0</span></span>
+<span id="cb241-115"><a href="chapter-fhir-pit.html#cb241-115" tabindex="-1"></a><span class="co"># 4           0               0          0                0            0</span></span>
+<span id="cb241-116"><a href="chapter-fhir-pit.html#cb241-116" tabindex="-1"></a><span class="co">#   Mometasone AutismDx Progesterone Prednisone Escitalopram CroupDx Goserelin</span></span>
+<span id="cb241-117"><a href="chapter-fhir-pit.html#cb241-117" tabindex="-1"></a><span class="co"># 1          0        0            0          0            0       0         0</span></span>
+<span id="cb241-118"><a href="chapter-fhir-pit.html#cb241-118" tabindex="-1"></a><span class="co"># 2          0        0            0          0            0       0         0</span></span>
+<span id="cb241-119"><a href="chapter-fhir-pit.html#cb241-119" tabindex="-1"></a><span class="co"># 3          0        0            0          0            0       0         0</span></span>
+<span id="cb241-120"><a href="chapter-fhir-pit.html#cb241-120" tabindex="-1"></a><span class="co"># 4          0        0            0          0            0       0         0</span></span>
+<span id="cb241-121"><a href="chapter-fhir-pit.html#cb241-121" tabindex="-1"></a><span class="co">#   Cetirizine Citalopram CoughDx EndometriosisDx TesticularCancerDx</span></span>
+<span id="cb241-122"><a href="chapter-fhir-pit.html#cb241-122" tabindex="-1"></a><span class="co"># 1          0          0       0               0                  0</span></span>
+<span id="cb241-123"><a href="chapter-fhir-pit.html#cb241-123" tabindex="-1"></a><span class="co"># 2          0          0       0               0                  0</span></span>
+<span id="cb241-124"><a href="chapter-fhir-pit.html#cb241-124" tabindex="-1"></a><span class="co"># 3          0          0       0               0                  0</span></span>
+<span id="cb241-125"><a href="chapter-fhir-pit.html#cb241-125" tabindex="-1"></a><span class="co"># 4          0          0       0               0                  0</span></span>
+<span id="cb241-126"><a href="chapter-fhir-pit.html#cb241-126" tabindex="-1"></a><span class="co">#   UterineCancerDx Fexofenadine Salmeterol Prasterone Duloxetine Estrogen</span></span>
+<span id="cb241-127"><a href="chapter-fhir-pit.html#cb241-127" tabindex="-1"></a><span class="co"># 1               0            0          0          0          0        0</span></span>
+<span id="cb241-128"><a href="chapter-fhir-pit.html#cb241-128" tabindex="-1"></a><span class="co"># 2               0            0          0          0          0        0</span></span>
+<span id="cb241-129"><a href="chapter-fhir-pit.html#cb241-129" tabindex="-1"></a><span class="co"># 3               0            0          0          0          0        0</span></span>
+<span id="cb241-130"><a href="chapter-fhir-pit.html#cb241-130" tabindex="-1"></a><span class="co"># 4               0            0          0          0          0        0</span></span>
+<span id="cb241-131"><a href="chapter-fhir-pit.html#cb241-131" tabindex="-1"></a><span class="co">#   PregnancyDx Ciclesonide ObesityDx Testosterone Beclomethasone</span></span>
+<span id="cb241-132"><a href="chapter-fhir-pit.html#cb241-132" tabindex="-1"></a><span class="co"># 1           0           0         0            0              0</span></span>
+<span id="cb241-133"><a href="chapter-fhir-pit.html#cb241-133" tabindex="-1"></a><span class="co"># 2           0           0         0            0              0</span></span>
+<span id="cb241-134"><a href="chapter-fhir-pit.html#cb241-134" tabindex="-1"></a><span class="co"># 3           0           0         0            0              0</span></span>
+<span id="cb241-135"><a href="chapter-fhir-pit.html#cb241-135" tabindex="-1"></a><span class="co"># 4           0           0         0            0              0</span></span>
+<span id="cb241-136"><a href="chapter-fhir-pit.html#cb241-136" tabindex="-1"></a><span class="co">#   OvarianCancerDx ReactiveAirwayDx Medroxyprogresterone DiabetesDx</span></span>
+<span id="cb241-137"><a href="chapter-fhir-pit.html#cb241-137" tabindex="-1"></a><span class="co"># 1               0                0                    0          0</span></span>
+<span id="cb241-138"><a href="chapter-fhir-pit.html#cb241-138" tabindex="-1"></a><span class="co"># 2               0                0                    0          0</span></span>
+<span id="cb241-139"><a href="chapter-fhir-pit.html#cb241-139" tabindex="-1"></a><span class="co"># 3               0                0                    0          0</span></span>
+<span id="cb241-140"><a href="chapter-fhir-pit.html#cb241-140" tabindex="-1"></a><span class="co"># 4               0                0                    0          0</span></span>
+<span id="cb241-141"><a href="chapter-fhir-pit.html#cb241-141" tabindex="-1"></a><span class="co">#   Hydroxyzine AlopeciaDx Propranolol Theophylline KidneyCancerDx AsthmaDx</span></span>
+<span id="cb241-142"><a href="chapter-fhir-pit.html#cb241-142" tabindex="-1"></a><span class="co"># 1           0          0           0            0              0        0</span></span>
+<span id="cb241-143"><a href="chapter-fhir-pit.html#cb241-143" tabindex="-1"></a><span class="co"># 2           0          0           0            0              0        0</span></span>
+<span id="cb241-144"><a href="chapter-fhir-pit.html#cb241-144" tabindex="-1"></a><span class="co"># 3           0          0           0            0              0        0</span></span>
+<span id="cb241-145"><a href="chapter-fhir-pit.html#cb241-145" tabindex="-1"></a><span class="co"># 4           0          0           0            0              0        0</span></span>
+<span id="cb241-146"><a href="chapter-fhir-pit.html#cb241-146" tabindex="-1"></a><span class="co">#   Metformin Albuterol Tamoxifen Estropipate Leuprolide CervicalCancerDx</span></span>
+<span id="cb241-147"><a href="chapter-fhir-pit.html#cb241-147" tabindex="-1"></a><span class="co"># 1         0         0         0           0          0                0</span></span>
+<span id="cb241-148"><a href="chapter-fhir-pit.html#cb241-148" tabindex="-1"></a><span class="co"># 2         0         0         0           0          0                0</span></span>
+<span id="cb241-149"><a href="chapter-fhir-pit.html#cb241-149" tabindex="-1"></a><span class="co"># 3         0         0         0           0          0                0</span></span>
+<span id="cb241-150"><a href="chapter-fhir-pit.html#cb241-150" tabindex="-1"></a><span class="co"># 4         0         0         0           0          0                0</span></span>
+<span id="cb241-151"><a href="chapter-fhir-pit.html#cb241-151" tabindex="-1"></a><span class="co">#   Histrelin Ipratropium Trazodone AgeStudyStart Active_In_Year</span></span>
+<span id="cb241-152"><a href="chapter-fhir-pit.html#cb241-152" tabindex="-1"></a><span class="co"># 1         0           0         0            14              1</span></span>
+<span id="cb241-153"><a href="chapter-fhir-pit.html#cb241-153" tabindex="-1"></a><span class="co"># 2         0           0         0            17              1</span></span>
+<span id="cb241-154"><a href="chapter-fhir-pit.html#cb241-154" tabindex="-1"></a><span class="co"># 3         0           0         0            20              1</span></span>
+<span id="cb241-155"><a href="chapter-fhir-pit.html#cb241-155" tabindex="-1"></a><span class="co"># 4         0           0         0            17              1</span></span></code></pre></div>
 <p>The deidentified ICEES2DEI CSV file may be used for further analysis. For instance, below we plot <code>AvgDailyPM2.5Exposure</code> vs <code>MaxDailyOzoneExposure</code> to examine the relationship between maximum daily ozone exposure and average daily PM<sub>2.5</sub> exposure, noting a strong correlation is not expected for this tutorial, as we randomly sampled the exposures data.</p>
-<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="chapter-fhir-pit.html#cb157-1" tabindex="-1"></a><span class="fu">ggplot</span>(icees2dei, <span class="fu">aes</span>(<span class="at">y =</span> AvgDailyPM2<span class="fl">.5</span>Exposure, <span class="at">x =</span> MaxDailyOzoneExposure)) <span class="sc">+</span></span>
-<span id="cb157-2"><a href="chapter-fhir-pit.html#cb157-2" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">color =</span> <span class="st">&quot;blue&quot;</span>) <span class="sc">+</span></span>
-<span id="cb157-3"><a href="chapter-fhir-pit.html#cb157-3" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="at">se =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb242"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb242-1"><a href="chapter-fhir-pit.html#cb242-1" tabindex="-1"></a><span class="fu">ggplot</span>(icees2dei, <span class="fu">aes</span>(<span class="at">y =</span> AvgDailyPM2<span class="fl">.5</span>Exposure, <span class="at">x =</span> MaxDailyOzoneExposure)) <span class="sc">+</span></span>
+<span id="cb242-2"><a href="chapter-fhir-pit.html#cb242-2" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">color =</span> <span class="st">&quot;blue&quot;</span>) <span class="sc">+</span></span>
+<span id="cb242-3"><a href="chapter-fhir-pit.html#cb242-3" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="at">se =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 <p><img src="images/fhir_pit/plot_daily_pm_vs_o3.png" class="centerimage" width="75%" height="auto"/></p>
 </div>
 </div>
@@ -546,42 +547,42 @@ target="blank">Published with bookdown</a></li>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
-"sharing": {
-"github": true,
-"facebook": false,
-"twitter": false,
-"linkedin": false,
-"weibo": false,
-"instapaper": false,
-"vk": false,
-"whatsapp": false,
-"all": false
-},
-"fontsettings": {
-"theme": "white",
-"family": "sans",
-"size": 2
-},
-"edit": {
-"link": null,
-"text": null
-},
-"history": {
-"link": null,
-"text": null
-},
-"view": {
-"link": null,
-"text": null
-},
-"download": null,
-"search": {
-"engine": "fuse",
-"options": null
-},
-"toc": {
-"collapse": "section"
-}
+  "sharing": {
+    "github": true,
+    "facebook": false,
+    "twitter": false,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": false
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": null,
+    "text": null
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": null,
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "section"
+  }
 });
 });
 </script>

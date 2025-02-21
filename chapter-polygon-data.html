@@ -5,19 +5,19 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>3 Polygon Data | CHORDS Training and Use Cases Toolkit</title>
-  <meta name="description" content="The CHORDS Training and Use Cases Toolkit provides guides, tutorials, and example code to support climate change and human health research." />
-  <meta name="generator" content="bookdown 0.40 and GitBook 2.6.7" />
+  <meta name="description" content="The CHORDS Training and Use Cases Toolkit provides guides, tutorials, and example code to support environmental health and disaster research." />
+  <meta name="generator" content="bookdown 0.42 and GitBook 2.6.7" />
 
   <meta property="og:title" content="3 Polygon Data | CHORDS Training and Use Cases Toolkit" />
   <meta property="og:type" content="book" />
   
-  <meta property="og:description" content="The CHORDS Training and Use Cases Toolkit provides guides, tutorials, and example code to support climate change and human health research." />
+  <meta property="og:description" content="The CHORDS Training and Use Cases Toolkit provides guides, tutorials, and example code to support environmental health and disaster research." />
   <meta name="github-repo" content="NIEHS/PCOR_bookdown_tools" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="3 Polygon Data | CHORDS Training and Use Cases Toolkit" />
   
-  <meta name="twitter:description" content="The CHORDS Training and Use Cases Toolkit provides guides, tutorials, and example code to support climate change and human health research." />
+  <meta name="twitter:description" content="The CHORDS Training and Use Cases Toolkit provides guides, tutorials, and example code to support environmental health and disaster research." />
   
 
 
@@ -53,8 +53,9 @@
 
 
 <style type="text/css">
+html { -webkit-text-size-adjust: 100%; }
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -64,7 +65,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -253,7 +254,7 @@ target="blank">Published with bookdown</a></li>
 <a href="chapter-user-profiles.html#profilestu"><img src="images/user_profiles/profilestu.svg" alt="Profile-STU" /></a></p>
 <div id="polygon-data-access-preparation-and-exploratory-analysis-in-r" class="section level3 unnumbered hasAnchor">
 <h3>Polygon Data Access, Preparation, and Exploratory Analysis in R<a href="chapter-polygon-data.html#polygon-data-access-preparation-and-exploratory-analysis-in-r" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p><strong>Date Modified:</strong> May 6, 2024</p>
+<p><strong>Date Modified:</strong> August 16, 2024</p>
 <p><strong>Authors:</strong> Mitchell Manware <a href="https://orcid.org/0009-0003-6440-6106"><img src="images/orcid.png" width="10" alt="author-mm" /></a>, Kyle P. Messier <a href="https://orcid.org/0000-0001-9508-9623"><img src="images/orcid.png" width="10" alt="author-kpm" /></a></p>
 <p><strong>Key Terms:</strong> <a href="chords-glossary.html#def-geospatial-data">Geospatial Data</a>, <a href="https://tools.niehs.nih.gov/cchhglossary/?keyword=wildfire&amp;termOnlySearch=true&amp;exactSearch=true">Wildfire</a></p>
 <p><strong>Programming Language:</strong> R</p>
@@ -278,47 +279,61 @@ target="blank">Published with bookdown</a></li>
 <h2><span class="header-section-number">3.2</span> Access, Download, and Unzip<a href="chapter-polygon-data.html#chapter-polygon-access" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>The website URL where the NOAA wildfire smoke plume data exists is date-specific, meaning there is a unique URL for each daily data set. For the purpose of these exploratory analyses, wildfire smoke plume data from September 1, 2023 will be used.</p>
 <p>Define three variables for <code>day</code>, <code>month</code>, and <code>year</code> according to the date of interest.</p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="chapter-polygon-data.html#cb31-1" tabindex="-1"></a>day <span class="ot">&lt;-</span> <span class="st">&quot;01&quot;</span></span>
-<span id="cb31-2"><a href="chapter-polygon-data.html#cb31-2" tabindex="-1"></a>month <span class="ot">&lt;-</span> <span class="st">&quot;09&quot;</span></span>
-<span id="cb31-3"><a href="chapter-polygon-data.html#cb31-3" tabindex="-1"></a>year <span class="ot">&lt;-</span> <span class="st">&quot;2023&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="chapter-polygon-data.html#cb75-1" tabindex="-1"></a>day <span class="ot">&lt;-</span> <span class="st">&quot;01&quot;</span></span>
+<span id="cb75-2"><a href="chapter-polygon-data.html#cb75-2" tabindex="-1"></a>month <span class="ot">&lt;-</span> <span class="st">&quot;09&quot;</span></span>
+<span id="cb75-3"><a href="chapter-polygon-data.html#cb75-3" tabindex="-1"></a>year <span class="ot">&lt;-</span> <span class="st">&quot;2023&quot;</span></span></code></pre></div>
 <p>The <code>utils::download.file()</code> function downloads the file according to the defined URL and destination file.</p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="chapter-polygon-data.html#cb32-1" tabindex="-1"></a>url_noaa <span class="ot">&lt;-</span> <span class="fu">paste0</span>(</span>
-<span id="cb32-2"><a href="chapter-polygon-data.html#cb32-2" tabindex="-1"></a>  <span class="st">&quot;https://satepsanone.nesdis.noaa.gov/pub/FIRE/web/HMS/Smoke_Polygons&quot;</span>,</span>
-<span id="cb32-3"><a href="chapter-polygon-data.html#cb32-3" tabindex="-1"></a>  <span class="st">&quot;/Shapefile/&quot;</span>,</span>
-<span id="cb32-4"><a href="chapter-polygon-data.html#cb32-4" tabindex="-1"></a>  year,</span>
-<span id="cb32-5"><a href="chapter-polygon-data.html#cb32-5" tabindex="-1"></a>  <span class="st">&quot;/&quot;</span>,</span>
-<span id="cb32-6"><a href="chapter-polygon-data.html#cb32-6" tabindex="-1"></a>  month,</span>
-<span id="cb32-7"><a href="chapter-polygon-data.html#cb32-7" tabindex="-1"></a>  <span class="st">&quot;/hms_smoke&quot;</span>,</span>
-<span id="cb32-8"><a href="chapter-polygon-data.html#cb32-8" tabindex="-1"></a>  year,</span>
-<span id="cb32-9"><a href="chapter-polygon-data.html#cb32-9" tabindex="-1"></a>  month,</span>
-<span id="cb32-10"><a href="chapter-polygon-data.html#cb32-10" tabindex="-1"></a>  day,</span>
-<span id="cb32-11"><a href="chapter-polygon-data.html#cb32-11" tabindex="-1"></a>  <span class="st">&quot;.zip&quot;</span></span>
-<span id="cb32-12"><a href="chapter-polygon-data.html#cb32-12" tabindex="-1"></a>)</span>
-<span id="cb32-13"><a href="chapter-polygon-data.html#cb32-13" tabindex="-1"></a></span>
-<span id="cb32-14"><a href="chapter-polygon-data.html#cb32-14" tabindex="-1"></a>destination_noaa <span class="ot">&lt;-</span> <span class="fu">paste0</span>(</span>
-<span id="cb32-15"><a href="chapter-polygon-data.html#cb32-15" tabindex="-1"></a>  <span class="st">&quot;/   YOUR FILE PATH   /noaa_smoke&quot;</span>,</span>
-<span id="cb32-16"><a href="chapter-polygon-data.html#cb32-16" tabindex="-1"></a>  year,</span>
-<span id="cb32-17"><a href="chapter-polygon-data.html#cb32-17" tabindex="-1"></a>  month,</span>
-<span id="cb32-18"><a href="chapter-polygon-data.html#cb32-18" tabindex="-1"></a>  day,</span>
-<span id="cb32-19"><a href="chapter-polygon-data.html#cb32-19" tabindex="-1"></a>  <span class="st">&quot;.zip&quot;</span></span>
-<span id="cb32-20"><a href="chapter-polygon-data.html#cb32-20" tabindex="-1"></a>)</span>
-<span id="cb32-21"><a href="chapter-polygon-data.html#cb32-21" tabindex="-1"></a></span>
-<span id="cb32-22"><a href="chapter-polygon-data.html#cb32-22" tabindex="-1"></a><span class="fu">download.file</span>(</span>
-<span id="cb32-23"><a href="chapter-polygon-data.html#cb32-23" tabindex="-1"></a>  url_noaa,</span>
-<span id="cb32-24"><a href="chapter-polygon-data.html#cb32-24" tabindex="-1"></a>  destination_noaa</span>
-<span id="cb32-25"><a href="chapter-polygon-data.html#cb32-25" tabindex="-1"></a>)</span></code></pre></div>
+<div class="note">
+<p>Multiple chunks of code in this tutorial will contain <code>./dataset/</code>, a fixed directory path to run the tutorial code. To run the code on your machine, substitute <code>./dataset/</code> with the file path where you would like to store the tutorial data.</p>
+</div>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="chapter-polygon-data.html#cb76-1" tabindex="-1"></a>url_noaa <span class="ot">&lt;-</span> <span class="fu">paste0</span>(</span>
+<span id="cb76-2"><a href="chapter-polygon-data.html#cb76-2" tabindex="-1"></a>  <span class="st">&quot;https://satepsanone.nesdis.noaa.gov/pub/FIRE/web/HMS/Smoke_Polygons&quot;</span>,</span>
+<span id="cb76-3"><a href="chapter-polygon-data.html#cb76-3" tabindex="-1"></a>  <span class="st">&quot;/Shapefile/&quot;</span>,</span>
+<span id="cb76-4"><a href="chapter-polygon-data.html#cb76-4" tabindex="-1"></a>  year,</span>
+<span id="cb76-5"><a href="chapter-polygon-data.html#cb76-5" tabindex="-1"></a>  <span class="st">&quot;/&quot;</span>,</span>
+<span id="cb76-6"><a href="chapter-polygon-data.html#cb76-6" tabindex="-1"></a>  month,</span>
+<span id="cb76-7"><a href="chapter-polygon-data.html#cb76-7" tabindex="-1"></a>  <span class="st">&quot;/hms_smoke&quot;</span>,</span>
+<span id="cb76-8"><a href="chapter-polygon-data.html#cb76-8" tabindex="-1"></a>  year,</span>
+<span id="cb76-9"><a href="chapter-polygon-data.html#cb76-9" tabindex="-1"></a>  month,</span>
+<span id="cb76-10"><a href="chapter-polygon-data.html#cb76-10" tabindex="-1"></a>  day,</span>
+<span id="cb76-11"><a href="chapter-polygon-data.html#cb76-11" tabindex="-1"></a>  <span class="st">&quot;.zip&quot;</span></span>
+<span id="cb76-12"><a href="chapter-polygon-data.html#cb76-12" tabindex="-1"></a>)</span>
+<span id="cb76-13"><a href="chapter-polygon-data.html#cb76-13" tabindex="-1"></a></span>
+<span id="cb76-14"><a href="chapter-polygon-data.html#cb76-14" tabindex="-1"></a>destination_noaa <span class="ot">&lt;-</span> <span class="fu">paste0</span>(</span>
+<span id="cb76-15"><a href="chapter-polygon-data.html#cb76-15" tabindex="-1"></a>  <span class="st">&quot;./dataset/noaa/noaa_smoke&quot;</span>,</span>
+<span id="cb76-16"><a href="chapter-polygon-data.html#cb76-16" tabindex="-1"></a>  year,</span>
+<span id="cb76-17"><a href="chapter-polygon-data.html#cb76-17" tabindex="-1"></a>  month,</span>
+<span id="cb76-18"><a href="chapter-polygon-data.html#cb76-18" tabindex="-1"></a>  day,</span>
+<span id="cb76-19"><a href="chapter-polygon-data.html#cb76-19" tabindex="-1"></a>  <span class="st">&quot;.zip&quot;</span></span>
+<span id="cb76-20"><a href="chapter-polygon-data.html#cb76-20" tabindex="-1"></a>)</span>
+<span id="cb76-21"><a href="chapter-polygon-data.html#cb76-21" tabindex="-1"></a></span>
+<span id="cb76-22"><a href="chapter-polygon-data.html#cb76-22" tabindex="-1"></a><span class="fu">download.file</span>(</span>
+<span id="cb76-23"><a href="chapter-polygon-data.html#cb76-23" tabindex="-1"></a>  url_noaa,</span>
+<span id="cb76-24"><a href="chapter-polygon-data.html#cb76-24" tabindex="-1"></a>  destination_noaa</span>
+<span id="cb76-25"><a href="chapter-polygon-data.html#cb76-25" tabindex="-1"></a>)</span></code></pre></div>
 <p>The file downloaded from the NOAA website is a <code>.zip</code> file. Zip files need to be unzipped (decompressed) in order to access the data within. Unzip the NOAA wildfire smoke plume coverage file with <code>utils::unzip()</code>.</p>
 <div class="warning">
 <p>Unzipping a <code>.zip</code> file will decompress the contents within. Spatial data sets can be very large (i.e., &gt; 1 GB), so check the size of the data before unzipping on your machine.</p>
 </div>
 <p>The numeric value size of each file is listed under <code>Length</code>.</p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="chapter-polygon-data.html#cb33-1" tabindex="-1"></a><span class="fu">unzip</span>(<span class="st">&quot;/   YOUR FILE PATH   /noaa_smoke20230901.zip&quot;</span>,</span>
-<span id="cb33-2"><a href="chapter-polygon-data.html#cb33-2" tabindex="-1"></a>  <span class="at">list =</span> <span class="cn">TRUE</span></span>
-<span id="cb33-3"><a href="chapter-polygon-data.html#cb33-3" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="chapter-polygon-data.html#cb77-1" tabindex="-1"></a><span class="fu">unzip</span>(</span>
+<span id="cb77-2"><a href="chapter-polygon-data.html#cb77-2" tabindex="-1"></a>  <span class="st">&quot;./dataset/noaa/noaa_smoke20230901.zip&quot;</span>,</span>
+<span id="cb77-3"><a href="chapter-polygon-data.html#cb77-3" tabindex="-1"></a>  <span class="at">list =</span> <span class="cn">TRUE</span></span>
+<span id="cb77-4"><a href="chapter-polygon-data.html#cb77-4" tabindex="-1"></a>)</span></code></pre></div>
+<pre><code>##                    Name Length                Date
+## 1 hms_smoke20230901.shp  29796 2023-09-02 11:19:00
+## 2 hms_smoke20230901.shx    564 2023-09-02 11:19:00
+## 3 hms_smoke20230901.dbf   3177 2023-09-02 11:19:00
+## 4 hms_smoke20230901.prj    145 2023-09-02 11:19:00</code></pre>
 <p>After inspecting the file sizes, unzip <code>noaa_smoke20230901.zip</code>.</p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="chapter-polygon-data.html#cb34-1" tabindex="-1"></a><span class="fu">unzip</span>(<span class="st">&quot;/   YOUR FILE PATH   /noaa_smoke20230901.zip&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="chapter-polygon-data.html#cb79-1" tabindex="-1"></a><span class="fu">unzip</span>(</span>
+<span id="cb79-2"><a href="chapter-polygon-data.html#cb79-2" tabindex="-1"></a>  <span class="st">&quot;./dataset/noaa/noaa_smoke20230901.zip&quot;</span>,</span>
+<span id="cb79-3"><a href="chapter-polygon-data.html#cb79-3" tabindex="-1"></a>  <span class="at">exdir =</span> <span class="st">&quot;./dataset/noaa/&quot;</span></span>
+<span id="cb79-4"><a href="chapter-polygon-data.html#cb79-4" tabindex="-1"></a>)</span></code></pre></div>
 <p>Inspecting the file with <code>utils::unzip(list = TRUE)</code> returned the size of the file, but also the name of the data file of interest. The desired data file can also be identified with <code>list.files()</code>.</p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="chapter-polygon-data.html#cb35-1" tabindex="-1"></a><span class="fu">list.files</span>(<span class="st">&quot;/   YOUR FILE PATH   /&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="chapter-polygon-data.html#cb80-1" tabindex="-1"></a><span class="fu">list.files</span>(<span class="st">&quot;./dataset/noaa/&quot;</span>)</span></code></pre></div>
+<pre><code>## [1] &quot;hms_smoke20230901.dbf&quot;  &quot;hms_smoke20230901.prj&quot;  &quot;hms_smoke20230901.shp&quot; 
+## [4] &quot;hms_smoke20230901.shx&quot;  &quot;noaa_smoke20230901.zip&quot;</code></pre>
 <p>Listing the contents of the unzipped file reveals four individual files. The data to be imported is stored in the <code>hms_smoke20230901.shp</code>, but the other files contain important information for the <code>.shp</code> file.</p>
 <div class="warning">
 <p>Deleting any of the supporting files (i.e., <code>*.dbf</code>, <code>*.prj</code>, or <code>*.shx</code>) will disrupt the data import.</p>
@@ -333,39 +348,80 @@ target="blank">Published with bookdown</a></li>
 <div class="note">
 <p>Although the supporting files are required to import a shapefile, only the file ending in <code>.shp</code> needs to be imported</p>
 </div>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="chapter-polygon-data.html#cb36-1" tabindex="-1"></a>smoke_sf <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">&quot;/   YOUR FILE PATH   /hms_smoke20230901.shp&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="chapter-polygon-data.html#cb82-1" tabindex="-1"></a>smoke_sf <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_read</span>(<span class="st">&quot;./dataset/noaa/hms_smoke20230901.shp&quot;</span>)</span></code></pre></div>
+<pre><code>## Reading layer `hms_smoke20230901&#39; from data source 
+##   `/home/runner/work/PCOR_bookdown_tools/PCOR_bookdown_tools/dataset/noaa/hms_smoke20230901.shp&#39; 
+##   using driver `ESRI Shapefile&#39;
+## Simple feature collection with 58 features and 4 fields
+## Geometry type: POLYGON
+## Dimension:     XY
+## Bounding box:  xmin: -149.8003 ymin: 13.58187 xmax: -13.8847 ymax: 75.17942
+## Geodetic CRS:  WGS 84</code></pre>
 <p>Importing <code>hms_smoke20230901.shp</code> does not return a <code>Warning:</code> message because the data set has native spatial features, and is therefore imported as an <code>sf</code> object.</p>
 </div>
 <div id="inspect-structure-1" class="section level3 hasAnchor" number="3.3.2">
 <h3><span class="header-section-number">3.3.2</span> Inspect Structure<a href="chapter-polygon-data.html#inspect-structure-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Inspect the structure of <code>smoke_sf</code> to see its class, column names, column classes, and the first two (specified by <code>vec.len = 2</code>) data points.</p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="chapter-polygon-data.html#cb37-1" tabindex="-1"></a><span class="fu">str</span>(smoke_sf,</span>
-<span id="cb37-2"><a href="chapter-polygon-data.html#cb37-2" tabindex="-1"></a>  <span class="at">vec.len =</span> <span class="dv">2</span></span>
-<span id="cb37-3"><a href="chapter-polygon-data.html#cb37-3" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="chapter-polygon-data.html#cb84-1" tabindex="-1"></a><span class="fu">str</span>(</span>
+<span id="cb84-2"><a href="chapter-polygon-data.html#cb84-2" tabindex="-1"></a>  smoke_sf,</span>
+<span id="cb84-3"><a href="chapter-polygon-data.html#cb84-3" tabindex="-1"></a>  <span class="at">vec.len =</span> <span class="dv">2</span></span>
+<span id="cb84-4"><a href="chapter-polygon-data.html#cb84-4" tabindex="-1"></a>)</span></code></pre></div>
+<pre><code>## Classes &#39;sf&#39; and &#39;data.frame&#39;:   58 obs. of  5 variables:
+##  $ Satellite: chr  &quot;GOES-EAST&quot; &quot;GOES-EAST&quot; ...
+##  $ Start    : chr  &quot;2023244 0900&quot; &quot;2023244 1300&quot; ...
+##  $ End      : chr  &quot;2023244 1300&quot; &quot;2023244 1700&quot; ...
+##  $ Density  : chr  &quot;Light&quot; &quot;Light&quot; ...
+##  $ geometry :sfc_POLYGON of length 58; first list element: List of 1
+##   ..$ : num [1:211, 1:2] -51.4 -48.8 ...
+##   ..- attr(*, &quot;class&quot;)= chr [1:3] &quot;XY&quot; &quot;POLYGON&quot; ...
+##  - attr(*, &quot;sf_column&quot;)= chr &quot;geometry&quot;
+##  - attr(*, &quot;agr&quot;)= Factor w/ 3 levels &quot;constant&quot;,&quot;aggregate&quot;,..: NA NA NA NA
+##   ..- attr(*, &quot;names&quot;)= chr [1:4] &quot;Satellite&quot; &quot;Start&quot; ...</code></pre>
 <p>As mentioned previously, the <code>smoke_sf</code> data set has native spatial features. These are reflected by the data set having classes of <code>sf</code> and <code>data.frame</code>, and the <code>$geometry</code> feature.</p>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="chapter-polygon-data.html#cb38-1" tabindex="-1"></a><span class="fu">class</span>(smoke_sf)</span></code></pre></div>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="chapter-polygon-data.html#cb86-1" tabindex="-1"></a><span class="fu">class</span>(smoke_sf)</span></code></pre></div>
+<pre><code>## [1] &quot;sf&quot;         &quot;data.frame&quot;</code></pre>
 </div>
 <div id="chapter-polygon-sf-reclassify" class="section level3 hasAnchor" number="3.3.3">
 <h3><span class="header-section-number">3.3.3</span> Reclassify<a href="chapter-polygon-data.html#chapter-polygon-sf-reclassify" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The main parameter of interest in this data set is <code>$Density</code>, which discretely categorizes each wildfire smoke plume as “Light”, “Medium”, or “Heavy”. Checking its class shows that <code>$Density</code> is class character.</p>
-<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="chapter-polygon-data.html#cb39-1" tabindex="-1"></a><span class="fu">class</span>(smoke_sf<span class="sc">$</span>Density)</span></code></pre></div>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="chapter-polygon-data.html#cb88-1" tabindex="-1"></a><span class="fu">class</span>(smoke_sf<span class="sc">$</span>Density)</span></code></pre></div>
+<pre><code>## [1] &quot;character&quot;</code></pre>
 <p>Nominal data, data without fixed order or rank system, can be stored as class character (i.e., State names). However, it is best to store ordinal data as class factor for conducting analyses in R.</p>
 <p>Converting data from class character to class factor can be done with <code>factor()</code>. The <code>levels = c()</code> argument in the function specifies both the level names and the ranked order of the levels.</p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="chapter-polygon-data.html#cb40-1" tabindex="-1"></a>smoke_sf<span class="sc">$</span>Density <span class="ot">&lt;-</span> <span class="fu">factor</span>(smoke_sf<span class="sc">$</span>Density,</span>
-<span id="cb40-2"><a href="chapter-polygon-data.html#cb40-2" tabindex="-1"></a>  <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;Light&quot;</span>, <span class="st">&quot;Medium&quot;</span>, <span class="st">&quot;Heavy&quot;</span>)</span>
-<span id="cb40-3"><a href="chapter-polygon-data.html#cb40-3" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="chapter-polygon-data.html#cb90-1" tabindex="-1"></a>smoke_sf<span class="sc">$</span>Density <span class="ot">&lt;-</span> <span class="fu">factor</span>(</span>
+<span id="cb90-2"><a href="chapter-polygon-data.html#cb90-2" tabindex="-1"></a>  smoke_sf<span class="sc">$</span>Density,</span>
+<span id="cb90-3"><a href="chapter-polygon-data.html#cb90-3" tabindex="-1"></a>  <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;Light&quot;</span>, <span class="st">&quot;Medium&quot;</span>, <span class="st">&quot;Heavy&quot;</span>)</span>
+<span id="cb90-4"><a href="chapter-polygon-data.html#cb90-4" tabindex="-1"></a>)</span></code></pre></div>
 <p>Check the class of <code>$Density</code> again to ensure proper reclassification.</p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="chapter-polygon-data.html#cb41-1" tabindex="-1"></a><span class="fu">class</span>(smoke_sf<span class="sc">$</span>Density)</span></code></pre></div>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="chapter-polygon-data.html#cb91-1" tabindex="-1"></a><span class="fu">class</span>(smoke_sf<span class="sc">$</span>Density)</span></code></pre></div>
+<pre><code>## [1] &quot;factor&quot;</code></pre>
 </div>
 <div id="coordinate-reference-system-and-projection-1" class="section level3 hasAnchor" number="3.3.4">
 <h3><span class="header-section-number">3.3.4</span> Coordinate Reference System and Projection<a href="chapter-polygon-data.html#coordinate-reference-system-and-projection-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Check the coordinate reference system of an <code>sf</code> object with <code>sf::st_crs()</code>.</p>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="chapter-polygon-data.html#cb42-1" tabindex="-1"></a><span class="fu">st_crs</span>(smoke_sf)</span></code></pre></div>
+<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="chapter-polygon-data.html#cb93-1" tabindex="-1"></a>sf<span class="sc">::</span><span class="fu">st_crs</span>(smoke_sf)</span></code></pre></div>
+<pre><code>## Coordinate Reference System:
+##   User input: WGS 84 
+##   wkt:
+## GEOGCRS[&quot;WGS 84&quot;,
+##     DATUM[&quot;World Geodetic System 1984&quot;,
+##         ELLIPSOID[&quot;WGS 84&quot;,6378137,298.257223563,
+##             LENGTHUNIT[&quot;metre&quot;,1]]],
+##     PRIMEM[&quot;Greenwich&quot;,0,
+##         ANGLEUNIT[&quot;degree&quot;,0.0174532925199433]],
+##     CS[ellipsoidal,2],
+##         AXIS[&quot;latitude&quot;,north,
+##             ORDER[1],
+##             ANGLEUNIT[&quot;degree&quot;,0.0174532925199433]],
+##         AXIS[&quot;longitude&quot;,east,
+##             ORDER[2],
+##             ANGLEUNIT[&quot;degree&quot;,0.0174532925199433]],
+##     ID[&quot;EPSG&quot;,4326]]</code></pre>
 <p><code>smoke_sf</code> has a native coordinate reference system which was imported during the <code>sf::st_read()</code> step. The area of interest for these exploratory analyses is the conterminous United States, so we can transform <code>smoke_sf</code> to the Albers Equal Area projected coordinate system (EPSG code: 5070).</p>
-<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="chapter-polygon-data.html#cb43-1" tabindex="-1"></a>smoke_sf <span class="ot">&lt;-</span> <span class="fu">st_transform</span>(</span>
-<span id="cb43-2"><a href="chapter-polygon-data.html#cb43-2" tabindex="-1"></a>  smoke_sf,</span>
-<span id="cb43-3"><a href="chapter-polygon-data.html#cb43-3" tabindex="-1"></a>  <span class="dv">5070</span></span>
-<span id="cb43-4"><a href="chapter-polygon-data.html#cb43-4" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="chapter-polygon-data.html#cb95-1" tabindex="-1"></a>smoke_sf <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_transform</span>(</span>
+<span id="cb95-2"><a href="chapter-polygon-data.html#cb95-2" tabindex="-1"></a>  smoke_sf,</span>
+<span id="cb95-3"><a href="chapter-polygon-data.html#cb95-3" tabindex="-1"></a>  <span class="dv">5070</span></span>
+<span id="cb95-4"><a href="chapter-polygon-data.html#cb95-4" tabindex="-1"></a>)</span></code></pre></div>
 </div>
 </div>
 <div id="exploratory-analysis-with-sf" class="section level2 hasAnchor" number="3.4">
@@ -374,19 +430,19 @@ target="blank">Published with bookdown</a></li>
 <h3><span class="header-section-number">3.4.1</span> Plot (Single)<a href="chapter-polygon-data.html#plot-single" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>With the data prepared, plot the wildfire smoke plume polygons with <code>ggplot2::ggplot()</code>.</p>
 <p>Now that the parameters of interest and coordinate reference system have been prepared, create a plot with <code>ggplot2::ggplot()</code>. Identifying the data set to be plotted within the <code>geom_sf()</code> argument informs the function that the data is an <code>sf</code> object.</p>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="chapter-polygon-data.html#cb44-1" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb44-2"><a href="chapter-polygon-data.html#cb44-2" tabindex="-1"></a>  <span class="fu">geom_sf</span>(</span>
-<span id="cb44-3"><a href="chapter-polygon-data.html#cb44-3" tabindex="-1"></a>    <span class="at">data =</span> smoke_sf,</span>
-<span id="cb44-4"><a href="chapter-polygon-data.html#cb44-4" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">fill =</span> Density)</span>
-<span id="cb44-5"><a href="chapter-polygon-data.html#cb44-5" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb44-6"><a href="chapter-polygon-data.html#cb44-6" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="st">&quot;Smoke Density&quot;</span>,</span>
-<span id="cb44-7"><a href="chapter-polygon-data.html#cb44-7" tabindex="-1"></a>    <span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;lightgreen&quot;</span>, <span class="st">&quot;lightgoldenrod&quot;</span>, <span class="st">&quot;tomato&quot;</span>)</span>
-<span id="cb44-8"><a href="chapter-polygon-data.html#cb44-8" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb44-9"><a href="chapter-polygon-data.html#cb44-9" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Wildfire Smoke Plumes&quot;</span>) <span class="sc">+</span></span>
-<span id="cb44-10"><a href="chapter-polygon-data.html#cb44-10" tabindex="-1"></a>  <span class="fu">theme_pubr</span>(<span class="at">legend =</span> <span class="st">&quot;bottom&quot;</span>) <span class="sc">+</span></span>
-<span id="cb44-11"><a href="chapter-polygon-data.html#cb44-11" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>)) <span class="sc">+</span></span>
-<span id="cb44-12"><a href="chapter-polygon-data.html#cb44-12" tabindex="-1"></a>  <span class="fu">grids</span>()</span></code></pre></div>
-<p><img src="images/intro_to_spatial/smoke_polygons_sf_original.png" width = "75%" height = "auto" class = "centerimage"></p>
+<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="chapter-polygon-data.html#cb96-1" tabindex="-1"></a>ggplot2<span class="sc">::</span><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb96-2"><a href="chapter-polygon-data.html#cb96-2" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_sf</span>(</span>
+<span id="cb96-3"><a href="chapter-polygon-data.html#cb96-3" tabindex="-1"></a>    <span class="at">data =</span> smoke_sf,</span>
+<span id="cb96-4"><a href="chapter-polygon-data.html#cb96-4" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">fill =</span> Density)</span>
+<span id="cb96-5"><a href="chapter-polygon-data.html#cb96-5" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb96-6"><a href="chapter-polygon-data.html#cb96-6" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">scale_fill_manual</span>(<span class="st">&quot;Smoke Density&quot;</span>,</span>
+<span id="cb96-7"><a href="chapter-polygon-data.html#cb96-7" tabindex="-1"></a>    <span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;lightgreen&quot;</span>, <span class="st">&quot;lightgoldenrod&quot;</span>, <span class="st">&quot;tomato&quot;</span>)</span>
+<span id="cb96-8"><a href="chapter-polygon-data.html#cb96-8" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb96-9"><a href="chapter-polygon-data.html#cb96-9" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">ggtitle</span>(<span class="st">&quot;Wildfire Smoke Plumes&quot;</span>) <span class="sc">+</span></span>
+<span id="cb96-10"><a href="chapter-polygon-data.html#cb96-10" tabindex="-1"></a>  ggpubr<span class="sc">::</span><span class="fu">theme_pubr</span>(<span class="at">legend =</span> <span class="st">&quot;bottom&quot;</span>) <span class="sc">+</span></span>
+<span id="cb96-11"><a href="chapter-polygon-data.html#cb96-11" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>)) <span class="sc">+</span></span>
+<span id="cb96-12"><a href="chapter-polygon-data.html#cb96-12" tabindex="-1"></a>  ggpubr<span class="sc">::</span><span class="fu">grids</span>()</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-45-1.png" width="672" /></p>
 <p>The wildfire smoke plume polygons are clearly visible and colored according to their individual smoke density classification. This plot, however, is difficult to interpret for two reasons. First, there are multiple polygons for each smoke density classification. Multiple borders and overlapping polygons with the same smoke density type can be confusing. To make the polygons more clear, individual polygons for each smoke density classification can be combined.</p>
 <div class="warning">
 <p>For the purposes of these exploratory analyses, the satellite travelling direction and time of collection will be ignored.</p>
@@ -395,137 +451,229 @@ target="blank">Published with bookdown</a></li>
 <div id="union" class="section level3 hasAnchor" number="3.4.2">
 <h3><span class="header-section-number">3.4.2</span> Union<a href="chapter-polygon-data.html#union" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Individual polygons can be unioned (combined) into one multi-part polygon with <code>sf::st_union</code>. The <code>group_by(Density)</code> argument specifies that the polygons should be combined based on the value stored in <code>$Density</code>. Adding the <code>Date = paste0(...</code> argument within the <code>dplyr::summarise()</code> function creates a parameter to store the date based on the year, month, and day of the data.</p>
-<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="chapter-polygon-data.html#cb45-1" tabindex="-1"></a>smoke_sf_density <span class="ot">&lt;-</span></span>
-<span id="cb45-2"><a href="chapter-polygon-data.html#cb45-2" tabindex="-1"></a>  smoke_sf <span class="sc">%&gt;%</span></span>
-<span id="cb45-3"><a href="chapter-polygon-data.html#cb45-3" tabindex="-1"></a>  <span class="fu">group_by</span>(Density) <span class="sc">%&gt;%</span></span>
-<span id="cb45-4"><a href="chapter-polygon-data.html#cb45-4" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
-<span id="cb45-5"><a href="chapter-polygon-data.html#cb45-5" tabindex="-1"></a>    <span class="at">geometry =</span> <span class="fu">st_union</span>(geometry),</span>
-<span id="cb45-6"><a href="chapter-polygon-data.html#cb45-6" tabindex="-1"></a>    <span class="at">Date =</span> <span class="fu">paste0</span>(</span>
-<span id="cb45-7"><a href="chapter-polygon-data.html#cb45-7" tabindex="-1"></a>      year,</span>
-<span id="cb45-8"><a href="chapter-polygon-data.html#cb45-8" tabindex="-1"></a>      month,</span>
-<span id="cb45-9"><a href="chapter-polygon-data.html#cb45-9" tabindex="-1"></a>      day</span>
-<span id="cb45-10"><a href="chapter-polygon-data.html#cb45-10" tabindex="-1"></a>    )</span>
-<span id="cb45-11"><a href="chapter-polygon-data.html#cb45-11" tabindex="-1"></a>  )</span></code></pre></div>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="chapter-polygon-data.html#cb97-1" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb97-2"><a href="chapter-polygon-data.html#cb97-2" tabindex="-1"></a>smoke_sf_density <span class="ot">&lt;-</span></span>
+<span id="cb97-3"><a href="chapter-polygon-data.html#cb97-3" tabindex="-1"></a>  smoke_sf <span class="sc">%&gt;%</span></span>
+<span id="cb97-4"><a href="chapter-polygon-data.html#cb97-4" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(Density) <span class="sc">%&gt;%</span></span>
+<span id="cb97-5"><a href="chapter-polygon-data.html#cb97-5" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">summarise</span>(</span>
+<span id="cb97-6"><a href="chapter-polygon-data.html#cb97-6" tabindex="-1"></a>    <span class="at">geometry =</span> sf<span class="sc">::</span><span class="fu">st_union</span>(geometry),</span>
+<span id="cb97-7"><a href="chapter-polygon-data.html#cb97-7" tabindex="-1"></a>    <span class="at">Date =</span> <span class="fu">paste0</span>(</span>
+<span id="cb97-8"><a href="chapter-polygon-data.html#cb97-8" tabindex="-1"></a>      year,</span>
+<span id="cb97-9"><a href="chapter-polygon-data.html#cb97-9" tabindex="-1"></a>      month,</span>
+<span id="cb97-10"><a href="chapter-polygon-data.html#cb97-10" tabindex="-1"></a>      day</span>
+<span id="cb97-11"><a href="chapter-polygon-data.html#cb97-11" tabindex="-1"></a>    )</span>
+<span id="cb97-12"><a href="chapter-polygon-data.html#cb97-12" tabindex="-1"></a>  )</span></code></pre></div>
 <p>The resulting data set contains three multi-polygons, a column for the smoke plume classification, and a column for the date.</p>
-<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="chapter-polygon-data.html#cb46-1" tabindex="-1"></a>smoke_sf_density</span></code></pre></div>
+<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="chapter-polygon-data.html#cb98-1" tabindex="-1"></a>smoke_sf_density</span></code></pre></div>
+<pre><code>## Simple feature collection with 3 features and 2 fields
+## Geometry type: MULTIPOLYGON
+## Dimension:     XY
+## Bounding box:  xmin: -3260097 ymin: -1003068 xmax: 5993172 ymax: 6112717
+## Projected CRS: NAD83 / Conus Albers
+## # A tibble: 3 × 3
+##   Density                                                         geometry Date 
+##   &lt;fct&gt;                                                 &lt;MULTIPOLYGON [m]&gt; &lt;chr&gt;
+## 1 Light   (((84357.22 1261681, 98970.86 1259451, 125379.3 1249659, 126431… 2023…
+## 2 Medium  (((-1999749 1735020, -2007784 1687042, -2022469 1654525, -20389… 2023…
+## 3 Heavy   (((45040.64 855923.7, 51735 842331, 52850.75 825751, 53427.35 8… 2023…</code></pre>
 <p>Creating a new plot with <code>smoke_sf_density</code>.</p>
-<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="chapter-polygon-data.html#cb47-1" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb47-2"><a href="chapter-polygon-data.html#cb47-2" tabindex="-1"></a>  <span class="fu">geom_sf</span>(</span>
-<span id="cb47-3"><a href="chapter-polygon-data.html#cb47-3" tabindex="-1"></a>    <span class="at">data =</span> smoke_sf_density,</span>
-<span id="cb47-4"><a href="chapter-polygon-data.html#cb47-4" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">fill =</span> Density)</span>
-<span id="cb47-5"><a href="chapter-polygon-data.html#cb47-5" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb47-6"><a href="chapter-polygon-data.html#cb47-6" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="st">&quot;Smoke Density&quot;</span>,</span>
-<span id="cb47-7"><a href="chapter-polygon-data.html#cb47-7" tabindex="-1"></a>    <span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;lightgreen&quot;</span>, <span class="st">&quot;lightgoldenrod&quot;</span>, <span class="st">&quot;tomato&quot;</span>)</span>
-<span id="cb47-8"><a href="chapter-polygon-data.html#cb47-8" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb47-9"><a href="chapter-polygon-data.html#cb47-9" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Wildfire Smoke Plumes (unioned)&quot;</span>) <span class="sc">+</span></span>
-<span id="cb47-10"><a href="chapter-polygon-data.html#cb47-10" tabindex="-1"></a>  <span class="fu">theme_pubr</span>(<span class="at">legend =</span> <span class="st">&quot;bottom&quot;</span>) <span class="sc">+</span></span>
-<span id="cb47-11"><a href="chapter-polygon-data.html#cb47-11" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>)) <span class="sc">+</span></span>
-<span id="cb47-12"><a href="chapter-polygon-data.html#cb47-12" tabindex="-1"></a>  <span class="fu">grids</span>()</span></code></pre></div>
-<p><img src="images/intro_to_spatial/smoke_polygons_sf_unioned.png" width = "75%" height = "auto" class = "centerimage"></p>
+<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="chapter-polygon-data.html#cb100-1" tabindex="-1"></a>ggplot2<span class="sc">::</span><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb100-2"><a href="chapter-polygon-data.html#cb100-2" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_sf</span>(</span>
+<span id="cb100-3"><a href="chapter-polygon-data.html#cb100-3" tabindex="-1"></a>    <span class="at">data =</span> smoke_sf_density,</span>
+<span id="cb100-4"><a href="chapter-polygon-data.html#cb100-4" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">fill =</span> Density)</span>
+<span id="cb100-5"><a href="chapter-polygon-data.html#cb100-5" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb100-6"><a href="chapter-polygon-data.html#cb100-6" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">scale_fill_manual</span>(<span class="st">&quot;Smoke Density&quot;</span>,</span>
+<span id="cb100-7"><a href="chapter-polygon-data.html#cb100-7" tabindex="-1"></a>    <span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;lightgreen&quot;</span>, <span class="st">&quot;lightgoldenrod&quot;</span>, <span class="st">&quot;tomato&quot;</span>)</span>
+<span id="cb100-8"><a href="chapter-polygon-data.html#cb100-8" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb100-9"><a href="chapter-polygon-data.html#cb100-9" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">ggtitle</span>(<span class="st">&quot;Wildfire Smoke Plumes (unioned)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb100-10"><a href="chapter-polygon-data.html#cb100-10" tabindex="-1"></a>  ggpubr<span class="sc">::</span><span class="fu">theme_pubr</span>(<span class="at">legend =</span> <span class="st">&quot;bottom&quot;</span>) <span class="sc">+</span></span>
+<span id="cb100-11"><a href="chapter-polygon-data.html#cb100-11" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>)) <span class="sc">+</span></span>
+<span id="cb100-12"><a href="chapter-polygon-data.html#cb100-12" tabindex="-1"></a>  ggpubr<span class="sc">::</span><span class="fu">grids</span>()</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-48-1.png" width="672" /></p>
 <p>The plot is still difficult to interpret because it lacks geospatial context. The grid lines provide latitude and longitude references, but physical or geopolitical boundaries can help show where the wildfire smoke plumes are relative to the study area of interest. To provide geospatial context to the wildfire smoke plume polygons, we can add the United States state boundary polygons to the plot.</p>
 </div>
 <div id="chapter-polygon-plot-multiple-sf" class="section level3 hasAnchor" number="3.4.3">
 <h3><span class="header-section-number">3.4.3</span> Plot (Multiple)<a href="chapter-polygon-data.html#chapter-polygon-plot-multiple-sf" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The steps taken to access, download, unzip, and import the United States state boundary data are the same as those taken for the wildfire smoke plume coverage data. Refer to Sections <a href="chapter-polygon-data.html#chapter-polygon-access">Access, Download, and Unzip</a> and <a href="#chapter-polygon-import">Import</a> for detailed descriptions.</p>
-<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="chapter-polygon-data.html#cb48-1" tabindex="-1"></a>url_states <span class="ot">&lt;-</span></span>
-<span id="cb48-2"><a href="chapter-polygon-data.html#cb48-2" tabindex="-1"></a>  <span class="st">&quot;https://www2.census.gov/geo/tiger/GENZ2018/shp/cb_2018_us_state_500k.zip&quot;</span></span>
-<span id="cb48-3"><a href="chapter-polygon-data.html#cb48-3" tabindex="-1"></a></span>
-<span id="cb48-4"><a href="chapter-polygon-data.html#cb48-4" tabindex="-1"></a>destination_states <span class="ot">&lt;-</span> <span class="st">&quot;/   YOUR FILE PATH   /states.zip&quot;</span></span>
-<span id="cb48-5"><a href="chapter-polygon-data.html#cb48-5" tabindex="-1"></a></span>
-<span id="cb48-6"><a href="chapter-polygon-data.html#cb48-6" tabindex="-1"></a><span class="fu">download.file</span>(</span>
-<span id="cb48-7"><a href="chapter-polygon-data.html#cb48-7" tabindex="-1"></a>  url_states,</span>
-<span id="cb48-8"><a href="chapter-polygon-data.html#cb48-8" tabindex="-1"></a>  destination_states</span>
-<span id="cb48-9"><a href="chapter-polygon-data.html#cb48-9" tabindex="-1"></a>)</span></code></pre></div>
-<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="chapter-polygon-data.html#cb49-1" tabindex="-1"></a><span class="fu">unzip</span>(<span class="st">&quot;/   YOUR FILE PATH   /states.zip&quot;</span>,</span>
-<span id="cb49-2"><a href="chapter-polygon-data.html#cb49-2" tabindex="-1"></a>  <span class="at">list =</span> <span class="cn">TRUE</span></span>
-<span id="cb49-3"><a href="chapter-polygon-data.html#cb49-3" tabindex="-1"></a>)</span></code></pre></div>
-<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="chapter-polygon-data.html#cb50-1" tabindex="-1"></a><span class="fu">unzip</span>(<span class="st">&quot;/   YOUR FILE PATH   /states.zip&quot;</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="chapter-polygon-data.html#cb51-1" tabindex="-1"></a><span class="fu">list.files</span>(<span class="st">&quot;/   YOUR FILE PATH   /&quot;</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="chapter-polygon-data.html#cb52-1" tabindex="-1"></a>states <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">&quot;/   YOUR FILE PATH   /cb_2018_us_state.shp&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="chapter-polygon-data.html#cb101-1" tabindex="-1"></a>url_states <span class="ot">&lt;-</span></span>
+<span id="cb101-2"><a href="chapter-polygon-data.html#cb101-2" tabindex="-1"></a>  <span class="st">&quot;https://www2.census.gov/geo/tiger/GENZ2018/shp/cb_2018_us_state_500k.zip&quot;</span></span>
+<span id="cb101-3"><a href="chapter-polygon-data.html#cb101-3" tabindex="-1"></a></span>
+<span id="cb101-4"><a href="chapter-polygon-data.html#cb101-4" tabindex="-1"></a>destination_states <span class="ot">&lt;-</span> <span class="st">&quot;./dataset/states/states.zip&quot;</span></span>
+<span id="cb101-5"><a href="chapter-polygon-data.html#cb101-5" tabindex="-1"></a></span>
+<span id="cb101-6"><a href="chapter-polygon-data.html#cb101-6" tabindex="-1"></a><span class="fu">download.file</span>(</span>
+<span id="cb101-7"><a href="chapter-polygon-data.html#cb101-7" tabindex="-1"></a>  url_states,</span>
+<span id="cb101-8"><a href="chapter-polygon-data.html#cb101-8" tabindex="-1"></a>  destination_states</span>
+<span id="cb101-9"><a href="chapter-polygon-data.html#cb101-9" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="chapter-polygon-data.html#cb102-1" tabindex="-1"></a><span class="fu">unzip</span>(</span>
+<span id="cb102-2"><a href="chapter-polygon-data.html#cb102-2" tabindex="-1"></a>  <span class="st">&quot;./dataset/states/states.zip&quot;</span>,</span>
+<span id="cb102-3"><a href="chapter-polygon-data.html#cb102-3" tabindex="-1"></a>  <span class="at">list =</span> <span class="cn">TRUE</span></span>
+<span id="cb102-4"><a href="chapter-polygon-data.html#cb102-4" tabindex="-1"></a>)</span></code></pre></div>
+<pre><code>##                                   Name  Length                Date
+## 1 cb_2018_us_state_500k.shp.ea.iso.xml   17905 2019-04-15 12:48:00
+## 2    cb_2018_us_state_500k.shp.iso.xml   32982 2019-04-15 12:48:00
+## 3            cb_2018_us_state_500k.shp 4721868 2019-04-15 11:55:00
+## 4            cb_2018_us_state_500k.shx     548 2019-04-15 11:55:00
+## 5            cb_2018_us_state_500k.dbf    9058 2019-04-15 11:55:00
+## 6            cb_2018_us_state_500k.prj     165 2019-04-15 11:55:00
+## 7            cb_2018_us_state_500k.cpg       5 2019-04-15 11:55:00</code></pre>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="chapter-polygon-data.html#cb104-1" tabindex="-1"></a><span class="fu">unzip</span>(</span>
+<span id="cb104-2"><a href="chapter-polygon-data.html#cb104-2" tabindex="-1"></a>  <span class="st">&quot;./dataset/states/states.zip&quot;</span>,</span>
+<span id="cb104-3"><a href="chapter-polygon-data.html#cb104-3" tabindex="-1"></a>  <span class="at">exdir =</span> <span class="st">&quot;./dataset/states/&quot;</span></span>
+<span id="cb104-4"><a href="chapter-polygon-data.html#cb104-4" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="chapter-polygon-data.html#cb105-1" tabindex="-1"></a><span class="fu">list.files</span>(<span class="st">&quot;./dataset/states/&quot;</span>)</span></code></pre></div>
+<pre><code>## [1] &quot;cb_2018_us_state_500k.cpg&quot;           
+## [2] &quot;cb_2018_us_state_500k.dbf&quot;           
+## [3] &quot;cb_2018_us_state_500k.prj&quot;           
+## [4] &quot;cb_2018_us_state_500k.shp&quot;           
+## [5] &quot;cb_2018_us_state_500k.shp.ea.iso.xml&quot;
+## [6] &quot;cb_2018_us_state_500k.shp.iso.xml&quot;   
+## [7] &quot;cb_2018_us_state_500k.shx&quot;           
+## [8] &quot;states.zip&quot;</code></pre>
+<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="chapter-polygon-data.html#cb107-1" tabindex="-1"></a>states_sf <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_read</span>(<span class="st">&quot;./dataset/states/cb_2018_us_state_500k.shp&quot;</span>)</span></code></pre></div>
+<pre><code>## Reading layer `cb_2018_us_state_500k&#39; from data source 
+##   `/home/runner/work/PCOR_bookdown_tools/PCOR_bookdown_tools/dataset/states/cb_2018_us_state_500k.shp&#39; 
+##   using driver `ESRI Shapefile&#39;
+## Simple feature collection with 56 features and 9 fields
+## Geometry type: MULTIPOLYGON
+## Dimension:     XY
+## Bounding box:  xmin: -179.1489 ymin: -14.5487 xmax: 179.7785 ymax: 71.36516
+## Geodetic CRS:  NAD83</code></pre>
 <p>Inspect the structure of <code>states_sf</code>.</p>
-<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="chapter-polygon-data.html#cb53-1" tabindex="-1"></a><span class="fu">str</span>(states_sf,</span>
-<span id="cb53-2"><a href="chapter-polygon-data.html#cb53-2" tabindex="-1"></a>  <span class="at">vec.len =</span> <span class="dv">2</span></span>
-<span id="cb53-3"><a href="chapter-polygon-data.html#cb53-3" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb109-1"><a href="chapter-polygon-data.html#cb109-1" tabindex="-1"></a><span class="fu">str</span>(</span>
+<span id="cb109-2"><a href="chapter-polygon-data.html#cb109-2" tabindex="-1"></a>  states_sf,</span>
+<span id="cb109-3"><a href="chapter-polygon-data.html#cb109-3" tabindex="-1"></a>  <span class="at">vec.len =</span> <span class="dv">2</span></span>
+<span id="cb109-4"><a href="chapter-polygon-data.html#cb109-4" tabindex="-1"></a>)</span></code></pre></div>
+<pre><code>## Classes &#39;sf&#39; and &#39;data.frame&#39;:   56 obs. of  10 variables:
+##  $ STATEFP : chr  &quot;28&quot; &quot;37&quot; ...
+##  $ STATENS : chr  &quot;01779790&quot; &quot;01027616&quot; ...
+##  $ AFFGEOID: chr  &quot;0400000US28&quot; &quot;0400000US37&quot; ...
+##  $ GEOID   : chr  &quot;28&quot; &quot;37&quot; ...
+##  $ STUSPS  : chr  &quot;MS&quot; &quot;NC&quot; ...
+##  $ NAME    : chr  &quot;Mississippi&quot; &quot;North Carolina&quot; ...
+##  $ LSAD    : chr  &quot;00&quot; &quot;00&quot; ...
+##  $ ALAND   : num  1.22e+11 1.26e+11 ...
+##  $ AWATER  : num  3.93e+09 1.35e+10 ...
+##  $ geometry:sfc_MULTIPOLYGON of length 56; first list element: List of 8
+##   ..$ :List of 1
+##   .. ..$ : num [1:16, 1:2] -88.5 -88.5 ...
+##   ..$ :List of 1
+##   .. ..$ : num [1:27, 1:2] -88.6 -88.6 ...
+##   ..$ :List of 1
+##   .. ..$ : num [1:27, 1:2] -88.8 -88.8 ...
+##   ..$ :List of 1
+##   .. ..$ : num [1:19, 1:2] -88.9 -88.9 ...
+##   ..$ :List of 1
+##   .. ..$ : num [1:8, 1:2] -88.9 -88.9 ...
+##   ..$ :List of 1
+##   .. ..$ : num [1:12, 1:2] -89 -89 ...
+##   ..$ :List of 1
+##   .. ..$ : num [1:27, 1:2] -89.1 -89.1 ...
+##   ..$ :List of 1
+##   .. ..$ : num [1:2713, 1:2] -91.7 -91.7 ...
+##   ..- attr(*, &quot;class&quot;)= chr [1:3] &quot;XY&quot; &quot;MULTIPOLYGON&quot; ...
+##  - attr(*, &quot;sf_column&quot;)= chr &quot;geometry&quot;
+##  - attr(*, &quot;agr&quot;)= Factor w/ 3 levels &quot;constant&quot;,&quot;aggregate&quot;,..: NA NA NA NA NA ...
+##   ..- attr(*, &quot;names&quot;)= chr [1:9] &quot;STATEFP&quot; &quot;STATENS&quot; ...</code></pre>
 <p>For the purpose of these exploratory analyses, only the conterminous United States (CONUS) will be used. Subset <code>states_sf</code> to remove Alaska, Hawaii, and United States territories.</p>
-<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="chapter-polygon-data.html#cb54-1" tabindex="-1"></a>remove <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
-<span id="cb54-2"><a href="chapter-polygon-data.html#cb54-2" tabindex="-1"></a>  <span class="st">&quot;Alaska&quot;</span>,</span>
-<span id="cb54-3"><a href="chapter-polygon-data.html#cb54-3" tabindex="-1"></a>  <span class="st">&quot;Hawaii&quot;</span>,</span>
-<span id="cb54-4"><a href="chapter-polygon-data.html#cb54-4" tabindex="-1"></a>  <span class="st">&quot;Puerto Rico&quot;</span>,</span>
-<span id="cb54-5"><a href="chapter-polygon-data.html#cb54-5" tabindex="-1"></a>  <span class="st">&quot;United States Virgin Islands&quot;</span>,</span>
-<span id="cb54-6"><a href="chapter-polygon-data.html#cb54-6" tabindex="-1"></a>  <span class="st">&quot;Commonwealth of the Northern Mariana Islands&quot;</span>,</span>
-<span id="cb54-7"><a href="chapter-polygon-data.html#cb54-7" tabindex="-1"></a>  <span class="st">&quot;Guam&quot;</span>,</span>
-<span id="cb54-8"><a href="chapter-polygon-data.html#cb54-8" tabindex="-1"></a>  <span class="st">&quot;American Samoa&quot;</span></span>
-<span id="cb54-9"><a href="chapter-polygon-data.html#cb54-9" tabindex="-1"></a>)</span>
-<span id="cb54-10"><a href="chapter-polygon-data.html#cb54-10" tabindex="-1"></a></span>
-<span id="cb54-11"><a href="chapter-polygon-data.html#cb54-11" tabindex="-1"></a>conus_sf <span class="ot">&lt;-</span> <span class="fu">subset</span>(</span>
-<span id="cb54-12"><a href="chapter-polygon-data.html#cb54-12" tabindex="-1"></a>  states_sf,</span>
-<span id="cb54-13"><a href="chapter-polygon-data.html#cb54-13" tabindex="-1"></a>  <span class="sc">!</span>NAME <span class="sc">%in%</span> remove</span>
-<span id="cb54-14"><a href="chapter-polygon-data.html#cb54-14" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="chapter-polygon-data.html#cb111-1" tabindex="-1"></a>remove <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb111-2"><a href="chapter-polygon-data.html#cb111-2" tabindex="-1"></a>  <span class="st">&quot;Alaska&quot;</span>,</span>
+<span id="cb111-3"><a href="chapter-polygon-data.html#cb111-3" tabindex="-1"></a>  <span class="st">&quot;Hawaii&quot;</span>,</span>
+<span id="cb111-4"><a href="chapter-polygon-data.html#cb111-4" tabindex="-1"></a>  <span class="st">&quot;Puerto Rico&quot;</span>,</span>
+<span id="cb111-5"><a href="chapter-polygon-data.html#cb111-5" tabindex="-1"></a>  <span class="st">&quot;United States Virgin Islands&quot;</span>,</span>
+<span id="cb111-6"><a href="chapter-polygon-data.html#cb111-6" tabindex="-1"></a>  <span class="st">&quot;Commonwealth of the Northern Mariana Islands&quot;</span>,</span>
+<span id="cb111-7"><a href="chapter-polygon-data.html#cb111-7" tabindex="-1"></a>  <span class="st">&quot;Guam&quot;</span>,</span>
+<span id="cb111-8"><a href="chapter-polygon-data.html#cb111-8" tabindex="-1"></a>  <span class="st">&quot;American Samoa&quot;</span></span>
+<span id="cb111-9"><a href="chapter-polygon-data.html#cb111-9" tabindex="-1"></a>)</span>
+<span id="cb111-10"><a href="chapter-polygon-data.html#cb111-10" tabindex="-1"></a></span>
+<span id="cb111-11"><a href="chapter-polygon-data.html#cb111-11" tabindex="-1"></a>conus_sf <span class="ot">&lt;-</span> <span class="fu">subset</span>(</span>
+<span id="cb111-12"><a href="chapter-polygon-data.html#cb111-12" tabindex="-1"></a>  states_sf,</span>
+<span id="cb111-13"><a href="chapter-polygon-data.html#cb111-13" tabindex="-1"></a>  <span class="sc">!</span>NAME <span class="sc">%in%</span> remove</span>
+<span id="cb111-14"><a href="chapter-polygon-data.html#cb111-14" tabindex="-1"></a>)</span></code></pre></div>
 <p>Check the coordinate reference system.</p>
-<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="chapter-polygon-data.html#cb55-1" tabindex="-1"></a><span class="fu">st_crs</span>(conus_sf)</span></code></pre></div>
+<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="chapter-polygon-data.html#cb112-1" tabindex="-1"></a>sf<span class="sc">::</span><span class="fu">st_crs</span>(conus_sf)</span></code></pre></div>
+<pre><code>## Coordinate Reference System:
+##   User input: NAD83 
+##   wkt:
+## GEOGCRS[&quot;NAD83&quot;,
+##     DATUM[&quot;North American Datum 1983&quot;,
+##         ELLIPSOID[&quot;GRS 1980&quot;,6378137,298.257222101,
+##             LENGTHUNIT[&quot;metre&quot;,1]]],
+##     PRIMEM[&quot;Greenwich&quot;,0,
+##         ANGLEUNIT[&quot;degree&quot;,0.0174532925199433]],
+##     CS[ellipsoidal,2],
+##         AXIS[&quot;latitude&quot;,north,
+##             ORDER[1],
+##             ANGLEUNIT[&quot;degree&quot;,0.0174532925199433]],
+##         AXIS[&quot;longitude&quot;,east,
+##             ORDER[2],
+##             ANGLEUNIT[&quot;degree&quot;,0.0174532925199433]],
+##     ID[&quot;EPSG&quot;,4269]]</code></pre>
 <div class="important">
 <p>When analyzing multiple spatial data sets together, all data sets must have the same coordinate reference system or projected coordinate system.</p>
 </div>
 <p>Transform <code>conus_sf</code> to match the projected coordinate system of the <code>smoke_sf_density</code> data set.</p>
-<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="chapter-polygon-data.html#cb56-1" tabindex="-1"></a>conus_sf <span class="ot">&lt;-</span> <span class="fu">st_transform</span>(</span>
-<span id="cb56-2"><a href="chapter-polygon-data.html#cb56-2" tabindex="-1"></a>  conus_sf,</span>
-<span id="cb56-3"><a href="chapter-polygon-data.html#cb56-3" tabindex="-1"></a>  <span class="fu">st_crs</span>(smoke_sf_density)</span>
-<span id="cb56-4"><a href="chapter-polygon-data.html#cb56-4" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="chapter-polygon-data.html#cb114-1" tabindex="-1"></a>conus_sf <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_transform</span>(</span>
+<span id="cb114-2"><a href="chapter-polygon-data.html#cb114-2" tabindex="-1"></a>  conus_sf,</span>
+<span id="cb114-3"><a href="chapter-polygon-data.html#cb114-3" tabindex="-1"></a>  sf<span class="sc">::</span><span class="fu">st_crs</span>(smoke_sf_density)</span>
+<span id="cb114-4"><a href="chapter-polygon-data.html#cb114-4" tabindex="-1"></a>)</span></code></pre></div>
 <p>Plot the conterminous United States state boundaries.</p>
-<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="chapter-polygon-data.html#cb57-1" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb57-2"><a href="chapter-polygon-data.html#cb57-2" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> conus_sf) <span class="sc">+</span></span>
-<span id="cb57-3"><a href="chapter-polygon-data.html#cb57-3" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Coterminous United States&#39; State Boundaries&quot;</span>) <span class="sc">+</span></span>
-<span id="cb57-4"><a href="chapter-polygon-data.html#cb57-4" tabindex="-1"></a>  <span class="fu">theme_pubr</span>() <span class="sc">+</span></span>
-<span id="cb57-5"><a href="chapter-polygon-data.html#cb57-5" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>)) <span class="sc">+</span></span>
-<span id="cb57-6"><a href="chapter-polygon-data.html#cb57-6" tabindex="-1"></a>  <span class="fu">grids</span>()</span></code></pre></div>
-<p><img src="images/intro_to_spatial/conus_sf_original.png" width = "75%" height = "auto" class = "centerimage"></p>
+<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="chapter-polygon-data.html#cb115-1" tabindex="-1"></a>ggplot2<span class="sc">::</span><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb115-2"><a href="chapter-polygon-data.html#cb115-2" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_sf</span>(<span class="at">data =</span> conus_sf) <span class="sc">+</span></span>
+<span id="cb115-3"><a href="chapter-polygon-data.html#cb115-3" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">ggtitle</span>(<span class="st">&quot;Coterminous United States&#39; State Boundaries&quot;</span>) <span class="sc">+</span></span>
+<span id="cb115-4"><a href="chapter-polygon-data.html#cb115-4" tabindex="-1"></a>  ggpubr<span class="sc">::</span><span class="fu">theme_pubr</span>() <span class="sc">+</span></span>
+<span id="cb115-5"><a href="chapter-polygon-data.html#cb115-5" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>)) <span class="sc">+</span></span>
+<span id="cb115-6"><a href="chapter-polygon-data.html#cb115-6" tabindex="-1"></a>  ggpubr<span class="sc">::</span><span class="fu">grids</span>()</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-58-1.png" width="672" /></p>
 <p>With the wildfire smoke plume and conterminous United States polygons imported and prepared, ensure that they have the same coordinate reference system.</p>
-<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="chapter-polygon-data.html#cb58-1" tabindex="-1"></a><span class="fu">st_crs</span>(smoke_sf_density) <span class="sc">==</span> <span class="fu">st_crs</span>(conus_sf)</span></code></pre></div>
+<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="chapter-polygon-data.html#cb116-1" tabindex="-1"></a>sf<span class="sc">::</span><span class="fu">st_crs</span>(smoke_sf_density) <span class="sc">==</span> sf<span class="sc">::</span><span class="fu">st_crs</span>(conus_sf)</span></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
 <p>Create a plot which shows the distribution of wildfire smoke plumes over the conterminous United States state boundaries.</p>
-<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="chapter-polygon-data.html#cb59-1" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb59-2"><a href="chapter-polygon-data.html#cb59-2" tabindex="-1"></a>  <span class="fu">geom_sf</span>(</span>
-<span id="cb59-3"><a href="chapter-polygon-data.html#cb59-3" tabindex="-1"></a>    <span class="at">data =</span> smoke_sf_density,</span>
-<span id="cb59-4"><a href="chapter-polygon-data.html#cb59-4" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">fill =</span> Density)</span>
-<span id="cb59-5"><a href="chapter-polygon-data.html#cb59-5" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb59-6"><a href="chapter-polygon-data.html#cb59-6" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="st">&quot;Smoke Density&quot;</span>,</span>
-<span id="cb59-7"><a href="chapter-polygon-data.html#cb59-7" tabindex="-1"></a>    <span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;lightgreen&quot;</span>, <span class="st">&quot;lightgoldenrod&quot;</span>, <span class="st">&quot;tomato&quot;</span>)</span>
-<span id="cb59-8"><a href="chapter-polygon-data.html#cb59-8" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb59-9"><a href="chapter-polygon-data.html#cb59-9" tabindex="-1"></a>  <span class="fu">geom_sf</span>(</span>
-<span id="cb59-10"><a href="chapter-polygon-data.html#cb59-10" tabindex="-1"></a>    <span class="at">data =</span> conus_sf,</span>
-<span id="cb59-11"><a href="chapter-polygon-data.html#cb59-11" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">&quot;transparent&quot;</span></span>
-<span id="cb59-12"><a href="chapter-polygon-data.html#cb59-12" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb59-13"><a href="chapter-polygon-data.html#cb59-13" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Wildfire Smoke Plumes (with states)&quot;</span>) <span class="sc">+</span></span>
-<span id="cb59-14"><a href="chapter-polygon-data.html#cb59-14" tabindex="-1"></a>  <span class="fu">theme_pubr</span>(<span class="at">legend =</span> <span class="st">&quot;bottom&quot;</span>) <span class="sc">+</span></span>
-<span id="cb59-15"><a href="chapter-polygon-data.html#cb59-15" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>)) <span class="sc">+</span></span>
-<span id="cb59-16"><a href="chapter-polygon-data.html#cb59-16" tabindex="-1"></a>  <span class="fu">grids</span>()</span></code></pre></div>
-<p><img src="images/intro_to_spatial/smoke_polygons_sf_states.png" width = "75%" height = "auto" class = "centerimage"></p>
+<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb118-1"><a href="chapter-polygon-data.html#cb118-1" tabindex="-1"></a>ggplot2<span class="sc">::</span><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb118-2"><a href="chapter-polygon-data.html#cb118-2" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_sf</span>(</span>
+<span id="cb118-3"><a href="chapter-polygon-data.html#cb118-3" tabindex="-1"></a>    <span class="at">data =</span> smoke_sf_density,</span>
+<span id="cb118-4"><a href="chapter-polygon-data.html#cb118-4" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">fill =</span> Density)</span>
+<span id="cb118-5"><a href="chapter-polygon-data.html#cb118-5" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb118-6"><a href="chapter-polygon-data.html#cb118-6" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">scale_fill_manual</span>(<span class="st">&quot;Smoke Density&quot;</span>,</span>
+<span id="cb118-7"><a href="chapter-polygon-data.html#cb118-7" tabindex="-1"></a>    <span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;lightgreen&quot;</span>, <span class="st">&quot;lightgoldenrod&quot;</span>, <span class="st">&quot;tomato&quot;</span>)</span>
+<span id="cb118-8"><a href="chapter-polygon-data.html#cb118-8" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb118-9"><a href="chapter-polygon-data.html#cb118-9" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_sf</span>(</span>
+<span id="cb118-10"><a href="chapter-polygon-data.html#cb118-10" tabindex="-1"></a>    <span class="at">data =</span> conus_sf,</span>
+<span id="cb118-11"><a href="chapter-polygon-data.html#cb118-11" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">&quot;transparent&quot;</span></span>
+<span id="cb118-12"><a href="chapter-polygon-data.html#cb118-12" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb118-13"><a href="chapter-polygon-data.html#cb118-13" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">ggtitle</span>(<span class="st">&quot;Wildfire Smoke Plumes (with states)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb118-14"><a href="chapter-polygon-data.html#cb118-14" tabindex="-1"></a>  ggpubr<span class="sc">::</span><span class="fu">theme_pubr</span>(<span class="at">legend =</span> <span class="st">&quot;bottom&quot;</span>) <span class="sc">+</span></span>
+<span id="cb118-15"><a href="chapter-polygon-data.html#cb118-15" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>)) <span class="sc">+</span></span>
+<span id="cb118-16"><a href="chapter-polygon-data.html#cb118-16" tabindex="-1"></a>  ggpubr<span class="sc">::</span><span class="fu">grids</span>()</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-60-1.png" width="672" /></p>
 <p>This plot provides important geospatial context for understanding where the wildfire smoke plumes are in relation to the study area of interest.</p>
 </div>
 <div id="crop" class="section level3 hasAnchor" number="3.4.4">
 <h3><span class="header-section-number">3.4.4</span> Crop<a href="chapter-polygon-data.html#crop" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The <code>sf::st_crop()</code> function can be used to reduce the extent of a set of polygons to a specific rectangle, typically the bounding box of another spatial data set. In this example we can crop the <code>smoke_sf_density</code> polygons to the bounding box surrounding the conterminous United States.</p>
-<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="chapter-polygon-data.html#cb60-1" tabindex="-1"></a>smoke_sf_crop <span class="ot">&lt;-</span> <span class="fu">st_crop</span>(</span>
-<span id="cb60-2"><a href="chapter-polygon-data.html#cb60-2" tabindex="-1"></a>  smoke_sf_density,</span>
-<span id="cb60-3"><a href="chapter-polygon-data.html#cb60-3" tabindex="-1"></a>  conus_sf</span>
-<span id="cb60-4"><a href="chapter-polygon-data.html#cb60-4" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="chapter-polygon-data.html#cb119-1" tabindex="-1"></a>smoke_sf_crop <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_crop</span>(</span>
+<span id="cb119-2"><a href="chapter-polygon-data.html#cb119-2" tabindex="-1"></a>  smoke_sf_density,</span>
+<span id="cb119-3"><a href="chapter-polygon-data.html#cb119-3" tabindex="-1"></a>  conus_sf</span>
+<span id="cb119-4"><a href="chapter-polygon-data.html#cb119-4" tabindex="-1"></a>)</span></code></pre></div>
+<pre><code>## Warning: attribute variables are assumed to be spatially constant throughout
+## all geometries</code></pre>
 <p>Plot the cropped wildfire smoke plume polygons and the conterminous United States state boundaries.</p>
-<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="chapter-polygon-data.html#cb61-1" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb61-2"><a href="chapter-polygon-data.html#cb61-2" tabindex="-1"></a>  <span class="fu">geom_sf</span>(</span>
-<span id="cb61-3"><a href="chapter-polygon-data.html#cb61-3" tabindex="-1"></a>    <span class="at">data =</span> smoke_sf_crop,</span>
-<span id="cb61-4"><a href="chapter-polygon-data.html#cb61-4" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">fill =</span> Density)</span>
-<span id="cb61-5"><a href="chapter-polygon-data.html#cb61-5" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb61-6"><a href="chapter-polygon-data.html#cb61-6" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="st">&quot;Smoke Density&quot;</span>,</span>
-<span id="cb61-7"><a href="chapter-polygon-data.html#cb61-7" tabindex="-1"></a>    <span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;lightgreen&quot;</span>, <span class="st">&quot;lightgoldenrod&quot;</span>, <span class="st">&quot;tomato&quot;</span>)</span>
-<span id="cb61-8"><a href="chapter-polygon-data.html#cb61-8" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb61-9"><a href="chapter-polygon-data.html#cb61-9" tabindex="-1"></a>  <span class="fu">geom_sf</span>(</span>
-<span id="cb61-10"><a href="chapter-polygon-data.html#cb61-10" tabindex="-1"></a>    <span class="at">data =</span> conus_sf,</span>
-<span id="cb61-11"><a href="chapter-polygon-data.html#cb61-11" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">&quot;transparent&quot;</span></span>
-<span id="cb61-12"><a href="chapter-polygon-data.html#cb61-12" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb61-13"><a href="chapter-polygon-data.html#cb61-13" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Wildfire Smoke Plumes (cropped)&quot;</span>) <span class="sc">+</span></span>
-<span id="cb61-14"><a href="chapter-polygon-data.html#cb61-14" tabindex="-1"></a>  <span class="fu">theme_pubr</span>(<span class="at">legend =</span> <span class="st">&quot;bottom&quot;</span>) <span class="sc">+</span></span>
-<span id="cb61-15"><a href="chapter-polygon-data.html#cb61-15" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>)) <span class="sc">+</span></span>
-<span id="cb61-16"><a href="chapter-polygon-data.html#cb61-16" tabindex="-1"></a>  <span class="fu">grids</span>()</span></code></pre></div>
-<p><img src="images/intro_to_spatial/smoke_polygons_sf_cropped.png" width = "75%" height = "auto" class = "centerimage"></p>
+<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb121-1"><a href="chapter-polygon-data.html#cb121-1" tabindex="-1"></a>ggplot2<span class="sc">::</span><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb121-2"><a href="chapter-polygon-data.html#cb121-2" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_sf</span>(</span>
+<span id="cb121-3"><a href="chapter-polygon-data.html#cb121-3" tabindex="-1"></a>    <span class="at">data =</span> smoke_sf_crop,</span>
+<span id="cb121-4"><a href="chapter-polygon-data.html#cb121-4" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">fill =</span> Density)</span>
+<span id="cb121-5"><a href="chapter-polygon-data.html#cb121-5" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb121-6"><a href="chapter-polygon-data.html#cb121-6" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">scale_fill_manual</span>(<span class="st">&quot;Smoke Density&quot;</span>,</span>
+<span id="cb121-7"><a href="chapter-polygon-data.html#cb121-7" tabindex="-1"></a>    <span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;lightgreen&quot;</span>, <span class="st">&quot;lightgoldenrod&quot;</span>, <span class="st">&quot;tomato&quot;</span>)</span>
+<span id="cb121-8"><a href="chapter-polygon-data.html#cb121-8" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb121-9"><a href="chapter-polygon-data.html#cb121-9" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_sf</span>(</span>
+<span id="cb121-10"><a href="chapter-polygon-data.html#cb121-10" tabindex="-1"></a>    <span class="at">data =</span> conus_sf,</span>
+<span id="cb121-11"><a href="chapter-polygon-data.html#cb121-11" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">&quot;transparent&quot;</span></span>
+<span id="cb121-12"><a href="chapter-polygon-data.html#cb121-12" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb121-13"><a href="chapter-polygon-data.html#cb121-13" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">ggtitle</span>(<span class="st">&quot;Wildfire Smoke Plumes (cropped)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb121-14"><a href="chapter-polygon-data.html#cb121-14" tabindex="-1"></a>  ggpubr<span class="sc">::</span><span class="fu">theme_pubr</span>(<span class="at">legend =</span> <span class="st">&quot;bottom&quot;</span>) <span class="sc">+</span></span>
+<span id="cb121-15"><a href="chapter-polygon-data.html#cb121-15" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>)) <span class="sc">+</span></span>
+<span id="cb121-16"><a href="chapter-polygon-data.html#cb121-16" tabindex="-1"></a>  ggpubr<span class="sc">::</span><span class="fu">grids</span>()</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-62-1.png" width="672" /></p>
 </div>
 </div>
 <div id="data-preparation-with-terra" class="section level2 hasAnchor" number="3.5">
@@ -537,63 +685,100 @@ target="blank">Published with bookdown</a></li>
 <div class="note">
 <p>See Sections <a href="chapter-polygon-data.html#chapter-polygon-access">Access, Download, and Unzip</a> and <a href="chapter-polygon-data.html#chapter-polygon-plot-multiple-sf">Plot (Multiple)</a> for obtaining the wildfire smoke plume coverage and United States state boundary data sets, respectively.</p>
 </div>
-<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="chapter-polygon-data.html#cb62-1" tabindex="-1"></a>smoke_t <span class="ot">&lt;-</span> <span class="fu">vect</span>(<span class="st">&quot;/   YOUR FILE PATH   /hms_smoke20230901.shp&quot;</span>)</span>
-<span id="cb62-2"><a href="chapter-polygon-data.html#cb62-2" tabindex="-1"></a>states_t <span class="ot">&lt;-</span> <span class="fu">vect</span>(<span class="st">&quot;/   YOUR FILE PATH   /cb_2018_us_state_500k.shp&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="chapter-polygon-data.html#cb122-1" tabindex="-1"></a>smoke_t <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">vect</span>(<span class="st">&quot;./dataset/noaa/hms_smoke20230901.shp&quot;</span>)</span>
+<span id="cb122-2"><a href="chapter-polygon-data.html#cb122-2" tabindex="-1"></a>states_t <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">vect</span>(<span class="st">&quot;./dataset/states/cb_2018_us_state_500k.shp&quot;</span>)</span></code></pre></div>
 </div>
 <div id="inspect-structure-2" class="section level3 hasAnchor" number="3.5.2">
 <h3><span class="header-section-number">3.5.2</span> Inspect Structure<a href="chapter-polygon-data.html#inspect-structure-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Inspect the structures of <code>smoke_t</code> and <code>states_t</code> to see their classes, column names, and column classes.</p>
-<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="chapter-polygon-data.html#cb63-1" tabindex="-1"></a>smoke_t</span>
-<span id="cb63-2"><a href="chapter-polygon-data.html#cb63-2" tabindex="-1"></a>states_t</span></code></pre></div>
+<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="chapter-polygon-data.html#cb123-1" tabindex="-1"></a>smoke_t</span></code></pre></div>
+<pre><code>##  class       : SpatVector 
+##  geometry    : polygons 
+##  dimensions  : 58, 4  (geometries, attributes)
+##  extent      : -149.8003, -13.8847, 13.58187, 75.17942  (xmin, xmax, ymin, ymax)
+##  source      : hms_smoke20230901.shp
+##  coord. ref. : lon/lat WGS 84 (EPSG:4326) 
+##  names       : Satellite        Start          End Density
+##  type        :     &lt;chr&gt;        &lt;chr&gt;        &lt;chr&gt;   &lt;chr&gt;
+##  values      : GOES-EAST 2023244 0900 2023244 1300   Light
+##                GOES-EAST 2023244 1300 2023244 1700   Light
+##                GOES-EAST 2023244 1300 2023244 1700   Light</code></pre>
+<div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb125-1"><a href="chapter-polygon-data.html#cb125-1" tabindex="-1"></a>states_t</span></code></pre></div>
+<pre><code>##  class       : SpatVector 
+##  geometry    : polygons 
+##  dimensions  : 56, 9  (geometries, attributes)
+##  extent      : -179.1489, 179.7785, -14.5487, 71.36516  (xmin, xmax, ymin, ymax)
+##  source      : cb_2018_us_state_500k.shp
+##  coord. ref. : lon/lat NAD83 (EPSG:4269) 
+##  names       : STATEFP  STATENS    AFFGEOID GEOID STUSPS           NAME  LSAD
+##  type        :   &lt;chr&gt;    &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;          &lt;chr&gt; &lt;chr&gt;
+##  values      :      28 01779790 0400000US28    28     MS    Mississippi    00
+##                     37 01027616 0400000US37    37     NC North Carolina    00
+##                     40 01102857 0400000US40    40     OK       Oklahoma    00
+##      ALAND    AWATER
+##      &lt;num&gt;     &lt;num&gt;
+##  1.215e+11 3.927e+09
+##  1.259e+11 1.347e+10
+##  1.777e+11 3.375e+09</code></pre>
 <p>Both <code>smoke_t</code> and <code>states_t</code> have native spatial features. These are reflected by the type of spatial data in <code>geometry:</code>, and the spatial attributes <code>extent:</code> and <code>coord. ref.:</code></p>
 </div>
 <div id="chapter-polygon-terra-reclassify" class="section level3 hasAnchor" number="3.5.3">
 <h3><span class="header-section-number">3.5.3</span> Reclassify<a href="chapter-polygon-data.html#chapter-polygon-terra-reclassify" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The main parameter of interest in this data set is <code>$Density</code>, which discretely categorizes each wildfire smoke plume as “Light”, “Medium”, or “Heavy”. Checking its class shows that <code>$Density</code> is class character.</p>
-<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="chapter-polygon-data.html#cb64-1" tabindex="-1"></a><span class="fu">class</span>(smoke_t<span class="sc">$</span>Density)</span></code></pre></div>
+<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb127-1"><a href="chapter-polygon-data.html#cb127-1" tabindex="-1"></a><span class="fu">class</span>(smoke_t<span class="sc">$</span>Density)</span></code></pre></div>
+<pre><code>## [1] &quot;character&quot;</code></pre>
 <p>Nominal data, data without fixed order or rank system, can be stored as class character (i.e., State names). However, it is best to store ordinal data as class factor for conducting analyses in R.</p>
 <p>Converting data from class character to class factor can be done with <code>factor()</code>. The <code>levels = c()</code> argument in the function specifies both the level names and the ranked order of the levels.</p>
-<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="chapter-polygon-data.html#cb65-1" tabindex="-1"></a>smoke_t<span class="sc">$</span>Density <span class="ot">&lt;-</span> <span class="fu">factor</span>(smoke_t<span class="sc">$</span>Density,</span>
-<span id="cb65-2"><a href="chapter-polygon-data.html#cb65-2" tabindex="-1"></a>  <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;Light&quot;</span>, <span class="st">&quot;Medium&quot;</span>, <span class="st">&quot;Heavy&quot;</span>)</span>
-<span id="cb65-3"><a href="chapter-polygon-data.html#cb65-3" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb129-1"><a href="chapter-polygon-data.html#cb129-1" tabindex="-1"></a>smoke_t<span class="sc">$</span>Density <span class="ot">&lt;-</span> <span class="fu">factor</span>(</span>
+<span id="cb129-2"><a href="chapter-polygon-data.html#cb129-2" tabindex="-1"></a>  smoke_t<span class="sc">$</span>Density,</span>
+<span id="cb129-3"><a href="chapter-polygon-data.html#cb129-3" tabindex="-1"></a>  <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;Light&quot;</span>, <span class="st">&quot;Medium&quot;</span>, <span class="st">&quot;Heavy&quot;</span>)</span>
+<span id="cb129-4"><a href="chapter-polygon-data.html#cb129-4" tabindex="-1"></a>)</span></code></pre></div>
 <p>Check the class of <code>$Density</code> again to ensure proper reclassification.</p>
-<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="chapter-polygon-data.html#cb66-1" tabindex="-1"></a><span class="fu">class</span>(smoke_t<span class="sc">$</span>Density)</span></code></pre></div>
+<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb130-1"><a href="chapter-polygon-data.html#cb130-1" tabindex="-1"></a><span class="fu">class</span>(smoke_t<span class="sc">$</span>Density)</span></code></pre></div>
+<pre><code>## [1] &quot;factor&quot;</code></pre>
 <p>For the purpose of these exploratory analyses, only the conterminous United States (CONUS) will be used. Subset <code>states_t</code> to remove Alaska, Hawaii, and the United States territories.</p>
-<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="chapter-polygon-data.html#cb67-1" tabindex="-1"></a>remove <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
-<span id="cb67-2"><a href="chapter-polygon-data.html#cb67-2" tabindex="-1"></a>  <span class="st">&quot;Alaska&quot;</span>,</span>
-<span id="cb67-3"><a href="chapter-polygon-data.html#cb67-3" tabindex="-1"></a>  <span class="st">&quot;Hawaii&quot;</span>,</span>
-<span id="cb67-4"><a href="chapter-polygon-data.html#cb67-4" tabindex="-1"></a>  <span class="st">&quot;Puerto Rico&quot;</span>,</span>
-<span id="cb67-5"><a href="chapter-polygon-data.html#cb67-5" tabindex="-1"></a>  <span class="st">&quot;United States Virgin Islands&quot;</span>,</span>
-<span id="cb67-6"><a href="chapter-polygon-data.html#cb67-6" tabindex="-1"></a>  <span class="st">&quot;Commonwealth of the Northern Mariana Islands&quot;</span>,</span>
-<span id="cb67-7"><a href="chapter-polygon-data.html#cb67-7" tabindex="-1"></a>  <span class="st">&quot;Guam&quot;</span>,</span>
-<span id="cb67-8"><a href="chapter-polygon-data.html#cb67-8" tabindex="-1"></a>  <span class="st">&quot;American Samoa&quot;</span></span>
-<span id="cb67-9"><a href="chapter-polygon-data.html#cb67-9" tabindex="-1"></a>)</span>
-<span id="cb67-10"><a href="chapter-polygon-data.html#cb67-10" tabindex="-1"></a></span>
-<span id="cb67-11"><a href="chapter-polygon-data.html#cb67-11" tabindex="-1"></a>conus_t <span class="ot">&lt;-</span> <span class="fu">subset</span>(</span>
-<span id="cb67-12"><a href="chapter-polygon-data.html#cb67-12" tabindex="-1"></a>  states_t,</span>
-<span id="cb67-13"><a href="chapter-polygon-data.html#cb67-13" tabindex="-1"></a>  <span class="sc">!</span>states_t<span class="sc">$</span>NAME <span class="sc">%in%</span> remove</span>
-<span id="cb67-14"><a href="chapter-polygon-data.html#cb67-14" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb132-1"><a href="chapter-polygon-data.html#cb132-1" tabindex="-1"></a>remove <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb132-2"><a href="chapter-polygon-data.html#cb132-2" tabindex="-1"></a>  <span class="st">&quot;Alaska&quot;</span>,</span>
+<span id="cb132-3"><a href="chapter-polygon-data.html#cb132-3" tabindex="-1"></a>  <span class="st">&quot;Hawaii&quot;</span>,</span>
+<span id="cb132-4"><a href="chapter-polygon-data.html#cb132-4" tabindex="-1"></a>  <span class="st">&quot;Puerto Rico&quot;</span>,</span>
+<span id="cb132-5"><a href="chapter-polygon-data.html#cb132-5" tabindex="-1"></a>  <span class="st">&quot;United States Virgin Islands&quot;</span>,</span>
+<span id="cb132-6"><a href="chapter-polygon-data.html#cb132-6" tabindex="-1"></a>  <span class="st">&quot;Commonwealth of the Northern Mariana Islands&quot;</span>,</span>
+<span id="cb132-7"><a href="chapter-polygon-data.html#cb132-7" tabindex="-1"></a>  <span class="st">&quot;Guam&quot;</span>,</span>
+<span id="cb132-8"><a href="chapter-polygon-data.html#cb132-8" tabindex="-1"></a>  <span class="st">&quot;American Samoa&quot;</span></span>
+<span id="cb132-9"><a href="chapter-polygon-data.html#cb132-9" tabindex="-1"></a>)</span>
+<span id="cb132-10"><a href="chapter-polygon-data.html#cb132-10" tabindex="-1"></a></span>
+<span id="cb132-11"><a href="chapter-polygon-data.html#cb132-11" tabindex="-1"></a>conus_t <span class="ot">&lt;-</span> <span class="fu">subset</span>(</span>
+<span id="cb132-12"><a href="chapter-polygon-data.html#cb132-12" tabindex="-1"></a>  states_t,</span>
+<span id="cb132-13"><a href="chapter-polygon-data.html#cb132-13" tabindex="-1"></a>  <span class="sc">!</span>states_t<span class="sc">$</span>NAME <span class="sc">%in%</span> remove</span>
+<span id="cb132-14"><a href="chapter-polygon-data.html#cb132-14" tabindex="-1"></a>)</span></code></pre></div>
 </div>
 <div id="coordinate-reference-system-and-projection-2" class="section level3 hasAnchor" number="3.5.4">
 <h3><span class="header-section-number">3.5.4</span> Coordinate Reference System and Projection<a href="chapter-polygon-data.html#coordinate-reference-system-and-projection-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Check the coordinate reference systems of <code>SpatVector</code> objects with <code>terra::crs()</code>.</p>
-<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="chapter-polygon-data.html#cb68-1" tabindex="-1"></a><span class="fu">crs</span>(smoke_t,</span>
-<span id="cb68-2"><a href="chapter-polygon-data.html#cb68-2" tabindex="-1"></a>  <span class="at">describe =</span> <span class="cn">TRUE</span></span>
-<span id="cb68-3"><a href="chapter-polygon-data.html#cb68-3" tabindex="-1"></a>)</span>
-<span id="cb68-4"><a href="chapter-polygon-data.html#cb68-4" tabindex="-1"></a><span class="fu">crs</span>(conus_t,</span>
-<span id="cb68-5"><a href="chapter-polygon-data.html#cb68-5" tabindex="-1"></a>  <span class="at">describe =</span> <span class="cn">TRUE</span></span>
-<span id="cb68-6"><a href="chapter-polygon-data.html#cb68-6" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb133"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb133-1"><a href="chapter-polygon-data.html#cb133-1" tabindex="-1"></a>terra<span class="sc">::</span><span class="fu">crs</span>(</span>
+<span id="cb133-2"><a href="chapter-polygon-data.html#cb133-2" tabindex="-1"></a>  smoke_t,</span>
+<span id="cb133-3"><a href="chapter-polygon-data.html#cb133-3" tabindex="-1"></a>  <span class="at">describe =</span> <span class="cn">TRUE</span></span>
+<span id="cb133-4"><a href="chapter-polygon-data.html#cb133-4" tabindex="-1"></a>)</span></code></pre></div>
+<pre><code>##     name authority code area       extent
+## 1 WGS 84      EPSG 4326 &lt;NA&gt; NA, NA, ....</code></pre>
+<div class="sourceCode" id="cb135"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb135-1"><a href="chapter-polygon-data.html#cb135-1" tabindex="-1"></a>terra<span class="sc">::</span><span class="fu">crs</span>(</span>
+<span id="cb135-2"><a href="chapter-polygon-data.html#cb135-2" tabindex="-1"></a>  conus_t,</span>
+<span id="cb135-3"><a href="chapter-polygon-data.html#cb135-3" tabindex="-1"></a>  <span class="at">describe =</span> <span class="cn">TRUE</span></span>
+<span id="cb135-4"><a href="chapter-polygon-data.html#cb135-4" tabindex="-1"></a>)</span></code></pre></div>
+<pre><code>##    name authority code area       extent
+## 1 NAD83      EPSG 4269 &lt;NA&gt; NA, NA, ....</code></pre>
 <p>Both data sets have native coordinate reference systems which were imported during the <code>terra::vect()</code> step. The two data sets, however, have different coordinate reference systems from each other. The area of interest for these exploratory analyses is the conterminous United States, so we can project <code>smoke_t</code> and <code>conus_t</code> to the Albers Equal Area projected coordinate system (EPSG code: 5070).</p>
-<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="chapter-polygon-data.html#cb69-1" tabindex="-1"></a>smoke_t <span class="ot">&lt;-</span> <span class="fu">project</span>(</span>
-<span id="cb69-2"><a href="chapter-polygon-data.html#cb69-2" tabindex="-1"></a>  smoke_t,</span>
-<span id="cb69-3"><a href="chapter-polygon-data.html#cb69-3" tabindex="-1"></a>  <span class="st">&quot;EPSG:5070&quot;</span></span>
-<span id="cb69-4"><a href="chapter-polygon-data.html#cb69-4" tabindex="-1"></a>)</span>
-<span id="cb69-5"><a href="chapter-polygon-data.html#cb69-5" tabindex="-1"></a>conus_t <span class="ot">&lt;-</span> <span class="fu">project</span>(</span>
-<span id="cb69-6"><a href="chapter-polygon-data.html#cb69-6" tabindex="-1"></a>  conus_t,</span>
-<span id="cb69-7"><a href="chapter-polygon-data.html#cb69-7" tabindex="-1"></a>  <span class="st">&quot;EPSG:5070&quot;</span></span>
-<span id="cb69-8"><a href="chapter-polygon-data.html#cb69-8" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb137-1"><a href="chapter-polygon-data.html#cb137-1" tabindex="-1"></a>smoke_t_p <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">project</span>(</span>
+<span id="cb137-2"><a href="chapter-polygon-data.html#cb137-2" tabindex="-1"></a>  smoke_t,</span>
+<span id="cb137-3"><a href="chapter-polygon-data.html#cb137-3" tabindex="-1"></a>  <span class="st">&quot;EPSG:5070&quot;</span></span>
+<span id="cb137-4"><a href="chapter-polygon-data.html#cb137-4" tabindex="-1"></a>)</span>
+<span id="cb137-5"><a href="chapter-polygon-data.html#cb137-5" tabindex="-1"></a>conus_t_p <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">project</span>(</span>
+<span id="cb137-6"><a href="chapter-polygon-data.html#cb137-6" tabindex="-1"></a>  conus_t,</span>
+<span id="cb137-7"><a href="chapter-polygon-data.html#cb137-7" tabindex="-1"></a>  <span class="st">&quot;EPSG:5070&quot;</span></span>
+<span id="cb137-8"><a href="chapter-polygon-data.html#cb137-8" tabindex="-1"></a>)</span></code></pre></div>
 <p>Although both data sets were transformed to the same projected coordinate system, it is important to ensure that all data sets have the same coordinate reference system or projected coordinate system.</p>
-<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="chapter-polygon-data.html#cb70-1" tabindex="-1"></a><span class="fu">crs</span>(smoke_t) <span class="sc">==</span> <span class="fu">crs</span>(conus_t)</span></code></pre></div>
+<div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb138-1"><a href="chapter-polygon-data.html#cb138-1" tabindex="-1"></a>terra<span class="sc">::</span><span class="fu">crs</span>(smoke_t_p) <span class="sc">==</span> terra<span class="sc">::</span><span class="fu">crs</span>(conus_t_p)</span></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
 </div>
 </div>
 <div id="exploratory-analysis-with-terra" class="section level2 hasAnchor" number="3.6">
@@ -602,23 +787,24 @@ target="blank">Published with bookdown</a></li>
 <h3><span class="header-section-number">3.6.1</span> Plot (Multiple)<a href="chapter-polygon-data.html#plot-multiple" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Plot both data sets together in one plot with <code>ggplot2::ggplot()</code>.</p>
 <p>Now that the parameters of interest and coordinate reference systems have been prepared, create a plot with <code>ggplot2::ggplot()</code>. Identifying the data sets to be plotted within the <code>tidyterra::geom_spatvector()</code> arguments informs the function that the data are <code>SpatVector</code> objects <span class="citation">(<a href="#ref-r-tidyterra">10</a>)</span>.</p>
-<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="chapter-polygon-data.html#cb71-1" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb71-2"><a href="chapter-polygon-data.html#cb71-2" tabindex="-1"></a>  <span class="fu">geom_spatvector</span>(</span>
-<span id="cb71-3"><a href="chapter-polygon-data.html#cb71-3" tabindex="-1"></a>    <span class="at">data =</span> smoke_t,</span>
-<span id="cb71-4"><a href="chapter-polygon-data.html#cb71-4" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">fill =</span> Density)</span>
-<span id="cb71-5"><a href="chapter-polygon-data.html#cb71-5" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb71-6"><a href="chapter-polygon-data.html#cb71-6" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="st">&quot;Smoke Density&quot;</span>,</span>
-<span id="cb71-7"><a href="chapter-polygon-data.html#cb71-7" tabindex="-1"></a>    <span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;lightgreen&quot;</span>, <span class="st">&quot;lightgoldenrod&quot;</span>, <span class="st">&quot;tomato&quot;</span>)</span>
-<span id="cb71-8"><a href="chapter-polygon-data.html#cb71-8" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb71-9"><a href="chapter-polygon-data.html#cb71-9" tabindex="-1"></a>  <span class="fu">geom_spatvector</span>(</span>
-<span id="cb71-10"><a href="chapter-polygon-data.html#cb71-10" tabindex="-1"></a>    <span class="at">data =</span> conus_t,</span>
-<span id="cb71-11"><a href="chapter-polygon-data.html#cb71-11" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">&quot;transparent&quot;</span></span>
-<span id="cb71-12"><a href="chapter-polygon-data.html#cb71-12" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb71-13"><a href="chapter-polygon-data.html#cb71-13" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Wildfire Smoke Plumes (with states)&quot;</span>) <span class="sc">+</span></span>
-<span id="cb71-14"><a href="chapter-polygon-data.html#cb71-14" tabindex="-1"></a>  <span class="fu">theme_pubr</span>(<span class="at">legend =</span> <span class="st">&quot;bottom&quot;</span>) <span class="sc">+</span></span>
-<span id="cb71-15"><a href="chapter-polygon-data.html#cb71-15" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>)) <span class="sc">+</span></span>
-<span id="cb71-16"><a href="chapter-polygon-data.html#cb71-16" tabindex="-1"></a>  <span class="fu">grids</span>()</span></code></pre></div>
-<p><img src="images/intro_to_spatial/smoke_polygons_terra_original.png" width = "75%" height = "auto" class = "centerimage"></p>
+<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb140-1"><a href="chapter-polygon-data.html#cb140-1" tabindex="-1"></a><span class="fu">library</span>(tidyterra)</span>
+<span id="cb140-2"><a href="chapter-polygon-data.html#cb140-2" tabindex="-1"></a>ggplot2<span class="sc">::</span><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb140-3"><a href="chapter-polygon-data.html#cb140-3" tabindex="-1"></a>  tidyterra<span class="sc">::</span><span class="fu">geom_spatvector</span>(</span>
+<span id="cb140-4"><a href="chapter-polygon-data.html#cb140-4" tabindex="-1"></a>    <span class="at">data =</span> smoke_t_p,</span>
+<span id="cb140-5"><a href="chapter-polygon-data.html#cb140-5" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">fill =</span> Density)</span>
+<span id="cb140-6"><a href="chapter-polygon-data.html#cb140-6" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb140-7"><a href="chapter-polygon-data.html#cb140-7" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">scale_fill_manual</span>(<span class="st">&quot;Smoke Density&quot;</span>,</span>
+<span id="cb140-8"><a href="chapter-polygon-data.html#cb140-8" tabindex="-1"></a>    <span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;lightgreen&quot;</span>, <span class="st">&quot;lightgoldenrod&quot;</span>, <span class="st">&quot;tomato&quot;</span>)</span>
+<span id="cb140-9"><a href="chapter-polygon-data.html#cb140-9" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb140-10"><a href="chapter-polygon-data.html#cb140-10" tabindex="-1"></a>  tidyterra<span class="sc">::</span><span class="fu">geom_spatvector</span>(</span>
+<span id="cb140-11"><a href="chapter-polygon-data.html#cb140-11" tabindex="-1"></a>    <span class="at">data =</span> conus_t_p,</span>
+<span id="cb140-12"><a href="chapter-polygon-data.html#cb140-12" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">&quot;transparent&quot;</span></span>
+<span id="cb140-13"><a href="chapter-polygon-data.html#cb140-13" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb140-14"><a href="chapter-polygon-data.html#cb140-14" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">ggtitle</span>(<span class="st">&quot;Wildfire Smoke Plumes (with states)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb140-15"><a href="chapter-polygon-data.html#cb140-15" tabindex="-1"></a>  ggpubr<span class="sc">::</span><span class="fu">theme_pubr</span>(<span class="at">legend =</span> <span class="st">&quot;bottom&quot;</span>) <span class="sc">+</span></span>
+<span id="cb140-16"><a href="chapter-polygon-data.html#cb140-16" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>)) <span class="sc">+</span></span>
+<span id="cb140-17"><a href="chapter-polygon-data.html#cb140-17" tabindex="-1"></a>  ggpubr<span class="sc">::</span><span class="fu">grids</span>()</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-72-1.png" width="672" /></p>
 <p>The wildfire smoke plume polygons are clearly visible and colored according to their individual smoke density classification. The plot, however, is difficult to interpret because there are multiple polygons for each smoke density classification. Multiple borders and overlapping polygons with the same smoke density type can be confusing. To make the polygons more clear, individual polygons for each smoke density classification can be combined.</p>
 <div class="warning">
 <p>For the purposes of these exploratory analyses, the satellite travelling direction and time of collection will be ignored.</p>
@@ -627,138 +813,153 @@ target="blank">Published with bookdown</a></li>
 <div id="aggregate" class="section level3 hasAnchor" number="3.6.2">
 <h3><span class="header-section-number">3.6.2</span> Aggregate<a href="chapter-polygon-data.html#aggregate" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Individual polygons an be aggregated (combined) into one multi-part polygon with <code>terra::aggregate()</code>. The <code>by = "Density"</code> argument specifies that the polygons should be combined based on the value stored in <code>$Density</code>.</p>
-<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="chapter-polygon-data.html#cb72-1" tabindex="-1"></a>smoke_t_density <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">aggregate</span>(smoke_t,</span>
-<span id="cb72-2"><a href="chapter-polygon-data.html#cb72-2" tabindex="-1"></a>  <span class="at">by =</span> <span class="st">&quot;Density&quot;</span>,</span>
-<span id="cb72-3"><a href="chapter-polygon-data.html#cb72-3" tabindex="-1"></a>  <span class="at">dissolve =</span> <span class="cn">TRUE</span></span>
-<span id="cb72-4"><a href="chapter-polygon-data.html#cb72-4" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb141-1"><a href="chapter-polygon-data.html#cb141-1" tabindex="-1"></a>smoke_t_density <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">aggregate</span>(</span>
+<span id="cb141-2"><a href="chapter-polygon-data.html#cb141-2" tabindex="-1"></a>  smoke_t_p,</span>
+<span id="cb141-3"><a href="chapter-polygon-data.html#cb141-3" tabindex="-1"></a>  <span class="at">by =</span> <span class="st">&quot;Density&quot;</span>,</span>
+<span id="cb141-4"><a href="chapter-polygon-data.html#cb141-4" tabindex="-1"></a>  <span class="at">dissolve =</span> <span class="cn">TRUE</span></span>
+<span id="cb141-5"><a href="chapter-polygon-data.html#cb141-5" tabindex="-1"></a>)</span></code></pre></div>
 <p>Aggregating the polygons based on the values stored in the <code>$Density</code> column can result in the other columns containing <code>NA</code> values. To remove these columns, subset <code>smoke_t_density</code> to remove <code>$Satellite</code>, <code>$Start</code>, and <code>$End</code>.</p>
-<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="chapter-polygon-data.html#cb73-1" tabindex="-1"></a>smoke_t_density <span class="ot">&lt;-</span> smoke_t_density[</span>
-<span id="cb73-2"><a href="chapter-polygon-data.html#cb73-2" tabindex="-1"></a>  <span class="fu">seq_len</span>(<span class="fu">nrow</span>(smoke_t_density)),</span>
-<span id="cb73-3"><a href="chapter-polygon-data.html#cb73-3" tabindex="-1"></a>  <span class="fu">c</span>(<span class="st">&quot;Density&quot;</span>, <span class="st">&quot;agg_n&quot;</span>)</span>
-<span id="cb73-4"><a href="chapter-polygon-data.html#cb73-4" tabindex="-1"></a>]</span></code></pre></div>
+<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="chapter-polygon-data.html#cb142-1" tabindex="-1"></a>smoke_t_density <span class="ot">&lt;-</span> smoke_t_density[</span>
+<span id="cb142-2"><a href="chapter-polygon-data.html#cb142-2" tabindex="-1"></a>  <span class="fu">seq_len</span>(<span class="fu">nrow</span>(smoke_t_density)),</span>
+<span id="cb142-3"><a href="chapter-polygon-data.html#cb142-3" tabindex="-1"></a>  <span class="fu">c</span>(<span class="st">&quot;Density&quot;</span>, <span class="st">&quot;agg_n&quot;</span>)</span>
+<span id="cb142-4"><a href="chapter-polygon-data.html#cb142-4" tabindex="-1"></a>]</span></code></pre></div>
 <p>The resulting data set contains three multi-polygons, a column for the smoke plume classification, and a count of the number of individual polygons that were aggregated to create the multi-polygon. This last column, <code>$agg_n</code> is automatically calculated by the <code>terra::aggregate()</code> function.</p>
-<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="chapter-polygon-data.html#cb74-1" tabindex="-1"></a>smoke_t_density</span></code></pre></div>
+<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb143-1"><a href="chapter-polygon-data.html#cb143-1" tabindex="-1"></a>smoke_t_density</span></code></pre></div>
+<pre><code>##  class       : SpatVector 
+##  geometry    : polygons 
+##  dimensions  : 3, 2  (geometries, attributes)
+##  extent      : -3260097, 5993172, -1003068, 6112717  (xmin, xmax, ymin, ymax)
+##  coord. ref. : NAD83 / Conus Albers (EPSG:5070) 
+##  names       : Density agg_n
+##  type        :  &lt;fact&gt; &lt;int&gt;
+##  values      :   Light    37
+##                 Medium    15
+##                  Heavy     6</code></pre>
 <p>Create a new plot with <code>smoke_t_density</code>.</p>
-<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="chapter-polygon-data.html#cb75-1" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb75-2"><a href="chapter-polygon-data.html#cb75-2" tabindex="-1"></a>  <span class="fu">geom_spatvector</span>(</span>
-<span id="cb75-3"><a href="chapter-polygon-data.html#cb75-3" tabindex="-1"></a>    <span class="at">data =</span> smoke_t_density,</span>
-<span id="cb75-4"><a href="chapter-polygon-data.html#cb75-4" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">fill =</span> Density)</span>
-<span id="cb75-5"><a href="chapter-polygon-data.html#cb75-5" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb75-6"><a href="chapter-polygon-data.html#cb75-6" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="st">&quot;Smoke Density&quot;</span>,</span>
-<span id="cb75-7"><a href="chapter-polygon-data.html#cb75-7" tabindex="-1"></a>    <span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;lightgreen&quot;</span>, <span class="st">&quot;lightgoldenrod&quot;</span>, <span class="st">&quot;tomato&quot;</span>)</span>
-<span id="cb75-8"><a href="chapter-polygon-data.html#cb75-8" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb75-9"><a href="chapter-polygon-data.html#cb75-9" tabindex="-1"></a>  <span class="fu">geom_spatvector</span>(</span>
-<span id="cb75-10"><a href="chapter-polygon-data.html#cb75-10" tabindex="-1"></a>    <span class="at">data =</span> conus_t,</span>
-<span id="cb75-11"><a href="chapter-polygon-data.html#cb75-11" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">&quot;transparent&quot;</span></span>
-<span id="cb75-12"><a href="chapter-polygon-data.html#cb75-12" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb75-13"><a href="chapter-polygon-data.html#cb75-13" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Wildfire Smoke Plumes (aggregated)&quot;</span>) <span class="sc">+</span></span>
-<span id="cb75-14"><a href="chapter-polygon-data.html#cb75-14" tabindex="-1"></a>  <span class="fu">theme_pubr</span>(<span class="at">legend =</span> <span class="st">&quot;bottom&quot;</span>) <span class="sc">+</span></span>
-<span id="cb75-15"><a href="chapter-polygon-data.html#cb75-15" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>)) <span class="sc">+</span></span>
-<span id="cb75-16"><a href="chapter-polygon-data.html#cb75-16" tabindex="-1"></a>  <span class="fu">grids</span>()</span></code></pre></div>
-<p><img src="images/intro_to_spatial/smoke_polygons_terra_aggregated.png" width = "75%" height = "auto" class = "centerimage"></p>
+<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb145-1"><a href="chapter-polygon-data.html#cb145-1" tabindex="-1"></a>ggplot2<span class="sc">::</span><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb145-2"><a href="chapter-polygon-data.html#cb145-2" tabindex="-1"></a>  tidyterra<span class="sc">::</span><span class="fu">geom_spatvector</span>(</span>
+<span id="cb145-3"><a href="chapter-polygon-data.html#cb145-3" tabindex="-1"></a>    <span class="at">data =</span> smoke_t_density,</span>
+<span id="cb145-4"><a href="chapter-polygon-data.html#cb145-4" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">fill =</span> Density)</span>
+<span id="cb145-5"><a href="chapter-polygon-data.html#cb145-5" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb145-6"><a href="chapter-polygon-data.html#cb145-6" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">scale_fill_manual</span>(<span class="st">&quot;Smoke Density&quot;</span>,</span>
+<span id="cb145-7"><a href="chapter-polygon-data.html#cb145-7" tabindex="-1"></a>    <span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;lightgreen&quot;</span>, <span class="st">&quot;lightgoldenrod&quot;</span>, <span class="st">&quot;tomato&quot;</span>)</span>
+<span id="cb145-8"><a href="chapter-polygon-data.html#cb145-8" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb145-9"><a href="chapter-polygon-data.html#cb145-9" tabindex="-1"></a>  tidyterra<span class="sc">::</span><span class="fu">geom_spatvector</span>(</span>
+<span id="cb145-10"><a href="chapter-polygon-data.html#cb145-10" tabindex="-1"></a>    <span class="at">data =</span> conus_t_p,</span>
+<span id="cb145-11"><a href="chapter-polygon-data.html#cb145-11" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">&quot;transparent&quot;</span></span>
+<span id="cb145-12"><a href="chapter-polygon-data.html#cb145-12" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb145-13"><a href="chapter-polygon-data.html#cb145-13" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">ggtitle</span>(<span class="st">&quot;Wildfire Smoke Plumes (aggregated)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb145-14"><a href="chapter-polygon-data.html#cb145-14" tabindex="-1"></a>  ggpubr<span class="sc">::</span><span class="fu">theme_pubr</span>(<span class="at">legend =</span> <span class="st">&quot;bottom&quot;</span>) <span class="sc">+</span></span>
+<span id="cb145-15"><a href="chapter-polygon-data.html#cb145-15" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>)) <span class="sc">+</span></span>
+<span id="cb145-16"><a href="chapter-polygon-data.html#cb145-16" tabindex="-1"></a>  ggpubr<span class="sc">::</span><span class="fu">grids</span>()</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-76-1.png" width="672" /></p>
 </div>
 <div id="crop-1" class="section level3 hasAnchor" number="3.6.3">
 <h3><span class="header-section-number">3.6.3</span> Crop<a href="chapter-polygon-data.html#crop-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The <code>terra::crop()</code> function can be used to reduce <code>SpatVector</code> to an area determined by another <code>SpatVector</code>. In this example, we can crop the <code>smoke_t_density</code> polygons to the conterminous United States state boundaries.</p>
-<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="chapter-polygon-data.html#cb76-1" tabindex="-1"></a>smoke_t_crop <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">crop</span>(</span>
-<span id="cb76-2"><a href="chapter-polygon-data.html#cb76-2" tabindex="-1"></a>  smoke_t_density,</span>
-<span id="cb76-3"><a href="chapter-polygon-data.html#cb76-3" tabindex="-1"></a>  conus_t</span>
-<span id="cb76-4"><a href="chapter-polygon-data.html#cb76-4" tabindex="-1"></a>)</span></code></pre></div>
+<div class="note">
+<p>Overlapping or self-intersecting polygons can occur with complex geometries or during data processing and transformation. Applying a negative buffer can help resolve these issues by slightly reducing the size of the polygons, thus eliminating problematic overlaps and intersections. This buffering adjustedment may affect statistical analyses, and therefore should be performed with caution.</p>
+</div>
+<div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb146-1"><a href="chapter-polygon-data.html#cb146-1" tabindex="-1"></a>smoke_t_crop <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">crop</span>(</span>
+<span id="cb146-2"><a href="chapter-polygon-data.html#cb146-2" tabindex="-1"></a>  smoke_t_density,</span>
+<span id="cb146-3"><a href="chapter-polygon-data.html#cb146-3" tabindex="-1"></a>  terra<span class="sc">::</span><span class="fu">buffer</span>(conus_t_p, <span class="sc">-</span><span class="fl">0.0001</span>)</span>
+<span id="cb146-4"><a href="chapter-polygon-data.html#cb146-4" tabindex="-1"></a>)</span></code></pre></div>
 <p>Plot the cropped wildfire smoke plume polygons and the conterminous United States state boundaries.</p>
-<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="chapter-polygon-data.html#cb77-1" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb77-2"><a href="chapter-polygon-data.html#cb77-2" tabindex="-1"></a>  <span class="fu">geom_spatvector</span>(</span>
-<span id="cb77-3"><a href="chapter-polygon-data.html#cb77-3" tabindex="-1"></a>    <span class="at">data =</span> smoke_t_crop,</span>
-<span id="cb77-4"><a href="chapter-polygon-data.html#cb77-4" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">fill =</span> Density)</span>
-<span id="cb77-5"><a href="chapter-polygon-data.html#cb77-5" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb77-6"><a href="chapter-polygon-data.html#cb77-6" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="st">&quot;Smoke Density&quot;</span>,</span>
-<span id="cb77-7"><a href="chapter-polygon-data.html#cb77-7" tabindex="-1"></a>    <span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;lightgreen&quot;</span>, <span class="st">&quot;lightgoldenrod&quot;</span>, <span class="st">&quot;tomato&quot;</span>)</span>
-<span id="cb77-8"><a href="chapter-polygon-data.html#cb77-8" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb77-9"><a href="chapter-polygon-data.html#cb77-9" tabindex="-1"></a>  <span class="fu">geom_spatvector</span>(</span>
-<span id="cb77-10"><a href="chapter-polygon-data.html#cb77-10" tabindex="-1"></a>    <span class="at">data =</span> conus_t,</span>
-<span id="cb77-11"><a href="chapter-polygon-data.html#cb77-11" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">&quot;transparent&quot;</span></span>
-<span id="cb77-12"><a href="chapter-polygon-data.html#cb77-12" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb77-13"><a href="chapter-polygon-data.html#cb77-13" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Wildfire Smoke Plumes (cropped)&quot;</span>) <span class="sc">+</span></span>
-<span id="cb77-14"><a href="chapter-polygon-data.html#cb77-14" tabindex="-1"></a>  <span class="fu">theme_pubr</span>(<span class="at">legend =</span> <span class="st">&quot;bottom&quot;</span>) <span class="sc">+</span></span>
-<span id="cb77-15"><a href="chapter-polygon-data.html#cb77-15" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
-<span id="cb77-16"><a href="chapter-polygon-data.html#cb77-16" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>),</span>
-<span id="cb77-17"><a href="chapter-polygon-data.html#cb77-17" tabindex="-1"></a>    <span class="at">axis.line =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb77-18"><a href="chapter-polygon-data.html#cb77-18" tabindex="-1"></a>    <span class="at">axis.ticks =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb77-19"><a href="chapter-polygon-data.html#cb77-19" tabindex="-1"></a>    <span class="at">axis.text =</span> <span class="fu">element_blank</span>()</span>
-<span id="cb77-20"><a href="chapter-polygon-data.html#cb77-20" tabindex="-1"></a>  )</span></code></pre></div>
-<p><img src="images/intro_to_spatial/smoke_polygons_terra_cropped.png" width = "75%" height = "auto" class = "centerimage"></p>
+<div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb147-1"><a href="chapter-polygon-data.html#cb147-1" tabindex="-1"></a>ggplot2<span class="sc">::</span><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb147-2"><a href="chapter-polygon-data.html#cb147-2" tabindex="-1"></a>  tidyterra<span class="sc">::</span><span class="fu">geom_spatvector</span>(</span>
+<span id="cb147-3"><a href="chapter-polygon-data.html#cb147-3" tabindex="-1"></a>    <span class="at">data =</span> smoke_t_crop,</span>
+<span id="cb147-4"><a href="chapter-polygon-data.html#cb147-4" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">fill =</span> Density)</span>
+<span id="cb147-5"><a href="chapter-polygon-data.html#cb147-5" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb147-6"><a href="chapter-polygon-data.html#cb147-6" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">scale_fill_manual</span>(<span class="st">&quot;Smoke Density&quot;</span>,</span>
+<span id="cb147-7"><a href="chapter-polygon-data.html#cb147-7" tabindex="-1"></a>    <span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;lightgreen&quot;</span>, <span class="st">&quot;lightgoldenrod&quot;</span>, <span class="st">&quot;tomato&quot;</span>)</span>
+<span id="cb147-8"><a href="chapter-polygon-data.html#cb147-8" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb147-9"><a href="chapter-polygon-data.html#cb147-9" tabindex="-1"></a>  tidyterra<span class="sc">::</span><span class="fu">geom_spatvector</span>(</span>
+<span id="cb147-10"><a href="chapter-polygon-data.html#cb147-10" tabindex="-1"></a>    <span class="at">data =</span> conus_t_p,</span>
+<span id="cb147-11"><a href="chapter-polygon-data.html#cb147-11" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">&quot;transparent&quot;</span></span>
+<span id="cb147-12"><a href="chapter-polygon-data.html#cb147-12" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb147-13"><a href="chapter-polygon-data.html#cb147-13" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">ggtitle</span>(<span class="st">&quot;Wildfire Smoke Plumes (cropped)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb147-14"><a href="chapter-polygon-data.html#cb147-14" tabindex="-1"></a>  ggpubr<span class="sc">::</span><span class="fu">theme_pubr</span>(<span class="at">legend =</span> <span class="st">&quot;bottom&quot;</span>) <span class="sc">+</span></span>
+<span id="cb147-15"><a href="chapter-polygon-data.html#cb147-15" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme</span>(</span>
+<span id="cb147-16"><a href="chapter-polygon-data.html#cb147-16" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>),</span>
+<span id="cb147-17"><a href="chapter-polygon-data.html#cb147-17" tabindex="-1"></a>    <span class="at">axis.line =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb147-18"><a href="chapter-polygon-data.html#cb147-18" tabindex="-1"></a>    <span class="at">axis.ticks =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb147-19"><a href="chapter-polygon-data.html#cb147-19" tabindex="-1"></a>    <span class="at">axis.text =</span> <span class="fu">element_blank</span>()</span>
+<span id="cb147-20"><a href="chapter-polygon-data.html#cb147-20" tabindex="-1"></a>  )</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-78-1.png" width="672" /></p>
 </div>
 <div id="zonal-statistics" class="section level3 hasAnchor" number="3.6.4">
 <h3><span class="header-section-number">3.6.4</span> Zonal Statistics<a href="chapter-polygon-data.html#zonal-statistics" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Looking closely at the previous plot, it is clear that wildfire smoke plumes cover each state differently. The <code>terra</code> package can be used to identify which states are covered by each classification of wildfire smoke plumes.</p>
 <p>The <code>terra::relate()</code> function can be used to identify spatial relationships between two <code>SpatVector</code> objects. The <code>relation = "intersects"</code> argument logically identifies if any portion of each state is or is not covered by each of the three wildfire smoke plume classification multi-polygons.</p>
 <p>The output of <code>terra::relate()</code> is a wide matrix. The nested <code>data.frame()</code> and <code>t()</code> wrappers convert the output from a wide matrix to a long data frame, which is required to combine the results with the <code>conus_t</code> data set.</p>
-<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="chapter-polygon-data.html#cb78-1" tabindex="-1"></a>conus_smoke <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb78-2"><a href="chapter-polygon-data.html#cb78-2" tabindex="-1"></a>  <span class="fu">t</span>(</span>
-<span id="cb78-3"><a href="chapter-polygon-data.html#cb78-3" tabindex="-1"></a>    <span class="fu">relate</span>(smoke_t_density,</span>
-<span id="cb78-4"><a href="chapter-polygon-data.html#cb78-4" tabindex="-1"></a>      conus_t,</span>
-<span id="cb78-5"><a href="chapter-polygon-data.html#cb78-5" tabindex="-1"></a>      <span class="at">relation =</span> <span class="st">&quot;intersects&quot;</span></span>
-<span id="cb78-6"><a href="chapter-polygon-data.html#cb78-6" tabindex="-1"></a>    )</span>
-<span id="cb78-7"><a href="chapter-polygon-data.html#cb78-7" tabindex="-1"></a>  )</span>
-<span id="cb78-8"><a href="chapter-polygon-data.html#cb78-8" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb148-1"><a href="chapter-polygon-data.html#cb148-1" tabindex="-1"></a>conus_smoke <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb148-2"><a href="chapter-polygon-data.html#cb148-2" tabindex="-1"></a>  <span class="fu">t</span>(</span>
+<span id="cb148-3"><a href="chapter-polygon-data.html#cb148-3" tabindex="-1"></a>    terra<span class="sc">::</span><span class="fu">relate</span>(</span>
+<span id="cb148-4"><a href="chapter-polygon-data.html#cb148-4" tabindex="-1"></a>      smoke_t_density,</span>
+<span id="cb148-5"><a href="chapter-polygon-data.html#cb148-5" tabindex="-1"></a>      conus_t_p,</span>
+<span id="cb148-6"><a href="chapter-polygon-data.html#cb148-6" tabindex="-1"></a>      <span class="at">relation =</span> <span class="st">&quot;intersects&quot;</span></span>
+<span id="cb148-7"><a href="chapter-polygon-data.html#cb148-7" tabindex="-1"></a>    )</span>
+<span id="cb148-8"><a href="chapter-polygon-data.html#cb148-8" tabindex="-1"></a>  )</span>
+<span id="cb148-9"><a href="chapter-polygon-data.html#cb148-9" tabindex="-1"></a>)</span></code></pre></div>
 <p>Set the column names of <code>conus_smoke</code> to match the smoke density classifications.</p>
 <div class="note">
 <p>The order of the columns in <code>conus_smoke</code> are based on the ordered factor levels in <code>smoke_t_density$Density</code> (see Section <a href="chapter-polygon-data.html#chapter-polygon-terra-reclassify">Reclassify</a>).</p>
 </div>
-<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="chapter-polygon-data.html#cb79-1" tabindex="-1"></a><span class="fu">colnames</span>(conus_smoke) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Light&quot;</span>, <span class="st">&quot;Medium&quot;</span>, <span class="st">&quot;Heavy&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb149-1"><a href="chapter-polygon-data.html#cb149-1" tabindex="-1"></a><span class="fu">colnames</span>(conus_smoke) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Light&quot;</span>, <span class="st">&quot;Medium&quot;</span>, <span class="st">&quot;Heavy&quot;</span>)</span></code></pre></div>
 <p>Combine the wildfire smoke plume indicator data frame with the the conterminous United States state boundaries data.</p>
-<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="chapter-polygon-data.html#cb80-1" tabindex="-1"></a>conus_t <span class="ot">&lt;-</span> <span class="fu">cbind</span>(</span>
-<span id="cb80-2"><a href="chapter-polygon-data.html#cb80-2" tabindex="-1"></a>  conus_t,</span>
-<span id="cb80-3"><a href="chapter-polygon-data.html#cb80-3" tabindex="-1"></a>  conus_smoke</span>
-<span id="cb80-4"><a href="chapter-polygon-data.html#cb80-4" tabindex="-1"></a>)</span></code></pre></div>
-<p>The <code>conus_t</code> data set now contains separate columns indicating the presence or absence of “Light”, “Medium”, and “Heavy” wildfire smoke plumes for each conterminous state.</p>
-<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="chapter-polygon-data.html#cb81-1" tabindex="-1"></a><span class="fu">names</span>(conus_t)</span></code></pre></div>
+<div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb150-1"><a href="chapter-polygon-data.html#cb150-1" tabindex="-1"></a>conus_t_p <span class="ot">&lt;-</span> <span class="fu">cbind</span>(</span>
+<span id="cb150-2"><a href="chapter-polygon-data.html#cb150-2" tabindex="-1"></a>  conus_t_p,</span>
+<span id="cb150-3"><a href="chapter-polygon-data.html#cb150-3" tabindex="-1"></a>  conus_smoke</span>
+<span id="cb150-4"><a href="chapter-polygon-data.html#cb150-4" tabindex="-1"></a>)</span></code></pre></div>
+<p>The <code>conus_t_p</code> data set now contains separate columns indicating the presence or absence of “Light”, “Medium”, and “Heavy” wildfire smoke plumes for each conterminous state.</p>
+<div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb151-1"><a href="chapter-polygon-data.html#cb151-1" tabindex="-1"></a><span class="fu">names</span>(conus_t_p)</span></code></pre></div>
+<pre><code>##  [1] &quot;STATEFP&quot;  &quot;STATENS&quot;  &quot;AFFGEOID&quot; &quot;GEOID&quot;    &quot;STUSPS&quot;   &quot;NAME&quot;    
+##  [7] &quot;LSAD&quot;     &quot;ALAND&quot;    &quot;AWATER&quot;   &quot;Light&quot;    &quot;Medium&quot;   &quot;Heavy&quot;</code></pre>
 </div>
 <div id="plot-for-loop" class="section level3 hasAnchor" number="3.6.5">
 <h3><span class="header-section-number">3.6.5</span> Plot (<code>for</code> Loop)<a href="chapter-polygon-data.html#plot-for-loop" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>A <code>for</code> loop can be used to create indicator plots for each wildfire smoke plume classification. The layout of a <code>for</code> loop can look complicated, but it simply applies the same set of functions to a given list of inputs.</p>
 <p>The list of inputs must first be created. As the goal is to plot each of the wildfire smoke plume density classifications, create a character vector of the three classification names.</p>
 <p>This “list of inputs” must first be created. Store the three wildfire smoke plume classifications in a vector of class character.</p>
-<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="chapter-polygon-data.html#cb82-1" tabindex="-1"></a>dens_c <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Light&quot;</span>, <span class="st">&quot;Medium&quot;</span>, <span class="st">&quot;Heavy&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb153-1"><a href="chapter-polygon-data.html#cb153-1" tabindex="-1"></a>dens_c <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Light&quot;</span>, <span class="st">&quot;Medium&quot;</span>, <span class="st">&quot;Heavy&quot;</span>)</span></code></pre></div>
 <p>Create a <code>for</code> loop that creates a plot for each wildfire smoke plume density stored within <code>dens_c</code>.</p>
 <p>Code line 1 tells the <code>for</code> loop to apply the following functions to each observation in <code>dens_c</code>.</p>
 <p>Code lines 3 through 9 define the plotting colors based on the wildfire smoke plume classification (<code>dens_c[d]</code>). As in previous plots, “Light” smoke plumes will be colored green, “Medium” smoke plumes will be covered yellow, and “Heavy” smoke plumes will be colored red.</p>
 <p>Code lines 12 through 32 create the plot based on the wildfire smoke plume classification (<code>dens_c[d]</code>), and previously defined plotting colors (<code>color_values</code>).</p>
-<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="chapter-polygon-data.html#cb83-1" tabindex="-1"></a><span class="cf">for</span> (d <span class="cf">in</span> <span class="fu">seq_along</span>(dens_c)) {</span>
-<span id="cb83-2"><a href="chapter-polygon-data.html#cb83-2" tabindex="-1"></a>  <span class="co"># define color palette based on smoke density</span></span>
-<span id="cb83-3"><a href="chapter-polygon-data.html#cb83-3" tabindex="-1"></a>  <span class="cf">if</span> (dens_c[d] <span class="sc">==</span> <span class="st">&quot;Light&quot;</span>) {</span>
-<span id="cb83-4"><a href="chapter-polygon-data.html#cb83-4" tabindex="-1"></a>    color_values <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;lightgrey&quot;</span>, <span class="st">&quot;lightgreen&quot;</span>)</span>
-<span id="cb83-5"><a href="chapter-polygon-data.html#cb83-5" tabindex="-1"></a>  } <span class="cf">else</span> <span class="cf">if</span> (dens_c[d] <span class="sc">==</span> <span class="st">&quot;Medium&quot;</span>) {</span>
-<span id="cb83-6"><a href="chapter-polygon-data.html#cb83-6" tabindex="-1"></a>    color_values <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;lightgrey&quot;</span>, <span class="st">&quot;lightgoldenrod&quot;</span>)</span>
-<span id="cb83-7"><a href="chapter-polygon-data.html#cb83-7" tabindex="-1"></a>  } <span class="cf">else</span> <span class="cf">if</span> (dens_c[d] <span class="sc">==</span> <span class="st">&quot;Heavy&quot;</span>) {</span>
-<span id="cb83-8"><a href="chapter-polygon-data.html#cb83-8" tabindex="-1"></a>    color_values <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;lightgrey&quot;</span>, <span class="st">&quot;tomato&quot;</span>)</span>
-<span id="cb83-9"><a href="chapter-polygon-data.html#cb83-9" tabindex="-1"></a>  }</span>
-<span id="cb83-10"><a href="chapter-polygon-data.html#cb83-10" tabindex="-1"></a></span>
-<span id="cb83-11"><a href="chapter-polygon-data.html#cb83-11" tabindex="-1"></a>  <span class="co"># create plot</span></span>
-<span id="cb83-12"><a href="chapter-polygon-data.html#cb83-12" tabindex="-1"></a>  <span class="fu">print</span>(</span>
-<span id="cb83-13"><a href="chapter-polygon-data.html#cb83-13" tabindex="-1"></a>    <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb83-14"><a href="chapter-polygon-data.html#cb83-14" tabindex="-1"></a>      <span class="fu">geom_spatvector</span>(</span>
-<span id="cb83-15"><a href="chapter-polygon-data.html#cb83-15" tabindex="-1"></a>        <span class="at">data =</span> conus_t,</span>
-<span id="cb83-16"><a href="chapter-polygon-data.html#cb83-16" tabindex="-1"></a>        <span class="fu">aes_string</span>(<span class="at">fill =</span> dens_c[d])</span>
-<span id="cb83-17"><a href="chapter-polygon-data.html#cb83-17" tabindex="-1"></a>      ) <span class="sc">+</span></span>
-<span id="cb83-18"><a href="chapter-polygon-data.html#cb83-18" tabindex="-1"></a>      <span class="fu">scale_fill_manual</span>(</span>
-<span id="cb83-19"><a href="chapter-polygon-data.html#cb83-19" tabindex="-1"></a>        <span class="fu">paste0</span>(</span>
-<span id="cb83-20"><a href="chapter-polygon-data.html#cb83-20" tabindex="-1"></a>          dens_c[d],</span>
-<span id="cb83-21"><a href="chapter-polygon-data.html#cb83-21" tabindex="-1"></a>          <span class="st">&quot; Smoke Plume Coverage Present&quot;</span></span>
-<span id="cb83-22"><a href="chapter-polygon-data.html#cb83-22" tabindex="-1"></a>        ),</span>
-<span id="cb83-23"><a href="chapter-polygon-data.html#cb83-23" tabindex="-1"></a>        <span class="at">values =</span> color_values</span>
-<span id="cb83-24"><a href="chapter-polygon-data.html#cb83-24" tabindex="-1"></a>      ) <span class="sc">+</span></span>
-<span id="cb83-25"><a href="chapter-polygon-data.html#cb83-25" tabindex="-1"></a>      <span class="fu">theme_pubr</span>(<span class="at">legend =</span> <span class="st">&quot;bottom&quot;</span>) <span class="sc">+</span></span>
-<span id="cb83-26"><a href="chapter-polygon-data.html#cb83-26" tabindex="-1"></a>      <span class="fu">theme</span>(</span>
-<span id="cb83-27"><a href="chapter-polygon-data.html#cb83-27" tabindex="-1"></a>        <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>),</span>
-<span id="cb83-28"><a href="chapter-polygon-data.html#cb83-28" tabindex="-1"></a>        <span class="at">axis.line =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb83-29"><a href="chapter-polygon-data.html#cb83-29" tabindex="-1"></a>        <span class="at">axis.ticks =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb83-30"><a href="chapter-polygon-data.html#cb83-30" tabindex="-1"></a>        <span class="at">axis.text =</span> <span class="fu">element_blank</span>()</span>
-<span id="cb83-31"><a href="chapter-polygon-data.html#cb83-31" tabindex="-1"></a>      )</span>
-<span id="cb83-32"><a href="chapter-polygon-data.html#cb83-32" tabindex="-1"></a>  )</span>
-<span id="cb83-33"><a href="chapter-polygon-data.html#cb83-33" tabindex="-1"></a>}</span></code></pre></div>
-<p><img src="images/intro_to_spatial/smoke_zonal_light.png" width = "50%" height = "auto" class = "centerimage"></p>
-<p><img src="images/intro_to_spatial/smoke_zonal_medium.png" width = "50%" height = "auto" class = "centerimage"></p>
-<p><img src="images/intro_to_spatial/smoke_zonal_heavy.png" width = "50%" height = "auto" class = "centerimage"></p>
+<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb154-1"><a href="chapter-polygon-data.html#cb154-1" tabindex="-1"></a><span class="cf">for</span> (d <span class="cf">in</span> <span class="fu">seq_along</span>(dens_c)) {</span>
+<span id="cb154-2"><a href="chapter-polygon-data.html#cb154-2" tabindex="-1"></a>  <span class="co"># define color palette based on smoke density</span></span>
+<span id="cb154-3"><a href="chapter-polygon-data.html#cb154-3" tabindex="-1"></a>  <span class="cf">if</span> (dens_c[d] <span class="sc">==</span> <span class="st">&quot;Light&quot;</span>) {</span>
+<span id="cb154-4"><a href="chapter-polygon-data.html#cb154-4" tabindex="-1"></a>    color_values <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;lightgrey&quot;</span>, <span class="st">&quot;lightgreen&quot;</span>)</span>
+<span id="cb154-5"><a href="chapter-polygon-data.html#cb154-5" tabindex="-1"></a>  } <span class="cf">else</span> <span class="cf">if</span> (dens_c[d] <span class="sc">==</span> <span class="st">&quot;Medium&quot;</span>) {</span>
+<span id="cb154-6"><a href="chapter-polygon-data.html#cb154-6" tabindex="-1"></a>    color_values <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;lightgrey&quot;</span>, <span class="st">&quot;lightgoldenrod&quot;</span>)</span>
+<span id="cb154-7"><a href="chapter-polygon-data.html#cb154-7" tabindex="-1"></a>  } <span class="cf">else</span> <span class="cf">if</span> (dens_c[d] <span class="sc">==</span> <span class="st">&quot;Heavy&quot;</span>) {</span>
+<span id="cb154-8"><a href="chapter-polygon-data.html#cb154-8" tabindex="-1"></a>    color_values <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;lightgrey&quot;</span>, <span class="st">&quot;tomato&quot;</span>)</span>
+<span id="cb154-9"><a href="chapter-polygon-data.html#cb154-9" tabindex="-1"></a>  }</span>
+<span id="cb154-10"><a href="chapter-polygon-data.html#cb154-10" tabindex="-1"></a></span>
+<span id="cb154-11"><a href="chapter-polygon-data.html#cb154-11" tabindex="-1"></a>  <span class="co"># create plot</span></span>
+<span id="cb154-12"><a href="chapter-polygon-data.html#cb154-12" tabindex="-1"></a>  <span class="fu">print</span>(</span>
+<span id="cb154-13"><a href="chapter-polygon-data.html#cb154-13" tabindex="-1"></a>    ggplot2<span class="sc">::</span><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb154-14"><a href="chapter-polygon-data.html#cb154-14" tabindex="-1"></a>      tidyterra<span class="sc">::</span><span class="fu">geom_spatvector</span>(</span>
+<span id="cb154-15"><a href="chapter-polygon-data.html#cb154-15" tabindex="-1"></a>        <span class="at">data =</span> conus_t_p,</span>
+<span id="cb154-16"><a href="chapter-polygon-data.html#cb154-16" tabindex="-1"></a>        <span class="fu">aes_string</span>(<span class="at">fill =</span> dens_c[d])</span>
+<span id="cb154-17"><a href="chapter-polygon-data.html#cb154-17" tabindex="-1"></a>      ) <span class="sc">+</span></span>
+<span id="cb154-18"><a href="chapter-polygon-data.html#cb154-18" tabindex="-1"></a>      ggplot2<span class="sc">::</span><span class="fu">scale_fill_manual</span>(</span>
+<span id="cb154-19"><a href="chapter-polygon-data.html#cb154-19" tabindex="-1"></a>        <span class="fu">paste0</span>(</span>
+<span id="cb154-20"><a href="chapter-polygon-data.html#cb154-20" tabindex="-1"></a>          dens_c[d],</span>
+<span id="cb154-21"><a href="chapter-polygon-data.html#cb154-21" tabindex="-1"></a>          <span class="st">&quot; Smoke Plume Coverage Present&quot;</span></span>
+<span id="cb154-22"><a href="chapter-polygon-data.html#cb154-22" tabindex="-1"></a>        ),</span>
+<span id="cb154-23"><a href="chapter-polygon-data.html#cb154-23" tabindex="-1"></a>        <span class="at">values =</span> color_values</span>
+<span id="cb154-24"><a href="chapter-polygon-data.html#cb154-24" tabindex="-1"></a>      ) <span class="sc">+</span></span>
+<span id="cb154-25"><a href="chapter-polygon-data.html#cb154-25" tabindex="-1"></a>      ggpubr<span class="sc">::</span><span class="fu">theme_pubr</span>(<span class="at">legend =</span> <span class="st">&quot;bottom&quot;</span>) <span class="sc">+</span></span>
+<span id="cb154-26"><a href="chapter-polygon-data.html#cb154-26" tabindex="-1"></a>      ggplot2<span class="sc">::</span><span class="fu">theme</span>(</span>
+<span id="cb154-27"><a href="chapter-polygon-data.html#cb154-27" tabindex="-1"></a>        <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>),</span>
+<span id="cb154-28"><a href="chapter-polygon-data.html#cb154-28" tabindex="-1"></a>        <span class="at">axis.line =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb154-29"><a href="chapter-polygon-data.html#cb154-29" tabindex="-1"></a>        <span class="at">axis.ticks =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb154-30"><a href="chapter-polygon-data.html#cb154-30" tabindex="-1"></a>        <span class="at">axis.text =</span> <span class="fu">element_blank</span>()</span>
+<span id="cb154-31"><a href="chapter-polygon-data.html#cb154-31" tabindex="-1"></a>      )</span>
+<span id="cb154-32"><a href="chapter-polygon-data.html#cb154-32" tabindex="-1"></a>  )</span>
+<span id="cb154-33"><a href="chapter-polygon-data.html#cb154-33" tabindex="-1"></a>}</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-84-1.png" width="672" /><img src="_main_files/figure-html/unnamed-chunk-84-2.png" width="672" /><img src="_main_files/figure-html/unnamed-chunk-84-3.png" width="672" /></p>
 
 </div>
 </div>
@@ -797,42 +998,42 @@ target="blank">Published with bookdown</a></li>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
-"sharing": {
-"github": true,
-"facebook": false,
-"twitter": false,
-"linkedin": false,
-"weibo": false,
-"instapaper": false,
-"vk": false,
-"whatsapp": false,
-"all": false
-},
-"fontsettings": {
-"theme": "white",
-"family": "sans",
-"size": 2
-},
-"edit": {
-"link": null,
-"text": null
-},
-"history": {
-"link": null,
-"text": null
-},
-"view": {
-"link": null,
-"text": null
-},
-"download": null,
-"search": {
-"engine": "fuse",
-"options": null
-},
-"toc": {
-"collapse": "section"
-}
+  "sharing": {
+    "github": true,
+    "facebook": false,
+    "twitter": false,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": false
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": null,
+    "text": null
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": null,
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "section"
+  }
 });
 });
 </script>

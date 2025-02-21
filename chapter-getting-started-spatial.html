@@ -5,19 +5,19 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>1 Getting Started | CHORDS Training and Use Cases Toolkit</title>
-  <meta name="description" content="The CHORDS Training and Use Cases Toolkit provides guides, tutorials, and example code to support climate change and human health research." />
-  <meta name="generator" content="bookdown 0.40 and GitBook 2.6.7" />
+  <meta name="description" content="The CHORDS Training and Use Cases Toolkit provides guides, tutorials, and example code to support environmental health and disaster research." />
+  <meta name="generator" content="bookdown 0.42 and GitBook 2.6.7" />
 
   <meta property="og:title" content="1 Getting Started | CHORDS Training and Use Cases Toolkit" />
   <meta property="og:type" content="book" />
   
-  <meta property="og:description" content="The CHORDS Training and Use Cases Toolkit provides guides, tutorials, and example code to support climate change and human health research." />
+  <meta property="og:description" content="The CHORDS Training and Use Cases Toolkit provides guides, tutorials, and example code to support environmental health and disaster research." />
   <meta name="github-repo" content="NIEHS/PCOR_bookdown_tools" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="1 Getting Started | CHORDS Training and Use Cases Toolkit" />
   
-  <meta name="twitter:description" content="The CHORDS Training and Use Cases Toolkit provides guides, tutorials, and example code to support climate change and human health research." />
+  <meta name="twitter:description" content="The CHORDS Training and Use Cases Toolkit provides guides, tutorials, and example code to support environmental health and disaster research." />
   
 
 
@@ -53,8 +53,9 @@
 
 
 <style type="text/css">
+html { -webkit-text-size-adjust: 100%; }
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -64,7 +65,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -392,23 +393,56 @@ Spatial Geometry Types
 <span id="cb1-7"><a href="chapter-getting-started-spatial.html#cb1-7" tabindex="-1"></a>  <span class="cf">if</span> (vignette_packages[v] <span class="sc">%in%</span> <span class="fu">installed.packages</span>() <span class="sc">==</span> <span class="cn">FALSE</span>) {</span>
 <span id="cb1-8"><a href="chapter-getting-started-spatial.html#cb1-8" tabindex="-1"></a>    <span class="fu">install.packages</span>(vignette_packages[v])</span>
 <span id="cb1-9"><a href="chapter-getting-started-spatial.html#cb1-9" tabindex="-1"></a>  }</span>
-<span id="cb1-10"><a href="chapter-getting-started-spatial.html#cb1-10" tabindex="-1"></a>}</span>
-<span id="cb1-11"><a href="chapter-getting-started-spatial.html#cb1-11" tabindex="-1"></a></span>
-<span id="cb1-12"><a href="chapter-getting-started-spatial.html#cb1-12" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb1-13"><a href="chapter-getting-started-spatial.html#cb1-13" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb1-14"><a href="chapter-getting-started-spatial.html#cb1-14" tabindex="-1"></a><span class="fu">library</span>(ggpubr)</span>
-<span id="cb1-15"><a href="chapter-getting-started-spatial.html#cb1-15" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
-<span id="cb1-16"><a href="chapter-getting-started-spatial.html#cb1-16" tabindex="-1"></a><span class="fu">library</span>(terra)</span>
-<span id="cb1-17"><a href="chapter-getting-started-spatial.html#cb1-17" tabindex="-1"></a><span class="fu">library</span>(tidyterra)</span>
-<span id="cb1-18"><a href="chapter-getting-started-spatial.html#cb1-18" tabindex="-1"></a><span class="fu">library</span>(utils)</span></code></pre></div>
+<span id="cb1-10"><a href="chapter-getting-started-spatial.html#cb1-10" tabindex="-1"></a>}</span></code></pre></div>
+<pre><code>## Installing package into &#39;/home/runner/work/_temp/Library&#39;
+## (as &#39;lib&#39; is unspecified)</code></pre>
+<pre><code>## also installing the dependencies &#39;rbibutils&#39;, &#39;Deriv&#39;, &#39;microbenchmark&#39;, &#39;Rdpack&#39;, &#39;numDeriv&#39;, &#39;doBy&#39;, &#39;SparseM&#39;, &#39;MatrixModels&#39;, &#39;minqa&#39;, &#39;nloptr&#39;, &#39;reformulas&#39;, &#39;carData&#39;, &#39;Formula&#39;, &#39;pbkrtest&#39;, &#39;quantreg&#39;, &#39;lme4&#39;, &#39;corrplot&#39;, &#39;car&#39;, &#39;ggrepel&#39;, &#39;ggsci&#39;, &#39;ggsignif&#39;, &#39;polynom&#39;, &#39;rstatix&#39;</code></pre>
+<pre><code>## Installing package into &#39;/home/runner/work/_temp/Library&#39;
+## (as &#39;lib&#39; is unspecified)</code></pre>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="chapter-getting-started-spatial.html#cb5-1" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code></pre></div>
+<pre><code>## 
+## Attaching package: &#39;dplyr&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:Biobase&#39;:
+## 
+##     combine</code></pre>
+<pre><code>## The following objects are masked from &#39;package:BiocGenerics&#39;:
+## 
+##     combine, intersect, setdiff, union</code></pre>
+<pre><code>## The following objects are masked from &#39;package:stats&#39;:
+## 
+##     filter, lag</code></pre>
+<pre><code>## The following objects are masked from &#39;package:base&#39;:
+## 
+##     intersect, setdiff, setequal, union</code></pre>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="chapter-getting-started-spatial.html#cb11-1" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb11-2"><a href="chapter-getting-started-spatial.html#cb11-2" tabindex="-1"></a><span class="fu">library</span>(ggpubr)</span>
+<span id="cb11-3"><a href="chapter-getting-started-spatial.html#cb11-3" tabindex="-1"></a><span class="fu">library</span>(sf)</span></code></pre></div>
+<pre><code>## Linking to GEOS 3.12.1, GDAL 3.8.4, PROJ 9.4.0; sf_use_s2() is TRUE</code></pre>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="chapter-getting-started-spatial.html#cb13-1" tabindex="-1"></a><span class="fu">library</span>(terra)</span></code></pre></div>
+<pre><code>## terra 1.8.21</code></pre>
+<pre><code>## 
+## Attaching package: &#39;terra&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:ggpubr&#39;:
+## 
+##     rotate</code></pre>
+<pre><code>## The following object is masked from &#39;package:BiocGenerics&#39;:
+## 
+##     width</code></pre>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="chapter-getting-started-spatial.html#cb18-1" tabindex="-1"></a><span class="fu">library</span>(tidyterra)</span></code></pre></div>
+<pre><code>## 
+## Attaching package: &#39;tidyterra&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:stats&#39;:
+## 
+##     filter</code></pre>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="chapter-getting-started-spatial.html#cb21-1" tabindex="-1"></a><span class="fu">library</span>(utils)</span></code></pre></div>
 </div>
 <div id="chapter-getting-started-spatial-resources" class="section level2 hasAnchor" number="1.5">
 <h2><span class="header-section-number">1.5</span> Resources<a href="chapter-getting-started-spatial.html#chapter-getting-started-spatial-resources" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>This section highlights resources for getting started with <code>R</code>, geospatial data analysis, and/or climate change and human health related research methods.</p>
+<p>This section highlights resources for getting started with <code>R</code>, geospatial data analysis, and/or environmental health related research methods.</p>
 <ul>
-<li><p>The BUSPH-HSPH Climate Change and Health Research Coordinating Center (<a href="https://climatehealthcafe.org">CAFÉ</a>) provides training and education materials for climate change and human health research in different formats for various types of users. The <a href="https://climate-cafe.github.io/cafe_github_org.html">Climate CAFÉ Tutorials and Code Walkthroughs</a> demonstrate geospatial data management and analysis in climate change and human health research using <code>R</code>. CAFÉ also provides a series of <a href="https://climatehealthcafe.org/training">video tutorials</a> demonstrating the use of geographic information systems (GIS) in environmental health and a list of <a href="https://climatehealthcafe.org/training">educational materials on climate and health</a>.</p></li>
+<li><p>The BUSPH-HSPH Research Coordinating Center (<a href="https://climatehealthcafe.org">CAFÉ</a>) provides training and education materials for environmental health research in different formats for various types of users. The <a href="https://climate-cafe.github.io/cafe_github_org.html">CAFÉ Tutorials and Code Walkthroughs</a> demonstrate geospatial data management and analysis using <code>R</code>. CAFÉ also provides a series of <a href="https://climatehealthcafe.org/training">video tutorials</a> demonstrating the use of geographic information systems (GIS) in environmental health and a list of <a href="https://climatehealthcafe.org/training">educational materials</a>.</p></li>
 <li><p>The <a href="https://uncsrp.github.io/Data-Analysis-Training-Modules/">inTelligence And Machine lEarning (TAME) Toolkit</a> provides tutorials for data generation, management, and analysis in environmental health research using <code>R</code>. The TAME Toolkit <a href="https://uncsrp.github.io/Data-Analysis-Training-Modules/introduction-to-coding-in-r.html#introduction-to-coding-in-r">Chapter 1</a> includes a guide for installing and getting started with <code>R</code> and an introduction to data science methods in <code>R</code>. The TAME Toolkit also includes tutorials with <code>R</code> code demonstrating geospatial data analysis methods in environmental health (e.g., <a href="https://uncsrp.github.io/Data-Analysis-Training-Modules/database-integration-air-quality-mortality-and-environmental-justice-data.html#database-integration-air-quality-mortality-and-environmental-justice-data">Chapter 3.3</a>).</p></li>
-<li><p>The <a href="https://tech.popdata.org/dhs-research-hub/">IPUMS DHS Climate Change and Health Research Hub</a> provides tutorials with code in <code>R</code> demonstrating use of various climate and health datasets and analysis methods. IPUMS also provides a guide to <a href="https://tech.popdata.org/dhs-research-hub/posts/2024-02-01-getting-started-with-r/">installing and setting up <code>R</code></a> for use in climate change and health research.</p></li>
+<li><p>The <a href="https://tech.popdata.org/dhs-research-hub/">IPUMS Research Hub</a> provides tutorials with code in <code>R</code> demonstrating use of various environment and health datasets and analysis methods. IPUMS also provides a guide to <a href="https://tech.popdata.org/dhs-research-hub/posts/2024-02-01-getting-started-with-r/">installing and setting up <code>R</code></a> for use in environmental health research.</p></li>
 <li><p>The book <a href="https://r.geocompx.org/"><em>Geocomputation with R</em></a> provides resources for geospatial data analysis, visualization, and modeling with <code>R</code>. This book provides tutorials and examples from various disciplines that use geospatial data (e.g., transportation, ecology). This book covers introductory through advanced topics.</p></li>
 </ul>
 
@@ -478,42 +512,42 @@ Spatial Geometry Types
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
-"sharing": {
-"github": true,
-"facebook": false,
-"twitter": false,
-"linkedin": false,
-"weibo": false,
-"instapaper": false,
-"vk": false,
-"whatsapp": false,
-"all": false
-},
-"fontsettings": {
-"theme": "white",
-"family": "sans",
-"size": 2
-},
-"edit": {
-"link": null,
-"text": null
-},
-"history": {
-"link": null,
-"text": null
-},
-"view": {
-"link": null,
-"text": null
-},
-"download": null,
-"search": {
-"engine": "fuse",
-"options": null
-},
-"toc": {
-"collapse": "section"
-}
+  "sharing": {
+    "github": true,
+    "facebook": false,
+    "twitter": false,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": false
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": null,
+    "text": null
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": null,
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "section"
+  }
 });
 });
 </script>

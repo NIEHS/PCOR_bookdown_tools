@@ -5,19 +5,19 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>4 Raster Data | CHORDS Training and Use Cases Toolkit</title>
-  <meta name="description" content="The CHORDS Training and Use Cases Toolkit provides guides, tutorials, and example code to support climate change and human health research." />
-  <meta name="generator" content="bookdown 0.40 and GitBook 2.6.7" />
+  <meta name="description" content="The CHORDS Training and Use Cases Toolkit provides guides, tutorials, and example code to support environmental health and disaster research." />
+  <meta name="generator" content="bookdown 0.42 and GitBook 2.6.7" />
 
   <meta property="og:title" content="4 Raster Data | CHORDS Training and Use Cases Toolkit" />
   <meta property="og:type" content="book" />
   
-  <meta property="og:description" content="The CHORDS Training and Use Cases Toolkit provides guides, tutorials, and example code to support climate change and human health research." />
+  <meta property="og:description" content="The CHORDS Training and Use Cases Toolkit provides guides, tutorials, and example code to support environmental health and disaster research." />
   <meta name="github-repo" content="NIEHS/PCOR_bookdown_tools" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="4 Raster Data | CHORDS Training and Use Cases Toolkit" />
   
-  <meta name="twitter:description" content="The CHORDS Training and Use Cases Toolkit provides guides, tutorials, and example code to support climate change and human health research." />
+  <meta name="twitter:description" content="The CHORDS Training and Use Cases Toolkit provides guides, tutorials, and example code to support environmental health and disaster research." />
   
 
 
@@ -53,8 +53,9 @@
 
 
 <style type="text/css">
+html { -webkit-text-size-adjust: 100%; }
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -64,7 +65,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -253,7 +254,7 @@ target="blank">Published with bookdown</a></li>
 <a href="chapter-user-profiles.html#profilestu"><img src="images/user_profiles/profilestu.svg" alt="Profile-STU" /></a></p>
 <div id="raster-data-access-preparation-and-exploratory-analysis-in-r" class="section level3 unnumbered hasAnchor">
 <h3>Raster Data Access, Preparation, and Exploratory Analysis in R<a href="chapter-raster-data.html#raster-data-access-preparation-and-exploratory-analysis-in-r" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p><strong>Date Modified:</strong> May 6, 2024</p>
+<p><strong>Date Modified:</strong> January 21, 2025</p>
 <p><strong>Authors:</strong> Mitchell Manware <a href="https://orcid.org/0009-0003-6440-6106"><img src="images/orcid.png" width="10" alt="author-mm" /></a>, Kyle P. Messier <a href="https://orcid.org/0000-0001-9508-9623"><img src="images/orcid.png" width="10" alt="author-kpm" /></a></p>
 <p><strong>Key Terms:</strong> <a href="chords-glossary.html#def-geospatial-data">Geospatial Data</a>, <a href="https://tools.niehs.nih.gov/cchhglossary/?keyword=weather&amp;termOnlySearch=true&amp;exactSearch=true">Weather</a></p>
 <p><strong>Programming Language:</strong> R</p>
@@ -278,29 +279,32 @@ target="blank">Published with bookdown</a></li>
 <h2><span class="header-section-number">4.2</span> Access and Download<a href="chapter-raster-data.html#raster-access" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>The website URL where the NOAA NARR exists is year-specific, meaning there is a unique URL for each annual data set. For the purpose of these exploratory analyses, air temperature data from the year 2021 will be used</p>
 <p>Define the variable <code>year</code> according to the year of interest.</p>
-<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="chapter-raster-data.html#cb84-1" tabindex="-1"></a>year <span class="ot">&lt;-</span> <span class="st">&quot;2021&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb155-1"><a href="chapter-raster-data.html#cb155-1" tabindex="-1"></a>year <span class="ot">&lt;-</span> <span class="st">&quot;2021&quot;</span></span></code></pre></div>
 <p>The <code>utils::download.file()</code> function downloads the file according to the defined URL and destination file.</p>
-<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="chapter-raster-data.html#cb85-1" tabindex="-1"></a><span class="co"># specify the URL where data is stored based on year variable of interest</span></span>
-<span id="cb85-2"><a href="chapter-raster-data.html#cb85-2" tabindex="-1"></a>url_narr <span class="ot">&lt;-</span> <span class="fu">paste0</span>(</span>
-<span id="cb85-3"><a href="chapter-raster-data.html#cb85-3" tabindex="-1"></a>  <span class="st">&quot;https://downloads.psl.noaa.gov//Datasets/NARR/Dailies/monolevel/air.2m.&quot;</span>,</span>
-<span id="cb85-4"><a href="chapter-raster-data.html#cb85-4" tabindex="-1"></a>  year,</span>
-<span id="cb85-5"><a href="chapter-raster-data.html#cb85-5" tabindex="-1"></a>  <span class="st">&quot;.nc&quot;</span></span>
-<span id="cb85-6"><a href="chapter-raster-data.html#cb85-6" tabindex="-1"></a>)</span>
-<span id="cb85-7"><a href="chapter-raster-data.html#cb85-7" tabindex="-1"></a></span>
-<span id="cb85-8"><a href="chapter-raster-data.html#cb85-8" tabindex="-1"></a><span class="co"># specify where to save downloaded data</span></span>
-<span id="cb85-9"><a href="chapter-raster-data.html#cb85-9" tabindex="-1"></a>destination_narr <span class="ot">&lt;-</span> <span class="fu">paste0</span>(</span>
-<span id="cb85-10"><a href="chapter-raster-data.html#cb85-10" tabindex="-1"></a>  <span class="st">&quot;/   YOUR FILE PATH   /narr_air2m_&quot;</span>,</span>
-<span id="cb85-11"><a href="chapter-raster-data.html#cb85-11" tabindex="-1"></a>  year,</span>
-<span id="cb85-12"><a href="chapter-raster-data.html#cb85-12" tabindex="-1"></a>  <span class="st">&quot;.nc&quot;</span></span>
-<span id="cb85-13"><a href="chapter-raster-data.html#cb85-13" tabindex="-1"></a>)</span>
-<span id="cb85-14"><a href="chapter-raster-data.html#cb85-14" tabindex="-1"></a></span>
-<span id="cb85-15"><a href="chapter-raster-data.html#cb85-15" tabindex="-1"></a><span class="co"># download the data</span></span>
-<span id="cb85-16"><a href="chapter-raster-data.html#cb85-16" tabindex="-1"></a><span class="fu">download.file</span>(</span>
-<span id="cb85-17"><a href="chapter-raster-data.html#cb85-17" tabindex="-1"></a>  url_narr,</span>
-<span id="cb85-18"><a href="chapter-raster-data.html#cb85-18" tabindex="-1"></a>  destination_narr</span>
-<span id="cb85-19"><a href="chapter-raster-data.html#cb85-19" tabindex="-1"></a>)</span></code></pre></div>
+<div class="note">
+<p>Multiple chunks of code in this tutorial will contain <code>./dataset/</code>, a fixed directory path to run the tutorial code. To run the code on your machine, substitute <code>./dataset/</code> with the file path where you would like to store the tutorial data.</p>
+</div>
+<div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb156-1"><a href="chapter-raster-data.html#cb156-1" tabindex="-1"></a><span class="co"># specify the URL where data is stored based on year variable of interest</span></span>
+<span id="cb156-2"><a href="chapter-raster-data.html#cb156-2" tabindex="-1"></a>url_narr <span class="ot">&lt;-</span> <span class="fu">paste0</span>(</span>
+<span id="cb156-3"><a href="chapter-raster-data.html#cb156-3" tabindex="-1"></a>  <span class="st">&quot;https://downloads.psl.noaa.gov//Datasets/NARR/Dailies/monolevel/air.2m.&quot;</span>,</span>
+<span id="cb156-4"><a href="chapter-raster-data.html#cb156-4" tabindex="-1"></a>  year,</span>
+<span id="cb156-5"><a href="chapter-raster-data.html#cb156-5" tabindex="-1"></a>  <span class="st">&quot;.nc&quot;</span></span>
+<span id="cb156-6"><a href="chapter-raster-data.html#cb156-6" tabindex="-1"></a>)</span>
+<span id="cb156-7"><a href="chapter-raster-data.html#cb156-7" tabindex="-1"></a></span>
+<span id="cb156-8"><a href="chapter-raster-data.html#cb156-8" tabindex="-1"></a><span class="co"># specify where to save downloaded data</span></span>
+<span id="cb156-9"><a href="chapter-raster-data.html#cb156-9" tabindex="-1"></a>destination_narr <span class="ot">&lt;-</span> <span class="fu">paste0</span>(</span>
+<span id="cb156-10"><a href="chapter-raster-data.html#cb156-10" tabindex="-1"></a>  <span class="st">&quot;./dataset/narr/air.2m_&quot;</span>,</span>
+<span id="cb156-11"><a href="chapter-raster-data.html#cb156-11" tabindex="-1"></a>  year,</span>
+<span id="cb156-12"><a href="chapter-raster-data.html#cb156-12" tabindex="-1"></a>  <span class="st">&quot;.nc&quot;</span></span>
+<span id="cb156-13"><a href="chapter-raster-data.html#cb156-13" tabindex="-1"></a>)</span>
+<span id="cb156-14"><a href="chapter-raster-data.html#cb156-14" tabindex="-1"></a></span>
+<span id="cb156-15"><a href="chapter-raster-data.html#cb156-15" tabindex="-1"></a><span class="co"># download the data</span></span>
+<span id="cb156-16"><a href="chapter-raster-data.html#cb156-16" tabindex="-1"></a><span class="fu">download.file</span>(</span>
+<span id="cb156-17"><a href="chapter-raster-data.html#cb156-17" tabindex="-1"></a>  url_narr,</span>
+<span id="cb156-18"><a href="chapter-raster-data.html#cb156-18" tabindex="-1"></a>  destination_narr</span>
+<span id="cb156-19"><a href="chapter-raster-data.html#cb156-19" tabindex="-1"></a>)</span></code></pre></div>
 <p>Identify the desired data file with <code>utils::list.files()</code></p>
-<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="chapter-raster-data.html#cb86-1" tabindex="-1"></a><span class="fu">list.files</span>(<span class="st">&quot;/   YOUR FILE PATH   /&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="chapter-raster-data.html#cb157-1" tabindex="-1"></a><span class="fu">list.files</span>(<span class="st">&quot;./dataset/narr&quot;</span>)</span></code></pre></div>
 <p>The file downloaded from NOAA’s NARR data set is an <code>.nc</code>, or netCDF, file. NetCDF files are common for raster data, and do not need to be unzipped.</p>
 </div>
 <div id="data-preparation-1" class="section level2 hasAnchor" number="4.3">
@@ -308,262 +312,289 @@ target="blank">Published with bookdown</a></li>
 <div id="import-3" class="section level3 hasAnchor" number="4.3.1">
 <h3><span class="header-section-number">4.3.1</span> Import<a href="chapter-raster-data.html#import-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Now that the data file of interest has been downloaded and identified, import the data with <code>terra::rast()</code>.</p>
-<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="chapter-raster-data.html#cb87-1" tabindex="-1"></a>narr <span class="ot">&lt;-</span> <span class="fu">rast</span>(<span class="fu">paste0</span>(</span>
-<span id="cb87-2"><a href="chapter-raster-data.html#cb87-2" tabindex="-1"></a>  <span class="st">&quot;/   YOUR FILE PATH   /narr_air2m_&quot;</span>,</span>
-<span id="cb87-3"><a href="chapter-raster-data.html#cb87-3" tabindex="-1"></a>  year,</span>
-<span id="cb87-4"><a href="chapter-raster-data.html#cb87-4" tabindex="-1"></a>  <span class="st">&quot;.nc&quot;</span></span>
-<span id="cb87-5"><a href="chapter-raster-data.html#cb87-5" tabindex="-1"></a>))</span></code></pre></div>
+<div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb158-1"><a href="chapter-raster-data.html#cb158-1" tabindex="-1"></a>narr <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">rast</span>(<span class="st">&quot;./dataset/narr/air.2m_2021.nc&quot;</span>)</span></code></pre></div>
 </div>
 <div id="inspect-structure-3" class="section level3 hasAnchor" number="4.3.2">
 <h3><span class="header-section-number">4.3.2</span> Inspect Structure<a href="chapter-raster-data.html#inspect-structure-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Inspect the structure of <code>narr</code> to see its class, dimensions, variables, and layer names.</p>
-<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="chapter-raster-data.html#cb88-1" tabindex="-1"></a>narr</span></code></pre></div>
+<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb159-1"><a href="chapter-raster-data.html#cb159-1" tabindex="-1"></a>narr</span></code></pre></div>
+<pre><code>## class       : SpatRaster 
+## dimensions  : 277, 349, 365  (nrow, ncol, nlyr)
+## resolution  : 32462.99, 32463  (x, y)
+## extent      : -16231.49, 11313351, -16231.5, 8976020  (xmin, xmax, ymin, ymax)
+## coord. ref. : +proj=lcc +lat_0=50 +lon_0=-107 +lat_1=50 +lat_2=50 +x_0=5632642.22547 +y_0=4612545.65137 +datum=WGS84 +units=m +no_defs 
+## source      : RtmpnG7SFaair.2m_2021.nc:air 
+## varname     : air (Daily Air Temperature at 2 m) 
+## names       : air_1, air_2, air_3, air_4, air_5, air_6, ... 
+## unit        :     K,     K,     K,     K,     K,     K, ... 
+## time        : 2021-01-01 to 2021-12-31 UTC</code></pre>
 <p>When working with raster data, the dimensions of the raster refer to the number of rows (<code>nrow</code>) and columns (<code>ncol</code>) of grid cells that make up the raster. Similarly, the number of layers in the raster object (<code>nlyr</code>) represents the number of observations of the data. These can also be inspected individually with <code>nrow()</code>, <code>ncol()</code>, and <code>nlyr()</code>, respectively.</p>
-<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="chapter-raster-data.html#cb89-1" tabindex="-1"></a><span class="fu">nrow</span>(narr)</span>
-<span id="cb89-2"><a href="chapter-raster-data.html#cb89-2" tabindex="-1"></a><span class="fu">ncol</span>(narr)</span>
-<span id="cb89-3"><a href="chapter-raster-data.html#cb89-3" tabindex="-1"></a><span class="fu">nlyr</span>(narr)</span></code></pre></div>
+<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb161-1"><a href="chapter-raster-data.html#cb161-1" tabindex="-1"></a><span class="fu">nrow</span>(narr)</span></code></pre></div>
+<pre><code>## [1] 277</code></pre>
+<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb163-1"><a href="chapter-raster-data.html#cb163-1" tabindex="-1"></a><span class="fu">ncol</span>(narr)</span></code></pre></div>
+<pre><code>## [1] 349</code></pre>
+<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb165-1"><a href="chapter-raster-data.html#cb165-1" tabindex="-1"></a>terra<span class="sc">::</span><span class="fu">nlyr</span>(narr)</span></code></pre></div>
+<pre><code>## [1] 365</code></pre>
 </div>
 <div id="rename" class="section level3 hasAnchor" number="4.3.3">
 <h3><span class="header-section-number">4.3.3</span> Rename<a href="chapter-raster-data.html#rename" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The <code>narr</code> data set contains 365 layers, one for each daily observation of air temperature in 2021. When working with raster data that contains multiple layers, it is important to know and recognize the naming structure of each layer. In this case, the layer names are <code>air_</code> followed by the day of the year (i.e., January 1 = <code>air_1</code>).</p>
-<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="chapter-raster-data.html#cb90-1" tabindex="-1"></a><span class="fu">names</span>(narr)[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb167-1"><a href="chapter-raster-data.html#cb167-1" tabindex="-1"></a><span class="fu">names</span>(narr)[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>]</span></code></pre></div>
+<pre><code>## [1] &quot;air_1&quot; &quot;air_2&quot; &quot;air_3&quot; &quot;air_4&quot; &quot;air_5&quot;</code></pre>
 <p>Renaming raster layers can be useful for calculating summary statistics or when combining rasters with potentially identical layer names. Using the <code>time()</code> and <code>gsub()</code> functions, the layers can be renamed according to their date.</p>
-<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="chapter-raster-data.html#cb91-1" tabindex="-1"></a><span class="fu">names</span>(narr) <span class="ot">&lt;-</span> <span class="fu">paste0</span>(</span>
-<span id="cb91-2"><a href="chapter-raster-data.html#cb91-2" tabindex="-1"></a>  <span class="st">&quot;air_&quot;</span>,</span>
-<span id="cb91-3"><a href="chapter-raster-data.html#cb91-3" tabindex="-1"></a>  <span class="fu">gsub</span>(</span>
-<span id="cb91-4"><a href="chapter-raster-data.html#cb91-4" tabindex="-1"></a>    <span class="st">&quot;-&quot;</span>,</span>
-<span id="cb91-5"><a href="chapter-raster-data.html#cb91-5" tabindex="-1"></a>    <span class="st">&quot;&quot;</span>,</span>
-<span id="cb91-6"><a href="chapter-raster-data.html#cb91-6" tabindex="-1"></a>    <span class="fu">as.character</span>(<span class="fu">time</span>(narr))</span>
-<span id="cb91-7"><a href="chapter-raster-data.html#cb91-7" tabindex="-1"></a>  )</span>
-<span id="cb91-8"><a href="chapter-raster-data.html#cb91-8" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb169-1"><a href="chapter-raster-data.html#cb169-1" tabindex="-1"></a><span class="fu">names</span>(narr) <span class="ot">&lt;-</span> <span class="fu">paste0</span>(</span>
+<span id="cb169-2"><a href="chapter-raster-data.html#cb169-2" tabindex="-1"></a>  <span class="st">&quot;air_&quot;</span>,</span>
+<span id="cb169-3"><a href="chapter-raster-data.html#cb169-3" tabindex="-1"></a>  <span class="fu">gsub</span>(</span>
+<span id="cb169-4"><a href="chapter-raster-data.html#cb169-4" tabindex="-1"></a>    <span class="st">&quot;-&quot;</span>,</span>
+<span id="cb169-5"><a href="chapter-raster-data.html#cb169-5" tabindex="-1"></a>    <span class="st">&quot;&quot;</span>,</span>
+<span id="cb169-6"><a href="chapter-raster-data.html#cb169-6" tabindex="-1"></a>    <span class="fu">as.character</span>(terra<span class="sc">::</span><span class="fu">time</span>(narr))</span>
+<span id="cb169-7"><a href="chapter-raster-data.html#cb169-7" tabindex="-1"></a>  )</span>
+<span id="cb169-8"><a href="chapter-raster-data.html#cb169-8" tabindex="-1"></a>)</span></code></pre></div>
 <p>Check the layer names again to ensure proper renaming.</p>
-<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="chapter-raster-data.html#cb92-1" tabindex="-1"></a><span class="fu">names</span>(narr)[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb170-1"><a href="chapter-raster-data.html#cb170-1" tabindex="-1"></a><span class="fu">names</span>(narr)[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>]</span></code></pre></div>
+<pre><code>## [1] &quot;air_20210101&quot; &quot;air_20210102&quot; &quot;air_20210103&quot; &quot;air_20210104&quot; &quot;air_20210105&quot;</code></pre>
 </div>
 <div id="coordinate-reference-system-and-projection-3" class="section level3 hasAnchor" number="4.3.4">
 <h3><span class="header-section-number">4.3.4</span> Coordinate Reference System and Projection<a href="chapter-raster-data.html#coordinate-reference-system-and-projection-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Check the coordinate reference system of a <code>SpatRaster</code> object with <code>terra::crs()</code>.</p>
-<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="chapter-raster-data.html#cb93-1" tabindex="-1"></a><span class="fu">crs</span>(narr,</span>
-<span id="cb93-2"><a href="chapter-raster-data.html#cb93-2" tabindex="-1"></a>  <span class="at">describe =</span> <span class="cn">TRUE</span></span>
-<span id="cb93-3"><a href="chapter-raster-data.html#cb93-3" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb172"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb172-1"><a href="chapter-raster-data.html#cb172-1" tabindex="-1"></a>terra<span class="sc">::</span><span class="fu">crs</span>(</span>
+<span id="cb172-2"><a href="chapter-raster-data.html#cb172-2" tabindex="-1"></a>  narr,</span>
+<span id="cb172-3"><a href="chapter-raster-data.html#cb172-3" tabindex="-1"></a>  <span class="at">describe =</span> <span class="cn">TRUE</span></span>
+<span id="cb172-4"><a href="chapter-raster-data.html#cb172-4" tabindex="-1"></a>)</span></code></pre></div>
+<pre><code>##      name authority code area       extent
+## 1 unnamed      &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; NA, NA, ....</code></pre>
 <p><code>narr</code> has a native coordinate reference system, but it is unnamed and was not identifiable by <code>terra::rast()</code>. The area of interest for these exploratory analyses is the conterminous United States, so we can project <code>narr</code> to the Albers Equal Area projected coordinate system (EPSG code: 5070).</p>
-<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="chapter-raster-data.html#cb94-1" tabindex="-1"></a>narr <span class="ot">&lt;-</span> <span class="fu">project</span>(</span>
-<span id="cb94-2"><a href="chapter-raster-data.html#cb94-2" tabindex="-1"></a>  narr,</span>
-<span id="cb94-3"><a href="chapter-raster-data.html#cb94-3" tabindex="-1"></a>  <span class="st">&quot;EPSG:5070&quot;</span></span>
-<span id="cb94-4"><a href="chapter-raster-data.html#cb94-4" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb174"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb174-1"><a href="chapter-raster-data.html#cb174-1" tabindex="-1"></a>narr_p <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">project</span>(</span>
+<span id="cb174-2"><a href="chapter-raster-data.html#cb174-2" tabindex="-1"></a>  narr,</span>
+<span id="cb174-3"><a href="chapter-raster-data.html#cb174-3" tabindex="-1"></a>  <span class="st">&quot;EPSG:5070&quot;</span></span>
+<span id="cb174-4"><a href="chapter-raster-data.html#cb174-4" tabindex="-1"></a>)</span></code></pre></div>
 <p>We want to create plots with and analyze the air temperature data as it relates to the conterminous United States state boundaries. Subset <code>states_t</code> to remove Alaska, Hawaii, and the United States territories.</p>
 <div class="note">
 <p>See the <a href="chapter-polygon-data.html#chapter-polygon-data">Polygon Data</a> Chapter Section <a href="chapter-polygon-data.html#chapter-polygon-plot-multiple-sf">Plot (Multiple)</a> for the steps for obtaining the <code>states_t</code> data set.</p>
 </div>
-<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="chapter-raster-data.html#cb95-1" tabindex="-1"></a>remove <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
-<span id="cb95-2"><a href="chapter-raster-data.html#cb95-2" tabindex="-1"></a>  <span class="st">&quot;Alaska&quot;</span>,</span>
-<span id="cb95-3"><a href="chapter-raster-data.html#cb95-3" tabindex="-1"></a>  <span class="st">&quot;Hawaii&quot;</span>,</span>
-<span id="cb95-4"><a href="chapter-raster-data.html#cb95-4" tabindex="-1"></a>  <span class="st">&quot;Puerto Rico&quot;</span>,</span>
-<span id="cb95-5"><a href="chapter-raster-data.html#cb95-5" tabindex="-1"></a>  <span class="st">&quot;United States Virgin Islands&quot;</span>,</span>
-<span id="cb95-6"><a href="chapter-raster-data.html#cb95-6" tabindex="-1"></a>  <span class="st">&quot;Commonwealth of the Northern Mariana Islands&quot;</span>,</span>
-<span id="cb95-7"><a href="chapter-raster-data.html#cb95-7" tabindex="-1"></a>  <span class="st">&quot;Guam&quot;</span>,</span>
-<span id="cb95-8"><a href="chapter-raster-data.html#cb95-8" tabindex="-1"></a>  <span class="st">&quot;American Samoa&quot;</span></span>
-<span id="cb95-9"><a href="chapter-raster-data.html#cb95-9" tabindex="-1"></a>)</span>
-<span id="cb95-10"><a href="chapter-raster-data.html#cb95-10" tabindex="-1"></a></span>
-<span id="cb95-11"><a href="chapter-raster-data.html#cb95-11" tabindex="-1"></a>conus_t <span class="ot">&lt;-</span> <span class="fu">subset</span>(</span>
-<span id="cb95-12"><a href="chapter-raster-data.html#cb95-12" tabindex="-1"></a>  states_t,</span>
-<span id="cb95-13"><a href="chapter-raster-data.html#cb95-13" tabindex="-1"></a>  <span class="sc">!</span>states_t<span class="sc">$</span>NAME <span class="sc">%in%</span> remove</span>
-<span id="cb95-14"><a href="chapter-raster-data.html#cb95-14" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb175-1"><a href="chapter-raster-data.html#cb175-1" tabindex="-1"></a>remove <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb175-2"><a href="chapter-raster-data.html#cb175-2" tabindex="-1"></a>  <span class="st">&quot;Alaska&quot;</span>,</span>
+<span id="cb175-3"><a href="chapter-raster-data.html#cb175-3" tabindex="-1"></a>  <span class="st">&quot;Hawaii&quot;</span>,</span>
+<span id="cb175-4"><a href="chapter-raster-data.html#cb175-4" tabindex="-1"></a>  <span class="st">&quot;Puerto Rico&quot;</span>,</span>
+<span id="cb175-5"><a href="chapter-raster-data.html#cb175-5" tabindex="-1"></a>  <span class="st">&quot;United States Virgin Islands&quot;</span>,</span>
+<span id="cb175-6"><a href="chapter-raster-data.html#cb175-6" tabindex="-1"></a>  <span class="st">&quot;Commonwealth of the Northern Mariana Islands&quot;</span>,</span>
+<span id="cb175-7"><a href="chapter-raster-data.html#cb175-7" tabindex="-1"></a>  <span class="st">&quot;Guam&quot;</span>,</span>
+<span id="cb175-8"><a href="chapter-raster-data.html#cb175-8" tabindex="-1"></a>  <span class="st">&quot;American Samoa&quot;</span></span>
+<span id="cb175-9"><a href="chapter-raster-data.html#cb175-9" tabindex="-1"></a>)</span>
+<span id="cb175-10"><a href="chapter-raster-data.html#cb175-10" tabindex="-1"></a></span>
+<span id="cb175-11"><a href="chapter-raster-data.html#cb175-11" tabindex="-1"></a>conus_t <span class="ot">&lt;-</span> <span class="fu">subset</span>(</span>
+<span id="cb175-12"><a href="chapter-raster-data.html#cb175-12" tabindex="-1"></a>  states_t,</span>
+<span id="cb175-13"><a href="chapter-raster-data.html#cb175-13" tabindex="-1"></a>  <span class="sc">!</span>states_t<span class="sc">$</span>NAME <span class="sc">%in%</span> remove</span>
+<span id="cb175-14"><a href="chapter-raster-data.html#cb175-14" tabindex="-1"></a>)</span></code></pre></div>
 <p>Project <code>conus_t</code> to the Albers Equal Area projected coordinate system (EPSG code: 5070).</p>
-<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="chapter-raster-data.html#cb96-1" tabindex="-1"></a>conus_t <span class="ot">&lt;-</span> <span class="fu">project</span>(</span>
-<span id="cb96-2"><a href="chapter-raster-data.html#cb96-2" tabindex="-1"></a>  conus_t,</span>
-<span id="cb96-3"><a href="chapter-raster-data.html#cb96-3" tabindex="-1"></a>  <span class="st">&quot;EPSG:5070&quot;</span></span>
-<span id="cb96-4"><a href="chapter-raster-data.html#cb96-4" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb176"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb176-1"><a href="chapter-raster-data.html#cb176-1" tabindex="-1"></a>conus_t <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">project</span>(</span>
+<span id="cb176-2"><a href="chapter-raster-data.html#cb176-2" tabindex="-1"></a>  conus_t,</span>
+<span id="cb176-3"><a href="chapter-raster-data.html#cb176-3" tabindex="-1"></a>  <span class="st">&quot;EPSG:5070&quot;</span></span>
+<span id="cb176-4"><a href="chapter-raster-data.html#cb176-4" tabindex="-1"></a>)</span></code></pre></div>
 <p>Ensure that both data sets have the same coordinate reference system.</p>
-<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="chapter-raster-data.html#cb97-1" tabindex="-1"></a><span class="fu">crs</span>(conus_t) <span class="sc">==</span> <span class="fu">crs</span>(narr)</span></code></pre></div>
+<div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb177-1"><a href="chapter-raster-data.html#cb177-1" tabindex="-1"></a>terra<span class="sc">::</span><span class="fu">crs</span>(conus_t) <span class="sc">==</span> terra<span class="sc">::</span><span class="fu">crs</span>(narr_p)</span></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
 </div>
 </div>
 <div id="exploratory-analysis-1" class="section level2 hasAnchor" number="4.4">
 <h2><span class="header-section-number">4.4</span> Exploratory Analysis<a href="chapter-raster-data.html#exploratory-analysis-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div id="plot-multiple-1" class="section level3 hasAnchor" number="4.4.1">
 <h3><span class="header-section-number">4.4.1</span> Plot (Multiple)<a href="chapter-raster-data.html#plot-multiple-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Now that the data sets and coordinate reference systems have been prepared, create a plot with <code>ggplot2::gglot()</code>. Identifying the data sets to be plotted within the <code>tidyterra::geom_spatraster()</code> and <code>tidyterra::geom_spatvector()</code> argument informs the function that the <code>narr</code> and <code>conus_t</code> data sets are <code>SpatRaster</code> and <code>SpatVector</code> objects, respectively <span class="citation">(<a href="#ref-r-tidyterra">10</a>)</span>.</p>
-<p>Only the first layer of the <code>narr</code> data set will be plotted.</p>
-<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="chapter-raster-data.html#cb98-1" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb98-2"><a href="chapter-raster-data.html#cb98-2" tabindex="-1"></a>  <span class="fu">geom_spatraster</span>(<span class="at">data =</span> narr<span class="sc">$</span>air_20210101) <span class="sc">+</span></span>
-<span id="cb98-3"><a href="chapter-raster-data.html#cb98-3" tabindex="-1"></a>  <span class="fu">scale_fill_continuous</span>(</span>
-<span id="cb98-4"><a href="chapter-raster-data.html#cb98-4" tabindex="-1"></a>    <span class="at">type =</span> <span class="st">&quot;viridis&quot;</span>,</span>
-<span id="cb98-5"><a href="chapter-raster-data.html#cb98-5" tabindex="-1"></a>    <span class="at">na.value =</span> <span class="cn">NA</span>,</span>
-<span id="cb98-6"><a href="chapter-raster-data.html#cb98-6" tabindex="-1"></a>    <span class="st">&quot;Temperature (°K)&quot;</span></span>
-<span id="cb98-7"><a href="chapter-raster-data.html#cb98-7" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb98-8"><a href="chapter-raster-data.html#cb98-8" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Air Temperature&quot;</span>) <span class="sc">+</span></span>
-<span id="cb98-9"><a href="chapter-raster-data.html#cb98-9" tabindex="-1"></a>  <span class="fu">geom_spatvector</span>(</span>
-<span id="cb98-10"><a href="chapter-raster-data.html#cb98-10" tabindex="-1"></a>    <span class="at">data =</span> conus_t,</span>
-<span id="cb98-11"><a href="chapter-raster-data.html#cb98-11" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">&quot;transparent&quot;</span>,</span>
-<span id="cb98-12"><a href="chapter-raster-data.html#cb98-12" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">&quot;black&quot;</span></span>
-<span id="cb98-13"><a href="chapter-raster-data.html#cb98-13" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb98-14"><a href="chapter-raster-data.html#cb98-14" tabindex="-1"></a>  <span class="fu">theme_pubr</span>(<span class="at">legend =</span> <span class="st">&quot;bottom&quot;</span>) <span class="sc">+</span></span>
-<span id="cb98-15"><a href="chapter-raster-data.html#cb98-15" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>)) <span class="sc">+</span></span>
-<span id="cb98-16"><a href="chapter-raster-data.html#cb98-16" tabindex="-1"></a>  <span class="fu">grids</span>()</span></code></pre></div>
-<p><img src="images/intro_to_spatial/temp_raster_original.png" width = "75%" height = "auto" class = "centerimage"></p>
+<p>Now that the data sets and coordinate reference systems have been prepared, create a plot with <code>ggplot2::gglot()</code>. Identifying the data sets to be plotted within the <code>tidyterra::geom_spatraster()</code> and <code>tidyterra::geom_spatvector()</code> argument informs the function that the <code>narr_p</code> and <code>conus_t</code> data sets are <code>SpatRaster</code> and <code>SpatVector</code> objects, respectively <span class="citation">(<a href="#ref-r-tidyterra">10</a>)</span>.</p>
+<p>Only the first layer of the <code>narr_p</code> data set will be plotted.</p>
+<div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb179-1"><a href="chapter-raster-data.html#cb179-1" tabindex="-1"></a>ggplot2<span class="sc">::</span><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb179-2"><a href="chapter-raster-data.html#cb179-2" tabindex="-1"></a>  tidyterra<span class="sc">::</span><span class="fu">geom_spatraster</span>(<span class="at">data =</span> narr_p<span class="sc">$</span>air_20210101) <span class="sc">+</span></span>
+<span id="cb179-3"><a href="chapter-raster-data.html#cb179-3" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">scale_fill_continuous</span>(</span>
+<span id="cb179-4"><a href="chapter-raster-data.html#cb179-4" tabindex="-1"></a>    <span class="at">type =</span> <span class="st">&quot;viridis&quot;</span>,</span>
+<span id="cb179-5"><a href="chapter-raster-data.html#cb179-5" tabindex="-1"></a>    <span class="at">na.value =</span> <span class="cn">NA</span>,</span>
+<span id="cb179-6"><a href="chapter-raster-data.html#cb179-6" tabindex="-1"></a>    <span class="st">&quot;Temperature (°K)&quot;</span></span>
+<span id="cb179-7"><a href="chapter-raster-data.html#cb179-7" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb179-8"><a href="chapter-raster-data.html#cb179-8" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">ggtitle</span>(<span class="st">&quot;Air Temperature&quot;</span>) <span class="sc">+</span></span>
+<span id="cb179-9"><a href="chapter-raster-data.html#cb179-9" tabindex="-1"></a>  tidyterra<span class="sc">::</span><span class="fu">geom_spatvector</span>(</span>
+<span id="cb179-10"><a href="chapter-raster-data.html#cb179-10" tabindex="-1"></a>    <span class="at">data =</span> conus_t,</span>
+<span id="cb179-11"><a href="chapter-raster-data.html#cb179-11" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">&quot;transparent&quot;</span>,</span>
+<span id="cb179-12"><a href="chapter-raster-data.html#cb179-12" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">&quot;black&quot;</span></span>
+<span id="cb179-13"><a href="chapter-raster-data.html#cb179-13" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb179-14"><a href="chapter-raster-data.html#cb179-14" tabindex="-1"></a>  ggpubr<span class="sc">::</span><span class="fu">theme_pubr</span>(<span class="at">legend =</span> <span class="st">&quot;bottom&quot;</span>) <span class="sc">+</span></span>
+<span id="cb179-15"><a href="chapter-raster-data.html#cb179-15" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>)) <span class="sc">+</span></span>
+<span id="cb179-16"><a href="chapter-raster-data.html#cb179-16" tabindex="-1"></a>  ggpubr<span class="sc">::</span><span class="fu">grids</span>()</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-100-1.png" width="672" /></p>
 </div>
 <div id="crop-2" class="section level3 hasAnchor" number="4.4.2">
 <h3><span class="header-section-number">4.4.2</span> Crop<a href="chapter-raster-data.html#crop-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The <code>terra::crop()</code> function can be used to reduce a <code>SpatRaster</code> to an area determined by <code>SpatVector</code> polygons. The <code>mask = TRUE</code> argument crops to the border of the polygons, whereas <code>mask = FALSE</code> crops to the bounding box surrounding the polygons. In this example, crop the <code>narr</code> data to the conterminous United States state boundaries.</p>
-<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="chapter-raster-data.html#cb99-1" tabindex="-1"></a>narr_crop <span class="ot">&lt;-</span> <span class="fu">crop</span>(narr,</span>
-<span id="cb99-2"><a href="chapter-raster-data.html#cb99-2" tabindex="-1"></a>  conus_t,</span>
-<span id="cb99-3"><a href="chapter-raster-data.html#cb99-3" tabindex="-1"></a>  <span class="at">mask =</span> <span class="cn">TRUE</span></span>
-<span id="cb99-4"><a href="chapter-raster-data.html#cb99-4" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb180-1"><a href="chapter-raster-data.html#cb180-1" tabindex="-1"></a>narr_crop <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">crop</span>(</span>
+<span id="cb180-2"><a href="chapter-raster-data.html#cb180-2" tabindex="-1"></a>  narr_p,</span>
+<span id="cb180-3"><a href="chapter-raster-data.html#cb180-3" tabindex="-1"></a>  conus_t,</span>
+<span id="cb180-4"><a href="chapter-raster-data.html#cb180-4" tabindex="-1"></a>  <span class="at">mask =</span> <span class="cn">TRUE</span></span>
+<span id="cb180-5"><a href="chapter-raster-data.html#cb180-5" tabindex="-1"></a>)</span></code></pre></div>
 <p>Plot the cropped temperature data and the conterminous United States state boundaries.</p>
 <p>Only the first layer of the <code>narr</code> data set will be plotted.</p>
-<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="chapter-raster-data.html#cb100-1" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb100-2"><a href="chapter-raster-data.html#cb100-2" tabindex="-1"></a>  <span class="fu">geom_spatraster</span>(<span class="at">data =</span> narr_crop<span class="sc">$</span>air_20210101) <span class="sc">+</span></span>
-<span id="cb100-3"><a href="chapter-raster-data.html#cb100-3" tabindex="-1"></a>  <span class="fu">scale_fill_continuous</span>(</span>
-<span id="cb100-4"><a href="chapter-raster-data.html#cb100-4" tabindex="-1"></a>    <span class="at">type =</span> <span class="st">&quot;viridis&quot;</span>,</span>
-<span id="cb100-5"><a href="chapter-raster-data.html#cb100-5" tabindex="-1"></a>    <span class="at">na.value =</span> <span class="cn">NA</span>,</span>
-<span id="cb100-6"><a href="chapter-raster-data.html#cb100-6" tabindex="-1"></a>    <span class="st">&quot;Temperature (°K)&quot;</span></span>
-<span id="cb100-7"><a href="chapter-raster-data.html#cb100-7" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb100-8"><a href="chapter-raster-data.html#cb100-8" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Air Temperature (cropped)&quot;</span>) <span class="sc">+</span></span>
-<span id="cb100-9"><a href="chapter-raster-data.html#cb100-9" tabindex="-1"></a>  <span class="fu">geom_spatvector</span>(</span>
-<span id="cb100-10"><a href="chapter-raster-data.html#cb100-10" tabindex="-1"></a>    <span class="at">data =</span> conus_t,</span>
-<span id="cb100-11"><a href="chapter-raster-data.html#cb100-11" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">&quot;transparent&quot;</span>,</span>
-<span id="cb100-12"><a href="chapter-raster-data.html#cb100-12" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">&quot;black&quot;</span></span>
-<span id="cb100-13"><a href="chapter-raster-data.html#cb100-13" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb100-14"><a href="chapter-raster-data.html#cb100-14" tabindex="-1"></a>  <span class="fu">theme_pubr</span>(<span class="at">legend =</span> <span class="st">&quot;bottom&quot;</span>) <span class="sc">+</span></span>
-<span id="cb100-15"><a href="chapter-raster-data.html#cb100-15" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
-<span id="cb100-16"><a href="chapter-raster-data.html#cb100-16" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>),</span>
-<span id="cb100-17"><a href="chapter-raster-data.html#cb100-17" tabindex="-1"></a>    <span class="at">axis.line =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb100-18"><a href="chapter-raster-data.html#cb100-18" tabindex="-1"></a>    <span class="at">axis.ticks =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb100-19"><a href="chapter-raster-data.html#cb100-19" tabindex="-1"></a>    <span class="at">axis.text =</span> <span class="fu">element_blank</span>()</span>
-<span id="cb100-20"><a href="chapter-raster-data.html#cb100-20" tabindex="-1"></a>  )</span></code></pre></div>
-<p><img src="images/intro_to_spatial/temp_raster_crop.png" width = "75%" height = "auto" class = "centerimage"></p>
+<div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb181-1"><a href="chapter-raster-data.html#cb181-1" tabindex="-1"></a>ggplot2<span class="sc">::</span><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb181-2"><a href="chapter-raster-data.html#cb181-2" tabindex="-1"></a>  tidyterra<span class="sc">::</span><span class="fu">geom_spatraster</span>(<span class="at">data =</span> narr_crop<span class="sc">$</span>air_20210101) <span class="sc">+</span></span>
+<span id="cb181-3"><a href="chapter-raster-data.html#cb181-3" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">scale_fill_continuous</span>(</span>
+<span id="cb181-4"><a href="chapter-raster-data.html#cb181-4" tabindex="-1"></a>    <span class="at">type =</span> <span class="st">&quot;viridis&quot;</span>,</span>
+<span id="cb181-5"><a href="chapter-raster-data.html#cb181-5" tabindex="-1"></a>    <span class="at">na.value =</span> <span class="cn">NA</span>,</span>
+<span id="cb181-6"><a href="chapter-raster-data.html#cb181-6" tabindex="-1"></a>    <span class="st">&quot;Temperature (°K)&quot;</span></span>
+<span id="cb181-7"><a href="chapter-raster-data.html#cb181-7" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb181-8"><a href="chapter-raster-data.html#cb181-8" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">ggtitle</span>(<span class="st">&quot;Air Temperature (cropped)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb181-9"><a href="chapter-raster-data.html#cb181-9" tabindex="-1"></a>  tidyterra<span class="sc">::</span><span class="fu">geom_spatvector</span>(</span>
+<span id="cb181-10"><a href="chapter-raster-data.html#cb181-10" tabindex="-1"></a>    <span class="at">data =</span> conus_t,</span>
+<span id="cb181-11"><a href="chapter-raster-data.html#cb181-11" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">&quot;transparent&quot;</span>,</span>
+<span id="cb181-12"><a href="chapter-raster-data.html#cb181-12" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">&quot;black&quot;</span></span>
+<span id="cb181-13"><a href="chapter-raster-data.html#cb181-13" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb181-14"><a href="chapter-raster-data.html#cb181-14" tabindex="-1"></a>  ggpubr<span class="sc">::</span><span class="fu">theme_pubr</span>(<span class="at">legend =</span> <span class="st">&quot;bottom&quot;</span>) <span class="sc">+</span></span>
+<span id="cb181-15"><a href="chapter-raster-data.html#cb181-15" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme</span>(</span>
+<span id="cb181-16"><a href="chapter-raster-data.html#cb181-16" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>),</span>
+<span id="cb181-17"><a href="chapter-raster-data.html#cb181-17" tabindex="-1"></a>    <span class="at">axis.line =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb181-18"><a href="chapter-raster-data.html#cb181-18" tabindex="-1"></a>    <span class="at">axis.ticks =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb181-19"><a href="chapter-raster-data.html#cb181-19" tabindex="-1"></a>    <span class="at">axis.text =</span> <span class="fu">element_blank</span>()</span>
+<span id="cb181-20"><a href="chapter-raster-data.html#cb181-20" tabindex="-1"></a>  )</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-102-1.png" width="672" /></p>
 </div>
 <div id="units" class="section level3 hasAnchor" number="4.4.3">
 <h3><span class="header-section-number">4.4.3</span> Units<a href="chapter-raster-data.html#units" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The previous plot depicts the 2 m air temperature data in degrees Kelvin. To convert the units to degrees Celsius, simply subtract the values in <code>narr_crop</code> by 273.15. This subtraction will be applied to every grid cell within every layer of <code>narr_crop</code>.</p>
-<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="chapter-raster-data.html#cb101-1" tabindex="-1"></a>narr_crop_c <span class="ot">&lt;-</span> narr_crop <span class="sc">-</span> <span class="fl">273.15</span></span></code></pre></div>
+<div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb182-1"><a href="chapter-raster-data.html#cb182-1" tabindex="-1"></a>narr_crop_c <span class="ot">&lt;-</span> narr_crop <span class="sc">-</span> <span class="fl">273.15</span></span></code></pre></div>
 </div>
 <div id="summary-statistics" class="section level3 hasAnchor" number="4.4.4">
 <h3><span class="header-section-number">4.4.4</span> Summary Statistics<a href="chapter-raster-data.html#summary-statistics" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Similar to mathematical operations, calculating summary statistics is very straight forward with raster data. For this example, calculate the annual mean 2m air temperature and range of 2m air temperatures at each grid cell, and save these as a new layer in <code>narr_crop_c</code></p>
-<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="chapter-raster-data.html#cb102-1" tabindex="-1"></a>narr_crop_c<span class="sc">$</span>mean <span class="ot">&lt;-</span> <span class="fu">mean</span>(narr_crop_c)</span>
-<span id="cb102-2"><a href="chapter-raster-data.html#cb102-2" tabindex="-1"></a>narr_crop_c<span class="sc">$</span>range <span class="ot">&lt;-</span> <span class="fu">max</span>(narr_crop_c) <span class="sc">-</span> <span class="fu">min</span>(narr_crop_c)</span></code></pre></div>
+<div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb183-1"><a href="chapter-raster-data.html#cb183-1" tabindex="-1"></a>narr_crop_c<span class="sc">$</span>mean <span class="ot">&lt;-</span> <span class="fu">mean</span>(narr_crop_c)</span>
+<span id="cb183-2"><a href="chapter-raster-data.html#cb183-2" tabindex="-1"></a>narr_crop_c<span class="sc">$</span>range <span class="ot">&lt;-</span> <span class="fu">max</span>(narr_crop_c) <span class="sc">-</span> <span class="fu">min</span>(narr_crop_c)</span></code></pre></div>
 <p>Inspect the results of the mean and range calculations.</p>
-<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="chapter-raster-data.html#cb103-1" tabindex="-1"></a><span class="fu">summary</span>(narr_crop_c<span class="sc">$</span>mean)</span>
-<span id="cb103-2"><a href="chapter-raster-data.html#cb103-2" tabindex="-1"></a><span class="fu">summary</span>(narr_crop_c<span class="sc">$</span>range)</span></code></pre></div>
+<div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb184-1"><a href="chapter-raster-data.html#cb184-1" tabindex="-1"></a><span class="fu">summary</span>(narr_crop_c<span class="sc">$</span>mean)</span></code></pre></div>
+<pre><code>##       mean       
+##  Min.   :-1.592  
+##  1st Qu.: 9.395  
+##  Median :12.493  
+##  Mean   :13.203  
+##  3rd Qu.:17.011  
+##  Max.   :25.966  
+##  NA&#39;s   :5192</code></pre>
+<div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb186-1"><a href="chapter-raster-data.html#cb186-1" tabindex="-1"></a><span class="fu">summary</span>(narr_crop_c<span class="sc">$</span>range)</span></code></pre></div>
+<pre><code>##      range       
+##  Min.   : 6.333  
+##  1st Qu.:35.071  
+##  Median :39.335  
+##  Mean   :41.220  
+##  3rd Qu.:47.793  
+##  Max.   :63.791  
+##  NA&#39;s   :5192</code></pre>
 <p>With the summary statistic layers prepared, create a plot with <code>ggplot2::ggplot()</code>. Identifying the data sets to be plotted within the <code>tidyterra::geom_spatraster()</code> and <code>tidyterra::geom_spatvector()</code> argument informs the function that the <code>narr_crop_c</code> and <code>conus_t</code> data sets are <code>SpatRaster</code> and <code>SpatVector</code> objects, respectively. Additionally, the <code>facet_wrap(~lyr)</code> argument creates a plot for each layer specified in <code>geom_spatraster(data = narr_crop_c[[c("mean", "range")]])</code>.</p>
-<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="chapter-raster-data.html#cb104-1" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb104-2"><a href="chapter-raster-data.html#cb104-2" tabindex="-1"></a>  <span class="fu">geom_spatraster</span>(<span class="at">data =</span> narr_crop_c[[<span class="fu">c</span>(<span class="st">&quot;mean&quot;</span>, <span class="st">&quot;range&quot;</span>)]]) <span class="sc">+</span></span>
-<span id="cb104-3"><a href="chapter-raster-data.html#cb104-3" tabindex="-1"></a>  <span class="fu">scale_fill_continuous</span>(</span>
-<span id="cb104-4"><a href="chapter-raster-data.html#cb104-4" tabindex="-1"></a>    <span class="at">type =</span> <span class="st">&quot;viridis&quot;</span>,</span>
-<span id="cb104-5"><a href="chapter-raster-data.html#cb104-5" tabindex="-1"></a>    <span class="at">na.value =</span> <span class="cn">NA</span>,</span>
-<span id="cb104-6"><a href="chapter-raster-data.html#cb104-6" tabindex="-1"></a>    <span class="st">&quot;Temperature (°C)&quot;</span></span>
-<span id="cb104-7"><a href="chapter-raster-data.html#cb104-7" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb104-8"><a href="chapter-raster-data.html#cb104-8" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>lyr) <span class="sc">+</span></span>
-<span id="cb104-9"><a href="chapter-raster-data.html#cb104-9" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Air Temperature&quot;</span>) <span class="sc">+</span></span>
-<span id="cb104-10"><a href="chapter-raster-data.html#cb104-10" tabindex="-1"></a>  <span class="fu">geom_spatvector</span>(</span>
-<span id="cb104-11"><a href="chapter-raster-data.html#cb104-11" tabindex="-1"></a>    <span class="at">data =</span> conus_t,</span>
-<span id="cb104-12"><a href="chapter-raster-data.html#cb104-12" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">&quot;transparent&quot;</span>,</span>
-<span id="cb104-13"><a href="chapter-raster-data.html#cb104-13" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">&quot;black&quot;</span></span>
-<span id="cb104-14"><a href="chapter-raster-data.html#cb104-14" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb104-15"><a href="chapter-raster-data.html#cb104-15" tabindex="-1"></a>  <span class="fu">theme_pubr</span>(<span class="at">legend =</span> <span class="st">&quot;bottom&quot;</span>) <span class="sc">+</span></span>
-<span id="cb104-16"><a href="chapter-raster-data.html#cb104-16" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
-<span id="cb104-17"><a href="chapter-raster-data.html#cb104-17" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>),</span>
-<span id="cb104-18"><a href="chapter-raster-data.html#cb104-18" tabindex="-1"></a>    <span class="at">axis.line =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb104-19"><a href="chapter-raster-data.html#cb104-19" tabindex="-1"></a>    <span class="at">axis.ticks =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb104-20"><a href="chapter-raster-data.html#cb104-20" tabindex="-1"></a>    <span class="at">axis.text =</span> <span class="fu">element_blank</span>()</span>
-<span id="cb104-21"><a href="chapter-raster-data.html#cb104-21" tabindex="-1"></a>  )</span></code></pre></div>
-<p><img src="images/intro_to_spatial/temp_raster_mean_range.png" width = "75%" height = "auto" class = "centerimage"></p>
+<div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb188-1"><a href="chapter-raster-data.html#cb188-1" tabindex="-1"></a>ggplot2<span class="sc">::</span><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb188-2"><a href="chapter-raster-data.html#cb188-2" tabindex="-1"></a>  tidyterra<span class="sc">::</span><span class="fu">geom_spatraster</span>(<span class="at">data =</span> narr_crop_c[[<span class="fu">c</span>(<span class="st">&quot;mean&quot;</span>, <span class="st">&quot;range&quot;</span>)]]) <span class="sc">+</span></span>
+<span id="cb188-3"><a href="chapter-raster-data.html#cb188-3" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">scale_fill_continuous</span>(</span>
+<span id="cb188-4"><a href="chapter-raster-data.html#cb188-4" tabindex="-1"></a>    <span class="at">type =</span> <span class="st">&quot;viridis&quot;</span>,</span>
+<span id="cb188-5"><a href="chapter-raster-data.html#cb188-5" tabindex="-1"></a>    <span class="at">na.value =</span> <span class="cn">NA</span>,</span>
+<span id="cb188-6"><a href="chapter-raster-data.html#cb188-6" tabindex="-1"></a>    <span class="st">&quot;Temperature (°C)&quot;</span></span>
+<span id="cb188-7"><a href="chapter-raster-data.html#cb188-7" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb188-8"><a href="chapter-raster-data.html#cb188-8" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">facet_wrap</span>(<span class="sc">~</span>lyr) <span class="sc">+</span></span>
+<span id="cb188-9"><a href="chapter-raster-data.html#cb188-9" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">ggtitle</span>(<span class="st">&quot;Air Temperature&quot;</span>) <span class="sc">+</span></span>
+<span id="cb188-10"><a href="chapter-raster-data.html#cb188-10" tabindex="-1"></a>  tidyterra<span class="sc">::</span><span class="fu">geom_spatvector</span>(</span>
+<span id="cb188-11"><a href="chapter-raster-data.html#cb188-11" tabindex="-1"></a>    <span class="at">data =</span> conus_t,</span>
+<span id="cb188-12"><a href="chapter-raster-data.html#cb188-12" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">&quot;transparent&quot;</span>,</span>
+<span id="cb188-13"><a href="chapter-raster-data.html#cb188-13" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">&quot;black&quot;</span></span>
+<span id="cb188-14"><a href="chapter-raster-data.html#cb188-14" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb188-15"><a href="chapter-raster-data.html#cb188-15" tabindex="-1"></a>  ggpubr<span class="sc">::</span><span class="fu">theme_pubr</span>(<span class="at">legend =</span> <span class="st">&quot;bottom&quot;</span>) <span class="sc">+</span></span>
+<span id="cb188-16"><a href="chapter-raster-data.html#cb188-16" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme</span>(</span>
+<span id="cb188-17"><a href="chapter-raster-data.html#cb188-17" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>),</span>
+<span id="cb188-18"><a href="chapter-raster-data.html#cb188-18" tabindex="-1"></a>    <span class="at">axis.line =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb188-19"><a href="chapter-raster-data.html#cb188-19" tabindex="-1"></a>    <span class="at">axis.ticks =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb188-20"><a href="chapter-raster-data.html#cb188-20" tabindex="-1"></a>    <span class="at">axis.text =</span> <span class="fu">element_blank</span>()</span>
+<span id="cb188-21"><a href="chapter-raster-data.html#cb188-21" tabindex="-1"></a>  )</span></code></pre></div>
 </div>
 <div id="zonal-statistics-1" class="section level3 hasAnchor" number="4.4.5">
 <h3><span class="header-section-number">4.4.5</span> Zonal Statistics<a href="chapter-raster-data.html#zonal-statistics-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Looking closely at the previous plot, it is clear that the annual mean and range of temperatures differ between states. The <code>terra</code> package can be used to calculate zonal statistics of a <code>SpatRaster</code> object based on <code>SpatVector</code> polygons.</p>
 <p>The <code>terra::zonal()</code> function can be used to calculate the average annual temperature in each state based on the annual grid cell temperatures stored in <code>narr_crop_c$mean</code>.</p>
-<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="chapter-raster-data.html#cb105-1" tabindex="-1"></a>conus_t<span class="sc">$</span>MEAN <span class="ot">&lt;-</span> <span class="fu">zonal</span>(narr_crop_c<span class="sc">$</span>mean,</span>
-<span id="cb105-2"><a href="chapter-raster-data.html#cb105-2" tabindex="-1"></a>  conus_t,</span>
-<span id="cb105-3"><a href="chapter-raster-data.html#cb105-3" tabindex="-1"></a>  <span class="at">fun =</span> <span class="st">&quot;mean&quot;</span></span>
-<span id="cb105-4"><a href="chapter-raster-data.html#cb105-4" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb189-1"><a href="chapter-raster-data.html#cb189-1" tabindex="-1"></a>conus_t<span class="sc">$</span>MEAN <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">zonal</span>(</span>
+<span id="cb189-2"><a href="chapter-raster-data.html#cb189-2" tabindex="-1"></a>  narr_crop_c<span class="sc">$</span>mean,</span>
+<span id="cb189-3"><a href="chapter-raster-data.html#cb189-3" tabindex="-1"></a>  conus_t,</span>
+<span id="cb189-4"><a href="chapter-raster-data.html#cb189-4" tabindex="-1"></a>  <span class="at">fun =</span> <span class="st">&quot;mean&quot;</span></span>
+<span id="cb189-5"><a href="chapter-raster-data.html#cb189-5" tabindex="-1"></a>)</span></code></pre></div>
 <p>Plot the state-specific annual mean temperatures with <code>ggplot2::ggplot()</code>. Identifying the data set to be plotted within <code>tidyterra::geom_spatvector()</code> argument informs the function that the data is a <code>SpatVector</code> object.</p>
-<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="chapter-raster-data.html#cb106-1" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb106-2"><a href="chapter-raster-data.html#cb106-2" tabindex="-1"></a>  <span class="fu">geom_spatvector</span>(</span>
-<span id="cb106-3"><a href="chapter-raster-data.html#cb106-3" tabindex="-1"></a>    <span class="at">data =</span> conus_t,</span>
-<span id="cb106-4"><a href="chapter-raster-data.html#cb106-4" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">fill =</span> MEAN)</span>
-<span id="cb106-5"><a href="chapter-raster-data.html#cb106-5" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb106-6"><a href="chapter-raster-data.html#cb106-6" tabindex="-1"></a>  <span class="fu">scale_fill_continuous</span>(</span>
-<span id="cb106-7"><a href="chapter-raster-data.html#cb106-7" tabindex="-1"></a>    <span class="at">type =</span> <span class="st">&quot;viridis&quot;</span>,</span>
-<span id="cb106-8"><a href="chapter-raster-data.html#cb106-8" tabindex="-1"></a>    <span class="at">na.value =</span> <span class="cn">NA</span>,</span>
-<span id="cb106-9"><a href="chapter-raster-data.html#cb106-9" tabindex="-1"></a>    <span class="st">&quot;Temperature (°C)&quot;</span></span>
-<span id="cb106-10"><a href="chapter-raster-data.html#cb106-10" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb106-11"><a href="chapter-raster-data.html#cb106-11" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Air Temperature (state mean)&quot;</span>) <span class="sc">+</span></span>
-<span id="cb106-12"><a href="chapter-raster-data.html#cb106-12" tabindex="-1"></a>  <span class="fu">theme_pubr</span>(<span class="at">legend =</span> <span class="st">&quot;bottom&quot;</span>) <span class="sc">+</span></span>
-<span id="cb106-13"><a href="chapter-raster-data.html#cb106-13" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
-<span id="cb106-14"><a href="chapter-raster-data.html#cb106-14" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>),</span>
-<span id="cb106-15"><a href="chapter-raster-data.html#cb106-15" tabindex="-1"></a>    <span class="at">axis.line =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb106-16"><a href="chapter-raster-data.html#cb106-16" tabindex="-1"></a>    <span class="at">axis.ticks =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb106-17"><a href="chapter-raster-data.html#cb106-17" tabindex="-1"></a>    <span class="at">axis.text =</span> <span class="fu">element_blank</span>()</span>
-<span id="cb106-18"><a href="chapter-raster-data.html#cb106-18" tabindex="-1"></a>  )</span></code></pre></div>
-<p><img src="images/intro_to_spatial/temp_raster_state_mean.png" width = "75%" height = "auto" class = "centerimage"></p>
+<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb190-1"><a href="chapter-raster-data.html#cb190-1" tabindex="-1"></a>ggplot2<span class="sc">::</span><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb190-2"><a href="chapter-raster-data.html#cb190-2" tabindex="-1"></a>  tidyterra<span class="sc">::</span><span class="fu">geom_spatvector</span>(</span>
+<span id="cb190-3"><a href="chapter-raster-data.html#cb190-3" tabindex="-1"></a>    <span class="at">data =</span> conus_t,</span>
+<span id="cb190-4"><a href="chapter-raster-data.html#cb190-4" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">fill =</span> MEAN)</span>
+<span id="cb190-5"><a href="chapter-raster-data.html#cb190-5" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb190-6"><a href="chapter-raster-data.html#cb190-6" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">scale_fill_continuous</span>(</span>
+<span id="cb190-7"><a href="chapter-raster-data.html#cb190-7" tabindex="-1"></a>    <span class="at">type =</span> <span class="st">&quot;viridis&quot;</span>,</span>
+<span id="cb190-8"><a href="chapter-raster-data.html#cb190-8" tabindex="-1"></a>    <span class="at">na.value =</span> <span class="cn">NA</span>,</span>
+<span id="cb190-9"><a href="chapter-raster-data.html#cb190-9" tabindex="-1"></a>    <span class="st">&quot;Temperature (°C)&quot;</span></span>
+<span id="cb190-10"><a href="chapter-raster-data.html#cb190-10" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb190-11"><a href="chapter-raster-data.html#cb190-11" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">ggtitle</span>(<span class="st">&quot;Air Temperature (state mean)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb190-12"><a href="chapter-raster-data.html#cb190-12" tabindex="-1"></a>  ggpubr<span class="sc">::</span><span class="fu">theme_pubr</span>(<span class="at">legend =</span> <span class="st">&quot;bottom&quot;</span>) <span class="sc">+</span></span>
+<span id="cb190-13"><a href="chapter-raster-data.html#cb190-13" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme</span>(</span>
+<span id="cb190-14"><a href="chapter-raster-data.html#cb190-14" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>),</span>
+<span id="cb190-15"><a href="chapter-raster-data.html#cb190-15" tabindex="-1"></a>    <span class="at">axis.line =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb190-16"><a href="chapter-raster-data.html#cb190-16" tabindex="-1"></a>    <span class="at">axis.ticks =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb190-17"><a href="chapter-raster-data.html#cb190-17" tabindex="-1"></a>    <span class="at">axis.text =</span> <span class="fu">element_blank</span>()</span>
+<span id="cb190-18"><a href="chapter-raster-data.html#cb190-18" tabindex="-1"></a>  )</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-108-1.png" width="672" /></p>
 </div>
 <div id="reclassify-1" class="section level3 hasAnchor" number="4.4.6">
 <h3><span class="header-section-number">4.4.6</span> Reclassify<a href="chapter-raster-data.html#reclassify-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Raster data is most often continuous numeric data. Sometimes, however, it is important to classify the continuous numeric raster data into discrete classes. For this example, we will reclassify the annual mean temperature data into three discrete classes: &lt;10°C, 10°C - 20°C, &gt;20°C.</p>
 <p>The first step in the reclassification process is to create a matrix storing the “from”, “to”, and “becomes” values. As the names imply, the “from” and “to” values identify the discrete ranges to be reclassified, and “becomes” is the new value that data within this range will take (i.e., “from” 0 “to” 5 “becomes” 1 means that values ranging from 0 to 5 will be reclassified as 1).</p>
 <p>Create the reclassification matrix.</p>
-<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="chapter-raster-data.html#cb107-1" tabindex="-1"></a>from <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
-<span id="cb107-2"><a href="chapter-raster-data.html#cb107-2" tabindex="-1"></a>  <span class="sc">-</span><span class="cn">Inf</span>,</span>
-<span id="cb107-3"><a href="chapter-raster-data.html#cb107-3" tabindex="-1"></a>  <span class="dv">10</span>,</span>
-<span id="cb107-4"><a href="chapter-raster-data.html#cb107-4" tabindex="-1"></a>  <span class="dv">20</span></span>
-<span id="cb107-5"><a href="chapter-raster-data.html#cb107-5" tabindex="-1"></a>)</span>
-<span id="cb107-6"><a href="chapter-raster-data.html#cb107-6" tabindex="-1"></a>to <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
-<span id="cb107-7"><a href="chapter-raster-data.html#cb107-7" tabindex="-1"></a>  <span class="dv">10</span>,</span>
-<span id="cb107-8"><a href="chapter-raster-data.html#cb107-8" tabindex="-1"></a>  <span class="dv">20</span>,</span>
-<span id="cb107-9"><a href="chapter-raster-data.html#cb107-9" tabindex="-1"></a>  <span class="cn">Inf</span></span>
-<span id="cb107-10"><a href="chapter-raster-data.html#cb107-10" tabindex="-1"></a>)</span>
-<span id="cb107-11"><a href="chapter-raster-data.html#cb107-11" tabindex="-1"></a>becomes <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span></span>
-<span id="cb107-12"><a href="chapter-raster-data.html#cb107-12" tabindex="-1"></a>reclass <span class="ot">&lt;-</span> <span class="fu">matrix</span>(</span>
-<span id="cb107-13"><a href="chapter-raster-data.html#cb107-13" tabindex="-1"></a>  <span class="fu">c</span>(</span>
-<span id="cb107-14"><a href="chapter-raster-data.html#cb107-14" tabindex="-1"></a>    from,</span>
-<span id="cb107-15"><a href="chapter-raster-data.html#cb107-15" tabindex="-1"></a>    to,</span>
-<span id="cb107-16"><a href="chapter-raster-data.html#cb107-16" tabindex="-1"></a>    becomes</span>
-<span id="cb107-17"><a href="chapter-raster-data.html#cb107-17" tabindex="-1"></a>  ),</span>
-<span id="cb107-18"><a href="chapter-raster-data.html#cb107-18" tabindex="-1"></a>  <span class="at">ncol =</span> <span class="dv">3</span></span>
-<span id="cb107-19"><a href="chapter-raster-data.html#cb107-19" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb191-1"><a href="chapter-raster-data.html#cb191-1" tabindex="-1"></a>from <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="sc">-</span><span class="cn">Inf</span>, <span class="dv">10</span>, <span class="dv">20</span>)</span>
+<span id="cb191-2"><a href="chapter-raster-data.html#cb191-2" tabindex="-1"></a>to <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">20</span>, <span class="cn">Inf</span>)</span>
+<span id="cb191-3"><a href="chapter-raster-data.html#cb191-3" tabindex="-1"></a>becomes <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span></span>
+<span id="cb191-4"><a href="chapter-raster-data.html#cb191-4" tabindex="-1"></a>reclass <span class="ot">&lt;-</span> <span class="fu">matrix</span>(</span>
+<span id="cb191-5"><a href="chapter-raster-data.html#cb191-5" tabindex="-1"></a>  <span class="fu">c</span>(</span>
+<span id="cb191-6"><a href="chapter-raster-data.html#cb191-6" tabindex="-1"></a>    from,</span>
+<span id="cb191-7"><a href="chapter-raster-data.html#cb191-7" tabindex="-1"></a>    to,</span>
+<span id="cb191-8"><a href="chapter-raster-data.html#cb191-8" tabindex="-1"></a>    becomes</span>
+<span id="cb191-9"><a href="chapter-raster-data.html#cb191-9" tabindex="-1"></a>  ),</span>
+<span id="cb191-10"><a href="chapter-raster-data.html#cb191-10" tabindex="-1"></a>  <span class="at">ncol =</span> <span class="dv">3</span></span>
+<span id="cb191-11"><a href="chapter-raster-data.html#cb191-11" tabindex="-1"></a>)</span></code></pre></div>
 <p>Now that the reclassification matrix has been prepared, reclassify the annual mean temperatures. The <code>right = TRUE</code> argument indicates that intervals are open on the left and closed on the right (i.e., (0,10] becomes 1).</p>
-<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="chapter-raster-data.html#cb108-1" tabindex="-1"></a>narr_reclass <span class="ot">&lt;-</span> <span class="fu">classify</span>(narr_crop_c<span class="sc">$</span>mean,</span>
-<span id="cb108-2"><a href="chapter-raster-data.html#cb108-2" tabindex="-1"></a>  <span class="at">rcl =</span> reclass,</span>
-<span id="cb108-3"><a href="chapter-raster-data.html#cb108-3" tabindex="-1"></a>  <span class="at">right =</span> <span class="cn">TRUE</span></span>
-<span id="cb108-4"><a href="chapter-raster-data.html#cb108-4" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb192-1"><a href="chapter-raster-data.html#cb192-1" tabindex="-1"></a>narr_reclass <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">classify</span>(</span>
+<span id="cb192-2"><a href="chapter-raster-data.html#cb192-2" tabindex="-1"></a>  narr_crop_c<span class="sc">$</span>mean,</span>
+<span id="cb192-3"><a href="chapter-raster-data.html#cb192-3" tabindex="-1"></a>  <span class="at">rcl =</span> reclass,</span>
+<span id="cb192-4"><a href="chapter-raster-data.html#cb192-4" tabindex="-1"></a>  <span class="at">right =</span> <span class="cn">TRUE</span></span>
+<span id="cb192-5"><a href="chapter-raster-data.html#cb192-5" tabindex="-1"></a>)</span></code></pre></div>
 <p>Although <code>narr_reclass</code> contains the reclassified mean air temperature data, the data is still continuously numeric. The following chunk of code converts the <code>narr_reclass$mean</code> layer from numeric to character based on the defined levels.</p>
 <p><code>narr_reclass</code> contains the reclassified mean air temperature data, but the data is still numeric. The <code>terra::set.cats()</code> function assigns categories to numeric data based on values stored in a data frame.</p>
-<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb109-1"><a href="chapter-raster-data.html#cb109-1" tabindex="-1"></a>level_values <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb109-2"><a href="chapter-raster-data.html#cb109-2" tabindex="-1"></a>  <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>),</span>
-<span id="cb109-3"><a href="chapter-raster-data.html#cb109-3" tabindex="-1"></a>  <span class="fu">c</span>(<span class="st">&quot;1&quot;</span>, <span class="st">&quot;2&quot;</span>, <span class="st">&quot;3&quot;</span>)</span>
-<span id="cb109-4"><a href="chapter-raster-data.html#cb109-4" tabindex="-1"></a>)</span>
-<span id="cb109-5"><a href="chapter-raster-data.html#cb109-5" tabindex="-1"></a><span class="fu">colnames</span>(level_values) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;mean_continuous&quot;</span>, <span class="st">&quot;mean_discrete&quot;</span>)</span>
-<span id="cb109-6"><a href="chapter-raster-data.html#cb109-6" tabindex="-1"></a><span class="fu">set.cats</span>(narr_reclass,</span>
-<span id="cb109-7"><a href="chapter-raster-data.html#cb109-7" tabindex="-1"></a>  <span class="at">layer =</span> <span class="st">&quot;mean&quot;</span>,</span>
-<span id="cb109-8"><a href="chapter-raster-data.html#cb109-8" tabindex="-1"></a>  <span class="at">value =</span> level_values</span>
-<span id="cb109-9"><a href="chapter-raster-data.html#cb109-9" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb193-1"><a href="chapter-raster-data.html#cb193-1" tabindex="-1"></a>level_values <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb193-2"><a href="chapter-raster-data.html#cb193-2" tabindex="-1"></a>  <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>),</span>
+<span id="cb193-3"><a href="chapter-raster-data.html#cb193-3" tabindex="-1"></a>  <span class="fu">c</span>(<span class="st">&quot;1&quot;</span>, <span class="st">&quot;2&quot;</span>, <span class="st">&quot;3&quot;</span>)</span>
+<span id="cb193-4"><a href="chapter-raster-data.html#cb193-4" tabindex="-1"></a>)</span>
+<span id="cb193-5"><a href="chapter-raster-data.html#cb193-5" tabindex="-1"></a><span class="fu">colnames</span>(level_values) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;mean_continuous&quot;</span>, <span class="st">&quot;mean_discrete&quot;</span>)</span>
+<span id="cb193-6"><a href="chapter-raster-data.html#cb193-6" tabindex="-1"></a>terra<span class="sc">::</span><span class="fu">set.cats</span>(</span>
+<span id="cb193-7"><a href="chapter-raster-data.html#cb193-7" tabindex="-1"></a>  narr_reclass,</span>
+<span id="cb193-8"><a href="chapter-raster-data.html#cb193-8" tabindex="-1"></a>  <span class="at">layer =</span> <span class="st">&quot;mean&quot;</span>,</span>
+<span id="cb193-9"><a href="chapter-raster-data.html#cb193-9" tabindex="-1"></a>  <span class="at">value =</span> level_values</span>
+<span id="cb193-10"><a href="chapter-raster-data.html#cb193-10" tabindex="-1"></a>)</span></code></pre></div>
 <p>Plot the discretely reclassified mean temperature data.</p>
-<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="chapter-raster-data.html#cb110-1" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb110-2"><a href="chapter-raster-data.html#cb110-2" tabindex="-1"></a>  <span class="fu">geom_spatraster</span>(<span class="at">data =</span> narr_reclass<span class="sc">$</span>mean_discrete) <span class="sc">+</span></span>
-<span id="cb110-3"><a href="chapter-raster-data.html#cb110-3" tabindex="-1"></a>  <span class="fu">scale_fill_viridis_d</span>(<span class="st">&quot;&quot;</span>,</span>
-<span id="cb110-4"><a href="chapter-raster-data.html#cb110-4" tabindex="-1"></a>    <span class="at">labels =</span> <span class="fu">c</span>(</span>
-<span id="cb110-5"><a href="chapter-raster-data.html#cb110-5" tabindex="-1"></a>      <span class="st">&quot;≤10°&quot;</span>,</span>
-<span id="cb110-6"><a href="chapter-raster-data.html#cb110-6" tabindex="-1"></a>      <span class="st">&quot;10°&lt; &amp; ≤20°&quot;</span>,</span>
-<span id="cb110-7"><a href="chapter-raster-data.html#cb110-7" tabindex="-1"></a>      <span class="st">&quot;20°&lt;&quot;</span>,</span>
-<span id="cb110-8"><a href="chapter-raster-data.html#cb110-8" tabindex="-1"></a>      <span class="st">&quot;&quot;</span></span>
-<span id="cb110-9"><a href="chapter-raster-data.html#cb110-9" tabindex="-1"></a>    ),</span>
-<span id="cb110-10"><a href="chapter-raster-data.html#cb110-10" tabindex="-1"></a>    <span class="at">na.value =</span> <span class="cn">NA</span></span>
-<span id="cb110-11"><a href="chapter-raster-data.html#cb110-11" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb110-12"><a href="chapter-raster-data.html#cb110-12" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Air Temperature (reclassified)&quot;</span>) <span class="sc">+</span></span>
-<span id="cb110-13"><a href="chapter-raster-data.html#cb110-13" tabindex="-1"></a>  <span class="fu">geom_spatvector</span>(</span>
-<span id="cb110-14"><a href="chapter-raster-data.html#cb110-14" tabindex="-1"></a>    <span class="at">data =</span> conus_t,</span>
-<span id="cb110-15"><a href="chapter-raster-data.html#cb110-15" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">&quot;transparent&quot;</span>,</span>
-<span id="cb110-16"><a href="chapter-raster-data.html#cb110-16" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">&quot;black&quot;</span></span>
-<span id="cb110-17"><a href="chapter-raster-data.html#cb110-17" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb110-18"><a href="chapter-raster-data.html#cb110-18" tabindex="-1"></a>  <span class="fu">theme_pubr</span>(<span class="at">legend =</span> <span class="st">&quot;bottom&quot;</span>) <span class="sc">+</span></span>
-<span id="cb110-19"><a href="chapter-raster-data.html#cb110-19" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
-<span id="cb110-20"><a href="chapter-raster-data.html#cb110-20" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>),</span>
-<span id="cb110-21"><a href="chapter-raster-data.html#cb110-21" tabindex="-1"></a>    <span class="at">axis.line =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb110-22"><a href="chapter-raster-data.html#cb110-22" tabindex="-1"></a>    <span class="at">axis.ticks =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb110-23"><a href="chapter-raster-data.html#cb110-23" tabindex="-1"></a>    <span class="at">axis.text =</span> <span class="fu">element_blank</span>()</span>
-<span id="cb110-24"><a href="chapter-raster-data.html#cb110-24" tabindex="-1"></a>  )</span></code></pre></div>
-<p><img src="images/intro_to_spatial/temp_raster_reclass.png" width = "75%" height = "auto" class = "centerimage"></p>
+<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb194-1"><a href="chapter-raster-data.html#cb194-1" tabindex="-1"></a>ggplot2<span class="sc">::</span><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb194-2"><a href="chapter-raster-data.html#cb194-2" tabindex="-1"></a>  tidyterra<span class="sc">::</span><span class="fu">geom_spatraster</span>(<span class="at">data =</span> narr_reclass<span class="sc">$</span>mean_discrete) <span class="sc">+</span></span>
+<span id="cb194-3"><a href="chapter-raster-data.html#cb194-3" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">scale_fill_viridis_d</span>(</span>
+<span id="cb194-4"><a href="chapter-raster-data.html#cb194-4" tabindex="-1"></a>    <span class="st">&quot;&quot;</span>,</span>
+<span id="cb194-5"><a href="chapter-raster-data.html#cb194-5" tabindex="-1"></a>    <span class="at">labels =</span> <span class="fu">c</span>(</span>
+<span id="cb194-6"><a href="chapter-raster-data.html#cb194-6" tabindex="-1"></a>      <span class="st">&quot;≤10°&quot;</span>,</span>
+<span id="cb194-7"><a href="chapter-raster-data.html#cb194-7" tabindex="-1"></a>      <span class="st">&quot;10°&lt; &amp; ≤20°&quot;</span>,</span>
+<span id="cb194-8"><a href="chapter-raster-data.html#cb194-8" tabindex="-1"></a>      <span class="st">&quot;20°&lt;&quot;</span>,</span>
+<span id="cb194-9"><a href="chapter-raster-data.html#cb194-9" tabindex="-1"></a>      <span class="st">&quot;&quot;</span></span>
+<span id="cb194-10"><a href="chapter-raster-data.html#cb194-10" tabindex="-1"></a>    ),</span>
+<span id="cb194-11"><a href="chapter-raster-data.html#cb194-11" tabindex="-1"></a>    <span class="at">na.value =</span> <span class="cn">NA</span></span>
+<span id="cb194-12"><a href="chapter-raster-data.html#cb194-12" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb194-13"><a href="chapter-raster-data.html#cb194-13" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">ggtitle</span>(<span class="st">&quot;Air Temperature (reclassified)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb194-14"><a href="chapter-raster-data.html#cb194-14" tabindex="-1"></a>  tidyterra<span class="sc">::</span><span class="fu">geom_spatvector</span>(</span>
+<span id="cb194-15"><a href="chapter-raster-data.html#cb194-15" tabindex="-1"></a>    <span class="at">data =</span> conus_t,</span>
+<span id="cb194-16"><a href="chapter-raster-data.html#cb194-16" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">&quot;transparent&quot;</span>,</span>
+<span id="cb194-17"><a href="chapter-raster-data.html#cb194-17" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">&quot;black&quot;</span></span>
+<span id="cb194-18"><a href="chapter-raster-data.html#cb194-18" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb194-19"><a href="chapter-raster-data.html#cb194-19" tabindex="-1"></a>  ggpubr<span class="sc">::</span><span class="fu">theme_pubr</span>(<span class="at">legend =</span> <span class="st">&quot;bottom&quot;</span>) <span class="sc">+</span></span>
+<span id="cb194-20"><a href="chapter-raster-data.html#cb194-20" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme</span>(</span>
+<span id="cb194-21"><a href="chapter-raster-data.html#cb194-21" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>),</span>
+<span id="cb194-22"><a href="chapter-raster-data.html#cb194-22" tabindex="-1"></a>    <span class="at">axis.line =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb194-23"><a href="chapter-raster-data.html#cb194-23" tabindex="-1"></a>    <span class="at">axis.ticks =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb194-24"><a href="chapter-raster-data.html#cb194-24" tabindex="-1"></a>    <span class="at">axis.text =</span> <span class="fu">element_blank</span>()</span>
+<span id="cb194-25"><a href="chapter-raster-data.html#cb194-25" tabindex="-1"></a>  )</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-112-1.png" width="672" /></p>
 
 </div>
 </div>
@@ -602,42 +633,42 @@ target="blank">Published with bookdown</a></li>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
-"sharing": {
-"github": true,
-"facebook": false,
-"twitter": false,
-"linkedin": false,
-"weibo": false,
-"instapaper": false,
-"vk": false,
-"whatsapp": false,
-"all": false
-},
-"fontsettings": {
-"theme": "white",
-"family": "sans",
-"size": 2
-},
-"edit": {
-"link": null,
-"text": null
-},
-"history": {
-"link": null,
-"text": null
-},
-"view": {
-"link": null,
-"text": null
-},
-"download": null,
-"search": {
-"engine": "fuse",
-"options": null
-},
-"toc": {
-"collapse": "section"
-}
+  "sharing": {
+    "github": true,
+    "facebook": false,
+    "twitter": false,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": false
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": null,
+    "text": null
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": null,
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "section"
+  }
 });
 });
 </script>
