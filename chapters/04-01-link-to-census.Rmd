@@ -27,7 +27,7 @@ This tutorial provides example code in `R`:
 
 Linking geocoded addresses to US Census geographic units is a common step in environmental health data integration workflows. First, using geographic information systems (GIS) software, the geocoded addresses are mapped to the specific Census geographic units (e.g., Census tracts) in which they are located. Second, the Census geographic unit identifying code (or, [geoID](https://www.census.gov/programs-surveys/geography/guidance/geo-identifiers.html)) is matched to each geocoded address. The result is a table of geocoded addresses and their corresponding Census geoIDs.
 
-The Census geoIDs can then serve as the basis for linking additional data to each geocoded address. Many types of data with importance for environmental health applications are available by Census geoID. Specifically, the Census collects and provides data by Census geoID for various social determinants of health (SDOH). Such Census SDOH data describe poverty, race/ethnicity, language, housing, and other socioeconomic characteristics. Increasingly, other data providers (e.g., other government agencies, research institutions, community science groups) are making their data available by Census geoID to help facilitate linkages with SDOH data. Such data cover various environment, climate, health, and built environment characteristics.
+The Census geoIDs can then serve as the basis for linking additional data to each geocoded address. Many types of data with importance for environmental health applications are available by Census geoID. Specifically, the Census collects and provides data by Census geoID for various social determinants of health (SDOH). Such Census SDOH data describe poverty, race/ethnicity, language, housing, and other socioeconomic characteristics. Increasingly, other data providers (e.g., other government agencies, research institutions, community science groups) are making their data available by Census geoID to help facilitate linkages with SDOH data. Such data cover various environment, disaster-related, health, and built environment characteristics.
 
 The following table lists example environmental health data sources readily available by Census geoID from US federal agencies.
 
@@ -35,8 +35,7 @@ The following table lists example environmental health data sources readily avai
 
 | Data source                                                                                           | Geographic units        | Example topics                                                                                                   |
 |-----------------------|-------------------------|------------------------|
-| [AHRQ Social Detrminants of Health Database](https://www.ahrq.gov/sdoh/data-analytics/sdoh-data.html) | County, ZIP code, tract | Demographic characteristics, housing and transportation characteristics, food access, healthcare characteristics |
-| [EPA Environmental Justice Screening and Mapping Tool](https://www.epa.gov/ejscreen)                  | Block group             | Air pollution, hazardous waste, flood risk, wildfire risk, environmental justice indices                         |
+| [AHRQ Social Determinants of Health Database](https://www.ahrq.gov/sdoh/data-analytics/sdoh-data.html) | County, ZIP code, tract | Demographic characteristics, housing and transportation characteristics, food access, healthcare characteristics |                      |
 | [CDC National Environmental Public Health Tracking Network](https://ephtracking.cdc.gov)              | State, county           | Heat, sunlight and ultraviolet exposure, built environment characteristics, asthma, heat-related illnesses       |
 
 ### Background {#intro-census-geoids}
@@ -46,7 +45,7 @@ The Census defines [geographic boundaries](https://www.census.gov/newsroom/blogs
 The Census defines the boundaries of tracts and block groups to scale with local population: that is, in areas with higher population density (e.g., urban cores), these geographic units have finer spatial scale (i.e., smaller land area per unit) and in areas with lower population density (e.g., rural areas), the geographic units have coarser spatial scale (i.e., larger land area per unit). As a result, the spatial scale of geographic units varies substantially across the US. The shape of geographic units also varies substantially: the Census defines these boundaries to follow political boundaries (e.g., state boundaries) as well as physical features (e.g., roads, rivers), which often have irregular shapes.
 
 ::: {.note}
-The variable shape and spatial scale of Census geographic units is in contrast with spatial grids-- in which each geographic unit (i.e., grid cell) has the same shape and spatial resolution. Such spatial grids are common for environment and climate data.
+The variable shape and spatial scale of Census geographic units is in contrast with spatial grids-- in which each geographic unit (i.e., grid cell) has the same shape and spatial resolution. Such spatial grids are common for environmental data.
 :::
 
 [ZIP Code Tabulation Areas (ZCTAs)](https://www.census.gov/programs-surveys/geography/guidance/geo-areas/zctas.html), which represent the geographic areas used by the US Postal Service for ZIP codes, are another common boundary used in environmental health workflows. ZCTAs have no spatial relationship with block groups, tracts, counties, or states: that is, ZCTAs can cross or overlap those other geographic boundaries. Like other Census geographic boundaries, ZCTAs vary in spatial resolution and shape across the US. The spatial scale of ZCTAs is, on average, finer than counties but coarser than tracts.
@@ -305,7 +304,7 @@ sdoh_tracts_2010_xlsx <-
   "/ YOUR FILE PATH /sdoh_2010_tract_1_0.xlsx"
 
 # read the "Data" sheet of the Excel file into a table R
-# note that you may need to provide a complete filepath for the Excel file
+# note that you may need to provide a complete file path for the Excel file
 sdoh_tracts_2010_tbl <- readxl::read_xlsx(sdoh_tracts_2010_xlsx,
                                           sheet = "Data")
 ```
@@ -322,7 +321,7 @@ sdoh_tracts_2010_xlsx <-
   "dataset/sdoh_2010_tract_1_0.xlsx"
 
 # read the "Data" sheet of the Excel file into a table R
-# note that you may need to provide a complete filepath for the Excel file
+# note that you may need to provide a complete file path for the Excel file
 sdoh_tracts_2010_tbl <- readxl::read_xlsx(sdoh_tracts_2010_xlsx,
                                           sheet = "Data")
 ```
