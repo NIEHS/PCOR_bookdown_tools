@@ -26,7 +26,7 @@ You can contact us by [email](mailto:chordshelp@nih.gov) or by opening an [issue
 
 The following code installs the `R` packages used in the example code:
 
-```{r}
+```{r eval = FALSE}
 install.packages(
   c(
     "bookdown", "plotly", "shiny", "tidycensus", "tidyverse", "viridis",
@@ -39,10 +39,16 @@ install.packages(
 BiocManager::install("Biobase")
 ```
 
-The following code creates a local HTML version of the book:
+The following code creates a local HTML version of the entire book:
 
-```{r}
+```{r eval = FALSE}
 bookdown::render_book("index.Rmd", "bookdown::gitbook")
+```
+
+The following code creates a local HTML version of a single chapter of the book:
+
+```{r eval = FALSE}
+bookdown::preview_chapter("chapters/EDIT-CHAPTER-NAME-HERE.Rmd")
 ```
 
 ## Contributing Guide
