@@ -1,6 +1,6 @@
 # **B** Glossary {#chords-glossary .unnumbered}
 
-Key terms used in the CHORDS Toolkit are defined below and in the [NIEHS Climate Change and Human Health Glossary](https://tools.niehs.nih.gov/cchhglossary/).
+Key terms used in the CHORDS Toolkit are defined below and in the [NIEHS Glossary](https://tools.niehs.nih.gov/cchhglossary/).
 
 ## Index {.unnumbered .unlisted}
 
