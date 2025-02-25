@@ -16,7 +16,7 @@ output: bookdown::html_document2
 
 ---
 
-Researchers interested in studying the health impacts of extreme weather events and related disasters need access to relevant, timely, and harmonized data on environmental exposures, social determinants of health variables, and health outcomes. However, such data sets are often developed for different purposes, reside in multiple locations, and require linkage. The Connecting Health Outcomes and Research Data Systems (CHORDS) Project seeks to connect researchers to environmental and health data sets with a toolkit that provides guides, tutorials, and example code to improve integration of geospatial data-based exposures and health data and records into their research. 
+Researchers interested in studying the health impacts of extreme weather events and related disasters need access to relevant, timely, and harmonized data on environmental exposures, social determinants of health variables, and health outcomes. However, such data sets are often developed for different purposes, reside in multiple locations, and require linkage. The Connecting Health Outcomes Research and Data Systems (CHORDS) Project seeks to connect researchers to environmental and health data sets with a toolkit that provides guides, tutorials, and example code to improve integration of geospatial data-based exposures and health data and records into their research. 
 
 ## About CHORDS {-}
 
