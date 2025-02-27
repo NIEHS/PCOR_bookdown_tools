@@ -1,4 +1,4 @@
-
+# HCUP and Amadeus Smoke Plume Use Case {#chapter-hcup-amadeus-usecase}
 
 ### Integrating HCUP databases with Amadeuse Exposure data{-}
 
