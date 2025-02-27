@@ -57,7 +57,7 @@ library(dplyr)
 
 ## Data Curation and Prep {#link-to-hcupAmadeus-1}
 
-Upon acquistion of HCUP database files, you will notice that the state files are distributed as large ASCII text files. These files contain the raw data and can be very large, as they store all of the individual records for hospital stays or procedures. ARHQ provides SAS software tools to assist with loading the data into SAS for analysis, however, this doesn't help when using other coding languages like R. To solve this we utilize the .loc files (also provided on HCUP website), the year of the data and the type of data file being loaded.
+Upon acquistion of HCUP database files, you will notice that the state files are distributed as large ASCII text files. These files contain the raw data and can be very large, as they store all of the individual records for hospital stays or procedures. ARHQ provides SAS software tools to assist with loading the data into [SAS](https://hcup-us.ahrq.gov/tech_assist/software/508course.jsp#structure) for analysis, however, this doesn't help when using other coding languages like R. To solve this we utilize the .loc files (also provided on HCUP website), the year of the data and the type of data file being loaded.
 
 We will start with State level data (SID, SEDD, SASD)
 
