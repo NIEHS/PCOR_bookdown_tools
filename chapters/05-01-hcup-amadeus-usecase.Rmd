@@ -15,7 +15,7 @@
 
 
 ```{r global options, include=FALSE}
-knitr::opts_chunk$set(warning=FALSE, message=FALSE)
+knitr::opts_chunk$set(warning = FALSE, message = FALSE)
 ```
 
 ## Motivation
@@ -70,47 +70,49 @@ We start with defining the years of the data we have as well as the type of data
 
 ```{r eval=FALSE}
 # Define years and data type
-years     <-  2017   # 2016:2021
-data_type <- 'CORE'  #c("CORE", "DX_PR_GRPS", "CHGS,SEVERITY")
+years     <-  2017
+data_type <- "CORE"
 
 # Define possible data sources
-data_sources <- "SEDD" #c("SASD", "SEDD","SID")  
+data_sources <- "SEDD"
 ```
 
 ```{r eval=FALSE}
 # Missing values definition
-missing_values <- as.character(quote(c(-99, -88, -66, -99.9999999, -88.8888888, 
-                                       -66.6666666, -9, -8, -6, -5, -9999, -8888,
-                                       -6666, -99999999, -999999999, -888888888,
-                                       -666666666, -999, -888, -666)))
+missing_values <- as.character(quote(c(-99, -88, -66, -99.9999999, -88.8888888,
+                                       -66.6666666, -9, -8, -6, -5, -9999,
+                                       -8888, -6666, -99999999, -999999999,
+                                       -888888888, -666666666, -999, -888,
+                                       -666)))
 
 # Loop through data sources
 for (data_source in data_sources) {
   # Create lowercase version with "c" appended
   data_source_lower_c <- paste0(tolower(data_source), "c")
-  
+
   for (year in years) {
     # Determine fwf_positions based on the year
-    # Year 2021 had a slightly different format on the specifications at meta_url below
+    # Year 2021 had a slightly different format on the specifications
+    # at meta_url below
     if (year == 2021) {
       positions <- fwf_positions(
-        start = c(1, 5, 10, 28, 32, 64, 69, 73, 75, 80), 
+        start = c(1, 5, 10, 28, 32, 64, 69, 73, 75, 80),
         end = c(3, 8, 26, 30, 62, 67, 72, 73, 78, NA)  # NA for ragged column
       )
     } else {
       positions <- fwf_positions(
-        start = c(1, 5, 10, 27, 31, 63, 68, 73, 75, 80), 
+        start = c(1, 5, 10, 27, 31, 63, 68, 73, 75, 80),
         end = c(3, 8, 25, 29, 61, 66, 71, 73, 78, NA)  # NA for ragged column
       )
     }
-    
+
     # Read metadata with adjusted URL
-    meta_url <- paste0('https://hcup-us.ahrq.gov/db/state/', data_source_lower_c,
-                       '/tools/filespecs/OR_', data_source, '_', year, '_', 
-                       data_type, '.loc')
+    meta_url <- paste0("https://hcup-us.ahrq.gov/db/state/",
+                       data_source_lower_c, "/tools/filespecs/OR_",
+                       data_source, "_", year, "_", data_type, ".loc")
     df <- read_fwf(meta_url, positions, skip = 20)
-    
     # Read data
+
     data_file <- paste0("../OR/", data_source, "/OR_", data_source, "_",
                         year, "_", data_type, ".asc")
     df2 <- read_fwf(
@@ -119,7 +121,7 @@ for (data_source in data_sources) {
       skip = 20,
       na = missing_values
     )
-    
+
     # Write output CSV
     output_file <- paste0("OR_", data_source, "_", year, "_", data_type, ".csv")
     write.csv(df2, file = output_file, row.names = FALSE)
@@ -131,20 +133,20 @@ for (data_source in data_sources) {
 Below is a preview of metadata that we use to organize the data being read in from the ASC data files.
 
 ```{r eval=FALSE}
-# print(df)
+print(df)
 # A tibble: 702 × 10
-#    X1       X2 X3       X4 X5          X6    X7    X8 X9    X10                 
-#    <chr> <dbl> <chr> <dbl> <chr>    <dbl> <dbl> <dbl> <chr> <chr>               
-#  1 OR     2021 CORE      1 AGE          1     3    NA Num   Age in years at adm…
-#  2 OR     2021 CORE      2 AGEDAY       4     6    NA Num   Age in days (when a…
-#  3 OR     2021 CORE      3 AGEMONTH     7     9    NA Num   Age in months (when…
-#  4 OR     2021 CORE      4 AHOUR       10    13    NA Num   Admission Hour      
-#  5 OR     2021 CORE      5 AMONTH      14    15    NA Num   Admission month     
-#  6 OR     2021 CORE      6 ATYPE       16    17    NA Num   Admission type      
-#  7 OR     2021 CORE      7 AWEEKEND    18    19    NA Num   Admission day is a …
-#  8 OR     2021 CORE      8 CPT1        20    24    NA Cha   CPT/HCPCS procedure…
-#  9 OR     2021 CORE      9 CPT2        25    29    NA Cha   CPT/HCPCS procedure…
-# 10 OR     2021 CORE     10 CPT3        30    34    NA Cha   CPT/HCPCS procedure…
+#    X1       X2 X3       X4 X5          X6    X7    X8 X9    X10
+#    <chr> <dbl> <chr> <dbl> <chr>    <dbl> <dbl> <dbl> <chr> <chr>
+#  1 OR     2021 CORE      1 AGE          1     3    NA Num   Age in years at…
+#  2 OR     2021 CORE      2 AGEDAY       4     6    NA Num   Age in days (when…
+#  3 OR     2021 CORE      3 AGEMONTH     7     9    NA Num   Age in months (wh…
+#  4 OR     2021 CORE      4 AHOUR       10    13    NA Num   Admission Hour
+#  5 OR     2021 CORE      5 AMONTH      14    15    NA Num   Admission month
+#  6 OR     2021 CORE      6 ATYPE       16    17    NA Num   Admission type
+#  7 OR     2021 CORE      7 AWEEKEND    18    19    NA Num   Admission day is…
+#  8 OR     2021 CORE      8 CPT1        20    24    NA Cha   CPT/HCPCS procede…
+#  9 OR     2021 CORE      9 CPT2        25    29    NA Cha   CPT/HCPCS procedu…
+# 10 OR     2021 CORE     10 CPT3        30    34    NA Cha   CPT/HCPCS procedu…
 # ℹ 692 more rows
 # ℹ Use `print(n = ...)` to see more rows
 ```
@@ -203,10 +205,10 @@ Using `calculate_hms()`, we extract wildfire smoke plume values at the ZIP code 
 temp_covar <- calculate_hms(
   covariate = "hms",                     # Specify the covariate type
   from = cov_h,                           # Use the processed HMS data
-  locs = tigris::zctas(state = "OR", year = 2010), # Use Oregon ZIP code boundaries
+  locs = tigris::zctas(state = "OR", year = 2010), # Use Oregon ZIP code bounds
   locs_id = "ZCTA5CE10",                  # Define ZIP code identifier
   radius = 0,                              # No buffer radius
-  geom = 'sf'                              # Return as an sf object
+  geom = "sf"                              # Return as an sf object
 )
 
 # Save processed data
