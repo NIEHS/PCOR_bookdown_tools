@@ -1,5 +1,8 @@
 # HCUP and Amadeus Smoke Plume Use Case {#chapter-hcup-amadeus-usecase}
 
+[![Profile-CMP](images/user_profiles/profilecmp.svg)](#profilecmp) [![Profile-CDM](images/user_profiles/profilecdm.svg)](#profilecdm) [![Profile-CHW](images/user_profiles/profilechw.svg)](#profilechw) [![Profile-STU](images/user_profiles/profilestu.svg)](#profilestu)
+
+
 ### Integrating HCUP databases with Amadeuse Exposure data{-}
 
 **Date Modified**: February 19, 2025
@@ -41,7 +44,7 @@ This tutorial includes the following steps:
 
 ```{r eval = FALSE}
 # install required packages
-install.packages(c("readr","data.table","sf","tidyverse","tigris",
+install.packages(c("readr", "data.table", "sf", "tidyverse", "tigris",
                    "dplyr"))
 pak::pak("NIEHS/amadeus@1.1.4")
 
