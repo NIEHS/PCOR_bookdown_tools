@@ -17,14 +17,13 @@ knitr::opts_chunk$set(warning=FALSE, message=FALSE)
 
 ## Motivation
 
-Understanding the relationship between environmental exposures and health outcomes is critical for informing public health interventions and policy decisions. Integrating Healthcare Cost and Utilization Project (HCUP) data with environmental exposure datasets allows researchers to examine how factors such as air pollution, wildfire smoke, and extreme heat influence hospital visits and healthcare utilization patterns.
+Understanding the relationship between external environmental factors and health outcomes is critical for guiding public health strategies and policy decisions. Integrating Healthcare Cost and Utilization Project (HCUP) data with environmental datasets allows researchers to examine how elements such as air quality, wildfire emissions, and extreme temperatures impact hospital visits and healthcare utilization patterns.
 
-HCUP provides detailed hospitalization records, including diagnoses, procedures, and patient demographics, making it a valuable resource for studying environmentally driven health impacts. By linking these data with environmental exposure metrics—such as air quality indices, satellite-derived pollution estimates, or climate-related hazard data—researchers can identify spatial and temporal trends in health conditions like respiratory diseases, cardiovascular events, and heat-related illnesses.
+HCUP provides detailed hospitalization records, including diagnoses, procedures, and patient demographics, making it a valuable resource for studying health effects driven by environmental conditions. By linking these data with exposure metrics—such as air quality indices, satellite-derived pollution estimates, or weather-related hazard data—researchers can identify spatial and temporal trends in health conditions like respiratory diseases, cardiovascular events, and heat-related illnesses.
 
-This integration also provides an opportunity to assess disparities in environmental health burdens. Many environmental hazards disproportionately affect marginalized communities, including low-income populations and communities of color. By combining HCUP data with geographic and socioeconomic indicators, researchers can explore how social determinants of health influence vulnerability to environmental stressors. This approach supports targeted policy interventions aimed at reducing health inequities.
+This integration also offers an opportunity to assess differences in environmental health risks across various populations. Many environmental hazards disproportionately impact underserved communities, including economically disadvantaged groups and historically underrepresented populations. By combining HCUP data with geographic and socioeconomic indicators, researchers can explore how broader social factors influence vulnerability to environmental stressors. This approach supports targeted policy strategies aimed at improving health outcomes for affected groups.
 
-Ultimately, linking HCUP and environmental exposure data enhances public health surveillance, strengthens early warning systems, and informs community-level strategies for mitigating health risks associated with environmental change.
-Commit changes
+Ultimately, linking HCUP and environmental exposure data enhances public health monitoring, strengthens early warning systems, and informs localized strategies for reducing health risks associated with environmental shifts.
 
 ### Outline
 
