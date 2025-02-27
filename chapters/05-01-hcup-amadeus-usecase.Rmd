@@ -65,7 +65,7 @@ We will start with State level data (SID, SEDD, SASD)
 
 We start with defining the years of the data we have as well as the type of data we want to process. There is a core data file that all states have and additional files which may include Diagnosis and Procedure Groups, AHA Linkages, Charges, and/or Severity.
 
-```{r, echo=FALSE}
+```{r eval=FALSE}
 # Define years and data type
 years     <-  2017   # 2016:2021
 data_type <- 'CORE'  #c("CORE", "DX_PR_GRPS", "CHGS,SEVERITY")
@@ -74,7 +74,7 @@ data_type <- 'CORE'  #c("CORE", "DX_PR_GRPS", "CHGS,SEVERITY")
 data_sources <- "SEDD" #c("SASD", "SEDD","SID")  
 ```
 
-```{r, echo=FALSE}
+```{r eval=FALSE}
 # Missing values definition
 missing_values <- as.character(quote(c(-99, -88, -66, -99.9999999, -88.8888888, 
                                        -66.6666666, -9, -8, -6, -5, -9999, -8888,
@@ -154,7 +154,7 @@ This section provides a step-by-step guide to downloading and processing wildfir
 
 The first step is to specify the date range for which we want to download wildfire smoke exposure data.
 
-```{r, echo=FALSE}
+```{r eval=FALSE}
 time_range <- c("2021-01-01", "2021-12-31") # Range of dates for exposure data
 ```
 
@@ -162,7 +162,7 @@ time_range <- c("2021-01-01", "2021-12-31") # Range of dates for exposure data
 
 Using the `amadeus::download_hms()` function, we download HMS smoke plume data in shapefile format within the specified time range. The data will be saved in a local directory.
 
-```{r, echo=FALSE}
+```{r eval=FALSE}
 amadeus::download_hms(
   data_format = "shapefile",  # Specify format as shapefile
   date = time_range,          # Use the defined time range
@@ -176,7 +176,7 @@ amadeus::download_hms(
 
 To analyze smoke exposure by geographic location, we retrieve ZCTA boundaries for Oregon using the `tigris` package.
 
-```{r, echo=FALSE}
+```{r eval=FALSE}
 or <- tigris::zctas(state = "OR", year = 2010)  # Get Oregon ZCTA boundaries
 ```
 
@@ -184,7 +184,7 @@ or <- tigris::zctas(state = "OR", year = 2010)  # Get Oregon ZCTA boundaries
 
 Once the raw HMS data is downloaded, we process it using `process_hms()`. This function cleans and filters the data based on the given time range and geographic extent (Oregon ZCTAs).
 
-```{r, echo=FALSE}
+```{r eval=FALSE}
 cov_h <- process_hms(
   date = time_range,          # Specify the date range
   path = "./data/data_files/", # Path to the downloaded data files
@@ -196,7 +196,7 @@ cov_h <- process_hms(
 
 Using `calculate_hms()`, we extract wildfire smoke plume values at the ZIP code (ZCTA) level. This function returns a data frame containing `locs_id`, `date`, and a binary variable for wildfire smoke plume density.
 
-```{r, echo=FALSE}
+```{r eval=FALSE}
 temp_covar <- calculate_hms(
   covariate = "hms",                     # Specify the covariate type
   from = cov_h,                           # Use the processed HMS data
