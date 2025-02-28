@@ -2,7 +2,7 @@
 
 [![Profile-CMP](images/user_profiles/profilecmp.svg)](#profilecmp) [![Profile-CDM](images/user_profiles/profilecdm.svg)](#profilecdm) [![Profile-CHW](images/user_profiles/profilechw.svg)](#profilechw) [![Profile-STU](images/user_profiles/profilestu.svg)](#profilestu)
 
-### Integrating HCUP databases with Amadeuse Exposure data {.unnumbered}
+### Integrating HCUP databases with Amadeus Exposure data {.unnumbered}
 
 **Date Modified**: February 19, 2025
 
