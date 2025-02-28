@@ -1,0 +1,217 @@
+# HCUP and Amadeus Smoke Plume Use Case {#chapter-hcup-amadeus-usecase}
+
+[![Profile-CMP](images/user_profiles/profilecmp.svg)](#profilecmp) [![Profile-CDM](images/user_profiles/profilecdm.svg)](#profilecdm) [![Profile-CHW](images/user_profiles/profilechw.svg)](#profilechw) [![Profile-STU](images/user_profiles/profilestu.svg)](#profilestu)
+
+### Integrating HCUP databases with Amadeus Exposure data {.unnumbered}
+
+**Date Modified**: February 19, 2025
+
+**Author**: Darius M. Bost
+
+<!-- **Key Terms**: [Data Integration](https://tools.niehs.nih.gov/cchhglossary/?keyword=data+integration&termOnlySearch=true&exactSearch=true), [Social Determinants of Health](https://tools.niehs.nih.gov/cchhglossary/?keyword=social+determinants+of+health+(sdoh)&termOnlySearch=true&exactSearch=true), [Geocoded Address](#def-geocoded-address), [GeoID](#def-geoid), [Geographic Unit](#def-geographic-unit) -->
+
+**Programming Language**: R
+
+```{r global options, include=FALSE}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE)
+```
+
+## Motivation
+
+Understanding the relationship between external environmental factors and health outcomes is critical for guiding public health strategies and policy decisions. Integrating Healthcare Cost and Utilization Project (HCUP) data with environmental datasets allows researchers to examine how elements such as air quality, wildfire emissions, and extreme temperatures impact hospital visits and healthcare utilization patterns.
+
+Ultimately, linking HCUP and environmental exposure data enhances public health monitoring and helps researchers better quantify environmental health risks.
+
+### Outline
+
+This tutorial includes the following steps:
+
+1.  [Install R packages](#link-to-hcupAmadeus-0)
+
+2.  [Data Curation and Prep](#link-to-hcupAmadeus-1)
+
+3.  [Downloading and Processing Exposure Data with the `amadeus` Package](#link-to-hcupAmadeus-2)
+
+## Tutorial
+
+### Install R Packages {#link-to-hcupAmadeus-0}
+
+```{r eval = FALSE}
+# install required packages
+install.packages(c("readr", "data.table", "sf", "tidyverse", "tigris",
+                   "dplyr", "amadeus"))
+
+# load required packages
+library(readr)
+library(data.table)
+library(sf)
+library(tidyverse)
+library(amadeus)
+library(tigris)
+library(dplyr)
+```
+
+## Data Curation and Prep {#link-to-hcupAmadeus-1}
+
+Upon acquistion of HCUP database files, you will notice that the state files are distributed as large ASCII text files. These files contain the raw data and can be very large, as they store all of the individual records for hospital stays or procedures. ARHQ provides SAS software tools to assist with loading the data into [SAS](https://hcup-us.ahrq.gov/tech_assist/software/508course.jsp#structure) for analysis, however, this doesn't help when using other coding languages like R. To solve this we utilize the .loc files (also provided on HCUP website), the year of the data and the type of data file being loaded.
+
+We will start with State level data: State Inpatient Database (SID), State Emergency Department Database (SEDD), and State Ambulatory Surgery and Services Database(SASD).
+
+### Read and format HCUP datafiles
+
+We start with defining the years of the data we have as well as the type of data we want to process. There is a core data file that all states have and additional files which may include Diagnosis and Procedure Groups, AHA Linkages, Charges, and/or Severity.
+
+```{r eval=FALSE}
+# Define years and data type
+years     <-  2021
+data_type <- "CORE"
+
+# Define possible data sources
+data_sources <- "SEDD"
+```
+
+```{r eval=FALSE}
+# Missing values definition
+missing_values <- as.character(quote(c(-99, -88, -66, -99.9999999, -88.8888888,
+                                       -66.6666666, -9, -8, -6, -5, -9999,
+                                       -8888, -6666, -99999999, -999999999,
+                                       -888888888, -666666666, -999, -888,
+                                       -666)))
+
+# Loop through data sources
+for (data_source in data_sources) {
+  # Create lowercase version with "c" appended
+  data_source_lower_c <- paste0(tolower(data_source), "c")
+
+  for (year in years) {
+    # Determine fwf_positions based on the year
+    # Year 2021 had a slightly different format on the specifications
+    # at meta_url below
+    if (year == 2021) {
+      positions <- readr::fwf_positions(
+        start = c(1, 5, 10, 28, 32, 64, 69, 73, 75, 80),
+        end = c(3, 8, 26, 30, 62, 67, 72, 73, 78, NA)  # NA for ragged column
+      )
+    } else {
+      positions <- readr::fwf_positions(
+        start = c(1, 5, 10, 27, 31, 63, 68, 73, 75, 80),
+        end = c(3, 8, 25, 29, 61, 66, 71, 73, 78, NA)  # NA for ragged column
+      )
+    }
+```
+The `fwf_positions()` function is utilizing column start and end positions found on the ahrq website (`meta_url` listed in next code chunk). We use these positions to read in the raw data files from their .asc format. 
+::: figure
+<img src="images/hcup_amadeus_usecase/oregon2021_SEDD_core_loc_file.png" style="width:100%"/>
+
+<figcaption>This is an example of the specifications loc file</figcaption>
+:::
+
+```{r eval = FALSE}
+    # Read metadata with adjusted URL
+    meta_url <- paste0("https://hcup-us.ahrq.gov/db/state/",
+                       data_source_lower_c, "/tools/filespecs/OR_",
+                       data_source, "_", year, "_", data_type, ".loc")
+    df <- readr::read_fwf(meta_url, positions, skip = 20)
+    # Read data
+
+    data_file <- paste0("../OR/", data_source, "/OR_", data_source, "_",
+                        year, "_", data_type, ".asc")
+    df2 <- readr::read_fwf(
+      data_file,
+      readr::fwf_positions(start = df$X6, end = df$X7, col_names = df$X5),
+      skip = 20,
+      na = missing_values
+    )
+
+    # Write output CSV
+    output_file <- paste0("OR_", data_source, "_", year, "_", data_type, ".csv")
+    write.csv(df2, file = output_file, row.names = FALSE)
+  }
+}
+#Output file: OR_SEDD_2021_CORE.csv
+```
+
+We can test what that our positions are right for reading in raw data by printing `df`.
+
+```{r eval=FALSE}
+print(df)
+# A tibble: 702 × 10
+#    X1       X2 X3       X4 X5          X6    X7    X8 X9    X10
+#    <chr> <dbl> <chr> <dbl> <chr>    <dbl> <dbl> <dbl> <chr> <chr>
+#  1 OR     2021 CORE      1 AGE          1     3    NA Num   Age in years at…
+#  2 OR     2021 CORE      2 AGEDAY       4     6    NA Num   Age in days (when…
+#  3 OR     2021 CORE      3 AGEMONTH     7     9    NA Num   Age in months (wh…
+#  4 OR     2021 CORE      4 AHOUR       10    13    NA Num   Admission Hour
+#  5 OR     2021 CORE      5 AMONTH      14    15    NA Num   Admission month
+#  6 OR     2021 CORE      6 ATYPE       16    17    NA Num   Admission type
+#  7 OR     2021 CORE      7 AWEEKEND    18    19    NA Num   Admission day is…
+#  8 OR     2021 CORE      8 CPT1        20    24    NA Cha   CPT/HCPCS procede…
+#  9 OR     2021 CORE      9 CPT2        25    29    NA Cha   CPT/HCPCS procedu…
+# 10 OR     2021 CORE     10 CPT3        30    34    NA Cha   CPT/HCPCS procedu…
+# ℹ 692 more rows
+# ℹ Use `print(n = ...)` to see more rows
+```
+
+## Downloading and Processing Exposure Data with the `amadeus` Package {#link-to-hcupAmadeus-2}
+
+This section provides a step-by-step guide to downloading and processing wildfire smoke exposure data using the `amadeus` package. The process includes retrieving Hazard Mapping System (HMS) smoke plume data, spatially joining it with ZIP Code Tabulation Areas (ZCTAs) for Oregon, and calculating summary statistics on smoke density.
+
+### Step 1: Define Time Range
+
+The first step is to specify the date range for which we want to download wildfire smoke exposure data.
+
+```{r eval=FALSE}
+time_range <- c("2021-01-01", "2021-12-31") # Range of dates for exposure data
+```
+
+### Step 2: Download HMS Smoke Plume Data
+
+Using the `amadeus::download_hms()` function, we download HMS smoke plume data in shapefile format within the specified time range. The data will be saved in a local directory.
+
+```{r eval=FALSE}
+amadeus::download_hms(
+  data_format = "shapefile",  # Specify format as shapefile
+  date = time_range,          # Use the defined time range
+  directory_to_save = "./data",  # Set the directory for saving files
+  acknowledgement = TRUE,       # Accept the data use acknowledgement
+  download = TRUE               # Enable downloading
+)
+```
+
+### Step 3: Load Oregon ZIP Code Spatial Data
+
+To analyze smoke exposure by geographic location, we retrieve ZCTA boundaries for Oregon using the `tigris` package.
+
+```{r eval=FALSE}
+or <- tigris::zctas(state = "OR", year = 2010)  # Get Oregon ZCTA boundaries
+```
+
+### Step 4: Process HMS Data
+
+Once the raw HMS data is downloaded, we process it using `process_hms()`. This function cleans and filters the data based on the given time range and geographic extent (Oregon ZCTAs).
+
+```{r eval=FALSE}
+cov_h <- process_hms(
+  date = time_range,          # Specify the date range
+  path = "./data/data_files/", # Path to the downloaded data files
+  extent = sf::st_bbox(or)    # Limit processing to Oregon's spatial extent
+)
+```
+
+### Step 5: Extract Smoke Plume Values at ZIP Code Locations
+
+Using `calculate_hms()`, we extract wildfire smoke plume values at the ZIP code (ZCTA) level. This function returns a data frame containing `locs_id`, `date`, and a binary variable for wildfire smoke plume density.
+
+```{r eval=FALSE}
+temp_covar <- calculate_hms(
+  covariate = "hms",                     # Specify the covariate type
+  from = cov_h,                           # Use the processed HMS data
+  locs = tigris::zctas(state = "OR", year = 2010), # Use Oregon ZIP code bounds
+  locs_id = "ZCTA5CE10",                  # Define ZIP code identifier
+  radius = 0,                              # No buffer radius
+  geom = "sf"                              # Return as an sf object
+)
+
+# Save processed data
+saveRDS(temp_covar, "smoke_plume2021_covar.R")
+```
