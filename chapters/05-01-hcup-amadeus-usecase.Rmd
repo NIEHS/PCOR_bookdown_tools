@@ -2,17 +2,15 @@
 
 [![Profile-CMP](images/user_profiles/profilecmp.svg)](#profilecmp) [![Profile-CDM](images/user_profiles/profilecdm.svg)](#profilecdm) [![Profile-CHW](images/user_profiles/profilechw.svg)](#profilechw) [![Profile-STU](images/user_profiles/profilestu.svg)](#profilestu)
 
-
-### Integrating HCUP databases with Amadeuse Exposure data{-}
+### Integrating HCUP databases with Amadeuse Exposure data {.unnumbered}
 
 **Date Modified**: February 19, 2025
 
-**Author**: Darius M. Bost 
+**Author**: Darius M. Bost
 
 <!-- **Key Terms**: [Data Integration](https://tools.niehs.nih.gov/cchhglossary/?keyword=data+integration&termOnlySearch=true&exactSearch=true), [Social Determinants of Health](https://tools.niehs.nih.gov/cchhglossary/?keyword=social+determinants+of+health+(sdoh)&termOnlySearch=true&exactSearch=true), [Geocoded Address](#def-geocoded-address), [GeoID](#def-geoid), [Geographic Unit](#def-geographic-unit) -->
 
 **Programming Language**: R
-
 
 ```{r global options, include=FALSE}
 knitr::opts_chunk$set(warning = FALSE, message = FALSE)
@@ -22,11 +20,7 @@ knitr::opts_chunk$set(warning = FALSE, message = FALSE)
 
 Understanding the relationship between external environmental factors and health outcomes is critical for guiding public health strategies and policy decisions. Integrating Healthcare Cost and Utilization Project (HCUP) data with environmental datasets allows researchers to examine how elements such as air quality, wildfire emissions, and extreme temperatures impact hospital visits and healthcare utilization patterns.
 
-HCUP provides detailed hospitalization records, including diagnoses, procedures, and patient demographics, making it a valuable resource for studying health effects driven by environmental conditions. By linking these data with exposure metrics—such as air quality indices, satellite-derived pollution estimates, or weather-related hazard data—researchers can identify spatial and temporal trends in health conditions like respiratory diseases, cardiovascular events, and heat-related illnesses.
-
-This integration also offers an opportunity to assess differences in environmental health risks across various populations. Many environmental hazards disproportionately impact underserved communities, including economically disadvantaged groups and historically underrepresented populations. By combining HCUP data with geographic and socioeconomic indicators, researchers can explore how broader social factors influence vulnerability to environmental stressors. This approach supports targeted policy strategies aimed at improving health outcomes for affected groups.
-
-Ultimately, linking HCUP and environmental exposure data enhances public health monitoring, strengthens early warning systems, and informs localized strategies for reducing health risks associated with environmental shifts.
+Ultimately, linking HCUP and environmental exposure data enhances public health monitoring and helps researchers better quantify environmental health risks.
 
 ### Outline
 
@@ -45,8 +39,7 @@ This tutorial includes the following steps:
 ```{r eval = FALSE}
 # install required packages
 install.packages(c("readr", "data.table", "sf", "tidyverse", "tigris",
-                   "dplyr"))
-pak::pak("NIEHS/amadeus@1.1.4")
+                   "dplyr", "amadeus"))
 
 # load required packages
 library(readr)
@@ -62,7 +55,7 @@ library(dplyr)
 
 Upon acquistion of HCUP database files, you will notice that the state files are distributed as large ASCII text files. These files contain the raw data and can be very large, as they store all of the individual records for hospital stays or procedures. ARHQ provides SAS software tools to assist with loading the data into [SAS](https://hcup-us.ahrq.gov/tech_assist/software/508course.jsp#structure) for analysis, however, this doesn't help when using other coding languages like R. To solve this we utilize the .loc files (also provided on HCUP website), the year of the data and the type of data file being loaded.
 
-We will start with State level data (SID, SEDD, SASD)
+We will start with State level data: State Inpatient Database (SID), State Emergency Department Database (SEDD), and State Ambulatory Surgery and Services Database(SASD).
 
 ### Read and format HCUP datafiles
 
@@ -70,7 +63,7 @@ We start with defining the years of the data we have as well as the type of data
 
 ```{r eval=FALSE}
 # Define years and data type
-years     <-  2017
+years     <-  2021
 data_type <- "CORE"
 
 # Define possible data sources
@@ -95,29 +88,37 @@ for (data_source in data_sources) {
     # Year 2021 had a slightly different format on the specifications
     # at meta_url below
     if (year == 2021) {
-      positions <- fwf_positions(
+      positions <- readr::fwf_positions(
         start = c(1, 5, 10, 28, 32, 64, 69, 73, 75, 80),
         end = c(3, 8, 26, 30, 62, 67, 72, 73, 78, NA)  # NA for ragged column
       )
     } else {
-      positions <- fwf_positions(
+      positions <- readr::fwf_positions(
         start = c(1, 5, 10, 27, 31, 63, 68, 73, 75, 80),
         end = c(3, 8, 25, 29, 61, 66, 71, 73, 78, NA)  # NA for ragged column
       )
     }
+```
+The `fwf_positions()` function is utilizing column start and end positions found on the ahrq website (`meta_url` listed in next code chunk). We use these positions to read in the raw data files from their .asc format. 
+::: figure
+<img src="images/hcup_amadeus_usecase/oregon2021_SEDD_core_loc_file.png" style="width:100%"/>
 
+<figcaption>This is an example of the specifications loc file</figcaption>
+:::
+
+```{r eval = FALSE}
     # Read metadata with adjusted URL
     meta_url <- paste0("https://hcup-us.ahrq.gov/db/state/",
                        data_source_lower_c, "/tools/filespecs/OR_",
                        data_source, "_", year, "_", data_type, ".loc")
-    df <- read_fwf(meta_url, positions, skip = 20)
+    df <- readr::read_fwf(meta_url, positions, skip = 20)
     # Read data
 
     data_file <- paste0("../OR/", data_source, "/OR_", data_source, "_",
                         year, "_", data_type, ".asc")
-    df2 <- read_fwf(
+    df2 <- readr::read_fwf(
       data_file,
-      fwf_positions(start = df$X6, end = df$X7, col_names = df$X5),
+      readr::fwf_positions(start = df$X6, end = df$X7, col_names = df$X5),
       skip = 20,
       na = missing_values
     )
@@ -130,7 +131,7 @@ for (data_source in data_sources) {
 #Output file: OR_SEDD_2021_CORE.csv
 ```
 
-Below is a preview of metadata that we use to organize the data being read in from the ASC data files.
+We can test what that our positions are right for reading in raw data by printing `df`.
 
 ```{r eval=FALSE}
 print(df)
