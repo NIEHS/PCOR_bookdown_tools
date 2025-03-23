@@ -18,7 +18,7 @@ knitr::opts_chunk$set(warning = FALSE, message = FALSE)
 
 ## Motivation
 
-Understanding the relationship between external environmental factors and health outcomes is critical for guiding public health strategies and policy decisions. Integrating Healthcare Cost and Utilization Project (HCUP) data with environmental datasets allows researchers to examine how elements such as air quality, wildfire emissions, and extreme temperatures impact hospital visits and healthcare utilization patterns.
+Understanding the relationship between external environmental factors and health outcomes is critical for guiding public health strategies and policy decisions. Integrating individual patient records from the Healthcare Cost and Utilization Project (HCUP) with data from environmental datasets allows researchers to examine how elements such as air quality, wildfire emissions, and extreme temperatures impact hospital visits and healthcare utilization patterns.
 
 Ultimately, linking HCUP and environmental exposure data enhances public health monitoring and helps researchers better quantify environmental health risks.
 
@@ -38,8 +38,7 @@ This tutorial includes the following steps:
 
 ```{r eval = FALSE}
 # install required packages
-install.packages(c("readr", "data.table", "sf", "tidyverse", "tigris",
-                   "dplyr", "amadeus"))
+install.packages(c("readr", "data.table", "sf", "tidyverse", "tigris","dplyr", "amadeus"))
 
 # load required packages
 library(readr)
@@ -52,6 +51,8 @@ library(dplyr)
 ```
 
 ## Data Curation and Prep {#link-to-hcupAmadeus-1}
+
+HCUP data files from AHRQ can be obtained from their [HCUP Central Distributor](https://cdors.ahrq.gov/) site where it details the data use aggreement, how to purchase, protect, re-use and share the HCUP data.
 
 Upon acquistion of HCUP database files, you will notice that the state files are distributed as large ASCII text files. These files contain the raw data and can be very large, as they store all of the individual records for hospital stays or procedures. ARHQ provides SAS software tools to assist with loading the data into [SAS](https://hcup-us.ahrq.gov/tech_assist/software/508course.jsp#structure) for analysis, however, this doesn't help when using other coding languages like R. To solve this we utilize the .loc files (also provided on HCUP website), the year of the data and the type of data file being loaded.
 
@@ -99,7 +100,9 @@ for (data_source in data_sources) {
       )
     }
 ```
-The `fwf_positions()` function is utilizing column start and end positions found on the ahrq website (`meta_url` listed in next code chunk). We use these positions to read in the raw data files from their .asc format. 
+
+The `fwf_positions()` function is utilizing column start and end positions found on the ahrq website (`meta_url` listed in next code chunk). We use these positions to read in the raw data files from their .asc format.
+
 ::: figure
 <img src="images/hcup_amadeus_usecase/oregon2021_SEDD_core_loc_file.png" style="width:100%"/>
 
@@ -152,9 +155,27 @@ print(df)
 # ℹ Use `print(n = ...)` to see more rows
 ```
 
-## Downloading and Processing Exposure Data with the `amadeus` Package {#link-to-hcupAmadeus-2}
+### Confirming data Characteristics
 
-This section provides a step-by-step guide to downloading and processing wildfire smoke exposure data using the `amadeus` package. The process includes retrieving Hazard Mapping System (HMS) smoke plume data, spatially joining it with ZIP Code Tabulation Areas (ZCTAs) for Oregon, and calculating summary statistics on smoke density.
+We now have or CSV formatted file `OR_SEDD_2021_CORE.csv`. We can check summary statistics for our data by going to HCUP databases page [here](https://hcup-us.ahrq.gov/databases.jsp).
+
+To get to the summary table for our data we do the following:
+
+1.  Click on the link for SEDD.
+
+2.  Next we find the section on Data Elements
+
+::: figure
+<img src="images/hcup_amadeus_usecase/hcup_data_elements.png" style="width:100%"/>
+:::
+
+3.  From here we want to select `Summary Statistics for All States and Years`. This will redirect us to a page that allows the selection of our database attributes (state, year, database choice)
+
+4.  Lastly we select the file we're interested in. In our example we downloaded the CORE file so that summary table will look like [this](https://hcup-us.ahrq.gov/db/state/seddc/tools/cdstats/OR_SEDDC_2021_SummaryStats_CORE.PDF).
+
+## Downloading and Processing Exposure Data with the [`amadeus`](https://niehs.github.io/amadeus/) Package {#link-to-hcupAmadeus-2}
+
+This section provides a step-by-step guide to downloading and processing wildfire smoke exposure data using the `amadeus` package. The process includes retrieving [Hazard Mapping System (HMS) smoke plume data](https://www.ospo.noaa.gov/products/land/hms.html#0), spatially joining it with ZIP Code Tabulation Areas (ZCTAs) for Oregon, and calculating summary statistics on smoke density.
 
 ### Step 1: Define Time Range
 
@@ -215,3 +236,34 @@ temp_covar <- calculate_hms(
 # Save processed data
 saveRDS(temp_covar, "smoke_plume2021_covar.R")
 ```
+
+In preparation for the next section we are going to make two new dataframes from our `temp_covar` object. The first collapses our zipcodes taking the average of light, medium, or heavy days.
+
+```{r eval=FALSE}
+avg_smoke_density <- temp_covar %>%
+  group_by(ZCTA5CE10) %>%
+  summarise(
+    avg_light = mean(light_00000, na.rm = TRUE),
+    avg_medium = mean(medium_00000, na.rm = TRUE),
+    avg_heavy = mean(heavy_00000, na.rm = TRUE),
+  )
+print(avg_smoke_density)
+saveRDS(avg_smoke_density, "smoke_density_avg_byZip.R")
+```
+
+The second dataframe also groups by our zip but takes the summation of the smoke plume days instead of an average.
+
+```{r eval=FALSE}
+total_smoke_density <- temp_covar %>%
+  group_by(ZCTA5CE10) %>%
+  summarise(
+    sum_light = sum(light_00000, na.rm = TRUE),
+    sum_medium = sum(medium_00000, na.rm = TRUE),
+    sum_heavy = sum(heavy_00000, na.rm = TRUE),
+    geometry = st_union(geometry) 
+  )
+print(total_smoke_density)
+saveRDS(total_smoke_density, "smoke_density_total_byZip.R")
+```
+
+## Data Analysis using HCUP and Amadeus data sources
