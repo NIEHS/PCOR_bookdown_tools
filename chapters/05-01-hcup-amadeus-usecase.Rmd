@@ -38,7 +38,8 @@ This tutorial includes the following steps:
 
 ```{r eval = FALSE}
 # install required packages
-install.packages(c("readr", "data.table", "sf", "tidyverse", "tigris","dplyr", "amadeus"))
+install.packages(c("readr", "data.table", "sf", "tidyverse", "tigris", "dplyr",
+                   "amadeus"))
 
 # load required packages
 library(readr)
@@ -260,7 +261,7 @@ total_smoke_density <- temp_covar %>%
     sum_light = sum(light_00000, na.rm = TRUE),
     sum_medium = sum(medium_00000, na.rm = TRUE),
     sum_heavy = sum(heavy_00000, na.rm = TRUE),
-    geometry = st_union(geometry) 
+    geometry = st_union(geometry)
   )
 print(total_smoke_density)
 saveRDS(total_smoke_density, "smoke_density_total_byZip.R")
