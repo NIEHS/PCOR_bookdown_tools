@@ -123,7 +123,7 @@ The `fwf_positions()` function is utilizing column start and end positions found
     df2 <- readr::read_fwf(
       data_file,
       readr::fwf_positions(start = df$X6, end = df$X7, col_names = df$X5),
-      skip = 20,
+      skip = 2,
       na = missing_values
     )
 
@@ -235,7 +235,7 @@ temp_covar <- calculate_hms(
 )
 
 # Save processed data
-saveRDS(temp_covar, "smoke_plume2021_covar.R")
+saveRDS(temp_covar, "smoke_plume_covar.R")
 ```
 
 In preparation for the next section we are going to make two new dataframes from our `temp_covar` object. The first collapses our zipcodes taking the average of light, medium, or heavy days.
@@ -250,6 +250,17 @@ avg_smoke_density <- temp_covar %>%
   )
 print(avg_smoke_density)
 saveRDS(avg_smoke_density, "smoke_density_avg_byZip.R")
+
+# > head(avg_smoke_density)
+# # A tibble: 6 × 4
+#   ZCTA5CE10 avg_light avg_medium avg_heavy
+#   <fct>         <dbl>      <dbl>     <dbl>
+# 1 97833         0.129     0.194     0.419 
+# 2 97840         0.161     0.226     0.387 
+# 3 97330         0.290     0.129     0.0323
+# 4 97004         0.258     0.0968    0.0323
+# 5 97023         0.194     0.0968    0.0323
+# 6 97042         0.258     0.129     0.0323
 ```
 
 The second dataframe also groups by our zip but takes the summation of the smoke plume days instead of an average.
@@ -265,6 +276,146 @@ total_smoke_density <- temp_covar %>%
   )
 print(total_smoke_density)
 saveRDS(total_smoke_density, "smoke_density_total_byZip.R")
+
+# > head(total_smoke_density)
+# # A tibble: 6 × 5
+#   ZCTA5CE10 sum_light sum_medium sum_heavy                            geometry
+#   <fct>         <int>      <int>     <int>                      <GEOMETRY [°]>
+# 1 97833             4          6        13 MULTIPOLYGON (((-118.1571 44.9990,…
+# 2 97840             5          7        12 POLYGON ((-116.9899 44.88256, -116…
+# 3 97330             9          4         1 POLYGON ((-123.1829 44.64559, -123…
+# 4 97004             8          3         1 POLYGON ((-122.4867 45.22209, -122…
+# 5 97023             6          3         1 POLYGON ((-122.0758 45.10881, -122…
+# 6 97042             8          4         1 POLYGON ((-122.5842 45.20546, -122…
 ```
 
 ## Data Analysis using HCUP and Amadeus data sources
+
+First we will load in our hcup data file we processed earlier and subset the file to a set of observations that make the data easier to work with (702 to 39 columns) and are still interesting for analysis. This includes zipcodes, age at admission, admission month, race identifier, sex, and ICD 10 diagnosis codes.
+
+```{r eval=FALSE}
+or_sedd_2021 <- fread("OR_SEDD_2021_CORE.csv")
+subset_data <- or_sedd_2021 %>%
+  select(FEMALE, ZIP, PSTCO, AGE, RACE, AMONTH, starts_with("I10_"))
+head(subset_data)
+
+# [1] "FEMALE"               "ZIP"                  "PSTCO"               
+#  [4] "AGE"                  "RACE"                 "AMONTH"              
+#  [7] "I10_DX_Visit_Reason1" "I10_DX_Visit_Reason2" "I10_DX_Visit_Reason3"
+# [10] "I10_DX1"              "I10_DX2"              "I10_DX3"             
+# [13] "I10_DX4"              "I10_DX5"              "I10_DX6"             
+# [16] "I10_DX7"              "I10_DX8"              "I10_DX9"             
+# [19] "I10_DX10"             "I10_DX11"             "I10_DX12"            
+# [22] "I10_DX13"             "I10_DX14"             "I10_DX15"            
+# [25] "I10_DX16"             "I10_DX17"             "I10_DX18"            
+# [28] "I10_DX19"             "I10_DX20"             "I10_DX21"            
+# [31] "I10_DX22"             "I10_DX23"             "I10_DX24"            
+# [34] "I10_DX25"             "I10_DX26"             "I10_DX27"            
+# [37] "I10_DX28"             "I10_NDX"              "I10_PROCTYPE"        
+
+```
+
+Next we will select July as our month of interest to further reduce the size of the data and to focus on a time frame where we know fires took place in Oregon. We will also load in our environmental data files we made above from amadeus.
+
+```{r eval=FALSE}
+# subset data to July
+july_subset_hcup_data <- subset_data[subset_data$AMONTH == 7,]
+
+# load in amadeus files we made previously
+avg_smoke_density <- readRDS("smoke_density_avg_byZip.R")
+total_smoke_density <- readRDS("smoke_density_total_byZip.R")
+```
+
+### Merging Environmental Data with Hospital Data
+
+We will now merge our environmental data into our hospital discharge (HCUP) data using an inner join on ZIP codes present in both datasets.
+
+```{r eval=FALSE}
+# Perform an inner join to merge `july_subset_hcup_data` with 
+# `avg_smoke_density` based on the ZIP code (`ZIP` in HCUP data and 
+# `ZCTA5CE10` in smoke density data)
+merged_data <- inner_join(july_subset_hcup_data, avg_smoke_density,
+                          by = c("ZIP" = "ZCTA5CE10"))
+
+# Perform another inner join to add `total_smoke_density` to the existing 
+# `merged_data`
+merged_data <- inner_join(merged_data, total_smoke_density,
+                          by = c("ZIP" = "ZCTA5CE10"))
+```
+
+### Identifying Asthma Cases
+
+Next, we will identify individuals diagnosed with asthma. This involves searching for the ICD-10 code "J45" within the diagnosis columns of our dataset.
+
+```{r eval=FALSE}
+# Identify the columns containing diagnosis codes (prefix "I10_")
+diag_columns <- grep("^I10_", colnames(merged_data), value = TRUE)
+
+# Create a new column `has_asthma` that checks if any diagnosis contains "J45"
+smoke_summary <- merged_data %>%
+  mutate(has_asthma = apply(select(., all_of(diag_columns)), 1, function(x) {
+    any(grepl("J45", x))
+  }))
+
+# Count total number of individuals in the dataset
+total_individuals <- nrow(smoke_summary)
+
+# Count the number of individuals with an asthma diagnosis
+asthma_cases <- sum(smoke_summary$has_asthma, na.rm = TRUE)
+
+# Calculate the proportion of individuals diagnosed with asthma
+asthma_rate <- asthma_cases / total_individuals
+```
+
+### Visualizing the Relationship Between Heavy Smoke Exposure and Asthma
+
+We will now generate a boxplot to visualize the distribution of average heavy smoke days across individuals with and without an asthma diagnosis.
+
+```{r eval=FALSE}
+ggplot(smoke_summary, aes(x = factor(has_asthma), y = avg_heavy,
+                          fill = factor(has_asthma))) +
+  geom_boxplot() +
+  labs(
+    x = "Has Asthma (J45)",
+    y = "Average Heavy Smoke Days",
+    fill = "Has Asthma",
+    title = "Average Heavy Smoke Days vs Asthma Diagnosis"
+  ) +
+  theme_minimal()
+```
+
+### Logistic Regression Analysis
+
+Finally, we fit a logistic regression model to examine the relationship between asthma diagnoses and exposure to different levels of smoke density.
+
+```{r eval=FALSE}
+# Fit a logistic regression model with asthma diagnosis as the outcome variable
+# and different smoke exposure levels as predictors
+model <- glm(has_asthma ~ avg_light + avg_medium + avg_heavy, 
+             data = smoke_summary, family = binomial)
+
+# Display model summary
+summary(model)
+# Call:
+# glm(formula = has_asthma ~ avg_light + avg_medium + avg_heavy, 
+#     family = binomial, data = smoke_summary)
+# 
+# Coefficients:
+#             Estimate Std. Error z value Pr(>|z|)    
+# (Intercept) -3.38823    0.09077 -37.329  < 2e-16 ***
+# avg_light   -0.21258    0.30322  -0.701    0.483    
+# avg_medium   1.74996    0.32456   5.392 6.98e-08 ***
+# avg_heavy    1.82572    0.16826  10.850  < 2e-16 ***
+# ---
+# Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+# 
+# (Dispersion parameter for binomial family taken to be 1)
+# 
+#     Null deviance: 42004  on 111124  degrees of freedom
+# Residual deviance: 41674  on 111121  degrees of freedom
+# AIC: 41682
+# 
+# Number of Fisher Scoring iterations: 6
+```
+
+The output provides estimates for each predictor, helping us assess the impact of light, medium, and heavy smoke exposure on asthma prevalence.
