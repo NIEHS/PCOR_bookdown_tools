@@ -99,7 +99,8 @@ for (data_source in data_sources) {
         start = c(1, 5, 10, 27, 31, 63, 68, 73, 75, 80),
         end = c(3, 8, 25, 29, 61, 66, 71, 73, 78, NA)  # NA for ragged column
       )
-    }
+    } #Ends if statement
+    # 'data_source in data_sources' and 'year in years' loop continues below
 ```
 
 The `fwf_positions()` function is utilizing column start and end positions found on the ahrq website (`meta_url` listed in next code chunk). We use these positions to read in the raw data files from their .asc format.
@@ -115,11 +116,18 @@ The `fwf_positions()` function is utilizing column start and end positions found
     meta_url <- paste0("https://hcup-us.ahrq.gov/db/state/",
                        data_source_lower_c, "/tools/filespecs/OR_",
                        data_source, "_", year, "_", data_type, ".loc")
+
+    # Skip the first 20 lines because they contain header information and
+    # descriptions, not column metadata
     df <- readr::read_fwf(meta_url, positions, skip = 20)
     # Read data
-
+    # Set directory to location where HCUP ASCII file was downloaded
+    # Users should replace "../OR/" with their own download path
     data_file <- paste0("../OR/", data_source, "/OR_", data_source, "_",
                         year, "_", data_type, ".asc")
+    # fwf_positions are passed column positions from df (file specifications)
+    # file. Ex. df$X5 has all the column names for our meta_data. See print(df)
+    # below.
     df2 <- readr::read_fwf(
       data_file,
       readr::fwf_positions(start = df$X6, end = df$X7, col_names = df$X5),
@@ -130,8 +138,8 @@ The `fwf_positions()` function is utilizing column start and end positions found
     # Write output CSV
     output_file <- paste0("OR_", data_source, "_", year, "_", data_type, ".csv")
     write.csv(df2, file = output_file, row.names = FALSE)
-  }
-}
+  } # Ends 'year in years' for loop
+} # Ends 'data_source in data_sources' for loop
 #Output file: OR_SEDD_2021_CORE.csv
 ```
 
@@ -214,9 +222,9 @@ Once the raw HMS data is downloaded, we process it using `process_hms()`. This f
 
 ```{r eval=FALSE}
 cov_h <- process_hms(
-  date = time_range,          # Specify the date range
+  date = time_range,           # Specify the date range
   path = "./data/data_files/", # Path to the downloaded data files
-  extent = sf::st_bbox(or)    # Limit processing to Oregon's spatial extent
+  extent = sf::st_bbox(or)     # Limit processing to Oregon's spatial extent
 )
 ```
 
@@ -226,16 +234,38 @@ Using `calculate_hms()`, we extract wildfire smoke plume values at the ZIP code 
 
 ```{r eval=FALSE}
 temp_covar <- calculate_hms(
-  covariate = "hms",                     # Specify the covariate type
+  covariate = "hms",                      # Specify the covariate type
   from = cov_h,                           # Use the processed HMS data
-  locs = tigris::zctas(state = "OR", year = 2010), # Use Oregon ZIP code bounds
+  locs = or,                              # Use Oregon ZIP code bounds
   locs_id = "ZCTA5CE10",                  # Define ZIP code identifier
-  radius = 0,                              # No buffer radius
-  geom = "sf"                              # Return as an sf object
+  radius = 0,                             # No buffer radius
+  geom = "sf"                             # Return as an sf object
 )
 
 # Save processed data
 saveRDS(temp_covar, "smoke_plume_covar.R")
+```
+
+```{r eval=FALSE}
+glimpse(temp_covar)
+# Rows: 12,989
+# Columns: 16
+# $ STATEFP10    <chr> "41", "41", "41", "41", "41", "41", "41", "41", "41", "…
+# $ ZCTA5CE10    <chr> "97833", "97840", "97330", "97004", "97023", "97042", "…
+# $ GEOID10      <chr> "4197833", "4197840", "4197330", "4197004", "4197023", …
+# $ CLASSFP10    <chr> "B5", "B5", "B5", "B5", "B5", "B5", "B5", "B5", "B5", "…
+# $ MTFCC10      <chr> "G6350", "G6350", "G6350", "G6350", "G6350", "G6350", "…
+# $ FUNCSTAT10   <chr> "S", "S", "S", "S", "S", "S", "S", "S", "S", "S", "S", …
+# $ ALAND10      <dbl> 228152974, 295777905, 199697439, 113398767, 330220870, …
+# $ AWATER10     <dbl> 0, 10777783, 814864, 71994, 2345079, 85543, 58021, 9206…
+# $ INTPTLAT10   <chr> "+44.9288886", "+44.8847111", "+44.6424890", "+45.25496…
+# $ INTPTLON10   <chr> "-118.0148791", "-116.9184395", "-123.2562655", "-122.4…
+# $ PARTFLG10    <chr> "N", "N", "N", "N", "N", "N", "N", "N", "N", "N", "N", …
+# $ time         <dttm> 2021-07-01, 2021-07-01, 2021-07-01, 2021-07-01, 2021-0…
+# $ light_00000  <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…
+# $ medium_00000 <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…
+# $ heavy_00000  <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…
+# $ geometry     <MULTIPOLYGON [°]> MULTIPOLYGON (((-118.1575 4..., MULTIPOLYG…
 ```
 
 In preparation for the next section we are going to make two new dataframes from our `temp_covar` object. The first collapses our zipcodes taking the average of light, medium, or heavy days.
@@ -263,7 +293,7 @@ saveRDS(avg_smoke_density, "smoke_density_avg_byZip.R")
 # 6 97042         0.258     0.129     0.0323
 ```
 
-The second dataframe also groups by our zip but takes the summation of the smoke plume days instead of an average.
+The second dataframe also groups by our zip but takes the summation of the smoke plume days instead of an average. We will keep the geometry with this dataframe as we will want to keep it for our merger later on. If we kept it for both dataframes, we would have repeating columns after our hcup/amadeus merge.
 
 ```{r eval=FALSE}
 total_smoke_density <- temp_covar %>%
@@ -291,7 +321,7 @@ saveRDS(total_smoke_density, "smoke_density_total_byZip.R")
 
 ## Data Analysis using HCUP and Amadeus data sources
 
-First we will load in our hcup data file we processed earlier and subset the file to a set of observations that make the data easier to work with (702 to 39 columns) and are still interesting for analysis. This includes zipcodes, age at admission, admission month, race identifier, sex, and ICD 10 diagnosis codes.
+First we will load in our hcup data file we processed earlier and subset the file to a set of observations that make the data easier to work with (702 to 39 columns) and are still interesting for analysis. This includes zipcodes (ZIP), age at admission (AGE), admission month (AMONTH), race identifier (RACE), sex (FEMALE), and ICD 10 diagnosis codes (I10\_).
 
 ```{r eval=FALSE}
 or_sedd_2021 <- fread("OR_SEDD_2021_CORE.csv")
@@ -364,7 +394,7 @@ total_individuals <- nrow(smoke_summary)
 asthma_cases <- sum(smoke_summary$has_asthma, na.rm = TRUE)
 
 # Calculate the proportion of individuals diagnosed with asthma
-asthma_rate <- asthma_cases / total_individuals
+asthma_prevalence <- asthma_cases / total_individuals
 ```
 
 ### Visualizing the Relationship Between Heavy Smoke Exposure and Asthma
@@ -383,6 +413,10 @@ ggplot(smoke_summary, aes(x = factor(has_asthma), y = avg_heavy,
   ) +
   theme_minimal()
 ```
+
+::: figure
+<img src="images/hcup_amadeus_usecase/asthma_vs_heavy_smoke.png"style="width:100%"/>
+:::
 
 ### Logistic Regression Analysis
 
