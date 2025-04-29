@@ -4,7 +4,7 @@
 
 ### Integrating HCUP databases with Amadeus Exposure data {.unnumbered}
 
-**Date Modified**: April 18, 2025
+**Date Modified**: April 29, 2025
 
 **Author**: Darius M. Bost
 
@@ -415,8 +415,101 @@ ggplot(smoke_summary, aes(x = factor(has_asthma), y = avg_heavy,
 ```
 
 ::: figure
-<img src="images/hcup_amadeus_usecase/asthma_vs_heavy_smoke.png"style="width:100%"/>
+<img src="images/hcup_amadeus_usecase/asthma_vs_heavy_smoke.png" style="width:100%"/>
 :::
+
+### Bivariate Map Analysis: Asthma and Heavy Smoke Exposure
+
+The code below producess a bivariate map for spatial analysis of asthma prevalence and heavy smoke exposure across ZIP codes in Oregon. Using hospital discharge data HCUP and NOAA's HMS smoke plume data, ZIP-level asthma rates were calculated and paired with the average number of heavy smoke days over the same time period.
+
+```{r bivariate-map, message=FALSE, warning=FALSE, eval= FALSE}
+
+# Load additional libraries
+library(biscale)
+library(cowplot)
+
+# Recall we have identified diagnosis columns
+head(diag_columns)
+
+# Recall our smoke summary dataframe
+head(smoke_summary)
+
+# Summarize asthma rate and heavy smoke exposure by ZIP code
+zip_summary <- smoke_summary %>%
+  group_by(ZIP) %>%
+  summarize(
+    asthma_rate = mean(has_asthma, na.rm = TRUE),
+    avg_heavy_smoke = mean(sum_heavy, na.rm = TRUE)
+  )
+
+# Recall ZIP code shapefile (ZCTA) for Oregon
+head(or)
+
+# Join spatial and summary data
+map_data <- left_join(or, zip_summary, by = c("ZCTA5CE10" = "ZIP"))
+
+# Filter out missing values
+map_data_clean <- map_data %>%
+  filter(!is.na(asthma_rate) & !is.na(avg_heavy_smoke))
+
+# Apply bivariate classification
+map_data_clean <- bi_class(map_data_clean, x = asthma_rate,
+                           y = avg_heavy_smoke, style = "quantile", dim = 3)
+
+# Create the main map
+map <- ggplot() +
+  theme_void(base_size = 14) +
+  geom_sf(data = map_data_clean, aes(fill = bi_class), color = "white",
+          size = 0.1, show.legend = FALSE) +
+  bi_scale_fill(pal = "GrPink", dim = 3) +
+  labs(
+    title = "Asthma Prevalence vs Heavy Smoke Exposure by ZIP Code",
+    subtitle = "Bivariate map showing intersection of health and environmental
+    burden",
+    caption = "Source: HCUP-Amadeus & NOAA HMS Smoke Data"
+  ) +
+  theme(
+    plot.title = element_text(hjust = 0.5, face = "bold"),
+    plot.subtitle = element_text(hjust = 0.5),
+    plot.caption = element_text(size = 10, face = "italic", hjust = 1),
+    plot.margin = margin(10, 20, 10, 20)
+  )
+
+# Create the legend
+legend <- bi_legend(
+  pal = "GrPink",
+  dim = 3,
+  xlab = "Higher Smoke",
+  ylab = "Higher Asthma",
+  size = 10,
+  flip_axes = FALSE,
+  rotate_pal = FALSE
+)
+
+# Combine map and legend
+final_plot <- ggdraw() +
+  draw_plot(map, 0, 0, 1, 1) +
+  draw_plot(legend, 0.77, 0.05, 0.2, 0.2)
+
+# Display the final plot
+final_plot
+```
+
+::: figure
+<img src="images/hcup_amadeus_usecase/asthmaVsSmokeBivariate.png" style="width:100%"/>
+:::
+
+Each ZIP code is shaded based on the intersection of these two variables using a 3x3 quantile classification. The bivariate color scale in the legend shows increasing smoke exposure along the x-axis (red) and increasing asthma prevalence along the y-axis (blue):
+
+Dark red areas: High smoke exposure, low asthma prevalence
+
+Dark blue areas: High asthma prevalence, low smoke exposure
+
+Dark purple areas: High asthma and high smoke — indicating areas with compounded health and environmental burdens
+
+Light gray areas: Low on both dimensions
+
+This bivariate map helps identify regions where environmental and health vulnerabilities intersect and can inform targeted public health responses.
 
 ### Logistic Regression Analysis
 
