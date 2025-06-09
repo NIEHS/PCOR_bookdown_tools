@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>8 HCUP and Amadeus Smoke Plume Use Case | CHORDS Training and Use Cases Toolkit</title>
+  <meta name="description" content="The CHORDS Training and Use Cases Toolkit provides guides, tutorials, and example code to support environmental health and disaster research." />
+  <meta name="generator" content="bookdown 0.43 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="8 HCUP and Amadeus Smoke Plume Use Case | CHORDS Training and Use Cases Toolkit" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="The CHORDS Training and Use Cases Toolkit provides guides, tutorials, and example code to support environmental health and disaster research." />
+  <meta name="github-repo" content="NIEHS/PCOR_bookdown_tools" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="8 HCUP and Amadeus Smoke Plume Use Case | CHORDS Training and Use Cases Toolkit" />
+  
+  <meta name="twitter:description" content="The CHORDS Training and Use Cases Toolkit provides guides, tutorials, and example code to support environmental health and disaster research." />
+  
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="use-cases.html"/>
+<link rel="next" href="appendix.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">CHORDS Training and Use Cases Toolkit</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><strong>Introduction</strong></a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#about-chords"><i class="fa fa-check"></i>About CHORDS</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#about-this-toolkit"><i class="fa fa-check"></i>About This Toolkit</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="unit-geospatial-foundations.html"><a href="unit-geospatial-foundations.html"><i class="fa fa-check"></i><strong>Geospatial Data Foundations</strong></a></li>
+<li class="chapter" data-level="1" data-path="chapter-getting-started-spatial.html"><a href="chapter-getting-started-spatial.html"><i class="fa fa-check"></i><b>1</b> Getting Started</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="chapter-getting-started-spatial.html"><a href="chapter-getting-started-spatial.html#introduction-1"><i class="fa fa-check"></i><b>1.1</b> Introduction</a></li>
+<li class="chapter" data-level="1.2" data-path="chapter-getting-started-spatial.html"><a href="chapter-getting-started-spatial.html#concepts-and-terminology"><i class="fa fa-check"></i><b>1.2</b> Concepts and Terminology</a></li>
+<li class="chapter" data-level="1.3" data-path="chapter-getting-started-spatial.html"><a href="chapter-getting-started-spatial.html#datasets"><i class="fa fa-check"></i><b>1.3</b> Datasets</a></li>
+<li class="chapter" data-level="1.4" data-path="chapter-getting-started-spatial.html"><a href="chapter-getting-started-spatial.html#r-packages"><i class="fa fa-check"></i><b>1.4</b> <code>R</code> Packages</a></li>
+<li class="chapter" data-level="1.5" data-path="chapter-getting-started-spatial.html"><a href="chapter-getting-started-spatial.html#chapter-getting-started-spatial-resources"><i class="fa fa-check"></i><b>1.5</b> Resources</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="chapter-point-data.html"><a href="chapter-point-data.html"><i class="fa fa-check"></i><b>2</b> Point Data</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="chapter-point-data.html"><a href="chapter-point-data.html#introduction-2"><i class="fa fa-check"></i><b>2.1</b> Introduction</a></li>
+<li class="chapter" data-level="2.2" data-path="chapter-point-data.html"><a href="chapter-point-data.html#access-download-and-unzip"><i class="fa fa-check"></i><b>2.2</b> Access, Download, and Unzip</a></li>
+<li class="chapter" data-level="2.3" data-path="chapter-point-data.html"><a href="chapter-point-data.html#data-preparation"><i class="fa fa-check"></i><b>2.3</b> Data Preparation</a></li>
+<li class="chapter" data-level="2.4" data-path="chapter-point-data.html"><a href="chapter-point-data.html#exploratory-analysis"><i class="fa fa-check"></i><b>2.4</b> Exploratory Analysis</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="chapter-polygon-data.html"><a href="chapter-polygon-data.html"><i class="fa fa-check"></i><b>3</b> Polygon Data</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="chapter-polygon-data.html"><a href="chapter-polygon-data.html#introduction-3"><i class="fa fa-check"></i><b>3.1</b> Introduction</a></li>
+<li class="chapter" data-level="3.2" data-path="chapter-polygon-data.html"><a href="chapter-polygon-data.html#chapter-polygon-access"><i class="fa fa-check"></i><b>3.2</b> Access, Download, and Unzip</a></li>
+<li class="chapter" data-level="3.3" data-path="chapter-polygon-data.html"><a href="chapter-polygon-data.html#data-preparation-with-sf"><i class="fa fa-check"></i><b>3.3</b> Data Preparation with <code>sf</code></a></li>
+<li class="chapter" data-level="3.4" data-path="chapter-polygon-data.html"><a href="chapter-polygon-data.html#exploratory-analysis-with-sf"><i class="fa fa-check"></i><b>3.4</b> Exploratory Analysis with <code>sf</code></a></li>
+<li class="chapter" data-level="3.5" data-path="chapter-polygon-data.html"><a href="chapter-polygon-data.html#data-preparation-with-terra"><i class="fa fa-check"></i><b>3.5</b> Data Preparation with <code>terra</code></a></li>
+<li class="chapter" data-level="3.6" data-path="chapter-polygon-data.html"><a href="chapter-polygon-data.html#exploratory-analysis-with-terra"><i class="fa fa-check"></i><b>3.6</b> Exploratory Analysis with <code>terra</code></a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="chapter-raster-data.html"><a href="chapter-raster-data.html"><i class="fa fa-check"></i><b>4</b> Raster Data</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="chapter-raster-data.html"><a href="chapter-raster-data.html#introduction-4"><i class="fa fa-check"></i><b>4.1</b> Introduction</a></li>
+<li class="chapter" data-level="4.2" data-path="chapter-raster-data.html"><a href="chapter-raster-data.html#raster-access"><i class="fa fa-check"></i><b>4.2</b> Access and Download</a></li>
+<li class="chapter" data-level="4.3" data-path="chapter-raster-data.html"><a href="chapter-raster-data.html#data-preparation-1"><i class="fa fa-check"></i><b>4.3</b> Data Preparation</a></li>
+<li class="chapter" data-level="4.4" data-path="chapter-raster-data.html"><a href="chapter-raster-data.html#exploratory-analysis-1"><i class="fa fa-check"></i><b>4.4</b> Exploratory Analysis</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="wildfire-data.html"><a href="wildfire-data.html"><i class="fa fa-check"></i><strong>Wildfire Data</strong></a></li>
+<li class="chapter" data-level="" data-path="other-environmental-data.html"><a href="other-environmental-data.html"><i class="fa fa-check"></i><strong>Other Environmental Data</strong></a></li>
+<li class="chapter" data-level="5" data-path="chapter-nasa-earthdata.html"><a href="chapter-nasa-earthdata.html"><i class="fa fa-check"></i><b>5</b> NASA EarthData Download</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="chapter-nasa-earthdata.html"><a href="chapter-nasa-earthdata.html#introduction-5"><i class="fa fa-check"></i><b>5.1</b> Introduction</a></li>
+<li class="chapter" data-level="5.2" data-path="chapter-nasa-earthdata.html"><a href="chapter-nasa-earthdata.html#nasa-earthdata-account"><i class="fa fa-check"></i><b>5.2</b> NASA EarthData Account</a></li>
+<li class="chapter" data-level="5.3" data-path="chapter-nasa-earthdata.html"><a href="chapter-nasa-earthdata.html#generate-prerequisite-files"><i class="fa fa-check"></i><b>5.3</b> Generate Prerequisite Files</a></li>
+<li class="chapter" data-level="5.4" data-path="chapter-nasa-earthdata.html"><a href="chapter-nasa-earthdata.html#download-data"><i class="fa fa-check"></i><b>5.4</b> Download Data</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="health-data-integration.html"><a href="health-data-integration.html"><i class="fa fa-check"></i><strong>Health Data Integration</strong></a></li>
+<li class="chapter" data-level="6" data-path="chapter-link-to-census.html"><a href="chapter-link-to-census.html"><i class="fa fa-check"></i><b>6</b> Linkage to Census Units</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="chapter-link-to-census.html"><a href="chapter-link-to-census.html#introduction-6"><i class="fa fa-check"></i><b>6.1</b> Introduction</a></li>
+<li class="chapter" data-level="6.2" data-path="chapter-link-to-census.html"><a href="chapter-link-to-census.html#tutorial"><i class="fa fa-check"></i><b>6.2</b> Tutorial</a></li>
+<li class="chapter" data-level="6.3" data-path="chapter-link-to-census.html"><a href="chapter-link-to-census.html#concluding-remarks"><i class="fa fa-check"></i><b>6.3</b> Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="chapter-fhir-pit.html"><a href="chapter-fhir-pit.html"><i class="fa fa-check"></i><b>7</b> A FHIR PIT Tutorial</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="chapter-fhir-pit.html"><a href="chapter-fhir-pit.html#introduction-7"><i class="fa fa-check"></i><b>7.1</b> Introduction</a></li>
+<li class="chapter" data-level="7.2" data-path="chapter-fhir-pit.html"><a href="chapter-fhir-pit.html#tutorial-1"><i class="fa fa-check"></i><b>7.2</b> Tutorial</a></li>
+<li class="chapter" data-level="7.3" data-path="chapter-fhir-pit.html"><a href="chapter-fhir-pit.html#fhir-pit-considerations"><i class="fa fa-check"></i><b>7.3</b> Considerations</a></li>
+<li class="chapter" data-level="7.4" data-path="chapter-fhir-pit.html"><a href="chapter-fhir-pit.html#concluding-remarks-1"><i class="fa fa-check"></i><b>7.4</b> Concluding Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="use-cases.html"><a href="use-cases.html"><i class="fa fa-check"></i><strong>Use Cases</strong></a></li>
+<li class="chapter" data-level="8" data-path="chapter-hcup-amadeus-usecase.html"><a href="chapter-hcup-amadeus-usecase.html"><i class="fa fa-check"></i><b>8</b> HCUP and Amadeus Smoke Plume Use Case</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="chapter-hcup-amadeus-usecase.html"><a href="chapter-hcup-amadeus-usecase.html#motivation-4"><i class="fa fa-check"></i><b>8.1</b> Motivation</a></li>
+<li class="chapter" data-level="8.2" data-path="chapter-hcup-amadeus-usecase.html"><a href="chapter-hcup-amadeus-usecase.html#tutorial-2"><i class="fa fa-check"></i><b>8.2</b> Tutorial</a></li>
+<li class="chapter" data-level="8.3" data-path="chapter-hcup-amadeus-usecase.html"><a href="chapter-hcup-amadeus-usecase.html#link-to-hcupAmadeus-1"><i class="fa fa-check"></i><b>8.3</b> Data Curation and Prep</a></li>
+<li class="chapter" data-level="8.4" data-path="chapter-hcup-amadeus-usecase.html"><a href="chapter-hcup-amadeus-usecase.html#link-to-hcupAmadeus-2"><i class="fa fa-check"></i><b>8.4</b> Downloading and Processing Exposure Data with the <code>amadeus</code> Package</a></li>
+<li class="chapter" data-level="8.5" data-path="chapter-hcup-amadeus-usecase.html"><a href="chapter-hcup-amadeus-usecase.html#data-analysis-using-hcup-and-amadeus-data-sources"><i class="fa fa-check"></i><b>8.5</b> Data Analysis using HCUP and Amadeus data sources</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="appendix.html"><a href="appendix.html"><i class="fa fa-check"></i><strong>Appendix</strong></a></li>
+<li class="chapter" data-level="" data-path="chapter-user-profiles.html"><a href="chapter-user-profiles.html"><i class="fa fa-check"></i><strong>A</strong> User Profiles</a></li>
+<li class="chapter" data-level="" data-path="chords-glossary.html"><a href="chords-glossary.html"><i class="fa fa-check"></i><strong>B</strong> Glossary</a></li>
+<li class="chapter" data-level="" data-path="all-references-appendix.html"><a href="all-references-appendix.html"><i class="fa fa-check"></i><strong>C</strong> References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" 
+target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">CHORDS Training and Use Cases Toolkit</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="chapter-hcup-amadeus-usecase" class="section level1 hasAnchor" number="8">
+<h1><span class="header-section-number">8</span> HCUP and Amadeus Smoke Plume Use Case<a href="chapter-hcup-amadeus-usecase.html#chapter-hcup-amadeus-usecase" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p><a href="chapter-user-profiles.html#profilecmp"><img src="images/user_profiles/profilecmp.svg" alt="Profile-CMP" /></a> <a href="chapter-user-profiles.html#profilecdm"><img src="images/user_profiles/profilecdm.svg" alt="Profile-CDM" /></a> <a href="chapter-user-profiles.html#profilechw"><img src="images/user_profiles/profilechw.svg" alt="Profile-CHW" /></a> <a href="chapter-user-profiles.html#profilestu"><img src="images/user_profiles/profilestu.svg" alt="Profile-STU" /></a></p>
+<div id="integrating-hcup-databases-with-amadeus-exposure-data" class="section level3 unnumbered hasAnchor">
+<h3>Integrating HCUP databases with Amadeus Exposure data<a href="chapter-hcup-amadeus-usecase.html#integrating-hcup-databases-with-amadeus-exposure-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><strong>Date Modified</strong>: April 29, 2025</p>
+<p><strong>Author</strong>: Darius M. Bost</p>
+<!-- **Key Terms**: [Data Integration](https://tools.niehs.nih.gov/cchhglossary/?keyword=data+integration&termOnlySearch=true&exactSearch=true), [Social Determinants of Health](https://tools.niehs.nih.gov/cchhglossary/?keyword=social+determinants+of+health+(sdoh)&termOnlySearch=true&exactSearch=true), [Geocoded Address](#def-geocoded-address), [GeoID](#def-geoid), [Geographic Unit](#def-geographic-unit) -->
+<p><strong>Programming Language</strong>: R</p>
+</div>
+<div id="motivation-4" class="section level2 hasAnchor" number="8.1">
+<h2><span class="header-section-number">8.1</span> Motivation<a href="chapter-hcup-amadeus-usecase.html#motivation-4" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Understanding the relationship between external environmental factors and health outcomes is critical for guiding public health strategies and policy decisions. Integrating individual patient records from the Healthcare Cost and Utilization Project (HCUP) with data from environmental datasets allows researchers to examine how elements such as air quality, wildfire emissions, and extreme temperatures impact hospital visits and healthcare utilization patterns.</p>
+<p>Ultimately, linking HCUP and environmental exposure data enhances public health monitoring and helps researchers better quantify environmental health risks.</p>
+<div id="outline-2" class="section level3 hasAnchor" number="8.1.1">
+<h3><span class="header-section-number">8.1.1</span> Outline<a href="chapter-hcup-amadeus-usecase.html#outline-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>This tutorial includes the following steps:</p>
+<ol style="list-style-type: decimal">
+<li><p><a href="chapter-hcup-amadeus-usecase.html#link-to-hcupAmadeus-0">Install R packages</a></p></li>
+<li><p><a href="chapter-hcup-amadeus-usecase.html#link-to-hcupAmadeus-1">Data Curation and Prep</a></p></li>
+<li><p><a href="chapter-hcup-amadeus-usecase.html#link-to-hcupAmadeus-2">Downloading and Processing Exposure Data with the <code>amadeus</code> Package</a></p></li>
+</ol>
+</div>
+</div>
+<div id="tutorial-2" class="section level2 hasAnchor" number="8.2">
+<h2><span class="header-section-number">8.2</span> Tutorial<a href="chapter-hcup-amadeus-usecase.html#tutorial-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="link-to-hcupAmadeus-0" class="section level3 hasAnchor" number="8.2.1">
+<h3><span class="header-section-number">8.2.1</span> Install R Packages<a href="chapter-hcup-amadeus-usecase.html#link-to-hcupAmadeus-0" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb245"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb245-1"><a href="chapter-hcup-amadeus-usecase.html#cb245-1" tabindex="-1"></a><span class="co"># install required packages</span></span>
+<span id="cb245-2"><a href="chapter-hcup-amadeus-usecase.html#cb245-2" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="fu">c</span>(<span class="st">&quot;readr&quot;</span>, <span class="st">&quot;data.table&quot;</span>, <span class="st">&quot;sf&quot;</span>, <span class="st">&quot;tidyverse&quot;</span>, <span class="st">&quot;tigris&quot;</span>, <span class="st">&quot;dplyr&quot;</span>,</span>
+<span id="cb245-3"><a href="chapter-hcup-amadeus-usecase.html#cb245-3" tabindex="-1"></a>                   <span class="st">&quot;amadeus&quot;</span>))</span>
+<span id="cb245-4"><a href="chapter-hcup-amadeus-usecase.html#cb245-4" tabindex="-1"></a></span>
+<span id="cb245-5"><a href="chapter-hcup-amadeus-usecase.html#cb245-5" tabindex="-1"></a><span class="co"># load required packages</span></span>
+<span id="cb245-6"><a href="chapter-hcup-amadeus-usecase.html#cb245-6" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
+<span id="cb245-7"><a href="chapter-hcup-amadeus-usecase.html#cb245-7" tabindex="-1"></a><span class="fu">library</span>(data.table)</span>
+<span id="cb245-8"><a href="chapter-hcup-amadeus-usecase.html#cb245-8" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
+<span id="cb245-9"><a href="chapter-hcup-amadeus-usecase.html#cb245-9" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb245-10"><a href="chapter-hcup-amadeus-usecase.html#cb245-10" tabindex="-1"></a><span class="fu">library</span>(amadeus)</span>
+<span id="cb245-11"><a href="chapter-hcup-amadeus-usecase.html#cb245-11" tabindex="-1"></a><span class="fu">library</span>(tigris)</span>
+<span id="cb245-12"><a href="chapter-hcup-amadeus-usecase.html#cb245-12" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code></pre></div>
+</div>
+</div>
+<div id="link-to-hcupAmadeus-1" class="section level2 hasAnchor" number="8.3">
+<h2><span class="header-section-number">8.3</span> Data Curation and Prep<a href="chapter-hcup-amadeus-usecase.html#link-to-hcupAmadeus-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>HCUP data files from AHRQ can be obtained from their <a href="https://cdors.ahrq.gov/">HCUP Central Distributor</a> site where it details the data use aggreement, how to purchase, protect, re-use and share the HCUP data.</p>
+<p>Upon acquistion of HCUP database files, you will notice that the state files are distributed as large ASCII text files. These files contain the raw data and can be very large, as they store all of the individual records for hospital stays or procedures. ARHQ provides SAS software tools to assist with loading the data into <a href="https://hcup-us.ahrq.gov/tech_assist/software/508course.jsp#structure">SAS</a> for analysis, however, this doesn’t help when using other coding languages like R. To solve this we utilize the .loc files (also provided on HCUP website), the year of the data and the type of data file being loaded.</p>
+<p>We will start with State level data: State Inpatient Database (SID), State Emergency Department Database (SEDD), and State Ambulatory Surgery and Services Database(SASD).</p>
+<div id="read-and-format-hcup-datafiles" class="section level3 hasAnchor" number="8.3.1">
+<h3><span class="header-section-number">8.3.1</span> Read and format HCUP datafiles<a href="chapter-hcup-amadeus-usecase.html#read-and-format-hcup-datafiles" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>We start with defining the years of the data we have as well as the type of data we want to process. There is a core data file that all states have and additional files which may include Diagnosis and Procedure Groups, AHA Linkages, Charges, and/or Severity.</p>
+<div class="sourceCode" id="cb246"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb246-1"><a href="chapter-hcup-amadeus-usecase.html#cb246-1" tabindex="-1"></a><span class="co"># Define years and data type</span></span>
+<span id="cb246-2"><a href="chapter-hcup-amadeus-usecase.html#cb246-2" tabindex="-1"></a>years     <span class="ot">&lt;-</span>  <span class="dv">2021</span></span>
+<span id="cb246-3"><a href="chapter-hcup-amadeus-usecase.html#cb246-3" tabindex="-1"></a>data_type <span class="ot">&lt;-</span> <span class="st">&quot;CORE&quot;</span></span>
+<span id="cb246-4"><a href="chapter-hcup-amadeus-usecase.html#cb246-4" tabindex="-1"></a></span>
+<span id="cb246-5"><a href="chapter-hcup-amadeus-usecase.html#cb246-5" tabindex="-1"></a><span class="co"># Define possible data sources</span></span>
+<span id="cb246-6"><a href="chapter-hcup-amadeus-usecase.html#cb246-6" tabindex="-1"></a>data_sources <span class="ot">&lt;-</span> <span class="st">&quot;SEDD&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb247"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb247-1"><a href="chapter-hcup-amadeus-usecase.html#cb247-1" tabindex="-1"></a><span class="co"># Missing values definition</span></span>
+<span id="cb247-2"><a href="chapter-hcup-amadeus-usecase.html#cb247-2" tabindex="-1"></a>missing_values <span class="ot">&lt;-</span> <span class="fu">as.character</span>(<span class="fu">quote</span>(<span class="fu">c</span>(<span class="sc">-</span><span class="dv">99</span>, <span class="sc">-</span><span class="dv">88</span>, <span class="sc">-</span><span class="dv">66</span>, <span class="sc">-</span><span class="fl">99.9999999</span>, <span class="sc">-</span><span class="fl">88.8888888</span>,</span>
+<span id="cb247-3"><a href="chapter-hcup-amadeus-usecase.html#cb247-3" tabindex="-1"></a>                                       <span class="sc">-</span><span class="fl">66.6666666</span>, <span class="sc">-</span><span class="dv">9</span>, <span class="sc">-</span><span class="dv">8</span>, <span class="sc">-</span><span class="dv">6</span>, <span class="sc">-</span><span class="dv">5</span>, <span class="sc">-</span><span class="dv">9999</span>,</span>
+<span id="cb247-4"><a href="chapter-hcup-amadeus-usecase.html#cb247-4" tabindex="-1"></a>                                       <span class="sc">-</span><span class="dv">8888</span>, <span class="sc">-</span><span class="dv">6666</span>, <span class="sc">-</span><span class="dv">99999999</span>, <span class="sc">-</span><span class="dv">999999999</span>,</span>
+<span id="cb247-5"><a href="chapter-hcup-amadeus-usecase.html#cb247-5" tabindex="-1"></a>                                       <span class="sc">-</span><span class="dv">888888888</span>, <span class="sc">-</span><span class="dv">666666666</span>, <span class="sc">-</span><span class="dv">999</span>, <span class="sc">-</span><span class="dv">888</span>,</span>
+<span id="cb247-6"><a href="chapter-hcup-amadeus-usecase.html#cb247-6" tabindex="-1"></a>                                       <span class="sc">-</span><span class="dv">666</span>)))</span>
+<span id="cb247-7"><a href="chapter-hcup-amadeus-usecase.html#cb247-7" tabindex="-1"></a></span>
+<span id="cb247-8"><a href="chapter-hcup-amadeus-usecase.html#cb247-8" tabindex="-1"></a><span class="co"># Loop through data sources</span></span>
+<span id="cb247-9"><a href="chapter-hcup-amadeus-usecase.html#cb247-9" tabindex="-1"></a><span class="cf">for</span> (data_source <span class="cf">in</span> data_sources) {</span>
+<span id="cb247-10"><a href="chapter-hcup-amadeus-usecase.html#cb247-10" tabindex="-1"></a>  <span class="co"># Create lowercase version with &quot;c&quot; appended</span></span>
+<span id="cb247-11"><a href="chapter-hcup-amadeus-usecase.html#cb247-11" tabindex="-1"></a>  data_source_lower_c <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="fu">tolower</span>(data_source), <span class="st">&quot;c&quot;</span>)</span>
+<span id="cb247-12"><a href="chapter-hcup-amadeus-usecase.html#cb247-12" tabindex="-1"></a></span>
+<span id="cb247-13"><a href="chapter-hcup-amadeus-usecase.html#cb247-13" tabindex="-1"></a>  <span class="cf">for</span> (year <span class="cf">in</span> years) {</span>
+<span id="cb247-14"><a href="chapter-hcup-amadeus-usecase.html#cb247-14" tabindex="-1"></a>    <span class="co"># Determine fwf_positions based on the year</span></span>
+<span id="cb247-15"><a href="chapter-hcup-amadeus-usecase.html#cb247-15" tabindex="-1"></a>    <span class="co"># Year 2021 had a slightly different format on the specifications</span></span>
+<span id="cb247-16"><a href="chapter-hcup-amadeus-usecase.html#cb247-16" tabindex="-1"></a>    <span class="co"># at meta_url below</span></span>
+<span id="cb247-17"><a href="chapter-hcup-amadeus-usecase.html#cb247-17" tabindex="-1"></a>    <span class="cf">if</span> (year <span class="sc">==</span> <span class="dv">2021</span>) {</span>
+<span id="cb247-18"><a href="chapter-hcup-amadeus-usecase.html#cb247-18" tabindex="-1"></a>      positions <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">fwf_positions</span>(</span>
+<span id="cb247-19"><a href="chapter-hcup-amadeus-usecase.html#cb247-19" tabindex="-1"></a>        <span class="at">start =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">28</span>, <span class="dv">32</span>, <span class="dv">64</span>, <span class="dv">69</span>, <span class="dv">73</span>, <span class="dv">75</span>, <span class="dv">80</span>),</span>
+<span id="cb247-20"><a href="chapter-hcup-amadeus-usecase.html#cb247-20" tabindex="-1"></a>        <span class="at">end =</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">8</span>, <span class="dv">26</span>, <span class="dv">30</span>, <span class="dv">62</span>, <span class="dv">67</span>, <span class="dv">72</span>, <span class="dv">73</span>, <span class="dv">78</span>, <span class="cn">NA</span>)  <span class="co"># NA for ragged column</span></span>
+<span id="cb247-21"><a href="chapter-hcup-amadeus-usecase.html#cb247-21" tabindex="-1"></a>      )</span>
+<span id="cb247-22"><a href="chapter-hcup-amadeus-usecase.html#cb247-22" tabindex="-1"></a>    } <span class="cf">else</span> {</span>
+<span id="cb247-23"><a href="chapter-hcup-amadeus-usecase.html#cb247-23" tabindex="-1"></a>      positions <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">fwf_positions</span>(</span>
+<span id="cb247-24"><a href="chapter-hcup-amadeus-usecase.html#cb247-24" tabindex="-1"></a>        <span class="at">start =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">27</span>, <span class="dv">31</span>, <span class="dv">63</span>, <span class="dv">68</span>, <span class="dv">73</span>, <span class="dv">75</span>, <span class="dv">80</span>),</span>
+<span id="cb247-25"><a href="chapter-hcup-amadeus-usecase.html#cb247-25" tabindex="-1"></a>        <span class="at">end =</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">8</span>, <span class="dv">25</span>, <span class="dv">29</span>, <span class="dv">61</span>, <span class="dv">66</span>, <span class="dv">71</span>, <span class="dv">73</span>, <span class="dv">78</span>, <span class="cn">NA</span>)  <span class="co"># NA for ragged column</span></span>
+<span id="cb247-26"><a href="chapter-hcup-amadeus-usecase.html#cb247-26" tabindex="-1"></a>      )</span>
+<span id="cb247-27"><a href="chapter-hcup-amadeus-usecase.html#cb247-27" tabindex="-1"></a>    } <span class="co">#Ends if statement</span></span>
+<span id="cb247-28"><a href="chapter-hcup-amadeus-usecase.html#cb247-28" tabindex="-1"></a>    <span class="co"># &#39;data_source in data_sources&#39; and &#39;year in years&#39; loop continues below</span></span></code></pre></div>
+<p>The <code>fwf_positions()</code> function is utilizing column start and end positions found on the ahrq website (<code>meta_url</code> listed in next code chunk). We use these positions to read in the raw data files from their .asc format.</p>
+<div class="figure">
+<p><img src="images/hcup_amadeus_usecase/oregon2021_SEDD_core_loc_file.png" style="width:100%"/></p>
+<figcaption>
+This is an example of the specifications loc file
+</figcaption>
+</div>
+<div class="sourceCode" id="cb248"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb248-1"><a href="chapter-hcup-amadeus-usecase.html#cb248-1" tabindex="-1"></a>    <span class="co"># Read metadata with adjusted URL</span></span>
+<span id="cb248-2"><a href="chapter-hcup-amadeus-usecase.html#cb248-2" tabindex="-1"></a>    meta_url <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&quot;https://hcup-us.ahrq.gov/db/state/&quot;</span>,</span>
+<span id="cb248-3"><a href="chapter-hcup-amadeus-usecase.html#cb248-3" tabindex="-1"></a>                       data_source_lower_c, <span class="st">&quot;/tools/filespecs/OR_&quot;</span>,</span>
+<span id="cb248-4"><a href="chapter-hcup-amadeus-usecase.html#cb248-4" tabindex="-1"></a>                       data_source, <span class="st">&quot;_&quot;</span>, year, <span class="st">&quot;_&quot;</span>, data_type, <span class="st">&quot;.loc&quot;</span>)</span>
+<span id="cb248-5"><a href="chapter-hcup-amadeus-usecase.html#cb248-5" tabindex="-1"></a></span>
+<span id="cb248-6"><a href="chapter-hcup-amadeus-usecase.html#cb248-6" tabindex="-1"></a>    <span class="co"># Skip the first 20 lines because they contain header information and</span></span>
+<span id="cb248-7"><a href="chapter-hcup-amadeus-usecase.html#cb248-7" tabindex="-1"></a>    <span class="co"># descriptions, not column metadata</span></span>
+<span id="cb248-8"><a href="chapter-hcup-amadeus-usecase.html#cb248-8" tabindex="-1"></a>    df <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_fwf</span>(meta_url, positions, <span class="at">skip =</span> <span class="dv">20</span>)</span>
+<span id="cb248-9"><a href="chapter-hcup-amadeus-usecase.html#cb248-9" tabindex="-1"></a>    <span class="co"># Read data</span></span>
+<span id="cb248-10"><a href="chapter-hcup-amadeus-usecase.html#cb248-10" tabindex="-1"></a>    <span class="co"># Set directory to location where HCUP ASCII file was downloaded</span></span>
+<span id="cb248-11"><a href="chapter-hcup-amadeus-usecase.html#cb248-11" tabindex="-1"></a>    <span class="co"># Users should replace &quot;../OR/&quot; with their own download path</span></span>
+<span id="cb248-12"><a href="chapter-hcup-amadeus-usecase.html#cb248-12" tabindex="-1"></a>    data_file <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&quot;../OR/&quot;</span>, data_source, <span class="st">&quot;/OR_&quot;</span>, data_source, <span class="st">&quot;_&quot;</span>,</span>
+<span id="cb248-13"><a href="chapter-hcup-amadeus-usecase.html#cb248-13" tabindex="-1"></a>                        year, <span class="st">&quot;_&quot;</span>, data_type, <span class="st">&quot;.asc&quot;</span>)</span>
+<span id="cb248-14"><a href="chapter-hcup-amadeus-usecase.html#cb248-14" tabindex="-1"></a>    <span class="co"># fwf_positions are passed column positions from df (file specifications)</span></span>
+<span id="cb248-15"><a href="chapter-hcup-amadeus-usecase.html#cb248-15" tabindex="-1"></a>    <span class="co"># file. Ex. df$X5 has all the column names for our meta_data. See print(df)</span></span>
+<span id="cb248-16"><a href="chapter-hcup-amadeus-usecase.html#cb248-16" tabindex="-1"></a>    <span class="co"># below.</span></span>
+<span id="cb248-17"><a href="chapter-hcup-amadeus-usecase.html#cb248-17" tabindex="-1"></a>    df2 <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_fwf</span>(</span>
+<span id="cb248-18"><a href="chapter-hcup-amadeus-usecase.html#cb248-18" tabindex="-1"></a>      data_file,</span>
+<span id="cb248-19"><a href="chapter-hcup-amadeus-usecase.html#cb248-19" tabindex="-1"></a>      readr<span class="sc">::</span><span class="fu">fwf_positions</span>(<span class="at">start =</span> df<span class="sc">$</span>X6, <span class="at">end =</span> df<span class="sc">$</span>X7, <span class="at">col_names =</span> df<span class="sc">$</span>X5),</span>
+<span id="cb248-20"><a href="chapter-hcup-amadeus-usecase.html#cb248-20" tabindex="-1"></a>      <span class="at">skip =</span> <span class="dv">2</span>,</span>
+<span id="cb248-21"><a href="chapter-hcup-amadeus-usecase.html#cb248-21" tabindex="-1"></a>      <span class="at">na =</span> missing_values</span>
+<span id="cb248-22"><a href="chapter-hcup-amadeus-usecase.html#cb248-22" tabindex="-1"></a>    )</span>
+<span id="cb248-23"><a href="chapter-hcup-amadeus-usecase.html#cb248-23" tabindex="-1"></a></span>
+<span id="cb248-24"><a href="chapter-hcup-amadeus-usecase.html#cb248-24" tabindex="-1"></a>    <span class="co"># Write output CSV</span></span>
+<span id="cb248-25"><a href="chapter-hcup-amadeus-usecase.html#cb248-25" tabindex="-1"></a>    output_file <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&quot;OR_&quot;</span>, data_source, <span class="st">&quot;_&quot;</span>, year, <span class="st">&quot;_&quot;</span>, data_type, <span class="st">&quot;.csv&quot;</span>)</span>
+<span id="cb248-26"><a href="chapter-hcup-amadeus-usecase.html#cb248-26" tabindex="-1"></a>    <span class="fu">write.csv</span>(df2, <span class="at">file =</span> output_file, <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb248-27"><a href="chapter-hcup-amadeus-usecase.html#cb248-27" tabindex="-1"></a>  <span class="er">}</span> <span class="co"># Ends &#39;year in years&#39; for loop</span></span>
+<span id="cb248-28"><a href="chapter-hcup-amadeus-usecase.html#cb248-28" tabindex="-1"></a><span class="er">}</span> <span class="co"># Ends &#39;data_source in data_sources&#39; for loop</span></span>
+<span id="cb248-29"><a href="chapter-hcup-amadeus-usecase.html#cb248-29" tabindex="-1"></a><span class="co">#Output file: OR_SEDD_2021_CORE.csv</span></span></code></pre></div>
+<p>We can test what that our positions are right for reading in raw data by printing <code>df</code>.</p>
+<div class="sourceCode" id="cb249"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb249-1"><a href="chapter-hcup-amadeus-usecase.html#cb249-1" tabindex="-1"></a><span class="fu">print</span>(df)</span>
+<span id="cb249-2"><a href="chapter-hcup-amadeus-usecase.html#cb249-2" tabindex="-1"></a><span class="co"># A tibble: 702 × 10</span></span>
+<span id="cb249-3"><a href="chapter-hcup-amadeus-usecase.html#cb249-3" tabindex="-1"></a><span class="co">#    X1       X2 X3       X4 X5          X6    X7    X8 X9    X10</span></span>
+<span id="cb249-4"><a href="chapter-hcup-amadeus-usecase.html#cb249-4" tabindex="-1"></a><span class="co">#    &lt;chr&gt; &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt; &lt;chr&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;</span></span>
+<span id="cb249-5"><a href="chapter-hcup-amadeus-usecase.html#cb249-5" tabindex="-1"></a><span class="co">#  1 OR     2021 CORE      1 AGE          1     3    NA Num   Age in years at…</span></span>
+<span id="cb249-6"><a href="chapter-hcup-amadeus-usecase.html#cb249-6" tabindex="-1"></a><span class="co">#  2 OR     2021 CORE      2 AGEDAY       4     6    NA Num   Age in days (when…</span></span>
+<span id="cb249-7"><a href="chapter-hcup-amadeus-usecase.html#cb249-7" tabindex="-1"></a><span class="co">#  3 OR     2021 CORE      3 AGEMONTH     7     9    NA Num   Age in months (wh…</span></span>
+<span id="cb249-8"><a href="chapter-hcup-amadeus-usecase.html#cb249-8" tabindex="-1"></a><span class="co">#  4 OR     2021 CORE      4 AHOUR       10    13    NA Num   Admission Hour</span></span>
+<span id="cb249-9"><a href="chapter-hcup-amadeus-usecase.html#cb249-9" tabindex="-1"></a><span class="co">#  5 OR     2021 CORE      5 AMONTH      14    15    NA Num   Admission month</span></span>
+<span id="cb249-10"><a href="chapter-hcup-amadeus-usecase.html#cb249-10" tabindex="-1"></a><span class="co">#  6 OR     2021 CORE      6 ATYPE       16    17    NA Num   Admission type</span></span>
+<span id="cb249-11"><a href="chapter-hcup-amadeus-usecase.html#cb249-11" tabindex="-1"></a><span class="co">#  7 OR     2021 CORE      7 AWEEKEND    18    19    NA Num   Admission day is…</span></span>
+<span id="cb249-12"><a href="chapter-hcup-amadeus-usecase.html#cb249-12" tabindex="-1"></a><span class="co">#  8 OR     2021 CORE      8 CPT1        20    24    NA Cha   CPT/HCPCS procede…</span></span>
+<span id="cb249-13"><a href="chapter-hcup-amadeus-usecase.html#cb249-13" tabindex="-1"></a><span class="co">#  9 OR     2021 CORE      9 CPT2        25    29    NA Cha   CPT/HCPCS procedu…</span></span>
+<span id="cb249-14"><a href="chapter-hcup-amadeus-usecase.html#cb249-14" tabindex="-1"></a><span class="co"># 10 OR     2021 CORE     10 CPT3        30    34    NA Cha   CPT/HCPCS procedu…</span></span>
+<span id="cb249-15"><a href="chapter-hcup-amadeus-usecase.html#cb249-15" tabindex="-1"></a><span class="co"># ℹ 692 more rows</span></span>
+<span id="cb249-16"><a href="chapter-hcup-amadeus-usecase.html#cb249-16" tabindex="-1"></a><span class="co"># ℹ Use `print(n = ...)` to see more rows</span></span></code></pre></div>
+</div>
+<div id="confirming-data-characteristics" class="section level3 hasAnchor" number="8.3.2">
+<h3><span class="header-section-number">8.3.2</span> Confirming data Characteristics<a href="chapter-hcup-amadeus-usecase.html#confirming-data-characteristics" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>We now have or CSV formatted file <code>OR_SEDD_2021_CORE.csv</code>. We can check summary statistics for our data by going to HCUP databases page <a href="https://hcup-us.ahrq.gov/databases.jsp">here</a>.</p>
+<p>To get to the summary table for our data we do the following:</p>
+<ol style="list-style-type: decimal">
+<li><p>Click on the link for SEDD.</p></li>
+<li><p>Next we find the section on Data Elements</p></li>
+</ol>
+<div class="figure">
+<p><img src="images/hcup_amadeus_usecase/hcup_data_elements.png" style="width:100%"/></p>
+</div>
+<ol start="3" style="list-style-type: decimal">
+<li><p>From here we want to select <code>Summary Statistics for All States and Years</code>. This will redirect us to a page that allows the selection of our database attributes (state, year, database choice)</p></li>
+<li><p>Lastly we select the file we’re interested in. In our example we downloaded the CORE file so that summary table will look like <a href="https://hcup-us.ahrq.gov/db/state/seddc/tools/cdstats/OR_SEDDC_2021_SummaryStats_CORE.PDF">this</a>.</p></li>
+</ol>
+</div>
+</div>
+<div id="link-to-hcupAmadeus-2" class="section level2 hasAnchor" number="8.4">
+<h2><span class="header-section-number">8.4</span> Downloading and Processing Exposure Data with the <a href="https://niehs.github.io/amadeus/"><code>amadeus</code></a> Package<a href="chapter-hcup-amadeus-usecase.html#link-to-hcupAmadeus-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>This section provides a step-by-step guide to downloading and processing wildfire smoke exposure data using the <code>amadeus</code> package. The process includes retrieving <a href="https://www.ospo.noaa.gov/products/land/hms.html#0">Hazard Mapping System (HMS) smoke plume data</a>, spatially joining it with ZIP Code Tabulation Areas (ZCTAs) for Oregon, and calculating summary statistics on smoke density.</p>
+<div id="step-1-define-time-range" class="section level3 hasAnchor" number="8.4.1">
+<h3><span class="header-section-number">8.4.1</span> Step 1: Define Time Range<a href="chapter-hcup-amadeus-usecase.html#step-1-define-time-range" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The first step is to specify the date range for which we want to download wildfire smoke exposure data.</p>
+<div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb250-1"><a href="chapter-hcup-amadeus-usecase.html#cb250-1" tabindex="-1"></a>time_range <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;2021-01-01&quot;</span>, <span class="st">&quot;2021-12-31&quot;</span>) <span class="co"># Range of dates for exposure data</span></span></code></pre></div>
+</div>
+<div id="step-2-download-hms-smoke-plume-data" class="section level3 hasAnchor" number="8.4.2">
+<h3><span class="header-section-number">8.4.2</span> Step 2: Download HMS Smoke Plume Data<a href="chapter-hcup-amadeus-usecase.html#step-2-download-hms-smoke-plume-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Using the <code>amadeus::download_hms()</code> function, we download HMS smoke plume data in shapefile format within the specified time range. The data will be saved in a local directory.</p>
+<div class="sourceCode" id="cb251"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb251-1"><a href="chapter-hcup-amadeus-usecase.html#cb251-1" tabindex="-1"></a>amadeus<span class="sc">::</span><span class="fu">download_hms</span>(</span>
+<span id="cb251-2"><a href="chapter-hcup-amadeus-usecase.html#cb251-2" tabindex="-1"></a>  <span class="at">data_format =</span> <span class="st">&quot;shapefile&quot;</span>,  <span class="co"># Specify format as shapefile</span></span>
+<span id="cb251-3"><a href="chapter-hcup-amadeus-usecase.html#cb251-3" tabindex="-1"></a>  <span class="at">date =</span> time_range,          <span class="co"># Use the defined time range</span></span>
+<span id="cb251-4"><a href="chapter-hcup-amadeus-usecase.html#cb251-4" tabindex="-1"></a>  <span class="at">directory_to_save =</span> <span class="st">&quot;./data&quot;</span>,  <span class="co"># Set the directory for saving files</span></span>
+<span id="cb251-5"><a href="chapter-hcup-amadeus-usecase.html#cb251-5" tabindex="-1"></a>  <span class="at">acknowledgement =</span> <span class="cn">TRUE</span>,       <span class="co"># Accept the data use acknowledgement</span></span>
+<span id="cb251-6"><a href="chapter-hcup-amadeus-usecase.html#cb251-6" tabindex="-1"></a>  <span class="at">download =</span> <span class="cn">TRUE</span>               <span class="co"># Enable downloading</span></span>
+<span id="cb251-7"><a href="chapter-hcup-amadeus-usecase.html#cb251-7" tabindex="-1"></a>)</span></code></pre></div>
+</div>
+<div id="step-3-load-oregon-zip-code-spatial-data" class="section level3 hasAnchor" number="8.4.3">
+<h3><span class="header-section-number">8.4.3</span> Step 3: Load Oregon ZIP Code Spatial Data<a href="chapter-hcup-amadeus-usecase.html#step-3-load-oregon-zip-code-spatial-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>To analyze smoke exposure by geographic location, we retrieve ZCTA boundaries for Oregon using the <code>tigris</code> package.</p>
+<div class="sourceCode" id="cb252"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb252-1"><a href="chapter-hcup-amadeus-usecase.html#cb252-1" tabindex="-1"></a>or <span class="ot">&lt;-</span> tigris<span class="sc">::</span><span class="fu">zctas</span>(<span class="at">state =</span> <span class="st">&quot;OR&quot;</span>, <span class="at">year =</span> <span class="dv">2010</span>)  <span class="co"># Get Oregon ZCTA boundaries</span></span></code></pre></div>
+</div>
+<div id="step-4-process-hms-data" class="section level3 hasAnchor" number="8.4.4">
+<h3><span class="header-section-number">8.4.4</span> Step 4: Process HMS Data<a href="chapter-hcup-amadeus-usecase.html#step-4-process-hms-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Once the raw HMS data is downloaded, we process it using <code>process_hms()</code>. This function cleans and filters the data based on the given time range and geographic extent (Oregon ZCTAs).</p>
+<div class="sourceCode" id="cb253"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb253-1"><a href="chapter-hcup-amadeus-usecase.html#cb253-1" tabindex="-1"></a>cov_h <span class="ot">&lt;-</span> <span class="fu">process_hms</span>(</span>
+<span id="cb253-2"><a href="chapter-hcup-amadeus-usecase.html#cb253-2" tabindex="-1"></a>  <span class="at">date =</span> time_range,           <span class="co"># Specify the date range</span></span>
+<span id="cb253-3"><a href="chapter-hcup-amadeus-usecase.html#cb253-3" tabindex="-1"></a>  <span class="at">path =</span> <span class="st">&quot;./data/data_files/&quot;</span>, <span class="co"># Path to the downloaded data files</span></span>
+<span id="cb253-4"><a href="chapter-hcup-amadeus-usecase.html#cb253-4" tabindex="-1"></a>  <span class="at">extent =</span> sf<span class="sc">::</span><span class="fu">st_bbox</span>(or)     <span class="co"># Limit processing to Oregon&#39;s spatial extent</span></span>
+<span id="cb253-5"><a href="chapter-hcup-amadeus-usecase.html#cb253-5" tabindex="-1"></a>)</span></code></pre></div>
+</div>
+<div id="step-5-extract-smoke-plume-values-at-zip-code-locations" class="section level3 hasAnchor" number="8.4.5">
+<h3><span class="header-section-number">8.4.5</span> Step 5: Extract Smoke Plume Values at ZIP Code Locations<a href="chapter-hcup-amadeus-usecase.html#step-5-extract-smoke-plume-values-at-zip-code-locations" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Using <code>calculate_hms()</code>, we extract wildfire smoke plume values at the ZIP code (ZCTA) level. This function returns a data frame containing <code>locs_id</code>, <code>date</code>, and a binary variable for wildfire smoke plume density.</p>
+<div class="sourceCode" id="cb254"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb254-1"><a href="chapter-hcup-amadeus-usecase.html#cb254-1" tabindex="-1"></a>temp_covar <span class="ot">&lt;-</span> <span class="fu">calculate_hms</span>(</span>
+<span id="cb254-2"><a href="chapter-hcup-amadeus-usecase.html#cb254-2" tabindex="-1"></a>  <span class="at">covariate =</span> <span class="st">&quot;hms&quot;</span>,                      <span class="co"># Specify the covariate type</span></span>
+<span id="cb254-3"><a href="chapter-hcup-amadeus-usecase.html#cb254-3" tabindex="-1"></a>  <span class="at">from =</span> cov_h,                           <span class="co"># Use the processed HMS data</span></span>
+<span id="cb254-4"><a href="chapter-hcup-amadeus-usecase.html#cb254-4" tabindex="-1"></a>  <span class="at">locs =</span> or,                              <span class="co"># Use Oregon ZIP code bounds</span></span>
+<span id="cb254-5"><a href="chapter-hcup-amadeus-usecase.html#cb254-5" tabindex="-1"></a>  <span class="at">locs_id =</span> <span class="st">&quot;ZCTA5CE10&quot;</span>,                  <span class="co"># Define ZIP code identifier</span></span>
+<span id="cb254-6"><a href="chapter-hcup-amadeus-usecase.html#cb254-6" tabindex="-1"></a>  <span class="at">radius =</span> <span class="dv">0</span>,                             <span class="co"># No buffer radius</span></span>
+<span id="cb254-7"><a href="chapter-hcup-amadeus-usecase.html#cb254-7" tabindex="-1"></a>  <span class="at">geom =</span> <span class="st">&quot;sf&quot;</span>                             <span class="co"># Return as an sf object</span></span>
+<span id="cb254-8"><a href="chapter-hcup-amadeus-usecase.html#cb254-8" tabindex="-1"></a>)</span>
+<span id="cb254-9"><a href="chapter-hcup-amadeus-usecase.html#cb254-9" tabindex="-1"></a></span>
+<span id="cb254-10"><a href="chapter-hcup-amadeus-usecase.html#cb254-10" tabindex="-1"></a><span class="co"># Save processed data</span></span>
+<span id="cb254-11"><a href="chapter-hcup-amadeus-usecase.html#cb254-11" tabindex="-1"></a><span class="fu">saveRDS</span>(temp_covar, <span class="st">&quot;smoke_plume_covar.R&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb255"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb255-1"><a href="chapter-hcup-amadeus-usecase.html#cb255-1" tabindex="-1"></a><span class="fu">glimpse</span>(temp_covar)</span>
+<span id="cb255-2"><a href="chapter-hcup-amadeus-usecase.html#cb255-2" tabindex="-1"></a><span class="co"># Rows: 12,989</span></span>
+<span id="cb255-3"><a href="chapter-hcup-amadeus-usecase.html#cb255-3" tabindex="-1"></a><span class="co"># Columns: 16</span></span>
+<span id="cb255-4"><a href="chapter-hcup-amadeus-usecase.html#cb255-4" tabindex="-1"></a><span class="co"># $ STATEFP10    &lt;chr&gt; &quot;41&quot;, &quot;41&quot;, &quot;41&quot;, &quot;41&quot;, &quot;41&quot;, &quot;41&quot;, &quot;41&quot;, &quot;41&quot;, &quot;41&quot;, &quot;…</span></span>
+<span id="cb255-5"><a href="chapter-hcup-amadeus-usecase.html#cb255-5" tabindex="-1"></a><span class="co"># $ ZCTA5CE10    &lt;chr&gt; &quot;97833&quot;, &quot;97840&quot;, &quot;97330&quot;, &quot;97004&quot;, &quot;97023&quot;, &quot;97042&quot;, &quot;…</span></span>
+<span id="cb255-6"><a href="chapter-hcup-amadeus-usecase.html#cb255-6" tabindex="-1"></a><span class="co"># $ GEOID10      &lt;chr&gt; &quot;4197833&quot;, &quot;4197840&quot;, &quot;4197330&quot;, &quot;4197004&quot;, &quot;4197023&quot;, …</span></span>
+<span id="cb255-7"><a href="chapter-hcup-amadeus-usecase.html#cb255-7" tabindex="-1"></a><span class="co"># $ CLASSFP10    &lt;chr&gt; &quot;B5&quot;, &quot;B5&quot;, &quot;B5&quot;, &quot;B5&quot;, &quot;B5&quot;, &quot;B5&quot;, &quot;B5&quot;, &quot;B5&quot;, &quot;B5&quot;, &quot;…</span></span>
+<span id="cb255-8"><a href="chapter-hcup-amadeus-usecase.html#cb255-8" tabindex="-1"></a><span class="co"># $ MTFCC10      &lt;chr&gt; &quot;G6350&quot;, &quot;G6350&quot;, &quot;G6350&quot;, &quot;G6350&quot;, &quot;G6350&quot;, &quot;G6350&quot;, &quot;…</span></span>
+<span id="cb255-9"><a href="chapter-hcup-amadeus-usecase.html#cb255-9" tabindex="-1"></a><span class="co"># $ FUNCSTAT10   &lt;chr&gt; &quot;S&quot;, &quot;S&quot;, &quot;S&quot;, &quot;S&quot;, &quot;S&quot;, &quot;S&quot;, &quot;S&quot;, &quot;S&quot;, &quot;S&quot;, &quot;S&quot;, &quot;S&quot;, …</span></span>
+<span id="cb255-10"><a href="chapter-hcup-amadeus-usecase.html#cb255-10" tabindex="-1"></a><span class="co"># $ ALAND10      &lt;dbl&gt; 228152974, 295777905, 199697439, 113398767, 330220870, …</span></span>
+<span id="cb255-11"><a href="chapter-hcup-amadeus-usecase.html#cb255-11" tabindex="-1"></a><span class="co"># $ AWATER10     &lt;dbl&gt; 0, 10777783, 814864, 71994, 2345079, 85543, 58021, 9206…</span></span>
+<span id="cb255-12"><a href="chapter-hcup-amadeus-usecase.html#cb255-12" tabindex="-1"></a><span class="co"># $ INTPTLAT10   &lt;chr&gt; &quot;+44.9288886&quot;, &quot;+44.8847111&quot;, &quot;+44.6424890&quot;, &quot;+45.25496…</span></span>
+<span id="cb255-13"><a href="chapter-hcup-amadeus-usecase.html#cb255-13" tabindex="-1"></a><span class="co"># $ INTPTLON10   &lt;chr&gt; &quot;-118.0148791&quot;, &quot;-116.9184395&quot;, &quot;-123.2562655&quot;, &quot;-122.4…</span></span>
+<span id="cb255-14"><a href="chapter-hcup-amadeus-usecase.html#cb255-14" tabindex="-1"></a><span class="co"># $ PARTFLG10    &lt;chr&gt; &quot;N&quot;, &quot;N&quot;, &quot;N&quot;, &quot;N&quot;, &quot;N&quot;, &quot;N&quot;, &quot;N&quot;, &quot;N&quot;, &quot;N&quot;, &quot;N&quot;, &quot;N&quot;, …</span></span>
+<span id="cb255-15"><a href="chapter-hcup-amadeus-usecase.html#cb255-15" tabindex="-1"></a><span class="co"># $ time         &lt;dttm&gt; 2021-07-01, 2021-07-01, 2021-07-01, 2021-07-01, 2021-0…</span></span>
+<span id="cb255-16"><a href="chapter-hcup-amadeus-usecase.html#cb255-16" tabindex="-1"></a><span class="co"># $ light_00000  &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…</span></span>
+<span id="cb255-17"><a href="chapter-hcup-amadeus-usecase.html#cb255-17" tabindex="-1"></a><span class="co"># $ medium_00000 &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…</span></span>
+<span id="cb255-18"><a href="chapter-hcup-amadeus-usecase.html#cb255-18" tabindex="-1"></a><span class="co"># $ heavy_00000  &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…</span></span>
+<span id="cb255-19"><a href="chapter-hcup-amadeus-usecase.html#cb255-19" tabindex="-1"></a><span class="co"># $ geometry     &lt;MULTIPOLYGON [°]&gt; MULTIPOLYGON (((-118.1575 4..., MULTIPOLYG…</span></span></code></pre></div>
+<p>In preparation for the next section we are going to make two new dataframes from our <code>temp_covar</code> object. The first collapses our zipcodes taking the average of light, medium, or heavy days.</p>
+<div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb256-1"><a href="chapter-hcup-amadeus-usecase.html#cb256-1" tabindex="-1"></a>avg_smoke_density <span class="ot">&lt;-</span> temp_covar <span class="sc">%&gt;%</span></span>
+<span id="cb256-2"><a href="chapter-hcup-amadeus-usecase.html#cb256-2" tabindex="-1"></a>  <span class="fu">group_by</span>(ZCTA5CE10) <span class="sc">%&gt;%</span></span>
+<span id="cb256-3"><a href="chapter-hcup-amadeus-usecase.html#cb256-3" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb256-4"><a href="chapter-hcup-amadeus-usecase.html#cb256-4" tabindex="-1"></a>    <span class="at">avg_light =</span> <span class="fu">mean</span>(light_00000, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb256-5"><a href="chapter-hcup-amadeus-usecase.html#cb256-5" tabindex="-1"></a>    <span class="at">avg_medium =</span> <span class="fu">mean</span>(medium_00000, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb256-6"><a href="chapter-hcup-amadeus-usecase.html#cb256-6" tabindex="-1"></a>    <span class="at">avg_heavy =</span> <span class="fu">mean</span>(heavy_00000, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb256-7"><a href="chapter-hcup-amadeus-usecase.html#cb256-7" tabindex="-1"></a>  )</span>
+<span id="cb256-8"><a href="chapter-hcup-amadeus-usecase.html#cb256-8" tabindex="-1"></a><span class="fu">print</span>(avg_smoke_density)</span>
+<span id="cb256-9"><a href="chapter-hcup-amadeus-usecase.html#cb256-9" tabindex="-1"></a><span class="fu">saveRDS</span>(avg_smoke_density, <span class="st">&quot;smoke_density_avg_byZip.R&quot;</span>)</span>
+<span id="cb256-10"><a href="chapter-hcup-amadeus-usecase.html#cb256-10" tabindex="-1"></a></span>
+<span id="cb256-11"><a href="chapter-hcup-amadeus-usecase.html#cb256-11" tabindex="-1"></a><span class="co"># &gt; head(avg_smoke_density)</span></span>
+<span id="cb256-12"><a href="chapter-hcup-amadeus-usecase.html#cb256-12" tabindex="-1"></a><span class="co"># # A tibble: 6 × 4</span></span>
+<span id="cb256-13"><a href="chapter-hcup-amadeus-usecase.html#cb256-13" tabindex="-1"></a><span class="co">#   ZCTA5CE10 avg_light avg_medium avg_heavy</span></span>
+<span id="cb256-14"><a href="chapter-hcup-amadeus-usecase.html#cb256-14" tabindex="-1"></a><span class="co">#   &lt;fct&gt;         &lt;dbl&gt;      &lt;dbl&gt;     &lt;dbl&gt;</span></span>
+<span id="cb256-15"><a href="chapter-hcup-amadeus-usecase.html#cb256-15" tabindex="-1"></a><span class="co"># 1 97833         0.129     0.194     0.419</span></span>
+<span id="cb256-16"><a href="chapter-hcup-amadeus-usecase.html#cb256-16" tabindex="-1"></a><span class="co"># 2 97840         0.161     0.226     0.387</span></span>
+<span id="cb256-17"><a href="chapter-hcup-amadeus-usecase.html#cb256-17" tabindex="-1"></a><span class="co"># 3 97330         0.290     0.129     0.0323</span></span>
+<span id="cb256-18"><a href="chapter-hcup-amadeus-usecase.html#cb256-18" tabindex="-1"></a><span class="co"># 4 97004         0.258     0.0968    0.0323</span></span>
+<span id="cb256-19"><a href="chapter-hcup-amadeus-usecase.html#cb256-19" tabindex="-1"></a><span class="co"># 5 97023         0.194     0.0968    0.0323</span></span>
+<span id="cb256-20"><a href="chapter-hcup-amadeus-usecase.html#cb256-20" tabindex="-1"></a><span class="co"># 6 97042         0.258     0.129     0.0323</span></span></code></pre></div>
+<p>The second dataframe also groups by our zip but takes the summation of the smoke plume days instead of an average. We will keep the geometry with this dataframe as we will want to keep it for our merger later on. If we kept it for both dataframes, we would have repeating columns after our hcup/amadeus merge.</p>
+<div class="sourceCode" id="cb257"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb257-1"><a href="chapter-hcup-amadeus-usecase.html#cb257-1" tabindex="-1"></a>total_smoke_density <span class="ot">&lt;-</span> temp_covar <span class="sc">%&gt;%</span></span>
+<span id="cb257-2"><a href="chapter-hcup-amadeus-usecase.html#cb257-2" tabindex="-1"></a>  <span class="fu">group_by</span>(ZCTA5CE10) <span class="sc">%&gt;%</span></span>
+<span id="cb257-3"><a href="chapter-hcup-amadeus-usecase.html#cb257-3" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb257-4"><a href="chapter-hcup-amadeus-usecase.html#cb257-4" tabindex="-1"></a>    <span class="at">sum_light =</span> <span class="fu">sum</span>(light_00000, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb257-5"><a href="chapter-hcup-amadeus-usecase.html#cb257-5" tabindex="-1"></a>    <span class="at">sum_medium =</span> <span class="fu">sum</span>(medium_00000, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb257-6"><a href="chapter-hcup-amadeus-usecase.html#cb257-6" tabindex="-1"></a>    <span class="at">sum_heavy =</span> <span class="fu">sum</span>(heavy_00000, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb257-7"><a href="chapter-hcup-amadeus-usecase.html#cb257-7" tabindex="-1"></a>    <span class="at">geometry =</span> <span class="fu">st_union</span>(geometry)</span>
+<span id="cb257-8"><a href="chapter-hcup-amadeus-usecase.html#cb257-8" tabindex="-1"></a>  )</span>
+<span id="cb257-9"><a href="chapter-hcup-amadeus-usecase.html#cb257-9" tabindex="-1"></a><span class="fu">print</span>(total_smoke_density)</span>
+<span id="cb257-10"><a href="chapter-hcup-amadeus-usecase.html#cb257-10" tabindex="-1"></a><span class="fu">saveRDS</span>(total_smoke_density, <span class="st">&quot;smoke_density_total_byZip.R&quot;</span>)</span>
+<span id="cb257-11"><a href="chapter-hcup-amadeus-usecase.html#cb257-11" tabindex="-1"></a></span>
+<span id="cb257-12"><a href="chapter-hcup-amadeus-usecase.html#cb257-12" tabindex="-1"></a><span class="co"># &gt; head(total_smoke_density)</span></span>
+<span id="cb257-13"><a href="chapter-hcup-amadeus-usecase.html#cb257-13" tabindex="-1"></a><span class="co"># # A tibble: 6 × 5</span></span>
+<span id="cb257-14"><a href="chapter-hcup-amadeus-usecase.html#cb257-14" tabindex="-1"></a><span class="co">#   ZCTA5CE10 sum_light sum_medium sum_heavy                            geometry</span></span>
+<span id="cb257-15"><a href="chapter-hcup-amadeus-usecase.html#cb257-15" tabindex="-1"></a><span class="co">#   &lt;fct&gt;         &lt;int&gt;      &lt;int&gt;     &lt;int&gt;                      &lt;GEOMETRY [°]&gt;</span></span>
+<span id="cb257-16"><a href="chapter-hcup-amadeus-usecase.html#cb257-16" tabindex="-1"></a><span class="co"># 1 97833             4          6        13 MULTIPOLYGON (((-118.1571 44.9990,…</span></span>
+<span id="cb257-17"><a href="chapter-hcup-amadeus-usecase.html#cb257-17" tabindex="-1"></a><span class="co"># 2 97840             5          7        12 POLYGON ((-116.9899 44.88256, -116…</span></span>
+<span id="cb257-18"><a href="chapter-hcup-amadeus-usecase.html#cb257-18" tabindex="-1"></a><span class="co"># 3 97330             9          4         1 POLYGON ((-123.1829 44.64559, -123…</span></span>
+<span id="cb257-19"><a href="chapter-hcup-amadeus-usecase.html#cb257-19" tabindex="-1"></a><span class="co"># 4 97004             8          3         1 POLYGON ((-122.4867 45.22209, -122…</span></span>
+<span id="cb257-20"><a href="chapter-hcup-amadeus-usecase.html#cb257-20" tabindex="-1"></a><span class="co"># 5 97023             6          3         1 POLYGON ((-122.0758 45.10881, -122…</span></span>
+<span id="cb257-21"><a href="chapter-hcup-amadeus-usecase.html#cb257-21" tabindex="-1"></a><span class="co"># 6 97042             8          4         1 POLYGON ((-122.5842 45.20546, -122…</span></span></code></pre></div>
+</div>
+</div>
+<div id="data-analysis-using-hcup-and-amadeus-data-sources" class="section level2 hasAnchor" number="8.5">
+<h2><span class="header-section-number">8.5</span> Data Analysis using HCUP and Amadeus data sources<a href="chapter-hcup-amadeus-usecase.html#data-analysis-using-hcup-and-amadeus-data-sources" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>First we will load in our hcup data file we processed earlier and subset the file to a set of observations that make the data easier to work with (702 to 39 columns) and are still interesting for analysis. This includes zipcodes (ZIP), age at admission (AGE), admission month (AMONTH), race identifier (RACE), sex (FEMALE), and ICD 10 diagnosis codes (I10_).</p>
+<div class="sourceCode" id="cb258"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb258-1"><a href="chapter-hcup-amadeus-usecase.html#cb258-1" tabindex="-1"></a>or_sedd_2021 <span class="ot">&lt;-</span> <span class="fu">fread</span>(<span class="st">&quot;OR_SEDD_2021_CORE.csv&quot;</span>)</span>
+<span id="cb258-2"><a href="chapter-hcup-amadeus-usecase.html#cb258-2" tabindex="-1"></a>subset_data <span class="ot">&lt;-</span> or_sedd_2021 <span class="sc">%&gt;%</span></span>
+<span id="cb258-3"><a href="chapter-hcup-amadeus-usecase.html#cb258-3" tabindex="-1"></a>  <span class="fu">select</span>(FEMALE, ZIP, PSTCO, AGE, RACE, AMONTH, <span class="fu">starts_with</span>(<span class="st">&quot;I10_&quot;</span>))</span>
+<span id="cb258-4"><a href="chapter-hcup-amadeus-usecase.html#cb258-4" tabindex="-1"></a><span class="fu">head</span>(subset_data)</span>
+<span id="cb258-5"><a href="chapter-hcup-amadeus-usecase.html#cb258-5" tabindex="-1"></a></span>
+<span id="cb258-6"><a href="chapter-hcup-amadeus-usecase.html#cb258-6" tabindex="-1"></a><span class="co"># [1] &quot;FEMALE&quot;               &quot;ZIP&quot;                  &quot;PSTCO&quot;</span></span>
+<span id="cb258-7"><a href="chapter-hcup-amadeus-usecase.html#cb258-7" tabindex="-1"></a><span class="co">#  [4] &quot;AGE&quot;                  &quot;RACE&quot;                 &quot;AMONTH&quot;</span></span>
+<span id="cb258-8"><a href="chapter-hcup-amadeus-usecase.html#cb258-8" tabindex="-1"></a><span class="co">#  [7] &quot;I10_DX_Visit_Reason1&quot; &quot;I10_DX_Visit_Reason2&quot; &quot;I10_DX_Visit_Reason3&quot;</span></span>
+<span id="cb258-9"><a href="chapter-hcup-amadeus-usecase.html#cb258-9" tabindex="-1"></a><span class="co"># [10] &quot;I10_DX1&quot;              &quot;I10_DX2&quot;              &quot;I10_DX3&quot;</span></span>
+<span id="cb258-10"><a href="chapter-hcup-amadeus-usecase.html#cb258-10" tabindex="-1"></a><span class="co"># [13] &quot;I10_DX4&quot;              &quot;I10_DX5&quot;              &quot;I10_DX6&quot;</span></span>
+<span id="cb258-11"><a href="chapter-hcup-amadeus-usecase.html#cb258-11" tabindex="-1"></a><span class="co"># [16] &quot;I10_DX7&quot;              &quot;I10_DX8&quot;              &quot;I10_DX9&quot;</span></span>
+<span id="cb258-12"><a href="chapter-hcup-amadeus-usecase.html#cb258-12" tabindex="-1"></a><span class="co"># [19] &quot;I10_DX10&quot;             &quot;I10_DX11&quot;             &quot;I10_DX12&quot;</span></span>
+<span id="cb258-13"><a href="chapter-hcup-amadeus-usecase.html#cb258-13" tabindex="-1"></a><span class="co"># [22] &quot;I10_DX13&quot;             &quot;I10_DX14&quot;             &quot;I10_DX15&quot;</span></span>
+<span id="cb258-14"><a href="chapter-hcup-amadeus-usecase.html#cb258-14" tabindex="-1"></a><span class="co"># [25] &quot;I10_DX16&quot;             &quot;I10_DX17&quot;             &quot;I10_DX18&quot;</span></span>
+<span id="cb258-15"><a href="chapter-hcup-amadeus-usecase.html#cb258-15" tabindex="-1"></a><span class="co"># [28] &quot;I10_DX19&quot;             &quot;I10_DX20&quot;             &quot;I10_DX21&quot;</span></span>
+<span id="cb258-16"><a href="chapter-hcup-amadeus-usecase.html#cb258-16" tabindex="-1"></a><span class="co"># [31] &quot;I10_DX22&quot;             &quot;I10_DX23&quot;             &quot;I10_DX24&quot;</span></span>
+<span id="cb258-17"><a href="chapter-hcup-amadeus-usecase.html#cb258-17" tabindex="-1"></a><span class="co"># [34] &quot;I10_DX25&quot;             &quot;I10_DX26&quot;             &quot;I10_DX27&quot;</span></span>
+<span id="cb258-18"><a href="chapter-hcup-amadeus-usecase.html#cb258-18" tabindex="-1"></a><span class="co"># [37] &quot;I10_DX28&quot;             &quot;I10_NDX&quot;              &quot;I10_PROCTYPE&quot;</span></span></code></pre></div>
+<p>Next we will select July as our month of interest to further reduce the size of the data and to focus on a time frame where we know fires took place in Oregon. We will also load in our environmental data files we made above from amadeus.</p>
+<div class="sourceCode" id="cb259"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb259-1"><a href="chapter-hcup-amadeus-usecase.html#cb259-1" tabindex="-1"></a><span class="co"># subset data to July</span></span>
+<span id="cb259-2"><a href="chapter-hcup-amadeus-usecase.html#cb259-2" tabindex="-1"></a>july_subset_hcup_data <span class="ot">&lt;-</span> subset_data[subset_data<span class="sc">$</span>AMONTH <span class="sc">==</span> <span class="dv">7</span>, ]</span>
+<span id="cb259-3"><a href="chapter-hcup-amadeus-usecase.html#cb259-3" tabindex="-1"></a></span>
+<span id="cb259-4"><a href="chapter-hcup-amadeus-usecase.html#cb259-4" tabindex="-1"></a><span class="co"># load in amadeus files we made previously</span></span>
+<span id="cb259-5"><a href="chapter-hcup-amadeus-usecase.html#cb259-5" tabindex="-1"></a>avg_smoke_density <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">&quot;smoke_density_avg_byZip.R&quot;</span>)</span>
+<span id="cb259-6"><a href="chapter-hcup-amadeus-usecase.html#cb259-6" tabindex="-1"></a>total_smoke_density <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">&quot;smoke_density_total_byZip.R&quot;</span>)</span></code></pre></div>
+<div id="merging-environmental-data-with-hospital-data" class="section level3 hasAnchor" number="8.5.1">
+<h3><span class="header-section-number">8.5.1</span> Merging Environmental Data with Hospital Data<a href="chapter-hcup-amadeus-usecase.html#merging-environmental-data-with-hospital-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>We will now merge our environmental data into our hospital discharge (HCUP) data using an inner join on ZIP codes present in both datasets.</p>
+<div class="sourceCode" id="cb260"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb260-1"><a href="chapter-hcup-amadeus-usecase.html#cb260-1" tabindex="-1"></a><span class="co"># Perform an inner join to merge `july_subset_hcup_data` with</span></span>
+<span id="cb260-2"><a href="chapter-hcup-amadeus-usecase.html#cb260-2" tabindex="-1"></a><span class="co"># `avg_smoke_density` based on the ZIP code (`ZIP` in HCUP data and</span></span>
+<span id="cb260-3"><a href="chapter-hcup-amadeus-usecase.html#cb260-3" tabindex="-1"></a><span class="co"># `ZCTA5CE10` in smoke density data)</span></span>
+<span id="cb260-4"><a href="chapter-hcup-amadeus-usecase.html#cb260-4" tabindex="-1"></a>merged_data <span class="ot">&lt;-</span> <span class="fu">inner_join</span>(july_subset_hcup_data, avg_smoke_density,</span>
+<span id="cb260-5"><a href="chapter-hcup-amadeus-usecase.html#cb260-5" tabindex="-1"></a>                          <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;ZIP&quot;</span> <span class="ot">=</span> <span class="st">&quot;ZCTA5CE10&quot;</span>))</span>
+<span id="cb260-6"><a href="chapter-hcup-amadeus-usecase.html#cb260-6" tabindex="-1"></a></span>
+<span id="cb260-7"><a href="chapter-hcup-amadeus-usecase.html#cb260-7" tabindex="-1"></a><span class="co"># Perform another inner join to add `total_smoke_density` to the existing</span></span>
+<span id="cb260-8"><a href="chapter-hcup-amadeus-usecase.html#cb260-8" tabindex="-1"></a><span class="co"># `merged_data`</span></span>
+<span id="cb260-9"><a href="chapter-hcup-amadeus-usecase.html#cb260-9" tabindex="-1"></a>merged_data <span class="ot">&lt;-</span> <span class="fu">inner_join</span>(merged_data, total_smoke_density,</span>
+<span id="cb260-10"><a href="chapter-hcup-amadeus-usecase.html#cb260-10" tabindex="-1"></a>                          <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;ZIP&quot;</span> <span class="ot">=</span> <span class="st">&quot;ZCTA5CE10&quot;</span>))</span></code></pre></div>
+</div>
+<div id="identifying-asthma-cases" class="section level3 hasAnchor" number="8.5.2">
+<h3><span class="header-section-number">8.5.2</span> Identifying Asthma Cases<a href="chapter-hcup-amadeus-usecase.html#identifying-asthma-cases" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Next, we will identify individuals diagnosed with asthma. This involves searching for the ICD-10 code “J45” within the diagnosis columns of our dataset.</p>
+<div class="sourceCode" id="cb261"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb261-1"><a href="chapter-hcup-amadeus-usecase.html#cb261-1" tabindex="-1"></a><span class="co"># Identify the columns containing diagnosis codes (prefix &quot;I10_&quot;)</span></span>
+<span id="cb261-2"><a href="chapter-hcup-amadeus-usecase.html#cb261-2" tabindex="-1"></a>diag_columns <span class="ot">&lt;-</span> <span class="fu">grep</span>(<span class="st">&quot;^I10_&quot;</span>, <span class="fu">colnames</span>(merged_data), <span class="at">value =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb261-3"><a href="chapter-hcup-amadeus-usecase.html#cb261-3" tabindex="-1"></a></span>
+<span id="cb261-4"><a href="chapter-hcup-amadeus-usecase.html#cb261-4" tabindex="-1"></a><span class="co"># Create a new column `has_asthma` that checks if any diagnosis contains &quot;J45&quot;</span></span>
+<span id="cb261-5"><a href="chapter-hcup-amadeus-usecase.html#cb261-5" tabindex="-1"></a>smoke_summary <span class="ot">&lt;-</span> merged_data <span class="sc">%&gt;%</span></span>
+<span id="cb261-6"><a href="chapter-hcup-amadeus-usecase.html#cb261-6" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">has_asthma =</span> <span class="fu">apply</span>(<span class="fu">select</span>(., <span class="fu">all_of</span>(diag_columns)), <span class="dv">1</span>, <span class="cf">function</span>(x) {</span>
+<span id="cb261-7"><a href="chapter-hcup-amadeus-usecase.html#cb261-7" tabindex="-1"></a>    <span class="fu">any</span>(<span class="fu">grepl</span>(<span class="st">&quot;J45&quot;</span>, x))</span>
+<span id="cb261-8"><a href="chapter-hcup-amadeus-usecase.html#cb261-8" tabindex="-1"></a>  }))</span>
+<span id="cb261-9"><a href="chapter-hcup-amadeus-usecase.html#cb261-9" tabindex="-1"></a></span>
+<span id="cb261-10"><a href="chapter-hcup-amadeus-usecase.html#cb261-10" tabindex="-1"></a><span class="co"># Count total number of individuals in the dataset</span></span>
+<span id="cb261-11"><a href="chapter-hcup-amadeus-usecase.html#cb261-11" tabindex="-1"></a>total_individuals <span class="ot">&lt;-</span> <span class="fu">nrow</span>(smoke_summary)</span>
+<span id="cb261-12"><a href="chapter-hcup-amadeus-usecase.html#cb261-12" tabindex="-1"></a></span>
+<span id="cb261-13"><a href="chapter-hcup-amadeus-usecase.html#cb261-13" tabindex="-1"></a><span class="co"># Count the number of individuals with an asthma diagnosis</span></span>
+<span id="cb261-14"><a href="chapter-hcup-amadeus-usecase.html#cb261-14" tabindex="-1"></a>asthma_cases <span class="ot">&lt;-</span> <span class="fu">sum</span>(smoke_summary<span class="sc">$</span>has_asthma, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb261-15"><a href="chapter-hcup-amadeus-usecase.html#cb261-15" tabindex="-1"></a></span>
+<span id="cb261-16"><a href="chapter-hcup-amadeus-usecase.html#cb261-16" tabindex="-1"></a><span class="co"># Calculate the proportion of individuals diagnosed with asthma</span></span>
+<span id="cb261-17"><a href="chapter-hcup-amadeus-usecase.html#cb261-17" tabindex="-1"></a>asthma_prevalence <span class="ot">&lt;-</span> asthma_cases <span class="sc">/</span> total_individuals</span></code></pre></div>
+</div>
+<div id="visualizing-the-relationship-between-heavy-smoke-exposure-and-asthma" class="section level3 hasAnchor" number="8.5.3">
+<h3><span class="header-section-number">8.5.3</span> Visualizing the Relationship Between Heavy Smoke Exposure and Asthma<a href="chapter-hcup-amadeus-usecase.html#visualizing-the-relationship-between-heavy-smoke-exposure-and-asthma" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>We will now generate a boxplot to visualize the distribution of average heavy smoke days across individuals with and without an asthma diagnosis.</p>
+<div class="sourceCode" id="cb262"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb262-1"><a href="chapter-hcup-amadeus-usecase.html#cb262-1" tabindex="-1"></a><span class="fu">ggplot</span>(smoke_summary, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(has_asthma), <span class="at">y =</span> avg_heavy,</span>
+<span id="cb262-2"><a href="chapter-hcup-amadeus-usecase.html#cb262-2" tabindex="-1"></a>                          <span class="at">fill =</span> <span class="fu">factor</span>(has_asthma))) <span class="sc">+</span></span>
+<span id="cb262-3"><a href="chapter-hcup-amadeus-usecase.html#cb262-3" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb262-4"><a href="chapter-hcup-amadeus-usecase.html#cb262-4" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb262-5"><a href="chapter-hcup-amadeus-usecase.html#cb262-5" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;Has Asthma (J45)&quot;</span>,</span>
+<span id="cb262-6"><a href="chapter-hcup-amadeus-usecase.html#cb262-6" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;Average Heavy Smoke Days&quot;</span>,</span>
+<span id="cb262-7"><a href="chapter-hcup-amadeus-usecase.html#cb262-7" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">&quot;Has Asthma&quot;</span>,</span>
+<span id="cb262-8"><a href="chapter-hcup-amadeus-usecase.html#cb262-8" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;Average Heavy Smoke Days vs Asthma Diagnosis&quot;</span></span>
+<span id="cb262-9"><a href="chapter-hcup-amadeus-usecase.html#cb262-9" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb262-10"><a href="chapter-hcup-amadeus-usecase.html#cb262-10" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
+<div class="figure">
+<p><img src="images/hcup_amadeus_usecase/asthma_vs_heavy_smoke.png" style="width:100%"/></p>
+</div>
+</div>
+<div id="bivariate-map-analysis-asthma-and-heavy-smoke-exposure" class="section level3 hasAnchor" number="8.5.4">
+<h3><span class="header-section-number">8.5.4</span> Bivariate Map Analysis: Asthma and Heavy Smoke Exposure<a href="chapter-hcup-amadeus-usecase.html#bivariate-map-analysis-asthma-and-heavy-smoke-exposure" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The code below producess a bivariate map for spatial analysis of asthma prevalence and heavy smoke exposure across ZIP codes in Oregon. Using hospital discharge data HCUP and NOAA’s HMS smoke plume data, ZIP-level asthma rates were calculated and paired with the average number of heavy smoke days over the same time period.</p>
+<div class="sourceCode" id="cb263"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb263-1"><a href="chapter-hcup-amadeus-usecase.html#cb263-1" tabindex="-1"></a><span class="co"># Load additional libraries</span></span>
+<span id="cb263-2"><a href="chapter-hcup-amadeus-usecase.html#cb263-2" tabindex="-1"></a><span class="fu">library</span>(biscale)</span>
+<span id="cb263-3"><a href="chapter-hcup-amadeus-usecase.html#cb263-3" tabindex="-1"></a><span class="fu">library</span>(cowplot)</span>
+<span id="cb263-4"><a href="chapter-hcup-amadeus-usecase.html#cb263-4" tabindex="-1"></a></span>
+<span id="cb263-5"><a href="chapter-hcup-amadeus-usecase.html#cb263-5" tabindex="-1"></a><span class="co"># Recall we have identified diagnosis columns</span></span>
+<span id="cb263-6"><a href="chapter-hcup-amadeus-usecase.html#cb263-6" tabindex="-1"></a><span class="fu">head</span>(diag_columns)</span>
+<span id="cb263-7"><a href="chapter-hcup-amadeus-usecase.html#cb263-7" tabindex="-1"></a></span>
+<span id="cb263-8"><a href="chapter-hcup-amadeus-usecase.html#cb263-8" tabindex="-1"></a><span class="co"># Recall our smoke summary dataframe</span></span>
+<span id="cb263-9"><a href="chapter-hcup-amadeus-usecase.html#cb263-9" tabindex="-1"></a><span class="fu">head</span>(smoke_summary)</span>
+<span id="cb263-10"><a href="chapter-hcup-amadeus-usecase.html#cb263-10" tabindex="-1"></a></span>
+<span id="cb263-11"><a href="chapter-hcup-amadeus-usecase.html#cb263-11" tabindex="-1"></a><span class="co"># Summarize asthma rate and heavy smoke exposure by ZIP code</span></span>
+<span id="cb263-12"><a href="chapter-hcup-amadeus-usecase.html#cb263-12" tabindex="-1"></a>zip_summary <span class="ot">&lt;-</span> smoke_summary <span class="sc">%&gt;%</span></span>
+<span id="cb263-13"><a href="chapter-hcup-amadeus-usecase.html#cb263-13" tabindex="-1"></a>  <span class="fu">group_by</span>(ZIP) <span class="sc">%&gt;%</span></span>
+<span id="cb263-14"><a href="chapter-hcup-amadeus-usecase.html#cb263-14" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb263-15"><a href="chapter-hcup-amadeus-usecase.html#cb263-15" tabindex="-1"></a>    <span class="at">asthma_rate =</span> <span class="fu">mean</span>(has_asthma, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb263-16"><a href="chapter-hcup-amadeus-usecase.html#cb263-16" tabindex="-1"></a>    <span class="at">avg_heavy_smoke =</span> <span class="fu">mean</span>(sum_heavy, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb263-17"><a href="chapter-hcup-amadeus-usecase.html#cb263-17" tabindex="-1"></a>  )</span>
+<span id="cb263-18"><a href="chapter-hcup-amadeus-usecase.html#cb263-18" tabindex="-1"></a></span>
+<span id="cb263-19"><a href="chapter-hcup-amadeus-usecase.html#cb263-19" tabindex="-1"></a><span class="co"># Recall ZIP code shapefile (ZCTA) for Oregon</span></span>
+<span id="cb263-20"><a href="chapter-hcup-amadeus-usecase.html#cb263-20" tabindex="-1"></a><span class="fu">head</span>(or)</span>
+<span id="cb263-21"><a href="chapter-hcup-amadeus-usecase.html#cb263-21" tabindex="-1"></a></span>
+<span id="cb263-22"><a href="chapter-hcup-amadeus-usecase.html#cb263-22" tabindex="-1"></a><span class="co"># Join spatial and summary data</span></span>
+<span id="cb263-23"><a href="chapter-hcup-amadeus-usecase.html#cb263-23" tabindex="-1"></a>map_data <span class="ot">&lt;-</span> <span class="fu">left_join</span>(or, zip_summary, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;ZCTA5CE10&quot;</span> <span class="ot">=</span> <span class="st">&quot;ZIP&quot;</span>))</span>
+<span id="cb263-24"><a href="chapter-hcup-amadeus-usecase.html#cb263-24" tabindex="-1"></a></span>
+<span id="cb263-25"><a href="chapter-hcup-amadeus-usecase.html#cb263-25" tabindex="-1"></a><span class="co"># Filter out missing values</span></span>
+<span id="cb263-26"><a href="chapter-hcup-amadeus-usecase.html#cb263-26" tabindex="-1"></a>map_data_clean <span class="ot">&lt;-</span> map_data <span class="sc">%&gt;%</span></span>
+<span id="cb263-27"><a href="chapter-hcup-amadeus-usecase.html#cb263-27" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(asthma_rate) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(avg_heavy_smoke))</span>
+<span id="cb263-28"><a href="chapter-hcup-amadeus-usecase.html#cb263-28" tabindex="-1"></a></span>
+<span id="cb263-29"><a href="chapter-hcup-amadeus-usecase.html#cb263-29" tabindex="-1"></a><span class="co"># Apply bivariate classification</span></span>
+<span id="cb263-30"><a href="chapter-hcup-amadeus-usecase.html#cb263-30" tabindex="-1"></a>map_data_clean <span class="ot">&lt;-</span> <span class="fu">bi_class</span>(map_data_clean, <span class="at">x =</span> asthma_rate,</span>
+<span id="cb263-31"><a href="chapter-hcup-amadeus-usecase.html#cb263-31" tabindex="-1"></a>                           <span class="at">y =</span> avg_heavy_smoke, <span class="at">style =</span> <span class="st">&quot;quantile&quot;</span>, <span class="at">dim =</span> <span class="dv">3</span>)</span>
+<span id="cb263-32"><a href="chapter-hcup-amadeus-usecase.html#cb263-32" tabindex="-1"></a></span>
+<span id="cb263-33"><a href="chapter-hcup-amadeus-usecase.html#cb263-33" tabindex="-1"></a><span class="co"># Create the main map</span></span>
+<span id="cb263-34"><a href="chapter-hcup-amadeus-usecase.html#cb263-34" tabindex="-1"></a>map <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb263-35"><a href="chapter-hcup-amadeus-usecase.html#cb263-35" tabindex="-1"></a>  <span class="fu">theme_void</span>(<span class="at">base_size =</span> <span class="dv">14</span>) <span class="sc">+</span></span>
+<span id="cb263-36"><a href="chapter-hcup-amadeus-usecase.html#cb263-36" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> map_data_clean, <span class="fu">aes</span>(<span class="at">fill =</span> bi_class), <span class="at">color =</span> <span class="st">&quot;white&quot;</span>,</span>
+<span id="cb263-37"><a href="chapter-hcup-amadeus-usecase.html#cb263-37" tabindex="-1"></a>          <span class="at">size =</span> <span class="fl">0.1</span>, <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb263-38"><a href="chapter-hcup-amadeus-usecase.html#cb263-38" tabindex="-1"></a>  <span class="fu">bi_scale_fill</span>(<span class="at">pal =</span> <span class="st">&quot;GrPink&quot;</span>, <span class="at">dim =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb263-39"><a href="chapter-hcup-amadeus-usecase.html#cb263-39" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb263-40"><a href="chapter-hcup-amadeus-usecase.html#cb263-40" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;Asthma Prevalence vs Heavy Smoke Exposure by ZIP Code&quot;</span>,</span>
+<span id="cb263-41"><a href="chapter-hcup-amadeus-usecase.html#cb263-41" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">&quot;Bivariate map showing intersection of health and environmental</span></span>
+<span id="cb263-42"><a href="chapter-hcup-amadeus-usecase.html#cb263-42" tabindex="-1"></a><span class="st">    burden&quot;</span>,</span>
+<span id="cb263-43"><a href="chapter-hcup-amadeus-usecase.html#cb263-43" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">&quot;Source: HCUP-Amadeus &amp; NOAA HMS Smoke Data&quot;</span></span>
+<span id="cb263-44"><a href="chapter-hcup-amadeus-usecase.html#cb263-44" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb263-45"><a href="chapter-hcup-amadeus-usecase.html#cb263-45" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb263-46"><a href="chapter-hcup-amadeus-usecase.html#cb263-46" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>, <span class="at">face =</span> <span class="st">&quot;bold&quot;</span>),</span>
+<span id="cb263-47"><a href="chapter-hcup-amadeus-usecase.html#cb263-47" tabindex="-1"></a>    <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>),</span>
+<span id="cb263-48"><a href="chapter-hcup-amadeus-usecase.html#cb263-48" tabindex="-1"></a>    <span class="at">plot.caption =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">10</span>, <span class="at">face =</span> <span class="st">&quot;italic&quot;</span>, <span class="at">hjust =</span> <span class="dv">1</span>),</span>
+<span id="cb263-49"><a href="chapter-hcup-amadeus-usecase.html#cb263-49" tabindex="-1"></a>    <span class="at">plot.margin =</span> <span class="fu">margin</span>(<span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">10</span>, <span class="dv">20</span>)</span>
+<span id="cb263-50"><a href="chapter-hcup-amadeus-usecase.html#cb263-50" tabindex="-1"></a>  )</span>
+<span id="cb263-51"><a href="chapter-hcup-amadeus-usecase.html#cb263-51" tabindex="-1"></a></span>
+<span id="cb263-52"><a href="chapter-hcup-amadeus-usecase.html#cb263-52" tabindex="-1"></a><span class="co"># Create the legend</span></span>
+<span id="cb263-53"><a href="chapter-hcup-amadeus-usecase.html#cb263-53" tabindex="-1"></a>legend <span class="ot">&lt;-</span> <span class="fu">bi_legend</span>(</span>
+<span id="cb263-54"><a href="chapter-hcup-amadeus-usecase.html#cb263-54" tabindex="-1"></a>  <span class="at">pal =</span> <span class="st">&quot;GrPink&quot;</span>,</span>
+<span id="cb263-55"><a href="chapter-hcup-amadeus-usecase.html#cb263-55" tabindex="-1"></a>  <span class="at">dim =</span> <span class="dv">3</span>,</span>
+<span id="cb263-56"><a href="chapter-hcup-amadeus-usecase.html#cb263-56" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">&quot;Higher Smoke&quot;</span>,</span>
+<span id="cb263-57"><a href="chapter-hcup-amadeus-usecase.html#cb263-57" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">&quot;Higher Asthma&quot;</span>,</span>
+<span id="cb263-58"><a href="chapter-hcup-amadeus-usecase.html#cb263-58" tabindex="-1"></a>  <span class="at">size =</span> <span class="dv">10</span>,</span>
+<span id="cb263-59"><a href="chapter-hcup-amadeus-usecase.html#cb263-59" tabindex="-1"></a>  <span class="at">flip_axes =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb263-60"><a href="chapter-hcup-amadeus-usecase.html#cb263-60" tabindex="-1"></a>  <span class="at">rotate_pal =</span> <span class="cn">FALSE</span></span>
+<span id="cb263-61"><a href="chapter-hcup-amadeus-usecase.html#cb263-61" tabindex="-1"></a>)</span>
+<span id="cb263-62"><a href="chapter-hcup-amadeus-usecase.html#cb263-62" tabindex="-1"></a></span>
+<span id="cb263-63"><a href="chapter-hcup-amadeus-usecase.html#cb263-63" tabindex="-1"></a><span class="co"># Combine map and legend</span></span>
+<span id="cb263-64"><a href="chapter-hcup-amadeus-usecase.html#cb263-64" tabindex="-1"></a>final_plot <span class="ot">&lt;-</span> <span class="fu">ggdraw</span>() <span class="sc">+</span></span>
+<span id="cb263-65"><a href="chapter-hcup-amadeus-usecase.html#cb263-65" tabindex="-1"></a>  <span class="fu">draw_plot</span>(map, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb263-66"><a href="chapter-hcup-amadeus-usecase.html#cb263-66" tabindex="-1"></a>  <span class="fu">draw_plot</span>(legend, <span class="fl">0.77</span>, <span class="fl">0.05</span>, <span class="fl">0.2</span>, <span class="fl">0.2</span>)</span>
+<span id="cb263-67"><a href="chapter-hcup-amadeus-usecase.html#cb263-67" tabindex="-1"></a></span>
+<span id="cb263-68"><a href="chapter-hcup-amadeus-usecase.html#cb263-68" tabindex="-1"></a><span class="co"># Display the final plot</span></span>
+<span id="cb263-69"><a href="chapter-hcup-amadeus-usecase.html#cb263-69" tabindex="-1"></a>final_plot</span></code></pre></div>
+<div class="figure">
+<p><img src="images/hcup_amadeus_usecase/asthmaVsSmokeBivariate.png" style="width:100%"/></p>
+</div>
+<p>Each ZIP code is shaded based on the intersection of these two variables using a 3x3 quantile classification. The bivariate color scale in the legend shows increasing smoke exposure along the x-axis (red) and increasing asthma prevalence along the y-axis (blue):</p>
+<p>Dark red areas: High smoke exposure, low asthma prevalence</p>
+<p>Dark blue areas: High asthma prevalence, low smoke exposure</p>
+<p>Dark purple areas: High asthma and high smoke — indicating areas with compounded health and environmental burdens</p>
+<p>Light gray areas: Low on both dimensions</p>
+<p>This bivariate map helps identify regions where environmental and health vulnerabilities intersect and can inform targeted public health responses.</p>
+</div>
+<div id="logistic-regression-analysis" class="section level3 hasAnchor" number="8.5.5">
+<h3><span class="header-section-number">8.5.5</span> Logistic Regression Analysis<a href="chapter-hcup-amadeus-usecase.html#logistic-regression-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Finally, we fit a logistic regression model to examine the relationship between asthma diagnoses and exposure to different levels of smoke density.</p>
+<div class="sourceCode" id="cb264"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb264-1"><a href="chapter-hcup-amadeus-usecase.html#cb264-1" tabindex="-1"></a><span class="co"># Fit a logistic regression model with asthma diagnosis as the outcome variable</span></span>
+<span id="cb264-2"><a href="chapter-hcup-amadeus-usecase.html#cb264-2" tabindex="-1"></a><span class="co"># and different smoke exposure levels as predictors</span></span>
+<span id="cb264-3"><a href="chapter-hcup-amadeus-usecase.html#cb264-3" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">glm</span>(has_asthma <span class="sc">~</span> avg_light <span class="sc">+</span> avg_medium <span class="sc">+</span> avg_heavy,</span>
+<span id="cb264-4"><a href="chapter-hcup-amadeus-usecase.html#cb264-4" tabindex="-1"></a>             <span class="at">data =</span> smoke_summary, <span class="at">family =</span> binomial)</span>
+<span id="cb264-5"><a href="chapter-hcup-amadeus-usecase.html#cb264-5" tabindex="-1"></a></span>
+<span id="cb264-6"><a href="chapter-hcup-amadeus-usecase.html#cb264-6" tabindex="-1"></a><span class="co"># Display model summary</span></span>
+<span id="cb264-7"><a href="chapter-hcup-amadeus-usecase.html#cb264-7" tabindex="-1"></a><span class="fu">summary</span>(model)</span>
+<span id="cb264-8"><a href="chapter-hcup-amadeus-usecase.html#cb264-8" tabindex="-1"></a><span class="co"># Call:</span></span>
+<span id="cb264-9"><a href="chapter-hcup-amadeus-usecase.html#cb264-9" tabindex="-1"></a><span class="co"># glm(formula = has_asthma ~ avg_light + avg_medium + avg_heavy,</span></span>
+<span id="cb264-10"><a href="chapter-hcup-amadeus-usecase.html#cb264-10" tabindex="-1"></a><span class="co">#     family = binomial, data = smoke_summary)</span></span>
+<span id="cb264-11"><a href="chapter-hcup-amadeus-usecase.html#cb264-11" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb264-12"><a href="chapter-hcup-amadeus-usecase.html#cb264-12" tabindex="-1"></a><span class="co"># Coefficients:</span></span>
+<span id="cb264-13"><a href="chapter-hcup-amadeus-usecase.html#cb264-13" tabindex="-1"></a><span class="co">#             Estimate Std. Error z value Pr(&gt;|z|)</span></span>
+<span id="cb264-14"><a href="chapter-hcup-amadeus-usecase.html#cb264-14" tabindex="-1"></a><span class="co"># (Intercept) -3.38823    0.09077 -37.329  &lt; 2e-16 ***</span></span>
+<span id="cb264-15"><a href="chapter-hcup-amadeus-usecase.html#cb264-15" tabindex="-1"></a><span class="co"># avg_light   -0.21258    0.30322  -0.701    0.483</span></span>
+<span id="cb264-16"><a href="chapter-hcup-amadeus-usecase.html#cb264-16" tabindex="-1"></a><span class="co"># avg_medium   1.74996    0.32456   5.392 6.98e-08 ***</span></span>
+<span id="cb264-17"><a href="chapter-hcup-amadeus-usecase.html#cb264-17" tabindex="-1"></a><span class="co"># avg_heavy    1.82572    0.16826  10.850  &lt; 2e-16 ***</span></span>
+<span id="cb264-18"><a href="chapter-hcup-amadeus-usecase.html#cb264-18" tabindex="-1"></a><span class="co"># ---</span></span>
+<span id="cb264-19"><a href="chapter-hcup-amadeus-usecase.html#cb264-19" tabindex="-1"></a><span class="co"># Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1</span></span>
+<span id="cb264-20"><a href="chapter-hcup-amadeus-usecase.html#cb264-20" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb264-21"><a href="chapter-hcup-amadeus-usecase.html#cb264-21" tabindex="-1"></a><span class="co"># (Dispersion parameter for binomial family taken to be 1)</span></span>
+<span id="cb264-22"><a href="chapter-hcup-amadeus-usecase.html#cb264-22" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb264-23"><a href="chapter-hcup-amadeus-usecase.html#cb264-23" tabindex="-1"></a><span class="co">#     Null deviance: 42004  on 111124  degrees of freedom</span></span>
+<span id="cb264-24"><a href="chapter-hcup-amadeus-usecase.html#cb264-24" tabindex="-1"></a><span class="co"># Residual deviance: 41674  on 111121  degrees of freedom</span></span>
+<span id="cb264-25"><a href="chapter-hcup-amadeus-usecase.html#cb264-25" tabindex="-1"></a><span class="co"># AIC: 41682</span></span>
+<span id="cb264-26"><a href="chapter-hcup-amadeus-usecase.html#cb264-26" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb264-27"><a href="chapter-hcup-amadeus-usecase.html#cb264-27" tabindex="-1"></a><span class="co"># Number of Fisher Scoring iterations: 6</span></span></code></pre></div>
+<p>The output provides estimates for each predictor, helping us assess the impact of light, medium, and heavy smoke exposure on asthma prevalence.</p>
+
+</div>
+</div>
+</div>
+
+
+
+<!DOCTYPE html>
+<script src="https://cdn.jsdelivr.net/npm/@xiee/utils/js/external-link.min.js" defer></script>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="use-cases.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="appendix.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": {
+    "github": true,
+    "facebook": false,
+    "twitter": false,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": false
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": null,
+    "text": null
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": null,
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "section"
+  }
+});
+});
+</script>
+
+</body>
+
+</html>
