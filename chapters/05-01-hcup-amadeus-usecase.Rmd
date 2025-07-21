@@ -399,24 +399,47 @@ asthma_prevalence <- asthma_cases / total_individuals
 
 ### Visualizing the Relationship Between Heavy Smoke Exposure and Asthma
 
-We will now generate a boxplot to visualize the distribution of average heavy smoke days across individuals with and without an asthma diagnosis.
+We will now generate a violin plot to visualize the distribution of average heavy smoke days across individuals with and without an asthma diagnosis.
 
 ```{r eval=FALSE}
-ggplot(smoke_summary, aes(x = factor(has_asthma), y = avg_heavy,
-                          fill = factor(has_asthma))) +
-  geom_boxplot() +
+ggplot(smoke_long, aes(x = factor(has_asthma), y = smoke_days,
+                       fill = factor(has_asthma))) +
+  geom_violin(trim = FALSE, alpha = 0.6) +
+  geom_boxplot(width = 0.1, outlier.shape = NA, alpha = 0.5) +
+  facet_wrap(~ smoke_type, scales = "free_y") +
   labs(
-    x = "Has Asthma (J45)",
-    y = "Average Heavy Smoke Days",
-    fill = "Has Asthma",
-    title = "Average Heavy Smoke Days vs Asthma Diagnosis"
+    x = "Asthma Diagnosis (J45)",
+    y = "Average Smoke Days",
+    fill = "Asthma Status",
+    title = "Violin Plots: Smoke Exposure by Asthma Diagnosis",
+    subtitle = "Faceted by smoke type (light, medium, heavy)"
   ) +
   theme_minimal()
+
 ```
 
 ::: figure
-<img src="images/hcup_amadeus_usecase/asthma_vs_heavy_smoke.png" style="width:100%"/>
+<img src="images/hcup_amadeus_usecase/JointViolinPlot.png" style="width:100%"/>
 :::
+
+This figure shows the distribution of average smoke exposure days by asthma status (J45 diagnosis), separated into three smoke types: light, medium, and heavy. Each subplot is a violin plot faceted by smoke type, comparing individuals with asthma (TRUE) and without asthma (FALSE).
+
+**Key Observations from Violin Plots**
+
+`avg_light`
+
+-   Both asthma and non-asthma groups are centered around \~0.2 average light smoke days.\
+-   The distributions are broad and overlapping, suggesting **no strong visual difference**.
+
+`avg_medium`
+
+-   Both groups have a narrower range than light exposure, mostly between **0.1–0.3 days**.\
+-   There is **slightly more central density** in the asthma group around 0.2, but overall the distributions **still overlap substantially**.
+
+`avg_heavy`
+
+-   This variable shows the **greatest skew**: most individuals have very low or zero average heavy smoke exposure.\
+-   However, there is a **small tail in the asthma group** suggesting **higher exposure in some individuals**.
 
 ### Bivariate Map Analysis: Asthma and Heavy Smoke Exposure
 
@@ -501,15 +524,23 @@ final_plot
 
 Each ZIP code is shaded based on the intersection of these two variables using a 3x3 quantile classification. The bivariate color scale in the legend shows increasing smoke exposure along the x-axis (red) and increasing asthma prevalence along the y-axis (blue):
 
-Dark red areas: High smoke exposure, low asthma prevalence
+`Dark red areas`: High smoke exposure, low asthma prevalence
 
-Dark blue areas: High asthma prevalence, low smoke exposure
+`Dark blue areas`: High asthma prevalence, low smoke exposure
 
-Dark purple areas: High asthma and high smoke — indicating areas with compounded health and environmental burdens
+`Dark purple areas`: High asthma and high smoke — indicating areas with compounded health and environmental burdens
 
-Light gray areas: Low on both dimensions
+`Light gray areas`: Low on both dimensions
 
 This bivariate map helps identify regions where environmental and health vulnerabilities intersect and can inform targeted public health responses.
+
+We observe clusters of purple areas, particularly in southern and eastern Oregon — ZIPs that face both high smoke exposure and high asthma prevalence. In contrast, parts of the western coastal area are red — high smoke but low asthma, while parts of northeastern Oregon are blue — high asthma but lower smoke.
+
+This can be explained by: Smoke from fires (especially in southwestern Oregon and northern California) is carried eastward/northeastward by prevailing winds.
+
+As smoke moves inland, it encounters the Cascade Range, where it: Is forced to rise and spill over peaks, gets concentrated in valleys and downwind ZIP codes. This orographic uplift and channeling can increase heavy smoke exposure in ZIP codes east of the mountains, aligning with the purple zones in your bivariate map—areas with both heavy smoke exposure and high asthma prevalence.
+
+**Public Health Relevance** This type of bivariate mapping can help prioritize resources for ZIP codes that are most vulnerable. For example, purple regions may benefit from both air quality interventions and respiratory health programs, while blue regions may warrant investigation into other asthma risk factors.
 
 ### Logistic Regression Analysis
 
