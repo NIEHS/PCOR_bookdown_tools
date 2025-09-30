@@ -101,6 +101,7 @@ env_dat <- env_dat %>%
 
 
 Data cleaning needs to be completed before joining the environmental and health data. In the code chunk below, we create variables for month and year from the environmental data.
+This data cleaning steps needs to be completed in order to join the environmental data to the health data.
 
 ```{r, echo = TRUE}
 # create a column for month and year based on the source_file variable
@@ -113,7 +114,7 @@ env_dat$pseudo_date <- ymd(paste0(env_dat$year, "-", env_dat$month, "-", "01"))
 
 ```
 
-In this example, we will focus on monthly mean, daily maximum temperature data from GridMet (measured in Kelvin) and monthly surface pressure data from MERRA-2 (measured in Pascals). Temperature data will be convered to degrees Celsius prior to joining with the health data. 
+In this example, we will focus on monthly mean, daily maximum temperature data from GridMet (measured in Kelvin) and monthly surface pressure data from MERRA-2 (measured in Pascals). Temperature data will be converted to degrees Celsius prior to joining with the health data. 
 
 We will also explore the notion of delayed effects - environmental exposures from the recent past may be associated with health outcomes. To reflect this, we will calculate a 2-month rolling mean for our environmental variables.
 
@@ -140,7 +141,7 @@ ra_dat$AMONTH <- str_pad(ra_dat$AMONTH, width = 2, side = "left", pad = "0")
 
 ```
 
-We will join the environmental data to the health data using both temporal and spatial information that is common between the two datasets. For our health data, we have information on the month, year and zip code of the ED visits. For our environmental data, we have information on the month, year and zip code for our temperature and surface pressure variables. Our join, therefore, will be based on year, month, and zip code to successfully merge the two datasets.
+We will join the environmental data to the health data using both temporal and spatial information that is common between the two datasets. For our health data, we have information on the month, year and zip code of the ED visits. For our environmental data, we have information on the month, year and zip code for our temperature and surface pressure variables. Our join, therefore, will be based on year, month, and zip code.
 
 ```{r echo=TRUE}
 # Join to environmental data based on month, year and zip
@@ -152,7 +153,7 @@ res_df <- ra_dat %>%
 ```
 
 
-## Visualzing data
+## Visualizing data
 
 What do the first few rows of our combined dataset look like?
 
@@ -197,8 +198,8 @@ ggplot(data = res_df, aes(x = ps)) +
 
 ### Spaghetti plots
 
-Now lets' zoom in on visualizing changes in environmental variables over time for a select group of RA patients who had muliple ED encounters over the study period.
-Let's calculate the number of visits each person had and restrict the data to only patients who had 10+ RA ED visits from 2016 - 2020.
+Now lets' zoom in on visualizing changes in environmental variables over time for a select group of RA patients who had multiple ED encounters over the study period.
+Let's calculate the number of visits each person had and restrict the data to patients who had 10+ RA ED visits from 2016 - 2020.
 
 ```{r, echo = TRUE}
 # Count number of encounters over time
