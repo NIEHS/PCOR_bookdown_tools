@@ -20,7 +20,7 @@ output:
 
 ### "Linking Individual-level Health Data to Environmental Variables: a Case Study of Rheumatoid Arthritis in Utah"
 
-**Date Modified**: September 29, 2025
+**Date Modified**: October 1, 2025
 
 **Author(s)**: Austin Rau [![author-lpc](images/orcid.png){width=10}](https://orcid.org/0000-0002-5818-4864)
 
@@ -30,7 +30,7 @@ output:
 
 The purpose of this tutorial is to demonstrate joining individual/payer level health information to environmental data. In this tutorial, individual-level health data from the Healthcare Utilization Project (HCUP) state emergency department database (SEDD) will be joined to environmental data from the `amadeus` [@r-amadeus] package. The SEDD provides individual-level emergency department encounter data with variables including the month of the encounter and the zip code of the patient. 
 
-As an illustrative example, emergency department (ED) vists for rheumatoid arthritis (RA) were extracted from the SEDD for the state of Utah from 2016 - 2020. RA is a chronic autoimmune disease in which the immune system attacks the joints. This can cause symptoms including swelling, pain, and joint stiffness. ICD-10 codes (M05.X, M06.X) for the primary discharge diagnosis variable (I10_DX1) in the SEDD database were used to extract RA ED encounters.
+As an example, emergency department (ED) vists for rheumatoid arthritis (RA) were extracted from the SEDD for the state of Utah from 2016 - 2020. RA is a chronic autoimmune disease in which the immune system attacks the joints. This can cause symptoms including swelling, pain, and joint stiffness. ICD-10 codes (M05.X, M06.X) for the primary discharge diagnosis variable (*I10_DX1*) in the SEDD database were used to extract RA ED encounters.
 
 ### Outline
 
@@ -53,7 +53,7 @@ The exploratory analyses in this tutorial are for educational purposes only.
 
 ### Load R Packages
 
-```{r, echo = TRUE, warning = FALSE, message = FALSE}
+```{r, echo = TRUE, warning = FALSE, message = FALSE, eval = FALSE}
 # load libraries
 library(tidyverse)
 library(slider)
@@ -77,7 +77,7 @@ wd <- "/ddn/gs1/home/rauat/PCOR_bookdown_tools/"
 
 In this step, the analyst will read in individual-level health data that is spatially referenced (i.e., contains information on the location of the patient such as county or zip code of residence). For the purposes of this tutorial, the individual-level health data are RA ED encounters for the state of Utah from 2016 - 2020 that are spatially referenced at the zip code level.
 
-```{r, echo = TRUE}
+```{r, echo = TRUE, eval = FALSE}
 
 ra_dat <- readRDS(paste0(wd, "dataset/ra_utah_px.rds"))
 
@@ -85,7 +85,7 @@ ra_dat <- readRDS(paste0(wd, "dataset/ra_utah_px.rds"))
 
 Next, we will load pre-processed environmental data from the `amadeus` package at the zip code level.
 
-```{r, echo = TRUE, message = FALSE}
+```{r, echo = TRUE, message = FALSE, eval = FALSE}
 # read in entire folder of environmental data
 # at zip code level as single dataframe
 env_dat <- list.files(paste0(wd, "dataset/env_data"),
@@ -100,10 +100,10 @@ env_dat <- env_dat %>%
 ```
 
 
-Data cleaning needs to be completed before joining the environmental and health data. In the code chunk below, we create variables for month and year from the environmental data.
-This data cleaning steps needs to be completed in order to join the environmental data to the health data.
+Data cleaning must be completed before joining the environmental and health data. In the code chunk below, we create variables for month and year from the environmental data.
+This data cleaning steps is necessary in order to join the environmental data to the health data.
 
-```{r, echo = TRUE}
+```{r, echo = TRUE, eval = FALSE}
 # create a column for month and year based on the source_file variable
 env_dat$year <- str_sub(env_dat$source_file, start = 5, end = 8)
 
@@ -118,7 +118,7 @@ In this example, we will focus on monthly mean, daily maximum temperature data f
 
 We will also explore the notion of delayed effects - environmental exposures from the recent past may be associated with health outcomes. To reflect this, we will calculate a 2-month rolling mean for our environmental variables.
 
-```{r, echo = TRUE}
+```{r, echo = TRUE, eval = FALSE}
 
 env_cleaned <- env_dat %>%
   select(geoid, tmmx, ps, pseudo_date, month, year) %>%
@@ -135,7 +135,7 @@ env_cleaned <- env_dat %>%
 
 ## Joining data
 
-```{r, echo = FALSE}
+```{r, echo = FALSE, eval = FALSE}
 # add a leading zero to month column in patient data
 ra_dat$AMONTH <- str_pad(ra_dat$AMONTH, width = 2, side = "left", pad = "0")
 
@@ -143,7 +143,7 @@ ra_dat$AMONTH <- str_pad(ra_dat$AMONTH, width = 2, side = "left", pad = "0")
 
 We will join the environmental data to the health data using both temporal and spatial information that is common between the two datasets. For our health data, we have information on the month, year and zip code of the ED visits. For our environmental data, we have information on the month, year and zip code for our temperature and surface pressure variables. Our join, therefore, will be based on year, month, and zip code.
 
-```{r echo=TRUE}
+```{r echo=TRUE, eval = FALSE}
 # Join to environmental data based on month, year and zip
 res_df <- ra_dat %>%
   left_join(env_cleaned,
@@ -155,25 +155,13 @@ res_df <- ra_dat %>%
 
 ## Visualizing data
 
-What do the first few rows of our combined dataset look like?
-
-```{r, message = FALSE}
-res_df %>%
-  select(person_id, AMONTH, AYEAR, contains("tmmx"), contains("ps")) %>%
-  head(n = 5)
-
-```
-
-We can see that each person in our dataset has associated environmental data. 
-
 ### Histograms
 
 Using histograms, we will explore the distribution of the environmental data for all RA ED visits in the dataset.
 
-
 #### Histogram (temperature)
 
-```{r, echo = TRUE, warning = FALSE, message = FALSE}
+```{r, echo = TRUE, warning = FALSE, message = FALSE, eval = FALSE}
 ggplot(data = res_df, aes(x = roll_tmmx)) +
   geom_histogram() +
   theme_minimal() +
@@ -183,10 +171,11 @@ ggplot(data = res_df, aes(x = roll_tmmx)) +
         axis.text = element_text(size = 11))
 ```
 
+![Temperature histogram](/ddn/gs1/home/rauat/PCOR_bookdown_tools/images/hcup_ra_usecase/temp_hist.png)
 
 #### Histogram (surface pressure)
 
-```{r, echo = TRUE, message = FALSE, warning = FALSE}
+```{r, echo = TRUE, message = FALSE, warning = FALSE, eval = FALSE}
 ggplot(data = res_df, aes(x = ps)) +
   geom_histogram() +
   theme_minimal() +
@@ -195,13 +184,14 @@ ggplot(data = res_df, aes(x = ps)) +
         axis.text = element_text(size = 11))
 ```
 
+![Surface pressure histogram](/ddn/gs1/home/rauat/PCOR_bookdown_tools/images/hcup_ra_usecase/pressure_hist.png)
 
 ### Spaghetti plots
 
-Now lets' zoom in on visualizing changes in environmental variables over time for a select group of RA patients who had multiple ED encounters over the study period.
+Now lets' zoom in to visualize changes in environmental variables over time for a select group of RA patients who had multiple ED encounters over the study period.
 Let's calculate the number of visits each person had and restrict the data to patients who had 10+ RA ED visits from 2016 - 2020.
 
-```{r, echo = TRUE}
+```{r, echo = TRUE, eval = FALSE}
 # Count number of encounters over time
 res_df <- res_df %>%
   group_by(person_id) %>%
@@ -209,7 +199,7 @@ res_df <- res_df %>%
 ```
 
 
-```{r, echo = TRUE}
+```{r, echo = TRUE, eval = FALSE}
 res_long <- res_df %>%
   # Filter to only individuals who had 10+ encounters for visualization purposes
   dplyr::filter(n_visits > 9) %>%
@@ -220,7 +210,7 @@ res_long <- res_df %>%
 
 #### Spaghetti plot (temperature)
 
-```{r}
+```{r, eval = FALSE}
 
 # 2-month rolling tmax
 ggplot(data = res_long, aes(x = pseudo_date, y = roll_tmmx,
@@ -237,20 +227,22 @@ ggplot(data = res_long, aes(x = pseudo_date, y = roll_tmmx,
         legend.title = element_text(size = 12))
 ```
 
+![Temperature line chart](/ddn/gs1/home/rauat/PCOR_bookdown_tools/images/hcup_ra_usecase/temp_line.png)
+
 Here we can observe the change in the 2-month rolling mean monthly max temperature across RA ED visits for 3 patients. Each encounter is marked by a point on the plot.
 
 #### Spaghetti plot (surface pressure)
 
 This same plot can be created to examine trends in surface pressure for this subset of patients.
 
-```{r, warning = FALSE}
+```{r, warning = FALSE, eval = FALSE}
 ggplot(data = res_long, aes(x = pseudo_date, y = ps,
                             color = person_id, group = person_id)) +
   geom_line(linewidth = 1) +
   geom_point(size = 2) +
   labs(x = "Year", y = "Surface pressure (Pa)", color = "Person ID",
        caption = "Each point represents an ED visit for a given patient.
-  \nPerson ID 228 had missing surface pressure data for 1 
+  \nPerson ID 228 had missing surface pressure data for\n1 
   encounter-month leading to discontinuity in line chart.") +
   theme_minimal() +
   theme(axis.title = element_text(size = 12),
@@ -258,6 +250,7 @@ ggplot(data = res_long, aes(x = pseudo_date, y = ps,
         legend.text = element_text(size = 11))
 ```
 
+![Surface pressure line chart](/ddn/gs1/home/rauat/PCOR_bookdown_tools/images/hcup_ra_usecase/pressure_line.png)
 
 ## Concluding Remarks
 
