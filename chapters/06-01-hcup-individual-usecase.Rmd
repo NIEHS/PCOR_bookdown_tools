@@ -242,7 +242,7 @@ ggplot(data = res_long, aes(x = pseudo_date, y = ps,
   geom_point(size = 2) +
   labs(x = "Year", y = "Surface pressure (Pa)", color = "Person ID",
        caption = "Each point represents an ED visit for a given patient.
-  \nPerson ID 228 had missing surface pressure data for 1 
+  \nPerson ID 228 had missing surface pressure data for\n1 
   encounter-month leading to discontinuity in line chart.") +
   theme_minimal() +
   theme(axis.title = element_text(size = 12),
