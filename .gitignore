@@ -1,7 +1,7 @@
 .Rproj.user
 .Rhistory
 .RData
-*.rds
+.rds
 .Ruserdata
 *.csv
 shap_files/
