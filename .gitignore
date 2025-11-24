@@ -10,4 +10,6 @@ _bookdown_files/
 _main_files
 .DS_Store
 docs/
+._.DS_Store
+._.Rhistory
 dataset/narr/air.2m_2021.nc
