@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>8 HCUP and Amadeus Smoke Plume Use Case | CHORDS Training and Use Cases Toolkit</title>
   <meta name="description" content="The CHORDS Training and Use Cases Toolkit provides guides, tutorials, and example code to support environmental health and disaster research." />
-  <meta name="generator" content="bookdown 0.43 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.45 and GitBook 2.6.7" />
 
   <meta property="og:title" content="8 HCUP and Amadeus Smoke Plume Use Case | CHORDS Training and Use Cases Toolkit" />
   <meta property="og:type" content="book" />
@@ -586,20 +586,43 @@ This is an example of the specifications loc file
 </div>
 <div id="visualizing-the-relationship-between-heavy-smoke-exposure-and-asthma" class="section level3 hasAnchor" number="8.5.3">
 <h3><span class="header-section-number">8.5.3</span> Visualizing the Relationship Between Heavy Smoke Exposure and Asthma<a href="chapter-hcup-amadeus-usecase.html#visualizing-the-relationship-between-heavy-smoke-exposure-and-asthma" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>We will now generate a boxplot to visualize the distribution of average heavy smoke days across individuals with and without an asthma diagnosis.</p>
-<div class="sourceCode" id="cb262"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb262-1"><a href="chapter-hcup-amadeus-usecase.html#cb262-1" tabindex="-1"></a><span class="fu">ggplot</span>(smoke_summary, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(has_asthma), <span class="at">y =</span> avg_heavy,</span>
-<span id="cb262-2"><a href="chapter-hcup-amadeus-usecase.html#cb262-2" tabindex="-1"></a>                          <span class="at">fill =</span> <span class="fu">factor</span>(has_asthma))) <span class="sc">+</span></span>
-<span id="cb262-3"><a href="chapter-hcup-amadeus-usecase.html#cb262-3" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
-<span id="cb262-4"><a href="chapter-hcup-amadeus-usecase.html#cb262-4" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb262-5"><a href="chapter-hcup-amadeus-usecase.html#cb262-5" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;Has Asthma (J45)&quot;</span>,</span>
-<span id="cb262-6"><a href="chapter-hcup-amadeus-usecase.html#cb262-6" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;Average Heavy Smoke Days&quot;</span>,</span>
-<span id="cb262-7"><a href="chapter-hcup-amadeus-usecase.html#cb262-7" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">&quot;Has Asthma&quot;</span>,</span>
-<span id="cb262-8"><a href="chapter-hcup-amadeus-usecase.html#cb262-8" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;Average Heavy Smoke Days vs Asthma Diagnosis&quot;</span></span>
-<span id="cb262-9"><a href="chapter-hcup-amadeus-usecase.html#cb262-9" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb262-10"><a href="chapter-hcup-amadeus-usecase.html#cb262-10" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
+<p>We will now generate a violin plot to visualize the distribution of average heavy smoke days across individuals with and without an asthma diagnosis.</p>
+<div class="sourceCode" id="cb262"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb262-1"><a href="chapter-hcup-amadeus-usecase.html#cb262-1" tabindex="-1"></a><span class="fu">ggplot</span>(smoke_long, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(has_asthma), <span class="at">y =</span> smoke_days,</span>
+<span id="cb262-2"><a href="chapter-hcup-amadeus-usecase.html#cb262-2" tabindex="-1"></a>                       <span class="at">fill =</span> <span class="fu">factor</span>(has_asthma))) <span class="sc">+</span></span>
+<span id="cb262-3"><a href="chapter-hcup-amadeus-usecase.html#cb262-3" tabindex="-1"></a>  <span class="fu">geom_violin</span>(<span class="at">trim =</span> <span class="cn">FALSE</span>, <span class="at">alpha =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
+<span id="cb262-4"><a href="chapter-hcup-amadeus-usecase.html#cb262-4" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">width =</span> <span class="fl">0.1</span>, <span class="at">outlier.shape =</span> <span class="cn">NA</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb262-5"><a href="chapter-hcup-amadeus-usecase.html#cb262-5" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> smoke_type, <span class="at">scales =</span> <span class="st">&quot;free_y&quot;</span>) <span class="sc">+</span></span>
+<span id="cb262-6"><a href="chapter-hcup-amadeus-usecase.html#cb262-6" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb262-7"><a href="chapter-hcup-amadeus-usecase.html#cb262-7" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;Asthma Diagnosis (J45)&quot;</span>,</span>
+<span id="cb262-8"><a href="chapter-hcup-amadeus-usecase.html#cb262-8" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;Average Smoke Days&quot;</span>,</span>
+<span id="cb262-9"><a href="chapter-hcup-amadeus-usecase.html#cb262-9" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">&quot;Asthma Status&quot;</span>,</span>
+<span id="cb262-10"><a href="chapter-hcup-amadeus-usecase.html#cb262-10" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;Violin Plots: Smoke Exposure by Asthma Diagnosis&quot;</span>,</span>
+<span id="cb262-11"><a href="chapter-hcup-amadeus-usecase.html#cb262-11" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">&quot;Faceted by smoke type (light, medium, heavy)&quot;</span></span>
+<span id="cb262-12"><a href="chapter-hcup-amadeus-usecase.html#cb262-12" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb262-13"><a href="chapter-hcup-amadeus-usecase.html#cb262-13" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
 <div class="figure">
-<p><img src="images/hcup_amadeus_usecase/asthma_vs_heavy_smoke.png" style="width:100%"/></p>
+<p><img src="images/hcup_amadeus_usecase/JointViolinPlot.png" style="width:100%"/></p>
 </div>
+<p>This figure shows the distribution of average smoke exposure days by asthma status (J45 diagnosis), separated into three smoke types: light, medium, and heavy. Each subplot is a violin plot faceted by smoke type, comparing individuals with asthma (TRUE) and without asthma (FALSE).</p>
+<p><strong>Key Observations from Violin Plots</strong></p>
+<p><code>avg_light</code></p>
+<ul>
+<li>Both asthma and non-asthma groups are centered around ~0.2 average light smoke days.<br />
+</li>
+<li>The distributions are broad and overlapping, suggesting <strong>no strong visual difference</strong>.</li>
+</ul>
+<p><code>avg_medium</code></p>
+<ul>
+<li>Both groups have a narrower range than light exposure, mostly between <strong>0.1–0.3 days</strong>.<br />
+</li>
+<li>There is <strong>slightly more central density</strong> in the asthma group around 0.2, but overall the distributions <strong>still overlap substantially</strong>.</li>
+</ul>
+<p><code>avg_heavy</code></p>
+<ul>
+<li>This variable shows the <strong>greatest skew</strong>: most individuals have very low or zero average heavy smoke exposure.<br />
+</li>
+<li>However, there is a <strong>small tail in the asthma group</strong> suggesting <strong>higher exposure in some individuals</strong>.</li>
+</ul>
 </div>
 <div id="bivariate-map-analysis-asthma-and-heavy-smoke-exposure" class="section level3 hasAnchor" number="8.5.4">
 <h3><span class="header-section-number">8.5.4</span> Bivariate Map Analysis: Asthma and Heavy Smoke Exposure<a href="chapter-hcup-amadeus-usecase.html#bivariate-map-analysis-asthma-and-heavy-smoke-exposure" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -677,11 +700,15 @@ This is an example of the specifications loc file
 <p><img src="images/hcup_amadeus_usecase/asthmaVsSmokeBivariate.png" style="width:100%"/></p>
 </div>
 <p>Each ZIP code is shaded based on the intersection of these two variables using a 3x3 quantile classification. The bivariate color scale in the legend shows increasing smoke exposure along the x-axis (red) and increasing asthma prevalence along the y-axis (blue):</p>
-<p>Dark red areas: High smoke exposure, low asthma prevalence</p>
-<p>Dark blue areas: High asthma prevalence, low smoke exposure</p>
-<p>Dark purple areas: High asthma and high smoke — indicating areas with compounded health and environmental burdens</p>
-<p>Light gray areas: Low on both dimensions</p>
+<p><code>Dark red areas</code>: High smoke exposure, low asthma prevalence</p>
+<p><code>Dark blue areas</code>: High asthma prevalence, low smoke exposure</p>
+<p><code>Dark purple areas</code>: High asthma and high smoke — indicating areas with compounded health and environmental burdens</p>
+<p><code>Light gray areas</code>: Low on both dimensions</p>
 <p>This bivariate map helps identify regions where environmental and health vulnerabilities intersect and can inform targeted public health responses.</p>
+<p>We observe clusters of purple areas, particularly in southern and eastern Oregon — ZIPs that face both high smoke exposure and high asthma prevalence. In contrast, parts of the western coastal area are red — high smoke but low asthma, while parts of northeastern Oregon are blue — high asthma but lower smoke.</p>
+<p>This can be explained by: Smoke from fires (especially in southwestern Oregon and northern California) is carried eastward/northeastward by prevailing winds.</p>
+<p>As smoke moves inland, it encounters the Cascade Range, where it: Is forced to rise and spill over peaks, gets concentrated in valleys and downwind ZIP codes. This orographic uplift and channeling can increase heavy smoke exposure in ZIP codes east of the mountains, aligning with the purple zones in your bivariate map—areas with both heavy smoke exposure and high asthma prevalence.</p>
+<p><strong>Public Health Relevance</strong> This type of bivariate mapping can help prioritize resources for ZIP codes that are most vulnerable. For example, purple regions may benefit from both air quality interventions and respiratory health programs, while blue regions may warrant investigation into other asthma risk factors.</p>
 </div>
 <div id="logistic-regression-analysis" class="section level3 hasAnchor" number="8.5.5">
 <h3><span class="header-section-number">8.5.5</span> Logistic Regression Analysis<a href="chapter-hcup-amadeus-usecase.html#logistic-regression-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h3>
