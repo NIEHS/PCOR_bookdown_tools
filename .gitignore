@@ -12,4 +12,5 @@ _main_files
 docs/
 ._.DS_Store 
 ._.Rhistory 
+._04-02-fhir-pit.Rmd
 dataset/narr/air.2m_2021.nc
