@@ -4,7 +4,7 @@
 
 ### Integrating HCUP databases with Amadeus Exposure data {.unnumbered}
 
-**Date Modified**: April 29, 2025
+**Date Modified**: September 30, 2025
 
 **Author**: Darius M. Bost
 
@@ -39,7 +39,7 @@ This tutorial includes the following steps:
 ```{r eval = FALSE}
 # install required packages
 install.packages(c("readr", "data.table", "sf", "tidyverse", "tigris", "dplyr",
-                   "amadeus"))
+                   "amadeus", "arrow", "duckdb", "DBI"))
 
 # load required packages
 library(readr)
@@ -49,6 +49,9 @@ library(tidyverse)
 library(amadeus)
 library(tigris)
 library(dplyr)
+library(arrow)
+library(duckdb)
+library(DBI)
 ```
 
 ## Data Curation and Prep {#link-to-hcupAmadeus-1}
@@ -79,31 +82,41 @@ missing_values <- as.character(quote(c(-99, -88, -66, -99.9999999, -88.8888888,
                                        -8888, -6666, -99999999, -999999999,
                                        -888888888, -666666666, -999, -888,
                                        -666)))
-
-# Loop through data sources
-for (data_source in data_sources) {
-  # Create lowercase version with "c" appended
-  data_source_lower_c <- paste0(tolower(data_source), "c")
-
-  for (year in years) {
-    # Determine fwf_positions based on the year
-    # Year 2021 had a slightly different format on the specifications
-    # at meta_url below
-    if (year == 2021) {
-      positions <- readr::fwf_positions(
-        start = c(1, 5, 10, 28, 32, 64, 69, 73, 75, 80),
-        end = c(3, 8, 26, 30, 62, 67, 72, 73, 78, NA)  # NA for ragged column
-      )
-    } else {
-      positions <- readr::fwf_positions(
-        start = c(1, 5, 10, 27, 31, 63, 68, 73, 75, 80),
-        end = c(3, 8, 25, 29, 61, 66, 71, 73, 78, NA)  # NA for ragged column
-      )
-    } #Ends if statement
-    # 'data_source in data_sources' and 'year in years' loop continues below
 ```
 
-The `fwf_positions()` function is utilizing column start and end positions found on the ahrq website (`meta_url` listed in next code chunk). We use these positions to read in the raw data files from their .asc format.
+The AHRQ `.loc` specification files describe the fixed-width layout of the raw `.asc` data files, but the layout of the `.loc` files themselves can also shift slightly from year to year (for example, the 2021 specifications file is laid out slightly differently than other years). Rather than hardcoding fixed-width positions per year, we parse the start position, end position, and label directly out of the `.loc` file's text with a regular expression. This lets the same parsing step work for any year or data source without modification.
+
+```{r eval = FALSE}
+# Parse column start/end positions and labels directly from the text of a
+# .loc specification file. This avoids hardcoding fixed-width positions
+# per year, since the .loc file layout can shift between years.
+get_column_positions <- function(loc_file) {
+  lines <- readLines(loc_file)
+  start_idx <- grep("^\\s*\\d+-\\s*\\d+\\s+", lines)
+  spec_lines <- lines[start_idx]
+
+  parsed <- lapply(spec_lines, function(line) {
+    matches <- regmatches(
+      line,
+      regexec("^\\s*(\\d+)-\\s*(\\d+)\\s+(.*?)\\s*$", line)
+    )[[1]]
+    if (length(matches) >= 4) {
+      list(
+        start = as.integer(matches[2]),
+        end = as.integer(matches[3]),
+        label = trimws(matches[4])
+      )
+    } else {
+      NULL
+    }
+  })
+
+  parsed <- Filter(Negate(is.null), parsed)
+  colspec <- do.call(rbind, lapply(parsed, as.data.frame))
+  colspec$label <- make.unique(colspec$label)  # Avoid duplicate col names
+  colspec
+}
+```
 
 ::: figure
 <img src="images/hcup_amadeus_usecase/oregon2021_SEDD_core_loc_file.png" style="width:100%"/>
@@ -112,57 +125,96 @@ The `fwf_positions()` function is utilizing column start and end positions found
 :::
 
 ```{r eval = FALSE}
-    # Read metadata with adjusted URL
+# Loop through data sources
+for (data_source in data_sources) {
+  # Create lowercase version with "c" appended
+  data_source_lower_c <- paste0(tolower(data_source), "c")
+
+  for (year in years) {
+    # Build the URL to the .loc specification file for this state, source,
+    # and year
     meta_url <- paste0("https://hcup-us.ahrq.gov/db/state/",
                        data_source_lower_c, "/tools/filespecs/OR_",
                        data_source, "_", year, "_", data_type, ".loc")
 
+    # Parse column positions directly from the .loc file text instead of
+    # hardcoding them per year
+    positions <- get_column_positions(meta_url)
+
     # Skip the first 20 lines because they contain header information and
     # descriptions, not column metadata
-    df <- readr::read_fwf(meta_url, positions, skip = 20)
+    df <- readr::read_fwf(
+      meta_url,
+      col_positions = readr::fwf_positions(
+        start = positions$start,
+        end = positions$end,
+        col_names = positions$label
+      ),
+      skip = 20
+    )
+
     # Read data
     # Set directory to location where HCUP ASCII file was downloaded
     # Users should replace "../OR/" with their own download path
     data_file <- paste0("../OR/", data_source, "/OR_", data_source, "_",
                         year, "_", data_type, ".asc")
-    # fwf_positions are passed column positions from df (file specifications)
-    # file. Ex. df$X5 has all the column names for our meta_data. See print(df)
-    # below.
+
+    # fwf_positions are passed the "Starting column", "Ending column", and
+    # "Variable name" fields parsed from df above. See print(df) below.
     df2 <- readr::read_fwf(
       data_file,
-      readr::fwf_positions(start = df$X6, end = df$X7, col_names = df$X5),
+      readr::fwf_positions(
+        start = df$`Starting column of variable in ASCII file`,
+        end = df$`Ending column of variable in ASCII file`,
+        col_names = df$`Variable name`
+      ),
       skip = 2,
       na = missing_values
     )
 
     # Write output CSV
-    output_file <- paste0("OR_", data_source, "_", year, "_", data_type, ".csv")
+    output_file <- paste0("OR_", data_source, "_", year, "_", data_type,
+                          ".csv")
     write.csv(df2, file = output_file, row.names = FALSE)
+
+    # Also write output Parquet and DuckDB files. These give us a
+    # compressed, columnar copy of the same data that is much faster to
+    # read back and query than the CSV, which matters once we are working
+    # across many years and states at once.
+    parquet_file <- paste0("OR_", data_source, "_", year, "_", data_type,
+                           ".parquet")
+    arrow::write_parquet(df2, parquet_file)
+
+    duckdb_file <- paste0("OR_", data_source, "_", year, "_", data_type,
+                          ".duckdb")
+    con <- DBI::dbConnect(duckdb::duckdb(), dbdir = duckdb_file,
+                          read_only = FALSE)
+    DBI::dbWriteTable(con, "hcup_data", df2, overwrite = TRUE)
+    DBI::dbDisconnect(con, shutdown = TRUE)
   } # Ends 'year in years' for loop
 } # Ends 'data_source in data_sources' for loop
-#Output file: OR_SEDD_2021_CORE.csv
+# Output files: OR_SEDD_2021_CORE.csv, OR_SEDD_2021_CORE.parquet,
+# OR_SEDD_2021_CORE.duckdb
 ```
 
-We can test what that our positions are right for reading in raw data by printing `df`.
+We can test that our positions are right for reading in raw data by printing `df`.
 
 ```{r eval=FALSE}
-print(df)
-# A tibble: 702 × 10
-#    X1       X2 X3       X4 X5          X6    X7    X8 X9    X10
-#    <chr> <dbl> <chr> <dbl> <chr>    <dbl> <dbl> <dbl> <chr> <chr>
-#  1 OR     2021 CORE      1 AGE          1     3    NA Num   Age in years at…
-#  2 OR     2021 CORE      2 AGEDAY       4     6    NA Num   Age in days (when…
-#  3 OR     2021 CORE      3 AGEMONTH     7     9    NA Num   Age in months (wh…
-#  4 OR     2021 CORE      4 AHOUR       10    13    NA Num   Admission Hour
-#  5 OR     2021 CORE      5 AMONTH      14    15    NA Num   Admission month
-#  6 OR     2021 CORE      6 ATYPE       16    17    NA Num   Admission type
-#  7 OR     2021 CORE      7 AWEEKEND    18    19    NA Num   Admission day is…
-#  8 OR     2021 CORE      8 CPT1        20    24    NA Cha   CPT/HCPCS procede…
-#  9 OR     2021 CORE      9 CPT2        25    29    NA Cha   CPT/HCPCS procedu…
-# 10 OR     2021 CORE     10 CPT3        30    34    NA Cha   CPT/HCPCS procedu…
-# ℹ 692 more rows
-# ℹ Use `print(n = ...)` to see more rows
+dplyr::glimpse(df)
+# Rows: 702
+# Columns: 10
+# Column names are parsed directly from the .loc file text, so the exact
+# labels may vary slightly by year and data source. The three columns used
+# above are shown below; the remaining columns hold additional descriptive
+# metadata (e.g., element number, variable type, variable label).
+# $ `Variable name`                             <chr> "AGE", "AGEDAY", "AGEM…
+# $ `Starting column of variable in ASCII file`  <int> 1, 4, 7, 10, 14, 16, 1…
+# $ `Ending column of variable in ASCII file`    <int> 3, 6, 9, 13, 15, 17, 1…
 ```
+
+::: {.note}
+Reading the Parquet or DuckDB output back in is often faster than re-reading the original CSV. For example: `arrow::read_parquet("OR_SEDD_2021_CORE.parquet")` or, for the DuckDB file, `con <- DBI::dbConnect(duckdb::duckdb(), "OR_SEDD_2021_CORE.duckdb"); DBI::dbGetQuery(con, "SELECT * FROM hcup_data LIMIT 10")`.
+:::
 
 ### Confirming data Characteristics
 
@@ -428,18 +480,18 @@ This figure shows the distribution of average smoke exposure days by asthma stat
 
 `avg_light`
 
--   Both asthma and non-asthma groups are centered around \~0.2 average light smoke days.\
--   The distributions are broad and overlapping, suggesting **no strong visual difference**.
+- Both asthma and non-asthma groups are centered around \~0.2 average light smoke days.\
+- The distributions are broad and overlapping, suggesting **no strong visual difference**.
 
 `avg_medium`
 
--   Both groups have a narrower range than light exposure, mostly between **0.1–0.3 days**.\
--   There is **slightly more central density** in the asthma group around 0.2, but overall the distributions **still overlap substantially**.
+- Both groups have a narrower range than light exposure, mostly between **0.1–0.3 days**.\
+- There is **slightly more central density** in the asthma group around 0.2, but overall the distributions **still overlap substantially**.
 
 `avg_heavy`
 
--   This variable shows the **greatest skew**: most individuals have very low or zero average heavy smoke exposure.\
--   However, there is a **small tail in the asthma group** suggesting **higher exposure in some individuals**.
+- This variable shows the **greatest skew**: most individuals have very low or zero average heavy smoke exposure.\
+- However, there is a **small tail in the asthma group** suggesting **higher exposure in some individuals**.
 
 ### Bivariate Map Analysis: Asthma and Heavy Smoke Exposure
 
@@ -577,3 +629,14 @@ summary(model)
 ```
 
 The output provides estimates for each predictor, helping us assess the impact of light, medium, and heavy smoke exposure on asthma prevalence.
+
+## Revisit Analysis
+
+The **HCUP Revisit Analysis** is a methodological framework provided by AHRQ for studying patterns of patient readmissions, transfers, and repeated healthcare utilization over time. Using special identifiers such as `VisitLink` and timing variables (e.g., `DaysToEvent`), researchers can reconstruct a longitudinal view of encounters for the same patient across different hospital discharge datasets (SID, SASD, SEDD). This allows for calculating metrics such as:
+
+- **30-day revisit rates**: patients who return within 30 days of a previous visit\
+- **Gap times**: the number of days between discharge and the next admission\
+- **Transfers**: identifying when patients move between facilities on the same or consecutive days\
+- **Clean periods / index events**: first diagnoses after a period without prior events
+
+HCUP distributes supplemental “Revisit Files” and guidelines to standardize this process, but the general logic can also be adapted to specific research questions.
