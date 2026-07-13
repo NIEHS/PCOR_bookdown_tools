@@ -4,7 +4,7 @@
 
 ### Integrating HCUP databases with Amadeus Exposure data {.unnumbered}
 
-**Date Modified**: April 29, 2025
+**Date Modified**: July 13, 2026
 
 **Author**: Darius M. Bost
 
