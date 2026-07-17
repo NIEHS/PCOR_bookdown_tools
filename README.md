@@ -3,7 +3,7 @@
 [![Super-Lint](https://github.com/NIEHS/PCOR_bookdown_tools/actions/workflows/check-super-linter.yml/badge.svg)](https://github.com/NIEHS/PCOR_bookdown_tools/actions/workflows/check-super-linter.yml)
 [![Render-Bookdown](https://github.com/NIEHS/PCOR_bookdown_tools/actions/workflows/check-render-bookdown.yml/badge.svg)](https://github.com/NIEHS/PCOR_bookdown_tools/actions/workflows/check-render-bookdown.yml)
 
-This repository provides the underlying code and data for the [Climate and Health Outcomes Research Data Systems (CHORDS)](https://www.niehs.nih.gov/research/programs/chords) Training and Use Cases Toolkit.
+This repository provides the underlying code and data for the [Connecting Health Outcomes Research and Data Systems (CHORDS)](https://www.niehs.nih.gov/research/programs/chords) Training and Use Cases Toolkit.
 The CHORDS Toolkit seeks to aid researchers in accessing, processing, and integrating geospatial data-based exposures into their health research by providing guides, tutorials, and example code. The CHORDS Toolkit is available at <https://niehs.github.io/PCOR_bookdown_tools/>.
 
 The CHORDS Toolkit chapters are written using [R Markdown](https://rmarkdown.rstudio.com/) files and the book is created using the [`bookdown`](https://bookdown.org/) `R` package.
@@ -26,7 +26,7 @@ You can contact us by [email](mailto:chordshelp@nih.gov) or by opening an [issue
 
 The following code installs the `R` packages used in the example code:
 
-```{r}
+```{r eval = FALSE}
 install.packages(
   c(
     "bookdown", "plotly", "shiny", "tidycensus", "tidyverse", "viridis",
@@ -39,10 +39,16 @@ install.packages(
 BiocManager::install("Biobase")
 ```
 
-The following code creates a local HTML version of the book:
+The following code creates a local HTML version of the entire book:
 
-```{r}
+```{r eval = FALSE}
 bookdown::render_book("index.Rmd", "bookdown::gitbook")
+```
+
+The following code creates a local HTML version of a single chapter of the book:
+
+```{r eval = FALSE}
+bookdown::preview_chapter("chapters/EDIT-CHAPTER-NAME-HERE.Rmd")
 ```
 
 ## Contributing Guide

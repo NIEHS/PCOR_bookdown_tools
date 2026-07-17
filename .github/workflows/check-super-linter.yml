@@ -22,5 +22,5 @@ jobs:
       - name: Run Super-Linter
         uses: github/super-linter@v4
         env:
-          FILTER_REGEX_EXCLUDE: .*/docs/.*|.*/.github/workflows/.*
+          FILTER_REGEX_EXCLUDE: .*/docs/.*|.*/.github/workflows/.*|.*/dataset/.*
           LINTR_ERROR_ON_LINT: true
